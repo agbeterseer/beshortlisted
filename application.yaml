@@ -1,0 +1,21 @@
+#Job Application Activity
+#
+#1. Candidates gets the job link to their emails
+#2. candidates clicks on the email
+#3. system checks if candidates already exist
+#4. Yes! system shows candidates the jop application form
+#- 
+#5. No! system shows the candidates the login/registration form
+#- after registration, system takes candidates to the Job application form
+#- THE APPLICATION FORM 
+#(Personal Info, Industry, profession, Work Experience, Skills, 
+#Education, Tools, Certifications, Update CV Generate Resume, Achievements & Awards, industrial experience
+
+#Statistics on admin Dashboard
+
+#1. No. of candidates by Qualification: total number and percentage 
+#2. No. of Candidates by Grade : total number and percentage 
+#3. No. of Candidates by level : total number and percentage
+#4. No. of applicants per year in percentage
+#5. No. of candidates by location
+#6. No. 
