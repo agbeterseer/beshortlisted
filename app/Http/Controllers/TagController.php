@@ -1682,104 +1682,56 @@ $units = $this->displayUnit();
 
     public function FilterJobs(Request $request)
     {
-      $s = $request->input('s');
+        $s = $request->input('s');
         $location = $request->location;
         $job_type = $request->job_type;
         $availability = $request->availability;
         $date_posted = $request->date_posted;
-        $profession = $request->categories;
+ 
         $job_category = $request->job_category;
-        $professions = IndustryProfession::all();
+        $professions = IndustryProfession::where('status',1)->get();
         $employement_terms = DB::table('employement_terms')->get();
 
- if ($job_type !=null  && $location !=null && $job_category !=null) {
-      $city = City::findOrFail($request->has('location'));
-      $tags = Tag::where('city', $city->name)->where('job_type', $request->has('job_type'))->where('job_category', $request->has('job_category'))->paginate(20);
-        $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'tags' => $tags, 's' =>$s, 'professions' => $professions, 'employement_terms' => $employement_terms);
-        return response()->json($response);
-       }elseif ($location !=null && $job_type !=null) {
-        $city = City::findOrFail($location);
-        $tags = Tag::where('city', $city->name)->where('job_type', $job_type)->paginate(20);
-        $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'tags' => $tags, 's' =>$s, 'professions' => $professions, 'employement_terms' => $employement_terms, 'both' => 'both');
-        return response()->json($response);
-       }elseif ($location !=null && $job_category !=null) {
-        $city = City::findOrFail($location);
-      $tags = Tag::where('city', $city->name)->where('job_category', $job_category)->paginate(20);
-        $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'tags' => $tags, 's' =>$s, 'professions' => $professions, 'employement_terms' => $employement_terms, 'both' => 'both');
-        return response()->json($response);
-       }elseif ($job_category !=null && $job_type !=null) { 
-          $tags = Tag::where('job_type', $job_type)->where('job_category', $job_category)->paginate(20);
-          $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'tags' => $tags, 's' =>$s, 'professions' => $professions, 'employement_terms' => $employement_terms);
-        return response()->json($response);
-       } 
 
-      if ($location !=null) {
-        $city = City::findOrFail($location);
-        $tags = Tag::where('city', $city->name)->paginate(20);
-        $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'tags' => $tags, 's' =>$s, 'city' => $city, 'professions' => $professions, 'employement_terms' => $employement_terms, 'location'=>'city');
-        return response()->json($response);
-       }elseif ($location !=null && $job_type !=null) {
-               $city = City::findOrFail($location);
-            $tags = Tag::where('city', $city->name)->where('job_type', $job_type)->paginate(20);
-        $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'tags' => $tags, 's' =>$s, 'professions' => $professions, 'employement_terms' => $employement_terms, 'both' => 'both');
-        return response()->json($response);
-       }
-
-      if ($request->has('job_type')) {
+  $tags = Tag::where(function($query) use ($job_type, $location, $job_category){
       
-        $tags = Tag::where('job_type', $job_type)->paginate(20);
-        $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'tags' => $tags, 's' =>$s, 'professions' => $professions, 'employement_terms' => $employement_terms, 'job_type' => 'terms');
-        return response()->json($response);
-       }
-      if ($request->has('job_category')) {
-        $tags = Tag::where('job_category', $job_category)->paginate(20);
-        $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'tags' => $tags, 's' =>$s, 'professions' => $professions, 'employement_terms' => $employement_terms, 'professions' => $professions, 'employement_terms' => $employement_terms, 'category' => 'only');
-        return response()->json($response);
-       }
+      if (isset($location)) {
+    foreach ($location as $city) {
+        $city_record = City::findOrFail($city);
+        $query->orWhere('delete', 0)->where('city', $city_record->name);
+    }         
+ }
+ if (isset($job_category)) {
+    foreach ($job_category as $key => $job_cat) {
+ 
+    $query->orWhere('delete', 0)->where('job_category', $job_cat);
+ 
+    }
+ }
 
+ if (isset($job_type)) {
+    foreach ($job_type as $key => $job_type) {
+      $query->orWhere('delete', 0)->where('job_type', $job_category);
+    }
+ }
 
-      //  if ($request->has('job_type') && $request->has('location') && $request->has('job_category')) {
-      //   $city = City::findOrFail($request->has('location'));
-      // $tags = Tag::where('city', $city->name)->where('job_type', $request->has('job_type'))->where('job_category', $request->has('job_category'))->paginate(20);
-      //   $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'tags' => $tags, 's' =>$s, 'professions' => $professions, 'employement_terms' => $employement_terms);
-      //   return response()->json($response);
-      //  }
-
-
-      //  if ($request->has('job_type') && $request->has('job_category')) { 
-      // $tags = Tag::where('job_type', $request->has('job_type'))->where('job_category', $request->has('job_category'))->paginate(20);
-      //   $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'tags' => $tags, 's' =>$s, 'professions' => $professions, 'employement_terms' => $employement_terms);
-      //   return response()->json($response);
-      //  }
-      //         if ($request->has('location') && $request->has('job_category')) {
-      //   $city = City::findOrFail($location);
-      // $tags = Tag::where('city', $city->name)->where('job_category', $job_category)->paginate(20);
-      //   $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'tags' => $tags, 's' =>$s, 'professions' => $professions, 'employement_terms' => $employement_terms, 'both' => 'both');
-      //   return response()->json($response);
-      //  }
-
-      //  if ($request->has('job_type') && $request->has('location')) {
-      //   $city = City::findOrFail($location);
-      // $tags = Tag::where('city', $city->name)->where('job_type', $request->has('job_type'))->paginate(20);
-      //   $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'tags' => $tags, 's' =>$s, 'professions' => $professions, 'employement_terms' => $employement_terms, 'both' => 'both');
-      //   return response()->json($response);
-      //  }
+    })->paginate(20);
 
         $response = array(
         'status' => 'success',
         'msg'    => 'Setting created successfully',
         'documents' => 'documents',
         'industries' => 'industries',
-        'employement_terms' => 'employement_terms',
+        'employement_terms' => $employement_terms,
         'educational_qualifications' => 'educational_qualifications',
         'jobcareer_levels' => 'jobcareer_levels',
-        'professions' => 'professions',
+        'professions' =>  $professions,
         'cities' => 'cities',
-        'work_experiences' => $work_experiences,
-        'users' => 'users',
+         'users' => 'users',
         'educational_levels' => 'educational_levels',
         'tags' => $tags,
-        'job_type' => $job_type
+        'job_type' => $job_type,
+        'location' =>$location
     );
         return response()->json($response);
     }

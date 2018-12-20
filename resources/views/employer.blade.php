@@ -49,13 +49,83 @@
     }
 
 </style>
+<style type="text/css">
+ 
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #13B5EA;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 28px;
+    left: 28px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 58px;
+    height: 58px;
+    opacity: 0;
+  }
+}
+
+.lds-ripplee {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+
+}
+.lds-ripplee div {
+  position: absolute;
+  border: 4px solid #13B5EA;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripplee 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+
+}
+.lds-ripplee div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripplee {
+  0% {
+    top: 28px;
+    left: 28px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 58px;
+    height: 58px;
+    opacity: 0;
+  }
+}
+</style>
 
 
     <!-- Wrapper -->
     <div class="careerfy-w
     rapper">
         <!-- Header -->
-@include('partials.employer_menu')
+        @include('partials.employer_menu')
         <!-- Header -->     
         <!-- Banner -->
         @include('partials.employer_breadcomb')
@@ -109,25 +179,26 @@
                              
                                       <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle" style="background-color: #ffffff;">
                                       <h2><a href="#" class="careerfy-click-btn">Location</a></h2>
-                                      <div class="careerfy-checkbox-toggle scroll_div" >
-                                      <ul class="careerfy-checkbox">
+                                      <div class="careerfy-checkbox-toggle scroll_div" id="city_filter">
+                                      <ul class="careerfy-checkbox" >
                                       @foreach($cities as $city) 
                                       <li>
-                                      <input type="radio" id="r{{$city->id}}" name="city" value="{{$city->id}}" />
+                                      <input type="checkbox" id="r{{$city->id}}" name="city[]" value="{{$city->id}}" />
                                       <label for="r{{$city->id}}"><span></span>{{$city->name}}</label>
                                       </li> 
                                       @endforeach 
                                       </ul> 
+
                                       </div>
                                       </div>
                   
                                        <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle" style="background-color: #ffffff;">
                                         <h2><a href="#" class="careerfy-click-btn">Employement Terms</a></h2>
-                                        <div class="careerfy-checkbox-toggle">
+                                        <div class="careerfy-checkbox-toggle" id="e_terms_filter">
                                             <ul class="careerfy-checkbox">
                                   @foreach($employement_terms as $employement_term)
                                                 <li>
-                                                    <input type="radio" id="jr{{$employement_term->id}}" name="e_terms" value="{{$employement_term->id}}"/>
+                                                    <input type="checkbox" id="jr{{$employement_term->id}}" name="e_terms[]" value="{{$employement_term->id}}"/>
                                                     <label for="jr{{$employement_term->id}}"><span></span>
                                                     {{$employement_term->name}}</label>
                                                     <small>4</small>
@@ -139,11 +210,11 @@
                                     
                               <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle" style="background-color: #ffffff;">
                                         <h2><a href="#" class="careerfy-click-btn">Job Function</a></h2>
-                                        <div class="careerfy-checkbox-toggle scroll_div">
+                                        <div class="careerfy-checkbox-toggle scroll_div" id="profession_filter">
                                             <ul class="careerfy-checkbox">
                                                @foreach($professions as $profession)
                                                 <li>
-                                                    <input type="radio" id="r_{{$profession->id}}" name="profession" value="{{$profession->id}}" />
+                                                    <input type="checkbox" id="r_{{$profession->id}}" name="profession[]" value="{{$profession->id}}" />
                                                     <label for="r_{{$profession->id}}"><span></span>{{$profession->name}}</label>
                                                     <small>10</small>
                                                 </li>
@@ -158,6 +229,8 @@
                         </aside>
                         <div class="careerfy-column-9 careerfy-typo-wrap">
                             <div class="careerfy-typo-wrap">
+                              <div class="lds-ripplee"><div></div><div></div></div>
+                              <div id="info"></div>
                                 <!-- FilterAble -->
                          <!--        <div class="careerfy-filterable">
                                     <h2>Showing 0-12 of 37 results</h2>
@@ -771,226 +844,14 @@ $count = \App\Application::where('sorted',0)->where('tag_id', $unsorted)->count(
                                         </div>
                                         </div>
  </div>
-
- 
-
-                        
-
-
-                    </div>
-                </div>
-
-
-           
-
-
-
-                                   
-
+      </div>
+         </div> 
             <!-- Main Section --> </div>
-
+</div>
  
-                                    </div>
- 
-
-
- 
-                           <!-- Main Section -->
-<!--             <div class="careerfy-main-section">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-md-12">
- 
-                            <section class="careerfy-fancy-title">
-                                <h2>Employer Dashboard</h2>
-                                <p>A better candidates are there. We'll help you find them to use.</p>
-                            </section>
-                        
-                            <div class="careerfy-blog careerfy-blog-grid">
-                                <ul class="row">
-                                    <li class="col-md-4">
-                                        <figure><a href="#"><img src="extra-images/blog-grid-1.jpg" alt=""></a></figure>
-                                        <div class="careerfy-blog-grid-text">
-                                            <div class="careerfy-blog-tag"> <a href="#">Culture</a> </div>
-                                            <h2><a href="#">Are You Paid Fairly? See Your Market Worth in Seconds</a></h2>
-                                            <ul class="careerfy-blog-grid-option">
-                                                <li>BY <a href="#" class="careerfy-color">Click mag staff</a></li>
-                                                <li><time datetime="2008-02-14 20:00">OCT 6, 2016</time></li>
-                                            </ul>
-                                            <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est.</p>
-                                            <a href="#" class="careerfy-read-more careerfy-bgcolor">Manage your Jobs</a>
-                                        </div>
-                                    </li>
-                                    <li class="col-md-4">
-                                        <figure><a href="#"><img src="extra-images/blog-grid-2.jpg" alt=""></a></figure>
-                                        <div class="careerfy-blog-grid-text">
-                                            <div class="careerfy-blog-tag"> <a href="#">ENTERTAINMENT</a> </div>
-                                            <h2><a href="#">Are You Paid Fairly? See Your Market Worth in Seconds</a></h2>
-                                            <ul class="careerfy-blog-grid-option">
-                                                <li>BY <a href="#" class="careerfy-color">Click mag staff</a></li>
-                                                <li><time datetime="2008-02-14 20:00">OCT 6, 2016</time></li>
-                                            </ul>
-                                            <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est.</p>
-                                            <a href="#" class="careerfy-read-more careerfy-bgcolor">Read Articles</a>
-                                        </div>
-                                    </li>
-                                    <li class="col-md-4">
-                                        <figure><a href="#"><img src="extra-images/blog-grid-3.jpg" alt=""></a></figure>
-                                        <div class="careerfy-blog-grid-text">
-                                            <div class="careerfy-blog-tag"> <a href="#">Living</a> </div>
-                                            <h2><a href="#">Are You Paid Fairly? See Your Market Worth in Seconds</a></h2>
-                                            <ul class="careerfy-blog-grid-option">
-                                                <li>BY <a href="#" class="careerfy-color">Click mag staff</a></li>
-                                                <li><time datetime="2008-02-14 20:00">OCT 6, 2016</time></li>
-                                            </ul>
-                                            <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est.</p>
-                                            <a href="#" class="careerfy-read-more careerfy-bgcolor">Read Articles</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div> -->
             <!-- Main Section -->
                 <div class="container-fluid">
-                    <!-- <div class="col col-md-3">         
-                        <div class="panel-group" id="accordion">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                              <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                                Files</a>
-                              </h4>
-                            </div>
-                            <div id="collapse1" class="panel-collapse collapse in">
-                                <ul class="list-group">
-                                    <li class="list-group-item"><span class="badge">253</span> New</li>
-                                    <li class="list-group-item"><span class="badge">17</span> Deleted</li>
-                                    <li class="list-group-item"><span class="badge">3</span> Reported</li>
-                                </ul>
-                            </div>
-                          </div>
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                              <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                                Blog</a>
-                              </h4>
-                            </div>
-                            <div id="collapse2" class="panel-collapse collapse">
-                                <ul class="list-group">
-                                    <li class="list-group-item"><span class="badge">12</span> New</li>
-                                    <li class="list-group-item"><span class="badge">5</span> Deleted</li>
-                                </ul>
-                            </div>
-                          </div>
-                            <div class="panel panel-default">
-                            <div class="panel-heading">
-                              <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                Settings</a>
-                              </h4>
-                            </div>
-                            <div id="collapse3" class="panel-collapse collapse">
-                                <ul class="list-group">
-                                    <li class="list-group-item"><span class="badge">1</span> Users Reported</li>
-                                    <li class="list-group-item"><span class="badge">5</span> User Waiting Activation</li>
-                                </ul>
-                            </div>
-                          </div>
-                        </div> 
-                    </div> -->
-                <!--    <div class="col-lg-6 col-xs-12 col-sm-12">
-                                <div class="portlet light bordered">
-                                    <div class="portlet-title">
-                                        <div class="caption">
-                                            <i class="icon-cursor font-dark hide"></i>
-                                            <span class="caption-subject font-dark bold uppercase">General Stats</span>
-                                        </div>
-                                        <div class="actions">
-                                            <a href="javascript:;" class="btn btn-sm btn-circle red easy-pie-chart-reload">
-                                                <i class="fa fa-repeat"></i> Reload </a>
-                                        </div>
-                                    </div>
-                                    <div class="portlet-body">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="easy-pie-chart">
-                                                    <div class="number transactions" data-percent="55">
-                                                        <span>+55</span>% <canvas height="112" width="112" style="height: 75px; width: 75px;"></canvas></div>
-                                                    <a class="title" href="javascript:;"> Transactions
-                                                        <i class="icon-arrow-right"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="margin-bottom-10 visible-sm"> </div>
-                                            <div class="col-md-4">
-                                                <div class="easy-pie-chart">
-                                                    <div class="number visits" data-percent="85">
-                                                        <span>+85</span>% <canvas height="112" width="112" style="height: 75px; width: 75px;"></canvas></div>
-                                                    <a class="title" href="javascript:;"> New Visits
-                                                        <i class="icon-arrow-right"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="margin-bottom-10 visible-sm"> </div>
-                                            <div class="col-md-4">
-                                                <div class="easy-pie-chart">
-                                                    <div class="number bounce" data-percent="46">
-                                                        <span>-46</span>% <canvas height="112" width="112" style="height: 75px; width: 75px;"></canvas></div>
-                                                    <a class="title" href="javascript:;"> Bounce
-                                                        <i class="icon-arrow-right"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-                    <!-- <div class="col col-md-9">
-
-                        <div class="row">
-                            <div class="col col-md-5">
-                                <h4>Today Stats:</h4>
-                                        Visits<span class="pull-right strong">- 15%</span>
-                                         <div class="progress">
-                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="15"aria-valuemin="0" aria-valuemax="100" style="width:15%">15%</div>
-                                        </div>
-                                    
-                                        20 New Users<span class="pull-right strong">+ 30%</span>
-                                         <div class="progress">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="30"aria-valuemin="0" aria-valuemax="100" style="width:30%">30%</div>
-                                        </div>
-                                    
-                                        359 Downloads<span class="pull-right strong">+ 8%</span>
-                                         <div class="progress">
-                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="8"aria-valuemin="0" aria-valuemax="100" style="width:8%">8%</div>
-                                        </div>
-                            </div>
-                            <div class="col col-md-5">
-                                <h4>This Month Stats:</h4>
-                                        Visits<span class="pull-right strong">+ 45%</span>
-                                         <div class="progress">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="45"aria-valuemin="0" aria-valuemax="100" style="width:45%">45%</div>
-                                        </div>
-                                    
-                                        395 New Users<span class="pull-right strong">+ 57%</span>
-                                         <div class="progress">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="57"aria-valuemin="0" aria-valuemax="100" style="width:57%">57%</div>
-                                        </div>
-                                    
-                                        12.593 Downloads<span class="pull-right strong">+ 25%</span>
-                                         <div class="progress">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="25"aria-valuemin="0" aria-valuemax="100" style="width:25%">25%</div>
-                                        </div>
-                            </div>
-                        </div>
-                    </div> -->
+                  
                 </div>
         <!-- Footer -->
                @include('partials.job_footer')
@@ -1014,7 +875,7 @@ $count = \App\Application::where('sorted',0)->where('tag_id', $unsorted)->count(
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
  <!-- 
     <script src="{{ asset('recruit/script/jquery.js')}}"></script> -->
-     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
+     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
     <script src="{{ asset('recruit/script/bootstrap.js')}}"></script>
     <script src="{{ asset('recruit/script/slick-slider.js')}}"></script>
     <script src="{{ asset('recruit/plugin-script/counter.js')}}"></script>
@@ -1037,7 +898,138 @@ $(document).ready(function(){
 
 <script>
 
-       $(document.getElementsByName('city')).click(function() { 
+   $('#city_filter').change(function() {
+   
+    var city = [];
+    var employement_term = [];
+    var job_function = []; 
+ 
+    function itemExistsChecker(cboxValue) {
+          
+    var len = city.length; 
+    if (len > 0) {
+      for (var i = 0; i < len; i++) {
+        if (city[i] == cboxValue) {
+          return true;
+        }
+      }
+    }
+          
+    city.push(cboxValue);
+  } 
+   
+  {
+    $('#city_filter :checked').each(function() { 
+     var cboxValue = $(this).val(); 
+
+      $(this).prop('checked', true);
+      itemExistsChecker(cboxValue);
+
+    }); 
+   console.log(city);
+ 
+FilterAllJobs(city,employement_term,job_function);
+ 
+  }
+});
+
+
+
+   $('#e_terms_filter').change(function() {
+   
+    var city = [];
+    var employement_term = [];
+    var job_function = []; 
+ 
+    function itemExistsChecker(cboxValue) {
+          
+    var len = employement_term.length; 
+    if (len > 0) {
+      for (var i = 0; i < len; i++) {
+        if (employement_term[i] == cboxValue) {
+          return true;
+        }
+      }
+    }
+          
+    employement_term.push(cboxValue);
+  } 
+   
+  {
+    $('#e_terms_filter :checked').each(function() { 
+     var cboxValue = $(this).val(); 
+      $(this).prop('checked', true);
+      itemExistsChecker(cboxValue);
+
+    }); 
+   console.log(employement_term);
+ 
+    FilterAllJobs(city,employement_term,job_function);
+ 
+  }
+});
+
+
+   $('#profession_filter').change(function() {
+   
+    var city = [];
+    var employement_term = [];
+    var job_function = []; 
+ 
+    function itemExistsChecker(cboxValue) {
+          
+    var len = job_function.length; 
+    if (len > 0) {
+      for (var i = 0; i < len; i++) {
+        if (job_function[i] == cboxValue) {
+          return true;
+        }
+      }
+    }
+          
+    job_function.push(cboxValue);
+  } 
+   
+  {
+    $('#profession_filter :checked').each(function() { 
+     var cboxValue = $(this).val(); 
+       $(this).prop('checked', true);
+      itemExistsChecker(cboxValue);
+ 
+     });
+
+   console.log(job_function);
+FilterAllJobs(city,employement_term,job_function);
+ 
+  }
+});
+
+// ,
+//               beforeSend: function(){
+//             //Show image container
+//             $(".lds-ripplee").show(); 
+//             $('#items').empty();
+//              },
+//             success:function(data){
+//             console.log(data);
+//              //$('#shortlist_btn{{$count}}').empty();
+//             $('#items').empty(); 
+//             // $('#items').hide();
+  
+//      },
+//      complete:function(data){
+//     // Hide image container 
+   
+//     $(".lds-ripplee").hide(); 
+//     },
+
+
+function FilterAllJobs(city,employement_term,job_function){
+    console.log(city);
+    console.log(employement_term);
+    console.log(job_function);
+ 
+   
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1049,24 +1041,31 @@ $(document).ready(function(){
             url:'/filterjob', 
             data:{
                 '_token':$('input[name=_token').val(),
-                'location':$('input[name=city]:checked').val(),
-                'job_type':$('input[name=e_terms]:checked').val(),
-                'job_category':$('input[name=profession]:checked').val(),
-                'date_posted':$('input[name=date_posted]:checked').val()
+                'location':city,
+                'job_type':employement_term,
+                'job_category':job_function, 
             },
               beforeSend: function(){
             //Show image container
             $("#loader").show(); 
+            $(".lds-ripplee").show(); 
+            $("#info").append('<i class="btn-success btn-xs" style="color:#ffffff;"> fetching data... </i>');
+            $("#joblist").hide();
              },
             success:function(data){
             console.log(data);
-           $('#joblist').empty();
-      $("#industry-div").hide();
+          $('#joblist').empty();
+          $("#industry-div").hide();
         //  window.location.reload(); 
      },
      complete:function(data){
-    // Hide image container 
+    // Hide image container
+
     $("#loader").hide();
+    $(".lds-ripplee").hide(); 
+    $("#info").hide();
+    $("#joblist").show();
+
     },
     }).done(function (data) {
       var code = data.tags;
@@ -1099,7 +1098,7 @@ $(document).ready(function(){
                 } 
          });
 
-       $.each(employement_terms , function(key, value){
+       $.each(employement_terms, function(key, value){
                 
                 var id = value.id;
                 var name = value.name;
@@ -1116,7 +1115,15 @@ $(document).ready(function(){
     $('#joblist').append(content);  
         }); 
     });
- });
+}
+
+// $(document.getElementsByName('city')).click(function() { 
+//          $.ajaxSetup({
+//             headers: {
+//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//             }
+//         }); 
+//  });
 
 
      $(document.getElementsByName('e_terms')).click(function() {
@@ -1373,7 +1380,16 @@ $(document).ready(function(){
 
 </script>
 
+ <script>
+   $(".lds-ripple").hide();
+ 
 
+   $(".lds-ripplee").hide();
+   $(".info").hide();
+    $(".delete").on("submit", function(){
+        return confirm("Do you want to delete this item?");
+    });
+</script>
  <script>
     
     $("#qualification").change(function() { 
