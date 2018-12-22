@@ -74,8 +74,9 @@ class ResumeController extends Controller
     {
         //
         $resume_templates = DB::table('resume_builders')->get();
+        $menus = $this->displayMenu();
 
-    return view('admin.resume.index', compact('resume_templates'), array('user' => Auth::user()));
+    return view('admin.resume.index', compact('resume_templates', 'menus'), array('user' => Auth::user()));
     }
 
     /**
@@ -86,8 +87,8 @@ class ResumeController extends Controller
     public function create()
     {
         //
-
-        return view('admin.resume.create' ,array('user' => Auth::user()));
+      $menus = $this->displayMenu();
+        return view('admin.resume.create' , compact('menus') array('user' => Auth::user()));
     }
 
 
@@ -196,8 +197,10 @@ class ResumeController extends Controller
     {
         //  
         $resume_builder = ResumeBuilder::findOrFail($id);
+        $menus = $this->displayMenu();
 
-        return view('admin.resume.show', compact('resume_builder'), array('user' => Auth::user()));
+
+        return view('admin.resume.show', compact('resume_builder', 'menus'), array('user' => Auth::user()));
     }
 
     /**
@@ -220,26 +223,7 @@ class ResumeController extends Controller
        $profile_pix_list = DB::table('recruit_profile_pixs')->where('user_id',$user->id)->orderBy('created_at', 'DESC')->get();
      $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
             } 
-              // dd('it is our work  ooo');
-        // $dt = Carbon::now();
-        // $ddt = Carbon::now(); 
-        // $documents = Document::all()->count();
-        // $users = User::all()->count();
-        // $jobskills = JobSkill::where('userid', $user->id)->get();
-        // $document = Document::Where('user_id', $user->id)->first();
-        // $industries =  DB::table('industries')->get();
-        // $recruityear_list = RecruitYear::all();
-        // $qualifications = Qualification::all();
-        // // $countries = Country::all();
-        // $job_career_levelList = JobcareerLevel::all();
-        // $educationallevels = $this->GetQualificationLevels();
-        // $employementterms = DB::table('employement_terms')->get();
-        // $jobcertifications = DB::table('job_certifications')->where('user_id', $user->id)->get();
-        // $person_info = PersonalInformation::where('user_id', $user->id)->first();
-        // //employement_terms employement_terms
-        // $industry_profession = DB::table('industry_professions')->get();
-        // // get Awards
-        // $awards = Award::where('user_id', $user->id)->get();
+
         $resumes = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->get();
         // fresh user test pass
         //$resumes = RecruitResume::where('user_id', $user->id)->having('status', '=', 1)->orderBy('status','DESC')->get();
@@ -248,8 +232,6 @@ class ResumeController extends Controller
         // check for candidates current resume
         $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->first();
         // fresh user test pass
-
-       // dd($user_single_resume_by_date);
 
         // get 
         $job_by_candidate_list = $this->GetAvailableJobs();
@@ -269,8 +251,9 @@ class ResumeController extends Controller
                $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
 
         //dd($recruit_profile_pix_list);
+               $menus = $this->displayMenu();
 
-        return view('candidate.display_profile_pix', compact('user', 'profile_pix_list', 'profile_pix', 'resumes', 'job_by_candidate_list', 'cities', 'tags', 'job_category_list','section_candidatelist_count', 'section_candidatelist'), array('user' => Auth::user()));
+        return view('candidate.display_profile_pix', compact('user', 'profile_pix_list', 'profile_pix', 'resumes', 'job_by_candidate_list', 'cities', 'tags', 'job_category_list','section_candidatelist_count', 'section_candidatelist', 'menus'), array('user' => Auth::user()));
     }
 
  public function UpdateCandidatesLogo(Request $request){
@@ -488,7 +471,8 @@ return redirect()->back()->with('done', 'Done successfully');
 
  // check if resume id exist 
  // return a des
-    return view('candidate.create_resume', compact('recruit_resume'), array('user' => Auth::user()));
+    $menus = $this->displayMenu();
+    return view('candidate.create_resume', compact('recruit_resume', 'menus'), array('user' => Auth::user()));
     }
 
 
@@ -745,8 +729,9 @@ public function DeleteResume($id)
         $cities = $this->GetCities();
         $countries = $this->GetCountries();
 
+        $menus = $this->displayMenu();
 
-       return view('candidate.edit_profile', compact('document', 'educationallevels','job_career_levelList', 'employementterms', 'regions', 'cities', 'countries', 'resume_id'), array('user' => Auth::user()));
+       return view('candidate.edit_profile', compact('document', 'educationallevels','job_career_levelList', 'employementterms', 'regions', 'cities', 'countries', 'resume_id', 'menus'), array('user' => Auth::user()));
     }
 
     public function UpdateCandidateProfile(Request $request)
@@ -923,8 +908,9 @@ try{
         //dd($id);
 
        $career = CareerSummary::findOrFail($id);
+          $menus = $this->displayMenu();
        
-        return view('candidate.career_summary', compact('career', 'code'), array('user' => Auth::user()));
+        return view('candidate.career_summary', compact('career', 'code', 'menus'), array('user' => Auth::user()));
     }
 
 public function AddCertificate(Request $request)
@@ -965,8 +951,9 @@ public function ShowUpdateCertificateForm($id)
 {
     # code...
         $certificate_record = JobCertification::findOrFail($id);
+           $menus = $this->displayMenu();
 
-        return view('candidate.update_certificates', compact('certificate_record') ,array('user' => Auth::user()));
+        return view('candidate.update_certificates', compact('certificate_record', 'menus') ,array('user' => Auth::user()));
 }
 
 
@@ -1003,8 +990,8 @@ try {
 public function ShowAddCertificateForm()
 {
   
-
-    return view('candidate.job_certificate', array('user' => Auth::user()));
+   $menus = $this->displayMenu();
+    return view('candidate.job_certificate', compact('menus'), array('user' => Auth::user()));
 
 }
 
@@ -1104,8 +1091,9 @@ public function UpdateslskillForm($id)
     $skill_list = JobSkill::where('userid', $user->id)->where('resumeid', $id)->get();
     //dd($skill_list);
     $resume = RecruitResume::findOrFail($id);
+       $menus = $this->displayMenu();
 
-    return view('candidate.edit_skill', compact('skill_list', 'resume'), array('user' => Auth::user()));
+    return view('candidate.edit_skill', compact('skill_list', 'resume', 'menus'), array('user' => Auth::user()));
 }
 
 
@@ -1175,7 +1163,8 @@ public function GetQualificationLevels()
     // $education = JobEducation::findOrFail($code);
     $qualifications = Qualification::all(); 
    $user_single_resume_by_id = RecruitResume::where('id', $id)->first();
-        return view('candidate.create_education', compact('user_single_resume_by_id', 'countries', 'recruityear_list', 'qualifications') ,array('user' => Auth::user()));
+      $menus = $this->displayMenu();
+        return view('candidate.create_education', compact('user_single_resume_by_id', 'countries', 'recruityear_list', 'qualifications', 'menus') ,array('user' => Auth::user()));
     }
 
     public function AddEducation(Request $request)
@@ -1258,9 +1247,10 @@ public function ShowEditEducation($code,$id)
     $education = JobEducation::findOrFail($code);
     $qualifications = Qualification::all(); 
    $user_single_resume_by_id = RecruitResume::where('id', $id)->first();
+      $menus = $this->displayMenu();
 
 
-     return view('candidate.edit_education', compact('countries', 'recruityear_list', 'education', 'user', 'qualifications', 'user_single_resume_by_id'), array('user' => Auth::user()));
+     return view('candidate.edit_education', compact('countries', 'recruityear_list', 'education', 'user', 'qualifications', 'user_single_resume_by_id', 'menus'), array('user' => Auth::user()));
 }
 
 
@@ -1343,8 +1333,9 @@ public function ShowWorkExperienceForm()
     $education = JobEducation::findOrFail($code);
     $qualifications = Qualification::all(); 
    $user_single_resume_by_id = RecruitResume::where('id', $id)->first();
+      $menus = $this->displayMenu();
 
-     return view('candidate.create_work_experience', compact('countries', 'recruityear_list', 'education', 'user', 'qualifications', 'user_single_resume_by_id'), array('user' => Auth::user()));
+     return view('candidate.create_work_experience', compact('countries', 'recruityear_list', 'education', 'user', 'qualifications', 'user_single_resume_by_id', 'menus'), array('user' => Auth::user()));
 }
    
    public function DeleteEducation($id)
@@ -1629,8 +1620,8 @@ public function SowUpdateWorkHistoryForm($code,$id)
 
          $work_industry_single = DB::table('work_industry')->where('work_experience_id', $code)->distinct()->first();
          //dd($work_industry_single);
-
-    return view('candidate.edit_work_history', compact('countries', 'recruityear_list', 'qualifications', 'user_single_resume_by_id', 'work_history', 'job_career_levelList', 'industries', 'industry_profession', 'work_industry_single'), array('user' => Auth::user()));
+   $menus = $this->displayMenu();
+    return view('candidate.edit_work_history', compact('countries', 'recruityear_list', 'qualifications', 'user_single_resume_by_id', 'work_history', 'job_career_levelList', 'industries', 'industry_profession', 'work_industry_single', 'menus'), array('user' => Auth::user()));
  
 }
 
