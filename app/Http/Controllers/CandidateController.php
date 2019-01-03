@@ -69,7 +69,6 @@ class CandidateController extends Controller
      $email_templates = EmailTemplate::all();
             $regions = Region::all();
             $cities = City::all();
-            // compact(['users', 'regions', 'cities'])
       return view('admin.questions.all_candidates', compact('users', 'questions', 'correct_options', 'email_templates', 'regions', 'cities'));
     }
 
@@ -81,27 +80,15 @@ class CandidateController extends Controller
      */
     public function show($id)
     {
-        //
-        $users = User::where('job_code', $id)->get();
-
+         $users = User::where('job_code', $id)->get();
         return view('admin.candidates.show', compact('users'), array('user' => Auth::user()));
     }
 
     public function showCandidateByJobCode($id)
     {
            $users = User::where('job_code', $id)->get();
-
         return view('admin.candidates.show', compact('users'), array('user' => Auth::user()));
     }
-
-
-    // public function getAllCandidates(){
-
-    //         $users = User::where('candidate', 1)->get();
-    //         $regions = Region::all();
-    //         $cities = City::all();
-    //         return view('admin.candidates.all_active_candidates', compact(['users', 'regions', 'cities']), array('user' => Auth::user())); 
-    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -131,9 +118,6 @@ class CandidateController extends Controller
     { 
       $organization = Organization::find($organization);
 
-      //  $data = DB::table('users')->where('organizations_id',$organization->id)->get(['id','firstname', 'lastname', 'middelname', 'phone_number', 'email', 'alt_phone_number', 'home_address', 'religion', 'state_of_origin', 'date_of_birth', 'resumption_date', 'marital_status', 'gender', 'city', 'spouse_name', 'spouse_employer', 'spouse_moblie_no', 'nex_surname', 'nex_other_names', 'nex_relationship', 'nex_phone_number', 'nex_home_address', 'nex_office_address', 'nex_occupation', 'nex_email_address', 'e_surname', 'e_lastname', 'e_othername', 'e_occupation', 'e_phonenumber', 'e_office_address', 'alt_e_phonenumber', 'p_height', 'p_weight', 'e_eyecolour', 'e_haircolour', 'e_bloodtype', 'e_genotype', 'e_allergies', 'e_email', 'p_marks', 'p_medical', 'p_comments', 'country', 'bank_id', 'account_name', 'account_number', 
-      // 'bvn', 'tin_number', 'pension_pin', 'pfa_name', 'sort_code', 'spouse_address', 'spouse_employers_address', 'e_home_address', 'leave_days']);
-     // $data = User::get()->toArray();
       $data = User::where('organizations_id', $organization->id)->get();
 // 
      
@@ -207,8 +191,6 @@ class CandidateController extends Controller
 
             $excel->sheet('mySheet', function($sheet) use ($usersArray)
             {
-
-
              $sheet->fromArray($usersArray);
             });
 

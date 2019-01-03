@@ -43,8 +43,6 @@ class DashboardController extends Controller
  
         $regions = Region::all();
         $cities = City::all();
-       // $aop = Profession::all();
-       // $profession_metas = DB::table('profession_metas')->where('status', 1)->get();
         return view('candidate_dashboard', compact('regions', 'cities', 'users'), array('user' => Auth::user()));
     }
 
@@ -52,20 +50,14 @@ class DashboardController extends Controller
 
     public function OnlineTestDashboard()
     {
-     
-  //$user = User::where('role', '!=', 'A')->count();
     $user = User::all()->count();
-   // dd($user);
     $question = Question::count();
     $quiz = Topic::count();
     $user_latest = User::where('id', '!=', Auth::id())->orderBy('created_at', 'desc')->get();
-
     return view('admin.dashboard', compact('user', 'question', 'answer', 'quiz', 'user_latest'));
-
     }
 
-
-      public function EmployeeDasboard()
+    public function EmployeeDasboard()
     {
        return view('employee', compact('user', 'question', 'answer', 'quiz', 'user_latest'));
     }

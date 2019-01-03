@@ -82,18 +82,9 @@ public function allCandidates(Request $request){
             ->join('work_experiences', 'work_experiences.userfk' , '=', 'documents.user_id')
             ->select('candidates_name', 'years_of_experience', 'city_id', 'region_id', 'nationality', 'gender', 'date_of_birth', 'age', 'email', 'phonenumber', 'availability', 'd_employment_term', 'educational_level',  'relocate_nationaly', 'minimum_salary','red', 'black', 'blue', 'green', 'yellow', 'documents.id', 'documents.user_id', 'start_year', 'start_month', 'end_year', 'end_month', 'position_title','company_name', 'country', 'responsibilities', 'userfk', 'resumefk', 'present', 'yoe', 'documents.id') 
                 ->paginate(20);
-  //dd($documents);
-            // foreach ($documents as $key => $value) {
-            //    dd($value->userid);
-            // }
-
         $industries = Industry::all();
-
-
         $professions = IndustryProfession::all();
         $countries = DB::table('countries')->get();
-
-      
         $cities = City::all();
         $educational_levels = DB::table('qualification_levels')->get();
         // get all records
@@ -101,41 +92,25 @@ public function allCandidates(Request $request){
         $educational_qualifications = DB::table('qualification_levels')->get();
         $employement_terms = DB::table('employement_terms')->get();
         $jobcareer_levels = DB::table('jobcareer_levels')->get();
-        //$educationaList = JobEducation::where('userid', $user->id)->where('resume_id', $user_single_resume_by_date->id)->get();
         $users = User::all();
-
-
         $user_info_application = DB::table('documents')
              ->select('tag_fk', DB::raw('count(*) as total'))
              ->groupBy('tag_fk')->get();
-
         $user_industry_count = DB::table('user_industries')
              ->select('industry_id', DB::raw('count(*) as total'))
              ->groupBy('industry_id')->get();
-
         $user_profession_count = DB::table('user_professions')
              ->select('industry_profession_id', DB::raw('count(*) as total'))
              ->groupBy('industry_profession_id')->get();
-  
-            // dd($user_info);
-
             //get candidates Position 
             //work_experience's
              $work_experiences = DB::table('work_experiences')->get();
             // find by location
-
             $documents_location = DB::table('documents')->where('city_id', $location)->get();
-            //dd($location);
-
             $menus = $this->displayMenu();
             $units = $this->displayUnit();
-
    return view('candidate.all_candidates', compact('documents', 'industries', 'employement_terms', 'educational_qualifications', 'jobcareer_levels', 'professions', 's', 'cities', 'c', 'work_experiences', 'users', 'educational_levels', 'dt', 'ddt', 'countries', 'documents3', 'menus', 'units'), array('user' => Auth::user()));
 }
-
-
-
-   
 public function filterbyCategory(Request $request){
     
         $s = $request->input('s');
@@ -154,19 +129,9 @@ public function filterbyCategory(Request $request){
         $employement_terms = $request->employement_terms;
         $job_terms = $request->job_terms;
         $check_section = 'check_section';
-
         $countries = DB::table('countries')->get();
         $resume_url = '/employer/candidate/resume/';
- 
          //get age to be grouped
-        // if ($age !=null) {
-        //   $age = $this->FindAge($age);
-        // }
- // $work_experiences = DB::table('work_experiences')
- //            ->join('applications', 'work_experiences.resumefk', '=', 'applications.resume_id')
- //            ->join('tags', 'tags.id', '=', 'applications.tag_id')
- //            ->get();
-
  $work_experiences = DB::table('work_experiences')
             ->join('documents', 'documents.resume_id', '=', 'work_experiences.resumefk')
             ->get();
@@ -174,11 +139,8 @@ $job_educations = DB::table('job_educations')
             ->join('documents', 'documents.resume_id', '=', 'job_educations.resume_id')
             ->select('job_educations.start_year', 'job_educations.end_month', 'job_educations.start_month', 'job_educations.end_month', 'job_educations.qualification', 'job_educations.school_name', 'job_educations.feild_of_study', 'job_educations.country', 'job_educations.userid', 'job_educations.resume_id')
             ->get();
-       
-       if ($request->has('gender') || $request->has('salary') || $request->has('availability') || $request->has('age') || $request->has('yoe')) {
-     
-  $documents_location = Document::where(function($query) use ($gender, $yoe, $locations, $qualifications,$employement_terms, $check_section, $age, $career_level, $job_terms, $availability, $salary, $industry){
-                                
+ if ($request->has('gender') || $request->has('salary') || $request->has('availability') || $request->has('age') || $request->has('yoe')) {
+  $documents_location = Document::where(function($query) use ($gender, $yoe, $locations, $qualifications,$employement_terms, $check_section, $age, $career_level, $job_terms, $availability, $salary, $industry){                                
                             if ($gender) {
                                     foreach ($gender as $gend) {
                                     $query->orWhere('black_list', 0)
@@ -233,8 +195,7 @@ $job_educations = DB::table('job_educations')
                 $end_age = $ages[1];    
              $query->orWhere('black_list', 0)->where('age', '>=', $start_age)->where('age', '<=', $end_age); 
                  }
- 
-       
+      
   })->paginate(20);
 
        $documents = DB::table('documents')->where('black_list', 0)
@@ -242,7 +203,6 @@ $job_educations = DB::table('job_educations')
              ->select('start_year', 'start_month', 'end_year', 'end_month', 'qualification', 'school_name', 'feild_of_study', 'country', 'userid', 'candidates_name', 'years_of_experience', 'city_id', 'region_id', 'nationality', 'gender', 'date_of_birth', 'age', 'email', 'phonenumber', 'availability', 'd_employment_term', 'educational_level','career_level', 'relocate_nationaly', 'minimum_salary','red', 'black', 'blue', 'green', 'yellow', 'documents.id', 'documents.user_id', 'documents.resume_id') 
              ->paginate(20);
 
- 
 //$documents_location = datatables()->query($documents_location)->toJson();
         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s, 'work_experiences' => $work_experiences, 'countries'=>$countries, 'job_educations' => $job_educations, 'resume_url' => $resume_url);
         return response()->json($response);
@@ -252,138 +212,7 @@ $job_educations = DB::table('job_educations')
         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s, 'countries'=>$countries, 'job_educations' => $job_educations, 'resume_url' => $resume_url);
         return response()->json($response);
        }
-//         if ($request->has('job_type')) {
-//         $documents_location = Document::where('d_employment_term', $job_type)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-//        // find by profession
-//         if ($profession !=null) {
-//         $documents_location = Document::where('job_type', $job_type)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-//        // find by industry
-//         if ($industry !=null) {
-//         $documents_location = Document::where('job_type', $job_type)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        } 
 
-//         if ($salary !=null) {
-//         $documents_location = Document::where('minimum_salary', $salary)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        } 
-//         if ($availability !=null) {
-//         $documents_location = Document::where('availability', $availability)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-//         if ($request->has('yoe')) {
-
-//         $documents_location = Document::where('yoe_range', $yoe)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-//         if ($age !=null) {
-//         $documents_location = Document::where('age', $age)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-//         if ($qualification !=null) {
-//         $documents_location = Document::where('educational_level', $qualification)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-//         if ($career_level !=null) {
-//         $documents_location = Document::where('career_level', $career_level)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
- 
-
-// // second combination
-//        if ($location !=null && $gender !=null) {
-//         $documents_location = Document::where('city_id', $location)->where('gender', $gender)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-       
-//         if ($job_type !=null && $profession !=null) {
-//         $documents_location = Document::where('d_employment_term', $job_type)->where('gender', $gender)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-//         if ($job_type !=null && $gender !=null) {
-//         $documents_location = Document::where('d_employment_term', $job_type)->where('gender', $gender)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-//         if ($job_type !=null && $salary !=null) {
-//         $documents_location = Document::where('d_employment_term', $job_type)->where('minimum_salary ', $salary)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-
-//     // industry / salary
-//         if ($industry !=null && $salary !=null) {
-//         $documents_location = Document::where('city_id', $location)->where('minimum_salary ', $salary)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-
-//         if ($availability !=null && $yoe !=null) {
-//         $documents_location = Document::where('availability', $availability)->where('minimum_salary', $salary)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }     
-//      if ($age !=null && $qualification !=null) {
-//         $documents_location = Document::where('age', $age)->where('educational_level ', $qualification)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }   
-
-// // Third combination
-//        if ($gender !=null && $profession !=null && $industry !=null) {
-//         $documents_location = Document::where('gender', $gender)->where('job_type', $job_type)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-//        if ($salary !=null && $availability !=null && $yoe !=null) {
-//         $documents_location = Document::where('minimum_salary', $salary)->where('availability', $availability)->where('years_of_experience', $yeo)->paginate(20);
-//         $response = array('status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-//     if ($age !=null && $qualification !=null && $location !=null) {
-//         $documents_location = Document::where('age', $age)->where('educational_level', $qualification)->where('city_id', $location)->paginate(20);
-//         $response = array('status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-
-// // Others
-//        if ($salary !=null && $gender !=null) {
-//       $documents_location = Document::where('minimum_salary', $salary)->where('gender', $gender)->paginate(20);
-//         $response = array('status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-
-//        if ($job_type !=null && $gender !=null) {
-//       $documents_location = Document::where('minimum_salary', $salary)->where('gender', $gender)->paginate(20);
-//         $response = array('status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);
-//        }
-
-// // $documents_location = DB::table('documents')->where('city_id', $location)->where('job_type', $job_type)->get();
-//      if ($location !=null && $job_type !=null && $gender !=null && $salary !=null && $age !=null && $availability !=null && $qualification !=null && $years_of_experience !=null) {
-//         $documents_location = Document::where('city_id', $location)->where('gender', $gender)->where('job_type', $job_type)->where('availability', $availability)->where('educational_level', $qualification)->paginate(20);
-//         $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => $documents_location, 's' =>$s);
-//         return response()->json($response);   
-//         }
-
-// $documents = DB::table('user')
-//             ->join('documents', 'documents.id', '=', 'applications.document_id') 
-//             ->get();
     $cities = City::all();
         $educational_levels = DB::table('qualification_levels')->get();
         // get all records
@@ -411,19 +240,13 @@ $documents_location = Document::where('black_list', 0)->paginate(20);
         'jobcareer_levels' => $jobcareer_levels,
         'employement_terms' => $employement_terms,
         'countries'=>$countries,
-        'resume_url' => $resume_url,
-        
- 
-
+        'resume_url' => $resume_url,    
     );
 return response()->json($response);
 }
 
  public function index(Request $request)
     {
-
-   
-
         $location = $request->location;
         $s = $request->input('s');
         $c = $request->input('c');
@@ -454,14 +277,10 @@ return response()->json($response);
         $user_profession_count = DB::table('user_professions')
              ->select('industry_profession_id', DB::raw('count(*) as total'))
              ->groupBy('industry_profession_id')->get();
-  
-            // dd($user_info);
-
             //get candidates Position 
             //work_experience's
              $work_experiences = DB::table('work_experiences')->get();
 // find by location
-
             $documents_location = DB::table('documents')->where('city_id', $location)->get();
 //dd($location);
             //get age from employees
@@ -476,53 +295,13 @@ return response()->json($response);
 
 
     public function filterbyJobTitle(Request $request, Document $documents){
-
         $search_fields = ['position_title', 'company_name', 'responsibilities'];
-
         $search_terms = explode(' ', $request->get('job_title'));
-
         if ($request->get('job_title') && $request->get('candidate_city') && $request->get('profession')) {
           
         }
 
-      // $documents = $documents->newQuery();
-       // if ($request->has('job_title')) {
-
-       //   $documents->where('job_type', $request->input('job_title'))->get();
-
-       // }
-       // $terms = $request->input('job_title');
-        //$terms = explode(" ", request('job_title'));
-
-
-//         $terms = ['Agriculture / Forestry / Fishing', 'Investment', 'phone_number'];
-
-// $work_experiences = WorkExperience::whereHas('industries', function($q) use($terms) {
-//         //$q->where('position_title', 'like', '%' . $term .'%');
-
-//         foreach (array_slice($terms, 1) as $term) {
-//             $q->orWhere('position_title', 'like', '%' . $term .'%');
-//         }
-
-//     });
-
-//         foreach ($terms as $term) {
-//     $work_experiences->orWhere('responsibilities', 'like', '%' . $term . '%');
-//             }
-
-//     $work_experiences = $work_experiences->get();
-
- 
-     // $documents_location = DB::table('documents')->where('job_type', $request->input('job_title'))->get();
-
-
-
-    // $query = Document::query();
-    // $document_join_workexperience = $query->where('black_list', 0)  
-    //         ->join('work_experiences', 'work_experiences.userfk' , '=', 'documents.user_id')
-    //         ->select('candidates_name', 'years_of_experience', 'city_id', 'region_id', 'nationality', 'gender', 'date_of_birth', 'age', 'email', 'phonenumber', 'availability', 'd_employment_term', 'educational_level',  'relocate_nationaly', 'minimum_salary','red', 'black', 'blue', 'green', 'yellow', 'documents.id', 'documents.user_id', 'start_year', 'start_month', 'end_year', 'end_month', 'position_title','company_name', 'country', 'responsibilities', 'userfk', 'resumefk', 'present', 'yoe', 'documents.id') 
-    //             ->get();
-     $query = WorkExperience::query();
+    $query = WorkExperience::query();
 
         foreach ($search_terms as $term) {
             $query->orWhere(function ($query) use ($search_fields, $term) {
@@ -545,13 +324,8 @@ $document_search_fields = ['candidates_name', 'city_id', 'nationality'];
                     $q->orWhere($field, 'LIKE', '%' . $term . '%');
                 }
             });
-        }
-
-      
+        }  
     $documents = $q->get();
-
-
-
         $response = array(
         'status' => 'success',
         'msg'    => 'Setting created successfully',  
@@ -560,8 +334,6 @@ $document_search_fields = ['candidates_name', 'city_id', 'nationality'];
         // 'document_join_workexperience' =>$document_join_workexperience
     );
 return response()->json($response);
-      // return view('admin.document.index', compact('documents', 'industries', 'employement_terms', 'educational_qualifications', 'jobcareer_levels', 'professions', 's', 'cities', 'c', 'work_experiences', 'users', 'educational_levels'), array('user' => Auth::user()));
-
 }
 
     public function filter(Request $request, Document $user)
@@ -578,8 +350,6 @@ return response()->json($response);
     });
 }
     }
-
-
 
     public function FindAge($age)
     {
@@ -638,7 +408,7 @@ public function filterbyLocation(Request $request)
         'job_type' => $job_type
     );
 return response()->json($response);
-    # code...
+ 
 }
 
 public function filterbyJobType(Request $request)
@@ -649,8 +419,6 @@ public function filterbyJobType(Request $request)
         $availability = $request->availability;
          //get age to be grouped
         $age = $this->FindAge($age);
-
-        // $documents_location = DB::table('documents')->where('city_id', $location)->where('job_type', $job_type)->get();
  if ($location !=null && $job_type !=null && $gender !=null && $salary !=null && $age !=null && $availability !=null) {
         $documents_location = Document::where('city_id', $location)->orWhere('job_type',$job_type)->paginate(20); 
     }
@@ -712,15 +480,6 @@ public function filterbyGenderAndOthers(Request $request)
 return response()->json($response);
     # code...
 }
-
-
-
-
-
-
-
-
-
 public function getcandidatesByIndustryAndOthers(Request $request)
 {
         $users = User::all();
@@ -739,16 +498,8 @@ public function getcandidatesByIndustryAndOthers(Request $request)
              if ($age !=null) {
           $age = $this->FindAge($age);
         }
-       
-        // $documents_location = DB::table('documents')->where('city_id', $location)->where('job_type', $job_type)->get();
-
         // get candidates by industry 
-        // $industry_record = DB::table('work_industry')->where('industry_id', $industry)->first();
         $user_industry = DB::table('user_industryies')->where('industry_id', $industry)->get();
-
-        // foreach ($user_industry as $key => $value) {
-        
-        // }
          if ($location !=null && $job_type !=null && $gender !=null && $salary !=null && $age !=null && $availability !=null) {
         $documents_location = Document::where('city_id', $location)->orWhere('gender', $gender)->orWhere('job_type',$job_type)->paginate(20);
     }
@@ -801,7 +552,6 @@ $documents_location = Document::where('city_id', $location)->orWhere('job_type',
             $documents_location = Document::where('minimum_salary', $salary)->paginate(20);
         }
 
- 
         $response = array(
         'status' => 'success',
         'msg' => 'Setting created successfully',
@@ -838,18 +588,8 @@ public function getcandidatesByAgeAndOthers(Request $request)
          if ($age !=null) {
           $age = $this->FindAge($age);
         }
-       
 
         // get age_group table
-
-        // $age_group = DB::tabel('age_group')->get();
-
-        // foreach ($age_group as $key => $value) {
-        //     if ($age === $value->age_range) { 
-        //        $age = $value->age;
-        //     } 
-        // }
-
         $documents_location = Document::where('city_id', $location)->orWhere('gender', $gender)->orWhere('minimum_salary', $salary)->orWhere('age', $age)->orWhere('job_type', $job_type)->orWhere('availability', $availability)->paginate(20);
  
         $response = array(
@@ -889,11 +629,8 @@ public function getcandidatesByAvalilabilityAndOthers(Request $request)
                if ($age !=null) {
           $age = $this->FindAge($age);
         }
-       
-
         $documents_location = Document::where('city_id', $location)->orWhere('gender', $gender)->orWhere('minimum_salary', $salary)->orWhere('age', $age)->orWhere('job_type', $job_type)->orWhere('availability', $availability)->paginate(20);
- 
-        $response = array(
+         $response = array(
         'status' => 'success',
         'msg' => 'Setting created successfully',
         'documents' => 'documents',
@@ -931,8 +668,6 @@ public function getcandidatesByYearsOfExperience(Request $request)
            if ($age !=null) {
           $age = $this->FindAge($age);
         }
-       
-
         $documents_location = Document::where('city_id', $location)->orWhere('gender', $gender)->orWhere('minimum_salary', $salary)->orWhere('age', $age)->orWhere('job_type', $job_type)->orWhere('availability', $availability)->orWhere('years_of_experience', $yearsofexperience)->paginate(20);
  
         $response = array(
@@ -953,11 +688,8 @@ public function getcandidatesByYearsOfExperience(Request $request)
     );
 return response()->json($response);
 }
-
 //
-
-
-    public function ViewSingleDocument($id)
+public function ViewSingleDocument($id)
     {
             if ($id) {
                 $document = Document::find($id);
@@ -995,19 +727,12 @@ return response()->json($response);
 
  if (Auth::check()) {
   $user = Auth::user();
-
     // The user is logged in...
-    
-
-
 }else{
 return redirect()->reoute('/login');
 
 }
-
- 
-    if ($this->uploadIsValid($request)) {
-
+if ($this->uploadIsValid($request)) {
          // validate
         $this->validate($request, [
                 'candidates_name' => 'required',
@@ -1110,14 +835,7 @@ try{
           ->withErrors(['error' => $e->getMessage()]);
     }
         
-        
     // there can be duplicate file names! 
-    //return $file; // array with file info file_get_contents($file->getRealPath())
-    
-  // return Response::make($rawData, 200)
-  //   ->header('ContentType', $file['mimetype'])  
-  //   ->header('Content-Disposition', "inline; filename='$filename'");
-       
  return Response::make($rawData, 200)
     ->header('ContentType', $file['mimetype'])  
     ->header('Content-Disposition', "attachment; filename='$filename'");
@@ -1211,16 +929,10 @@ try{
         $updocument->save();
  
         // map profession to candidate
-        // foreach ($profession as $key => $value) {
-          
-        //     $indocument->professions()->attach($value);
-        // }
-
-         // $indocument->save(); 
-            DB::table('document_profession')->where('document_id',$id)->delete();
+        DB::table('document_profession')->where('document_id',$id)->delete();
         // add Update
           
-           // dd($dds);
+        // dd($dds);
         foreach ($dds as $key => $value) {
  
              $updocument->professions()->attach($value);
@@ -1301,8 +1013,6 @@ try{
 
     public function uploadIsValid($request)
     {
-
-
         if ($request->file('file')) {
             // dd($request->all());
         foreach ($request->file('file') as $file) {
@@ -1387,58 +1097,6 @@ public function post_search(Request $request) {
         return redirect()->route('document.search_category', compact(['documents','regions', 'cities', 'aop', 's']), array('user' => Auth::user()));
    }
 
-   /*
-    public function searchDocumentByRegionAndProfessionAndYearsOfExperience(Request $request) {
-    
-  
-        $city= $request->city;
-        $region = $request->region;
-        $location = $request->location;
-        $professionsList = $request->profession;
-        $years_of_experience = $request->years_of_experience;
-
-
-        foreach ($professionsList as $key => $profession) {
-           $profession = $profession;
-               
-        }
-
-        $profession_name = Profession::find($profession)->name;
-    
-    
-        $locations = DB::table('cities')->where('name', $location)->get();
-    
-    if($years_of_experience === null){
-    $s = '';
-        foreach ($locations as $key => $location) {
-          $location_id = $location->id;
-      
-        }
-        $city_name = City::find($location_id)->name;
-     $documents = DB::table('documents')->where('region_id', $region)->where('city_id', $location_id)->get();
-    
-    }
-    else{
-            $s = '';
-         // $documents = Document::search($s)->paginate(20);
-            // $documents = Document::all();
-     $documents = DB::table('documents')->where('years_of_experience', $years_of_experience)
-                                        ->where('region_id', $region)->where('city_id', $location_id)->get();
-    }
-    $document_profession = DB::table('document_profession')->get();
-  
-    
-        $cities = City::all();
-        $regions = Region::all();
-        $professionsList = Profession::all();
- 
-   // dd($documents);
-
-
-    return view('admin.document.search', compact(['documents','city', 'regions', 'cities', 'professionsList', 's' , 'years_of_experience', 'document_profession', 'profession_name', 'city_name']), array('user' => Auth::user()));
-   }
-   */
-
     public function searchDocumentByRegionAndProfessionAndYearsOfExperience(Request $request) {
     
     /*
@@ -1515,49 +1173,29 @@ public function post_search(Request $request) {
             // $documents = Document::all();
         $documents = DB::table('documents')->where('years_of_experience', $years_of_experience)
                                         ->where('region_id', $region)->where('city_id', $location_id)->get();
-
         $document_profession = DB::table('document_profession')->get();
-  
-    
         $cities = City::all();
         $regions = Region::all();
         $professionsList = Profession::all();
-
-       }else{
-        
+       }else{     
         return redirect()->back();
-
        }
-        
- 
-   // dd($documents);
-
+       // dd($documents);
     return view('admin.document.search', compact(['documents','city', 'regions', 'cities', 'professionsList', 's' , 'years_of_experience', 'document_profession', 'profession_name', 'city_name']), array('user' => Auth::user()));
    }
-
-
-
 /*
 this method displays the search at first time
 */
-      public function show_search(Request $request) {
-       
+    public function show_search(Request $request) {      
         $years_of_experience = '';
         $s = $request->input('s');
-
         $cities = City::all();
         $regions = Region::all();
         $aop = Profession::all();
         $documents = Document::latest()->search($s)->paginate(20);
-
         // add search by TAG here
-
         $tags = Tag::all();
-
-
-
-
-        return view('admin.document.search_category', compact(['documents','city', 'tags' ,'regions', 'cities', 'aop', 's', 'years_of_experience']), array('user' => Auth::user()));
+    return view('admin.document.search_category', compact(['documents','city', 'tags' ,'regions', 'cities', 'aop', 's', 'years_of_experience']), array('user' => Auth::user()));
    }
 
    // filter by city; get all candidates that belongs to a city
@@ -1568,11 +1206,9 @@ this method displays the search at first time
     // It has valid data
         $location = City::find($location);
         $cities = City::all();
-            }else{
-
+        }else{
         return redirect()->back()->withErrors(['error' => 'canot find city']);
-
-            }
+        }
          //find candidates by city
         return view('admin.document.filter_by_city', compact(['location', 'cities']), array('user' => Auth::user()));
     }
@@ -1582,11 +1218,8 @@ this method displays the search at first time
          $location = $request->location;
           // get a specific Loaction by ID
          $locations = City::find($location);
-
       return redirect()->route('document.filter_by_city', compact('locations'));
     }
-
-
     public function search_category()
     {
         return view('admin.document.search_category');
@@ -1599,58 +1232,30 @@ this method displays the search at first time
           $locations = City::find($location);
           return redirect()->route('document.search_category', compact('locations'));
        }
-
-
-
     public function show_profession()
     {
-
-      return view('admin.document.filter_by_professions',   array('user' => Auth::user()));
+    return view('admin.document.filter_by_professions',   array('user' => Auth::user()));
     }
-
     public function view_filter_by_professions(Request $request)
     {
-
-        $aop = $request->aop;
+       $aop = $request->aop;
         // get the size of the array
         $max = sizeof($aop);
         // loop through and find each item
-        for ($i=0; $i < $max ; $i++) {
-           
+        for ($i=0; $i < $max ; $i++) {         
          $professions = Profession::find($aop); 
     }
- 
-   // foreach ($professions as $profession) {
-      // dd($profession->id);
-    //   $documents = DB::table('professions')
-    //   ->join('documents', 'professions.id', '=', 'documents.profession_id')
-    //     ->where('professions.name', '=', $aop)->paginate(5);
-    
-    // dd($documents);
-           // }
-        //   DB::table('tags')
-        // ->join('posts', 'tags.id', '=', 'posts.tag_id')
-        // ->where('tags.name', '=', $tag)
-        // ->paginate(5);
-        // $company = \Company::find($companyId)
-        //     ->with('users')
-        //     ->first();
-
-        // $users = $company->users()->paginate(10);
-
     return view('admin.document.filter_by_professions', compact(['aop', 'professions', 'documents']), array('user' => Auth::user()));
     }
 
     public function searchCandidatesByProfession(Request $request)
-    {
-     
-        $aop = $request->profession;
-       
+    {   
+        $aop = $request->profession;  
       return redirect()->route('document.filter_by_professions', compact(['aop']));
     }
 
     // filter by Years of Experience
-   
+
     public function searchCandidatesByYearsOfExperience(Request $request)
     {
          
@@ -1675,15 +1280,12 @@ this method displays the search at first time
     public function view_filter_by_region(Request $request)
     {
     // dd($request->region);
-
        return view('admin.document.filter_by_region');
     }
 
     public function search_filter_by_region(Request $request)
-    {
-     
+    {    
          $region = $request->region;
-
        return redirect()->route('document.filter_by_region', compact('region'));
     }
 
@@ -1762,13 +1364,8 @@ this method displays the search at first time
 
  return redirect()->route('document.index');
     }
-
-
-
-
-    public function importCandidatesFromCSV(Request $request)
+   public function importCandidatesFromCSV(Request $request)
     {
-
         $this->validate($request, [
             'upload-file' => 'required']);
         //get file
@@ -1788,13 +1385,11 @@ this method displays the search at first time
         //looping through othe columns
         while($columns=fgetcsv($file))
         {
-
             if($columns[0]=="")
             {
                 continue;
             } 
         // dd($columns);
-
             //trim data
             foreach ($columns as $key => &$value) {
                 $value=preg_replace('//','',$value);
@@ -1835,11 +1430,7 @@ this method displays the search at first time
 
  return redirect()->route('document.index');
     }
-
-
-
     public function BlackListCV($id) {
-
         try {
             if ($id) {
                 $document = Document::find($id);
@@ -1852,11 +1443,6 @@ this method displays the search at first time
               return redirect()->back()
           ->withErrors(['error' => $e->getMessage()]);
         }
-
-
          return redirect()->back()->with(['success' => 'CV Blacklisted successfully']);
     }
-
-
-
 }
