@@ -93,7 +93,8 @@ class HomeController extends Controller
              ->select('job_category', DB::raw('count(*) as total'))
              ->groupBy('job_category')->get();
       
-             $menus = $this->displayMenu();
+        $menus = $this->displayMenu();
+
         return view('index', compact('documents', 'roles', 'users', 'resumes','industries', 'resume_builder_list', 'industries', 'jobs', 'resume_count', 'jobs_count', 'industry_professions', 'employement_term_list', 'cities','industry_count', 'industries_paginage', 'job_function_count', 'jobs_8', 'job_post', 'tag_cities', 'employement_terms', 'menus'), array('user' => Auth::user()));
     }
 

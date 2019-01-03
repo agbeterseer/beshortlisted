@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB; 
 use App\Notifications\OnlineTest;
 use App\Notifications\TestVerification;
+use App\Menu;
 class CandidateController extends Controller
 {
 
@@ -23,6 +24,10 @@ class CandidateController extends Controller
       $this->middleware('auth');
     }
 
+    public function displayMenu(){
+
+     return $menus = Menu::where('status', 1)->orderBy('menu_order', 'ASC')->get();
+   }
 
     /**
      * Display a listing of the resource.
@@ -33,11 +38,9 @@ class CandidateController extends Controller
     {
        // dd('here');
        //   $users = User::where('candidate', 1)->get();
-          // $user_info = DB::table('users')
-          //    ->select('job_code', DB::raw('count(*) as total'))
-          //    ->groupBy('job_code')->get();
-  
-    return view('employee_dashboard', compact('user_info'), array('user' => Auth::user()));
+ 
+   $menus = $this->displayMenu();
+    return view('employee_dashboard', compact('menus'), array('user' => Auth::user()));
     }
 
     /**
