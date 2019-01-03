@@ -63,8 +63,6 @@ class ResumeController extends Controller
       return $units = EmployerPackage::where('status', 1)->where('userfkp', $user->id)->first();
     }
 
-
-
     /**
      * Display a listing of the resource.
      *
@@ -75,7 +73,6 @@ class ResumeController extends Controller
         //
         $resume_templates = DB::table('resume_builders')->get();
         $menus = $this->displayMenu();
-
     return view('admin.resume.index', compact('resume_templates', 'menus'), array('user' => Auth::user()));
     }
 
@@ -88,9 +85,8 @@ class ResumeController extends Controller
     {
         //
       $menus = $this->displayMenu();
-        return view('admin.resume.create' , compact('menus') array('user' => Auth::user()));
+        return view('admin.resume.create' , compact('menus'), array('user' => Auth::user()));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -2030,12 +2026,9 @@ DB::table('documents')->where('user_id', $user->id)->update(['years_of_experienc
                 'job_category_list', 'regions', 'referee_list', 'profile_pix', 'menus', 'units'), array('user' => Auth::user()));
     }
 
-
  public function AdminResumeById($resume_id, $candidate_id)
     {
-
-       //dd($resume_id);
-//dd($candidate_id);
+ 
         $document = Document::where('resume_id', $resume_id)->where('black_list',0)->first();
         $candidate = User::findOrFail($document->user_id);
         $user = Auth::user();     
@@ -2104,11 +2097,6 @@ DB::table('documents')->where('user_id', $user->id)->update(['years_of_experienc
                 'job_category_list', 'regions', 'referee_list', 'profile_pix', 'user','recruit_profile_pix', 'recruit_profile_pix_list', 'candidate', 'menus', 'units'), array('user' => Auth::user()));
     }
 
-        /*
-check 
-
-
-        */
 // get all resume by default first time
 
         public function ShowResume() {
@@ -2136,14 +2124,11 @@ check
         $awards = Award::where('user_id', $user->id)->get();
         $resumes = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->get();
         // fresh user test pass
-        //$resumes = RecruitResume::where('user_id', $user->id)->having('status', '=', 1)->orderBy('status','DESC')->get();
         $user_resume_list = RecruitResume::where('user_id', $user->id)->orderBy('created_at','DESC')->get();
        // fresh user test pass
         // check for candidates current resume
         $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->first();
         // fresh user test pass
-
-       // dd($user_single_resume_by_date);
         try {
     $career = CareerSummary::where('userid', $user->id)->where('resume_id', $user_single_resume_by_date->id)->first();
        // get Educational History
@@ -2159,12 +2144,10 @@ check
         // get 
         $job_by_candidate_list = $this->GetAvailableJobs();
         // dd($job_by_candidate_list);
-
         $users = $this->GetUsers();
         $countries = $this->GetCountries();
         $cities = $this->GetCities();
         $regions = DB::table('regions')->get();
-
         $tags = $this->Tags();
         $section_candidatelist = $this->GetCandidateSection($user_single_resume_by_date->id);
           $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
@@ -2172,12 +2155,11 @@ check
           $job_category_list = $this->GetJobcategory();
           $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
         $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
-        //dd($profile_pix);
-
         //get educational_levels
-
-            return view('candidate.resume', compact('documents', 'roles', 'users', 'resumes_by_user', 'resumes','industries', 'industry_profession', 'industry_group', 'get_industry_child', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'dtwork', 'ddtwork', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
-                'job_category_list', 'regions', 'referee_list', 'profile_pix', 'menus', 'units'), array('user' => Auth::user()));
+             $menus = $this->displayMenu();
+    
+        return view('candidate.resume', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+                'job_category_list', 'regions', 'referee_list', 'profile_pix', 'menus'), array('user' => Auth::user()));
         }
 
         public function PrintResume($id){
@@ -2228,50 +2210,30 @@ check
         // get 
         $job_by_candidate_list = $this->GetAvailableJobs();
         // dd($job_by_candidate_list);
-
         $users = $this->GetUsers();
         $countries = $this->GetCountries();
         $cities = $this->GetCities();
         $regions = DB::table('regions')->get();
-
         $tags = $this->Tags();
         $section_candidatelist = $this->GetCandidateSection($user_single_resume_by_date->id);
         $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
-
         $job_category_list = $this->GetJobcategory();
         $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
-  // dd($job_category_list);
-
         //get educational_levels
-
-            return view('candidate.print_resume', compact('documents', 'roles', 'users', 'resumes_by_user', 'resumes','industries', 'industry_profession', 'industry_group', 'get_industry_child', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'dtwork', 'ddtwork', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+            return view('candidate.print_resume', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
                 'job_category_list', 'regions', 'referee_list'), array('user' => Auth::user()));
         }
- 
-
-        // public function ShowPersonalInformation()
-        // {
-        //     dd($request->all());
-        //     return view()
-        // }
-
-        public function AddPersonalInformation(Request $request)
+       public function AddPersonalInformation(Request $request)
         {
-
             $user = Auth::user();
-
             $interest = $request->interest;
             $associations = $request->associations;
             $award = $request->award;
             $personal_page = $request->personal_page;
             $training = $request->training;
-
             $section = $request->pinfor;
             $resume = $request->resume;
-
-    // 
             try {
-
             $pinformation = new PersonalInformation;
             $pinformation->user_id = $user->id;
             $pinformation->interest = $interest;
@@ -2282,19 +2244,15 @@ check
             $pinformation->created_at =  $this->returnCurrentTime();
             $pinformation->training = $training;
             $pinformation->save();
-
             //dd($pinformation);
             $this->AddSection($section, $user->id, $resume);
-
             $request->session()->flash('message.level', 'success');
             $request->session()->flash('message.content', 'Done successfully!'); 
-
             } catch (\Exception $e) {
         $request->session()->flash('message.level', 'danger');
         $request->session()->flash('message.content', 'Cannot create record'); 
         Session::flash('error', $e->getMessage());
             }
-             
             return redirect()->back();
         }
 
@@ -2311,10 +2269,7 @@ check
 
             return view('candidate.update_personal_information', compact('person_info'), array('user' => Auth::user()));
         }
-
-
         /// forms 
-
         public function EducationFormBuilder(FormBuilder $formBuilder){
         $form = $formBuilder->create(\App\Forms\SongForm::class, [
                         [
@@ -2333,11 +2288,8 @@ check
             'method' => 'POST',
             'url' => route('song.store')
         ]);
-
         return view('candidate.create_resume', compact('form'));
-
-
-        }
+      }
 
 public function AddAward(Request $request){
 
@@ -2346,9 +2298,7 @@ public function AddAward(Request $request){
   $company_name = $request->company_name;
   $description = $request->description;
   $resume = $request->resume;
-
     $user = Auth::user();
-
     // validate the input
     $validation = Validator::make( $request->all(), [
         'title'=>'required|string|max:50',
