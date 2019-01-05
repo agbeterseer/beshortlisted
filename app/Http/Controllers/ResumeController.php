@@ -1957,17 +1957,14 @@ DB::table('documents')->where('user_id', $user->id)->update(['years_of_experienc
         //dd($section_candidatelist_count);
           $job_category_list = $this->GetJobcategory();
           $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
-        $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
-        //get educational_levels
-             $menus = $this->displayMenu();
-    
+        $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first(); 
+        $menus = $this->displayMenu(); 
         return view('candidate.resume', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
                 'job_category_list', 'regions', 'referee_list', 'profile_pix', 'menus'), array('user' => Auth::user()));
         }
 
         public function PrintResume($id){
-        $user = Auth::user();
-       // dd('it is our work  ooo');
+        $user = Auth::user(); 
         $dt = Carbon::now();
         $ddt = Carbon::now(); 
         $documents = Document::all()->count();
@@ -2264,21 +2261,16 @@ return $get_Job_by_common_industries;
       $job_requirements = DB::table('job_requirements')->where('job_id', $id)->get();
       $get_Job_by_common_industries = DB::table('tags')->where('industry',$tag->industry)->orWhere('job_category',$tag->job_category)->orWhere('salary_range', $tag->salary_range)->get();
       $get_Job_by_common_industries_similler = DB::table('tags')->where('industry',$tag->industry)->where('job_category',$tag->job_category)->where('salary_range', $tag->salary_range)->get();
-
       // get employer that posted this job
     $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
     $resume_list = RecruitResume::where('user_id', $user->id)->get();
     $get_all_user_list = User::all();
     $menus = $this->displayMenu();
-
      return view('jobs.job_details', compact('tag','employement_terms', 'jobcareer_levels', 'industries', 'educational_levels', 'skillsets', 'job_assessments', 'job_requirements', 'get_Job_by_common_industries', 'get_Job_by_common_industries_similler', 'cities', 'get_all_user_list', 'user_single_resume_by_date', 'resume_list', 'industry_professions', 'menus'), array('user' => Auth::user()));
-     
       }else{
-
   return redirect()->route('auth.login');
      // return url('/login?redirect_to=' . urlencode(request()->url()));
       }
-   
     return redirect()->back();
     }
 // extra note ::::::logic for the Apply link on candidates profile page
@@ -2286,7 +2278,7 @@ return $get_Job_by_common_industries;
 // this method allows the applicant to select the resume for the job application
     public function CompareRequirments($code, $id)
     {
-        $user = Auth::user();
+    $user = Auth::user();
     // selection 
     // gold silver bronze
     // "qualification" => 4
@@ -2294,30 +2286,22 @@ return $get_Job_by_common_industries;
     $silver = 3;
     $bronze = 2;
     $rating = 0;
-
     $user_profile = Document::where('user_id', $user->id)->where('resume_id', $code)->first();
     $requirements = $this->GetRequirements($id);
     $tag = Tag::findOrFail($id);
    //dd($tag);
     $job_skills = JobSkill::where('userid',$user->id)->get();
 
-    // match candidate and job $user_profile->years_of_experience
-    if ($tag->experience === $user_profile->yoe_range && $tag->salary_range === $user_profile->minimum_salary && $tag->job_type === $user_profile->d_employment_term && $tag->job_level === $user_profile->career_level && $tag->region === $user_profile->region_id && $tag->city === $user_profile->city_id && $tag->qualification === $user_profile->educational_level) {
-
-    $this->saveJobMatch($user->id, $id, $gold);
-
+    if ($tag->experience === $user_profile->yoe_range && $tag->salary_range === $user_profile->minimum_salary && $tag->job_type == $user_profile->d_employment_term && $tag->job_level == $user_profile->career_level && $tag->region == $user_profile->region_id && $tag->city === $user_profile->city_id && $tag->qualification === $user_profile->educational_level) {
+     $this->saveJobMatch($user->id, $id, $gold);
      return $rating = $gold;
-
-    }elseif ($tag->job_type === $user_profile->d_employment_term && $tag->job_level === $user_profile->career_level && $tag->region === $user_profile->region_id && $tag->city === $user_profile->city_id && $tag->qualification === $user_profile->educational_level) {
+    }elseif ($tag->job_type == $user_profile->d_employment_term && $tag->job_level == $user_profile->career_level && $tag->region == $user_profile->region_id && $tag->city === $user_profile->city_id && $tag->qualification === $user_profile->educational_level) {
       $this->saveJobMatch($user->id, $id, $silver);
-          // return redirect()->back();
     }else{
       $this->saveJobMatch($user->id, $id, $bronze);
-        
-     return $rating = $bronze;
-//dd($rating); 
-    }
-        return redirect()->back();
+      return $rating = $bronze;
+   }
+      return redirect()->back();
     }
 
     public function saveJobMatch($user_id, $id, $rate)
@@ -2332,8 +2316,8 @@ return $get_Job_by_common_industries;
 
 public function StageOneJobApplication($code, $id, $check){
 //dd($id);
-$comparerequirements = $this->CompareRequirments($code, $id);
- $user = Auth::user();
+  $comparerequirements = $this->CompareRequirments($code, $id);
+  $user = Auth::user();
   // allow candidate to select the Resume they want to apply with
    // get assesment questions
     $assessements = $this->GetAssessment($id);
@@ -2373,46 +2357,45 @@ $education = QualificationLevel::findOrFail($document->educational_level);
 //dd($education);
 // fetch experience 
 //dd($document->yoe_range);
-    $jobapplication = Application::firstOrNew(['user_id'=>$user->id, 'resume_id'=>$resume, 'tag_id'=>$tag_id]);
-    $jobapplication->user_id = $user->id;
-    $jobapplication->document_id = $document->id;
-    $jobapplication->resume_id = $resume;
-    $jobapplication->tag_id = $tag_id;
-    $jobapplication->status = 1;
-    $jobapplication->sorted = 0;
-    $jobapplication->sort_by_category = 0;
-    $jobapplication->created_at = $this->returnCurrentTime();
-    $jobapplication->delete = 0;
-    $jobapplication->years_of_experience = $document->years_of_experience;
-    $jobapplication->city_id = $document->city_id;
-    $jobapplication->region_id = $document->region_id;
-    $jobapplication->gender = $document->gender;
-    $jobapplication->age = $document->age;
-    $jobapplication->nationality = $document->nationality;
-    $jobapplication->d_employment_term = $document->d_employment_term;
-    $jobapplication->educational_level = $document->educational_level;
-    $jobapplication->qualification = $education->name;
-    $jobapplication->career_level = $document->career_level;
-    $jobapplication->relocate_nationaly = $document->relocate_nationaly;
-    $jobapplication->availability = $document->availability;
-    $jobapplication->minimum_salary = $document->minimum_salary;
-    $jobapplication->yoe_range = $document->yoe_range;
-    $jobapplication->candidates_name = $document->candidates_name;
-    $jobapplication->email = $document->email;
-    $jobapplication->clientfk = $tag_record->client;
-    $jobapplication->save();
- 
+    // $jobapplication = Application::firstOrNew(['user_id'=>$user->id, 'resume_id'=>$resume, 'tag_id'=>$tag_id]);
+    // $jobapplication->user_id = $user->id;
+    // $jobapplication->document_id = $document->id;
+    // $jobapplication->resume_id = $resume;
+    // $jobapplication->tag_id = $tag_id;
+    // $jobapplication->status = 1;
+    // $jobapplication->sorted = 0;
+    // $jobapplication->sort_by_category = 0;
+    // $jobapplication->created_at = $this->returnCurrentTime();
+    // $jobapplication->delete = 0;
+    // $jobapplication->years_of_experience = $document->years_of_experience;
+    // $jobapplication->city_id = $document->city_id;
+    // $jobapplication->region_id = $document->region_id;
+    // $jobapplication->gender = $document->gender;
+    // $jobapplication->age = $document->age;
+    // $jobapplication->nationality = $document->nationality;
+    // $jobapplication->d_employment_term = $document->d_employment_term;
+    // $jobapplication->educational_level = $document->educational_level;
+    // $jobapplication->qualification = $education->name;
+    // $jobapplication->career_level = $document->career_level;
+    // $jobapplication->relocate_nationaly = $document->relocate_nationaly;
+    // $jobapplication->availability = $document->availability;
+    // $jobapplication->minimum_salary = $document->minimum_salary;
+    // $jobapplication->yoe_range = $document->yoe_range;
+    // $jobapplication->candidates_name = $document->candidates_name;
+    // $jobapplication->email = $document->email;
+    // $jobapplication->clientfk = $tag_record->client;
+    // $jobapplication->save();
     $count = 0;
 
-  foreach ($job_assessment_id as $key => $question) {
-$answer = new JobAssessmentAnswer;
-$answer->quesion_id = $question;
-$answer->job_id = $tag_id;
-$answer->job_application_id = $jobapplication->id;
-$answer->answer = $job_assessment_answer[$count++];
-$answer->created_at = $this->returnCurrentTime();
-$answer->save();
-}
+//   foreach ($job_assessment_id as $key => $question) {
+// $answer = new JobAssessmentAnswer;
+// $answer->quesion_id = $question;
+// $answer->job_id = $tag_id;
+// $answer->job_application_id = $jobapplication->id;
+// $answer->answer = $job_assessment_answer[$count++];
+// $answer->created_at = $this->returnCurrentTime();
+// $answer->save();
+// }
  
 $this->CompareRequirments($resume, $tag_id);
 
@@ -2526,7 +2509,7 @@ $applications_employer = DB::table('applications')->where('clientfk', $user->id)
     // get candidates Resume
     $menus = $this->displayMenu();
     $units = $this->displayUnits();
-    return view('employer',compact('logs', 'tag_fk_record', 'educational_level', 'unsorted', 'jobs_byemployer', 'employement_terms', 'jobs_count', 'professions', 'cities', 'employement_terms', 's', 'jobs_draft_list', 'job_draft_count', 'job_awaiting_approval_count', 'jobs_awaiting_approval_list', 'job_blacklist_count', 'job_black_list', 'job_activelist_count', 'job_active_list', 'job_not_active_list', 'job_not_activelist_count', 'groups_count', 'allapplicants', 'unsorted_count', 'dt', 'hired_count2', 'hired_count', 'offered_count', 'rejected_count', 'shortlisted_count', 'in_review_count', 'groups_count', 'hired_', 'tag_record', 'number_of_applicants_per_job', 'applications_employer', 'distinct_job_applications', 'sorted', 'menus', 'units'), array('user' => Auth::user()));
+    return view('employer',compact('tag_fk_record', 'educational_level', 'unsorted', 'jobs_byemployer', 'employement_terms', 'jobs_count', 'professions', 'cities', 'employement_terms', 's', 'jobs_draft_list', 'job_draft_count', 'job_awaiting_approval_count', 'jobs_awaiting_approval_list', 'job_blacklist_count', 'job_black_list', 'job_activelist_count', 'job_active_list', 'job_not_active_list', 'job_not_activelist_count', 'groups_count', 'allapplicants', 'unsorted_count', 'dt', 'hired_count', 'offered_count', 'rejected_count', 'shortlisted_count', 'in_review_count', 'groups_count', 'hired_', 'tag_record', 'number_of_applicants_per_job', 'applications_employer', 'distinct_job_applications', 'sorted', 'menus', 'units'), array('user' => Auth::user()));
   }
 
   public function ShowCandidateCV($id)

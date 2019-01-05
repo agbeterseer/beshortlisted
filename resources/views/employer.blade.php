@@ -229,7 +229,7 @@
                         </aside>
                         <div class="careerfy-column-9 careerfy-typo-wrap">
                             <div class="careerfy-typo-wrap">
-                              <div class="lds-ripplee"><div></div><div></div></div>
+                              <div class="lds-ripplee" style="display: none;"><div></div><div></div></div>
                               <div id="info"></div>
                                 <!-- FilterAble -->
                          <!--        <div class="careerfy-filterable">
@@ -1382,8 +1382,6 @@ function FilterAllJobs(city,employement_term,job_function){
 
  <script>
    $(".lds-ripple").hide();
- 
-
    $(".lds-ripplee").hide();
    $(".info").hide();
     $(".delete").on("submit", function(){

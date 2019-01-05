@@ -367,7 +367,7 @@ if($profession || $salary_unsorted || $availability || $job_terms || $career_lev
                             }
                  }
                  if (isset($age)) {
-                  
+
                 $ages = explode("-", $age);
                 $start_age = $ages[0];
                 $end_age = $ages[1]; 
@@ -1760,8 +1760,10 @@ $units = $this->displayUnit();
     $recruit_profile_pix_list = DB::table('recruit_profile_pixs')->where('user_id',$user->id)->orderBy('created_at', 'DESC')->get();
 
     $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
+    $menus = $this->displayMenu();
+    $units = $this->displayUnit();
      //dd($user);
-    return view('employer.create_job', compact('resumes','countries','cities', 'regions', 'educational_levels', 'industries', 'employement_terms', 'jobcareer_levels', 'industry_professions', 'recruit_profile_pix_list', 'recruit_profile_pix', 'fields_of_study_list') ,array('user' => Auth::user()));
+    return view('employer.create_job', compact('resumes','countries','cities', 'regions', 'educational_levels', 'industries', 'employement_terms', 'jobcareer_levels', 'industry_professions', 'recruit_profile_pix_list', 'recruit_profile_pix', 'fields_of_study_list', 'menus', 'units') ,array('user' => Auth::user()));
       }else{
         dd('YES');
          

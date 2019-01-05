@@ -342,7 +342,7 @@
 <div class="form-group"> 
 <label class="control-label col-md-3">Phone Number <span class="required">*</span></label>
 <div class="col-md-8"> 
- <input type="number" name="phonenumber"  class="form-control"  required="required">
+ <input type="number" name="phonenumber" value="{{$document->phonenumber}}"  class="form-control"  required="required">
 </div>
 </div>
 <!-- /input-group -->
