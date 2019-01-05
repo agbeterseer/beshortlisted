@@ -40,6 +40,7 @@ use PDF;
 use App\Referee;
 use App\Menu;
 use App\EmployerPackage;
+use App\JobMatch;
 class ResumeController extends Controller
 {
         public function __construct()
@@ -447,6 +448,10 @@ return redirect()->back()->with('done', 'Done successfully');
     public function ShowCaptionForm(){
     $user = Auth::user();
     $recruit_resume = RecruitResume::where('user_id', $user->id)->first();
+
+    // check if user has default avatar.
+
+    DB::table('recruit_profile_pixs')->where('user_id', $user->id)->first();
     //dd($recruit_resume);
     if ($recruit_resume === null) {
         $recruit_resume = 'default';
@@ -2237,7 +2242,7 @@ return $get_Job_by_common_industries;
 
 // Job Application 
     public function JobApplicationForm($id){
-//$id = 28;
+    //$id = 28;
     if (Auth::check()) {
         $user = Auth::user();
       $tag = Tag::findOrFail($id);
@@ -2248,26 +2253,20 @@ return $get_Job_by_common_industries;
       $educational_levels = $this->GetQualificationLevels(); 
       $skillsets = DB::table('skillsets')->where('tagid', $id)->get();
       $cities = DB::table('cities')->get();
-
       $industry_professions = DB::table('industry_professions')->get();
-
       // view assessement Questions
-
       $job_assessments = DB::table('job_assessments')->where('job_id', $id)->get();
-
       $job_requirements = DB::table('job_requirements')->where('job_id', $id)->get();
-
       $get_Job_by_common_industries = DB::table('tags')->where('industry',$tag->industry)->orWhere('job_category',$tag->job_category)->orWhere('salary_range', $tag->salary_range)->get();
       $get_Job_by_common_industries_similler = DB::table('tags')->where('industry',$tag->industry)->where('job_category',$tag->job_category)->where('salary_range', $tag->salary_range)->get();
-      
-      // dd($get_Job_by_common_industries);
-      // get employer that posted this job
- $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
- $resume_list = RecruitResume::where('user_id', $user->id)->get();
-      // $get_job_poster_list = Tag::where('client', $tag->client)->get();
-      $get_all_user_list = User::all();
 
-     return view('jobs.job_details', compact('tag','employement_terms', 'jobcareer_levels', 'industries', 'educational_levels', 'skillsets', 'job_assessments', 'job_requirements', 'get_Job_by_common_industries', 'get_Job_by_common_industries_similler', 'cities', 'get_all_user_list', 'user_single_resume_by_date', 'resume_list', 'industry_professions'), array('user' => Auth::user()));
+      // get employer that posted this job
+    $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
+    $resume_list = RecruitResume::where('user_id', $user->id)->get();
+    $get_all_user_list = User::all();
+    $menus = $this->displayMenu();
+
+     return view('jobs.job_details', compact('tag','employement_terms', 'jobcareer_levels', 'industries', 'educational_levels', 'skillsets', 'job_assessments', 'job_requirements', 'get_Job_by_common_industries', 'get_Job_by_common_industries_similler', 'cities', 'get_all_user_list', 'user_single_resume_by_date', 'resume_list', 'industry_professions', 'menus'), array('user' => Auth::user()));
      
       }else{
 
@@ -2285,33 +2284,47 @@ return $get_Job_by_common_industries;
         $user = Auth::user();
     // selection 
     // gold silver bronze
-    //"qualification" => 4
+    // "qualification" => 4
+    $gold = 5;
+    $silver = 3;
+    $bronze = 2;
+    $rating = 0;
 
-        $gold = 5;
-        $silver = 3;
-        $bronze = 2;
-        $rating = 0;
     $user_profile = Document::where('user_id', $user->id)->where('resume_id', $code)->first();
     $requirements = $this->GetRequirements($id);
     $tag = Tag::findOrFail($id);
    //dd($tag);
-     $job_skills = JobSkill::where('userid',$user->id)->get();
-// match candidate and job
-    if ($tag->experience === $user_profile->yoe_range && $tag->salary_range === $user_profile->minimum_salary && $tag->job_type === $user_profile->d_employment_term && $tag->job_level === $user_profile->career_level && $tag->region === $user_profile->region_id && $tag->city === $user_profile->city_id) {
-        
-        DB::table('job_matches')->insert([]);
+    $job_skills = JobSkill::where('userid',$user->id)->get();
+
+    // match candidate and job $user_profile->years_of_experience
+    if ($tag->experience === $user_profile->yoe_range && $tag->salary_range === $user_profile->minimum_salary && $tag->job_type === $user_profile->d_employment_term && $tag->job_level === $user_profile->career_level && $tag->region === $user_profile->region_id && $tag->city === $user_profile->city_id && $tag->qualification === $user_profile->educational_level) {
+
+    $this->saveJobMatch($user->id, $id, $gold);
+
      return $rating = $gold;
 
-    }elseif ($tag->experience === $user_profile->yoe_range && $tag->job_type === $user_profile->d_employment_term && $tag->job_level === $user_profile->career_level && $tag->region === $user_profile->region_id && $tag->city === $user_profile->city_id) {
-    $rating = $silver;
+    }elseif ($tag->job_type === $user_profile->d_employment_term && $tag->job_level === $user_profile->career_level && $tag->region === $user_profile->region_id && $tag->city === $user_profile->city_id && $tag->qualification === $user_profile->educational_level) {
+      $this->saveJobMatch($user->id, $id, $silver);
           // return redirect()->back();
     }else{
+      $this->saveJobMatch($user->id, $id, $bronze);
         
      return $rating = $bronze;
 //dd($rating); 
     }
         return redirect()->back();
     }
+
+    public function saveJobMatch($user_id, $id, $rate)
+    {
+     $save_job_match = JobMatch::firstOrNew(['user_id'=> $user_id, 'job_id'=> $id]);
+    $save_job_match->user_id = $user_id;
+    $save_job_match->job_id = $id;
+    $save_job_match->rate = $rate;
+    $save_job_match->created_at = $this->returnCurrentTime();
+    $save_job_match->save();
+    }
+
 public function StageOneJobApplication($code, $id, $check){
 //dd($id);
 $comparerequirements = $this->CompareRequirments($code, $id);
@@ -2331,9 +2344,10 @@ return redirect()->route('apply.job', $id);
 
 public function ApplyForAJob(Request $request)
 {
-    $user = Auth::user();
-try{
+  //dd($request->all());
 
+  $user = Auth::user();
+try{
   $resume_selected_id = $request->resume_name;
   $tag_id = $request->tag_id;
   $job_assessment_id = $request->job_assessment_id;
@@ -2343,7 +2357,7 @@ try{
 
   $tag_record = Tag::findOrFail($tag_id);
   if ($resume_selected_id === null) {
-$resume_name = RecruitResume::where('id', $resume)->where('user_id',$user->id)->where('status', 1)->first();
+  $resume_name = RecruitResume::where('id', $resume)->where('user_id',$user->id)->where('status', 1)->first();
   }else{
 $resume_name = RecruitResume::where('id', $resume_selected_id)->where('user_id',$user->id)->where('status', 1)->first();
      // persist the jo  job_assessment_answers
@@ -2382,9 +2396,9 @@ $education = QualificationLevel::findOrFail($document->educational_level);
     $jobapplication->email = $document->email;
     $jobapplication->clientfk = $tag_record->client;
     $jobapplication->save();
- //dd($jobapplication);
-//dd($job_assessment_answer[2]);
-$count = 0;
+ 
+    $count = 0;
+
   foreach ($job_assessment_id as $key => $question) {
 $answer = new JobAssessmentAnswer;
 $answer->quesion_id = $question;
@@ -2394,8 +2408,7 @@ $answer->answer = $job_assessment_answer[$count++];
 $answer->created_at = $this->returnCurrentTime();
 $answer->save();
 }
-
-// // $code = resume_id  and $id = job_id
+ 
 $this->CompareRequirments($resume, $tag_id);
 
 return redirect()->route('application.success', $tag_id);
@@ -2408,13 +2421,13 @@ return redirect()->route('application.success', $tag_id);
  return redirect()->back();
 }
 
-
 public function ApplicationSuccess($id)
 {
    $get_Job_by_common_industries = $this->JobCommonByIndustries($id);
    $industry_professions = DB::table('industry_professions')->get();
    $employement_terms = DB::table('employement_terms')->get();
-  return view('candidate.application_success_page', compact('get_Job_by_common_industries', 'employement_terms', 'industry_professions') , array('user' => Auth::user()));
+   $menus = $this->displayMenu();
+  return view('candidate.application_success_page', compact('get_Job_by_common_industries', 'employement_terms', 'industry_professions', 'menus') , array('user' => Auth::user()));
 }
 
 

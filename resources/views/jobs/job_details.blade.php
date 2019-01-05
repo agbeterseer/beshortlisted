@@ -36,7 +36,6 @@
     height:200px;
     }
  
-
 </style>
 
          @if(Session()->has('error'))
@@ -125,36 +124,29 @@
                                             </li>
                                         </ul>
                                     </div>
-                           <!--          <div class="careerfy-content-title"><h2>Job Description</h2></div> -->
                                     <div class="careerfy-description">
                                         <p>{!! $tag->description !!}</p>
                                     </div>
-                            
                                     <div class="careerfy-content-title"><h2>Job Requirements</h2></div>
                                     <div class="careerfy-description"> 
-                                     
                                      <ol>
                                      @foreach($job_requirements as $job_requirement)
                                         <li>{{$job_requirement->title}}</li>
                                         @endforeach
                                     </ol>
- 
-                                    </div>
- 
-
-                                    <div class="careerfy-content-title"><h2>Required skills</h2></div>
+                                     </div>
+                                     <div class="careerfy-content-title"><h2>Required skills</h2></div>
                                     <div class="careerfy-jobdetail-tags">
                                     @foreach($skillsets as $skillset)
-                                        <a href="#">{{$skillset->title}} 
-                                        @endforeach
-                       
+                                        <a href="#">{{$skillset->title}} </a>
+                                        @endforeach 
                                     </div> 
- 
   <div class="space">&nbsp;</div>
     <span style="color: red;">Kindly answer the evaluation question(s) below to begin your screening process</span>
 <form method="POST" action="{{route('make.application')}}" name="requirements"> 
    {{ csrf_field() }}
    <input type="hidden" name="tag_id" value="{{$tag->id}}">
+   <input type="hidden" name="user_id" value="{{$user->id}}">
                                    <div class="careerfy-content-title"><h2>Evaluation Questions</h2></div>
                                     <div class="careerfy-jobdetail-services">
                                             <ul>
@@ -180,27 +172,25 @@
                                                  </div>
                                     <div class="widget widget_apply_job">
                                     <div class="widget_apply_job_wrap"> 
-                                     <!-- <input type="submit" class="careerfy-applyjob-btn" value="Proceed to Apply"> -->
                                       @php
                                       $check = 'first';
                                       @endphp
-   <span style="color: red;"> Please note, Choosing resume is optional</span> 
+                                <span style="color: red;"> Please note, Choosing resume is optional</span> 
                                <input type="hidden" name="check" value="{{$check}}">
                                <input type="hidden" name="resume" value="{{$user_single_resume_by_date->id}}"> 
 
-                                <select name="resume_name">
-                                <option value="">Choose Resume</option>
-                                 @foreach($resume_list as $resume)
-                                 <option value="{{$resume->id}}">{{$resume->pr_caption}}</option>
-                                 @endforeach
-                                 </select>
+                                    <select name="resume_name">
+                                    <option value="">Choose Resume</option>
+                                     @foreach($resume_list as $resume)
+                                     <option value="{{$resume->id}}">{{$resume->pr_caption}}</option>
+                                     @endforeach
+                                     </select>
                                      <div class="space">&nbsp;</div> 
-                     <div class="space">&nbsp;</div> 
-          
-             <input type="submit" name="" value="Apply" class="careerfy-applyjob-btn">
-                                        <span style="color: red;">Application ends in 4d 5h 3m</span>
-                                        <div class="careerfy-applywith-title"><small><!-- OR apply with --></small></div>
-                                        <p>Know someone who would be perfect for  this role this role? Be a pal, let them know.</p>
+                                    <div class="space">&nbsp;</div> 
+                                    <input type="submit" name="" value="Apply" class="careerfy-applyjob-btn">
+                                    <span style="color: red;">Application ends in 4d 5h 3m</span>
+                                    <div class="careerfy-applywith-title"><small><!-- OR apply with --></small></div>
+                                    <p>Know someone who would be perfect for  this role this role? Be a pal, let them know.</p>
                                      
                                     </div>
                                

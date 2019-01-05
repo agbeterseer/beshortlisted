@@ -11,7 +11,7 @@
 ])
 
 @section('content')
-
+@include('partials.employee_breadcomb')
 
       <div class="careerfy-main-section careerfy-dashboard-fulltwo">
                 <div class="container " id="page" style="" >

@@ -100,7 +100,7 @@
                                         <small>Active Resumes</small>
                                     </li>
                                     <li class="col-md-4">
-                                        <span class="word-counter">140,312</span>
+                                        <span class="word-counter">{{$job_match_count}}</span>
                                         <small>Positions Matched</small>
                                     </li>
                                 </ul>

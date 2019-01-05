@@ -59,6 +59,7 @@ class HomeController extends Controller
 
     public function index()
     {
+
         $job_post = \App\Tag::job_post();
         $documents = Document::all()->count();
         $roles = Role::all()->count();
@@ -95,14 +96,18 @@ class HomeController extends Controller
       
         $menus = $this->displayMenu();
 
-        return view('index', compact('documents', 'roles', 'users', 'resumes','industries', 'resume_builder_list', 'industries', 'jobs', 'resume_count', 'jobs_count', 'industry_professions', 'employement_term_list', 'cities','industry_count', 'industries_paginage', 'job_function_count', 'jobs_8', 'job_post', 'tag_cities', 'employement_terms', 'menus'), array('user' => Auth::user()));
+        $job_match_count = DB::table('job_matches')->where('rate', '>', 2)->count();
+
+
+
+        return view('index', compact('documents', 'roles', 'users', 'resumes','industries', 'resume_builder_list', 'industries', 'jobs', 'resume_count', 'jobs_count', 'industry_professions', 'employement_term_list', 'cities','industry_count', 'industries_paginage', 'job_function_count', 'jobs_8', 'job_post', 'tag_cities', 'employement_terms', 'menus', 'job_match_count'), array('user' => Auth::user()));
     }
 
 
   public function employee(Request $request)
   {
- 
-    return view('employee', compact('resumes') );
+ $menus = $this->displayMenu();
+    return view('employee', compact('menus'));
   }
   public function employer(Request $request)
   {

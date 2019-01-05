@@ -367,6 +367,7 @@ if($profession || $salary_unsorted || $availability || $job_terms || $career_lev
                             }
                  }
                  if (isset($age)) {
+                  
                 $ages = explode("-", $age);
                 $start_age = $ages[0];
                 $end_age = $ages[1]; 

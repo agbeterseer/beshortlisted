@@ -12,12 +12,12 @@
 ])
 
 @section('content')
+@include('partials.employee_breadcomb')
  <div class="careerfy-main-content" style="background-color: #ffffff;">
              <!-- Main Section -->
                         <section class="careerfy-fancy-title">
                                 <h2>Welcome to employee section</h2>
-            
-                            </section>
+                        </section>
             <div class="careerfy-main-section careerfy-parallex-full">
                 <div class="container">
                     <div class="row">

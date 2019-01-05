@@ -14,7 +14,9 @@ use Illuminate\Pagination\Paginator;
 | contains the "web" middleware group. Now create something great!
 |
 */
- 
+
+
+
 Route::get('/','HomeController@index');
 Auth::routes();
 Route::get('/rhizome-admin', function () {

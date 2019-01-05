@@ -11,7 +11,7 @@
 ])
 
 @section('content')
-@include('partials.employee_breadcomb.blade')
+@include('partials.employee_breadcomb')
     <div class="careerfy-wrapper">
         <!-- Header -->
        
