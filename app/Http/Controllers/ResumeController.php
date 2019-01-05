@@ -41,6 +41,7 @@ use App\Referee;
 use App\Menu;
 use App\EmployerPackage;
 use App\JobMatch;
+use App\RecruitProfilePix;
 class ResumeController extends Controller
 {
         public function __construct()
@@ -446,12 +447,13 @@ return redirect()->back()->with('done', 'Done successfully');
         return $resume_by_user;
     }
     public function ShowCaptionForm(){
+
     $user = Auth::user();
     $recruit_resume = RecruitResume::where('user_id', $user->id)->first();
-
+     
     // check if user has default avatar.
 
-    DB::table('recruit_profile_pixs')->where('user_id', $user->id)->first();
+
     //dd($recruit_resume);
     if ($recruit_resume === null) {
         $recruit_resume = 'default';
@@ -1899,7 +1901,14 @@ DB::table('documents')->where('user_id', $user->id)->update(['years_of_experienc
 // get all resume by default first time
         public function ShowResume() {
         // dd($this->ResumeProperties()['0']);
-        $user = Auth::user();
+       $user = Auth::user();
+              $check_pix = RecruitProfilePix::where('user_id', $user->id)->first();
+     // dd($check_pix);
+    if ($check_pix == null) {
+ 
+      DB::table('recruit_profile_pixs')->insert(['user_id'=> $user->id, 'pix' => 'default.png', 'order' => 1, 'status' => 1, 'created_at' => $this->returnCurrentTime()]);
+    }
+    
        // dd($user->id);
         $dt = Carbon::now();
         $ddt = Carbon::now(); 
