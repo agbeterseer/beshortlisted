@@ -59,48 +59,6 @@
                 </div>
          </div>
         </header>
-<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="{{asset('/')}}">
-      <img src="" width="112" height="28">
-    </a>
- 
-    <a role="button" class="navbar-burger burger navbar-end" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
- 
-  </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-start">
-              @foreach($menus as $menu)
-                                       <a class="navbar-item" href="{{$menu->routes}}" > {{$menu->name}}</a> 
-                                @endforeach
-   
-    </div>
-
-    <div class="navbar-end">
-          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-      <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-primary" href="{{route('post.jobs')}}">
-            <strong>Post A Jop</strong>
-          </a>
-          <a class="button is-light" href="{{ route('auth.login') }}">
-            Log in
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav> -->
-        <!-- Page Content  header myHeader-->
-     
            
        
