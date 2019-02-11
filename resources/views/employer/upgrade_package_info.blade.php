@@ -14,7 +14,6 @@
 @section('content') 
 
 <div class="careerfy-main-content" style="background-color: #ffffff;">
-                     
  <!-- Main Section -->
             <div class="careerfy-main-section careerfy-plain-services-full">
                 <div class="container">
@@ -32,18 +31,15 @@
                             </section>
                             <div align="center">
 You are currently on   @foreach($packages as $package)  @if($package->id === $employer_package->package_id) {{$package->title}}  @endif @endforeach
-and you current unit is:  {{$employer_package->units}}
+and your current unit is:  {{$employer_package->units}}
 <br>
 Do you wish to    <input type="submit" value="Upgrade">  <a href="{{route('employer.make_upgrade')}}">Upgrade? </a> | or <a href="{{ route('employer.packages') }}">  see current package(s) </a> 
 
 <P></P>
  
 	<div style=" background-color: #845b9b; color: #ffffff; border: solid 0px; padding-top: 5px; padding-bottom: 5px; width: 30%" ><br> Note: <br> Upgrading to another package while having current <br>active unit will sum previous and new units together 
-  </div>
- 
- 
-                            </div>
-	
+  </div> 
+   </div> 
                         </div>
                         </form>
 

@@ -11,7 +11,12 @@
   'all_re' => '',
   'sett' => '',
   'candidate' => '',
-  'resume' => 'active'
+  'resume' => 'active',
+    'policy' => '',
+  'package' => '',
+  'page' => '',
+     'role' => '',
+  'user' => '',
 ])
 
 @section('content')

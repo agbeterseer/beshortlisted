@@ -1,3 +1,4 @@
+
      <header id="careerfy-header" class="careerfy-header-one">
             <div class="container">
                 <div class="row">
@@ -52,11 +53,14 @@
                                         </form>
  
                                     </li>
-                                    <li>UNITS<span class="badge" style="background-color: orange">{{$units->jobs_remaining}}</span> </li>
+                                    <li>UNITS<span class="badge" style="background-color: orange">
+                                        @if($units) {{$units->jobs_remaining}} @else 0 @endif
+
+                                    </span> </li>
                                 @endif
                             </ul> 
                             <a href="{{route('post.jobs')}}" class="careerfy-simple-btn careerfy-bgcolor"><span> <i class="careerfy-icon careerfy-arrows-2"></i> Post Job</span></a>
-                         
+                   
                         </div>
                     </aside>
                 </div>

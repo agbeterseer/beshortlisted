@@ -1,5 +1,20 @@
   
-@extends('admin.user.layout.user')
+@extends('layouts.admin_layout', [
+  'page_header' => 'Pages',
+  'dash' => '',
+  'quiz' => '',
+  'users' => '',
+  'questions' => '',
+  'top_re' => '',
+  'all_re' => '',
+  'sett' => '',
+  'candidate' => '',
+  'policy' => '',
+  'package' => '',
+  'page' => '',
+  'role' => '',
+  'user' => 'active'
+]) 
 
 @section('content')
 <div class="container">

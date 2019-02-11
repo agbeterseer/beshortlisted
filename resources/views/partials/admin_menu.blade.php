@@ -38,7 +38,7 @@
                                   </form> -->
                                   <!-- END RESPONSIVE QUICK SEARCH FORM -->
                               </li>
-                               @if ($user->is_admin())
+                     
                               <li class="nav-item start active open">
                               <a href="{{route('board')}}" class="nav-link nav-toggle">
                                     <i class="icon-home"></i>
@@ -46,19 +46,7 @@
                                       <span class="arrow open"></span>
                                   </a>
                               </li>
-                              @else
-
-                      <li class="nav-item start active open">
-                              <a href="{{route('index')}}" class="nav-link nav-toggle">
-                                    <i class="icon-home"></i>
-                                    <span class="title">Dashboard</span>
-                                      <span class="arrow open"></span>
-                                  </a>
-                              </li>
-
-                              @endif
-
-                              @if ($user->is_admin())
+          
                         <li class="nav-item">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-puzzle"></i>
@@ -79,7 +67,7 @@
                                                    
                                   </ul> 
                       </li>
-                      <li class="nav-item " id="roleid">
+                      <li class="nav-item {{$role}}" id="roleid">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-briefcase"></i>
                                       <span class="title">Role Management</span>
@@ -87,7 +75,7 @@
                                       <span class="selected"></span>
                                   </a>
                                   <ul class="sub-menu">
-                                      <li class="nav-item ">
+                                      <li class="nav-item {{$role}}">
                                           <a href="{{route('role.index')}}" class="nav-link">
                                               <span class="title">View Roles</span>
                                              <span class="selected"></span>
@@ -113,8 +101,7 @@
                                </ul>
                                       
                       
-                              </li>
-                              @endif
+                              </li> 
 
                                   <li class="nav-item">
                                   <a href="javascript:;" class="nav-link nav-toggle">
@@ -158,6 +145,31 @@
                                   </ul>
                                
                               </li>
+                                <li class="nav-item {{$page}}">
+                                  <a href="javascript:;" class="nav-link nav-toggle">
+                                      <i class="icon-puzzle"></i>
+                                      <span class="title">Post</span>
+                                      <span class="arrow"></span>
+                                  </a>
+                                   <ul class="sub-menu">
+                                   <li class="nav-item ">
+                                      <a href="{{ route('pages.index') }}" class="nav-link "> 
+                                     <span class="title">All Pages</span>
+                                      </a>
+                                
+                                      </li>
+                                  <li class="nav-item ">
+                                          <a href="{{ route('pages.create') }}" class="nav-link ">
+                                              <span class="title">Add Page</span>
+                                          </a>
+                                      </li>  
+                                <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
+                                          <a href="{{route('policies.index')}}" class="nav-link ">
+                                        <span class="title">@lang('cvmanagement.policies.title') </span>
+                                          </a>
+                                      </li>         
+                                  </ul>
+                                </li>
                                 <li class="nav-item">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-puzzle"></i>
@@ -282,7 +294,7 @@
                                   </li>
                                  
                                    
-                              <li class="nav-item  ">
+                              <li class="nav-item {{$sett}} ">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-settings"></i>
                                       <span class="title">Settings</span>
@@ -311,7 +323,11 @@
                                         <span class="title">@lang('cvmanagement.fields-of-study.title') </span>
                                           </a>
                                       </li> 
-
+                                  <li class="nav-item {{ $request->segment(1) == 'contact' ? 'active' : '' }}">
+                                          <a href="{{route('show.contacts')}}" class="nav-link ">
+                                        <span class="title">@lang('cvmanagement.contact.title') </span>
+                                          </a>
+                                      </li> 
                                       
                                     </ul> 
                                   </li>

@@ -8,7 +8,12 @@
   'top_re' => '',
   'all_re' => '',
   'sett' => '',
-  'candidate' => 'active'
+  'candidate' => 'active',
+   'policy' => '',
+  'package' => '',
+  'page' => '',
+  'role' => '',
+  'user' => '',
 ])
 
 @section('content')

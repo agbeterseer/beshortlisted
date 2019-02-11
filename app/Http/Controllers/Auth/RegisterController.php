@@ -113,7 +113,7 @@ class RegisterController extends Controller
 
     public function create(array $data) { 
  
-    dd($data);
+    //dd($data);
 
       $user = User::firstOrNew(['email'=>$data['email']]);
       $user->name = $data['name'];

@@ -382,7 +382,7 @@ address                         { font-style: italic; }
 }
 .navbar-nav .sub-menu .sub-menu {
     left: 100%;
-    top: 20%;
+    top: 10%;
 }
 .navbar-nav .sub-menu > li {
     float: left;
@@ -1474,8 +1474,21 @@ li:hover .careerfy-read-more { background-color: transparent; }
 .active.careerfy-simple-priceplane ul { padding-bottom: 21px; }
 /* Plain Services */
 .careerfy-plain-services {
-    float: left;
+ 
     width: 100%;
+}
+@media screen and (min-width: 200px) {
+.careerfy-plain-services{ 
+    align-content: center;
+    width: 100%;
+}
+.careerfy-plain-services h2, p{
+    text-align: center;
+}
+i{
+ align-content: center;  
+
+}
 }
 .careerfy-plain-services ul li { list-style: none; }
 .careerfy-plain-services > ul > li { margin-bottom: 40px; }

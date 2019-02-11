@@ -159,7 +159,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('home')}}" >
+                    <a href="{{route('index')}}" >
                         <span>Scheduled for Interview</span>
                         <i class="icon-graph"></i>
                     </a>

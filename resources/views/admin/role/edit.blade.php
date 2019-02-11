@@ -1,4 +1,19 @@
-@extends('admin.role.layout.role')
+@extends('layouts.admin_layout', [
+  'page_header' => 'Role',
+  'dash' => '',
+  'quiz' => '',
+  'users' => '',
+  'questions' => '',
+  'top_re' => '',
+  'all_re' => '',
+  'sett' => '',
+  'candidate' => '',
+  'policy' => '',
+  'package' => '',
+  'page' => '',
+  'role' => 'active',
+  'user' => ''
+]) 
 @section('content')
  
     <div class="col-md-12">

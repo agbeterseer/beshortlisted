@@ -11,6 +11,35 @@
     <link href="{{ asset('recruit/css/color.css')}}" rel="stylesheet">
     <link href="{{ asset('recruit/style.css')}}" rel="stylesheet">
     <link href="{{ asset('recruit/base.css')}}" rel="stylesheet">
+    <style type="text/css">
+    .header {
+  padding: 10px 16px;
+  background: #555;
+  color: #f1f1f1;
+  position: relative;
+}
+
+/* Page content */
+.content {
+  padding: 16px;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 102px;
+}
+
+
+</style>
+      <!-- <link rel="stylesheet" href="{{asset('css/style3.css')}}"> -->
+    <!-- <link href="{{ asset('bulma-0.7.2/css/bulma.min.css')}}" rel="stylesheet"> -->
     <link href="{{ asset('recruit/css/responsive.css')}}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=cyrillic-ext,vietnamese" rel="stylesheet">
          <!--    <link href="{{ asset('css/assets/global/css/components.min.css') }}" rel="stylesheet"> -->

@@ -126,26 +126,14 @@ protected function authenticated(Request $request, $user)
         $user_id=$user->id;
          if ($user->is_admin()) {
           return redirect()->route('board');
-          
           }elseif(!$user->is_admin() && !$user->is_candidate()){ 
-
            if ($user->account_type === 'employee') {
-
                 return redirect()->route('candidate');
-
             }else{
- 
               return redirect()->route('dashboard');
             }
-           
-               
-            
-           
           }
-        // dd($user);
-          }
-         // dd($user);
-
+        }
           return back()->withInput()->withErrors(['email'=>'Username or password is invalid']);
 
      } 

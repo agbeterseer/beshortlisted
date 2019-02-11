@@ -1,15 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <title>Job Board</title>
-    
-    <!-- Css -->
- 
-        @include('partials.job_board_header')
-
-    
+        @include('partials.job_board_header') 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -51,64 +44,30 @@ th, td {
 }
 
 tr:hover {background-color:#f5f5f5;}
-   </style>
+.responsive {
+  width: 100%;
+  height: auto;
+}
+   </style> 
 </head>
-
 <body>
- 
     <!-- Wrapper -->
     <div class="careerfy-wrapper">
-
         <!-- Header -->
         @include('partials.job_menu')
         <!-- Header -->
-        
         <!-- Banner v #1E3142 -->
         <!-- Banner -->
-
         <!-- Main Content -->
         <div class="careerfy-main-content" style="margin-top: -50px;">
-        
-            <!-- Main Section -->
-
-         
-         
+ 
         @yield('content')
-
-            <!-- Main Section -->
-
-            <!-- Main Section -->
-            
-            <!-- Main Section -->
-
-            <!-- Main Section -->
-  
-            <!-- Main Section -->
-
-            <!-- Main Section -->
-        
-            <!-- Main Section -->
-
-            <!-- Main Section -->
-             
-            <!-- Main Section -->
-
-            <!-- Main Section -->
-         
-            <!-- Main Section -->
-
-            <!-- Main Section -->
-         
-            <!-- Main Section -->
 
         </div>
         <!-- Main Content -->
-        
         <!-- Footer -->
-  
      @include('partials.job_footer')
         <!-- Footer -->
-
     </div>
     <!-- Wrapper -->
 
@@ -145,9 +104,7 @@ tr:hover {background-color:#f5f5f5;}
                                 </a>
                             </li>
                         </ul>
-                    </div> 
-
-              
+                    </div>  
                     <div class="careerfy-user-form">
                         <ul>
                             <li>
@@ -367,7 +324,7 @@ employee
 @endif
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{{ asset('recruit/script/jquery.js')}}"></script>
+    <script src="{{ asset('recruit/script/jquery-3.3.1.min.js')}}"></script>
     <script src="{{ asset('recruit/script/bootstrap.js')}}"></script>
  <script src="{{ asset('css/assets/global/plugins/bootstrap-summernote/summernote.min.js')}}" type="text/javascript"></script>
     <script src="{{ asset('recruit/script/slick-slider.js')}}"></script>
@@ -381,10 +338,27 @@ employee
 <script src="{{ asset('css/assets/pages/scripts/components-bootstrap-tagsinput.min.js')}}" type="text/javascript"></script>
       <script src="{{ asset('css/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
       <script src="{{ asset('css/assets/pages/scripts/form-repeater.min.js')}}" type="text/javascript"></script>
- 
+      <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/masking-input.js" data-autoinit="true"></script> 
+<script src="{{ asset('js/card/jquery.payform.min.js')}}" charset="utf-8"></script>
+<script src="{{ asset('js/card/script.js')}}"></script>
+
  <script type="text/javascript">
-    
  
+
+ $(window).scroll(function () {
+    $('.animation-test').each(function () {
+        var imagePos = $(this).offset().top;
+        var imageHeight = $(this).height();
+        var topOfWindow = $(window).scrollTop();
+
+        if (imagePos < topOfWindow + imageHeight && imagePos + imageHeight > topOfWindow) {
+            $(this).addClass("slideRight");
+        } else {
+            $(this).removeClass("slideRight");
+        }
+    });
+});
+
     $(document).ready(function() {
         $('#summernote_1').summernote({
             height:'300px'
@@ -440,25 +414,19 @@ $(document).ready(function(){
 });
 
 
-$("#present").click(function(){
-  //  alert($(this).val());
+$("#present").click(function(){ 
     //$("#end_month").hide();
     //document.getElementById('myInput').value = ''
   document.getElementById('end_month_work').value = ''; 
-  
   document.getElementById('end_year').value = ''; 
   
 });
 
   $("#end_month").change(function() { 
-//alert($(this).val());
     if ( $(this).val() !=null) {
 
         $("#present2").show();
-        $("#present").hide();
-  //document.getElementById('present').style.display = 'none';
-   //document.getElementById('work_to_present').style.display = 'block';
-        
+        $("#present").hide();        
     }
     else{
 document.getElementById('work_to_present').style.display = 'none';
@@ -515,17 +483,10 @@ document.getElementById('present').style.display = 'block';
   {
     $('#job_location :checked').each(function() { 
      var cboxValue = $(this).val(); 
-      alert(cboxValue);
-     // var cboxChecked = localStorage.getItem(cboxValue) == 'true' ? true : false;
-    // On page load check if any of the checkboxes has previously been selected and mark it as "checked"
-    // alert(cboxChecked);
-    // if (cboxChecked) {
       $(this).prop('checked', true);
       itemExistsChecker(cboxValue);
-    // }
- 
     }); 
- console.log(location);
+ //console.log(location);
  
 JobFilterIndex(location,profession,job_type);
  
@@ -554,17 +515,10 @@ JobFilterIndex(location,profession,job_type);
   {
     $('#job_terms :checked').each(function() { 
      var cboxValue = $(this).val(); 
-      alert(cboxValue);
-     // var cboxChecked = localStorage.getItem(cboxValue) == 'true' ? true : false;
-    // On page load check if any of the checkboxes has previously been selected and mark it as "checked"
-    // alert(cboxChecked);
-    // if (cboxChecked) {
       $(this).prop('checked', true);
       itemExistsChecker(cboxValue);
-    // }
- 
     }); 
- console.log(job_type);
+ //console.log(job_type);
  
 JobFilterIndex(location,profession,job_type);
  
@@ -593,18 +547,10 @@ JobFilterIndex(location,profession,job_type);
   {
     $('#job_profession :checked').each(function() { 
      var cboxValue = $(this).val(); 
-      alert(cboxValue);
-     // var cboxChecked = localStorage.getItem(cboxValue) == 'true' ? true : false;
-    // On page load check if any of the checkboxes has previously been selected and mark it as "checked"
-    // alert(cboxChecked);
-    // if (cboxChecked) {
       $(this).prop('checked', true);
-      itemExistsChecker(cboxValue);
-    // }
- 
+      itemExistsChecker(cboxValue); 
     }); 
- console.log(profession);
- 
+ //console.log(profession);
 JobFilterIndex(location,profession,job_type);
  
   }
@@ -617,7 +563,6 @@ function isEmpty(obj) {
     return true;
 }
  function JobFilterIndex(location, profession, job_type){
-
     console.log(location);
     console.log(profession);
     console.log(job_type);
@@ -636,17 +581,14 @@ function isEmpty(obj) {
                 'location':location,
                 'profession':profession,
                 'job_type':job_type,
-             
             },
               beforeSend: function(){
             //Show image container
             $("#loader").show();
-    
              },
             success:function(data){
           console.log(data); 
-           $('#job_section').empty();
-        // $("#industry-div").hide();
+           $('#job_section').empty(); 
         // window.location.reload(); 
      },
      complete:function(data){
@@ -662,24 +604,18 @@ function isEmpty(obj) {
   var candidates_name = '';
   var user = null;
   var resume_id = null;
-  var job_id = data.job_id;
-   // var route_name = location.href ='/job/job-detail';
+  var job_id = data.job_id; 
    var apply_route = location.href ='/candidates/job-details';
-
     if(isEmpty(code['data'])) {
         $('#job_section').append('<li class="careerfy-column-12"> No Record(s) Found</li>');  
-          // $('#pages').empty();   
-    }
-    console.log(code['data']);
  
-      // console.log(new_hired_list);
+    }
+    console.log(code['data']); 
   var job_title = '';
   var job_terms = '';
   var job_title = '';
   var category = '';
- 
-    
-      // hired list
+     // hired list
       $.each(code['data'], function(key, value){
             var id = value.id; 
 
@@ -689,10 +625,7 @@ function isEmpty(obj) {
     profession_name = getJobFunction(industry_professions, value.job_category);
     job_title = value.job_title;
     category = getJobTermsCategory(employement_term_list, value.job_type);
-
- 
-
-      var content2 = '<li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><figure><a href="'+apply_route+'/ '+value.id+'"><img src="/img/extra-images/job-listing-logo-1.png" alt=""></a></figure><div class="careerfy-joblisting-text"><div class="careerfy-list-option"><h2><a href="">'+job_title+' </a> <span>Featured</span></h2><ul><li><a href="#" class="careerfy-option-btn careerfy-'+category+'" style="color:#ffffff;">'+employement_term+'</a></li><li><i class="careerfy-icon careerfy-maps-and-flags"></i> '+value.country+', '+value.city+'</li><li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>'+profession_name+'</li></ul></div><div class="careerfy-job-userlist"> <a href="'+apply_route+'/'+value.id+'" class="careerfy-option-btn careerfy-'+category+'">Apply</a><a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a></div><div class="clearfix"></div></div></div></li>';
+     var content2 = '<li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><figure><a href="'+apply_route+'/ '+value.id+'"><img src="/img/extra-images/job-listing-logo-1.png" alt=""></a></figure><div class="careerfy-joblisting-text"><div class="careerfy-list-option"><h2><a href="">'+job_title+' </a> <span>Featured</span></h2><ul><li><a href="#" class="careerfy-option-btn careerfy-'+category+'" style="color:#ffffff;">'+employement_term+'</a></li><li><i class="careerfy-icon careerfy-maps-and-flags"></i> '+value.country+', '+value.city+'</li><li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>'+profession_name+'</li></ul></div><div class="careerfy-job-userlist"> <a href="'+apply_route+'/'+value.id+'" class="careerfy-option-btn careerfy-'+category+'">Apply</a><a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a></div><div class="clearfix"></div></div></div></li>';
 
         $('#job_section').append(content2);
 
@@ -744,13 +677,65 @@ var profession_name = '';
     
   return profession_name;
 }
- 
- 
-
-     
+      
 
 </script>
- 
+ <script>
+    $(".delete").on("submit", function(){
+        return confirm("Do you want to delete this item?");
+    });
+  $(":input").inputmask(); 
+$("#phone").inputmask({"mask": "(999) 999-9999"});
+</script>
+<script type="text/javascript">
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any navbar burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
+
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+});
+
+    var expandCollapse = function(){
+        if ( $(window).width() < 768 ) {
+            $(function(){
+                // add a class .collapse to a div .showHide
+                $('.showHide').addClass('collapse'); //showHide
+                // set display: "" in css for the toggle button .btn.btn-primary
+                $('.hide_right').removeClass('collapse');// removes display property to make it visible
+            });
+        }
+        else {
+            $(function(){
+                // remove a class .collapse from a div .showHide
+                $('.showHide').removeClass('collapse');
+                // set display: none in css for the toggle button .btn.btn-primary  
+                $('.hide_right').css('display', 'none');// hides button display on bigger screen
+            });
+        }
+    }
+    $(window).resize(expandCollapse); // calls the function when the window first loads    
+</script>
+
 </body>
 
 </html>

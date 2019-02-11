@@ -1,5 +1,5 @@
 @extends('layouts.admin_layout', [
-  'page_header' => 'Resume Builder',
+  'page_header' => 'Policy',
   'dash' => '',
   'quiz' => '',
   'users' => '',
@@ -7,7 +7,12 @@
   'top_re' => '',
   'all_re' => '',
   'sett' => '',
-  'candidate' => 'active'
+  'candidate' => ''
+  'policy' => 'active', 
+  'package' => '',
+  'page' => ' ',
+     'role' => '',
+  'user' => '',
 ])
 
 @section('content')

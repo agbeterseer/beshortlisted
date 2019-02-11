@@ -58,39 +58,7 @@
                                                     </div>
                                                 </div>
                                                 @endforeach
-                                           <!--     <div class="careerfy-table-layer careerfy-packages-tbody">
-                                                    <div class="careerfy-table-row">
-                                                        <div class="careerfy-table-cell">#2336</div>
-                                                        <div class="careerfy-table-cell"><span>Premium</span></div>
-                                                        <div class="careerfy-table-cell">200</div>
-                                                        <div class="careerfy-table-cell">1</div>
-                                                        <div class="careerfy-table-cell">5</div>
-                                                        <div class="careerfy-table-cell">30 days</div>
-                                                        <div class="careerfy-table-cell"><i class="fa fa-circle careerfy-packages-pending"></i> Expired</div>
-                                                    </div>
-                                                </div>
-                                                <div class="careerfy-table-layer careerfy-packages-tbody">
-                                                    <div class="careerfy-table-row">
-                                                        <div class="careerfy-table-cell">#2348</div>
-                                                        <div class="careerfy-table-cell"><span>Free</span></div>
-                                                        <div class="careerfy-table-cell">90</div>
-                                                        <div class="careerfy-table-cell">0</div>
-                                                        <div class="careerfy-table-cell">0</div>
-                                                        <div class="careerfy-table-cell">15 days</div>
-                                                        <div class="careerfy-table-cell"><i class="fa fa-circle careerfy-packages-pending"></i> active</div>
-                                                    </div>
-                                                </div>
-                                                <div class="careerfy-table-layer careerfy-packages-tbody">
-                                                    <div class="careerfy-table-row">
-                                                        <div class="careerfy-table-cell">#2336</div>
-                                                        <div class="careerfy-table-cell"><span>Simple</span></div>
-                                                        <div class="careerfy-table-cell">10</div>
-                                                        <div class="careerfy-table-cell">0</div>
-                                                        <div class="careerfy-table-cell">2</div>
-                                                        <div class="careerfy-table-cell">15 days</div>
-                                                        <div class="careerfy-table-cell"><i class="fa fa-circle careerfy-packages-pending"></i> active</div>
-                                                    </div>
-                                                </div> -->
+                             
                                             </div>
                                         </div>
                                         <!-- Pagination -->

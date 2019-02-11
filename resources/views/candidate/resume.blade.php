@@ -104,9 +104,8 @@ $check = 'second';
 @include('partials.employee_breadcomb')
             <!-- Main Section -->
             <div class="careerfy-main-section careerfy-dashboard-fulltwo">
-                <div class="container " id="page" style="" >
-                    <div class=" ">
-
+                <div class="container " id="page" >
+                    <div> 
                     @include('partials.job_board_sidebar')
 
 <!--  <div class="progress" style="height: 10px;">
@@ -142,9 +141,10 @@ $check = 'second';
     <div class="careerfy-typo-wrap"  style="background-color: #FFFFFF;">
     <div id="resume_title" class="title3" >
 <div class="actions">
-<p class="editov2"><a class="copy" href="">Create</a></p>
+ 
+<p class="editov2"><a class="copy" href="{{route('show.cation')}}">Create</a></p>
 <p class="editov2"><a class="print print_link" href="{{route('print.resume', $user_single_resume_by_date->id)}}">Print</a></p>
-<p class="editov2"><a class="delete" href="">Delete</a></p>
+<!-- <p class="editov2"><a class="delete" href="">Delete</a></p> -->
 </div><!-- END action -->
 
 <h3> {{$user_single_resume_by_date->pr_caption}}</h3><a class="snote" data-toggle="modal"  data-style="slide-left" data-spinner-color="#333" href="#static_update">[Edit]</a>                                   <h3>      
@@ -170,9 +170,6 @@ $check = 'second';
 <a href="" class="careerfy-green">90% completed</a>
 @endif
 
-@if($section_candidatelist_count === 7)
- 
-@endif
  
 <!-- 
 @if($document && $jobcertifications && $jobskills && $person_info) 
@@ -278,13 +275,6 @@ $check = 'second';
           Add Job Profile
           <a href="#" class="careerfy-resume-addbtn" style="background-color: red"><span class="fa fa-minus"></span></a>
           </h2> </div>
-<!-- <div class="portlet-title table_header">
-<div class="caption font-dark">
-<i class="icon-settings font-dark "></i>
-<span class="caption-subject bold uppercase ">Add Job Profile</span>
-</div> 
-</div> -->
-
 <form class="form-horizontal" action="{{ route('add.profile') }}" method="post" role="form">
                                             {{ csrf_field() }}
   <input type="hidden" value="job_profile" name="jobprofile">
@@ -460,55 +450,12 @@ $check = 'second';
                                                     </ul>
                                                     </form>
                                                 </div>
-                                             <!--    <div class="careerfy-resume-education">
-                                                    <ul class="careerfy-row">
-                                                        <li class="careerfy-column-12">
-                                                            <div class="careerfy-resume-education-wrap">
-                                                                <small>2002 - 2004</small>
-                                                                <h2><a href="#">Masters in Fine Arts</a></h2>
-                                                                <span>Walters University</span>
-                                                            </div>
-                                                            <div class="careerfy-resume-education-btn">
-                                                                <a href="#" class="careerfy-icon careerfy-edit"></a>
-                                                                <a href="#" class="careerfy-icon careerfy-rubbish"></a>
-                                                            </div>
-                                                        </li>
-                                                        <li class="careerfy-column-12">
-                                                            <div class="careerfy-resume-education-wrap">
-                                                                <small>2012 - 2015</small>
-                                                                <h2><a href="#">Tommers College</a></h2>
-                                                                <span>Bachlors in Fine Arts</span>
-                                                            </div>
-                                                            <div class="careerfy-resume-education-btn">
-                                                                <a href="#" class="careerfy-icon careerfy-edit"></a>
-                                                                <a href="#" class="careerfy-icon careerfy-rubbish"></a>
-                                                            </div>
-                                                        </li>
-                                                        <li class="careerfy-column-12">
-                                                            <div class="careerfy-resume-education-wrap">
-                                                                <small>2014 - 2015</small>
-                                                                <h2><a href="#">Diploma in Fine Arts</a></h2>
-                                                                <span>Imperieal Institute of Art Direction</span>
-                                                            </div>
-                                                            <div class="careerfy-resume-education-btn">
-                                                                <a href="#" class="careerfy-icon careerfy-edit"></a>
-                                                                <a href="#" class="careerfy-icon careerfy-rubbish"></a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div> -->
+                                         
                                             </div>
 
 
 @endif
  
-    <!-- <div class="careerfy-fileUpload">
-        <span><i class="careerfy-icon careerfy-add"></i> Add  Basic Information</span>
-        <input type="file" class="careerfy-upload" />
-        </div> -->
-
-
-<!-- <div class="careerfy-profile-title"><h4></h4></div> static_summary -->
 @if($career)
 <div class="col-md-12 cv_content" >
 
@@ -525,15 +472,15 @@ $check = 'second';
 @else
  
 <div class="careerfy-candidate-resume-wrap">    
-                                                <div class="careerfy-candidate-title"> <h4>
-  <i class="careerfy-icon careerfy-mortarboard"></i>CAREER OBJECTIVES
+ <div class="careerfy-candidate-title"> <h4>
+  <i class="careerfy-icon careerfy-mortarboard"></i>Career Objectives
                                                     <a href="javascript:void(0)" class="careerfy-resume-addbtn" style="width: 30%"><span class="fa fa-plus"></span>  Add Career Objectives</a>
                                                 </h4> </div>
                                 <div class="careerfy-add-popup">
-                                <div class="careerfy-candidate-title"> <h2>
+                                <div class="careerfy-candidate-title"> <h4>
                                 Career Objectives
                                 <a href="#" class="careerfy-resume-addbtn" style="background-color: red"><span class="fa fa-minus"></span></a>
-                                </h2> </div>
+                                </h4> </div>
                           <form class="form-horizontal" action="{{ route('add.career_summary') }}" method="post" role="form">
                                   {{ csrf_field() }}
                                   <input type="hidden" name="resume" value="{{$user_single_resume_by_date->id}}">
@@ -573,14 +520,7 @@ $check = 'second';
 @foreach($jobskills as $jobskill)
  <span class="jellybean">{{$jobskill->job_skill}}</span> 
 @endforeach
-<!-- <span class="jellybean">Java</span>
-<span class="jellybean">php</span>
-<span class="jellybean">Javascript</span>
-<span class="jellybean">hibernate</span>
-<span class="jellybean">Spring Tomcat</span>
-<span class="jellybean">LAMP</span>
-<span class="jellybean">XAMP</span> <i class="careerfy-icon careerfy-social-media"></i>
-<span class="jellybean">Netbean</span> -->
+
 </div>
 </div> </div>
 @else
@@ -747,23 +687,9 @@ $check = 'second';
 
 @else
 
-<!--  <div class="col-md-12 cv_content" >
-
-<div class="pageactionIn" id="education_topsection">
-
-<div class="apply_select_l select_add" id="summary_topsection">
-<a class="action" data-toggle="modal" data-style="slide-left" data-spinner-color="#333" href="#static_education">
-<span class="outer"><span class="line"><span class="inner"> 
- Add Education 
-</span></span></span></a>
-
-</div>
- </div>
-</div> -->
-
 <div class="careerfy-candidate-resume-wrap">    
                                                 <div class="careerfy-candidate-title"> <h4>
-                                <i class="careerfy-icon careerfy-mortarboard"></i>EDUCATION 
+                                <i class="careerfy-icon careerfy-mortarboard"></i>Education 
                   <a href="javascript:void(0)" class="careerfy-resume-addbtn" style="width: 30%"><span class="fa fa-plus"></span> Add Education</a>
                                                 </h4> </div>
 
@@ -868,56 +794,13 @@ Feild of Study:<span class="required">*</span>
 </li>
       <li class="careerfy-column-12">
       <input type="submit" value="Add education"> 
-      </li>
-      
+      </li> 
  
            </form>
-      </ul>
-                                               
-                                                </div>
-                                             <!--    <div class="careerfy-resume-education">
-                                                    <ul class="careerfy-row">
-                                                        <li class="careerfy-column-12">
-                                                            <div class="careerfy-resume-education-wrap">
-                                                                <small>2002 - 2004</small>
-                                                                <h2><a href="#">Masters in Fine Arts</a></h2>
-                                                                <span>Walters University</span>
-                                                            </div>
-                                                            <div class="careerfy-resume-education-btn">
-                                                                <a href="#" class="careerfy-icon careerfy-edit"></a>
-                                                                <a href="#" class="careerfy-icon careerfy-rubbish"></a>
-                                                            </div>
-                                                        </li>
-                                                        <li class="careerfy-column-12">
-                                                            <div class="careerfy-resume-education-wrap">
-                                                                <small>2012 - 2015</small>
-                                                                <h2><a href="#">Tommers College</a></h2>
-                                                                <span>Bachlors in Fine Arts</span>
-                                                            </div>
-                                                            <div class="careerfy-resume-education-btn">
-                                                                <a href="#" class="careerfy-icon careerfy-edit"></a>
-                                                                <a href="#" class="careerfy-icon careerfy-rubbish"></a>
-                                                            </div>
-                                                        </li>
-                                                        <li class="careerfy-column-12">
-                                                            <div class="careerfy-resume-education-wrap">
-                                                                <small>2014 - 2015</small>
-                                                                <h2><a href="#">Diploma in Fine Arts</a></h2>
-                                                                <span>Imperieal Institute of Art Direction</span>
-                                                            </div>
-                                                            <div class="careerfy-resume-education-btn">
-                                                                <a href="#" class="careerfy-icon careerfy-edit"></a>
-                                                                <a href="#" class="careerfy-icon careerfy-rubbish"></a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div> -->
-                                            </div>
-
-
-@endif
- 
-
+      </ul>                                        
+  </div> 
+</div> 
+@endif 
 @if(!$work_histories->isEmpty())
 <div class="col-md-12 cv_content">
 <div class="pageactionIn" id="work_history_topsection">
@@ -967,19 +850,16 @@ Previous
 <div class="overviewtitle2">
 <span class="ovtitle">Country</span>
 <span class="highlightable"> @foreach($countries as $country) @if($work_history->country === $country->code) {{$country->name_en}} @endif @endforeach</span>
-</div>
-
+</div> 
 
 <div class="overviewtitle2">
 <span class="ovtitle">Industry</span>
 <span class="highlightable"> @foreach($work_history->industries as $industry) {{$industry->name}}  @endforeach</span>
-</div>
-
+</div> 
 <div class="overviewtitle2">
 <span class="ovtitle">Position Type</span>
 <span class="highlightable">@foreach($work_history->industryprofessions as $profession) {{$profession->name}}  @endforeach </span>
-</div>
-
+</div> 
 <div class="overviewtitle2">
 <span class="ovtitle">Position Description</span>
 <span class="job_description detail highlightable">
@@ -988,79 +868,25 @@ Previous
 </div>
 @endforeach
 </div>
-</div>
-
+</div> 
 @else
-<!--  <div class="col-md-12 cv_content" >
 
-<div class="pageactionIn" id="work_history_topsection">
-
-<div class="apply_select_l select_add" id="work_history_topsection">
-<a class="action  " data-toggle="modal" data-style="slide-left" data-spinner-color="#333" href="#static_work">
-<span class="outer"><span class="line"><span class="inner"> 
- Add Work Experience 
-</span></span></span></a>
-
-</div>
- </div>
-</div> -->
-       <div class="careerfy-candidate-resume-wrap">    
-                                                <div class="careerfy-candidate-title"> <h4>
-                                                    <i class="careerfy-icon careerfy-social-media"></i>EXPERIENCE
+       <div class="careerfy-candidate-resume-wrap">  
+            <div class="careerfy-candidate-title"> <h4>
+                    <i class="careerfy-icon careerfy-social-media"></i>Experience
 <a class="careerfy-resume-addbtn2" style="width: 30%" data-toggle="modal" data-style="slide-left" data-spinner-color="#333" href="#static_work"><span class="fa fa-plus"></span> Add experience</a>
-                                                </h4> </div>
-
-                                                <div class="careerfy-add-popup">
-                   
-                                                </div>
-                                           <!--      <div class="careerfy-resume-education">
-                                                    <ul class="careerfy-row">
-                                                        <li class="careerfy-column-12">
-                                                            <div class="careerfy-resume-education-wrap">
-                                                                <small>2010 - 2012</small>
-                                                                <h2><a href="#">Development Manager</a></h2>
-                                                                <span>Atract Solutions</span>
-                                                            </div>
-                                                            <div class="careerfy-resume-education-btn">
-                                                                <a href="#" class="careerfy-icon careerfy-edit"></a>
-                                                                <a href="#" class="careerfy-icon careerfy-rubbish"></a>
-                                                            </div>
-                                                        </li>
-                                                        <li class="careerfy-column-12">
-                                                            <div class="careerfy-resume-education-wrap">
-                                                                <small>2006 - 2008</small>
-                                                                <h2><a href="#">Senior PHP/Drupal developer</a></h2>
-                                                                <span>Minor Solutions</span>
-                                                            </div>
-                                                            <div class="careerfy-resume-education-btn">
-                                                                <a href="#" class="careerfy-icon careerfy-edit"></a>
-                                                                <a href="#" class="careerfy-icon careerfy-rubbish"></a>
-                                                            </div>
-                                                        </li>
-                                                        <li class="careerfy-column-12">
-                                                            <div class="careerfy-resume-education-wrap">
-                                                                <small>2002 - 2004</small>
-                                                                <h2><a href="#">Self Employed Professional</a></h2>
-                                                                <span> Abstraxct Max</span>
-                                                            </div>
-                                                            <div class="careerfy-resume-education-btn">
-                                                                <a href="#" class="careerfy-icon careerfy-edit"></a>
-                                                                <a href="#" class="careerfy-icon careerfy-rubbish"></a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div> -->
-                                            </div>
-
+                                                </h4> </div> 
+        <div class="careerfy-add-popup"> 
+        </div> 
+    </div> 
 @endif
 
-@if($jobcertifications->isEmpty())
- 
+@if($jobcertifications->isEmpty()) 
          <div class="careerfy-candidate-resume-wrap">    
-                <div class="careerfy-candidate-title"> <h2>
+                <div class="careerfy-candidate-title"> <h4>
                 <i class="careerfy-icon careerfy-briefcase"></i> Certification 
                 <a href="" class="careerfy-resume-addbtn" style="width: 30%" data-toggle="modal" data-style="slide-left" data-spinner-color="#333" ><span class="fa fa-plus"></span>  Add Certification </a>
-                </h2> </div>
+                </h4> </div>
                                                 <div class="careerfy-add-popup">
                                                     <a href="javascript:void(0)"  data-dismiss="modal" class="careerfy-resume-addbtn" style="background-color: red" ><span class="fa fa-minus"></span></a>
 <form class="form-horizontal" action="{{ route('add.certificate') }}" method="post" role="form">
@@ -1074,10 +900,9 @@ Previous
 <span class="caption-subject bold ">Add Certifications</span>
 </div>                
 </div></li>
-                                                        <li class="careerfy-column-6">
-                                                <label>Certification Name  <span class="required">*</span></label>
-                            <input id="certification_name" type="text" class="form-control" name="certification_name" value="{{ old('name') }}" required autofocus>
-
+                 <li class="careerfy-column-6">
+                      <label>Certification Name  <span class="required">*</span></label>
+                            <input id="certification_name" type="text" class="form-control" name="certification_name" value="{{ old('name') }}" required autofocus> 
                                 @if ($errors->has('certification_name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('certification_name') }}</strong>
@@ -1187,10 +1012,10 @@ Previous
 
  
          <div class="careerfy-candidate-resume-wrap">    
-                <div class="careerfy-candidate-title"> <h2>
+                <div class="careerfy-candidate-title"> <h4>
                 <i class="careerfy-icon careerfy-briefcase"></i> Referee
                 <a href="" class="careerfy-resume-addbtn" style="width: 30%" data-toggle="modal" data-style="slide-left" data-spinner-color="#333" ><span class="fa fa-plus"></span>  Add Referee </a>
-                </h2> </div>
+                </h4> </div>
                                                 <div class="careerfy-add-popup">
                                                     <a href="javascript:void(0)"  data-dismiss="modal" class="careerfy-resume-addbtn" style="background-color: red" ><span class="fa fa-minus"></span></a>
 <form class="form-horizontal" action="{{ route('add.referee') }}" method="post" role="form">
@@ -1301,21 +1126,10 @@ Previous
 </div>
 </div>
 @endforeach
-
 </div>
 </div>
-
  @endif
- 
-
- 
- 
- 
- 
  <a href="{{route('display.templates')}}" class="careerfy-resume-addbtn"><span class="fa fa-plus"></span> Convert Resume To PDF</a>
- 
- 
-
 <!-- wards was here -->
 <!-- <div class="col-md-12 cv_content">
 <div class="careerfy-candidate-resume-wrap">    
@@ -1434,10 +1248,6 @@ Previous
                                                     </ul>
                                                 </div>
                                                     </form>
-
-
-                       
-
                                             </div> -->
                                     </div>
                                 </div>

@@ -37,19 +37,16 @@ border-color: white !important;
     }
 
 </style>
+@include('partials.employer_breadcomb')
 <!--    <td height="80" align="center" valign="middle" bgcolor="#00aecc" style="font-family:Arial, Helvetica, sans-serif; color:#ffffff;"><div style="font-size:15px;"><b>R</b></div><div style="font-size:15px;"><b>C</b></div>
 
    </td> -->
-  
-
                         <div class="careerfy-column-12 careerfy-typo-wrap">
     <!-- Main Section -->
- 
                             <div class="careerfy-typo-wrap">
                                 <div class="careerfy-employer-dasboard" style="background-color: #ffffff;">
                                     <form method="POST" action="{{route('tag.store')}}" class="mt-repeater" >
-                                        {{ csrf_field() }}
-
+                                        {{ csrf_field() }} 
                                         <div class="careerfy-employer-box-section">
                                             <!-- Profile Title -->
                                             <div class="careerfy-profile-title">
@@ -146,20 +143,7 @@ border-color: white !important;
                                                         </select>
                                                     </div>
                                                 </li>
-                                   <!--              <li class="careerfy-column-6">
-                                                    <label>Field Of Study</label>
-                                                    <div class="careerfy-profile-select">
 
-                                                    <select  required="required">
-                                        @foreach($fields_of_study_list as $fields_of_study)
-                                        <option value="{{$fields_of_study->id}}">{{$fields_of_study->fields}} </option>
-                               
-                                                @endforeach
-
-                                                    </select>
-             
-                                                    </div>
-                                                </li> -->
                                                 <li class="careerfy-column-6">
                                                     <label>Experience*</label>
                                                     <div class="careerfy-profile-select">
@@ -302,22 +286,17 @@ Eg. Do You have Experience in building API's?
                                             </div>
                             <a href="javascript:;" data-repeater-create class="careerfy-employer-profile-submit" >
                                                 <i class="fa fa-plus"></i> Add Assessement</a>
-                                        </div>
-                                    </div>
+                                            </div>
+                                         </div>
+                                     </div> 
                                 </div>
-
-
-                            </div>
-
-
-                                            </ul>
-                                        </div>
+                             </ul>
+                          </div>
            <input type="submit" class="careerfy-employer-profile-submit" value="Save Job"> 
- </form>
-                                </div>
-                            </div>
-
-                            </div>
+                            </form>
+                         </div>
+                        </div> 
+                    </div>
  
 
      @endsection

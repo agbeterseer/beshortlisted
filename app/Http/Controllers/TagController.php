@@ -121,55 +121,10 @@ $ddt = Carbon::now();
 $job_id = $id; 
 $job_record = Tag::findOrFail($job_id);
  $List_applicants_by_job_id = Application::where('tag_id', $job_id)->where('delete', 0)->where('sorted', 0)->orderBy('created_at', 'desc')->get();
-
- //dd($List_applicants_by_job_id);
-// foreach ($job_applciation_list as $key => $value) {
-
-//   $document = Document::where('id', $value->document_id)->first();
-  // $get_applicants_profile = Document::all();
-  // $get_applicants_profile->where(function(query){
-
-
-  // });->get();
-    // dd($get_applicants_profile);
-
-  // $get_applicants_profile = DB::table('documents')
-  //           ->join('applications', 'documents.id', '=', 'applications.document_id') 
-  //           ->select('documents.id', 'applications.resume_id', 'applications.user_id')
-  //           ->get();
-             // dd($get_applicants_profile);
-// $query = DB::table('applications')
-//             ->join('documents', 'documents.id', '=', 'applications.document_id');
-// $sorted_application = $query->where('delete', 0)->get();
-
-
-  //dd($sorted_applications);
-// }
-// get all applications by a user
-//$usersss = User::find(76)->applicaitons;
 $get_applicants_profile = Document::find(3741)->applications;
-// get all applicants by job code
-//$List_applicants_by_job_id = Tag::find($job_id)->applicaitons->where('sorted', 0)->get();
-
- //$List_applicants_by_job_id = $List_applicants_by_job_id->where('sorted', 0)->get();
-  
+// get all applicants by job code 
 // get the resume of each candidate that applied for a job
  $get_applicants_by_jobRevers = Application::find(12)->document->document_id;
-
- 
-// return a single Profile instance of an application
-// find by applicaiton Primary Key
- 
-// i want to getapplicants who applied for a particular job post
-
-        // foreach ($List_applicants_by_job_id as $key => $applicant) {
-        //   $jobap = Application::find($applicant->id)->document->resume_id;
-        //  // $sds = $document->document->resume_id;
-        // }
-
-    //dd($jobap);
-        ///dd($List_applicants_by_job_id);
-
         $location = $request->location;
         $s = $request->input('s');
         $c = $request->input('c');
@@ -177,13 +132,11 @@ $get_applicants_profile = Document::find(3741)->applications;
         $documentList = Document::all();
         $documents = Document::latest()
         ->search($s)
-        ->paginate(20);
-       
+        ->paginate(20);      
         $industries = Industry::all();
         $professions = IndustryProfession::all();
         $cities = City::all();
         $educationallevels = $this->GetQualificationLevels(); 
-
         // dd($educational_levels);
         $countries = DB::table('countries')->get();
         // get all records
@@ -194,24 +147,17 @@ $get_applicants_profile = Document::find(3741)->applications;
         $careerlist = CareerSummary::all();
         $skillsets = DB::table('skillsets')->where('tagid', $id)->get();
         $jobskills = DB::table('job_skills')->get();
-
-
         $work_histories = WorkExperience::all();
         $jobcertifications = DB::table('job_certifications')->get();
         $person_info_list = PersonalInformation::all();
         $awards = Award::all();
-
-
         $users = User::all();
-
         $user_info_application = DB::table('documents')
              ->select('tag_fk', DB::raw('count(*) as total'))
              ->groupBy('tag_fk')->get();
-
-        $user_industry_count = DB::table('user_industries')
+       $user_industry_count = DB::table('user_industries')
              ->select('industry_id', DB::raw('count(*) as total'))
              ->groupBy('industry_id')->get();
-
         $user_profession_count = DB::table('user_professions')
              ->select('industry_profession_id', DB::raw('count(*) as total'))
              ->groupBy('industry_profession_id')->get();
@@ -219,34 +165,20 @@ $get_applicants_profile = Document::find(3741)->applications;
             //work_experience's
              $work_experiences = DB::table('work_experiences')->get();
             // find by location
-
             $documents_location = DB::table('documents')->where('city_id', $location)->get();
-
-           //  $rejected_count = Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->count();
-           //  $review_count = Application::where('tag_id',$job_id)->where('in_review', 1)->where('delete', 0)->count();
-           //  $sorted = Application::where('tag_id',$job_id)->where('sorted', 0)->where('delete', 0)->count();
-           //  $offered_count = Application::where('tag_id',$job_id)->where('offered', 1)->where('delete', 0)->count();
-           //  $hired_count = Application::where('tag_id',$job_id)->where('hired', 1)->where('delete', 0)->count();
-           // $shortlisted_count = Application::where('tag_id',$job_id)->where('shortlisted', 1)->where('delete', 0)->count();
-
             $sorted_count = $this->GetSortedCount($job_id);  
             $rejected_count = $this->GetRejectedCount($job_id); 
             $review_count = $this->GetReivewCount($job_id); 
             $offered_count = $this->GetOfferedCount($job_id); 
             $shortlisted_count = $this->GetShortlistedCount($job_id); 
             $hired_count = $this->GetHiredCount($job_id); 
-
             $offered_list = $this->GetOfferApplicationList($job_id); //Application::where('tag_id',$job_id)->where('offered', 1)->where('delete', 0)->get(); 
             $hired_list = Application::where('tag_id',$job_id)->where('hired', 1)->where('delete', 0)->get();
             $rejected_list = Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->get();
             $shortlisted_list = Application::where('tag_id',$job_id)->where('shortlisted', 1)->where('delete', 0)->get();
-            $review_list = $this->GetReviewNewApplicationList($job_id);
-
-           
+            $review_list = $this->GetReviewNewApplicationList($job_id);         
             $shortlisted_list = Application::where('tag_id',$job_id)->where('shortlisted', 1)->where('delete', 0)->get();
- 
- 
-            $menus = $this->displayMenu();
+             $menus = $this->displayMenu();
             $units = $this->displayUnit();
 return view('employer.candidates_listing',  compact('documents', 'industries', 'employement_terms', 'educationallevels', 'jobcareer_levels', 'professions', 's', 'cities', 'c', 'work_experiences', 'users', 'educationallevels', 'job_applciation_list', 'List_applicants_by_job_id', 'jobap', 'documentList', 'countries', 'careerlist', 'jobskills', 'educationaList', 'dt', 'ddt', 'work_histories', 'jobcertifications', 'person_info', 'person_info_list', 'rejected_count', 'sorted_count', 'review_count', 'shortlisted_count', 'offered_count', 'hired_count', 'review_list', 'rejected_list', 'shortlisted_list', 'offered_list', 'hired_list', 'offered_list', 'job_id', 'job_record', 'industry_profession_list', 'menus', 'units'), array('user' => Auth::user()));
 }
@@ -265,31 +197,18 @@ return view('employer.candidates_listing',  compact('documents', 'industries', '
         $skillsets = DB::table('skillsets')->where('tagid', $id)->get();
         $jobskills = DB::table('job_skills')->get();
         $countries = DB::table('countries')->get();
-
- 
-
         // $industries = Industry::all();
         $applicants = Application::where('job_id', $id)->where('delete',0)->get();
         $applicants_count = Application::where('job_id', $id)->where('delete',0)->count();
-
-
         // dd($applicants_count);
         $professions = IndustryProfession::all();
         $cities = City::all();
- 
         // // get all records
-        // $sort_categories_list = DB::table('sort_categories')->get();
-        // $employement_terms = DB::table('employement_terms')->get();
-        // $jobcareer_levels = DB::table('jobcareer_levels')->get();
-        // $documents = DB::table('documents')->where()
         $resume = RecruitResume::where('user_id',$user->id)->where('status', 1)->first();
         $menus = $this->displayMenu();
         $units = $this->displayUnit();
        return view('employer.display_job_detail_sort', compact('tag','employement_terms', 'jobcareer_levels', 'industries', 'educational_levels', 'skillsets', 'professions', 'cities', 'applicants', 'applicants', 'applicants_count', 'resume', 'jobskills', 'countries', 'menus', 'units'), array('user' => Auth::user()));
  }
-
-
-
 public function OfferedFilter(Request $request)
  {
     $s = $request->input('s');
@@ -312,9 +231,7 @@ public function OfferedFilter(Request $request)
     $availability = $request->availability;
     $salary_unsorted = $request->salary;
     $profession = $request->profession;
-    $default_unsorted_list = null;
-
- 
+    $default_unsorted_list = null; 
     $gender_list = Input::has('gender') ? Input::get('gender') : [];
     $gender_unsortedlist = Input::has('gender_unsorted') ? Input::get('gender_unsorted') : [];
 
@@ -420,32 +337,25 @@ if($profession || $salary_unsorted || $availability || $job_terms || $career_lev
 }else{
     $applications = Application::where('offered', 1)->where('sorted', 1)->where('delete',0)->where('tag_id',$job_id)->paginate(10);
 }
-
-
 $work_experiences = DB::table('work_experiences')
             ->join('applications', 'work_experiences.resumefk', '=', 'applications.resume_id')
             ->join('tags', 'tags.id', '=', 'applications.tag_id')
             ->get();
-
 $documents = DB::table('applications')
             ->join('documents', 'documents.id', '=', 'applications.document_id') 
             ->get();
-
    $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'applications' => $applications,  's' =>$s, 'locations' => $locations, 'qualifications' => $qualifications, 'employement_terms' => $employement_terms, 'work_experiences'=>$work_experiences, 'documents' => $documents, 'jobs_list'=>$jobs_list, 'job_id'=>$job_id, 'ages'=>$ages, 'career_level'=>$career_level, 'default_unsorted_list'=>$default_unsorted_list);
 return response()->json($response);
  }
 
-
 public function ShortListFilter(Request $request)
  {
-        $s = $request->input('s');
+    $s = $request->input('s');
     $job_id = $request->job_id;
     $jobs_list = $request->job;
     $career_level = $request->career_level;
- 
     $gender_list = $request->gender;
     $years_of_experience = $request->years_of_experience;
-
     $locations = $request->location;
     $age = $request->age;
     $qualifications = $request->qualification;
@@ -458,13 +368,9 @@ public function ShortListFilter(Request $request)
     $availability = $request->availability;
     $salary_unsorted = $request->salary;
     $profession = $request->profession;
-    $default_unsorted_list = null;
-
-          
- 
+    $default_unsorted_list = null;       
     $gender_list = Input::has('gender') ? Input::get('gender') : [];
     $gender_unsortedlist = Input::has('gender') ? Input::get('gender') : [];
-
 if($profession || $salary_unsorted || $availability || $job_terms || $career_level || $gender || $gender_list|| $years_of_experience || $locations || $age || $qualifications || $employement_terms){
      
     $applications = Application::where(function($query) use ($gender_list, $years_of_experience, $locations, $age, $qualifications,$employement_terms, $gender, $check_section, $ages, $career_level, $job_terms, $availability, $salary_unsorted){
@@ -556,41 +462,30 @@ if($profession || $salary_unsorted || $availability || $job_terms || $career_lev
                             ->where('gender', '=', $gend)->where('shortlisted', 1)->where('sorted', 1);
                     } 
                 }
- 
         }
- 
- 
  })->paginate(10);
-
-
 }else{
     $applications = Application::where('shortlisted', 1)->where('sorted', 1)->where('delete',0)->where('tag_id',$job_id)->paginate(10);
 }
-
-
 $work_experiences = DB::table('work_experiences')
             ->join('applications', 'work_experiences.resumefk', '=', 'applications.resume_id')
             ->join('tags', 'tags.id', '=', 'applications.tag_id')
             ->get();
-
 $documents = DB::table('applications')
             ->join('documents', 'documents.id', '=', 'applications.document_id') 
             ->get();
-
 $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'applications' => $applications,  's' =>$s, 'locations' => $locations, 'qualifications' => $qualifications, 'employement_terms' => $employement_terms, 'work_experiences'=>$work_experiences, 'documents' => $documents, 'jobs_list'=>$jobs_list, 'job_id'=>$job_id, 'ages'=>$ages, 'career_level'=>$career_level, 'default_unsorted_list'=>$default_unsorted_list);
 return response()->json($response);
  }
 
  public function InReviewFilter(Request $request)
  {
-        $s = $request->input('s');
+    $s = $request->input('s');
     $job_id = $request->job_id;
     $jobs_list = $request->job;
     $career_level = $request->career_level;
- 
     $gender_list = $request->gender;
     $years_of_experience = $request->years_of_experience;
-
     $locations = $request->location;
     $age = $request->age;
     $qualifications = $request->qualification;
@@ -603,15 +498,10 @@ return response()->json($response);
     $availability = $request->availability;
     $salary_unsorted = $request->salary;
     $profession = $request->profession;
-    $default_unsorted_list = null;
-
-          
- 
+    $default_unsorted_list = null;        
     $gender_list = Input::has('gender') ? Input::get('gender') : [];
     $gender_unsortedlist = Input::has('gender_unsorted') ? Input::get('gender_unsorted') : [];
-
 if($profession || $salary_unsorted || $availability || $job_terms || $career_level || $gender || $gender_list|| $years_of_experience || $locations || $age || $qualifications || $employement_terms){
-     
     $applications = Application::where(function($query) use ($gender_list, $years_of_experience, $locations, $age, $qualifications,$employement_terms, $gender, $check_section, $ages, $career_level, $job_terms, $availability, $salary_unsorted){
  
   if (isset($gender)) {
@@ -632,9 +522,7 @@ if($profession || $salary_unsorted || $availability || $job_terms || $career_lev
                         $query->orWhere('delete', 0)
                         ->where('educational_level', $qualification)->where('in_review', 1)->where('sorted', 1);
                         }
-
                 }
-
              if($check_section === 'inreview'){
                        if (isset($years_of_experience)) {
                 foreach ($years_of_experience as $key => $yeo) {
@@ -701,34 +589,24 @@ if($profession || $salary_unsorted || $availability || $job_terms || $career_lev
                             ->where('gender', '=', $gend)->where('in_review', 1)->where('sorted', 1);
                     } 
                 }
- 
         }
- 
- 
  })->paginate(10);
-
-
 }else{
     $applications = Application::where('in_review', 1)->where('sorted', 1)->where('delete',0)->where('tag_id',$job_id)->paginate(10);
 }
-
-
 $work_experiences = DB::table('work_experiences')
             ->join('applications', 'work_experiences.resumefk', '=', 'applications.resume_id')
             ->join('tags', 'tags.id', '=', 'applications.tag_id')
             ->get();
-
 $documents = DB::table('applications')
             ->join('documents', 'documents.id', '=', 'applications.document_id') 
             ->get();
-
    $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'applications' => $applications,  's' =>$s, 'locations' => $locations, 'qualifications' => $qualifications, 'employement_terms' => $employement_terms, 'work_experiences'=>$work_experiences, 'documents' => $documents, 'jobs_list'=>$jobs_list, 'job_id'=>$job_id, 'ages'=>$ages, 'career_level'=>$career_level, 'default_unsorted_list'=>$default_unsorted_list);
 return response()->json($response);
  }
-
 public function RejectedFilter(Request $request)
  {
-        $s = $request->input('s');
+    $s = $request->input('s');
     $job_id = $request->job_id;
     $jobs_list = $request->job;
     $career_level = $request->career_level;
@@ -748,17 +626,11 @@ public function RejectedFilter(Request $request)
     $availability = $request->availability;
     $salary_unsorted = $request->salary;
     $profession = $request->profession;
-    $default_unsorted_list = null;
-
-          
- 
+    $default_unsorted_list = null;       
     $gender_list = Input::has('gender') ? Input::get('gender') : [];
     $gender_unsortedlist = Input::has('gender_unsorted') ? Input::get('gender_unsorted') : [];
-
-if($profession || $salary_unsorted || $availability || $job_terms || $career_level || $gender_unsorted || $gender_list|| $years_of_experience || $locations || $age || $qualifications || $employement_terms){
-     
+if($profession || $salary_unsorted || $availability || $job_terms || $career_level || $gender_unsorted || $gender_list|| $years_of_experience || $locations || $age || $qualifications || $employement_terms){   
     $applications = Application::where(function($query) use ($gender_list, $years_of_experience, $locations, $age, $qualifications,$employement_terms, $gender_unsorted, $check_section, $ages, $career_level, $job_terms, $availability, $salary_unsorted){
- 
   if (isset($gender_unsorted)) {
                  foreach ($gender_unsorted as $gender) {
                     $query->orWhere('delete', 0)
@@ -846,43 +718,29 @@ if($profession || $salary_unsorted || $availability || $job_terms || $career_lev
                             ->where('gender', '=', $gender)->where('rejected', 1)->where('sorted', 1);
                     } 
                 }
- 
-        }
- 
- 
+        } 
  })->paginate(10);
-
-
 }else{
     $applications = Application::where('rejected', 1)->where('sorted', 1)->where('delete',0)->where('tag_id',$job_id)->paginate(10);
 }
-
-
 $work_experiences = DB::table('work_experiences')
             ->join('applications', 'work_experiences.resumefk', '=', 'applications.resume_id')
             ->join('tags', 'tags.id', '=', 'applications.tag_id')
             ->get();
-
 $documents = DB::table('applications')
             ->join('documents', 'documents.id', '=', 'applications.document_id') 
             ->get();
-
    $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'applications' => $applications,  's' =>$s, 'locations' => $locations, 'qualifications' => $qualifications, 'employement_terms' => $employement_terms, 'work_experiences'=>$work_experiences, 'documents' => $documents, 'jobs_list'=>$jobs_list, 'job_id'=>$job_id, 'ages'=>$ages, 'career_level'=>$career_level, 'default_unsorted_list'=>$default_unsorted_list);
 return response()->json($response);
  }
-
-
-
  public function UnsortedFilter(Request $request)
  {
-        $s = $request->input('s');
+    $s = $request->input('s');
     $job_id = $request->job_id;
     $jobs_list = $request->job;
     $career_level = $request->career_level;
- 
     $gender_list = $request->gender;
     $years_of_experience = $request->years_of_experience;
-
     $locations = $request->location;
     $age = $request->age;
     $qualifications = $request->qualification;
@@ -895,15 +753,10 @@ return response()->json($response);
     $availability = $request->availability;
     $salary_unsorted = $request->salary;
     $profession = $request->profession;
-    $default_unsorted_list = null;
-
-          
- 
+    $default_unsorted_list = null;       
     $gender_list = Input::has('gender') ? Input::get('gender') : [];
     $gender_unsortedlist = Input::has('gender_unsorted') ? Input::get('gender_unsorted') : [];
-
 if($profession || $salary_unsorted || $availability || $job_terms || $career_level || $gender_unsorted || $gender_list|| $years_of_experience || $locations || $age || $qualifications || $employement_terms){
-     
     $applications = Application::where(function($query) use ($gender_list, $years_of_experience, $locations, $age, $qualifications,$employement_terms, $gender_unsorted, $check_section, $ages, $career_level, $job_terms, $availability, $salary_unsorted){
  
   if (isset($gender_unsorted)) {
@@ -995,40 +848,27 @@ if($profession || $salary_unsorted || $availability || $job_terms || $career_lev
                 }
  
         }
- 
- 
  })->paginate(10);
-
-
 }else{
     $applications = Application::where('sorted', 0)->where('delete',0)->where('tag_id',$job_id)->paginate(10);
 }
-
-
 $work_experiences = DB::table('work_experiences')
             ->join('applications', 'work_experiences.resumefk', '=', 'applications.resume_id')
             ->join('tags', 'tags.id', '=', 'applications.tag_id')
             ->get();
-
 $documents = DB::table('applications')
             ->join('documents', 'documents.id', '=', 'applications.document_id') 
             ->get();
-
    $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'applications' => $applications,  's' =>$s, 'locations' => $locations, 'qualifications' => $qualifications, 'employement_terms' => $employement_terms, 'work_experiences'=>$work_experiences, 'documents' => $documents, 'jobs_list'=>$jobs_list, 'job_id'=>$job_id, 'ages'=>$ages, 'career_level'=>$career_level, 'default_unsorted_list'=>$default_unsorted_list);
 return response()->json($response);
  }
-
-
  public function searchConditions(Request $request){
-
     $s = $request->input('s');
     $job_id = $request->job_id;
     $jobs_list = $request->job;
     $career_level = $request->career_level;
- 
     $gender_list = $request->gender;
     $years_of_experience = $request->years_of_experience;
-
     $locations = $request->location;
     $age = $request->age;
     $qualifications = $request->qualification;
@@ -1041,21 +881,13 @@ return response()->json($response);
     $availability = $request->availability;
     $salary_hired = $request->salary;
     $profession = $request->profession;
-    $default_unsorted_list = null;
-
-            
- 
+    $default_unsorted_list = null;       
     $gender_list = Input::has('gender') ? Input::get('gender') : [];
     $gender_hiredList = Input::has('gender_hired') ? Input::get('gender_hired') : [];
-
 if($profession || $salary_hired || $availability || $job_terms || $career_level || $gender_hired || $gender_list|| $years_of_experience || $locations || $age || $qualifications || $employement_terms){
-    
     $applications = Application::where(function($query) use ($gender_list, $years_of_experience, $locations, $age, $qualifications,$employement_terms, $gender_hiredList, $check_section, $ages, $career_level, $job_terms, $availability, $salary_hired){
- 
-
-             if (isset($years_of_experience)) {
+              if (isset($years_of_experience)) {
                 foreach ($years_of_experience as $key => $yeo) {
-
                 $years_of_experience = explode("-", $yeo);
                 $start_year = $years_of_experience[0];
                 $end_year = $years_of_experience[1]; 
@@ -1063,7 +895,6 @@ if($profession || $salary_hired || $availability || $job_terms || $career_level 
                 }
              
                 } 
- 
                 if (isset($locations)) {
                             foreach ($locations as $key => $location) {
                                 $location_id = City::findOrFail($location);
@@ -1127,11 +958,6 @@ if($profession || $salary_hired || $availability || $job_terms || $career_level 
                                 $query->orWhere('delete', 0)->where('minimum_salary', '=', $salary);
                                     }
                  } 
-                 // if (isset($profession)) {
-                 //                        foreach ($profession as $salary) {
-                 //                $query->orWhere('delete', 0)->where('minimum_salary', '=', $salary);
-                 //                    }
-                 // }
 
                 }
 
@@ -1164,27 +990,10 @@ if($profession || $salary_hired || $availability || $job_terms || $career_level 
  })->paginate(10);
 
 }else{
-
 $applications = Application::where('sorted', 1)->where('delete',0)->paginate(10);
 $default_unsorted_list = Application::where('sorted', 0)->where('tag_id', $job_id)->where('delete',0)->paginate(10);
 }
-// }elseif ($gender_list) {
-//       $applications = Application::where(function($query) use ($gender_list, $years_of_experience, $locations, $age, $qualifications,$employement_terms){
-//                 if ($gender_list) {  
-//                     foreach ($gender_list as $gender) {
-//                     $query->orWhere('delete', 0)
-//                             ->where('gender', '=', $gender);
-//                     }
-//                 }
-
-//       });
-
-
- $applications = Application::where('sorted', 1)->where('delete',0)->paginate(10);
-    // $new_hired_list = $this->GetHiredApplicationList($job_id);, 'new_hired_list' => $new_hired_list
- 
-
-    // $work_experiences = DB::table('work_experiences')->get();
+$applications = Application::where('sorted', 1)->where('delete',0)->paginate(10);
 $work_experiences = DB::table('work_experiences')
             ->join('applications', 'work_experiences.resumefk', '=', 'applications.resume_id')
             ->join('tags', 'tags.id', '=', 'applications.tag_id')
@@ -1193,25 +1002,18 @@ $work_experiences = DB::table('work_experiences')
 $documents = DB::table('applications')
             ->join('documents', 'documents.id', '=', 'applications.document_id') 
             ->get();
-
- $query = DB::table('applications')
+$query = DB::table('applications')
             ->join('documents', 'documents.id', '=', 'applications.document_id');
 $sorted_applications = $query->where('delete', 0)->get();
-
 $gouped_hired = DB::table('applications')
              ->select('hired', DB::raw('count(*) as total'))
              ->groupBy('hired')->get();
 $gouped_offered = DB::table('applications')
              ->select('hired', DB::raw('count(*) as total'))
              ->groupBy('hired')->get();
-
-  
-
- $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'applications' => $applications,  's' =>$s, 'locations' => $locations, 'qualifications' => $qualifications, 'employement_terms' => $employement_terms, 'work_experiences'=>$work_experiences, 'documents' => $documents, 'jobs_list'=>$jobs_list, 'job_id'=>$job_id, 'ages'=>$ages, 'career_level'=>$career_level, 'default_unsorted_list'=>$default_unsorted_list);
+$response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'applications' => $applications,  's' =>$s, 'locations' => $locations, 'qualifications' => $qualifications, 'employement_terms' => $employement_terms, 'work_experiences'=>$work_experiences, 'documents' => $documents, 'jobs_list'=>$jobs_list, 'job_id'=>$job_id, 'ages'=>$ages, 'career_level'=>$career_level, 'default_unsorted_list'=>$default_unsorted_list);
 return response()->json($response);
-
-
- }
+}
 // automatch method
 /*  
     1. get the applicants by job_id from the application table
@@ -1221,16 +1023,12 @@ return response()->json($response);
 */
  
   
- public function AutoMatchApplicantWithJobs($job_id){
-    
+ public function AutoMatchApplicantWithJobs($job_id){  
     //get the applicants by job_id from the application table
     $applicant_list = $this->GetUnsortedNewApplicationList($job_id);
-
     // get the job record 
     $get_job = Tag::findOrFail($job_id);
-
     $industry_profession_list = DB::table('industry_professions')->get();
-
     // get years of experience
     // Job location industry
     // qualification 
@@ -1241,7 +1039,6 @@ return response()->json($response);
     // salary_range
     // region
     // city
-
     foreach ($applicant_list as $key => $applicant) {
         if ($get_job->gender === 'All') {
                        if ($gat_job->experience === $applicant->years_of_experience && $get_job->job_level === $applicant->career_level &&  $applicant->d_employment_term === $get_job->job_type &&  $get_job->salary_range === $applicant->minimum_salary && $get_job->qualification === $applicant->educational_level){
@@ -1266,12 +1063,9 @@ return response()->json($response);
  // when applying for a job
  // when building resume
  $jobs = Tag::where('status', 1)->where('active', 1)->get();
-
-
-    // get the job assessment
-    $job_assessment_list = DB::table('job_assessments')->where('client_id', $get_job->id)->get();
- 
-    return $applications;
+ // get the job assessment
+ $job_assessment_list = DB::table('job_assessments')->where('client_id', $get_job->id)->get();
+ return $applications;
  }
 
 public function EmailCandidates(Request $request)
@@ -1289,13 +1083,12 @@ public function EmailCandidates(Request $request)
         ];
   Mail::to($email_address)->queue(new EmailCandidate($content));
  
-     $request->session()->flash('message.level', 'success');
+    $request->session()->flash('message.level', 'success');
     $request->session()->flash('message.content', 'Done successfully!');
 } catch (Exception $e) {
     $request->session()->flash('message.level', 'danger');
     $request->session()->flash('message.content', 'something is not right!');
 }
- 
   return redirect()->back();
 }
 
@@ -1316,36 +1109,25 @@ public function RejectApplicant(Request $request)
     $application->hired = 0;
     $application->sorted = 1;
     $application->save();
-
     $sorted_count = $this->GetSortedCount($job_id); //Application::where('tag_id',$job_id)->where('sorted', 0)->where('delete', 0)->count();
-
-    $reject_count = $this->GetRejectedCount($job_id);//Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->count();
-    
+    $reject_count = $this->GetRejectedCount($job_id);//Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->count();  
     $review_count = $this->GetReivewCount($job_id);//Application::where('tag_id',$job_id)->where('in_review', 1)->where('delete', 0)->count();
     $offered_count = $this->GetOfferedCount($job_id); //Application::where('tag_id',$job_id)->where('offered', 1)->where('delete', 0)->count();
     $shortlisted_count = $this->GetShortlistedCount($job_id); //Application::where('tag_id',$job_id)->where('shortlisted', 1)->count();
     $hired_count = $this->GetHiredCount($job_id); //Application::where('tag_id',$job_id)->where('hired', 1)->count();
-
     $newapplication_list = $this->GetUnsortedNewApplicationList($job_id);
-
     $new_reject_list = $this->GetRejectedNewApplicationList($job_id); //Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->get();
-
     $review_list = $this->GetReviewNewApplicationList($job_id);
-
     // $work_experiences = DB::table('work_experiences')->get();
 $work_experiences = DB::table('work_experiences')
             ->join('applications', 'work_experiences.resumefk', '=', 'applications.resume_id')
             ->join('tags', 'tags.id', '=', 'applications.tag_id')
             ->get();
-
 $documents = DB::table('applications')
             ->join('documents', 'documents.id', '=', 'applications.document_id') 
-            ->get();
-
- 
- $response = array( 'status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'reject_count' => $reject_count, 'sorted_count' =>$sorted_count, 'review_count' => $review_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hired_count' => $hired_count, 'newapplication_list' => $newapplication_list, 'work_experiences'=>$work_experiences, 'new_reject_list' => $new_reject_list, 'review_list' => $review_list);
+           ->get();
+ $response = array('status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'reject_count' => $reject_count, 'sorted_count' =>$sorted_count, 'review_count' => $review_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hired_count' => $hired_count, 'newapplication_list' => $newapplication_list, 'work_experiences'=>$work_experiences, 'new_reject_list' => $new_reject_list, 'review_list' => $review_list);
     return response()->json($response);
- 
 }
 
 public function GetUnsortedNewApplicationList($job_id)
@@ -1420,7 +1202,6 @@ public function GetHiredCount($job_id)
    return $hire_count;
 }
 
-
 public function GetQualificationLevels()
 {
     $qualifications = DB::table('qualification_levels')->get();
@@ -1433,7 +1214,6 @@ public function ReviewApplicant(Request $request)
     $in_review = $request->get('in_review');
     $user_id = $request->get('user_id');
     $job_id = $request->get('job_id');
-
     $application = Application::findOrFail($application_id);
     $application->delete = 0;
     $application->in_review = 1;
@@ -1443,35 +1223,25 @@ public function ReviewApplicant(Request $request)
     $application->hired = 0;
     $application->sorted = 1;
     $application->save();
-
     $sorted_count = $this->GetSortedCount($job_id); //Application::where('tag_id',$job_id)->where('sorted', 0)->where('delete', 0)->count();
-
     $reject_count = $this->GetRejectedCount($job_id);//Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->count();
-    
     $review_count = $this->GetReivewCount($job_id);//Application::where('tag_id',$job_id)->where('in_review', 1)->where('delete', 0)->count();
     $offered_count = $this->GetOfferedCount($job_id); //Application::where('tag_id',$job_id)->where('offered', 1)->where('delete', 0)->count();
     $shortlisted_count = $this->GetShortlistedCount($job_id); //Application::where('tag_id',$job_id)->where('shortlisted', 1)->count();
     $hired_count = $this->GetHiredCount($job_id); //Application::where('tag_id',$job_id)->where('hired', 1)->count();
-
     $newapplication_list = $this->GetUnsortedNewApplicationList($job_id);
-
     $new_reject_list = $this->GetRejectedNewApplicationList($job_id); //Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->get();
     $review_list = $this->GetReviewNewApplicationList($job_id);
-
     $work_experiences = DB::table('work_experiences')
             ->join('applications', 'work_experiences.resumefk', '=', 'applications.resume_id')
             ->join('tags', 'tags.id', '=', 'applications.tag_id')
             ->get();
-
 $documents = DB::table('applications')
             ->join('documents', 'documents.id', '=', 'applications.document_id') 
             ->get();
-
-
-    $group_application = DB::table('applications')
+$group_application = DB::table('applications')
              ->select('in_review', 'tag_id', DB::raw('count(*) as total'))
              ->groupBy('in_review', 'tag_id')->get();
- 
  //$response = array( 'status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'review_count' => $review_count, 'group_application' => $group_application, 'sorted_count' => $sorted_count, 'reject_count'=>$reject_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hire_count' => $hire_count);
 $response = array( 'status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'reject_count' => $reject_count, 'sorted_count' =>$sorted_count, 'review_count' => $review_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hired_count' => $hired_count, 'newapplication_list' => $newapplication_list, 'work_experiences'=>$work_experiences, 'new_reject_list' => $new_reject_list, 'review_list'=>$review_list);
     return response()->json($response);
@@ -1484,7 +1254,6 @@ public function ShortlistApplicant(Request $request)
     $shortlist = $request->get('shortlist');
     $user_id = $request->get('user_id');
     $job_id = $request->get('job_id');
-
     $application = Application::findOrFail($application_id);
     $application->delete = 0;
     $application->in_review = 0;
@@ -1494,37 +1263,26 @@ public function ShortlistApplicant(Request $request)
     $application->hired = 0;
     $application->sorted = 1;
     $application->save();
-
     $sorted_count = $this->GetSortedCount($job_id); //Application::where('tag_id',$job_id)->where('sorted', 0)->where('delete', 0)->count();
-
     $reject_count = $this->GetRejectedCount($job_id);//Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->count();
-    
     $review_count = $this->GetReivewCount($job_id);//Application::where('tag_id',$job_id)->where('in_review', 1)->where('delete', 0)->count();
     $offered_count = $this->GetOfferedCount($job_id); //Application::where('tag_id',$job_id)->where('offered', 1)->where('delete', 0)->count();
     $shortlisted_count = $this->GetShortlistedCount($job_id); //Application::where('tag_id',$job_id)->where('shortlisted', 1)->count();
     $hired_count = $this->GetHiredCount($job_id); //Application::where('tag_id',$job_id)->where('hired', 1)->count();
-
     $newapplication_list = $this->GetUnsortedNewApplicationList($job_id);
-
     $new_reject_list = $this->GetRejectedNewApplicationList($job_id); //Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->get();
     $new_review_list = $this->GetReviewNewApplicationList($job_id);
-
     $shortlisted_list = $this->GetShortlistedApplicationList($job_id);
-
     $work_experiences = DB::table('work_experiences')
             ->join('applications', 'work_experiences.resumefk', '=', 'applications.resume_id')
             ->join('tags', 'tags.id', '=', 'applications.tag_id')
             ->get();
-
-$documents = DB::table('applications')
+    $documents = DB::table('applications')
             ->join('documents', 'documents.id', '=', 'applications.document_id') 
             ->get();
-
-
     $group_application = DB::table('applications')
              ->select('in_review', 'tag_id', DB::raw('count(*) as total'))
              ->groupBy('in_review', 'tag_id')->get();
- 
 $response = array( 'status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'reject_count' => $reject_count, 'sorted_count' =>$sorted_count, 'review_count' => $review_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hired_count' => $hired_count, 'newapplication_list' => $newapplication_list, 'work_experiences'=>$work_experiences, 'new_reject_list' => $new_reject_list, 'new_review_list'=>$new_review_list, 'shortlisted_list'=>$shortlisted_list);
     return response()->json($response);
  
@@ -1546,40 +1304,25 @@ public function OfferApplicant(Request $request)
     $application->hired = 0;
     $application->sorted = 1;
     $application->save();
-
     $sorted_count = $this->GetSortedCount($job_id); //Application::where('tag_id',$job_id)->where('sorted', 0)->where('delete', 0)->count();
-
-    $reject_count = $this->GetRejectedCount($job_id);//Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->count();
-    
+    $reject_count = $this->GetRejectedCount($job_id);//Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->count();  
     $review_count = $this->GetReivewCount($job_id);//Application::where('tag_id',$job_id)->where('in_review', 1)->where('delete', 0)->count();
     $offered_count = $this->GetOfferedCount($job_id); //Application::where('tag_id',$job_id)->where('offered', 1)->where('delete', 0)->count();
     $shortlisted_count = $this->GetShortlistedCount($job_id); //Application::where('tag_id',$job_id)->where('shortlisted', 1)->count();
     $hired_count = $this->GetHiredCount($job_id); //Application::where('tag_id',$job_id)->where('hired', 1)->count();
-
-    // $newapplication_list = $this->GetUnsortedNewApplicationList($job_id);
-
-    // $new_reject_list = $this->GetRejectedNewApplicationList($job_id); //Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->get();
-    // $review_list = $this->GetReviewNewApplicationList($job_id);
-
     $new_offered_list = $this->GetOfferApplicationList($job_id);
-
     $shortlisted_list = $this->GetShortlistedApplicationList($job_id);
-
     $work_experiences = DB::table('work_experiences')
             ->join('applications', 'work_experiences.resumefk', '=', 'applications.resume_id')
             ->join('tags', 'tags.id', '=', 'applications.tag_id')
             ->get();
             // dd($work_experiences);
-
     $documents = DB::table('applications')
             ->join('documents', 'documents.id', '=', 'applications.document_id') 
             ->get();
- 
-
-    $group_application = DB::table('applications')
+   $group_application = DB::table('applications')
              ->select('in_review', 'tag_id', DB::raw('count(*) as total'))
              ->groupBy('in_review', 'tag_id')->get();
- 
 $response = array( 'status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'reject_count' => $reject_count, 'sorted_count' =>$sorted_count, 'review_count' => $review_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hired_count' => $hired_count, 'work_experiences'=>$work_experiences, 'shortlisted_list'=>$shortlisted_list, 'new_offered_list' => $new_offered_list);
     return response()->json($response);
  
@@ -1610,42 +1353,25 @@ public function HireApplicant(Request $request)
     $offered_count = $this->GetOfferedCount($job_id); //Application::where('tag_id',$job_id)->where('offered', 1)->where('delete', 0)->count();
     $shortlisted_count = $this->GetShortlistedCount($job_id); //Application::where('tag_id',$job_id)->where('shortlisted', 1)->count();
     $hired_count = $this->GetHiredCount($job_id); //Application::where('tag_id',$job_id)->where('hired', 1)->count();
-
     $newapplication_list = $this->GetUnsortedNewApplicationList($job_id);
-
-    // $new_reject_list = $this->GetRejectedNewApplicationList($job_id); //Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->get();
-    // $review_list = $this->GetReviewNewApplicationList($job_id);
-
     $hired_list = $this->GetHiredApplicationList($job_id);
-
     // $shortlisted_list = $this->GetShortlistedApplicationList($job_id);
-
     $newoffered_list = $this->GetOfferApplicationList($job_id);
-
     // $work_experiences = DB::table('work_experiences')->get();
     $work_experiences = DB::table('work_experiences')
             ->join('applications', 'work_experiences.resumefk', '=', 'applications.resume_id')
             ->join('tags', 'tags.id', '=', 'applications.tag_id')
             ->get();
             // dd($work_experiences);
-
     $documents = DB::table('applications')
             ->join('documents', 'documents.id', '=', 'applications.document_id') 
             ->get();
- 
-
-
 $group_application = DB::table('applications')
              ->select('in_review', 'tag_id', DB::raw('count(*) as total'))
              ->groupBy('in_review', 'tag_id')->get();
- 
 $response = array( 'status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'reject_count' => $reject_count, 'sorted_count' =>$sorted_count, 'review_count' => $review_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hired_count' => $hired_count, 'newapplication_list' => $newapplication_list, 'work_experiences'=>$work_experiences, 'hired_list'=>$hired_list,  'newoffered_list' =>$newoffered_list);
-    return response()->json($response);
- 
+    return response()->json($response); 
 }
-
-
-
     // this method displays list of job post
     public function ShowManageJobs(Request $request){
          $s = $request->input('s');
@@ -1656,8 +1382,6 @@ $response = array( 'status' => 'success', 'msg' => 'Setting created successfully
         $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
             $recruit_profile_pix_list = DB::table('recruit_profile_pixs')->where('user_id',$user->id)->orderBy('created_at', 'DESC')->get();
      // $applications_by_user  = Application::where('clientfk', $user->id)->get();
-      
-
 $group_application = DB::table('applications')
              ->select('in_review', 'tag_id', DB::raw('count(*) as total'))
              ->groupBy('in_review', 'tag_id')->get();
@@ -1666,21 +1390,6 @@ $menus = $this->displayMenu();
 $units = $this->displayUnit();
       return view('employer.manage_jobs', compact('resumes','tags','industry_professions', 'recruit_profile_pix', 'recruit_profile_pix_list', 'group_application', 's', 'menus', 'units'), array('user' => Auth::user()));
     }
-
-
-// public function FilterJobs(Request $request){
-//       $s = $request->input('s');
-//         $location = $request->location; 
-//       if ($location !=null) {
-//        $city = City::findOrFail($location); 
-//        //$tags = Tag::where('city_id', $city->name)->paginate(20);
-// $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'documents_location' => 'ss', 's' =>$s, 'location' => $location);
-//         return response()->json($response);
-//        } 
-// return redirect()->back();
-//     }
-
-
     public function FilterJobs(Request $request)
     {
         $s = $request->input('s');
@@ -1688,15 +1397,11 @@ $units = $this->displayUnit();
         $job_type = $request->job_type;
         $availability = $request->availability;
         $date_posted = $request->date_posted;
- 
         $job_category = $request->job_category;
         $professions = IndustryProfession::where('status',1)->get();
         $employement_terms = DB::table('employement_terms')->get();
-
-
-  $tags = Tag::where(function($query) use ($job_type, $location, $job_category){
-      
-      if (isset($location)) {
+        $tags = Tag::where(function($query) use ($job_type, $location, $job_category){
+        if (isset($location)) {
     foreach ($location as $city) {
         $city_record = City::findOrFail($city);
         $query->orWhere('delete', 0)->where('city', $city_record->name);
@@ -1715,9 +1420,7 @@ $units = $this->displayUnit();
       $query->orWhere('delete', 0)->where('job_type', $job_category);
     }
  }
-
     })->paginate(20);
-
         $response = array(
         'status' => 'success',
         'msg'    => 'Setting created successfully',
@@ -2081,27 +1784,7 @@ return redirect()->back();
           $tag->delete = 0;
           $tag->awaiting_aproval = 1;
           $tag->save();
-              
-    // DB::table('profession_metas')->insert([
-    //             'name' => $profession->name,
-    //             'display_name' => $profession->name,
-    //             'status' => 1,
-    //             'tag_id' => $tag->id,
-    //             'profession_id' => $profession->id,
-    //             ]);
-    
-    // DB::table('tag_urls')->insert([
-    //     'tag_id' => $tag->id,
-    //     'tag_url' => url('/') .'/candidate/job_application_form/'.$tag->id,
-    //     'created_at' => $this->returnCurrentTime(),
-    //   ]);
-
-  
-       // foreach ($reqirements as $key => $value) {
-       // // dd($value['jrequirement']);
-       //    # code...
-       //     DB::table('job_requirements')->insert(['title' => $value['jrequirement'], 'client_id' => $user->id, 'job_id' =>$tag->id, 'status' => 1, 'created_at' =>$this->returnCurrentTime()]);
-       //  }
+ 
 
        foreach ($assessments as $key => $value) {
         //dd($value['assessment']);
@@ -2112,11 +1795,6 @@ return redirect()->back();
           DB::table('job_field_of_studies')->insert(['fostudy' => $value, 'tag_id' =>$tag->id, 'status' => 1, 'created_at' =>$this->returnCurrentTime()]);
         }
 
-        // foreach ($skillist as $key => $value) {
-
-        //   DB::table('skillsets')->insert(['title' => $value['skill'], 'employerid' => $user->id, 'tagid' =>$tag->id,  'percentage' =>$value['percentage'] ,'status' => 1, 'created_at' =>$this->returnCurrentTime()]);
-        // }
- 
            });
        
  
@@ -2290,7 +1968,6 @@ public function GetAvailableJobs()
     {
       $s = $request->input('s');
       $user = Auth::user();
-    
       // $resumes = RecruitResume
       $resumes = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->get();
       $job_by_candidate_list = $this->GetAvailableJobs();
@@ -2298,24 +1975,21 @@ public function GetAvailableJobs()
       $cities = DB::table('cities')->get();
       $tags = DB::table('tags')->where('status',1)->where('active', 1)->get();
       $countries = DB::table('countries')->get();
- 
    $job_applied_by_candidate = DB::table('applications')->where('user_id', $user->id)
             ->join('tags', 'tags.id', '=', 'applications.tag_id')
             ->select('applications.id', 'applications.resume_id', 'applications.user_id', 'tags.email_address', 'tags.job_title', 'applications.created_at', 'applications.updated_at')
             ->paginate(8);
-
      //dd($get_applicants_profile);
-
-             // check for candidates current resume
-        $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->first();
+   // check for candidates current resume
+   $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->first();
         // fresh user test pass
-         $section_candidatelist = $this->GetCandidateSection($user_single_resume_by_date->id);
-        $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
-
+    $section_candidatelist = $this->GetCandidateSection($user_single_resume_by_date->id);
+    $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
+    $recruit_profile_pix_list = DB::table('recruit_profile_pixs')->where('user_id',$user->id)->orderBy('created_at', 'DESC')->get();
+     $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
+      $pr_caption= RecruitResume::where('user_id', $user->id)->where('status',1)->first();
     $menus = $this->displayMenu();
-    // $units = $this->displayUnit();
-
-     return view('candidate.applied_jobs', compact('job_applied_by_candidate', 'resumes', 'job_by_candidate_list', 'cities', 'tags','s', 'job_category_list', 'section_candidatelist', 'section_candidatelist', 'section_candidatelist_count','countries', 'menus'), array('user' => Auth::user()));
+     return view('candidate.applied_jobs', compact('job_applied_by_candidate', 'resumes', 'job_by_candidate_list', 'cities', 'tags','s', 'job_category_list', 'section_candidatelist', 'section_candidatelist', 'section_candidatelist_count','countries', 'menus', 'profile_pix', 'pr_caption'), array('user' => Auth::user()));
     }
 
 public function GetCandidateSection($code){
@@ -2336,7 +2010,6 @@ public function GetJobcategory(){
     return $job_category;
 }
 
-
 //show job post success page 
 public function JPSuccess($id)
 {
@@ -2344,7 +2017,6 @@ public function JPSuccess($id)
        $user = Auth::user();
     $recruit_profile_pix_list = DB::table('recruit_profile_pixs')->where('user_id',$user->id)->orderBy('created_at', 'DESC')->get();
      $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
-
     $menus = $this->displayMenu();
     $units = $this->displayUnit();
 return view('employer.job_post_confirmation', compact('tag', 'recruit_profile_pix_list', 'recruit_profile_pix', 'menus', 'units'), array('user' => Auth::user()));
@@ -2390,13 +2062,10 @@ return view('employer.job_post_confirmation', compact('tag', 'recruit_profile_pi
      $job_requirements = DB::table('job_requirements')->where('job_id',$id)->get();
     $job_assessments = DB::table('job_assessments')->where('job_id',$id)->get();
     //dd($job_assessments);
- 
           return view('admin.tags.edit', compact(['tag','clients', 'professions', 'sort_categories_list', 'cities', 'documents', 's','resumes','countries','cities', 'regions', 'educational_levels', 'industries', 'employement_terms', 'jobcareer_levels', 'industry_professions', 'recruit_profile_pix_list', 'recruit_profile_pix', 'job_requirements', 'job_assessments']), array('user' => Auth::user()));
 
         
     }
-
-
     /**
      * Update the specified resource in storage.
      *
@@ -2540,25 +2209,11 @@ Session::flash('error', 'something went wrong');
   public function GetfeaturedJobs(Request $request){
    $s = $request->input('s');
         // $documents = Document::all()->count();
-    $user = Auth::User();
-        // $jobskills = JobSkill::where('userid', $user->id)->get();
-        // $document = Document::Where('user_id', $user->id)->first();
-        // $industries =  DB::table('industries')->get();
-        // $recruityear_list = RecruitYear::all();
-        // $qualifications = Qualification::all();
-        // $countries = Country::all();
-        // $job_career_levelList = JobcareerLevel::all();
-       
+        $user = Auth::User();    
         $countries = DB::table('countries')->get();
         $cities = DB::table('cities')->get();
-
-        // $educationallevels = $this->GetQualificationLevels();
-        // $employementterms = DB::table('employement_terms')->get();
-        // $jobcertifications = DB::table('job_certifications')->where('user_id', $user->id)->get();
-        // $person_info = PersonalInformation::where('user_id', $user->id)->first();
         //employement_terms employement_terms
-          $job_by_candidate_list = $this->GetAvailableJobs();
-     
+        $job_by_candidate_list = $this->GetAvailableJobs();
         $resumes = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->get();
         // fresh user test pass
         //$resumes = RecruitResume::where('user_id', $user->id)->having('status', '=', 1)->orderBy('status','DESC')->get();
@@ -2568,16 +2223,16 @@ Session::flash('error', 'something went wrong');
         $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->first();
         // fresh user test pass
         $job_category_list = $this->GetJobcategory();
-
-    $featured_jobs = DB::table('tags')->where('status', 1)->where('active', 1)->where('featured', 1)->paginate(8);
+        $featured_jobs = DB::table('tags')->where('status', 1)->where('active', 1)->where('featured', 1)->paginate(8);
         $tags = DB::table('tags')->where('status', 1)->where('active', 1)->paginate(8);
-
         $section_candidatelist = $this->GetCandidateSection($user_single_resume_by_date->id);
         $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
-
-    $menus = $this->displayMenu();
+        $menus = $this->displayMenu();
+        $recruit_profile_pix_list = DB::table('recruit_profile_pixs')->where('user_id',$user->id)->orderBy('created_at', 'DESC')->get();
+     $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
+      $pr_caption= RecruitResume::where('user_id', $user->id)->where('status',1)->first();
     // $units = $this->displayUnit();
-    return view('candidate.list_featured_jobs', compact('featured_jobs', 'resumes', 'job_by_candidate_list', 'cities', 'countries', 'tags', 'job_category_list', 'section_candidatelist', 'section_candidatelist_count','s', 'menus') ,array('user' => Auth::user()));
+    return view('candidate.list_featured_jobs', compact('featured_jobs', 'resumes', 'job_by_candidate_list', 'cities', 'countries', 'tags', 'job_category_list', 'section_candidatelist', 'section_candidatelist_count','s', 'menus', 'profile_pix', 'pr_caption') ,array('user' => Auth::user()));
   }
 
 
@@ -2853,22 +2508,15 @@ public function ExpireJob($id)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        if ($id) {
-
+    public function destroy($id)    {
+    if ($id) {
     $tag = Tag::find($id);
     $tag->status = 3;
     $tag-save();
-       Session::flash('success','Tag has been deleted successfully');
- 
- 
-        }else{
-
-            return 'ID is required';
-        }
-  
- 
+    Session::flash('success','Tag has been deleted successfully');
+    }else{
+    return 'ID is required';
+    }
     return redirect()->route('tag.index')->withMessage('Tag Deleted'); #
     }
 

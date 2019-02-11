@@ -8,8 +8,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css"> 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/master.css') }}">
@@ -19,8 +18,7 @@
             <ul class="nav nav">
             <li></li>
               <li >  
-         <img src="/logo/rhizome.jpg" alt="Logo"  width="90px" height="30px"  class="logo-default" style="margin-left: 40px; margin-top: 13px;" />   </li>
-          
+         <img src="/logo/rhizome.jpg" alt="Logo"  width="90px" height="30px"  class="logo-default" style="margin-left: 40px; margin-top: 13px;" />   </li> 
         </ul>
         </nav>
         <br><br><br><br>
@@ -44,48 +42,24 @@
                     @endif 
                     </div>
        <div class="container">
-
-            <!--  <div class="col-md-8">
-                    <input type="text" class="form-control" id="name" name="name"
-                        placeholder="Enter some name" required>
-                    <p class="error text-center alert alert-danger hidden"></p>
-                </div>
-                <div class="col-md-4">
-                    <button class="btn btn-primary" type="submit" id="add">
-                        <span class="glyphicon glyphicon-plus"></span> ADD
-                    </button>
-                
-                </div> -->
-        
-
-     <!--           @if(session()->has('message.level'))
-                <div class="alert alert-{{ session('message.level') }}"> 
-                {!! session('message.content') !!}
-                </div>
-            @endif -->
-
-
-                      @if(Session()->has('no-connection'))
+              @if(Session()->has('no-connection'))
                 <div class="alert alert-danger"> 
                 {!! Session::get('no-connection') !!}
                 </div>
-                        @endif 
+                      @endif 
                       @if(Session()->has('error'))
                 <div class="alert alert-danger"> 
                 {!! Session::get('error') !!}
                 </div>
-                        @endif 
-
-
-                        @if(Session()->has('success'))
+                      @endif  
+                      @if(Session()->has('success'))
                 <div class="alert alert-success"> 
                 {!! Session::get('success') !!}
                 </div>
-                        @endif
-
+                      @endif 
                 @if (session('status'))
                     <div class="alert alert-success">
-                        {{ session('status') }}
+                      {{ session('status') }}
                     </div>
                 @endif
             <div class="form-group row add"> 
@@ -93,25 +67,22 @@
                 <div class="content">
                 <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
-
             <div class="portlet light bordered">
                 <div class="portlet-body">
                   <div class="table-toolbar">
                     <div class="row">
                     <div class="col-md-6">
                     <div class="btn-group">
-             
                     </div>
                 </div>
             </div>
         </div>
+
             <!-- <p id="myElem" style="display:none">Saved</p> -->
- 
-
-
-<table width="100%" border="0" cellpadding="0" cellspacing="0" >  
+ <table width="100%" border="0" cellpadding="0" cellspacing="0" >  
         <tr>
-            <td valign="top"  width="20%" class="navbar navbar-default " >        <table class="navbar navbar-default "  align="center"  width="100%" >
+            <td valign="top"  width="20%" class="navbar navbar-default " >
+      <table class="navbar navbar-default "  align="center"  width="100%" >
     <tr>
         <td align="center">
           <h3> <strong>Important Notice</strong> </h3>
@@ -133,9 +104,7 @@
             <td  width="100%">
   <form class="form-horizontal" name="candidateForm" action="{{route('candidate.addCandidate')}}" enctype="multipart/form-data" method="post" role="form">
                            {{ csrf_field() }}
- 
-   <div class="form-group{{ $errors->has('candidates_name') ? ' has-error' : '' }}">
-             
+   <div class="form-group{{ $errors->has('candidates_name') ? ' has-error' : '' }}">       
       <label for="candidates_name" class="col-md-4 control-label">Candidates Name
         <span class="required"><font color="red">*</font></span>
       </label>
@@ -147,14 +116,12 @@
                         </span>
                     @endif
                 </div>
-            </div>
-
+            </div> 
             <div class="form-group{{ $errors->has('profession') ? ' has-error' : '' }}">
                 <label for="profession" class="col-md-4 control-label">Profession
                             <span class="required"><font color="red">*</font></span>
                 </label>
-                <div class="col-md-4">
-
+                <div class="col-md-4"> 
                          <select name="profession" id="profession"  class="form-control" required="required">
                          <option value="">Select One</option>
                                        @foreach($aop as $profession)
@@ -172,8 +139,7 @@
                 <label for="profession" class="col-md-4 control-label">Other Profession
                            
                 </label>
-                <div class="col-md-4">
- 
+                <div class="col-md-4"> 
   <input  type="text" id="other_profession" class="form-control" placeholder="Optional" name="other_profession" >
                     @if ($errors->has('other_profession'))
                         <span class="help-block">
@@ -181,10 +147,8 @@
                         </span>
                     @endif
                 </div>
-            </div>
-
-   <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
-             
+            </div> 
+   <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}"> 
       <label for="gender" class="col-md-4 control-label">Gender
         <span class="required"><font color="red">*</font></span>
       </label>
@@ -201,17 +165,13 @@
                         </span>
                     @endif
                 </div>
-            </div>
-
-   <div class="form-group{{ $errors->has('ethnicity') ? ' has-error' : '' }}">
-             
-      <label for="ethnicity" class="col-md-4 control-label">Ethnicity
-    
+            </div> 
+   <div class="form-group{{ $errors->has('ethnicity') ? ' has-error' : '' }}"> 
+      <label for="ethnicity" class="col-md-4 control-label">Ethnicity 
       </label>
                 <div class="col-md-4">
                     <select name="ethnicity" id="ethnicity"  class="form-control" >
-                         <option value="">Select One</option>
-                                 
+                         <option value="">Select One</option> 
                                        <option value="Male">Black</option>
                                        <option value="White">White</option>
                                         <option value="Asia">Asia</option>
@@ -224,8 +184,7 @@
                     @endif
                 </div>
             </div>
-   <div class="form-group{{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
-             
+   <div class="form-group{{ $errors->has('date_of_birth') ? ' has-error' : '' }}"> 
       <label for="date_of_birth" class="col-md-4 control-label">Date of birth:
         <span class="required"><font color="red">*</font></span>
       </label>
@@ -237,11 +196,8 @@
                         </span>
                     @endif
                 </div>
-            </div>
- 
-
-    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-             
+            </div> 
+    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">  
       <label for="email" class="col-md-4 control-label">Email:
         <span class="required"><font color="red">*</font></span>
       </label>
@@ -253,10 +209,8 @@
                         </span>
                     @endif
                 </div>
-            </div>
-
-                <div class="form-group{{ $errors->has('phonenumber') ? ' has-error' : '' }}">
-             
+            </div> 
+      <div class="form-group{{ $errors->has('phonenumber') ? ' has-error' : '' }}">       
       <label for="phonenumber" class="col-md-4 control-label">Phone N0.:
         <span class="required"><font color="red">*</font></span>
       </label>
@@ -268,17 +222,14 @@
                         </span>
                     @endif
                 </div>
-            </div>
-
-                   <div class="form-group{{ $errors->has('job_type') ? ' has-error' : '' }}">
+            </div> 
+              <div class="form-group{{ $errors->has('job_type') ? ' has-error' : '' }}">
                 <label for="job_type" class="col-md-4 control-label">Job type:
                             <span class="required"><font color="red">*</font></span>
                 </label>
                 <div class="col-md-4">
-
                          <select name="job_type" id="job_type"  class="form-control" required="required">
                          <option value="">Select One</option>
-                                  
                    <option value="Permanent">Permanent</option>
                    <option value="Interim / Freelance / Contract">Interim / Freelance / Contract</option>
                    <option value="Part-time">Part-time</option>
@@ -292,19 +243,14 @@
                     @endif
                 </div>
             </div>
-            
   <div class="form-group{{ $errors->has('relocate_nationaly') ? ' has-error' : '' }}">
                 <label for="relocate_nationaly" class="col-md-4 control-label">Relocate nationally?:
-                          
                 </label>
                 <div class="col-md-4">
-
              <select name="relocate_nationaly" id="relocate_nationaly"  class="form-control" >
-             <option value="">Select One</option>
-                                  
+             <option value="">Select One</option>                                  
             <option value="YES">YES</option>
             <option value="NO">NO</option>
-       
                                    </select>
                     @if ($errors->has('relocate_nationaly'))
                         <span class="help-block">
@@ -313,16 +259,12 @@
                     @endif
                 </div>
             </div>
-                
   <div class="form-group{{ $errors->has('relocate_internationaly') ? ' has-error' : '' }}">
                 <label for="relocate_nationaly" class="col-md-4 control-label">Relocate Internationally?:
-                          
                 </label>
                 <div class="col-md-4">
-
              <select name="relocate_internationaly" id="relocate_internationaly"  class="form-control" >
              <option value="">Select One</option>
-                                  
             <option value="YES">YES</option>
             <option value="NO">NO</option>
        
@@ -334,7 +276,6 @@
                     @endif
                 </div>
             </div>
-
   <div class="form-group{{ $errors->has('availability') ? ' has-error' : '' }}">
                 <label for="relocate_nationaly" class="col-md-4 control-label">Availability: </label>
                 <div class="col-md-4"> 
@@ -344,7 +285,6 @@
             <option value="Two Week">Two Week</option>
             <option value="One Month">One Month</option>
             <option value="Two Months">Two Months</option>
-       
                                    </select>
                     @if ($errors->has('availability'))
                         <span class="help-block">
@@ -353,8 +293,6 @@
                     @endif
                 </div>
             </div>
- 
-
   <div class="form-group{{ $errors->has('career_highlights') ? ' has-error' : '' }}">
                 <label for="career_highlights" class="col-md-4 control-label"> Career highlights:
                             <span class="required"><font color="red">*</font></span>
@@ -363,12 +301,9 @@
         <div id="border">
             <textarea id='text' name="career_highlights" class="form-control" required="required"></textarea>
         </div>
- 
         <div id="result">
           not more than 200  Words: <span id="wordCount">0</span><br/> 
         </div>
-
-
                     @if ($errors->has('career_highlights'))
                         <span class="help-block">
                             <strong>{{ $errors->first('career_highlights') }}</strong>
@@ -376,15 +311,12 @@
                     @endif
                 </div>
             </div>
-
        <div class="form-group{{ $errors->has('annual_salary') ? ' has-error' : '' }}">
                 <label for="profession" class="col-md-4 control-label">Annual salary:
                             <span class="required"><font color="red">*</font></span>
                 </label>
                 <div class="col-md-4">
                  <select name="annual_salary" id="annual_salary"  class="form-control" required="required"  >
-             
-                  
                 <option value="" selected=""></option>
                 <option value="1">Below NGN 100000</option>
                 <option value="2">NGN 100000 - NGN 300000</option>
@@ -407,7 +339,6 @@
                 <option value="19">NGN 30.0m - NGN 40.0m</option>
                 <option value="20">NGN 40.0m - NGN 60.0m</option>
                 </select> 
- 
                     @if ($errors->has('annual_salary'))
                         <span class="help-block">
                             <strong>{{ $errors->first('annual_salary') }}</strong>
@@ -415,8 +346,6 @@
                     @endif
                 </div>
             </div>
-  
-
             <div class="form-group{{ $errors->has('years_of_experience') ? ' has-error' : '' }}">
                 <label for="description" class="col-md-4 control-label">Years of Experience
                             <span class="required"><font color="red">*</font></span>
@@ -432,28 +361,17 @@
                     @endif
                 </div>
             </div>
-
             <div class="form-group{{ $errors->has('region_id') ? ' has-error' : '' }}">
                 <label for="region_id" class="col-md-4 control-label">Current Region
                    <span class="required"><font color="red">*</font></span>
                 </label>
-
                 <div class="col-md-4">
-     <!--          <select name="region_id" id="region_id"  class="form-control" required="required">
-                     <option value="">...select one...</option>
-                           @foreach($regions as $region)
-                           <option value="{{$region->id}}">{{$region->name}}</option>
-                           @endforeach
-                       </select> -->
-
-
                 <select name="region" class="form-control"  required="required" >
                 <option value="">...Select Region...</option>
                 @foreach($regions as $region)
                 <option value="{{$region->id}}">{{$region->name}}</option>
                 @endforeach
                 </select> 
-
                     @if ($errors->has('region'))
                         <span class="help-block">
                             <strong>{{ $errors->first('region') }}</strong>
@@ -461,17 +379,14 @@
                     @endif
                 </div>
             </div>
-
             <div class="form-group{{ $errors->has('city_id') ? ' has-error' : '' }}">
                 <label for="city_id" class="col-md-4 control-label">Current Location
                             <span class="required"><font color="red">*</font></span>
                 </label>
-
                 <div class="col-md-4">
                             <select name="location" id="location" class="form-control" >
                                 <option value="">...Select Region...</option>
-                            </select>
-                            
+                            </select>    
                                 @if ($errors->has('location'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('location') }}</strong>
@@ -479,12 +394,10 @@
                                 @endif
                 </div>
             </div>
-
             <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
                 <label for="cv_file" class="col-md-4 control-label">Upload  A CV
                 <span class="required"><font color="red">*</font></span>
                 </label>
-
                 <div class="col-md-4">
            <input id="file" type="file" class="form-control" name="file" required="required">
                     @if ($errors->has('file'))
@@ -494,9 +407,7 @@
                     @endif
                         <span class="note note-danger"><font color="red"> NOTE: allowed file extensions are : 'doc,docx,pdf,rtf,odt'</font></span>
                 </div>
-             
             </div>
-
               <div class="form-group">
                 <div class="col-md-6 col-md-offset-4">
                    <button class="btn btn-primary" type="submit" id="add">
@@ -504,72 +415,48 @@
                     </button>
             <!-- <img id="loading" src="{{asset('uploads/ajax-loader.gif')}}" > -->
                <br>NOTE: Do not press Submit more than once. Your upload may take some time.
-         
                 </div>
-
                 </div> 
-                </form></td>
+                </form>
+          </td>
         </tr>
         <tr>
             <td></td>
             <td></td>
         </tr>
-
 </table>
-
-
-
-
-                    <!-- </div> -->
-
-           <p class="error text-center alert alert-danger hidden" style="padding-left: 350px; width: 1000px;">
-
+         <p class="error text-center alert alert-danger hidden" style="padding-left: 350px; width: 1000px;">
            </p>            
-                    </div>
-                </div>
-
+             </div>
+          </div>
                 <!-- END EXAMPLE TABLE PORTLET-->
             </div>
-   
             </div>
         </div>
     </div>
-  
-
     </div>
- 
                     <div class="content" style="padding-left: 450px; width: 1000px;">
-
                     @if (count($errors))
                     <div class="alert alert-danger">
                     <ul >
                     @foreach ($errors->all() as $error)
-
                     <li>
                     <p class="error text-center alert alert-danger hidden"></p>
                     {{ $error }}
                     </li>
-
                     @endforeach
-
                     </ul>
-
                     </div>
                     @endif 
                     </div>
-
-   
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
       <script src="{{ asset('js/app.js') }}"></script>
       <script src="{{ asset('js/selectform.js') }}"></script>
     </body>
-
     <script type="text/javascript">
-        
         counter = function() {
     var value = $('#text').val();
-
     if (value.length == 0) {
         $('#wordCount').html(0);
         $('#totalChars').html(0);
@@ -577,13 +464,11 @@
         $('#charCountNoSpace').html(0);
         return;
     }
-
     var regex = /\s+/gi;
     var wordCount = value.trim().replace(regex, ' ').split(' ').length;
     var totalChars = value.length;
     var charCount = value.trim().length;
     var charCountNoSpace = value.replace(regex, '').length;
-
     $('#wordCount').html(wordCount);
     $('#totalChars').html(totalChars);
     $('#charCount').html(charCount);

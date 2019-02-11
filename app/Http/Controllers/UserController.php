@@ -102,7 +102,6 @@ class UserController extends Controller
 		]);
 
 		$user->attachRole(Role::where('name','general-user')->first());
-
 	   return redirect()->route('user.index', array('user' => Auth::user()));
 	}
 
@@ -116,7 +115,6 @@ class UserController extends Controller
 	 public function show(Request $request, User $user)
 	{
 		  $value = $request->session()->get('key');
-
 	 return view('user.show',compact('user'), array('user' => Auth::user())); 
 	}
 

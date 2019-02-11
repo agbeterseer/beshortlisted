@@ -25,7 +25,7 @@
             @endforeach
         </ul>
     </div>
-@endif
+    @endif
           @if(Session()->has('success'))
                 <div class="alert alert-success"> 
                 {!! Session::get('success') !!}
@@ -64,12 +64,9 @@
                         </div>
                         <div class="form-group{{ $errors->has('display_name') ? ' has-error' : '' }}">
                             <label for="address" class="col-md-4 control-label"> Display Name
-                                
                             </label>
                             <div class="col-md-6">
               <input id="display_name" type="text" class="form-control" name="display_name" value="{{ old('display_name') }}"  placeholder="Display Name">
-                                
-
                                 @if ($errors->has('display_name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('display_name') }}</strong>
@@ -77,13 +74,11 @@
                                 @endif
                             </div>
                         </div>
-
                 <div class="form-group{{ $errors->has('tag_line') ? ' has-error' : '' }}">
                 <label for="tag_line" class="col-md-4 control-label">Tag line
    <span class="required">*</span>
                 </label>
-                <div class="col-md-6">
-              
+                <div class="col-md-6">              
                     <textarea class="form-control" placeholder="Enter Description" name="tag_line" required></textarea>
                     @if ($errors->has('tag_line'))
                         <span class="help-block">
@@ -92,8 +87,7 @@
                     @endif
                 </div>
             </div>
-
-                             <div class="form-group{{ $errors->has('menu_icon') ? ' has-error' : '' }}">
+                    <div class="form-group{{ $errors->has('menu_icon') ? ' has-error' : '' }}">
                 <label for="menu_icon" class="col-md-4 control-label">Menu Icon 
                 </label>
                 <div class="col-md-6">
@@ -105,7 +99,7 @@
                     @endif
                 </div>
             </div>
-                                         <div class="form-group{{ $errors->has('menu_route') ? ' has-error' : '' }}">
+             <div class="form-group{{ $errors->has('menu_route') ? ' has-error' : '' }}">
                 <label for="menu_route" class="col-md-4 control-label">Route 
                 </label>
                 <div class="col-md-6">
@@ -117,9 +111,7 @@
                     @endif
                 </div>
             </div>
-                  
-
-                       <div class="form-group">
+                      <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Add Menu

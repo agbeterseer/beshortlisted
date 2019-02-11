@@ -13,10 +13,10 @@ use Validator;
 use App\Menu;
 use App\Submenu;
 use Auth;
+use App\Post;
 
 class MenuController extends Controller
 {
-
         public function __construct()
     {
         // $this->middleware(['permission:role-create','permission:role-edit', 'permission:role-delete']);
@@ -52,7 +52,7 @@ class MenuController extends Controller
     {
       $menus = Menu::all();
       $user = Auth::user();
-      return view('admin.menu.create', compact(['organizations', 'menus']), array('user' => Auth::user()));
+      return view('admin.menu.create', compact(['menus']), array('user' => Auth::user()));
     }
 
     /**
@@ -63,7 +63,14 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-    
+    $string = $request->name;
+    $substr = '';
+    $attachment = '-';
+
+    $s = ucfirst($string);
+    $bar =  strtolower($string);
+    $path = preg_replace('/\s+/', $attachment, $bar);
+
     $name = $request->name;
     $display_name = $request->display_name;
     $menu_order = $request->menu_order;
@@ -88,7 +95,6 @@ class MenuController extends Controller
     $this->validate($request, $rules); 
 try {
         if ($name !=null && $name !='' && $display_name !=null && $display_name !='' && $menu_order !=null && $menu_order !='') {
-       
         $menu = Menu::firstOrNew(['name' => $name]);
         $menu->display_name = $display_name;
         $menu->status = 1;
@@ -96,31 +102,23 @@ try {
         $menu->description = $tag_line;
         $menu->menu_icon = $menu_icon;
         $menu->created_at = $this->returnCurrentTime();
-        $menu->routes->$menu_route;
+        $menu->routes = $path;
         $menu->save();
- 
-    }
-  
+    }  
 } catch (\Exception $e) {
      return redirect()->back()
           ->withErrors(['error' => 'Some thing went wrong']);
 }
-
-
-    Session::flash('success','Menu created successfully');
+   Session::flash('success','Menu created successfully');
     return redirect()->route('menu.index');
     }
-
-
 public function ShowAssignSubmenusToParentMenu($id)
 {
     $menu = Menu::find($id);
 
    return view('admin.menu.addsub_menu', compact('menu'), array('user' => Auth::user()));
 }
-
-
-    public function AssignSubmenusToParentMenu(Request $request)
+public function AssignSubmenusToParentMenu(Request $request)
     {
  // dd($request->all());
         $name = $request->name;
@@ -147,7 +145,6 @@ public function ShowAssignSubmenusToParentMenu($id)
     ); 
     $this->validate($request, $rules);  
     //dd($request->all());
-
     try {
         if ($name !=null) {
             $menu = Menu::find($name);
@@ -169,8 +166,6 @@ public function ShowAssignSubmenusToParentMenu($id)
     }
        return redirect()->back();
     }
-
-
     /**
      * Display the specified resource.
      *
@@ -267,5 +262,19 @@ try {
             return 'ID is required';
         }
       return redirect()->back()->withMessage('Role Deleted');
+    }
+
+    public function linkMenuForm($id)
+    {
+    $pages = Post::where('status', 1)->get();
+    $menu = Menu::findOrFail($id);
+
+     return view('admin.menu.link_to_pages', compact('pages', 'menu'), array('user' => Auth::user()));
+    }
+
+    public function linkMenu(Request $request)
+    {
+
+        return redirect()->back()->withMessage('');
     }
 }

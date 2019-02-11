@@ -20,8 +20,7 @@
     height:200px;
     }
     .mini_header{
-border-color: white !important;
-
+border-color: white !important; 
     }
     body{background-color: #FAFAFA;}
 </style>
@@ -39,21 +38,17 @@ border-color: white !important;
                 </div>
             </div>
         </div>
-        <!-- SubHeader -->
-
+        <!-- SubHeader --> 
         <!-- Main Content -->
-        <div class="careerfy-main-content">
-            
+        <div class="careerfy-main-content"> 
             <!-- Main Section -->
             <div class="careerfy-main-section careerfy-subheader-form-full">
                 <div class="container">
-                    <div class="row">
-
+                    <div class="row"> 
                         <div class="col-md-12 careerfy-typo-wrap">
                             <!-- Sub Header Form -->
                             <div class="careerfy-subheader-form">
-                     <form class="careerfy-banner-search" action="{{route('job.listing')}}" method="GET">
-                     
+                     <form class="careerfy-banner-search" action="{{route('job.listing')}}" method="GET"> 
                         <ul>
                             <li>
                         <div class="careerfy-select-style">
@@ -79,7 +74,6 @@ border-color: white !important;
                                     @foreach($cities as $city)
                                     @if($location)
                                     @if($city->name === $location->name)
-
                                         <option value="{{$city->id}}" selected="selected">{{$city->name}}</option> 
                                         @else
     <option value="{{$city->id}}">{{$city->name}}</option> 
@@ -87,18 +81,15 @@ border-color: white !important;
                                         @endif
                                         @endforeach 
                                     </select>
-                                </div> 
-                               
+                                </div>  
                             </li>
                             <li>
                                 <div class="careerfy-select-style" >
                                     <select name="job_function"  class="careerfy-banner-search" >
                                     <option value="">Select Job Function</option>
                                     @foreach($industry_professions as $industry_profession)
-                                        <option value="{{$industry_profession->id}}">{{$industry_profession->name}}</option>
-
-                                        @endforeach
-                               
+                                        <option value="{{$industry_profession->id}}">{{$industry_profession->name}}</option> 
+                                        @endforeach                                     
                                     </select>
                                 </div>
                             </li>
@@ -145,76 +136,7 @@ border-color: white !important;
                                             </ul> 
                                         </div>
                                     </div>
-
-
-                    <!--                 <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Date Posted</a></h2>
-                                        <div class="careerfy-checkbox-toggle">
-                                            <ul class="careerfy-checkbox">
-                                                <li>
-                                                    <input type="checkbox" id="r5" name="rr" />
-                                                    <label for="r5"><span></span>Last Hour</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r6" name="rr" />
-                                                    <label for="r6"><span></span>Last 24 hours</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r7" name="rr" />
-                                                    <label for="r7"><span></span>Last 7 days</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r8" name="rr" />
-                                                    <label for="r8"><span></span>Last 14 days</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r9" name="rr" />
-                                                    <label for="r9"><span></span>Last 30 days</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r10" name="rr" />
-                                                    <label for="r10"><span></span>All</label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div> -->
-                         <!--            <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Vacancy Type</a></h2>
-                                        <div class="careerfy-checkbox-toggle">
-                                            <ul class="careerfy-checkbox">
-                                                <li>
-                                                    <input type="checkbox" id="r11" name="rr" />
-                                                    <label for="r11"><span></span>Freelance</label>
-                                                    <small>13</small>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r12" name="rr" />
-                                                    <label for="r12"><span></span>Full Time</label>
-                                                    <small>4</small>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r13" name="rr" />
-                                                    <label for="r13"><span></span>Internship</label>
-                                                    <small>12</small>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r14" name="rr" />
-                                                    <label for="r14"><span></span>Part Time</label>
-                                                    <small>22</small>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r15" name="rr" />
-                                                    <label for="r15"><span></span>Temporary</label>
-                                                    <small>5</small>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r16" name="rr" />
-                                                    <label for="r16"><span></span>Volunteer</label>
-                                                    <small>20</small>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div> -->
+ 
 
                                        <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
                                         <h2><a href="#" class="careerfy-click-btn">Vacancy Type</a></h2>
@@ -259,49 +181,7 @@ border-color: white !important;
                                             </ul> 
                                         </div>
                                     </div>
-                          <!--           <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Categories</a></h2>
-                                        <div class="careerfy-checkbox-toggle">
-                                            <ul class="careerfy-checkbox">
-                                                <li>
-                                                    <input type="checkbox" id="r17" name="rr" />
-                                                    <label for="r17"><span></span>Accountancy</label>
-                                                    <small>10</small>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r18" name="rr" />
-                                                    <label for="r18"><span></span>Banking</label>
-                                                    <small>2</small>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r19" name="rr" />
-                                                    <label for="r19"><span></span>Charity & Voluntary</label>
-                                                    <small>6</small>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r20" name="rr" />
-                                                    <label for="r20"><span></span>Digital & Creative</label>
-                                                    <small>4</small>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r21" name="rr" />
-                                                    <label for="r21"><span></span>Estate Agency</label>
-                                                    <small>19</small>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r22" name="rr" />
-                                                    <label for="r22"><span></span>Graduate</label>
-                                                    <small>5</small>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="r23" name="rr" />
-                                                    <label for="r23"><span></span>IT Contractor</label>
-                                                    <small>10</small>
-                                                </li>
-                                            </ul>
-                                            <a href="#" class="careerfy-seemore">+see more</a>
-                                        </div>
-                                    </div> -->
+                  
                                 </form>
                             </div>
                         </aside>

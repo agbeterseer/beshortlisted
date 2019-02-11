@@ -80,6 +80,12 @@ return [
 		'title' => 'Title',
 	],
 ],
+	'contact' =>[
+	'title' => 'Contact',
+	'fields' => [
+		'title' => 'Title',
+	],
+],
 
 	'questions' => [
 		'title' => 'Questions',

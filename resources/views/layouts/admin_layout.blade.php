@@ -72,7 +72,7 @@
         <div class="page-wrapper">
             <!-- BEGIN HEADER -->
 
-         @include('admin.layout.includes.header')
+         @include('partials.header')
 
             <!-- END HEADER -->
             <!-- BEGIN HEADER & CONTENT DIVIDER -->
@@ -204,7 +204,8 @@
         <script src="{{ asset('css/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js')}}" type="text/javascript"></script>
   <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL SCRIPTS -->
-     
+
+
 <script src="{{ asset('css/assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
 
@@ -236,7 +237,7 @@ $('#example').DataTable();
         <!-- <script src="{{ asset('css/assets/pages/scripts/table-datatables-managed.min.js') }}" type="text/javascript"></script> -->
         <!-- END THEME GLOBAL SCRIPTS -->
         <!-- BEGIN PAGE LEVEL SCRIPTS -->
-         <!-- <script src="{{ asset('css/assets/pages/scripts/dashboard.min.js') }}" type="text/javascript"></script> -->
+         <script src="{{ asset('css/assets/pages/scripts/dashboard.min.js') }}" type="text/javascript"></script>
         
         <!-- END PAGE LEVEL SCRIPTS -->
         <!-- BEGIN THEME LAYOUT SCRIPTS -->

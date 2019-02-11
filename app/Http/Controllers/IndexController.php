@@ -37,7 +37,6 @@ class IndexController extends Controller
     }
 
 
-
 public function beginTest($id, $user_id)
 {
     $topic = Topic::findOrFail($id);
@@ -277,11 +276,6 @@ function generatePIN($digits = 4){
         //return $this->show_success($request->candidates_name);
     }
 
-
-
-
-
-
 /*
  public function JobApplication(Request $request)
     {
@@ -289,10 +283,6 @@ function generatePIN($digits = 4){
         // generate application pin
         // create applicatant to user table
         // make application
-
-
- 
-
         $candidates_name = $request->candidates_name;
         $gender = $request->gender;
         $ethnicity = $request->ethnicity;

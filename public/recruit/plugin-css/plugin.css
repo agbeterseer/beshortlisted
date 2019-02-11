@@ -98,6 +98,25 @@
     appearance:none;
     cursor:pointer;
 }
+.careerfy-select-style2 div{
+    padding: 8px 18px;
+    background: #fff;
+    color: #666666;
+    height: 60px;
+    border: 1px solid #f2f2f2;
+    border-left: none;
+    font-size: 14px;
+    font-weight: 400;
+    outline:none;
+    display: inline-block;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    cursor:pointer;
+
+}
+
+.careerfy-select-style2 option { padding: 8px 18px; }
 .careerfy-select-style select option { padding: 8px 18px; }
 .careerfy-select-style { position: relative; }
 .careerfy-select-style:after {
@@ -112,9 +131,11 @@
 .careerfy-banner-search input[type="submit"] {
     height: 60px;
     border: none;
-    background-color: transparent;
+    background-color: #13B5EA;
     position: relative;
     z-index: 3;
+    color:#ffffff;
+    font-weight: bold;
 }
 .careerfy-banner-search ul li.careerfy-banner-submit i {
     color: #ffffff;
@@ -125,6 +146,75 @@
     height: 60px;
     padding-top: 18px;
 }
+.careerfy-banner-search div.careerfy-banner-submit i {
+    color: #ffffff;
+    font-size: 26px;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    height: 60px;
+    padding-top: 18px;
+    margin-top: -56px;
+}
+#find_jobss{
+    display: none !important;
+}
+
+.showHide { display:none; }
+
+/* Desktop*/
+@media screen and (min-width: 768px) {
+  .showHide  { display: block; }
+  #leftside > button { display: none; }
+}
+
+@media screen and (max-width: 200px) {
+.hide_right{
+    display: none;
+}
+  h1{
+       font-size: xx-small;
+  }
+  .text-content{
+    font-size: xx-small;
+  }
+  .post_job{
+    display: none;
+    }
+}
+ 
+@media  (min-width: 200px) {
+
+.h2_center{
+     margin-left: 60px !important;     
+    }
+.careerfy-element-list {
+     margin-left: 60px !important;    
+    }
+
+#find_jobss{
+    display: inline-block;
+}
+#find_jobs{
+    display: inline-block;
+}
+/*    h1{
+        font-size: 9px;
+    }*/
+ .text-content{ 
+ font-size: 11px ;
+    margin-top: 10px;
+ }
+  .careerfy-banner-btn {
+   margin-left: 60px !important;
+   
+}
+
+  }
+
+ .text-content{
+     margin-left: -40px;
+ }
 .careerfy-banner-btn {
     display: inline-block;
 }
@@ -651,6 +741,13 @@
     z-index: 2;
 }
 .careerfy-search-box i {
+    position: absolute;
+    right: 14px;
+    top: 12px;
+    color: #cbd7d9;
+    font-size: 14px;
+}
+.careerfy-search-box div {
     position: absolute;
     right: 14px;
     top: 12px;

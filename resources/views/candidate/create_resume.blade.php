@@ -12,7 +12,13 @@
 ])
 
 @section('content')
-    <div class="col-md-8 "  >
+@include('partials.employee_breadcomb')
+      <div class="careerfy-main-section careerfy-dashboard-fulltwo">
+                <div class="container " id="page" style="" >
+            <div class="careerfy-employer-dasboard">
+<div class="careerfy-employer-box-section" style="background-color: #FFFFFF;"> 
+
+    <div class="col-md-12 "  >
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
            
  <div class="portlet light bordered" >
@@ -30,10 +36,9 @@
                 <div class="portlet-title table_header">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark "></i>
-                        <span class="caption-subject bold  ">PR Caption (this will be visible to Employers)</span>
+                        <span class="caption-subject bold  ">PR Caption (this will be visible to employers)</span>
                     </div>                
-                </div>
- 
+                </div> 
 <form class="form-horizontal" action="{{ route('add.caption') }}" method="post" role="form" name="caption_form" >
 {{ csrf_field() }}
 <input type="hidden" name="old_name" value="{{$recruit_resume}}">
@@ -64,5 +69,8 @@ Title
 <!-- END EXAMPLE TABLE PORTLET-->
  
  
- 
+   </div>
+</div>
+ </div>
+</div>
 @endsection

@@ -74,7 +74,16 @@
                                         <li class="{{$job_post}}"><a href="{{route('post.jobs')}}"><i class="careerfy-icon careerfy-plus"></i> Post a New Job</a></li>
                                   <!--       <li><a href="employer-dashboard-manage-jobs.html"><i class="careerfy-icon careerfy-alarm"></i> Job Alerts</a></li> -->
                                         <li><a href="candidate-dashboard-changed-password.html"><i class="careerfy-icon careerfy-multimedia"></i> Change Password</a></li>
-                                        <li><a href="index.html"><i class="careerfy-icon careerfy-logout"></i> Logout</a></li>
+                                        <li>
+                                    <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            <i class="careerfy-icon careerfy-logout"></i>  Logout
+                                        </a>
+                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+
                                     </ul>
  
                                    

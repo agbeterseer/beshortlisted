@@ -85,7 +85,7 @@ tr:hover {background-color:#f5f5f5;}
  
                                     </li>  
                               
-                                    <li><a href="{{route('list.job')}}" style="padding-top: 40px; padding-bottom: 10px;"> JOBS</a> </li>
+                                    <li><a href="{{route('list.job', 'job-list')}}" style="padding-top: 40px; padding-bottom: 10px;"> JOBS</a> </li>
                                   <li><a href="{{route('employer_infor')}}" style="padding-top: 40px; padding-bottom: 10px;">EMPLOYER</a> 
        
                                   </li> 

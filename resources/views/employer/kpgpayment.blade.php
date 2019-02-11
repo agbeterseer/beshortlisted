@@ -12,10 +12,9 @@
    'employer_infor' => 'active'
 ])
 @section('content') 
-
+@include('partials.employer_breadcomb')
 <div class="careerfy-main-content" style="background-color: #ffffff;">
-             <!-- Main Section -->
-                       
+             <!-- Main Section --> 
  <!-- Main Section -->
             <div class="careerfy-main-section careerfy-plain-services-full">
                 <div class="container">
@@ -31,12 +30,11 @@
                              <div class="careerfy-employer-payments">
                                   <!--           <h2>Payment method</h2> -->
                                              <div class="careerfy-payment-method-wrap">
-           <form method="POST" action="{{route('make.payment')}}" accept-charset="UTF-8" class="form-horizontal" role="form">
-           
+           <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8" class="form-horizontal" role="form"> 
         <div class="row" style="margin-bottom:40px;">
           <div class="col-md-8 col-md-offset-2">
             <p>
-     <div class="careerfy-employer-payments ">
+                     <div class="careerfy-employer-payments">
                                             <h2>Your package</h2>
                                              <div class="careerfy-employer-payments-wrap">
                                                 <table>
@@ -45,8 +43,7 @@
                                                             <th>Select</th>
                                                             <th>Title</th>
                                                             <th>Price</th>
-                                                            <th>Jobs Units</th>
-                                                  
+                                                            <th>Jobs Units</th> 
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -67,7 +64,7 @@
                                              </div>
                                         </div>
             </p>
-            <input type="hidden" name="package_id" value="{{$package_record->id}}">
+            <input type="hidden" name="plan" value="{{$package_record->id}}">
             <input type="hidden" name="email" value="{{$user->email}}"> {{-- required --}}
             <input type="hidden" name="orderID" value="#{{$orderID}}">
             <input type="hidden" name="amount" value="{{$package_record->price}}.00"> {{-- required in kobo --}}
@@ -77,11 +74,9 @@
             <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
             {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
 
-             <input type="hidden" name="_token" value="{{ csrf_token() }}"> {{-- employ this in place of csrf_field only in laravel 5.0 --}}
-
+             <input type="hidden" name="_token" value="{{ csrf_token() }}"> {{-- employ this in place of csrf_field only in laravel 5.0 --}} 
 <!-- 
-            <p class="col-md-4">
-
+            <p class="col-md-4"> 
               <button class="btn btn-success btn-lg btn-block" type="submit" value="Pay Now!">
               <i class="fa fa-plus-circle fa-lg"></i> Pay Now!
               </button>
@@ -209,3 +204,4 @@ CVV: 883
                   
         <!-- Main Content -->
 @endsection
+

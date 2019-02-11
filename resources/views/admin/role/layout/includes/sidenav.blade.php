@@ -47,7 +47,7 @@
                               @else
 
                       <li class="nav-item ">
-                              <a href="{{route('home')}}" class="nav-link nav-toggle">
+                              <a href="{{route('index')}}" class="nav-link nav-toggle">
                                     <i class="icon-home"></i>
                                     <span class="title">Dashboard</span>
                                       <span class="arrow open"></span>

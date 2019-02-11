@@ -17,6 +17,7 @@
                 <div class="container " id="page" style="" >
             <div class="careerfy-employer-dasboard">
 <div class="careerfy-employer-box-section" style="background-color: #FFFFFF;"> 
+ 
  <div class="col-md-12 ">
 <!-- BEGIN EXAMPLE TABLE PORTLET-->
 <div class="portlet light bordered">

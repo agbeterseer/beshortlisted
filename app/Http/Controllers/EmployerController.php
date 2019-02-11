@@ -253,13 +253,15 @@ function generatePIN($digits = 4){
         $employer_package = EmployerPackage::where('userfkp', $user->id)->where('status',1)->first();
         
         //dd($employer_package); s
-        if ($employer_package->status === 1) {
+        if ($employer_package) {
         return redirect()->route('upgrade.package', $employer_package);
      
-        } 
-
-      return view('employer.kpgpayment', compact('package_record','recruit_profile_pix', 'recruit_profile_pix_list', 'menus', 'orderID', 'units') ,array('user' => Auth::user()));
-    }
+        }else{
+       return view('employer.kpgpayment', compact('package_record','recruit_profile_pix', 'recruit_profile_pix_list', 'menus', 'orderID', 'units') ,array('user' => Auth::user()));
+  
+        }
+return redirect()->back();
+     }
 
     // get Employers packages
     public function Packages(){
@@ -395,9 +397,34 @@ $recruit_profile_pix  = $this->showImageForm($id);
 
          $menus = $this->displayMenu();
     $units = $this->displayUnits();
-          return view('employer.edit', compact('tag','resumes','countries','cities', 'regions', 'educational_levels', 'industries', 'employement_terms', 'jobcareer_levels', 'industry_professions','job_requirements', 'job_assessments', 'client', 'recruit_profile_pix', 'recruit_profile_pix_list', 'menus', 'units'), array('user' => Auth::user()));
+          return view('employer.employer_settings', compact('countries','cities', 'regions', 'educational_levels', 'industries', 'employement_terms', 'jobcareer_levels', 'industry_professions', 'client', 'recruit_profile_pix', 'recruit_profile_pix_list', 'menus', 'units'), array('user' => Auth::user()));
     }
 
+public function EmplpoyerSetting(Request $request)
+{ 
+    $user = Auth::user();
+    $id = $user->id;
+  $menus = $this->displayMenu();
+
+    $countries = DB::table('countries')->get();
+    $cities = DB::table('cities')->get();
+    $regions = DB::table('regions')->get();
+    $educational_levels = DB::table('qualification_levels')->get();
+    $industries = DB::table('industries')->get();
+    $employement_terms = DB::table('employement_terms')->get();
+    $jobcareer_levels = DB::table('jobcareer_levels')->get();
+    $industry_professions = DB::table('industry_professions')->get();
+
+    $client = DB::table('clients')->where('user_id', $user->id)->first();
+$recruit_profile_pix  = $this->showImageForm($id);
+    //dd($client);
+        $recruit_profile_pix_list = DB::table('recruit_profile_pixs')->where('user_id',$user->id)->orderBy('created_at', 'DESC')->get();
+     $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
+
+         $menus = $this->displayMenu();
+    $units = $this->displayUnits();
+  return view('employer.employer_settings', compact('countries','cities', 'regions', 'educational_levels', 'industries', 'employement_terms', 'jobcareer_levels', 'industry_professions', 'client', 'recruit_profile_pix', 'recruit_profile_pix_list', 'menus', 'units'), array('user' => Auth::user()));
+}
     /**
      * Update the specified resource in storage.
      *

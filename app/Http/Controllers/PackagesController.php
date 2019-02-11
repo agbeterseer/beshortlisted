@@ -51,28 +51,23 @@ class PackagesController extends Controller
      */
     public function create(Request $request)
     {
-        //dd($request->all());
          return view('admin.plans.create', array('user' => Auth::user()));
     
     }
 
     public function store(Request $request)
     {
-    	//dd($request->all());
    	$title = $request->title;
     $price = $request->price;
     $jobs_posting = $request->jobs_posting;
     $featured_jobs = $request->featured_jobs;
     $renew_jobs = $request->renew_jobs;
     $job_duration = $request->job_duration;
-  
-
      $rules = [
                 'title' => 'required|string',
                 'jobs_posting' => 'required|integer',
                 'renew_jobs'=> 'required|integer',
         ];
- 
         $input = Input::only(
         'title',
         'jobs_posting',
@@ -222,22 +217,11 @@ try {
         	$name = $value['job_property'];
         		//dd($value['job_property']);
           $plan = new PlanProperty;
-
           $plan->property = $value['job_property'];
-
           $plan->planpackage_id = $package_id; 
-
 					$plan->status = 1;
-
 					$plan->created_at = $this->returnCurrentTime();
- 
 					$plan->save();
-					
-				//	dd($plan);
-
-	// $package = DB::table('plan_properties')->insert(['properties'=> $name, 'package_id' => $package_id, 'status' =>0, 'created_at' => $this->returnCurrentTime(), 'user_id' => Auth::user()->id]);
-
-						// dd($value['job_property']);
 					$request->session()->flash('message.level', 'success');
 					$request->session()->flash('message.content', 'done successfully!'); 
         	}
@@ -276,19 +260,12 @@ public function UpdateProperty(Request $request)
  // dd($package_id);
 try {
         if ($property_id !=null && $property_id !='') {
-
-     
- 
           $plan = PlanProperty::findOrFail($property_id);
- 
           $plan->property = $jobproperty;
           $plan->updated_at = $this->returnCurrentTime();
           $plan->save();
- 
           $request->session()->flash('message.level', 'success');
           $request->session()->flash('message.content', 'done successfully!'); 
-     
-
     }
   
 } catch (\Exception $e) {
@@ -302,9 +279,7 @@ try {
 
 return redirect()->back();
 }
-
-
-    public function deleteProperty(Request $request)
+public function deleteProperty(Request $request)
     {
       $package_id = $request->package_id;
        //dd($package_id);
@@ -312,8 +287,6 @@ return redirect()->back();
         Session::flash('success','Record has been deleted successfully');
        return redirect()->back()->withMessage('Deleted');
     }
-
-
     public function UpgradePackageInfo($id)
     {
       $user = Auth::user();
@@ -321,7 +294,6 @@ return redirect()->back();
       $employer_package = EmployerPackage::where('userfkp', $user->id)->where('status',1)->first();
       $packages = Planpackage::all();
       //dd($package);
-
       return view('employer.upgrade_package_info', compact('employer_package', 'menus', 'packages', 'id') );
     }
 

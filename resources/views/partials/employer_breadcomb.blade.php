@@ -7,7 +7,8 @@
                     <li><a href="{{route('employer.edit', Auth::user()->id )}}"> PROFILE</a></li> 
                     <li><a href="{{route('manage.jobs')}}">MANAGE JOBS</a></li> 
                     <li><a href="{{route('dashboard')}}">SHORTLIST</a></li> 
-                    <li class="" >POST A JOB</li> 
+                     <li><a href="{{route('employer.edit', Auth::user()->id )}}">SETTINGS</a></li> 
+                    <li><a href="{{route('post.jobs')}}"> POST A JOB</a></li> 
                     <!-- <li>Transaction </li> -->
                  
                 </ul>

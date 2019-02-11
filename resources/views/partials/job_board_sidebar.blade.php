@@ -62,7 +62,7 @@
               </div>
               @if(Auth::user())
               <h4> {{Auth::user()->name}}</h4>
-              <span class="careerfy-dashboard-subtitle">UI/UX Designer</span>
+              <span class="careerfy-dashboard-subtitle">{{$pr_caption->pr_caption}}</span>
               @endif
               </figcaption>
 </figure>

@@ -3,6 +3,8 @@ use Illuminate\Support\Facades\Input as Input;
 use App\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\Paginator;
+use App\Post;
+use App\Menu;
  
 /*
 |--------------------------------------------------------------------------
@@ -13,32 +15,64 @@ use Illuminate\Pagination\Paginator;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-
-
+*/ 
+ 
+Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay'); 
+Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 
 Route::get('/','HomeController@index');
 Auth::routes();
+Route::get('/test', function () {
+    return view('tests.test');
+});
+Route::get('/post-page/{id}', [
+	'as'=> 'single.page',
+	'uses'=> 'HomeController@vieSinglePage'
+]);
+Route::get('/terms-of-use/',  [
+	'as' => 'terms.use',
+	'uses' => 'HomeController@TermsOfUse'
+]);
 Route::get('/rhizome-admin', function () {
     return view('backend-admin');
 });
- 
-//'/onlinetest_link/link/'. $this->user->test_id . '/candidate/'. $this->user->id
+Route::get('/help-center', function () { 
+    return view('helpcenter');
+});
 
+Route::get('/page/{page}', [
+'as' => 'single.page',
+'uses' => 'HomeController@showSinglePage'
+]);
+
+Route::get('/guidelines', [
+	'as'=> 'guidelines',
+	'uses'=> 'HomeController@guidelines'
+]);
+ Route::get('/helpcenter', [
+	'as'=> 'helpcenter',
+	'uses'=> 'HomeController@helpcenter'
+]);
+
+//'/onlinetest_link/link/'. $this->user->test_id . '/candidate/'. $this->user->id
 Route::get('/index/candidate-information', [
 	'as' => 'candidates',
 	'uses' => 'HomeController@employee'
 	]);
-
 Route::get('/index/employer-information', [
 	'as' => 'employer_infor',
 	'uses' => 'HomeController@employer'
 	]);
 Route::get('/index/contact-information', [
-	'as' => 'contact',
+	'as' => 'contactus',
 	'uses' => 'HomeController@contact'
 	]);
-Route::get('/job/list-jobs', [
+
+Route::post('contactus', [
+	'as' => 'post.message',
+	'uses' => 'HomeController@addContactUs'
+]);
+Route::get('/jobs/job-listing-form/{code}', [
 	'as' => 'list.job',
 	'uses' => 'HomeController@ShowJobFilterForm'
 	]);
@@ -46,30 +80,28 @@ Route::get('/job/all-jobs', [
 	'as' => 'all.jobs',
 	'uses' => 'HomeController@AllJobs'
 	]);
-
 Route::get('/email-subscription', [
 	'as' => 'subscribe',
 	'uses' => 'HomeController@SubscribeToNewsletter'
-
 	]);
-
 Route::get('/index/policy-document', [
 	'as' => 'display.policy',
-	'uses' => 'PolicyController@DisplayPolicy'
+	'uses' => 'HomeController@DisplayPolicy'
 	]);
-
+Route::get('/index/policy-document/{code}', [
+	'as' => 'policy.document',
+	'uses' => 'HomeController@PreivewPolicy'
+	]);
 Route::get('/job/job-descriptions/{id}', [
 	'as' => 'job.description',
 	'uses' => 'HomeController@JobDetails'
 	]);
-
 Route::get('/job/industries', [
 	'as' => 'list_industries',
 	'uses' => 'HomeController@AllIndustries'
 	]);
 // Auth::logout()
 Route::get('/onlinetest_link/link/{id}/candidate/{user}',  'IndexController@beginTest');
-
 Route::get('/test/start_test-{id}-candidate-{user}',[
 	'as' => 'start.test',
 	'uses' =>'TestsController@testInfoPage']);
@@ -80,11 +112,9 @@ Route::get('/test/start_test-{id}-candidate-{user}',[
 		]
 		);
 	Route::post('/login',[
-
 	'uses'=> 'LoginController@login',
 	'as'=> 'login'
 	]);
-
 	Route::get('/logout',[
 	'uses'=> 'LoginController@logout',
 	'as'=> 'logout'
@@ -99,50 +129,89 @@ Route::get('/test/start_test-{id}-candidate-{user}',[
    // Route::get('auth/{provider}/callback', 'LoginController@login')
    // ->where(['provider' => 'facebook|google|twitter']);
 
-	 Route::get('auth/{provider}/callback', 'LoginController@handleProviderCallback');
-
+	Route::get('auth/{provider}/callback', 'LoginController@handleProviderCallback');
 	Route::group(array('before' => 'auth', 'after' => 'no-cache', 'middleware' => 'web'),  function (){
 
 
-	Route::get('/index','HomeController@index')->name('index')->middleware('auth');
+	Route::get('/employer/create-card', [
+		'as' => 'create.card',
+		'uses' => 'SettingController@CreateCard' 
+	]);
+Route::post('add-card', [
+	'as' => 'add.card',
+	'uses' => 'SettingController@AddCard'
+]);
+	// Route::get('/employer/setting/', [
+	// 	'as' => 'employer.setting',
+	// 	'uses'=> 'SettingController@EmplpoyerSetting'
+	// ]);
 
+	Route::get('/settings/list-contact-form', [
+		'as' => 'show.contacts',
+		'uses'=> 'SettingController@listContactForms'
+	]);
+
+	Route::get('/settings/publish-contact-form/{id}', [
+		'as' => 'publish.contact',
+		'uses'=> 'SettingController@PublishContactForm'
+	]);
+	Route::get('/settings/show-contact-form', [
+		'as' => 'create.contact',
+		'uses'=> 'SettingController@showContactForm'
+	]); 
+	Route::post('add-contact', [
+		'as' => 'add.contact',
+		'uses'=> 'SettingController@addContact'
+	]);
+	Route::post('update-contact/{id}', [
+		'as' => 'update.contact',
+		'uses'=> 'SettingController@updateContact'
+	]);
+	Route::post('delete-contact', [
+		'as' => 'delete.contact',
+		'uses'=> 'SettingController@deleteContact'
+	]);
+	Route::get('/settings/edit-contact-form/{id}', [
+		'as' => 'edit.contact',
+		'uses'=> 'SettingController@editContact'
+	]); 
+	Route::get('/menu/link_to_page/{id}', [
+		'as' => 'link_to_page',
+		'uses'=> 'MenuController@linkMenuForm'
+	]);
+	Route::post('/pages/add-page-content', [
+		'as' => 'add_content',
+		'uses' => 'PostController@AddPageContent'
+	]);
+	Route::get('/index','HomeController@index')->name('index')->middleware('auth');
 	Route::get('/employer/dashboard', [
 			'as' => 'dashboard',
 			'uses' => 'ResumeController@employer'
 		]);
 
-	Route::get('/board', 'DashboardController@index')->name('board')->middleware('auth');
- 	
+	Route::get('/board', 'DashboardController@index')->name('board')->middleware('auth');	
  	Route::get('/index/employee_dashboard', [
  		'as' => 'candidate',
  		'uses' => 'CandidateController@index'
- 		]);
-  
- 	
+ 		]); 
  	Route::get('/user/profile', 'UserController@profile')->name('profile')->middleware('auth');
 	Route::post('/user/profile', 'UserController@update_avatar')->middleware('auth');
 	Route::post('/verify_candidate', 'UserController@candidate_update_avatar')->middleware('auth');
-
 	Route::get('/print_out-{id}', [
 			'as' => 'print.slip',
 			'uses' => 'UserController@PrintVerification'
-
 		]);
-	
-	 Route::post('/user/profileupdate', 'UserController@updateProfile');
-
+	Route::post('/user/profileupdate', 'UserController@updateProfile');
 	Route::post('/user/password', [
 	'uses' => 'UserController@changePassword',
 	'as' => 'user.changePassword'
 		])->middleware('auth');
-
 	Route::get('/profession',[
 		'as' => 'profession.index',
 		  'middleware' => 'role:admin',
 		// 'middleware'=>(['role:admin','role:superuser','role:general-user']),
 		'uses' => 'ProfessionController@index'
 	])->middleware('auth');
-
 	Route::get('/admin',[
 		'as' => 'admin.index',
 		'middleware' => 'role:admin',
@@ -150,100 +219,71 @@ Route::get('/test/start_test-{id}-candidate-{user}',[
 		return view('admin.index');
 		}
 	])->middleware('auth');
-
-	Route::get('/user',[
-
+	Route::get('/user',[ 
 		'as' => 'user.index',
 		  'middleware' => 'role:admin',
 		// 'middleware'=>(['role:admin','role:superuser','role:general-user']),
 		'uses' =>function(){
-
 		return view('user.index');
 	}
 	])->middleware('auth');
-
 	Route::get('/role',[
-
 		'as' => 'role.index',
 		 'middleware' => 'role:admin',
 		// 'middleware'=>(['role:admin','role:superuser','role:general-user']),
 		'uses' =>function(){
-
 		return view('role.index');
 	}
 	]);
-
 	Route::get('/region',[
-
 		'as' => 'region.index',
 		 'middleware' => 'role:admin',
 		// 'middleware'=>(['role:admin','role:superuser','role:general-user']),
 		'uses' =>function(){
-
 		return view('region.index');
 	}
 	])->middleware('auth');
-
 	Route::get('/document/search', [
 		'uses' => 'DocumentController@show_search',
 		'as' => 'document.search_category'
 		])->middleware('auth');
-	
 	Route::post('/document/search', [
 		'uses' => 'DocumentController@post_search',
 		'as' => 'document.search_category'
 		])->middleware('auth');
-
 	Route::get('/document/uploadcv', 'DocumentController@show_upload');
-
 	Route::post('/document/uploadcv',[
 		'uses'=>'DocumentController@handleUploadcv',
 	 	'as'=> 'document.uploadcv'
 	 ])->middleware('auth');
-
 	// show search
-	//Route::get('/document/search', 'DocumentController@show_search');
-
-	// Route::post('/document/search',[
-	// 	'uses'=>'DocumentController@document_search',
-	// 	'as'=> 'document.search_category'
-	// 	]);
 	Route::post('/document/custome-search', [
 		'as' => 'document.custome_search',
 		'uses' => 'DocumentController@searchDocumentByRegionAndProfessionAndYearsOfExperience'
 		]);
-
-
 	Route::get('/document/get_single_document/{id}',[
 	'as' => 'get_single.document',
 	'uses' => 'DocumentController@ViewSingleDocument'
 		]);
-
 	// filter by city routes
-	 
 	Route::post('document/city', [
 		'uses'=>'DocumentController@searchCandidatesByCity',
 		'as'=> 'document.filter_by_city'
 		]);
-
 	Route::get('document/city', [
 		'uses'=>'DocumentController@view_filter_by_city',
 		'as'=> 'document.view_filter_by_city'
 		]);
-
 	// filter by Years Of Experience
  	Route::post('document/years', [
 		'uses'=>'DocumentController@searchCandidatesByYearsOfExperience',
 		'as'=> 'document.filter_by_yoe'
 		]);
-
 	Route::get('document/years', [
 		'uses'=>'DocumentController@view_filter_by_years',
 		'as'=> 'document.view_filter_by_yoe'
 		]);
-
 		// filter by Region 
-
 	Route::post('/region/city', [
 		'uses'=>'RegionController@getRegion',
 		'as'=> 'region.filter_by_region'
@@ -252,107 +292,72 @@ Route::get('/test/start_test-{id}-candidate-{user}',[
 			'uses'=>'RegionController@getRegion',
 			'as' => 'region.getRegion'
 			]);
-
 	//filter by Professions
-
 	Route::get('/document/professions',  [
 			'uses'=>'DocumentController@view_filter_by_professions',
 			'as' => 'document.view_filter_by_professions'
-
 			]);
 	Route::post('/document/professions', [
 		'uses'=>'DocumentController@searchCandidatesByProfession',
 		'as'=> 'document.filter_by_professions'
 		]);
-
 	Route::get('/document/cv', [
 		'uses' => 'DocumentController@getFile',
 		'as' => 'document.getFile'
 		]);
-
 	Route::post('/document/cv', [
 		'uses' => 'DocumentController@getFile',
 		'as' => 'document.index'
 		])->middleware('auth');
-
-
-
 	Route::get('/index/candidates-pool/', [
 		'as' => 'list.all',
 		'uses' => 'DocumentController@allCandidates'
-
 		]);
-
-
 	Route::get('/document/upload', [
 		'uses' => 'DocumentController@showFormCSV',
 		'as' => 'document.uploadfromcsv'
 		]);
-
 	Route::post('/document/upload', [
 		'uses' => 'DocumentController@importFromCSV',
 		'as' => 'document.importFromCSV'
 		]);
-
-	// Route::get('user/', [
-	// 	'uses' => 'UserController@ShowRegisterForm'
-		 
-	// 	]);
-
 	Route::get('importExport', [
 		'uses' => 'BackupController@importExport',
 		'as' => 'backupsys.importExport'
 		]);
-
 	Route::get('downloadCandidateExcel/{organisation}', 'AdminController@downloadExcel');
-
 	Route::get('downloadExcel/{type}', 'BackupController@downloadExcel');
  	Route::get('backUpDocumentProfession/{type}', 'BackupController@backUpDocumentProfession');
-	
-	// Route::post('importExcel', 'BackupController@importExcel');
-		// Route::post('register', [
-		// 'uses' => 'RegisterController@ShowRegisterForm',
-		// 'as' => 'auth.register'
-		// ]);
 	Route::get('document/search/{region_id}',
 	array('as'=>'region.search','uses'=>'IndexController@getCitiesByRegioinAjax')); 
-
 	Route::get('backup', [
 	    	'uses' =>  'BackupController@index',
 	    	'as' =>'backupsys.backups' 
 	    	])->middleware('auth');
-
 	Route::get('/advance-search/', [
 		'as' => 'search.advance_search',
 		'uses' =>'SearchController@index'
-
 		])->middleware('auth');
-
 	Route::get('lob/logActivity', [
 	'as' => 'log.activity',
 	'uses' => 'HomeController@logActivity'
 	]);
-
 	Route::post('make-red-{id}', [
 		'as' => 'make.red',
 		'uses' => 'ShortlistController@RedCV' 
 		]);
-
 	Route::post('make-blue-{id}', [
 		'as' => 'make.blue',
 		'uses' => 'ShortlistController@BlueCV' 
 		]);
-
 	Route::post('make-green-{id}', [
 		'as' => 'make.green',
 		'uses' => 'ShortlistController@GreenCV' 
 		]);
-	
 	Route::post('make-yellow-{id}', [
 		'as' => 'make.yellow',
 		'uses' => 'ShortlistController@YellowCV' 
 		]);
-	
  	Route::post('make-black', [
 		'as' => 'make.black',
 		'uses' => 'ShortlistController@BlackCV' 
@@ -407,10 +412,7 @@ Route::get('/policy_preview/{code}', [
 	'as' => 'preview.code',
 	'uses' => 'PolicyController@PreivewPolicy'
 	]);
-Route::get('/index/policy-document/{code}', [
-	'as' => 'policy.document',
-	'uses' => 'PolicyController@PreivewPolicy'
-	]);
+
 Route::get('/admin_online_dashboard', [
  'as' => 'test.dashborad',
  'uses' => 'DashboardController@OnlineTestDashboard'
@@ -730,14 +732,11 @@ Route::get('/employer/shortlist-candidates', [
 Route::get('/employer/shortlist-candidate/{id}', [
 	'as' => 'shortlist.candidate',
 	'uses' => 'ResumeController@ShowCandidateCV'
-	]);
-
+	]); 
 Route::get('/employer/candidate/resume/{id}/{candidate_id}', [
 	'as' => 'candidate.resume',
-	'uses' => 'ResumeController@AdminResumeById'
-
-	]);
-
+	'uses' => 'ResumeController@AdminResumeById' 
+	]); 
 Route::get('/index/application-history', [
 		'as' => 'application.history',
 		'uses' => 'TagController@ApplicationHistoryPage'
@@ -786,7 +785,7 @@ Route::post('employee-upload-image', [
 	'uses' => 'EmployerController@UpdateCandidatesLogo'
 	]);
 
-Route::get('/index/display-profile-pix/{id}', [
+Route::get('/index/display-profile-pix', [
 	'as' => 'display.pix',
 	'uses' => 'ResumeController@showImageForm'
 	]);
@@ -1007,13 +1006,8 @@ Route::post('update-ward', [
 	'as' => 'update.ward',
 	'uses' => 'ResumeController@UpdateAward'
 	]);
-
- // Route::get('/v1/api/candidates', [
- //    	'uses' => 'EmployerController@ListCandidates2'
- //    	]);
-Route::get('/home', 'DocumentController@home');
-  
- //poute::get('/home', 'DocumentController@home');
+ 
+   
 Route::get('/employer/candidates-listing', [
 	'as' => 'candidate.list',
 	'uses' => 'EmployerController@ListCandidates2'
@@ -1061,8 +1055,6 @@ Route::post('/menu-submenu', [
 'as' => 'menu.submenu',
 'uses' => 'MenuController@AssignSubmenusToParentMenu'
 ]);
-Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay'); 
-Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 
  
 Route::post('/getcandidatesbylocation', 'DocumentController@filterbyLocation');
@@ -1202,6 +1194,8 @@ Route::get('/index/resume/edit-referees/{id}', [
 	Route::resource('employer-dashboard', 'HomeController');
 	Route::resource('plans', 'PackagesController');
 	Route::resource('menu', 'MenuController');
+	Route::resource('pages', 'PostController');
+	Route::resource('blog', 'BlogController');
 	// Route::resource('')
 
 		Route::get('/employer/post-jobs/{region_id}',

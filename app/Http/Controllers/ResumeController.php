@@ -42,6 +42,7 @@ use App\Menu;
 use App\EmployerPackage;
 use App\JobMatch;
 use App\RecruitProfilePix;
+use App\ControlApplication;
 class ResumeController extends Controller
 {
         public function __construct()
@@ -59,7 +60,7 @@ class ResumeController extends Controller
 
      return $menus = Menu::where('status', 1)->orderBy('menu_order', 'ASC')->get();
    }
-       public function displayUnits()
+    public function displayUnits()
     {
       $user = Auth::user();
       return $units = EmployerPackage::where('status', 1)->where('userfkp', $user->id)->first();
@@ -109,25 +110,25 @@ class ResumeController extends Controller
 
         $resume_template = $request->file('resume_template');
   try {
-     $rules = [
-        'name'=>'required|string|max:55',
-        'display_name' =>'required|string|max:55',
-        ];
+    //  $rules = [
+    //     'name'=>'required|string|max:55',
+    //     'display_name' =>'required|string|max:55',
+    //     ];
 
-        $input = Input::only(
-        'resume_template',
-        'display_name',
-        'description',
-        'name',
-        'category'
-    );
+    //     $input = Input::only(
+    //     'resume_template',
+    //     'display_name',
+    //     'description',
+    //     'name',
+    //     'category'
+    // );
      
-        $validator = Validator::make($input, $rules);
+    //     $validator = Validator::make($input, $rules);
 
-         if(!$validator)
-        {
-            return Redirect::back()->withInput()->withErrors($validator);
-        }
+    //      if(!$validator)
+    //     {
+    //         return Redirect::back()->withInput()->withErrors($validator);
+    //     }
 
 
         if ($request->hasFile('resume_template')) {
@@ -146,24 +147,20 @@ class ResumeController extends Controller
         'category'
 
         );
-      
-
         $validator = Validator::make($input, $rules);
-
-     
+   
          if(!$validator)
         {
           Session::flash('error-avatar', 'error');
             return Redirect::back()->withInput()->withErrors($validator);
         }
-             // $fileName = $file->getClientOriginalName();
+            // $fileName = $file->getClientOriginalName();
             // $file->move(public_path('hivPolicy'), $fileName);
 
             //$avatar = $request->file('avatar');
             $filename = time() . '.' . $resume_template->getClientOriginalExtension();
             $resume_template->move(public_path('/uploads/ResumeTemplates/'), $filename);
 
-  
             $rbuilder = new ResumeBuilder;
             $rbuilder->name = $name;
             $rbuilder->display_name = $display_name;
@@ -215,43 +212,36 @@ class ResumeController extends Controller
         return view('admin.resume.edit', compact('resume_builder'), array('user' => Auth::user()));
     }
 
-    public function showImageForm($id){
-            if ($id) {
-      $user = User::findOrFail($id);
+    public function showImageForm(){
+      $user = Auth::user();
+            if (Auth::check()) {
+      
        $profile_pix_list = DB::table('recruit_profile_pixs')->where('user_id',$user->id)->orderBy('created_at', 'DESC')->get();
      $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
             } 
 
         $resumes = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->get();
+        $pr_caption= RecruitResume::where('user_id', $user->id)->where('status',1)->first();
         // fresh user test pass
-        //$resumes = RecruitResume::where('user_id', $user->id)->having('status', '=', 1)->orderBy('status','DESC')->get();
         $user_resume_list = RecruitResume::where('user_id', $user->id)->orderBy('created_at','DESC')->get();
        // fresh user test pass
         // check for candidates current resume
         $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->first();
         // fresh user test pass
-
-        // get 
-        $job_by_candidate_list = $this->GetAvailableJobs();
+       $job_by_candidate_list = $this->GetAvailableJobs();
         // dd($job_by_candidate_list);
-
         $users = $this->GetUsers();
         $countries = $this->GetCountries();
         $cities = $this->GetCities();
         $regions = DB::table('regions')->get();
-
         $tags = $this->Tags();
         $section_candidatelist = $this->GetCandidateSection($user_single_resume_by_date->id);
-          $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
- // dd($section_candidatelist_count);
+          $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count(); 
           $job_category_list = $this->GetJobcategory();
           $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
-               $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
-
-        //dd($recruit_profile_pix_list);
-               $menus = $this->displayMenu();
-
-        return view('candidate.display_profile_pix', compact('user', 'profile_pix_list', 'profile_pix', 'resumes', 'job_by_candidate_list', 'cities', 'tags', 'job_category_list','section_candidatelist_count', 'section_candidatelist', 'menus'), array('user' => Auth::user()));
+               $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();  
+               $menus = $this->displayMenu(); 
+        return view('candidate.display_profile_pix', compact('user', 'profile_pix_list', 'profile_pix', 'resumes', 'job_by_candidate_list', 'cities', 'tags', 'job_category_list','section_candidatelist_count', 'section_candidatelist', 'menus', 'pr_caption'), array('user' => Auth::user()));
     }
 
  public function UpdateCandidatesLogo(Request $request){
@@ -290,11 +280,9 @@ class ResumeController extends Controller
   
    $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('user_id', $user->id)->get();
     foreach ($recruit_profile_pix as $key => $value) {
- 
     $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('user_id', $user->id)->update(['status'=> 0, 'order'=> 0]);
-
            }
-       $recruit_profile_pix = DB::table('recruit_profile_pixs')->insert(['user_id' => $user_id, 'pix' => $filename, 'order' => 1, 'status' => 1, 'created_at'=>$this->returnCurrentTime()]);
+    $recruit_profile_pix = DB::table('recruit_profile_pixs')->insert(['user_id' => $user_id, 'pix' => $filename, 'order' => 1, 'status' => 1, 'created_at'=>$this->returnCurrentTime()]);
 
          Session::flash('success-avatar','Image Change successfully');
      \LogActivity::addToLog(Auth::user()->firstname .' Has Changed Picture.');
@@ -340,37 +328,29 @@ class ResumeController extends Controller
         'display_name',
         'url_link'
     );
-     //dd($request->all());
         $validator = Validator::make($input, $rules);
-
          if(!$validator)
         {
             return Redirect::back()->withInput()->withErrors($validator);
         }
-//
-        if ($request->hasFile('resume_template') ) {
 
+        if ($request->hasFile('resume_template') ) {
         $resume_template = $request->file('resume_template');
         $rules = [
         '_token'=>'required',
         'resume_template' =>'required|jpg,jpeg,png,gif|max:381872',
         ];
-
         $input = Input::only(
         '_token',
         'resume_template'
         );
- 
-       $validator = Validator::make($input, $rules);
-     
-         if(!$validator)
+        $validator = Validator::make($input, $rules);
+        if(!$validator)
         {
           Session::flash('error-avatar', 'error');
             return Redirect::back()->withInput()->withErrors($validator);
         }
- 
-        //$avatar = $request->file('avatar');
-                $filename = time() . '.' . $resume_template->getClientOriginalExtension();
+           $filename = time() . '.' . $resume_template->getClientOriginalExtension();
             $resume_template->move(public_path('/uploads/ResumeTemplates/'), $filename);
   if ($id) {
              $rbuilder = ResumeBuilder::findOrFail($id);
@@ -385,12 +365,10 @@ class ResumeController extends Controller
             $rbuilder->save();
              Session::flash('success', 'Done successfully');
   }
-
 return redirect()->back()->with('done', 'Done successfully');
     }else{
 
-    
-  if ($id) {
+    if ($id) {
              $rbuilder = ResumeBuilder::findOrFail($id);
                
             $rbuilder->name = $name;
@@ -422,13 +400,10 @@ return redirect()->back()->with('done', 'Done successfully');
      */
     public function destroy($id)
     {
-        //dd($id);
         if ($id) {
-
        DB::table("resume_builders")->where('id',$id)->delete();
        Session::flash('success','deleted successfully');
          }else{
-
             return 'ID is required';
         }
     return redirect()->back(); 
@@ -530,12 +505,9 @@ return redirect()->back()->with('done', 'Done successfully');
             } 
     $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->orderBy('created_at','DESC')->first();
     //dd($user_single_resume_by_date);
-
     return redirect()->route('get.resume', $user_single_resume_by_date->id);
-
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Done successfully!');
-
         }
         } catch (\Exception $e) {
         $request->session()->flash('message.level', 'danger');
@@ -569,7 +541,6 @@ return redirect()->back()->with('done', 'Done successfully');
             $resume->save(); 
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Done successfully!');
-
         }
         } catch (\Exception $e) {
         $request->session()->flash('message.level', 'danger');
@@ -587,8 +558,7 @@ public function DeleteResume($id)
     {
        // dd($request->all());
         // get the current user
-        $user = Auth::user();
-
+        $user = Auth::user(); 
         $firstname = $request->firstname;
         $lastname = $request->lastname;
         $date_of_birth = $request->date_of_birth;
@@ -656,14 +626,12 @@ public function DeleteResume($id)
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Done successfully!');
       // $this->AddSection($section, $user->id, $resume);
-        
     } catch (\Exception $e) {
         $request->session()->flash('message.level', 'danger');
         $request->session()->flash('message.content', 'Cannot create record');
            return redirect()->back()->withErrors($e->getMessage());
       // Session::flash('error', $e->getMessage()); 
     }
- 
         return redirect()->back();
     }
        public function showAccountSettings(Request $request){
@@ -684,9 +652,7 @@ public function DeleteResume($id)
         $regions = Region::all();
         $cities = $this->GetCities();
         $countries = $this->GetCountries();
-
         $menus = $this->displayMenu();
-
        return view('candidate.edit_profile', compact('document', 'educationallevels','job_career_levelList', 'employementterms', 'regions', 'cities', 'countries', 'resume_id', 'menus'), array('user' => Auth::user()));
     }
 
@@ -728,7 +694,6 @@ public function DeleteResume($id)
     // change below as required
     return \Redirect::back()->withInput()->withErrors( $validation->messages() );
     }
-// new Carbon($date_of_birth)->diffInYears(Carbon\Carbon::now());/
   $date =  new Carbon($date_of_birth);
   $now = Carbon::now();
     // add candidates first and last name to user table
@@ -760,16 +725,13 @@ public function DeleteResume($id)
         $document->save();
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Done successfully!');
-  
     //$this->AddSection($section, $user->id, $resume);
-        
     } catch (\Exception $e) {
         $request->session()->flash('message.level', 'danger');
         $request->session()->flash('message.content', 'Cannot create record');
            return redirect()->back()->withErrors($e->getMessage());
       // Session::flash('error', $e->getMessage()); 
     }
- 
         return redirect()->back();
     }
     public function AddCareer(Request $request)
@@ -794,12 +756,8 @@ try{
             $career_->save();
             $request->session()->flash('message.level', 'success');
             $request->session()->flash('message.content', 'Done successfully!');
-
-       //  dd($career_);
-
             // this method registers the career summary for this user
         $this->AddSection($section, $user, $resume->id);
-
         }
     } catch (\Exception $e) {
         $request->session()->flash('message.level', 'danger');
@@ -807,7 +765,6 @@ try{
            return redirect()->back()->withErrors($e->getMessage());
       // Session::flash('error', $e->getMessage()); 
     }
-
         return redirect()->back();
     }
     public function UpdateCareer(Request $request)
@@ -820,14 +777,12 @@ try{
         if ($career_summary !=null && $career_summary !='') {
             
             $career_ = CareerSummary::findOrFail($career);
-
             $career_->userid = Auth::user()->id;
             $career_->resume_id = $resume;
             $career_->summary = $career_summary;
             $career_->status = 1;
             $career_->updated_at = $this->returnCurrentTime();
             $career_->save();
-
             $request->session()->flash('message.level', 'success');
             $request->session()->flash('message.content', 'Done successfully!');
         }
@@ -863,12 +818,7 @@ try {
         $job_certifications = DB::table('job_certifications')->insert(['name' =>$certification_name, 'date_received' =>$date_received, 'user_id' => $user->id ]);
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Done successfully!');
-
-//$resume = RecruitResume::findOrFail($resume);
-
-
-//$this->AddSection($section, $user->id, $resume);
-
+         $this->AddSection($section, $user, $resume->id);
 } catch (\Exception $e) {
     
         $request->session()->flash('message.level', 'danger');
@@ -879,7 +829,6 @@ try {
 
 public function ShowUpdateCertificateForm($id)
 {
-    # code...
         $certificate_record = JobCertification::findOrFail($id);
         $menus = $this->displayMenu();
         return view('candidate.update_certificates', compact('certificate_record', 'menus') ,array('user' => Auth::user()));
@@ -892,8 +841,7 @@ public function UpdateCertificate(Request $request)
    $user =  Auth::user();
    $certification_name = $request->certification_name;
    $certificate_id = $request->certificate_id;
- 
-     $date_received = $request->date_received;
+   $date_received = $request->date_received;
 
      // $job_certifications 
 
@@ -902,12 +850,9 @@ try {
         $update_certificate->name = $certification_name;
         $update_certificate->date_received;
         $update_certificate->save();
-
- 
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Done successfully!');
 } catch (\Exception $e) {
-    
         $request->session()->flash('message.level', 'danger');
         $request->session()->flash('message.content', 'Cannot create record');
 }
@@ -987,6 +932,7 @@ try {
         }
         return redirect()->back();
     }
+
 public function UpdateslskillForm($id)
 {
     $user = Auth::user();
@@ -1003,10 +949,8 @@ public function deleteSkill(Request $request, $code, $id){
     $resume = $request->resume;
     $user = Auth::user();
     if ($id !=null && $id !='') {
-
      $skill_list = JobSkill::where('userid', $user->id)->where('id', $id)->delete();
-//dd($skill_list);
-    $request->session()->flash('message.level', 'success');
+        $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Done successfully!');
     }else{
 
@@ -1032,9 +976,7 @@ return redirect()->back();
             }
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Done successfully!');
-
         }else{
-
         $request->session()->flash('message.level', 'danger');
         $request->session()->flash('message.content', 'Cannot create record');
         }
@@ -1125,8 +1067,6 @@ public function ShowEditEducation($code,$id)
     $qualifications = Qualification::all(); 
    $user_single_resume_by_id = RecruitResume::where('id', $id)->first();
       $menus = $this->displayMenu();
-
-
      return view('candidate.edit_education', compact('countries', 'recruityear_list', 'education', 'user', 'qualifications', 'user_single_resume_by_id', 'menus'), array('user' => Auth::user()));
 }
 public function UpdateEducation(Request $request)
@@ -1220,8 +1160,9 @@ public function ShowWorkExperienceForm()
 
     public function AddWorkExperience(Request $request)
     {
-   // dd($request->all());
+ //dd($request->all());
         $resume = $request->resume;
+        //dd($resume);
         $section = $request->work_history;
         $user = Auth::user();
         $work_from_year = $request->work_from_year;
@@ -1278,6 +1219,8 @@ public function ShowWorkExperienceForm()
      try {
   $candidate_work_experience = DB::table('work_experiences')->insertGetId(['start_year'=>$work_from_year, 'start_month'=>$work_from_month, 'end_year'=>$end_year, 'end_month'=>$end_month, 'position_title'=>$position_title, 'career_level'=>$career_level, 'company_name'=>$company_name, 'country'=>$country, 'responsibilities'=>$responsibilities, 'status'=>1, 'userfk'=>$user->id, 'resumefk'=>$resume, 'present'=> $present]); 
 
+ // dd($candidate_work_experience);
+
 // // // // //$candidate_work_experience
 // 1. get the current Years of Experience by user iD and resume ID
 // 2. find the users record in Document table with [user_id and resume_id]
@@ -1292,22 +1235,24 @@ if ($end_year === null) {
     $dt->year = $end_yeard;
 }else{
  $dt->year = $end_year;
-}
-
- 
+} 
 $yer = $ddt->diffInYears($dt);
-
 $work_e = WorkExperience::findOrFail($candidate_work_experience);
+
 $work_e->yoe +=$yer;
 $work_e->save();
-
-
-$user_yoe = Document::where('user_id', $user->id)->where('resume_id', $resume)->first();
+//dd($work_e);
+try {
+  $user_yoe = Document::where('user_id', $user->id)->where('resume_id', $resume)->first();
 $user_yoe->years_of_experience +=$yer;
 $user_yoe->save();
+} catch (Exception $e) {
+  
+}
+
 // $years_sum = 0;
 // $years_sum +=$yer;
- // dd($user_yoe);
+  // dd($work_e);
 // $updateDocument = DB::table('documents')->where('user_id', $user->id)->where('resume_id', $resume)->update(['years_of_experience'=>$years_sum]);
 //  dd($user_yoe->id);
 $get_user_for_Yoe_update = Document::findOrFail($user_yoe->id);
@@ -1836,11 +1781,11 @@ DB::table('documents')->where('user_id', $user->id)->update(['years_of_experienc
         $job_category_list = $this->GetJobcategory();
         $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
          $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
-
+$pr_caption= RecruitResume::where('user_id', $user->id)->where('status',1)->first();
         $menus = $this->displayMenu();
         $units = $this->displayUnits();
-            return view('candidate.resume', compact('documents', 'roles', 'users', 'resumes_by_user', 'resumes','industries', 'industry_profession', 'industry_group', 'get_industry_child', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'dtwork', 'ddtwork', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
-                'job_category_list', 'regions', 'referee_list', 'profile_pix', 'menus', 'units'), array('user' => Auth::user()));
+            return view('candidate.resume', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt','job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+                'job_category_list', 'regions', 'referee_list', 'profile_pix', 'menus', 'units', 'pr_caption'), array('user' => Auth::user()));
     }
 
  public function AdminResumeById($resume_id, $candidate_id)
@@ -1902,7 +1847,6 @@ DB::table('documents')->where('user_id', $user->id)->update(['years_of_experienc
       public function ShowResume() { 
        $user = Auth::user();
        $check_pix = RecruitProfilePix::where('user_id', $user->id)->first();
- 
     if ($check_pix == null) {
       DB::table('recruit_profile_pixs')->insert(['user_id'=> $user->id, 'pix' => 'default.png', 'order' => 1, 'status' => 1, 'created_at' => $this->returnCurrentTime()]);
     }
@@ -1925,6 +1869,7 @@ DB::table('documents')->where('user_id', $user->id)->update(['years_of_experienc
         $industry_profession = DB::table('industry_professions')->get();
         // get Awards
         $awards = Award::where('user_id', $user->id)->get();
+        $pr_caption = RecruitResume::where('user_id', $user->id)->where('status',1)->first();
         $resumes = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->get();
         // fresh user test pass
         $user_resume_list = RecruitResume::where('user_id', $user->id)->orderBy('created_at','DESC')->get();
@@ -1936,7 +1881,6 @@ DB::table('documents')->where('user_id', $user->id)->update(['years_of_experienc
     $career = CareerSummary::where('userid', $user->id)->where('resume_id', $user_single_resume_by_date->id)->first();
        // get Educational History
     $educationaList = JobEducation::where('userid', $user->id)->where('resume_id', $user_single_resume_by_date->id)->get();
-        ///dd($educationaList);
         // get Work History
     $work_histories = WorkExperience::where('userfk', $user->id)->where('resumefk', $user_single_resume_by_date->id)->orderBy('present','DESC')->get();
            
@@ -1946,21 +1890,19 @@ DB::table('documents')->where('user_id', $user->id)->update(['years_of_experienc
         }
         // get 
         $job_by_candidate_list = $this->GetAvailableJobs();
-        // dd($job_by_candidate_list);
         $users = $this->GetUsers();
         $countries = $this->GetCountries();
         $cities = $this->GetCities();
         $regions = DB::table('regions')->get();
         $tags = $this->Tags();
         $section_candidatelist = $this->GetCandidateSection($user_single_resume_by_date->id);
-          $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
-        //dd($section_candidatelist_count);
-          $job_category_list = $this->GetJobcategory();
-          $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
+        $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
+        $job_category_list = $this->GetJobcategory();
+        $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
         $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first(); 
         $menus = $this->displayMenu(); 
         return view('candidate.resume', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
-                'job_category_list', 'regions', 'referee_list', 'profile_pix', 'menus'), array('user' => Auth::user()));
+                'job_category_list', 'regions', 'referee_list', 'profile_pix', 'menus', 'pr_caption'), array('user' => Auth::user()));
         }
 
         public function PrintResume($id){
@@ -2224,7 +2166,6 @@ public function GetJobcategory(){
     $job_category = DB::table('employement_terms')->get();
     return $job_category;
 }
-
 public function GetAssessment($job){
     $assessements = DB::table('job_assessments')->where('job_id', $job)->get(); 
     return $assessements;
@@ -2234,14 +2175,12 @@ public function GetRequirements($job)
     $requirements = DB::table('job_requirements')->where('job_id', $job)->get();
     return $requirements;
 }
-
 public function JobCommonByIndustries($id)
 {
     $tag = Tag::findOrFail($id);
     $get_Job_by_common_industries = DB::table('tags')->where('industry',$tag->industry)->orWhere('job_category',$tag->job_category)->orWhere('salary_range', $tag->salary_range)->get();
 return $get_Job_by_common_industries;
 }
-
 // Job Application 
     public function JobApplicationForm($id){
     //$id = 28;
@@ -2303,8 +2242,7 @@ return $get_Job_by_common_industries;
    }
       return redirect()->back();
     }
-
-    public function saveJobMatch($user_id, $id, $rate)
+public function saveJobMatch($user_id, $id, $rate)
     {
      $save_job_match = JobMatch::firstOrNew(['user_id'=> $user_id, 'job_id'=> $id]);
     $save_job_match->user_id = $user_id;
@@ -2313,7 +2251,6 @@ return $get_Job_by_common_industries;
     $save_job_match->created_at = $this->returnCurrentTime();
     $save_job_match->save();
     }
-
 public function StageOneJobApplication($code, $id, $check){
 //dd($id);
   $comparerequirements = $this->CompareRequirments($code, $id);
@@ -2330,11 +2267,8 @@ public function StageOneJobApplication($code, $id, $check){
  // dd('here');
 return redirect()->route('apply.job', $id);
 }
-
 public function ApplyForAJob(Request $request)
 {
-  //dd($request->all());
-
   $user = Auth::user();
 try{
   $resume_selected_id = $request->resume_name;
@@ -2354,50 +2288,50 @@ $resume_name = RecruitResume::where('id', $resume_selected_id)->where('user_id',
 $document = Document::where('user_id', $user->id)->where('resume_id', $resume)->first();
 // get educational Qualification name for display purposes 
 $education = QualificationLevel::findOrFail($document->educational_level);
-//dd($education);
-// fetch experience 
-//dd($document->yoe_range);
-    // $jobapplication = Application::firstOrNew(['user_id'=>$user->id, 'resume_id'=>$resume, 'tag_id'=>$tag_id]);
-    // $jobapplication->user_id = $user->id;
-    // $jobapplication->document_id = $document->id;
-    // $jobapplication->resume_id = $resume;
-    // $jobapplication->tag_id = $tag_id;
-    // $jobapplication->status = 1;
-    // $jobapplication->sorted = 0;
-    // $jobapplication->sort_by_category = 0;
-    // $jobapplication->created_at = $this->returnCurrentTime();
-    // $jobapplication->delete = 0;
-    // $jobapplication->years_of_experience = $document->years_of_experience;
-    // $jobapplication->city_id = $document->city_id;
-    // $jobapplication->region_id = $document->region_id;
-    // $jobapplication->gender = $document->gender;
-    // $jobapplication->age = $document->age;
-    // $jobapplication->nationality = $document->nationality;
-    // $jobapplication->d_employment_term = $document->d_employment_term;
-    // $jobapplication->educational_level = $document->educational_level;
-    // $jobapplication->qualification = $education->name;
-    // $jobapplication->career_level = $document->career_level;
-    // $jobapplication->relocate_nationaly = $document->relocate_nationaly;
-    // $jobapplication->availability = $document->availability;
-    // $jobapplication->minimum_salary = $document->minimum_salary;
-    // $jobapplication->yoe_range = $document->yoe_range;
-    // $jobapplication->candidates_name = $document->candidates_name;
-    // $jobapplication->email = $document->email;
-    // $jobapplication->clientfk = $tag_record->client;
-    // $jobapplication->save();
+ 
+// fetch experience  
+    $jobapplication = Application::firstOrNew(['user_id'=>$user->id, 'resume_id'=>$resume, 'tag_id'=>$tag_id]);
+    $jobapplication->user_id = $user->id;
+    $jobapplication->document_id = $document->id;
+    $jobapplication->resume_id = $resume;
+    $jobapplication->tag_id = $tag_id;
+    $jobapplication->status = 1;
+    $jobapplication->sorted = 0;
+    $jobapplication->sort_by_category = 0;
+    $jobapplication->created_at = $this->returnCurrentTime();
+    $jobapplication->delete = 0;
+    $jobapplication->years_of_experience = $document->years_of_experience;
+    $jobapplication->city_id = $document->city_id;
+    $jobapplication->region_id = $document->region_id;
+    $jobapplication->gender = $document->gender;
+    $jobapplication->age = $document->age;
+    $jobapplication->nationality = $document->nationality;
+    $jobapplication->d_employment_term = $document->d_employment_term;
+    $jobapplication->educational_level = $document->educational_level;
+    $jobapplication->qualification = $education->name;
+    $jobapplication->career_level = $document->career_level;
+    $jobapplication->relocate_nationaly = $document->relocate_nationaly;
+    $jobapplication->availability = $document->availability;
+    $jobapplication->minimum_salary = $document->minimum_salary;
+    $jobapplication->yoe_range = $document->yoe_range;
+    $jobapplication->candidates_name = $document->candidates_name;
+    $jobapplication->email = $document->email;
+    $jobapplication->clientfk = $tag_record->client;
+    $jobapplication->save();
     $count = 0;
 
-//   foreach ($job_assessment_id as $key => $question) {
-// $answer = new JobAssessmentAnswer;
-// $answer->quesion_id = $question;
-// $answer->job_id = $tag_id;
-// $answer->job_application_id = $jobapplication->id;
-// $answer->answer = $job_assessment_answer[$count++];
-// $answer->created_at = $this->returnCurrentTime();
-// $answer->save();
-// }
- 
+  foreach ($job_assessment_id as $key => $question) {
+$answer = new JobAssessmentAnswer;
+$answer->quesion_id = $question;
+$answer->job_id = $tag_id;
+$answer->job_application_id = $jobapplication->id;
+$answer->answer = $job_assessment_answer[$count++];
+$answer->created_at = $this->returnCurrentTime();
+$answer->save();
+}
 $this->CompareRequirments($resume, $tag_id);
+
+$this->CheckNumberOfApplicationPerJob($tag_id, $jobapplication);
 
 return redirect()->route('application.success', $tag_id);
 } catch (\Exception $e) {
@@ -2407,6 +2341,20 @@ return redirect()->route('application.success', $tag_id);
        Session::flash('error', $e->getMessage()); 
 }
  return redirect()->back();
+}
+
+
+
+public function CheckNumberOfApplicationPerJob($job,$application)
+{
+  // dd($application);
+ $check_job_application = new ControlApplication;
+ $check_job_application->job_id = $job;
+ $check_job_application->application_id = $application->id;
+ $check_job_application->status = 1;
+ $check_job_application->save();
+
+return $application;
 }
 
 public function ApplicationSuccess($id)
@@ -2426,7 +2374,7 @@ public function ApplicationSuccess($id)
       $allapplicants = Application::all();
   $users = DB::table('applications')->distinct()->get(); 
   $distinct_job_applications = Application::distinct('tag_id')->pluck('tag_id');
-     $user = Auth::user();
+  $user = Auth::user();
     // get candidate by educational qualification  
     $s = $request->input('s');
     $user = Auth::user();
@@ -2442,7 +2390,7 @@ public function ApplicationSuccess($id)
      $jobs_byemployer = Tag::where('delete',0)->latest()->paginate(10);
 
     $jobs_count = Tag::where('client', $user->id)->where('delete',0)->where('active', 0)->where('status',0)->count(); 
-//dd($jobs_count);
+  
     $job_draft_count = Tag::where('client', $user->id)->where('draft', 1)->where('delete',0)->where('active', 0)->where('status',0)->count();
     $jobs_draft_list = Tag::where('client', $user->id)->where('draft', 1)->where('delete',0)->where('active', 0)->where('status',0)->latest()->paginate(10);
     $job_awaiting_approval_count = Tag::where('client', $user->id)->where('awaiting_aproval',1)->where('active', 0)->where('status', 0)->where('delete',0)->count();
@@ -2458,14 +2406,24 @@ public function ApplicationSuccess($id)
              ->select('tag_id', DB::raw('count(*) as total'))
              ->groupBy('tag_id')->get();
   //$tagss = Tag::find(20)->applications;
-   $number_of_applicants_per_job = DB::table('tags')->join('applications', 'applications.tag_id', '=', 'tags.id') 
-            ->get();
+  // $number_of_applicants_per_job = DB::table('tags')->join('applications', 'applications.tag_id', '=', 'tags.id') ->get();
+          //  dd($number_of_applicants_per_job);
    // find by job get the total count
  // get all applications by a user
-    $usersss = User::find(75)->applications;
+   // $usersss = User::find(75)->applications;
+
+    //$application_count = DB::table('control_applications')->get();
+//$applications = Application::where('in_review', 0)->where('tag_id',$tag_id)->count();
+
+ $app_count= DB::table('control_applications')
+             ->select('job_id', DB::raw('count(*) as total'))
+             ->groupBy('job_id')->get();
+    //dd($app_count);
     $tag_record= DB::table('applications')
-             ->select('tag_id', DB::raw('count(*) as total'))
-             ->groupBy('tag_id')->get(); 
+             ->select('tag_id', 'in_review', DB::raw('count(*) as total'))
+             ->groupBy('tag_id', 'in_review')->get();
+
+// dd($tag_record); 
     $tags = Tag::all();
 $applications = Application::where('clientfk', $user->id)->get();
 $applications_employer = DB::table('applications')->where('clientfk', $user->id)->get(); 
@@ -2509,7 +2467,7 @@ $applications_employer = DB::table('applications')->where('clientfk', $user->id)
     // get candidates Resume
     $menus = $this->displayMenu();
     $units = $this->displayUnits();
-    return view('employer',compact('tag_fk_record', 'educational_level', 'unsorted', 'jobs_byemployer', 'employement_terms', 'jobs_count', 'professions', 'cities', 'employement_terms', 's', 'jobs_draft_list', 'job_draft_count', 'job_awaiting_approval_count', 'jobs_awaiting_approval_list', 'job_blacklist_count', 'job_black_list', 'job_activelist_count', 'job_active_list', 'job_not_active_list', 'job_not_activelist_count', 'groups_count', 'allapplicants', 'unsorted_count', 'dt', 'hired_count', 'offered_count', 'rejected_count', 'shortlisted_count', 'in_review_count', 'groups_count', 'hired_', 'tag_record', 'number_of_applicants_per_job', 'applications_employer', 'distinct_job_applications', 'sorted', 'menus', 'units'), array('user' => Auth::user()));
+    return view('employer',compact('tag_fk_record', 'educational_level', 'unsorted', 'jobs_byemployer', 'employement_terms', 'jobs_count', 'professions', 'cities', 'employement_terms', 's', 'jobs_draft_list', 'job_draft_count', 'job_awaiting_approval_count', 'jobs_awaiting_approval_list', 'job_blacklist_count', 'job_black_list', 'job_activelist_count', 'job_active_list', 'job_not_active_list', 'job_not_activelist_count', 'groups_count', 'allapplicants', 'unsorted_count', 'dt', 'hired_count', 'offered_count', 'rejected_count', 'shortlisted_count', 'in_review_count', 'groups_count', 'hired_', 'tag_record', 'applications_employer', 'distinct_job_applications', 'sorted', 'menus', 'units', 'app_count'), array('user' => Auth::user()));
   }
 
   public function ShowCandidateCV($id)
@@ -3102,8 +3060,6 @@ public function UpdateReferees(Request $request)
         $job_by_candidate_list = $this->GetAvailableJobs();
         // dd($job_by_candidate_list);
 
-
-
         $users = $this->GetUsers();
         $countries = $this->GetCountries();
         $cities = $this->GetCities();
@@ -3115,17 +3071,12 @@ public function UpdateReferees(Request $request)
  // dd($section_candidatelist_count);
           $job_category_list = $this->GetJobcategory();
           $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
-   // dd($referee_list);
-
         //get educational_levels 
-
-            return view('candidate.freshertemplates.standard', compact('documents', 'roles', 'users', 'resumes_by_user', 'resumes','industries', 'industry_profession', 'industry_group', 'get_industry_child', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'dtwork', 'ddtwork', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+        return view('candidate.freshertemplates.standard', compact('documents', 'roles', 'users', 'resumes_by_user', 'resumes','industries', 'industry_profession', 'industry_group', 'get_industry_child', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'dtwork', 'ddtwork', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
                 'job_category_list', 'referee_list'), array('user' => Auth::user()));
            // return view('candidate.freshertemplates.classic', array('user' => Auth::user()));
         }else{
-
           return redirect('/login');
-
         }
         return redirect()->back(); 
     }

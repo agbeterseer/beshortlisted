@@ -227,8 +227,7 @@
                                           <a href="{{route('backupsys.importExport')}}" class="nav-link ">
                                         <span class="title">Back up cv </span>
                                           </a>
-                                      </li>
-
+                                      </li> 
                                   <li class="nav-item ">
                                           <a href="{{route('backupsys.backups')}}" class="nav-link ">
                                         <span class="title">Back up cv </span>
@@ -238,14 +237,9 @@
                                           <a href="{{route('policies.index')}}" class="nav-link ">
                                         <span class="title">@lang('cvmanagement.policies.title') </span>
                                           </a>
-                                      </li>
-
-                                    </ul>
-
-                                  </li>
-                           
-
-
+                                      </li> 
+                                    </ul> 
+                                  </li> q
                                    <li class="nav-item  ">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-settings"></i>

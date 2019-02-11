@@ -1,6 +1,5 @@
-
 @extends('layouts.admin_layout', [
-  'page_header' => 'Resume Builder',
+  'page_header' => 'Policy',
   'dash' => '',
   'quiz' => '',
   'users' => '',
@@ -8,7 +7,12 @@
   'top_re' => '',
   'all_re' => '',
   'sett' => '',
-  'candidate' => 'active'
+  'candidate' => '',
+    'policy' => 'active', 
+  'package' => '',
+  'page' => ' ',
+     'role' => '',
+  'user' => '',
 ])
 
 @section('content')
@@ -43,7 +47,7 @@
                         @endif
                     </div>
 
-                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+                    <table id="example" class="display" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>
@@ -114,15 +118,9 @@
                                                     </td>
                                                 </tr>
                                                  @empty
-                                 
-                            
+                                                 
                              @endforelse
                            
-                            
-                         
-                                                
-                                     
-
 
                                             </tbody>
                                         </table>

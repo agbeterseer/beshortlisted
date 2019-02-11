@@ -28,11 +28,11 @@
                                 <div class="careerfy-employer-box-section" style="background-color: #ffffff;">
                                     <div class="careerfy-profile-title">
                                         <h2>Saved Jobs</h2>
-                                        <form class="careerfy-employer-search">
+                       <!--                  <form class="careerfy-employer-search">
                                             <input value="Search orders" onblur="if(this.value == '') { this.value ='Search orders'; }" onfocus="if(this.value =='Search orders') { this.value = ''; }" type="text">
                                             <input value="" type="submit">
                                             <i class="careerfy-icon careerfy-search"></i>
-                                        </form>
+                                        </form> -->
                                     </div>
                                     <div class="careerfy-candidate-savedjobs">
                                         <div class="careerfy-candidate-savedjobs-wrap">
@@ -52,7 +52,7 @@
                                                         <td>
                                         <a href="#" class="careerfy-savedjobs-thumb">
                                         <img src="{{asset('img/candidate-saved-jobs-thumb.png')}}" alt=""></a>
-                                                       <h2><a href="{{route('job.description', $job_applied->id)}}">   {{$job_applied->job_title}} </a></h2>
+                                                       <a href="{{route('job.description', $job_applied->id)}}">   {{$job_applied->job_title}} </a>
                                                         </td>
                                                         <td><span> {{$job_applied->email_address}} </span></td>
                                                         <td>{{ date('M d, Y', strtotime($job_applied->created_at)) }}</td>
@@ -69,6 +69,9 @@
                                     </div>
                                     <!-- Pagination -->
                                     {{ $job_applied_by_candidate->appends(['s' => $s])->links() }}
+
+
+
                                 </div>
                             </div>
                         </div>
