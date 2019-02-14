@@ -11,38 +11,52 @@
    'resume_' => 'active'
 ])
 
-
 @section('content')
-          <div class="careerfy-main-section" style="background-color: #cccccc;">
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div>  
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div>  
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div>  
+          <div class="careerfy-main-section" style="background-color: #ffffff;">
                 <div class="container">
                     <div class="row">
-                        <aside class="col-md-6 careerfy-typo-wrap">
+
+                           <div class="careerfy-employer-box-section">
+                                            <div class="careerfy-profile-title"><h2>Address / Location</h2></div>
+                                          <aside class="col-md-6 careerfy-typo-wrap">
                             <div class="careerfy-parallex-text">
                               @foreach($contact as $cont)
                               <div class="row">
                             <div class="col-md-3"> <label>Country :</label></div>
                             <div class="col-md-3">@foreach($countries as $country) @if($country->code === $cont->country){{$country->name_en}} @endif @endforeach<br></div>
                           </div> 
+                          <div class="space">&nbsp;</div>  
                           <div class="row">
                             <div class="col-md-3"> <label>State :</label></div>
                             <div class="col-md-3">{{$cont->state}}<br></div>
                           </div> 
+                          <div class="space">&nbsp;</div>  
                          <div class="row">
                             <div class="col-md-3"> <label>City :</label></div>
                             <div class="col-md-3">{{$cont->city}}<br></div>
                           </div> 
+                          <div class="space">&nbsp;</div>  
                           <div class="row">
                             <div class="col-md-3"> <label>Street Name :</label></div>
                             <div class="col-md-3">{{$cont->street_name}}<br></div>
                           </div>
+                          <div class="space">&nbsp;</div>  
                           <div class="row">
                             <div class="col-md-3"> <label>Postal Code :</label></div>
                             <div class="col-md-3">{{$cont->postalcode}}<br></div>
                           </div> 
+                          <div class="space">&nbsp;</div>  
                            <div class="row">
                             <div class="col-md-3"> <label>Phone Number :</label></div>
                             <div class="col-md-3">{{$cont->phonenumber}}<br></div>
                           </div> 
+                          <div class="space">&nbsp;</div>  
                             <div class="row">
                             <div class="col-md-3"> <label>Email :</label></div>
                             <div class="col-md-3">{{$cont->email}}<br></div>
@@ -52,8 +66,12 @@
             
                             </div>
                         </aside>
+                                        </div>
+
+
+                     <!--  
                         <aside class="col-md-6 careerfy-typo-wrap"> <div class="careerfy-right">
-                            <img src="{{asset('recruit/extra-images/parallex-thumb-1.png')}}" alt=""></div> </aside>
+                            <img src="{{asset('recruit/extra-images/parallex-thumb-1.png')}}" alt=""></div> </aside> -->
                     </div>
                 </div>
             </div>
