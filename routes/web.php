@@ -1364,16 +1364,6 @@ $fullPath = storage_path().'/app/'. 'Emeka iwuchukwu.pdf';
       return 'NOT HERE';
   }
 
-
-  // if(file_exists($fullPath)) {
-  //   // return 'YES ITS HERE';
-  //   // return Response::download($fullPath, $filename);
-  //           $response = Response::make(storage_path().'/app/'. 'HIV Policy.pdf', 200);
-  //           $response->header('Content-Type', 'application/pdf');
-  //           return $response;
-  // } else {
-  //     return 'NOT HERE';
-  // }
                             
 });
 

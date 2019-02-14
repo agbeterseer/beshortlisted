@@ -58,8 +58,8 @@
                         <aside class="col-md-3">
                             <div class="widget jobsearch_twitter_widget">
                                 <div class="jobsearch_twitter_widget_wrap">
-                                    <p>Great fun commentating with @mj_slats that last 30 mins ! We were riding the emotion of the game with all our viewers, was great fun, enjoyed itx</p>
-                                    <span>3 hours ago</span>
+                                    <p> @beShorlisted</p>
+                                    <span> </span>
                                 </div>
                                 <small><i class="fa fa-twitter"></i> @beShorlisted</small>
                             </div>

@@ -16,14 +16,10 @@
  <div class="careerfy-main-content" style="background-color: #ffffff;">
              <!-- Main Section -->
                  <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
-
-
-
+        <div class="space">&nbsp;</div>  
                         <section class="careerfy-fancy-title">
-                                <h2>Welcome to employee section</h2>
+                                <h2>employee section</h2>
                         </section>
-
                                      <!-- Main Section -->
             <div class="careerfy-main-section">
                 <div class="container">
@@ -81,7 +77,7 @@
                         <aside class="col-md-6 careerfy-typo-wrap">
                             <div class="careerfy-parallex-text">
                                 <h2>Millions of jobs. <br> Find the one that’s right for you.</h2>
-                                <p>Search all the open positions on the web. Get your own personalised salary estimate. Read reviews on over 600,000 companies worldwide. The right job is out there.</p>
+                                <p>Search all the open positions on the web. Get your own personalised salary estimate. The right job is out there.</p>
                                 <a href="#" class="careerfy-static-btn careerfy-bgcolor"><span>Search Jobs</span></a>
                             </div>
                         </aside>
@@ -114,7 +110,7 @@
                                                 <li>BY <a href="#" class="careerfy-color">Click mag staff</a></li>
                                                 <li><time datetime="2008-02-14 20:00">OCT 6, 2016</time></li>
                                             </ul>
-                                            <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est.</p>
+                                            <p> </p>
                                             <a href="{{route('blog.show', $post->id)}}" class="careerfy-read-more careerfy-bgcolor">Read Articles</a>
                                         </div>
                                     </li>
@@ -127,6 +123,5 @@
                 </div>
             </div>
  
-
  </div>
 @endsection

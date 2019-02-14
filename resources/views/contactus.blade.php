@@ -13,10 +13,25 @@
 
 
 @section('content')
-          <div class="careerfy-main-section " style="background-color: #cccccc;">
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div> 
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div> 
+                 <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div> 
+                         <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div>
+          <div class="careerfy-main-section">
                 <div class="container">
-                    <div class="row">-
-                        <aside class="col-md-6 careerfy-typo-wrap">
+                 
+                    <div class="row">
+
+         <div class="careerfy-employer-box-section" style="background-color: #ffffff;">
+                                            <div class="careerfy-profile-title"><h2>Address / Location</h2></div>
+
+
+
+                                                           <aside class="col-md-6 careerfy-typo-wrap">
                             <div class="careerfy-parallex-text">
                               @foreach($contact as $cont)
                               <div class="row">
@@ -52,8 +67,14 @@
             
                             </div>
                         </aside>
-                        <aside class="col-md-6 careerfy-typo-wrap"> <div class="careerfy-right">
-                            <img src="{{asset('recruit/extra-images/parallex-thumb-1.png')}}" alt=""></div> </aside>
+                                                
+                                        </div>
+ 
+            
+                            </div>
+                        </aside>
+<!--                         <aside class="col-md-6 careerfy-typo-wrap"> <div class="careerfy-right">
+                            <img src="{{asset('recruit/extra-images/parallex-thumb-1.png')}}" alt=""></div> </aside> -->
                     </div>
                 </div>
             </div>
