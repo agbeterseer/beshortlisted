@@ -18,23 +18,19 @@
                                 <ul class="navbar-nav">
                                 @foreach($menus as $menu)
                                        <li > <a href="{{$menu->routes}}" style="padding-top: 40px; padding-bottom: 10px;"> {{strtoupper($menu->name)}}</a></li> 
-                                @endforeach
-                   
+                                @endforeach 
                     </ul>  
-             </div>
+                  </div>
                   </nav>
                 </aside>
                     <aside class="col-md-4 showHide" >
                         <div class="careerfy-right">
                             <ul class="careerfy-user-section">
-                                  @if(!Auth::user())
-                     
+                                  @if(!Auth::user()) 
                                <li><a class="careerfy-color" href="{{ route('register') }}">REGISTER</a>
-                               </li>
-                          
+                               </li> 
                                <li><a class="careerfy-color " href="{{ route('auth.login') }}">SIGN IN</a></li>
-                                @else
-                              
+                                @else 
                                   <li> <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -47,9 +43,7 @@
                              @if(Auth::user())
                                  
                             <a href="{{route('post.jobs')}}" class="careerfy-simple-btn careerfy-bgcolor post_job"><span> <i class="careerfy-icon careerfy-arrows-2"></i> Post Job</span></a>
-                     
-  
-                            @endif
+                             @endif
                              @if(!Auth::user())
                           <a href="{{route('post.jobs')}}" class="careerfy-simple-btn careerfy-bgcolor post_job "><span> <i class="careerfy-icon careerfy-arrows-2"></i> Post Job</span></a>
                             @endif
@@ -58,7 +52,4 @@
                     </aside>
                 </div>
          </div>
-        </header>
-
-           
-       
+        </header> 

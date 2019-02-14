@@ -1668,10 +1668,7 @@ return redirect()->back();
       // admin to publish only Job Post with status 1 and active 1
       // waiting approval status = 2
       // draft status 3
-      // blacklist status = 4
-
-
-  //dd($request->all());
+      // blacklist status = 4 
         $user = Auth::user();
         $returnCurrentTime = $this->returnCurrentTime();
         $end_date = $request->end_date;
@@ -1829,18 +1826,11 @@ if ($admin) {
     return redirect()->back();
 }else{
   Session::flash('success','Job created successfuly');
-  
   return redirect()->route('jp.success', $tagid->id);
-
-    // return redirect()->route('show.draft', $tagid->id);employer.payment
-    // return redirect()->back();
-    //route('employer.payment', $tagid->id); // 
-}
-   // insert into ProfessionMeta of candidates to im
-     
-        } catch (Exception $e) {
-      
-             return redirect()->back()->withErrors(['error' => 'somthing went wrong']);
+ }
+   // insert into ProfessionMeta of candidates to im     
+        } catch (\Exception $e) {
+        return redirect()->back()->withErrors(['error' => 'somthing went wrong']);
         }
   }
 //dd('here');

@@ -125,12 +125,12 @@ protected function authenticated(Request $request, $user)
         $user = User::where('email', $request->email)->first();
         $user_id=$user->id;
          if ($user->is_admin()) {
-          return redirect()->route('board');
+          return redirect()->intended('board');
           }elseif(!$user->is_admin() && !$user->is_candidate()){ 
            if ($user->account_type === 'employee') {
-                return redirect()->route('candidate');
+                return redirect()->intended('candidate');
             }else{
-              return redirect()->route('dashboard');
+              return redirect()->intended('dashboard');
             }
           }
         }

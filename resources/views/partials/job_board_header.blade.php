@@ -35,8 +35,6 @@
 .sticky + .content {
   padding-top: 102px;
 }
-
-
 </style>
       <!-- <link rel="stylesheet" href="{{asset('css/style3.css')}}"> -->
     <!-- <link href="{{ asset('bulma-0.7.2/css/bulma.min.css')}}" rel="stylesheet"> -->
