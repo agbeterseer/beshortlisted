@@ -12,18 +12,18 @@
 ])
 
 @section('content')
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div> 
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div> 
+
 @include('partials.employee_breadcomb')
+
  <div class="careerfy-main-content" style="background-color: #ffffff;">
              <!-- Main Section -->
-                 <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
-
-
-
-                        <section class="careerfy-fancy-title">
-                                <h2>Welcome to employee section</h2>
-                        </section>
-
+ 
                                      <!-- Main Section -->
             <div class="careerfy-main-section">
                 <div class="container">
