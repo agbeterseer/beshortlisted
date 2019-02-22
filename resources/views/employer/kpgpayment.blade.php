@@ -16,6 +16,11 @@
 <div class="careerfy-main-content" style="background-color: #ffffff;">
              <!-- Main Section --> 
  <!-- Main Section -->
+                        @if(Session()->has('error'))
+                            <div class="alert alert-danger"> 
+                            {!! Session::get('error') !!}
+                            </div>
+                        @endif
             <div class="careerfy-main-section careerfy-plain-services-full">
                 <div class="container">
                     <div class="row">
@@ -63,8 +68,7 @@
                                                 </table>
                                              </div>
                                         </div>
-            </p>
-            <input type="hidden" name="plan" value="{{$package_record->id}}">
+            </p> 
             <input type="hidden" name="email" value="{{$user->email}}"> {{-- required --}}
             <input type="hidden" name="orderID" value="#{{$orderID}}">
             <input type="hidden" name="amount" value="{{$package_record->price}}.00"> {{-- required in kobo --}}

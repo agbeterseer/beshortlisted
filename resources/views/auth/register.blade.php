@@ -81,14 +81,15 @@ tr:hover {background-color:#f5f5f5;}
  
                                     </li>  
                               
-                                    <li><a href="{{route('list.job')}}" style="padding-top: 40px; padding-bottom: 10px;"> JOBS</a> </li>
+                                 
                                   <li><a href="{{route('employer_infor')}}" style="padding-top: 40px; padding-bottom: 10px;">EMPLOYER</a> 
        
                                   </li> 
                                 <li><a href="{{route('candidates')}}" style="padding-top: 40px; padding-bottom: 10px;">CANDIDATES</a> </li>
 
                        <li><a href="#" style="padding-top: 40px; padding-bottom: 10px;">CONTACT</a>  
-                    </li>                       
+                    </li> 
+                    </ul>                      
  
              </div>
                       </nav>
@@ -128,6 +129,8 @@ tr:hover {background-color:#f5f5f5;}
                 </div>
             </div>
         </header>
+ 
+
         <!-- Header -->
         
         <!-- Banner v #1E3142 -->

@@ -13,6 +13,7 @@ use Auth;
 use Carbon\Carbon;
 use App\EmployerPackage;
 use App\Planpackage;
+use App\Menu;
 class PaymentController extends Controller
 {
 
@@ -20,9 +21,27 @@ class PaymentController extends Controller
      * Redirect the User to Paystack Payment Page
      * @return Url
      */
+ public function displayMenu(){
+
+     return $menus = Menu::where('status', 1)->orderBy('menu_order', 'ASC')->get();
+   }
+
+public function displayUnit()
+{
+  $user = Auth::user();
+  return $units = EmployerPackage::where('status', 1)->where('userfkp', $user->id)->first();
+}
     public function redirectToGateway()
     {
-        return Paystack::getAuthorizationUrl()->redirectNow();
+      try {
+
+          return Paystack::getAuthorizationUrl()->redirectNow();
+
+      } catch (\Exception $e) { 
+        Session::flash('error', 'something went wrong'); 
+        return redirect()->back();
+      }
+      
     }
 
     public function returnCurrentTime()
@@ -38,25 +57,42 @@ class PaymentController extends Controller
      */
     public function handleGatewayCallback()
     {
-        $paymentDetails = Paystack::getPaymentData();
+      $user = Auth::user();
+    $paymentDetails = Paystack::getPaymentData();
 
-  dd($paymentDetails['data']);
+  //dd($paymentDetails['data']);
   //$paymentDetails['data']['amount']
   //$paymentDetails['data']['email']
   //$paymentDetails['data']['amount']
   //$paymentDetails['data']['customer']['email'])
 //$paymentDetails['data']['status']
+    //$paymentDetails['data']['paid_at']
+
   if ($paymentDetails['data']['status'] === 'success') {
 
   $planpackages = DB::table('planpackages')->where('price', $paymentDetails['data']['amount'])->first();
   //dd($planpackages);
         $user = Auth::user();
-        $employer_packages = DB::table('employer_packages')->insert(['userfkp' => $user->id, 'package_id' => $planpackages->id, 'jobs_remaining' => 0, 'features_remaining' => $planpackages->featured_jobs, 'renew_remaining' => 0, 'job_duration' => $planpackages->job_duration, 'status' => 1, 'units' => $planpackages->jobs_posting, 'created_at' => $paymentDetails['data']['paid_at'], 'amount' => $paymentDetails['data']['amount']]);
+        $employer_package = EmployerPackage::firstOrNew(['userfkp'=>$user->id, 'package_id' => $planpackages->id]);
+        $employer_package->jobs_remaining = 0;
+        $employer_package->features_remaining = $planpackages->featured_jobs;
+        $employer_package->renew_remaining = 0;
+        $employer_package->job_duration = $planpackages->job_duration;
+        $employer_package->status = 1;
+        $employer_package->units = $planpackages->jobs_posting;
+        $employer_package->created_at = $this->returnCurrentTime();
+        $employer_package->amount = $paymentDetails['data']['amount'];
+        $employer_package->save();
+
+
+        // $employer_packages = DB::table('employer_packages')->insert(['userfkp' => $user->id, 'package_id' => $planpackages->id, 'jobs_remaining' => 0, 'features_remaining' => $planpackages->featured_jobs, 'renew_remaining' => 0, 'job_duration' => $planpackages->job_duration, 'status' => 1, 'units' => $planpackages->jobs_posting, 'created_at' => $this->returnCurrentTime(), 'amount' => $paymentDetails['data']['amount']]);
         // Now you have the payment,
         // you can store the authorization_code in your db to allow for recurrent subscriptions
         // you can then redirect or do whatever you want
     }
-
+    $menus = $this->displayMenu();
+   // return Redirect::intended();
+    return view('success_payment', compact('menus'));
     }
 
     public function employerPayment(Request $request)

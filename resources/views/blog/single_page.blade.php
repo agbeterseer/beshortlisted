@@ -43,7 +43,7 @@
                         <div class="col-md-12 careerfy-typo-wrap">
                             <!-- Fancy Title -->
                             <section class="careerfy-fancy-title">
-                                <h2>{{$post->title}}</h2>
+                                <h2>{{$post->title}}d</h2>
                          
                             </section>
                             <!-- Featured Jobs Listings -->

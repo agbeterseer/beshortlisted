@@ -1,7 +1,21 @@
-@extends('admin.tags.layout.tags')
+@extends('layouts.admin_layout', [
+  'page_header' => 'Policy',
+  'dash' => '',
+  'quiz' => '',
+  'users' => '',
+  'questions' => '',
+  'top_re' => '',
+  'all_re' => '',
+  'sett' => '',
+  'candidate' => '',
+    'policy' => 'active', 
+  'package' => '',
+  'page' => ' ',
+     'role' => '',
+  'user' => '',
+])
 @section('content')
- 
-
+     
 
 
                                 @if(Session()->has('success'))

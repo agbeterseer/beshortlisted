@@ -176,9 +176,7 @@ public function AddFieldsOfStudy(Request $request)
    //dd($request->all());
     $title = $request->title;
     $displayname = $request->displayname; 
-  
-
-     $rules = [
+    $rules = [
                 'title' => 'required|string',
                 'displayname' => 'required|string', 
         ];

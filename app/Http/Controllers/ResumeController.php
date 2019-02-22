@@ -2329,6 +2329,7 @@ $answer->answer = $job_assessment_answer[$count++];
 $answer->created_at = $this->returnCurrentTime();
 $answer->save();
 }
+
 $this->CompareRequirments($resume, $tag_id);
 
 $this->CheckNumberOfApplicationPerJob($tag_id, $jobapplication);
