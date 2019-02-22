@@ -10,8 +10,12 @@
   'candidate' =>'',
   'taxcalculator' => '',
   'finance' => '',
-  'email' =>
-
+  'email' => '',
+    'policy' => '',
+  'package' => 'active',
+    'page' => '', 
+  'role' => '',
+  'user' => '',
 ])
 @section('content')
         <div class="col-md-12">

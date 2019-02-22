@@ -9,7 +9,13 @@
   'sett' => '',
   'candidate' =>'',
   'taxcalculator' => '',
-  'finance' => ''
+  'finance' => '',
+  'email' => '',
+    'policy' => '',
+  'package' => 'active',
+    'page' => '', 
+  'role' => '',
+  'user' => '',
 ])
 @section('content')
     

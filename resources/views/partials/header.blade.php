@@ -72,7 +72,7 @@
                 <li class="dropdown dropdown-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
  
-    <img alt="" class="img-circle" src="/uploads/avatars/{{ $user->avatar }}" />
+    <img alt="" class="img-circle" src="/uploads/avatars/{{ Auth::user()->avatar }}" />
     
                     @if(Auth::user())
               

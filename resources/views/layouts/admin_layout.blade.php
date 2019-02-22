@@ -67,12 +67,11 @@
  </head>
     <!-- END HEAD -->
  
-       <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white">
-   
+    <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-content-white">
         <div class="page-wrapper">
             <!-- BEGIN HEADER -->
 
-              @include('admin.layout.includes.header') 
+         @include('partials.header')
 
             <!-- END HEADER -->
             <!-- BEGIN HEADER & CONTENT DIVIDER -->
