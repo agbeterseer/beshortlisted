@@ -72,7 +72,7 @@
         <div class="page-wrapper">
             <!-- BEGIN HEADER -->
 
-         @include('partials.header')
+              @include('admin.layout.includes.header') 
 
             <!-- END HEADER -->
             <!-- BEGIN HEADER & CONTENT DIVIDER -->

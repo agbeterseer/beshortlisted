@@ -200,24 +200,15 @@ protected function authenticated(Request $request, $user)
 
 } 
 
-
      // public function login(Request $request){
-      
-
-     // 	if (Auth::attempt([
+    // 	if (Auth::attempt([
      // 		'email' => $request->email,
      // 		'password' => $request->password
      // 	])){
 
-     // 	$user = User::where('email', $request->email)->first();
-        
-     
-          
-     	
+     // 	$user = User::where('email', $request->email)->first();                     	
      //      return redirect()->route('home');
-     	
      //      }
-
      //      return back()->withInput()->withErrors(['email'=>'Username or password is invalid']);
         
      // } 
