@@ -10,6 +10,8 @@
   'candidate' => '',
   'policy' => '',
   'package' => 'active',
+  'role' => '',
+  'user' => '',
 ])
 
 @section('content')

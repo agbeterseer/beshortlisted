@@ -263,7 +263,7 @@
             </li>
           </ul>
 
-                                  </li>
+     </li>
                           <li class="nav-item {{ $request->segment(1) == 'resume' ? 'active' : '' }} ">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-settings"></i>

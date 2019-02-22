@@ -1657,7 +1657,7 @@ return redirect()->back();
  
     $menus = $this->displayMenu();
     $units = $this->displayUnit();
-          return view('admin.tags.create', compact(['clients', 'professions', 'sort_categories_list', 'cities', 'documents', 's','resumes','countries','cities', 'regions', 'educational_levels', 'industries', 'employement_terms', 'jobcareer_levels', 'industry_professions', 'recruit_profile_pix_list', 'recruit_profile_pix', 'menus', 'units']), array('user' => Auth::user()));
+          return view('admin.tags.create', compact(['clients', 'professions', 'sort_categories_list', 'cities', 'documents', 's','resumes','countries','cities', 'regions', 'educational_levels', 'industries', 'employement_terms', 'jobcareer_levels', 'industry_professions', 'menus', 'units']), array('user' => Auth::user()));
     }
 
 
