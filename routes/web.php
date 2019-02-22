@@ -17,9 +17,8 @@ use App\Menu;
 |
 */ 
  
-Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay'); 
+Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
-
 Route::get('/','HomeController@index');
 Auth::routes();
 Route::get('/test', function () {

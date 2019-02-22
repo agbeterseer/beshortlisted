@@ -58,8 +58,13 @@
                         <aside class="col-md-3">
                             <div class="widget jobsearch_twitter_widget">
                                 <div class="jobsearch_twitter_widget_wrap">
+<<<<<<< HEAD
                                     <p> @beShorlisted</p>
                                     <span> </span>
+=======
+                                    <p>@beShorlisted</p>
+                                    <span>3 hours ago</span>
+>>>>>>> cd138e643dca751295bffdf00c1ebaa9d75e8385
                                 </div>
                                 <small><i class="fa fa-twitter"></i> @beShorlisted</small>
                             </div>
