@@ -163,6 +163,17 @@
 .showHide { display:none; }
 
 /* Desktop*/
+
+@media screen and (min-width: 200px){
+.text-content{
+    padding-right: -556px; 
+}
+
+}
+#find_jobs{
+    display: inline-block;
+     margin-left: 80px; 
+}
 @media screen and (min-width: 768px) {
   .showHide  { display: block; }
   #leftside > button { display: none; }
@@ -196,6 +207,7 @@
     display: inline-block;
 }
 #find_jobs{
+     margin-left: -5px; 
     display: inline-block;
 }
 /*    h1{
@@ -203,7 +215,7 @@
     }*/
  .text-content{ 
  font-size: 11px ;
-    margin-top: 10px;
+margin-top: 10px;
  }
   .careerfy-banner-btn {
    margin-left: 60px !important;
@@ -211,10 +223,7 @@
 }
 
   }
-
- .text-content{
-     margin-left: -40px;
- }
+ 
 .careerfy-banner-btn {
     display: inline-block;
 }
@@ -315,7 +324,7 @@
 .careerfy-featured-listing figure,
 .careerfy-featured-listing-text {
     display: table-cell;
-    vertical-align: middle;
+    vertical-align: middle; 
 }
 .careerfy-featured-listing .careerfy-table-layer                                          { border: 1px solid #ececec; }
 .careerfy-featured-listing figure a                                                        { display: inline-block; }

@@ -1,48 +1,56 @@
+<style type="text/css">
+    .footer_links{
+    color: #ffffff;
+    }
+</style>
 <footer id="careerfy-footer" class="careerfy-footer-two">
-            <div class="container">
+            <div class="container"  >
                 <!-- Footer Widget -->
                 <div class="careerfy-footer-widget">
-                    <div class="row">
-                        <aside class="col-md-9">
-                            <div class="widget widget_section_nav">
+                    <div class="row" >
+                        <span style="color:#ffffff;">
+                        <aside class="col-md-12" >
+                            <div class="col-md-3">
                                 <ul>
-                                    <!-- <li><a href="#">Shortcodes</a></li> -->
-                                    <li><a href="{{route('list.job', 'job-list')}}">Browse Jobs</a></li>
-                                    <li><a href="{{route('single.page', 'helpcenter')}}">Help Center</a></li> 
+                                    <li><a href="#" class="footer_links">Site map</a></li>
+                                    <li><a href="{{route('list.job', 'job-list')}}" class="footer_links">Browse Jobs</a></li>
+                                    <li><a href="{{route('single.page', 'helpcenter')}}" class="footer_links">Help Center</a></li> 
                                 </ul>
                             </div>
-                            <div class="widget widget_section_nav">
+                            <div class="col-md-3">
                                 <ul>
-                                    <li><a href="{{route('list_industries')}}">Browse Industries</a></li>
-                                    <li><a href="{{route('employer_infor')}}">Employer</a></li>
-                                    <li><a href="{{route('single.page', 'guidelines')}}">Guidelines</a></li>
+                                    <li><a href="{{route('list_industries')}}" class="footer_links">Browse Industries</a></li>
+                                    <li><a href="{{route('employer_infor')}}" class="footer_links">Employer</a></li>
+                                    <li><a href="{{route('single.page', 'guidelines')}}" class="footer_links">Guidelines</a></li>
                                 </ul>
                             </div>
-                            <div class="widget widget_section_nav">
+                            <div class="col-md-3">
                                 <ul> 
-                                    <li><a href="{{route('show.resume')}}">Resume Builder</a></li>
-                                    <li><a href="{{route('post.jobs')}}">Add Job</a></li>
-                                    <li><a href="{{route('single.page', 'terms-of-use')}}">NEW - Terms of Use</a></li>
+                                    <li><a href="{{route('show.resume')}}" class="footer_links">Resume Builder</a></li>
+                                    <li><a href="{{route('post.jobs')}}" class="footer_links">Add Job</a></li>
+                                    <li><a href="{{route('single.page', 'terms-of-use')}}" class="footer_links">Terms of Use</a></li>
                                 </ul>
                             </div>
-                            <div class="widget widget_section_nav">
+                            <div class="col-md-3">
                                 <ul>
-                                    <li><a href="{{route('candidates')}}">Candidate</a></li>
-                                    <li><a href="{{route('employer_infor')}}">Job Packages</a></li>
-                                    <li><a href="{{route('display.policy')}}">NEW - Privacy &amp; Cookies</a></li>
+                                    <li><a href="{{route('candidates')}}" class="footer_links">Candidate</a></li>
+                                    <li><a href="{{route('employer_infor')}}" class="footer_links">Job Packages</a></li>
+                                    <li><a href="{{route('display.policy')}}" class="footer_links">Privacy &amp; Cookies</a></li>
                                 </ul>
                             </div>
+</span>
+<p><p>
                             <div class="careerfy-footer-newslatter">
                                 <form id="email_subscription" action="{{route('subscribe')}}" method="get">
                                     <label>Subscribe for weekly newsletter</label> 
                                     <ul>
                                         <li>
                                             <i class="careerfy-icon careerfy-mail"></i>
-                                            <input name="email" placeholder="Sign up for newsletter professionally designed templates." type="text">
+                                            <input name="email" placeholder="Sign up for newsletter" type="text">
                                         </li>
                                         <li>
-                                            <i class="careerfy-icon careerfy-arrows22"></i>
-                                            <input type="submit" value="Subcribe">
+                                    <i class="careerfy-icon careerfy-arrows22"></i>
+                                       <input type="submit" value="Subcribe" style="background-color:#13B5EA;">
                                         </li> 
                                     </ul>
                                     <ul>
@@ -55,15 +63,15 @@
                                 </form>
                             </div>
                         </aside>
-                        <aside class="col-md-3">
+                       <!-- <aside class="col-md-3">
                             <div class="widget jobsearch_twitter_widget">
                                 <div class="jobsearch_twitter_widget_wrap">
-                                    <p>@beShorlisted</p>
+                                    <p>@beShortlisted</p>
                                     <span>3 hours ago</span>
                                 </div>
-                                <small><i class="fa fa-twitter"></i> @beShorlisted</small>
+                                <small><i class="fa fa-twitter"></i> @beShortlisted</small>
                             </div>
-                        </aside>
+                        </aside>  -->
                     </div>
                 </div>
                 <!-- Footer Widget -->
@@ -75,8 +83,10 @@
                         <li><a href="#" class="careerfy-icon careerfy-linkedin-button"></a></li>
                         <li><a href="#" class="careerfy-icon careerfy-dribbble-logo"></a></li>
                     </ul>
-                    <p>Copyrights © 2018 All Rights Reserved beShorlisted.com</p>
+
                 </div>
+             <div style="text-align: left">
+                    <p style="text-align: left; color: #ffffff;">Copyrights © 2018 All Rights Reserved beShorlisted.com</p></div>
                 <!-- CopyRight -->
             </div>
         </footer>

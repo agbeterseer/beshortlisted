@@ -2,7 +2,7 @@
               <div class="container">
                 <div class="row">
                     <aside class="col-md-2"> 
-                      <a href="{{asset('/')}}" class="careerfy-logo" ><img src="{{asset('logo/logo2.jpg')}}" alt="TREEPHR" width="200" height="200">  </a> 
+                      <a href="{{asset('/')}}" class="careerfy-logo" style="margin-top: 0px;" ><img src="{{asset('logo/logo2.jpg')}}" alt="TREEPHR" width="200" height="00">  </a> 
                 
                     </aside>
                     <aside class="col-md-6"> 
@@ -17,7 +17,7 @@
                             <div class="collapse navbar-collapse" id="careerfy-navbar-collapse-1">
                                 <ul class="navbar-nav">
                                 @foreach($menus as $menu)
-                                       <li > <a href="{{$menu->routes}}" style="padding-top: 40px; padding-bottom: 10px;"> {{strtoupper($menu->name)}}</a></li> 
+                                       <li > <a href="{{$menu->routes}}"> {{strtoupper($menu->name)}}</a></li> 
                                 @endforeach 
                     </ul>  
                   </div>

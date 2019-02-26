@@ -15,19 +15,12 @@
                             </div>
                             <div class="collapse navbar-collapse" id="careerfy-navbar-collapse-1">
                                 <ul class="navbar-nav">
-                                 <li class="active"><a href="{{asset('/')}}" style="padding-top: 40px; padding-bottom: 10px;">HOME</a>
- 
-                                    </li>  
-                              
-                                    <li><a href="#" style="padding-top: 40px; padding-bottom: 10px;"> JOBS</a> </li>
-                                  <li><a href="{{route('employer_infor')}}" style="padding-top: 40px; padding-bottom: 10px;">EMPLOYER</a> 
-                      
-                                  </li>
-                                        
-                        <li><a href="{{route('candidates')}}" style="padding-top: 40px; padding-bottom: 10px;">CANDIDATES</a> 
-                  
-                    </li>
-                       <li><a href="" style="padding-top: 40px; padding-bottom: 10px;">CONTACT</a>  
+                                 <li class="active"><a href="{{asset('/')}}">HOME</a> </li>  
+                        <li><a href="#"> JOBS</a> </li>
+                        <li><a href="{{route('employer_infor')}}" >EMPLOYER</a>  </li>             
+                        <li><a href="{{route('candidates')}}" >CANDIDATES</a> 
+                        </li>
+                       <li><a href="" >CONTACT</a>  
                     </li>                       
  
              </div>

@@ -11,6 +11,11 @@
   'taxcalculator' => '',
   'finance' => '',
   'email' => '',
+  'policy' => '',
+  'package' => 'active',
+  'page' => '', 
+  'role' => '',
+  'user' => '',
 ])
 @section('content')
         <div class="col-md-8 col-md-offset-2">

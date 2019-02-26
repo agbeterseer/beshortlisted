@@ -20,13 +20,17 @@
                         </div>
                         @endif
         <!-- Banner -->
+
         <div class="careerfy-banner careerfy-typo-wrap">
             <span class="careerfy-banner-transparent"></span>
             <div class="careerfy-banner-caption">
-                <div class="container">
-                    <div class="text-content" > 
+                <div class="container">  
+        <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div>
+                <div class="text-content"> 
                      <h1>Aim Higher. Reach Farther. Dream Bigger.</h1>
-                    <p>A better career is out there. We'll help you find it.</p> </div>
+                    <p>A better career is out there. We'll help you find it.</p> 
+                </div>
                     <form class="careerfy-banner-search" action="{{route('job.listing')}}" method="GET" id="find_jobs">
                         <div class=" col-md-4 careerfy-select-style">
                                     <select name="s"  required="required">
@@ -64,7 +68,7 @@
         <!-- Banner -->
  
         <!-- Main Content -->
-        <div class="careerfy-main-content" style="background-color: #ffffff;"> 
+        <div class="careerfy-main-content" > 
             <!-- Main Section -->
             <div class="careerfy-main-section careerfy-counter-full">
                 <div class="container">
@@ -95,7 +99,7 @@
             <!-- Main Section -->
        
             <!-- Main Section -->
-            <div class="careerfy-main-section animation-test">
+            <div class="careerfy-main-section animation-test" >
                 <div class="container">
                     <div class="row">
                  <div class="careerfy-element-text" align="center" data-os-animation="fadeIn">
@@ -105,13 +109,13 @@
                             <!-- Fancy Title -->  
                           <div class="space">&nbsp;</div>
                             <!-- Featured Jobs Listings  jobs-->
-                            <div class="careerfy-job-listing careerfy-featured-listing">
+                            <div class="careerfy-job-listing careerfy-featured-listing" >
                                 <ul class="careerfy-row">
                                 @forelse($jobs as $job)
-                                    <li class="careerfy-column-6 animation-test">
-                                        <div class="careerfy-table-layer">
+                                    <li class="careerfy-column-6 animation-test" >
+                                        <div class="careerfy-table-layer" style="background-color: #ffffff;">
                                             <div class="careerfy-table-row">
-                                     <!--     <figure><a href="{{route('apply.job', $job->id)}}"><img src="{{asset('img/extra-images/featured-listing-1.jpg')}}" alt="" height="65" width="65"></a></figure> -->
+                                       <figure><a href="{{route('apply.job', $job->id)}}"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-featured-listing-text">
                                                     <h2><a href="{{route('job.description', $job->id)}}"> {{$job->job_title}}<!--  <span>Featured</span> --></a></h2>
                                                     <a href="#" class="careerfy-like-list"><i class="careerfy-icon careerfy-heart"></i></a>
@@ -123,7 +127,7 @@
                                                         <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#">@foreach($industry_professions as $profession) @if($profession->id === $job->job_category){{$profession->name}} @endif @endforeach</a></li>
                                                         <li>| <i>  @foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type){{$employement_term->name}} @endif @endforeach</i></li>
                                                     </ul>
-                                                        <a href="#" class="careerfy-option-btn">@foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type)featured @endif @endforeach</a>
+                                                        <a href="#" class="careerfy-option-btn">@foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type)Apply @endif @endforeach</a>
                                                     </div>
                                                 </div>
                                             </div>

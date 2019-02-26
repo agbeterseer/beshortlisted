@@ -174,7 +174,7 @@ border-color: white !important;
                         <div class="careerfy-column-8 careerfy-typo-wrap">
                             <div class="careerfy-typo-wrap">
                                 <!-- FilterAble -->
-                                <div class="careerfy-filterable">
+                            <!--     <div class="careerfy-filterable">
                                     <h2>Showing 0-12 of 37 results</h2>
                                     <ul>
                                         <li>
@@ -182,7 +182,7 @@ border-color: white !important;
                                         <li><a href="#"><i class="careerfy-icon careerfy-squares"></i> Grid</a></li>
                                         <li><a href="#"><i class="careerfy-icon careerfy-list"></i> List</a></li>
                                     </ul>
-                                </div>
+                                </div> -->
                                 <!-- FilterAble -->
                                 <!-- JobGrid -->
                                 <div class="careerfy-job careerfy-joblisting-classic">
@@ -190,7 +190,7 @@ border-color: white !important;
                                     @forelse($tags as $tag)
                                         <li class="careerfy-column-12">
                                             <div class="careerfy-joblisting-classic-wrap">
-                                                <figure><a href="{{route('apply.job', $tag->id)}}"><img src="/img/extra-images/job-listing-logo-1.png" alt=""></a></figure>
+                                                <figure><a href="{{route('apply.job', $tag->id)}}"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-joblisting-text">
                                                     <div class="careerfy-list-option">
                                                         <h2><a href="{{route('apply.job', $tag->id)}}"> {{$tag->job_title}} </a> <!-- <span>Featured</span> --> </h2>
