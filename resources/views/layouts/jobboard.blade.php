@@ -49,6 +49,19 @@ tr:hover {background-color:#f5f5f5;}
   height: auto;
 }
    </style> 
+   <style type="text/css"> 
+    .scroll_div{
+    overflow:scroll;
+    overflow-x:hidden;
+    overflow-y:scroll;
+    height:200px;
+    }
+    .mini_header{
+border-color: white !important;
+
+    }
+ 
+</style>
 </head>
 <body>
     <!-- Wrapper -->
@@ -60,9 +73,7 @@ tr:hover {background-color:#f5f5f5;}
         <!-- Banner -->
         <!-- Main Content -->
         <div class="careerfy-main-content" style="margin-top: -50px;">
- 
         @yield('content')
-
         </div>
         <!-- Main Content -->
         <!-- Footer -->
