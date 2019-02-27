@@ -67,9 +67,8 @@ tr:hover {background-color:#f5f5f5;}
       <header id="careerfy-header" class="careerfy-header-one">
             <div class="container">
                 <div class="row">
-                    <aside class="col-md-2"> <a href="{{asset('/')}}" class="careerfy-logo"><img src="{{asset('logo/logo2.jpg')}}" alt="TREEPHR"></a> </aside>
+                    <aside class="col-md-2"> <a href="{{asset('/')}}" class="careerfy-logo" style="margin-top: 0px;"><img src="{{asset('logo/logo2.jpg')}}" alt="TREEPHR"></a> </aside>
                     <aside class="col-md-6">
-
                         <nav class="careerfy-navigation">
                             <div class="navbar-header">
                                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#careerfy-navbar-collapse-1" aria-expanded="false">
@@ -80,18 +79,11 @@ tr:hover {background-color:#f5f5f5;}
                             </div>
                             <div class="collapse navbar-collapse" id="careerfy-navbar-collapse-1">
                                 <ul class="navbar-nav">
-                
-                                    <li class="active"><a href="{{asset('/')}}" style="padding-top: 40px; padding-bottom: 10px;">HOME</a>
- 
-                                    </li>  
-                              
-                                    <li><a href="{{route('list.job', 'job-list')}}" style="padding-top: 40px; padding-bottom: 10px;"> JOBS</a> </li>
-                                  <li><a href="{{route('employer_infor')}}" style="padding-top: 40px; padding-bottom: 10px;">EMPLOYER</a> 
-       
-                                  </li> 
-                                <li><a href="{{route('candidates')}}" style="padding-top: 40px; padding-bottom: 10px;">CANDIDATES</a> </li>
-
-                       <li><a href="#" style="padding-top: 40px; padding-bottom: 10px;">CONTACT</a>  
+                                    <li class="active"><a href="{{asset('/')}}">HOME</a></li>  
+                                    <li><a href="{{route('list.job', 'job-list')}}"> JOBS</a> </li>
+                                  <li><a href="{{route('employer_infor')}}">EMPLOYER</a></li> 
+                                <li><a href="{{route('candidates')}}">CANDIDATES</a> </li>
+                       <li><a href="#">CONTACT</a>  
                     </li>                       
  
              </div>
