@@ -65,8 +65,7 @@
                                 </form>
                             </div>
                         </aside>
- 
-     @include('sweet::alert') 
+  
                     </div>
                 </div>
                 <!-- Footer Widget -->
