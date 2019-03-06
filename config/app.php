@@ -169,8 +169,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class,
-         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class, 
         // Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
 
 
@@ -261,8 +260,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
-         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
+        'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class, 
         // 'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
 
     ],
