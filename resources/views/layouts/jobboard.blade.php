@@ -61,8 +61,7 @@ border-color: white !important;
 
     }
  
-</style>
- <script src="js/sweetalert.min.js"></script> 
+</style> 
 </head>
 <body>
     <!-- Wrapper -->
@@ -76,7 +75,7 @@ border-color: white !important;
         <div class="careerfy-main-content" style="margin-top: -60px;">
         @yield('content')
        
-        @include('sweet::alert')
+   
         </div>
         <!-- Main Content -->
         <!-- Footer -->
