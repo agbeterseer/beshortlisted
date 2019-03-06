@@ -35,7 +35,9 @@
     overflow-y:scroll;
     height:200px;
     }
- 
+ .white_background{
+  background-color: #ffffff;
+ }
 </style>
 
          @if(Session()->has('error'))
@@ -94,7 +96,7 @@
                         <!-- Job Detail Content -->
                         <div class="careerfy-column-8">
                             <div class="careerfy-typo-wrap">
-                                <div class="careerfy-jobdetail-content">
+                                <div class="careerfy-jobdetail-content white_background">
                                     <div class="careerfy-content-title"><h2>Job Detail</h2></div>
                                     <div class="careerfy-jobdetail-services">
                                         <ul class="careerfy-row">
@@ -238,26 +240,11 @@
                         <!-- Job Detail SideBar -->
                         <aside class="careerfy-column-4">
                             <div class="careerfy-typo-wrap">
-                            <!--     <div class="widget widget_apply_job">
-                                    <div class="widget_apply_job_wrap">
-                                        <a href="#" class="careerfy-applyjob-btn">Apply for the job</a>
-                                        <span>Application ends in 4d 5h 3m</span>
-                                        <div class="careerfy-applywith-title"><small>OR apply with</small></div>
-                                        <p>Know someone who would be perfect for  this role this role? Be a pal, let them know.</p>
-                                        <ul>
-                                            <li><a href="#"><i class="careerfy-icon careerfy-facebook-logo-1"></i> Facebook</a></li>
-                                            <li><a href="#"><i class="careerfy-icon careerfy-linkedin-logo"></i> LinkedIn</a></li>
-                                        </ul>
-                                    </div>
-                                    <a href="#" class="careerfy-sendmessage-btn"><i class="careerfy-icon careerfy-envelope"></i> Send a message</a>
-                                </div> -->
-                            <!--     <div class="widget jobsearch_widget_map">
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d22589232.038285658!2d-103.9763543971716!3d46.28054447273778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1507595834401"></iframe>
-                                </div> -->
+                     
                                 <div class="widget widget_add">
-                                    <img src="img/extra-images/jobdetail-add.jpg" alt="">
+                                     <img src="{{asset('/img/job.png')}}" alt="">
                                 </div>
-                                <div class="widget widget_view_jobs">
+                                <div class="widget widget_view_jobs white_background">
                                 <!-- get employee that posted this job -->
                                     <div class="careerfy-widget-title"><h2>More Jobs from  @foreach($get_all_user_list as $user) @if($user->id === $tag->client) {{$user->name}}@endif @endforeach</h2></div>
                                     <ul>
@@ -267,17 +254,7 @@
                                             <span>{{$similar_job->salary_range}} per annum</span>
                                             <small>{{$similar_job->country}},  @foreach($cities as $city) @if($similar_job->city === $city->id) {{$city->name}} @endif @endforeach</small>
                                         </li>
-                                        @endforeach
-                                  <!--       <li>
-                                            <h6><a href="#">Electrical Maintenance Engineer PLCs</a></h6>
-                                            <span>£25,000 - £33,000 per annum</span>
-                                            <small>London, United Kingdom</small>
-                                        </li>
-                                        <li>
-                                            <h6><a href="#">Electrical Maintenance Engineer FMCG Manufacturer</a></h6>
-                                            <span>£30,000 - £33,000 per annum</span>
-                                            <small>Sutton-in-Ashfield, Nottinghamshire</small>
-                                        </li> -->
+                                        @endforeach 
                                     </ul>
                                     <a href="#" class="widget_view_jobs_btn">View all jobs <i class="careerfy-icon careerfy-arrows32"></i></a>
                                 </div>

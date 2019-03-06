@@ -48,78 +48,6 @@ public function beginTest($id, $user_id)
 }
 
 
-
- //   public function addItem(Request $request)
- //    {
- 
- //        $rules =[
- //            'candidates_name' => 'required',
- //            'years_of_experience' => 'required',
- //            'region_id' => 'required',
- //            'city_id' => 'required',
- //            'profession'=>'required',
-    
- //        ];
-    
-     
- //        $validator = Validator::make(Input::all(), $rules);
- //        if ($validator->fails()) {
- //            return Response::json(array(
-
- //                    'errors' => $validator->getMessageBag()->toArray(),
- //            ));
- //        } else {
-
- //        $file = $request->file;
-       
- //         $allowedFileTypes = config('app.allowedFileTypes');
-
- //         $maxFileSize = config('app.maxFileSize');
-
- //         $rules = [
- //            'file' => 'required|mimes:'.$allowedFileTypes.'|max:'.$maxFileSize
- //        ];
- //  		dd($rules);
-
- //       $check = $this->validate($request, $rules);
-    
-       
- //        $fileName = $file->getClientOriginalName();
- //        $uploaded = Storage::cloud()->put($fileName, file_get_contents($file->getRealPath()));
-
- //        if ($uploaded) {
- //            $data = new Document;
- //            $data->candidates_name = $request->candidates_name;
- //            $data->years_of_experience = $request->years_of_experience;
- //            $data->city_id = $request->city_id;
- //            $data->region_id = $request->region_id;
- //            $data->save();
-
- //            if ($data) {
- //     		$data = Document::find($indocument->id);
- //        	$data->cv_file=$fileName;
- //        	$data->save();
-
-
-	// 	       foreach ($request->profession as $key => $value) {
-		      
-	// 	        $data->professions()->attach($value);
-	// 	    }
- //        }
-
-	// }
-  //          return response()->json($data);
- //        }
-//    }
-
-    //   public function show(Request $request, User $user)
-    // {
-    //      $value = $request->session()->get('key');
-
-    //     return view('candidate.show',  array('user' => Auth::user())); 
-    // }
-
-
 function generatePIN($digits = 4){
     $i = 0; //counter
     $pin = ""; //our default pin is blank.
@@ -161,8 +89,6 @@ function generatePIN($digits = 4){
         // generate pin for each candidate
        // $pin = $this->generatePIN(15);
 
-
- 
         //$city_id = City::find(9001);
          $city_id = DB::table('cities')->where('name',$location)->first();
          $city_id = $city_id->id;
@@ -195,15 +121,11 @@ function generatePIN($digits = 4){
         //dd($request->all());  
 
         DB::transaction(function() use ($city_id, $request, $rules, $profession, $fileName) {
-      //dd($request->career_level);
-       // $indocument = new Document;
-       //get input and store into variables set all input to insert to db
         
         try {
-        // $indocument = Document::firstOrNew(['email' => $request->email], ['candidates_name'=> title_case($request->candidates_name)]);
         $indocument = new Document;
         $indocument->candidates_name = title_case($request->candidates_name);
-        $indocument->years_of_experience = $request->years_of_experience;1
+        $indocument->years_of_experience = $request->years_of_experience;
         $indocument->city_id = $city_id;
         $indocument->region_id = $request->region;
         $indocument->gender = $request->gender;
@@ -213,11 +135,8 @@ function generatePIN($digits = 4){
         $indocument->phonenumber = $request->phonenumber;
         $indocument->job_type = $request->job_type;
         $indocument->years_of_experience = $request->years_of_experience;
-        //$indocument->relocate_nationaly = $request->relocate_nationaly;
-        //$indocument->relocate_internationaly = $request->relocate_internationaly;
         $indocument->availability = $request->availability;
         $indocument->career_highlights = $request->career_highlights;
-        //$indocument->annual_salary = $request->annual_salary;
         $indocument->availability_date = new Date($request->date_of_birth);
         $indocument->educational_level = $request->educational_level;
         $indocument->career_level = $request->career_level;
@@ -261,7 +180,6 @@ function generatePIN($digits = 4){
  
     $indocument = Document::where('id', $indocument->id)->update(['cv_file' => $fileName]);
  
-
  
 });
        \LogActivity::addToLog($request->candidates_name .' Has Applied for a Job.');
@@ -276,135 +194,6 @@ function generatePIN($digits = 4){
         //return $this->show_success($request->candidates_name);
     }
 
-/*
- public function JobApplication(Request $request)
-    {
-        // generate application number
-        // generate application pin
-        // create applicatant to user table
-        // make application
-        $candidates_name = $request->candidates_name;
-        $gender = $request->gender;
-        $ethnicity = $request->ethnicity;
-        $date_of_birth = $request->date_of_birth;
-        $email = $request->email;
-        $phonenumber = $request->phonenumber;
-        $job_type = $request->job_type;
-        $relocate_nationaly = $request->relocate_nationaly;
-        $relocate_internationaly = $request->relocate_internationaly;
-        $availability = $request->availability;
-        $career_highlights = $request->career_highlights;
-        $annual_salary = $request->annual_salary;
-        $location = $request->location;
-        $profession =$request->profession;
-        $educational_level = $request->educational_level;
-        $career_level = $request->career_level;
-        $demployment_terms = $request->demployment_terms;
-
-        // generate pin for each candidate
-        $pin = $this->generatePIN(15);
-     dd($request->all());
-        $user = User::firstOrNew(['email' => $email]);
-        $user->name = $candidates_name;
-        $user->email =$email;
-        $user->password = bcrypt($pin);
-        $user->save();
- 
-        //$city_id = City::find(9001);
-         $city_id = DB::table('cities')->where('name',$location)->first();
-         $city_id = $city_id->id;
- 
-    if ($request->hasFile('file')) {
-
-    }else{
-         // validate $this->uploadIsValid($request)
-            //access to the file
-        $file = $request->file('file'); 
-
-        $allowedFileTypess = config('app.allowedFileTypess');
-
-        $maxFileSize = config('app.maxFileSize');
-
-        $rules = [
-            'file' => 'required|mimes:'.$allowedFileTypess.'|max:'.$maxFileSize
-        ];
-        
-         $this->validate($request, $rules); 
-           
-        try {
-                $fileName = $file->getClientOriginalName();
-                $uploaded = Storage::cloud()->put($fileName, file_get_contents($file->getRealPath()));
-
-        } catch (\Exception $e) {
-            Session::flash('no-connection','Please check your network connectivity');
-        $request->session()->flash('message.level', 'danger');
-        $request->session()->flash('message.content',  $e->getMessage());
-
-            return redirect()->back();
-        }
-     
-        //dd($request->all());  
-
-        DB::transaction(function() use ($city_id, $request, $rules, $profession, $fileName) {
-        // dd($request->all());
-       // $indocument = new Document;
-       //get input and store into variables set all input to insert to db
-        try {
-        $indocument = Document::firstOrNew(['email' => $request->email], ['candidates_name'=> title_case($request->candidates_name)]);
-        //$indocument->candidates_name = title_case($request->candidates_name);
-        $indocument->years_of_experience = $request->years_of_experience;
-        $indocument->city_id = $city_id;
-        $indocument->region_id = $request->region;
-        $indocument->gender = $request->gender;
-        $indocument->ethnicity = $request->ethnicity;
-        $indocument->date_of_birth = new Date($request->date_of_birth);
-        $indocument->email = $request->email;
-        $indocument->phonenumber = $request->phonenumber;
-        $indocument->job_type = $request->job_type;
-        $indocument->relocate_nationaly = $request->relocate_nationaly;
-        $indocument->relocate_internationaly = $request->relocate_internationaly;
-        $indocument->availability = $request->availability;
-        $indocument->career_highlights = $request->career_highlights;
-        $indocument->annual_salary = $request->annual_salary;
-        $indocument->black_list = 1;
-        $indocument->tag_id = $profession;
-        $indocument->save();
-            } catch (\Exception $e) {
-                Session::flash('error', $e->getMessage());
-                 return redirect()->back()->withErrors('error' . $e->getMessage());
-            }
-
-    try {
-    // get the real profession ID to link with the Document
-          $get_profession_meta = DB::table('profession_metas')->where('tag_id',$profession)->get();
-         foreach ($get_profession_meta as $key => $value) {  
-               $newProfession = Profession::find($value->profession_id)->id;
-
-         } 
-
-    $indocument->professions()->attach($newProfession);
- 
-    } catch (\Exception $e) {
-               Session::flash('error', $e->getMessage());
-           return redirect()->back()->withErrors('error' . $e->getMessage());
-    }
- 
-    $indocument = Document::where('id', $indocument->id)->update(['cv_file' => $fileName]);
- 
-});
-       \LogActivity::addToLog($request->candidates_name .' Has Send CV.');
-  }
-
-  
-      //  dd('log insert successfully.');
-   
-    $request->session()->flash('message.level', 'success');
-    $request->session()->flash('message.content', $fileName .'CV Uploaded successfully!');
-  
-        // return redirect()->route('candidate.index');
-        return $this->show_success($request->candidates_name);
-    }
-*/
 
  public function addCandidate(Request $request)
     {
@@ -454,9 +243,6 @@ function generatePIN($digits = 4){
     //dd($request->all());  
 
         DB::transaction(function() use ($city_id, $request, $fileName) {
-   // dd($request->all());
-       // $indocument = new Document;
-       //get input and store into variables set all input to insert to db
             try {
          $indocument = Document::firstOrNew(['email' => $request->email], ['candidates_name'=> title_case($request->candidates_name)]);
     //    $indocument->candidates_name = title_case($request->candidates_name);
@@ -686,18 +472,7 @@ public function SendEmailToCandidates(){
           $data = array_combine($escapedHeader, $columns);
           $email=$data['email'];
           $status=$data['status']; 
-              // dd($email);
-    //  try {
-    //   // if ($email === $email) {
-    //     Mail::to($email)->queue(new UploadCV()); 
-    //   // }
-    //      // $when = Carbon::now()->addSeconds(2);
-    //       // $this->info('messages sent successfully!'); 
-    // } catch (\Exception $e) {
-    //     // print_r('Birthday messages not sent');
-    //   return redirect()->back()
-    //       ->withErrors(['error' => $e->getMessage()]);
-    // }
+
   $request->session()->flash('message.level', 'success');
   $request->session()->flash('message.content', 'Records Uploaded successfully!');
 
@@ -709,9 +484,6 @@ public function SendEmailToCandidates(){
               $candidate->status = $status;
               $candidate->created_at = $currentTime;
               $candidate->save();
-
-
-             // DB::table('candidates')->insert(['email'=>$email, 'status' => 1, 'created_at' => $currentTime]);
         
      });
 
@@ -728,8 +500,8 @@ public function SendEmailToCandidates(){
   $candidates = DB::table('candidates')->orderBy('created_at','DESC')->get();
 
 return $this->showEmails();
- // return view('admin.extra.candidates', compact('candidates'), array('user' => Auth::user()));
-    }
+    
+}
 
 
 public function showUploadPage() {

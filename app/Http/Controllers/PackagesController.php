@@ -90,7 +90,7 @@ try {
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'done successfully!'); 
     }
-  
+  return redirect()->route('plans.index');
 } catch (\Exception $e) {
      return redirect()->back()
           ->withErrors(['error' => 'Some thing went wrong']);
@@ -150,7 +150,7 @@ try {
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'done successfully!'); 
     }
-  
+  return redirect()->route('plans.index');
 } catch (\Exception $e) {
      return redirect()->back()
           ->withErrors(['error' => 'Some thing went wrong']);

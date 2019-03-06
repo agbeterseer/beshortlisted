@@ -284,7 +284,7 @@ class PostController extends Controller
 
     public function AddPageContent(CreatePageContent $request)
     {
-        dd($request->all());       
+        //dd($request->all());       
         $user = Auth::user();
         //$avatar = $request->file('avatar');
         $banner = $request->file('banner');
@@ -311,10 +311,74 @@ class PostController extends Controller
         $page_content->post_id = $request->title;
         $page_content->content = $request->content; 
         $page_content->post_type = $request->post_type;
-        $page_content->content_image = $banner;
+        $page_content->content_image = $filename;
         $page_content->created_at = $this->returnCurrentTime();
         $page_content->save();
- return redirect()->route('pages.index');
+    return redirect()->route('pages.index');
+    }
+
+
+    public function showPageInforForm()
+    { 
+        return view('admin.pages.page_information');
+    }
+
+    public function AddPageInfor(Request $request)
+    { 
+       // dd($request->all());
+         $banner = $request->file('blog_image');
+        $rules = [
+        '_token'=>'required',
+        'banner' =>'required|jpg,jpeg,png,gif|max:381872',
+        ];
+
+        $input = Input::only(
+        '_token',
+        'banner'
+        );
+
+        $filename = time() . '.' . $banner->getClientOriginalExtension();
+        $banner->move(public_path('/uploads/banners/'), $filename);
+        $validator = Validator::make($input, $rules);
+     
+         if(!$validator)
+        {
+          Session::flash('error-avatar', 'error');
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
+        DB::table('page_informations')->insert(['name' => $request->title, 'description' => $request->description, 'image' =>$filename, 'status' => 1, 'created_at' => $this->returnCurrentTime(), 'category' => $request->category ]);
+        $request->session()->flash('message.level', 'success');
+        $request->session()->flash('message.content', 'Done successfully!');
+        return redirect()->back();
+    }
+
+        public function UpdatePageInfor(Request $request)
+    { 
+        //dd($request->all());
+         $banner = $request->file('blog_image');
+        $rules = [
+        '_token'=>'required',
+        'banner' =>'required|jpg,jpeg,png,gif|max:381872',
+        ];
+
+        $input = Input::only(
+        '_token',
+        'banner'
+        );
+
+        $filename = time() . '.' . $banner->getClientOriginalExtension();
+        $banner->move(public_path('/uploads/banners/'), $filename);
+        $validator = Validator::make($input, $rules);
+     
+         if(!$validator)
+        {
+          Session::flash('error-avatar', 'error');
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
+     DB::table('page_informations')->where('id', $request->id)->update(['name' => $request->title, 'description' => $request->description, 'image' =>$filename, 'status' => 1, 'updated_at' => $this->returnCurrentTime(), 'category' => $request->category ]);
+        $request->session()->flash('message.level', 'success');
+        $request->session()->flash('message.content', 'Done successfully!');
+        return redirect()->back();
     }
 
 }

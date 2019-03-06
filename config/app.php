@@ -18,7 +18,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Rhizome cv-mgt'),
+    'name' => env('APP_NAME', 'beShortlisted'),
 
     /*
     |--------------------------------------------------------------------------
@@ -170,6 +170,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         // Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
 
 
@@ -261,6 +262,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
+         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         // 'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
 
     ],

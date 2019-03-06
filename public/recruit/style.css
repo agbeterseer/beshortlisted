@@ -462,7 +462,8 @@ address                         { font-style: italic; }
     width: 100%;
     background: url(extra-images/banner-bg.jpg);
     position: relative;
-    padding: 138px 0px 139px 0px;
+    padding: 138px 0px 139px 0px;#
+    background-repeat: no-repeat;
 }
 .careerfy-banner-transparent {
     background-color: #1e3142;

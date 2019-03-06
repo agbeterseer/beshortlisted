@@ -21,9 +21,15 @@ Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 Route::get('/','HomeController@index');
 Auth::routes();
-Route::get('/test', function () {
-    return view('tests.test');
-});
+Route::post('/test', [
+	'as' => 'send.email',
+	'uses' => 'HomeController@sendEmail'
+]);
+
+Route::get('/industries-with-job-opening/{id}', [
+	'as'=> 'job_opening',
+	'uses'=> 'HomeController@getJobsByIndustries'
+]);
 Route::get('/post-page/{id}', [
 	'as'=> 'single.page',
 	'uses'=> 'HomeController@vieSinglePage'
@@ -38,12 +44,10 @@ Route::get('/rhizome-admin', function () {
 Route::get('/help-center', function () { 
     return view('helpcenter');
 });
-
 Route::get('/page/{page}', [
 'as' => 'single.page',
 'uses' => 'HomeController@showSinglePage'
 ]);
-
 Route::get('/guidelines', [
 	'as'=> 'guidelines',
 	'uses'=> 'HomeController@guidelines'
@@ -52,7 +56,6 @@ Route::get('/guidelines', [
 	'as'=> 'helpcenter',
 	'uses'=> 'HomeController@helpcenter'
 ]);
-
 //'/onlinetest_link/link/'. $this->user->test_id . '/candidate/'. $this->user->id
 Route::get('/index/candidate-information', [
 	'as' => 'candidates',
@@ -66,7 +69,6 @@ Route::get('/index/contact-information', [
 	'as' => 'contactus',
 	'uses' => 'HomeController@contact'
 	]);
-
 Route::post('contactus', [
 	'as' => 'post.message',
 	'uses' => 'HomeController@addContactUs'
@@ -118,38 +120,47 @@ Route::get('/test/start_test-{id}-candidate-{user}',[
 	'uses'=> 'LoginController@logout',
 	'as'=> 'logout'
 	]);
+ 
 
-// Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+	// Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 	 Route::get('auth/{provider}', 'LoginController@redirectToProvider');
-
 	//Route::get('auth/{provider}', 'LoginController@auth')
    // ->where(['provider' => 'facebook|google|twitter|linkedin']);
-
    // Route::get('auth/{provider}/callback', 'LoginController@login')
    // ->where(['provider' => 'facebook|google|twitter']);
-
 	Route::get('auth/{provider}/callback', 'LoginController@handleProviderCallback');
 	Route::group(array('before' => 'auth', 'after' => 'no-cache', 'middleware' => 'web'),  function (){
-
-
 	Route::get('/employer/create-card', [
 		'as' => 'create.card',
 		'uses' => 'SettingController@CreateCard' 
 	]);
-Route::post('add-card', [
-	'as' => 'add.card',
-	'uses' => 'SettingController@AddCard'
-]);
-	// Route::get('/employer/setting/', [
-	// 	'as' => 'employer.setting',
-	// 	'uses'=> 'SettingController@EmplpoyerSetting'
-	// ]);
+	Route::post('add-card', [
+		'as' => 'add.card',
+		'uses' => 'SettingController@AddCard'
+	]);
+		// Route::get('/employer/setting/', [
+		// 	'as' => 'employer.setting',
+		// 	'uses'=> 'SettingController@EmplpoyerSetting'
+		// ]);
+
+	Route::post('/add-page-information', [
+		'as' => 'add.page_infor',
+		'uses' => 'PostController@AddPageInfor'
+	]);
+	Route::get('/show-information', [
+		'as' => 'page_infor',
+		'uses' => 'PostController@showPageInforForm'
+	]);
+//UpdatePageInfor
+	Route::post('/update-page-information', [
+		'as' => 'update.page',
+		'uses' => 'PostController@UpdatePageInfor'
+	]);
 
 	Route::get('/settings/list-contact-form', [
 		'as' => 'show.contacts',
 		'uses'=> 'SettingController@listContactForms'
 	]);
-
 	Route::get('/settings/publish-contact-form/{id}', [
 		'as' => 'publish.contact',
 		'uses'=> 'SettingController@PublishContactForm'
@@ -187,7 +198,6 @@ Route::post('add-card', [
 			'as' => 'dashboard',
 			'uses' => 'ResumeController@employer'
 		]);
-
 	Route::get('/board', 'DashboardController@index')->name('board')->middleware('auth');	
  	Route::get('/index/employee_dashboard', [
  		'as' => 'candidate',
@@ -365,17 +375,14 @@ Route::post('add-card', [
 		'as' => 'shortlist.index',
 		'uses' => 'ShortlistController@index' 
 		]);
-
  	Route::post('get-red', [
 		'as' => 'get.red',
 		'uses' => 'ShortlistController@FilterByRed' 
 		]);
-
 	Route::post('get-blue', [
 		'as' => 'get.blue',
 		'uses' => 'ShortlistController@FilterByBlue' 
 		]);
-
 	Route::post('get-green', [
 		'as' => 'get.green',
 		'uses' => 'ShortlistController@FilterByGreen' 
@@ -384,17 +391,14 @@ Route::post('add-card', [
 		'as' => 'get.yellow',
 		'uses' => 'ShortlistController@FilterByYellow' 
 		]);
-
 Route::get('get-unsorted-{id}', [
 		'as' => 'get.unsorted',
 		'uses' => 'ShortlistController@FilterByUnsorted' 
 		]);
-
 Route::get('tag', [
 		'as' => 'tag.index',
 		'uses' => 'TagController@index' 
 		]);
-
 Route::post('black-list-{id}',[
 	'as' => 'blacklist.cv',
 	'uses' => 'DocumentController@BlackListCV'
@@ -404,37 +408,27 @@ Route::post('/Savepolicy', [
 	'as' => 'save.policy',
 	'uses' => 'PolicyController@Savepolicy'
 	]);
-
 Route::post('/Updatepolicy', 'PolicyController@Updatepolicy');
-
 Route::get('/policy_preview/{code}', [
 	'as' => 'preview.code',
 	'uses' => 'PolicyController@PreivewPolicy'
 	]);
-
 Route::get('/admin_online_dashboard', [
  'as' => 'test.dashborad',
  'uses' => 'DashboardController@OnlineTestDashboard'
-
  ]);
-
 Route::get('/admin/candidates/', [
 	'as' => 'all.candidtates',
 	'uses' => 'CandidateController@getAllCandidates'
 ]);
-
 Route::get('/cbt_update_record-form', [
 	'as' => 'cbt.update',
 	'uses' => 'UserController@UpdateCandidateRecordForm'
 	]);
-
 Route::post('/UpdateCandidateRecord', 'UserController@UpdateCandidateRecord');
-
 Route::get('/admin/candidate/bycode-{id}', 'CandidateController@showCandidateByJobCode');
-
 Route::get('/admin/candidate/active-candidate', 'CandidateController@getAllCandidates');
 Route::resource('/admin/settings', 'SettingController');
-
 Route::post('sort_by_category', [
 		'as' => 'sort.criteria',
 		'uses' => 'ShortlistController@SortByCategory' 
@@ -443,7 +437,6 @@ Route::get('/sort_by_category/{id}/{code}', [
 		'as' => 'sort.criteria',
 		'uses' => 'ShortlistController@SortByCategory' 
 		]);
-
 Route::get('custom_search-{years_of_experience}/{profession}/{location}/{sort_category}', [
 	'as' => 'c.search',
 	'uses' => 'SearchController@customSearch'
@@ -458,9 +451,7 @@ Route::post('custom_search', [
  	Route::resource('/emails', 'EmailTemaplateController');
   	Route::resource('/admin/all_reports', 'AllReportController');
   	Route::resource('/admin/top_report', 'TopReportController');
-
   	Route::resource('/admin/candidate/verified', 'CandidateController');
-
     Route::resource('tests', 'TestsController');
     Route::resource('topics', 'TopicsController');
     Route::resource('sendlink', 'SendLinkController');
@@ -470,20 +461,15 @@ Route::post('custom_search', [
   	Route::post('/admin/questions/import_questions', 'QuestionsController@importExcelToDB')->name('import_questions');
   	Route::post('/admin/questions/import_candidates', 'QuestionsController@importCandidatesExcelToDB')->name('import_candidates');
   
-
   	Route::post('/admin/sendlink', 'SendLinkController@SendLinkToMultipleCandidates');
   	Route::post('/admin/sendVerification_link', 'SendLinkController@SendVerificaitonLinkToMultipleCandidates');
-
   	Route::post('/extract_content', [
   		'as' => 'extract.word',
   		'uses' => 'SearchController@extract_docx'
   		]);
-
    // Route::resource('roles', 'RolesController');
 Route::resource('/admin/topics', 'TopicController');
 Route::resource('/admin/topics/send_test_links', 'SendLinkController');
-
-
   
 Route::get('/tests',[
         'as' => 'tests.index',
@@ -493,18 +479,14 @@ Route::get('/sendlink-{id}', [
  	'as' => 'send.link',
  	'uses' => 'SendLinkController@sendTestLink'
  	]);
-
 Route::post('add-industry', [
 	'as' => 'add.industry',
 	'uses' => 'SettingController@AddIndustry'
 	]);
-
 Route::post('update-industry', [
-
 	'as' => 'update.industry',
 	'uses' => 'SettingController@UpdateIndustry'
 	]);
-
 Route::get('/job-settings', [
 	'as' => 'show.industry_settings',
 	'uses' => 'SettingController@showIndustrySettings'
@@ -516,29 +498,23 @@ Route::get('/resume/add-work-history', [
 Route::post('assign-profession-to-industry', [
 	'as' => 'assing.profession',
 	'uses' => 'SettingController@AssignProfessionToIndustry'
-
 	]);
-
 Route::post('add-work-history', [
 	'as' => 'add.work_history',
 	'uses' => 'ResumeController@AddWorkExperience'
 	]);
-
 Route::get('/index/resume/work_history-{code}-{id}', [
 	'as'=>'show.work_history',
 	'uses' => 'ResumeController@SowUpdateWorkHistoryForm'
 	]);
-
 Route::post('update-work_history', [
 	'as' => 'update.work_history',
 	'uses' => 'ResumeController@UpdateWorkHistory'
 	]);
-
 Route::get('/delete/work_experience-{id}/{code}', [
 	'as' => 'delete.work',
 	'uses' => 'ResumeController@DeleteWorkExperience'
 	]);
-
 Route::post('add-education', [
 	'as' => 'add.education',
 	'uses' => 'ResumeController@AddEducation'
@@ -547,28 +523,22 @@ Route::get('/candidate/create-education-form/{id}', [
 	'as' => 'show.education_form',
 	'uses' => 'ResumeController@CreateEducationForm'
 	]);
-
 Route::post('update-education', [
 	'as' => 'update.education',
 	'uses' => 'ResumeController@UpdateEducation'
-
 	]);
 Route::get('/update_education_form-{code}-{id}', [
 	'as' => 'show.update',
 	'uses' => 'ResumeController@ShowEditEducation'
-
 	]);
-
 Route::get('/candidate/delete-education/{id}', [
 	'as' => 'delete.education',
 	'uses' => 'ResumeController@DeleteEducation'
 	]);
-
 Route::post('add-skills', [
 	'as' => 'add.skill',
 	'uses' => 'ResumeController@AddSkills'
 	]);
-
 Route::post('edit-skill', [
 	'as' => 'update.skill',
 	'uses' => 'ResumeController@UpdateSkill'
@@ -577,31 +547,23 @@ Route::get('/index/resume-{id}-update-skill', [
 	'as' => 'update_skill.form',
 	'uses' => 'ResumeController@UpdateslskillForm'
 	]);
-
 Route::get('/index/resume/delete-{code}-skill-{id}', [
 	'as' => 'delete.skill',
 	'uses' => 'ResumeController@deleteSkill'
-
 	]);
 Route::get('/employer/show/email', 'EmailTemaplateController@PreviewEmail');
-
 Route::post('add-career-summary', [
 	'as' => 'add.career_summary',
 	'uses' => 'ResumeController@AddCareer'
 	]);
-
 Route::post('update-career-summary', [
 	'as' => 'update.career_summary',
 	'uses' => 'ResumeController@UpdateCareer'
-
 	]);
-
 Route::get('/employer/candidates-pool', [
 	'as' => 'candidates.pool',
 	'uses' => 'DocumentController@Add'
-
 	]);
-
  
 Route::get('/candidates/job-details/{id}', [
 	'as' => 'apply.job',
@@ -613,7 +575,6 @@ Route::get('/candidate/job/application-success/{id}', [
 	]);
 	Route::get('candidate/search/{region_id}',
 	array('as'=>'edit_profile.index','uses'=>'ResumeController@getCitiesByRegioinAjax')); 
-
 Route::get('/candidate/job/application/{resume}/stage-one/{id}/{check}', [
 	'as' => 'stage_one.application',
 	'uses' => 'ResumeController@StageOneJobApplication'
@@ -630,7 +591,6 @@ Route::post('update-profile', [
 	'as' => 'update.candidate_profile',
 	'uses' => 'ResumeController@UpdateCandidateProfile'
 	]);
-
 Route::get('/candidate/edit-profile-form/{id}/{resume_id}',[
 	'as' => 'edit.profile',
 	'uses' => 'ResumeController@EditProfileForm'
@@ -639,22 +599,18 @@ Route::post('add-caption', [
 	'as' => 'add.caption',
 	'uses' => 'ResumeController@AddCaption'
 	]);
-
 Route::post('update-caption', [
 	'as' => 'update.caption',
 	'uses' => 'ResumeController@UpdateCaption'
 	]);
-
 Route::post('add-qualification', [
 	'as' => 'add.qualification',
 	'uses' => 'SettingController@AddQaulification'
 	]);
-
 Route::get('/index/resume/show-caption_form', [
 	'as' => 'show.cation',
 	'uses' => 'ResumeController@ShowCaptionForm'
 	]);
-
 Route::get('/index/resume', [
 	'as' => 'show.resume',
 	'uses' => 'ResumeController@ShowResume'
@@ -663,7 +619,6 @@ Route::get('/index/resume-{id}', [
 	'as' => 'show.resume_id',
 	'uses' => 'ResumeController@ShowResume'
 	]);
-
 Route::get('/index/resume/{resume_id}', [
 	'as' => 'get.resume',
 	'uses' => 'ResumeController@SelectResume'
@@ -671,13 +626,11 @@ Route::get('/index/resume/{resume_id}', [
 // Route::get('/index/resume', [
 // 	'as' => 'show.resume_id',
 // 	'uses' => 'ResumeController@ShowResume'
-
 // 	]);
 Route::get('/index/resume/{code}/career_summary/{id}', [
 	'as' => 'career.summary',
 	'uses' => 'ResumeController@ShowCareerForm'
 	]);
-
 Route::get('/index/resume/certificate', [
 	'as' => 'show.certificate',
 	'uses' => 'ResumeController@ShowAddCertificateForm'
@@ -686,39 +639,30 @@ Route::get('/index/resume/certificate/{resume_id}',[
 		'as' => 'edit.certificate',
 		'uses' => 'ResumeController@ShowUpdateCertificateForm'
 	]);
-
 Route::post('update-certificate', [
 	'as' => 'update.certificate',
 	'uses' => 'ResumeController@UpdateCertificate'
 	]);
-
 Route::post('add-certificate', [
 	'as' => 'add.certificate',
 	'uses' => 'ResumeController@AddCertificate'
 	]);
-
 Route::get('/index/resume/delete/certifica-{id}', [
 	'as' => 'delete.certification',
 	'uses' => 'ResumeController@DeleteCertification'
 	]);
-
 Route::post('add-personal-information', [
 	'as' => 'personal.information',
 	'uses' => 'ResumeController@AddPersonalInformation'
-
 	]);
-
 Route::get('/index/resume/{resume_id}/personal_information', [
 	'as' => 'update.pinformation',
 	'uses' => 'ResumeController@ShowUpdatePersonalInformationForm'
 	]);
-
 Route::post('update/personal_information', [
 	'as' => 'update.pfform',
 	'uses' => 'ResumeController@ShowUpdatePersonalInformationForm'
-
 	]);
-
 Route::post('status_change-{id}',[
 	'uses' => 'TagController@changeStatus',
 	'as' => 'change.status'
@@ -751,22 +695,18 @@ Route::get('/index/application-history', [
 // 	'uses' => 'EmployerController@EmployerAddprofile'
 // 	]);
 //add.profile
-
 Route::get('/employer/display-image-upload/{id}', [
 		'as' => 'upload.images',
 		'uses' => 'EmployerController@showImageForm'
 		]);
-
 Route::post('employer-upload-image', [
 	'as' => 'post.image',
 	'uses' => 'EmployerController@UpdateProfilePix'
 	]);
-
 Route::get('/employer-select-image',[
 	'as' => 'selete.image',
 	'uses' =>  'EmployerController@SelectionImage'
 	]);
-
 Route::get('/employer/display-job-detail-sort-{id}', [
 	'as' => 'display.sort',
 	'uses' => 'TagController@DisplayRecordsForSorting'
@@ -783,12 +723,10 @@ Route::post('employee-upload-image', [
 	'as' => 'employee_postimage',
 	'uses' => 'EmployerController@UpdateCandidatesLogo'
 	]);
-
 Route::get('/index/display-profile-pix', [
 	'as' => 'display.pix',
 	'uses' => 'ResumeController@showImageForm'
 	]);
-
 Route::post('/employer-update-jobpost', [
 	'as' => 'e_update.post',
 	'uses' => 'TagController@UpdateJobPost'
@@ -801,18 +739,14 @@ Route::get('/employer/post-jobs', [
 	'as' => 'post.jobs',
 	'uses' => 'TagController@PostJobs'
 	]);
-
 Route::get('/employer/job/save-to-draft/{id}', [
 	'as' => 'show.draft',
 	'uses' => 'TagController@showSaveToDraft'
-
 	]);
 Route::get('/tag/reivew/{id}', [
 	'as' => 'review.jobs',
 	'uses' => 'TagController@ReivewJob'
 	]);
-
-
 Route::post('employer-job', [
 	'as' => 'save.draft',
 	'uses' => 'TagController@SaveDraft'
@@ -821,27 +755,22 @@ Route::get('/job/job-listing', [
 	'as' => 'job.listing',
 	'uses' => 'HomeController@JobListing'
 	]);
-
 Route::get('/index/resume/print/{id}', [
 	'as' => 'print.resume',
 	'uses' => 'ResumeController@PrintResume'
 	]);
-
  
 Route::get('/job/job-detail/{code}', [
 	'as' => 'job.details',
 	'uses' => 'TagController@JobDetail'
 	]);
-
 Route::get('/employer/job-post-successfull-{id}', [
 	'as' => 'jp.success',
 	'uses' => 'TagController@JPSuccess'
 	]);
-
 Route::post('/tag/approve-job-post/{id}', [
 	'as' => 'approve.job',
 	'uses' => 'TagController@ApproveJobPost'
-
 	]);
 Route::post('/tag/turn-off-job-post/{id}', [
 	'as' => 'turnoff.job',
@@ -851,7 +780,6 @@ Route::post('/tag/blacklist-job-post/{id}', [
 	'as' => 'blacklist.job',
 	'uses' => 'TagController@BlackListJobPost'
 	]);
-
 Route::get('/templates', [
 		'as'=> 'display.templates',
 		'uses' => 'HomeController@DisplayTemplates'
@@ -872,12 +800,10 @@ Route::get('/employer/payment/{id}', [
 	'as' => 'employer.payment',
 	'uses' => 'EmployerController@Payment'
 	]);
-
 Route::get('/employer/upgrade-package/{id}', [
 	'as' => 'upgrade.package',
 	'uses' => 'PackagesController@UpgradePackageInfo'
 	]);
-
 Route::post('/employer-make-panyment', [
 	'as' => 'make.payment',
 	'uses' => 'PaymentController@employerPayment'
@@ -890,12 +816,10 @@ Route::get('/standard', [
 	'as' => 'standard.show',
 	'uses' => 'ResumeController@Standard'
 	]);
-
 Route::post('/employer/make-package-upgrade', [
 	'as' => 'employer.make_upgrade',
 	'uses' => 'PaymentController@makeUpgrade'
 	]);
-
 Route::get('/professional', [
 	'as' => 'professional.show',
 	'uses' => 'ResumeController@Professional'
@@ -904,7 +828,6 @@ Route::get('/professional2', [
 	'as' => 'professional2.show',
 	'uses' => 'ResumeController@Professional2'
 	]);
-
 Route::get('/twocolumn', [
 	'as' => 'column.show',
 	'uses' => 'ResumeController@TwoColumns'
@@ -922,7 +845,6 @@ Route::get('/rightphoto', [
  	'as' => 'traditional.show',
  	'uses' => 'ResumeController@Traditional'
  	]);
-
  Route::get('/classic-experienced', [
  	'as' => 'show.classic2',
  	'uses' => 'ResumeController@ClassicExperienced'
@@ -931,22 +853,18 @@ Route::get('/rightphoto', [
  	'as' => 'show.twocolumns2',
  	'uses' => 'ResumeController@TwoColumns2'
  	]);
-
  Route::get('/standard2', [
  	'as' => 'show.standard2',
  	'uses' => 'ResumeController@Standard2'
  	]);
-
  Route::get('/iconic', [
  	'as' => 'show.iconic',
  	'uses' => 'ResumeController@Iconic'
  	]);
-
  Route::get('/elegant', [
  	'as' => 'show.elegant',
  	'uses' => 'ResumeController@Elegant'
  	]);
-
  Route::get('/boldheader', [
  	'as' => 'show.header',
  	'uses' => 'ResumeController@BoldHeader'
@@ -959,7 +877,6 @@ Route::get('/rightphoto', [
  	'as' => 'show.rightside',
  	'uses' => 'ResumeController@RightSide'
  	]);
-
  Route::get('/stylishred', [
  	'as' => 'show.rightside',
  	'uses' => 'ResumeController@StylishRed'
@@ -968,12 +885,10 @@ Route::get('/rightphoto', [
  	'as' => 'show.rightside',
  	'uses' => 'ResumeController@Hexagonal'
  	]);
-
  Route::get('/creative_red', [
  	'as' => 'creative.red',
  	'uses' => 'ResumeController@CreativeRed'
  	]);
-
 Route::get('/blue_arc', [
 	'as' => 'blue.arc',
 	'uses' => 'ResumeController@BlueArc'
@@ -986,17 +901,14 @@ Route::get('/rightpane', [
 	'as' => 'show.right_pane',
 	'uses' => 'ResumeController@RightPane'
 	]);
-
 Route::get('/blue-yellow', [
 	'as' => 'show.by',
 	'uses' => 'ResumeController@BlueYellow'
 	]);
-
 Route::post('add-award', [
 	'as' => 'add.award',
 	'uses' => 'ResumeController@AddAward'
 	]);
-
 Route::get('/edit-award-{id}', [
 	'as' => 'edit.award',
 	'uses' => 'ResumeController@ShowUpdateAward'
@@ -1015,18 +927,14 @@ Route::get('/employer/job/applicants/{id}', [
 	'as' => 'get.applicants_byid',
 	'uses' => 'TagController@GetCandidatesByJobApplication'
 	]);
-
 Route::post('/employer/add-property-plan', [
 	'as' => 'add.property',
 	'uses' => 'PackagesController@AddProperty'
 	]);
-
 Route::get('/plan/property/{id}', [
 	'as' => 'get.property',
 	'uses' => 'PackagesController@showPropertyForm'
-
 	]);
-
 Route::post('/plan/property/delete', [
 	'as' => 'delete.properties',
 	'uses' => 'PackagesController@deleteProperty'
@@ -1043,18 +951,14 @@ Route::get('/menu', [
 'as' => 'admin.show_menu',
 'uses' => 'MenuController@index'
 ]);
-
 Route::get('/menu-show-submenu-{id}', [
 'as' => 'menu.show_submenu',
 'uses' => 'MenuController@ShowAssignSubmenusToParentMenu'
 ]);
-
-
 Route::post('/menu-submenu', [
 'as' => 'menu.submenu',
 'uses' => 'MenuController@AssignSubmenusToParentMenu'
 ]);
-
  
 Route::post('/getcandidatesbylocation', 'DocumentController@filterbyLocation');
 Route::post('/getcandidatesbyjobtype', 'DocumentController@filterbyJobType');
@@ -1072,52 +976,39 @@ Route::post('/filterRejected', 'TagController@RejectedFilter');
 Route::post('/filterInReview', 'TagController@InReviewFilter');
 Route::post('/filterShortlist', 'TagController@ShortListFilter');
 Route::post('/filterOffered', 'TagController@OfferedFilter');
-
 Route::post('/jobfilter', 'HomeController@JobFilter');
-
 Route::post('/filterbyJobTitle', 'DocumentController@filterbyJobTitle');
-
 Route::post('/send-candidates-email', 'TagController@EmailCandidates');
 Route::post('/reject_applicant', 'TagController@RejectApplicant');
 Route::post('/review_applicant', 'TagController@ReviewApplicant');
 Route::post('/shortlist_applicant', 'TagController@ShortlistApplicant');
 Route::post('/offered_applicant', 'TagController@OfferApplicant');
 Route::post('/hire_applicant', 'TagController@HireApplicant');
-
 // Export to PDF
-
 Route::post('exprort-classic-to-pdf', [
 	'as' => 'export_classic',
 	'uses' => 'ResumeController@ClassicPDF'
 	]);
-
-
 Route::post('exprort-standard-to-pdf', [
 	'as' => 'export_standard',
 	'uses' => 'ResumeController@StandardPDF'
 	]);
-
 Route::post('exprort-classic-experienced-to-pdf', [
 	'as' => 'export_classic_experienced',
 	'uses' => 'ResumeController@ClassicExperiencedPDF'
 	]);
-
 Route::post('exprort-tabular-to-pdf', [
 	'as' => 'export_tabular',
 	'uses' => 'ResumeController@TabularPDF'
 	]);
-
 Route::post('/add-referee', [
 	'as' => 'add.referee',
 	'uses'=> 'ResumeController@AddReferees'
-
 	]);
-
 Route::get('/index/resume/edit-referees/{id}', [
 	'as' => 'edit.referee',
 	'uses' => 'ResumeController@EditReferees'
 	]);
-
  Route::post('/index/resume/update-referees', [
 	'as' => 'update.referee',
 	'uses' => 'ResumeController@UpdateReferees'
@@ -1126,7 +1017,6 @@ Route::get('/index/resume/edit-referees/{id}', [
  	'as' => 'delete.referee',
  	'uses' => 'ResumeController@DeleteReferee'
  	]);
-
  Route::get('/settings/create-field-of-study', [
  	'as' => 'create.field',
  	'uses' => 'SettingController@createFeildsOfStudy'
@@ -1138,32 +1028,26 @@ Route::get('/index/resume/edit-referees/{id}', [
   Route::get('/settings/all-field-of-study', [
  	'as' => 'all.fields',
  	'uses' => 'SettingController@showFeildsOfStudyList'
-
  	]);
  Route::post('/settings/add-fields', [
  	'as' => 'add.field',
  	'uses' => 'SettingController@AddFieldsOfStudy'
  	]);
-
 // 	'as' => 'em', 
 // 	'uses' => 'EmployerController@index'
 // 	]);
-
 //  Route::get('tests/resul/{id}/finish', function($id){
 //   $topic = Topic::findOrFail($id);
 //   $count_questions = Question::where('topic_id', $id)->count();
 //   $answers = Answer::where('topic_id', $id)->get();
 //   return view('finish', compact('topic', 'answers', 'count_questions'));
 // });
-
  // take candidate to another page and submit the test
-
 	//Route::get()
    // Route::post('roles_mass_destroy', ['uses' => 'RolesController@massDestroy', 'as' => 'roles.mass_destroy']);
     //Route::resource('users', 'UsersController');
     //Route::post('users_mass_destroy', ['uses' => 'UsersController@massDestroy', 'as' => 'users.mass_destroy']);
     //Route::resource('user_actions', 'UserActionsController');
-
    Route::post('topics_mass_destroy', ['uses' => 'TopicsController@massDestroy', 'as' => 'topics.mass_destroy']);
    Route::post('questions_mass_destroy', ['uses' => 'QuestionsController@massDestroy', 'as' => 'questions.mass_destroy']);
    Route::post('questions_options_mass_destroy', ['uses' => 'QuestionsOptionsController@massDestroy', 'as' => 'questions_options.mass_destroy']);
@@ -1171,7 +1055,6 @@ Route::get('/index/resume/edit-referees/{id}', [
 	
 	/// end of test .//// 
 	
-
 	Route::get('add-to-log', 'IndexController@AddToLog');    
     Route::get('backup/create', 'BackupController@create');
     Route::get('backup/download/{file_name}', 'BackupController@download');
@@ -1196,7 +1079,6 @@ Route::get('/index/resume/edit-referees/{id}', [
 	Route::resource('pages', 'PostController');
 	Route::resource('blog', 'BlogController');
 	// Route::resource('')
-
 		Route::get('/employer/post-jobs/{region_id}',
 	array('as'=>'post_job.get_region','uses'=>'TagController@getCitiesByRegioinAjax')); 
 });
@@ -1204,12 +1086,8 @@ Route::get('/index/resume/edit-referees/{id}', [
  
 	Route::get('candidate/update_job_application/{region_id}',
 	array('as'=>'candidate.index','uses'=>'IndexController@getCitiesByRegioinAjax')); 
-
 	Route::get('tag/create/{region_id}',
 	array('as'=>'tag.get','uses'=>'TagController@getCitiesByRegioinAjax')); 
-
-
-
 	Route::get('/candidate/update_job_application_form',[
 		'as' => 'candidate.index',
 			'uses' => 'IndexController@showUpdateApplicantForm' 
@@ -1218,65 +1096,44 @@ Route::get('/index/resume/edit-referees/{id}', [
 			'as' => 'candidate.applicaiton',
 			'uses' => 'IndexController@showApplicantForm' 
 			]);
-
-
 	Route::post('/job_application_form',[
 	'uses' => 'IndexController@PostJobApplication',
 	'as' => 'job.application'
 	]);
-
 	Route::get('/show_success',[
 			'as' => 'candidate.show_success',
 			'uses' => 'IndexController@show_success'
 			]);
-
-
 	Route::post('/update_job_application_form/update_records',[
 	'uses' => 'IndexController@addCandidate',
 	'as' => 'candidate.addCandidate'
 	]);
-
-
-
 	// Route::get('/update_job_application_form/show_form/success', 'IndexController@show_success');
-
 	Route::get('/usermanual', 'IndexController@readManual');
 	Route::get('/datatable', 'IndexController@showDatatable');
-
-
 	Route::get('/testpage', [ 
-
 	'uses' =>function () {
  return view('sett');
-
 	}]);
-
 	Route::post('post-test', [
 		'as'=> 'test.code',
 		'uses' => 'IndexController@Image'
 		]);
-
-
-
 	Route::get('/sendEmail', [
 		'as' => 'send.email_candidates',
 		'uses' => 'IndexController@SendEmailToCandidates'
 		]);
-
  Route::post('upload_email', [
 	'as' => 'upload.emails',
 	'uses' => 'IndexController@UploadEmailsFromCSV' 
 	]);
-
 Route::get('candidates', [
 	'as' => 'candidate.go',
 	'uses' => 'IndexController@showEmails']);
-
 	Route::post('/admin/upload_from_csv',[
 			'as' => 'upload.email',
 	 		'uses' => 'IndexController@UploadEmailsFromCSV'
 	]);
-
 	Route::get('/show_upload_from_csv',[
 			'as' => 'show.uploademail',
 	 		'uses' => 'IndexController@showUploadPage'
@@ -1296,52 +1153,37 @@ Route::get('candidates', [
 // remember to make sure your server can store your file name characters in the first place (!)
 // then encode to respect RFC 6266 on output through content-disposition
 $fileNameFromStorage = rawurlencode(basename($pathToFile));
-
  // dd($fileNameFromStorage);
 // otherwise, if the file in storage has a hashed file name (recommended)
 // and the display name comes from your DB and will tend to be UTF-8
 // encode to respect RFC 6266 on output through content-disposition
 // $fileNameFromDatabase = rawurlencode('пожалуйста.pdf');
-
 // Storage facade path is relative to the root directory
 // Defined as "storage/app" in your configuration by default
 // Remember to import Illuminate\Support\Facades\Storage
-
 // return response()->file(storage_path($pathToFile), [
 //     'Content-Disposition' => str_replace('%name', $fileNameFromStorage, "inline; filename=\"%name\"; filename*=utf-8''%name"),
 //     'Content-Type'        => Storage::getMimeType($pathToFile), // e.g. 'application/pdf', 'text/plain' etc.
 // ]);
-
 // return response()->file($pathToFile, [
 //   'Content-Disposition' => 'inline; filename="'. $fileNameFromStorage .'"'
 // ]);
-
     // ->header('ContentType', 'text/plain')
     // ->header('Content-Disposition', "inline; filename='$pathToFile'");
-
 	return response()->file($pathToFile, $headers);
 // return response()->file($pathToFile) ->header('Content-Disposition', "inline; filename='$filename'");
-
     // return Response::make($pathToFile, 200)
     // ->header('ContentType', 'text/plain')
     // ->header('Content-Disposition', "inline; filename='$pathToFile'");
 // return response()->file($pathToFile);
-
 	});
-
-
  
-
 Route::get('inbrowser', function(){
-
-
   // $extension = $request->file('file')->getClientOriginalExtension();
   // $filename = $request->book_name.'.'. $extension;
   // $request->file('file')->move(storage_path().'/books/', $filename);
-
 $fullPath = storage_path().'/app/'. 'Emeka iwuchukwu.pdf';
 //$fullPath = storage_path().'/app/'. 'R-24 user Manual.docx';
-
   //
   $content_types = [
     'application/octet-stream', // txt etc
@@ -1352,7 +1194,6 @@ $fullPath = storage_path().'/app/'. 'Emeka iwuchukwu.pdf';
     'application/pdf', // pdf
 ];
 // dd($fullPath); 
-
  if(file_exists($fullPath)) {
         //$contentType = mime_content_type($fullPath);
          //dd($contentType); 
@@ -1362,7 +1203,5 @@ $fullPath = storage_path().'/app/'. 'Emeka iwuchukwu.pdf';
   } else {
       return 'NOT HERE';
   }
-
                             
 });
-

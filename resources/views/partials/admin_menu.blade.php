@@ -167,7 +167,12 @@
                                           <a href="{{route('policies.index')}}" class="nav-link ">
                                         <span class="title">@lang('cvmanagement.policies.title') </span>
                                           </a>
-                                      </li>         
+                                      </li> 
+                         <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
+                                     <a href="{{route('page_infor')}}" class="nav-link ">
+                                        <span class="title">Page Information </span>
+                                          </a>
+                                </li>    
                                   </ul>
                                 </li>
                                 <li class="nav-item">
@@ -183,12 +188,13 @@
                                       </a>
                                 
                                       </li>
-                        <li class="nav-item ">
+                                  <li class="nav-item">
                                           <a href="{{ route('tag.create') }}" class="nav-link ">
                                               <span class="title">Add New</span>
                                           </a>
                                       </li> 
-                                                   
+
+                             
                                   </ul>
                                        <!--  <a href="{{ url('/register') }}">Register</a>  -->
                       
@@ -214,7 +220,7 @@
                                                    
                                   </ul> 
                               </li>
-      <li class="nav-item">
+<!--       <li class="nav-item">
         <a href="javascript:;" class="nav-link nav-toggle">
             <i class="icon-settings"></i>
             <span class="title">Online Test</span>
@@ -261,9 +267,10 @@
                 </a>
        
             </li>
+ 
           </ul>
 
-     </li>
+     </li> -->
                           <li class="nav-item {{ $request->segment(1) == 'resume' ? 'active' : '' }} ">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-settings"></i>

@@ -14,7 +14,7 @@
                                 <ul>
                                     <li><a href="#" class="footer_links">Site map</a></li>
                                     <li><a href="{{route('list.job', 'job-list')}}" class="footer_links">Browse Jobs</a></li>
-                                    <li><a href="{{route('single.page', 'helpcenter')}}" class="footer_links">Help Center</a></li> 
+                                    <li><a href="{{url('/usermanual')}}" class="footer_links">Help Center</a></li> 
                                 </ul>
                             </div>
                             <div class="col-md-3">
@@ -60,10 +60,13 @@
                                            <input type="radio" name="email_user" value="employer" required="required">
                                               I am an Employer</div> 
                                     </ul>
+                                   
+            
                                 </form>
                             </div>
                         </aside>
-               
+ 
+     @include('sweet::alert') 
                     </div>
                 </div>
                 <!-- Footer Widget -->

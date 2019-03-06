@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c991ff242647888f375bc72347b726cd",
+    "content-hash": "e82eee216dc24e1974657abf545c822b",
     "packages": [
         {
             "name": "backpack/backupmanager",
@@ -23,7 +23,7 @@
             "require": {
                 "illuminate/support": "~5.1",
                 "php": ">=5.3.0",
-                "spatie/laravel-backup": "^3.1"
+                "spatie/laravel-backup": "^3.1.9"
             },
             "require-dev": {
                 "phpunit/phpunit": "4.*",
@@ -1040,7 +1040,7 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.4.0",
+            "version": "v5.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
@@ -1185,9 +1185,9 @@
                 "guzzlehttp/guzzle": "~6.0",
                 "illuminate/contracts": "~5.4",
                 "illuminate/http": "~5.4",
-                "illuminate/support": "~5.4",
+                "illuminate/support": "~5.6",
                 "league/oauth1-client": "~1.0",
-                "php": ">=5.6.4"
+                "php": ">=7.1.6"
             },
             "require-dev": {
                 "mockery/mockery": "~0.9",
@@ -1295,7 +1295,7 @@
         },
         {
             "name": "laravelcollective/html",
-            "version": "v5.4.9",
+            "version": "v5.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/html.git",
@@ -1308,11 +1308,11 @@
                 "shasum": ""
             },
             "require": {
-                "illuminate/http": "5.4.*",
-                "illuminate/routing": "5.4.*",
-                "illuminate/session": "5.4.*",
-                "illuminate/support": "5.4.*",
-                "illuminate/view": "5.4.*",
+                "illuminate/http": "5.6.*",
+                "illuminate/routing": "5.6.*",
+                "illuminate/session": "5.6.*",
+                "illuminate/support": "5.6.*",
+                "illuminate/view": "5.6.*",
                 "php": ">=5.6.4"
             },
             "require-dev": {
@@ -2707,7 +2707,7 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "3.11.0",
+            "version": "3.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
@@ -3800,6 +3800,67 @@
                 "subscription"
             ],
             "time": "2016-12-24T08:05:37+00:00"
+        },
+        {
+            "name": "uxweb/sweet-alert",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uxweb/sweet-alert.git",
+                "reference": "5b74ad1e51b913ede67c17c667dad6c162766fdc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uxweb/sweet-alert/zipball/5b74ad1e51b913ede67c17c667dad6c162766fdc",
+                "reference": "5b74ad1e51b913ede67c17c667dad6c162766fdc",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/session": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "UxWeb\\SweetAlert\\SweetAlertServiceProvider"
+                    ],
+                    "aliases": {
+                        "Alert": "UxWeb\\SweetAlert\\SweetAlert"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "UxWeb\\SweetAlert\\": "src/SweetAlert/"
+                },
+                "files": [
+                    "src/SweetAlert/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Uziel Bueno",
+                    "email": "ux.webs@gmail.com"
+                }
+            ],
+            "description": "A simple PHP package to show Sweet Alerts with the Laravel Framework",
+            "keywords": [
+                "alert",
+                "laravel",
+                "notifier",
+                "sweet"
+            ],
+            "time": "2018-11-20T19:21:08+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

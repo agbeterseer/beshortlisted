@@ -34,14 +34,12 @@
 .singup a:hover {
  color: #ffffff;
 }
-
 </style>
    <style type="text/css">
 table {
     border-collapse: collapse;
     width: 100%;
 }
-
 th, td {
     height: 10px;
     padding: 8px;
@@ -49,7 +47,6 @@ th, td {
     border-bottom: 1px solid #ddd;
     border-color: #13B5EA;
 }
-
 tr:hover {background-color:#f5f5f5;}
    </style>
    <style type="text/css">
@@ -97,8 +94,8 @@ tr:hover {background-color:#f5f5f5;}
                                <li><a class="careerfy-color" href="{{ route('register') }}">REGISTER</a>
                                </li>
                           
-                               <li><a class="careerfy-color " href="{{ route('auth.login') }}">SIGN IN</a></li>
-                                @else
+                               <li><a class="careerfy-color " href="{{ url('/login') }}">SIGN IN</a></li>
+                                @else 
                               
                                   <li> <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -124,6 +121,8 @@ tr:hover {background-color:#f5f5f5;}
                 </div>
             </div>
         </header>
+ 
+
         <!-- Header -->
         
         <!-- Banner v #1E3142 -->
@@ -179,7 +178,9 @@ tr:hover {background-color:#f5f5f5;}
                         </ul>
                         <div class="clearfix"></div>
                         <div class="careerfy-user-form-info">
-                        Forgot Password? | <a href="#">Sign Up</a>
+                         <a class="btn btn-link" href="{{ url('/password/reset') }}">
+                                    Forgot Your Password?
+                                </a> Forgot Password? | <a href="{{route('register')}}">Sign Up</a>
                             <div class="careerfy-checkbox">
                                 <input type="checkbox" id="r10" name="rr" />
                                 <label for="r10"><span></span> Remember Password</label>
@@ -192,8 +193,8 @@ tr:hover {background-color:#f5f5f5;}
                     </div>
                     <div class="clearfix"></div>
                     <ul class="careerfy-login-media">
-                        <li><a href="#"><i class="fa fa-facebook"></i> Sign In with Facebook</a></li> 
-                       <li><a href="#" data-original-title="google"><i class="fa fa-google"></i> Sign In with Google</a></li>
+                  <li><a href="{{ url('/auth/facebook') }}"><i class="fa fa-facebook"></i> Sign In with Facebook</a></li>
+                        <li><a href="{{ url('/auth/google') }}" data-original-title="google"><i class="fa fa-google"></i> Sign In with Google</a></li>
                     </ul>
 
                     </div>
@@ -298,7 +299,7 @@ tr:hover {background-color:#f5f5f5;}
                         </ul>
                         <div class="clearfix"></div>
                         <div class="careerfy-user-form-info">
-                            <p>Forgot Password? | <a href="#">Sign Up</a></p>
+                            <p>Forgot Password? | <a href="{{ route('register') }}">Sign Up</a></p>
                             <div class="careerfy-checkbox">
                                 <input type="checkbox" id="r10" name="rr" />
                                 <label for="r10"><span></span> Remember Password</label>
@@ -519,28 +520,20 @@ employee
     $(document).ready(function() {
         $('#summernote_1').summernote({
             height:'300px'
-
-
         });
         // body...
     });
-
     $(document).ready(function() {
         $('#summernote_2').summernote({
             height:'300px',
-
-
         });
         // body...
     });
-
     $('#clear').on('click', function() {
         $('#summernote_1').summernote('code', null);
-
     });
         $('#clear').on('click', function() {
         $('#summernote_2').summernote('code', null);
-
     });
 </script>
  
@@ -556,21 +549,15 @@ $(document).ready(function(){
     $("#qualification").change(function() { 
     
     if ( $(this).val() == "Specific Qualification") {
-
     $("#qualification").hide();
-
     $("#availability_date").show();
-
 }
     else{
     
         $("#qualification").show();
         $("#availability_date").hide();
     }
-
 });
-
-
 $("#present").click(function(){
   //  alert($(this).val());
     //$("#end_month").hide();
@@ -580,11 +567,9 @@ $("#present").click(function(){
   document.getElementById('end_year').value = ''; 
   
 });
-
   $("#end_month").change(function() { 
 //alert($(this).val());
     if ( $(this).val() !=null) {
-
         $("#present2").show();
         $("#present").hide();
   //document.getElementById('present').style.display = 'none';
@@ -596,14 +581,10 @@ document.getElementById('work_to_present').style.display = 'none';
 document.getElementById('present').style.display = 'block';
  
     }
-
 }); 
  (function( $ ) {
-
     'use strict';
-
     if ( $.isFunction($.fn[ 'summernote_1' ]) ) {
-
         $(function() {
             $('#summernote_1').themePluginSummerNote({
                 height: 180,
@@ -615,20 +596,16 @@ document.getElementById('present').style.display = 'block';
                 ]
             });
         });
-
     }
-
 }).apply(this, [ jQuery ]);
  </script>
 
  <script type="text/javascript">
-
  $('#job_location').change(function() {
     var location = [];
     var profession = [];
     var job_type = [];
  
-
     function itemExistsChecker(cboxValue) {
           
     var len = location.length; 
@@ -662,12 +639,10 @@ JobFilterIndex(location,profession,job_type);
  
   }
 });
-
  $('#job_terms').change(function() {
     var location = [];
     var profession = [];
     var job_type = [];
-
     function itemExistsChecker(cboxValue) {
           
     var len = job_type.length; 
@@ -701,12 +676,10 @@ JobFilterIndex(location,profession,job_type);
  
   }
 });
-
  $('#job_profession').change(function() {
     var location = [];
     var profession = [];
     var job_type = [];
-
     function itemExistsChecker(cboxValue) {
           
     var len = profession.length; 
@@ -748,7 +721,6 @@ function isEmpty(obj) {
     return true;
 }
  function JobFilterIndex(location, profession, job_type){
-
     console.log(location);
     console.log(profession);
     console.log(job_type);
@@ -796,7 +768,6 @@ function isEmpty(obj) {
   var job_id = data.job_id;
    // var route_name = location.href ='/job/job-detail';
    var apply_route = location.href ='/candidates/job-details';
-
     if(isEmpty(code['data'])) {
         $('#job_section').append('<li class="careerfy-column-12"> No Record(s) Found</li>');  
           // $('#pages').empty();   
@@ -813,29 +784,21 @@ function isEmpty(obj) {
       // hired list
       $.each(code['data'], function(key, value){
             var id = value.id; 
-
   if(value.status === 1 && value.active === 1){
-
     employement_term = getJobTerms(employement_term_list, value.job_type);
     profession_name = getJobFunction(industry_professions, value.job_category);
     job_title = value.job_title;
     category = getJobTermsCategory(employement_term_list, value.job_type);
-
  
-
       var content2 = '<li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><figure><a href="'+apply_route+'/ '+value.id+'"><img src="/img/extra-images/job-listing-logo-1.png" alt=""></a></figure><div class="careerfy-joblisting-text"><div class="careerfy-list-option"><h2><a href="">'+job_title+' </a> <span>Featured</span></h2><ul><li><a href="#" class="careerfy-option-btn careerfy-'+category+'" style="color:#ffffff;">'+employement_term+'</a></li><li><i class="careerfy-icon careerfy-maps-and-flags"></i> '+value.country+', '+value.city+'</li><li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>'+profession_name+'</li></ul></div><div class="careerfy-job-userlist"> <a href="'+apply_route+'/'+value.id+'" class="careerfy-option-btn careerfy-'+category+'">Apply</a><a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a></div><div class="clearfix"></div></div></div></li>';
-
         $('#job_section').append(content2);
-
 }else{
 console.log('am here');
-
 }
       });
    
   });
 }
-
 function getJobTerms(terms,category) {
 var employement_term = '';
   $.each(terms, function(key, value) {
@@ -848,7 +811,6 @@ var employement_term = '';
  
   return employement_term;
 }
-
 function getJobTermsCategory(terms,category) {
 var category = '';
   $.each(terms, function(key, value) {
@@ -861,10 +823,8 @@ var category = '';
  
   return category;
 }
-
 function getJobFunction(i_professions, job_type) {
 var profession_name = '';
-
   $.each(i_professions, function(key, value) {
  
         if (value['id'] === job_type) {  
@@ -877,13 +837,9 @@ var profession_name = '';
 }
  
  
-
      
-
 </script>
  
 </body>
 
 </html>
- 
-

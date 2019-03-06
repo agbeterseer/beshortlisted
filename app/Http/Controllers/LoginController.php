@@ -23,64 +23,10 @@ public function __construct()
     $this->middleware('guest', ['except' => 'logout']);
 }
  
-    //  protected $loginUser;
  
-    // public function __construct(LoginUser $loginUser)
-    // {
-    //     $this->loginUser = $loginUser;
-    // }
-
-    //   public function auth($provider)
-    // {
-    //     return $this->loginUser->authenticate($provider);
-    // }
- 
-    // public function login($provider)
-    // {
-    //     try {
-    //         $this->loginUser->login($provider);
-    //        if ($this->loginUser->is_admin()) {
-
-    //       return redirect()->route('board');
-          
-    //       }
-    //         //return redirect()->route('board');
-    //     } catch (SocialAuthException $e) {
-    //         return redirect()->route('login')
-    //             ->with('flash-message', $e->getMessage());
-    //     }
-    // }
- 
-    // public function logout()
-    // {
-    //    auth()->logout();
-    //    return redirect()->to('/'); 
-    // }
-
-// public function showLoginForm()
-// {
-//     session(['link' => url()->previous()]);
-//     return view('auth.login');
-// }
-
-
-// protected function authenticated(Request $request, $user)
-// {
-//     return redirect(session('link'));
-// }
-
-//     public function showLoginForm()
-// {
-//     //dd('here');
-//     if(!session()->has('url.intended'))
-//     {
-//         session(['url.intended' => url()->previous()]);
-//     }
-//     return view('auth.login');    
-// }
 
 public function showLoginForm()
-{
+{ 
     session(['link' => url()->previous()]);
     return view('auth.login');
 }
@@ -107,7 +53,7 @@ protected function authenticated(Request $request, $user)
 
 
         $input = Input::only('email', 'password');
-//dd($request->all());
+        //dd($request->all());
 
       if ( ! Auth::validate(Input::only('email', 'password')))
       {
@@ -127,10 +73,10 @@ protected function authenticated(Request $request, $user)
          if ($user->is_admin()) {
           return redirect()->intended('board');
           }elseif(!$user->is_admin() && !$user->is_candidate()){ 
-           if ($user->account_type === 'employee') {
-                return redirect()->intended('candidate');
+           if ($user->account_type === 'employee') { 
+                return redirect()->route('show.resume'); // candidate
             }else{
-              return redirect()->intended('dashboard');
+              return redirect()->route('dashboard');
             }
           }
         }
@@ -193,6 +139,10 @@ protected function authenticated(Request $request, $user)
         $this->guard()->logout();
         $request->session()->flush();
         $request->session()->regenerate();
+         Auth::logout();
+
+        Alert::success('You have been logged out.', 'Good bye!');
+
         return redirect('/index');
     }
 

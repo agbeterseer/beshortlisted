@@ -26,7 +26,7 @@ border-color: white !important;
     body{background-color: #FAFAFA;}
 </style>
   <!-- SubHeader -->
-        <div class="careerfy-subheader">
+    <!--     <div class="careerfy-subheader">
             <span class="careerfy-banner-transparent"></span>
             <div class="container">
                 <div class="row">
@@ -38,7 +38,16 @@ border-color: white !important;
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+        <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div>
         <!-- SubHeader -->
 
         <!-- Main Content -->
@@ -109,13 +118,13 @@ border-color: white !important;
             <div class="careerfy-main-section">
                 <div class="container">
                     <div class="row"> 
-                     <aside class="careerfy-column-4 careerfy-typo-wrap"  style="background-color: #ffffff;">
+                     <aside class="careerfy-column-4 careerfy-typo-wrap"  >
                             <div class="careerfy-typo-wrap" >
                                 <form class="careerfy-search-filter"> 
     <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
                                         <h2><a href="#" class="careerfy-click-btn">Location</a></h2>
                                         <div class="careerfy-checkbox-toggle scroll_div" id="job_location" >
-                                            <ul class="careerfy-checkbox"> 
+                                            <ul class="careerfy-checkbox" style="background-color: #ffffff;"> 
                                             @foreach($cities as $city_record) 
                                                 <li> 
        <input type="checkbox" id="r{{$city_record->id}}" name="city[]" value="{{$city_record->id}}" />

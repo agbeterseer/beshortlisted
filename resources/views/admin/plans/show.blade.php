@@ -13,6 +13,7 @@
     'page' => '', 
   'role' => '',
   'user' => '',
+  'page' => '',
 ])
 
 @section('content')

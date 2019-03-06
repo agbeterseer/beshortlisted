@@ -16,6 +16,8 @@
 @if(Auth::check())
 @include('partials.employer_breadcomb')
 @endif
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div>
  <div class="careerfy-main-content" style="background-color: #ffffff;">
              <!-- Main Section --> 
  <!-- Main Section -->

@@ -21,7 +21,7 @@
 
 @include('partials.employee_breadcomb')
 
- <div class="careerfy-main-content" style="background-color: #ffffff;"> 
+ <div class="careerfy-main-content"> 
 <div class="space">&nbsp;</div>
 <div class="space">&nbsp;</div>  
                         <section class="careerfy-fancy-title">
@@ -42,9 +42,9 @@
                                 <ul class="careerfy-row">
                                     @forelse($featured_tags as $job)
                                                     <li class="careerfy-column-6 animation-test">
-                                        <div class="careerfy-table-layer">
+                                        <div class="careerfy-table-layer" style="background-color: #ffffff;">
                                             <div class="careerfy-table-row">
-                                
+                                 <figure><a href="{{route('apply.job', $job->id)}}"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-featured-listing-text">
                                                     <h2><a href="{{route('job.description', $job->id)}}"> {{$job->job_title}}<!--  <span>Featured</span> --></a></h2>
                                                     <a href="#" class="careerfy-like-list"><i class="careerfy-icon careerfy-heart"></i></a>
@@ -54,8 +54,7 @@
                                                         <li><i class="careerfy-icon careerfy-maps-and-flags"></i> <a href="#">{{$job->country}},</a> <a href="#">{{$job->city}}</a></li>
                                                         <br>
                                                         <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#">@foreach($industry_professions as $profession) @if($profession->id === $job->job_category){{$profession->name}} @endif @endforeach</a></li>
-                                           
-                                                    </ul>
+                                             <a href="{{route('apply.job', $job->id)}}" class="careerfy-option-btn"> Apply </a>    </ul>
                                                 
                                                     </div>
                                                 </div>
@@ -71,25 +70,26 @@
                                 </ul>
                             </div>
                             <!-- Featured Jobs Listings -->
-                            <div class="careerfy-plain-btn"> <a href="#">View All Jobs</a> </div>
+                            <div class="careerfy-plain-btn"> <a href="{{route('list.job', 'job-list')}}">View All Jobs</a> </div>
                         </div>
 
                     </div>
                 </div>
             </div>
             <!-- Main Section -->
-            <div class="careerfy-main-section careerfy-parallex-full">
+            <div class="careerfy-main-section careerfy-parallex-full" style="background-color: #ffffff;">
                 <div class="container">
                     <div class="row">-
                         <aside class="col-md-6 careerfy-typo-wrap">
                             <div class="careerfy-parallex-text">
-                                <h2>Millions of jobs. <br> Find the one that’s right for you.</h2>
-                                <p>Search all the open positions on the web. Get your own personalised salary estimate. The right job is out there.</p>
+
+                                <h2>{{$page_information->name}}</h2>
+                                <p>{{$page_information->description}}</p>
                                 <a href="#" class="careerfy-static-btn careerfy-bgcolor"><span>Search Jobs</span></a>
                             </div>
                         </aside>
                         <aside class="col-md-6 careerfy-typo-wrap"> <div class="careerfy-right">
-                            <img src="extra-images/parallex-thumb-1.png" alt=""></div> </aside>
+                            <img src="{{asset('/uploads/banners')}}/{{$page_information->image}}" alt=""></div> </aside>
                     </div>
                 </div>
             </div>
@@ -105,7 +105,7 @@
                                 <p>A better career is out there. We'll help you find it to use.</p>
                             </section>
                             <!-- Blog -->
-                            <div class="careerfy-blog careerfy-blog-grid">
+                            <div class="careerfy-blog careerfy-blog-grid"  style="background-color: #ffffff;">
                                 <ul class="row">
                                     @forelse($posts as $post)
                                     <li class="col-md-4">

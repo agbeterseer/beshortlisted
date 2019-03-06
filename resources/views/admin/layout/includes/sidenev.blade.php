@@ -239,7 +239,7 @@
                                           </a>
                                       </li> 
                                     </ul> 
-                                  </li> q
+                                  </li> 
                                    <li class="nav-item  ">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-settings"></i>

@@ -25,8 +25,7 @@
             <span class="careerfy-banner-transparent"></span>
             <div class="careerfy-banner-caption">
                 <div class="container">  
-        <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
+ 
                 <div class="text-content"> 
                      <h1>Aim Higher. Reach Farther. Dream Bigger.</h1>
                     <p>A better career is out there. We'll help you find it.</p> 
@@ -115,7 +114,7 @@
                                     <li class="careerfy-column-6 animation-test" >
                                         <div class="careerfy-table-layer" style="background-color: #ffffff;">
                                             <div class="careerfy-table-row">
-                                       <figure><a href="{{route('apply.job', $job->id)}}"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
+                                       <figure><a href="{{route('job.description', $job->id)}}"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-featured-listing-text">
                                                     <h2><a href="{{route('job.description', $job->id)}}"> {{$job->job_title}}<!--  <span>Featured</span> --></a></h2>
                                                     <a href="#" class="careerfy-like-list"><i class="careerfy-icon careerfy-heart"></i></a>
@@ -127,7 +126,7 @@
                                                         <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#">@foreach($industry_professions as $profession) @if($profession->id === $job->job_category){{$profession->name}} @endif @endforeach</a></li>
                                                         <li>| <i>  @foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type){{$employement_term->name}} @endif @endforeach</i></li>
                                                     </ul>
-                                                        <a href="#" class="careerfy-option-btn">@foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type)Apply @endif @endforeach</a>
+                                                        <a href="{{route('apply.job', $job->id)}}" class="careerfy-option-btn">@foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type)Apply @endif @endforeach</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -167,7 +166,7 @@
     <tbody> 
     @forelse($jobs_8 as $job)
         <tr>
-        <td width="50%"><i class="careerfy-icon {{$job->industry}}"></i> {{$job->job_title}}@foreach($industries as $industry) @if($industry->id === $job->industry) {{ $industry->name}} @endif @endforeach </td>
+        <td width="50%"><i class="careerfy-icon {{$job->industry}}"></i> <a href="{{route('job.description', $job->id)}}">{{$job->job_title}}  </a> | @foreach($industries as $industry) @if($industry->id === $job->industry) {{ $industry->name}} @endif @endforeach </td>
         <td width="25%"> <i class="fa fa-map-marker"></i>  {{$job->city}} </td>
         <td width="25%"><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>@foreach($employement_terms as $employement_term) @if($employement_term->id === $job->job_type) {{$employement_term->name}}@endif @endforeach </td>
       </tr> 
@@ -194,28 +193,24 @@
                  <div class="space">&nbsp;</div>
                   <div class="space">&nbsp;</div>
                           </div>
-                        <div class="col-md-12 careerfy-typo-wrap">
-                            <div class="categories-list"> 
-                                <ul class="careerfy-row">
-                                @foreach($industries_paginage as $industry)
-                                    <li class="careerfy-column-3">
-                                        <i class="careerfy-icon {{$industry->icon}}"></i>
-                                        <a href="#">{{$industry->name}}</a>
-                                        <span> @foreach($job_function_count as $function_count) @if($function_count->job_category === $industry->id) {{ $function_count->total}}  @endif @endforeach Open Vacancie(s) </span>
-                                    </li>
-                                    @endforeach
-                  
-                                </ul>
+                        <div class="col-md-15 careerfy-typo-wrap ">
+                            @foreach($industries as $industry)
+                            <div class="col-md-4">
+                                <li>@foreach($job_function_count as $function_count) @if($function_count->job_category === $industry->id) <span style="font-weight: bold;"> ({{ $function_count->total}}) </span> 
+                                          @endif  @endforeach <a href="{{route('job_opening', $industry->id)}}"> {{$industry->name}} </a>
+                                </li>
                             </div>
-                            <div class="careerfy-plain-btn"> <a href="{{route('list_industries')}}">Browse All Industries</a> </div> 
+                            @endforeach
+ 
                         </div>
+                    <div class="space">&nbsp;</div>
+                    <div class="space">&nbsp;</div>
+                    <div class="space">&nbsp;</div>
+                    <div class="space">&nbsp;</div>
                     </div>
                 </div>
             </div>
-                    <div class="space">&nbsp;</div>
-                    <div class="space">&nbsp;</div>
-                    <div class="space">&nbsp;</div>
-                    <div class="space">&nbsp;</div>
+
                       </div>
             <!-- Main Section -->
 <div class="jobsearch-main-section careerfy-element-list-full animation-test">
@@ -271,7 +266,7 @@
                             <div class="careerfy-parallex-text" style="color: white !important;">
                                 <h2 style="color: white !important;">Millions of jobs. <br> Find the one that’s right for you.</h2>
                                 <p>Search all the open positions on the web.</p>
-                        <a href="#find_jobs" class="careerfy-static-btn careerfy-bgcolor"  ><span>Search Jobs</span></a>
+                        <a href="{{route('list.job', 'job-list')}}" class="careerfy-static-btn careerfy-bgcolor"  ><span>Search Jobs</span></a>
                             </div>
                         </div>
                       </div>
@@ -279,17 +274,19 @@
                 </div>
             </div>
             <!-- Main Section -->
-            <div class="careerfy-main-section careerfy-parallex-full animation-test">
+            <div class="careerfy-main-section careerfy-parallex-full animation-test"  style="background-color: #ffffff;">
                 <div class="container">
                     <div class="row">
                         <aside class="col-md-6 careerfy-typo-wrap">
                             <div class="careerfy-parallex-text">
-                                <h2>Millions of jobs. <br> Find the one that’s right for you.</h2>
-                                <p>Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 600,000 companies worldwide. The right job is out there.</p>
-                                <a href="#" class="careerfy-static-btn careerfy-bgcolor"><span>User Jobs</span></a>
+                                
+                                <h2>{{$page_information->name}}</h2>
+                                <p>{{$page_information->description}} </p>
+                                <!-- <a href="#" class="careerfy-static-btn careerfy-bgcolor"><span>User Jobs</span></a> -->
                             </div>
                         </aside>
-                        <aside class="col-md-6 careerfy-typo-wrap"> <div class="careerfy-right"><img src="{{asset('/recruit/extra-images/parallex-thumb-1.png')}}" alt=""></div> </aside>
+                     <aside class="col-md-6 careerfy-typo-wrap"> <div class="careerfy-right">
+                            <img src="{{asset('/uploads/banners')}}/{{$page_information->image}}" alt=""></div> </aside>
                     </div>
                 </div>
             </div>

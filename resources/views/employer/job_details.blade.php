@@ -36,7 +36,9 @@
     height:200px;
     }
  
-
+ .white_background{
+  background-color: #ffffff;
+ }
 </style>
 
          @if(Session()->has('error'))
@@ -45,21 +47,16 @@
         </div>
         @endif
      <!-- SubHeader careerfy-subheader-without-bg-->
-        <div class="careerfy-job-subheader careerfy-subheader-without-bg">
-             <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        
-                    </div>
-                </div>
-            </div>
-        </div> 
+                    <div class="space">&nbsp;</div>
+                    <div class="space">&nbsp;</div>
+                    <div class="space">&nbsp;</div>
+                    <div class="space">&nbsp;</div> 
         <!-- SubHeader -->
 
         <!-- Main Content -->
         <div class="careerfy-main-content">
             <!-- Main Section -->
-            <div class="careerfy-main-section" style="background-color: #ffffff;">
+            <div class="careerfy-main-section">
                 <div class="container">
                     <div class="row">
                         
@@ -67,7 +64,7 @@
                         <div class="careerfy-column-12">
                             <div class="careerfy-typo-wrap">
                                 <figure class="careerfy-jobdetail-list">
-                                    <span class="careerfy-jobdetail-listthumb"><img src="img/extra-images/job-detail-logo-1.png" alt=""></span>
+                                    <span class="careerfy-jobdetail-listthumb"> <figure><a href=" "><img src="{{asset('/img/job.png')}}" alt=""></a></figure></span>
                                     <figcaption>
                                         <h2>{{$tag->job_title}}</h2>
                                         <span><small class="careerfy-jobdetail-type">@foreach($employement_terms as $employement_term) @if($tag->job_type === $employement_term->id)  {{$employement_term->name}} @endif @endforeach</small> Huntington Learning Center <small class="careerfy-jobdetail-postinfo">Posted now</small></span>
@@ -92,10 +89,10 @@
                         </div>
                         <!-- Job Details List -->
  
-                        <!-- Job Detail Content -->
-                        <div class="careerfy-column-8">
+                        <!-- Job Detail Content --> 
+                        <div class="careerfy-column-8" >
                             <div class="careerfy-typo-wrap">
-                                <div class="careerfy-jobdetail-content">
+                                <div class="careerfy-jobdetail-content white_background">
                                     <div class="careerfy-content-title"><h2>Job Detail</h2></div>
                                     <div class="careerfy-jobdetail-services">
                                         <ul class="careerfy-row">
@@ -147,37 +144,25 @@
                                     @foreach($skillsets as $skillset)
                                         <a href="#">{{$skillset->title}}</a>
                                         @endforeach
-                                   <!--      <a href="#">Civils</a>
-                                        <a href="#">food</a>
-                                        <a href="#">17th edition</a>
-                                        <a href="#">electrical</a>
-                                        <a href="#">engineer</a>
-                                        <a href="#">engineer</a>
-                                        <a href="#">engineering</a>
-                                        <a href="#">dairy</a>
-                                        <a href="#">projects</a>
-                                        <a href="#">Maintenance engineer</a> -->
+                      
                                     </div>
 
   <div class="space">&nbsp;</div> 
   <div class="space">&nbsp;</div>
   <div class="space">&nbsp;</div>
   <div class="space">&nbsp;</div>
-    <span style="color: red;">Kindly answer the evaluation question(s) below to begin your screening process</span>
+    <!-- <span style="color: red;">Kindly answer the evaluation question(s) below to begin your screening process</span> -->
 
                                 </div> 
 
                                 <!-- display jobs in the same industry -->
                                 <div class="careerfy-section-title"><h2>Other jobs you may like</h2></div>
-                                <div class="careerfy-job careerfy-joblisting-classic careerfy-jobdetail-joblisting">
-                             
+                                <div class="careerfy-job careerfy-joblisting-classic careerfy-jobdetail-joblisting"> 
                                     <ul class="careerfy-row">
-                                       @foreach($get_Job_by_common_industries as $common_job)
-
-                               
+                                       @foreach($get_Job_by_common_industries as $common_job) 
                                         <li class="careerfy-column-12">
                                             <div class="careerfy-joblisting-classic-wrap">
-                                                <figure><a href="#"><img src="img/extra-images/job-listing-logo-1.png" alt=""></a></figure>
+                                                <figure><a href="#"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-joblisting-text">
                                                     <div class="careerfy-list-option">
                                                         <h2><a href="#"> {{$common_job->job_title}}</a> <span>Featured</span></h2>
@@ -190,15 +175,14 @@
                                                         </ul>
                                                     </div>
                                                     <div class="careerfy-job-userlist">
-                                                        <a href="#" class="careerfy-option-btn"> {{$common_job->job_type}}Freelance</a>
+                                                        <a href="#" class="careerfy-option-btn">Freelance</a>
                                                         <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
                                                     </div>
                                                 <div class="clearfix"></div>
                                                 </div>
                                             </div>
                                         </li>
-                                         @endforeach
-                               
+                                         @endforeach 
                                 </div>
 
 
@@ -208,29 +192,15 @@
                         <!-- Job Detail SideBar -->
                         <aside class="careerfy-column-4">
                             <div class="careerfy-typo-wrap">
-                            <!--     <div class="widget widget_apply_job">
-                                    <div class="widget_apply_job_wrap">
-                                        <a href="#" class="careerfy-applyjob-btn">Apply for the job</a>
-                                        <span>Application ends in 4d 5h 3m</span>
-                                        <div class="careerfy-applywith-title"><small>OR apply with</small></div>
-                                        <p>Know someone who would be perfect for  this role this role? Be a pal, let them know.</p>
-                                        <ul>
-                                            <li><a href="#"><i class="careerfy-icon careerfy-facebook-logo-1"></i> Facebook</a></li>
-                                            <li><a href="#"><i class="careerfy-icon careerfy-linkedin-logo"></i> LinkedIn</a></li>
-                                        </ul>
-                                    </div>
-                                    <a href="#" class="careerfy-sendmessage-btn"><i class="careerfy-icon careerfy-envelope"></i> Send a message</a>
-                                </div> -->
-                            <!--     <div class="widget jobsearch_widget_map">
-                                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d22589232.038285658!2d-103.9763543971716!3d46.28054447273778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1507595834401"></iframe>
-                                </div> -->
+                       
                                 <div class="widget widget_add">
-                                    <img src="img/extra-images/jobdetail-add.jpg" alt="">
+                                    <img src="{{asset('/img/job.png')}}" alt="">
                                 </div>
-                                <div class="widget widget_view_jobs">
+                                <div class="careerfy-widget-title"><h2>More Jobs from  @foreach($get_all_user_list as $user) @if($user->id === $tag->client) {{$user->name}}@endif @endforeach</h2></div>
+
+                                <div class="widget widget_view_jobs white_background" >
                                 <!-- get employee that posted this job -->
-                                    <div class="careerfy-widget-title"><h2>More Jobs from  @foreach($get_all_user_list as $user) @if($user->id === $tag->client) {{$user->name}}@endif @endforeach</h2></div>
-                                    <ul>
+                                                                        <ul>
                                     @foreach($get_Job_by_common_industries_similler as $similar_job)
                                         <li>
                                             <h6><a href="#">{{$similar_job->job_title}} </a></h6>
@@ -238,18 +208,9 @@
                                             <small>{{$similar_job->country}},  @foreach($cities as $city) @if($similar_job->city === $city->id) {{$city->name}} @endif @endforeach</small>
                                         </li>
                               @endforeach
-                                  <!--       <li>
-                                            <h6><a href="#">Electrical Maintenance Engineer PLCs</a></h6>
-                                            <span>£25,000 - £33,000 per annum</span>
-                                            <small>London, United Kingdom</small>
-                                        </li>
-                                        <li>
-                                            <h6><a href="#">Electrical Maintenance Engineer FMCG Manufacturer</a></h6>
-                                            <span>£30,000 - £33,000 per annum</span>
-                                            <small>Sutton-in-Ashfield, Nottinghamshire</small>
-                                        </li> -->
+                       
                                     </ul>
-                                    <a href="#" class="widget_view_jobs_btn">View all jobs <i class="careerfy-icon careerfy-arrows32"></i></a>
+                                    <a href="{{route('list.job', 'job-list')}}" class="widget_view_jobs_btn">View all jobs <i class="careerfy-icon careerfy-arrows32"></i></a>
                                 </div>
                             </div>
                         </aside>

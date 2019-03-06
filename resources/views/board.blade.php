@@ -223,7 +223,17 @@
                                           <a href="{{route('policies.index')}}" class="nav-link ">
                                         <span class="title">@lang('cvmanagement.policies.title') </span>
                                           </a>
-                                      </li>         
+                                      </li> 
+                             <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
+                                     <a href="{{route('page_infor')}}" class="nav-link ">
+                                        <span class="title">Page Information </span>
+                                          </a>
+                                </li>
+                                  <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
+                                     <a href="{{route('policies.index')}}" class="nav-link ">
+                                        <span class="title">Employer </span>
+                                          </a>
+                                </li>         
                                   </ul>
                                 </li>
                                 <li class="nav-item">
@@ -379,7 +389,7 @@
                                         <span class="title">@lang('cvmanagement.fields-of-study.title') </span>
                                           </a>
                                       </li> 
-
+                         
                                       
                                     </ul> 
                                   </li>
