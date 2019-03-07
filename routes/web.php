@@ -120,18 +120,16 @@ Route::get('/test/start_test-{id}-candidate-{user}',[
 	'uses'=> 'LoginController@logout',
 	'as'=> 'logout'
 	]);
- 	Route::get('/redirect', 'LoginController@redirect');
-	Route::get('/callback', 'LoginController@callback');
+ 	//Route::get('/redirect', 'LoginController@redirect');
+	//Route::get('/callback', 'LoginController@callback');
   
-  	Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
-	Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+  	//Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
+	//Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback'); 
 
-	 Route::get('/{provider}', 'LoginController@redirectToProvider');
-	//Route::get('auth/{provider}', 'LoginController@auth')
-   // ->where(['provider' => 'facebook|google|twitter|linkedin']);
-   // Route::get('auth/{provider}/callback', 'LoginController@login')
-   // ->where(['provider' => 'facebook|google|twitter']);
-	Route::get('/{provider}/callback', 'LoginController@handleProviderCallback');
+	Route::get('auth/{provider}', 'Auth\LoginController@socialLogin')
+   ->where(['provider' => 'facebook|google']);
+   Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback2')
+   ->where(['provider' => 'facebook|google']);
 	Route::group(array('before' => 'auth', 'after' => 'no-cache', 'middleware' => 'web'),  function (){
 	Route::get('/employer/create-card', [
 		'as' => 'create.card',

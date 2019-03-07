@@ -19,7 +19,7 @@ class LoginUser
 
              
             $user = User::firstOrCreate(['email' => $socialUserInfo->getEmail()]);
-     dd($socialUserInfo->getEmail());
+          dd($socialUserInfo->getEmail());
            // $socialProfile = $user->socialProfile ?: new SocialLoginProfile;
             $providerField = "{$provider}_id";
             $socialProfile->{$providerField} = $socialUserInfo->getId();
