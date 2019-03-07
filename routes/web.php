@@ -1070,7 +1070,7 @@ Route::get('/index/resume/edit-referees/{id}', [
 	Route::resource('policies', 'PolicyController');
 	Route::resource('resume', 'ResumeController');
 	Route::resource('employer', 'EmployerController');
-	Route::resource('employer-dashboard', 'HomeController');
+	Route::resource('index', 'HomeController');
 	Route::resource('plans', 'PackagesController');
 	Route::resource('menu', 'MenuController');
 	Route::resource('pages', 'PostController');
