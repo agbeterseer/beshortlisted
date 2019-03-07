@@ -85,11 +85,11 @@ Route::get('/email-subscription', [
 	'as' => 'subscribe',
 	'uses' => 'HomeController@SubscribeToNewsletter'
 	]);
-Route::get('/index/policy-document', [
+Route::get('/page/policy-document', [
 	'as' => 'display.policy',
 	'uses' => 'HomeController@DisplayPolicy'
 	]);
-Route::get('/index/policy-document/{code}', [
+Route::get('/page/policy-document/{code}', [
 	'as' => 'policy.document',
 	'uses' => 'HomeController@PreivewPolicy'
 	]);
