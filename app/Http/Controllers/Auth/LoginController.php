@@ -83,9 +83,10 @@ class LoginController extends Controller
        $user = User::where(['email' => $userSocial->getEmail()])->first();
        if($user){
            Auth::login($user);
-           return redirect()->action('HomeController@index');
+          // return redirect()->action('HomeController@index');
        }else{
-           return view('auth.register',['name' => $userSocial->getName(), 'email' => $userSocial->getEmail()]);
+         $authUser = $this->findOrCreateUser($user, $provider);
+        return view('auth.register',['name' => $userSocial->getName(), 'email' => $userSocial->getEmail()]);
        }
    }
 
