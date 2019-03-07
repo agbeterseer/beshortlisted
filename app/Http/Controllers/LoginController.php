@@ -132,7 +132,8 @@ protected function authenticated(Request $request, $user)
             'name'     => $user->name,
             'email'    => $user->email,
             'provider' => $provider,
-            'provider_id' => $user->id
+            'provider_id' => $user->id,
+            'account_type' => 'employee'
         ]);
     } 
 

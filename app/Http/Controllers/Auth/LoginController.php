@@ -42,7 +42,7 @@ class LoginController extends Controller
     {
         return Socialite::driver($provider)->redirect();
     }
-    
+
    public function findOrCreateUser($user, $provider)
     {
         $authUser = User::where('provider_id', $user->id)->first();
@@ -53,7 +53,8 @@ class LoginController extends Controller
             'name'     => $user->name,
             'email'    => $user->email,
             'provider' => $provider,
-            'provider_id' => $user->id
+            'provider_id' => $user->id,
+            'account_type' => 'employee'
         ]);
     }
 
