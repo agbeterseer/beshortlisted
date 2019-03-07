@@ -92,6 +92,7 @@ protected function authenticated(Request $request, $user)
      */
     public function redirectToProvider($provider)
     {
+        //dd($provider);
         return Socialite::driver($provider)->redirect();
     }
 
@@ -105,6 +106,7 @@ protected function authenticated(Request $request, $user)
      */
     public function handleProviderCallback($provider)
     {
+        dd($provider);
         $user = Socialite::driver($provider)->user();
 
         $authUser = $this->findOrCreateUser($user, $provider);
@@ -146,21 +148,23 @@ protected function authenticated(Request $request, $user)
         return redirect('/index');
     }
 
- 
 
-} 
 
-     // public function login(Request $request){
- 
-     // 	if (Auth::attempt([
-     // 		'email' => $request->email,
-     // 		'password' => $request->password
-     // 	])){
-     // 	$user = User::where('email', $request->email)->first(); 
-     //      return redirect()->route('home');
-     //      }
-     //      return back()->withInput()->withErrors(['email'=>'Username or password is invalid']);
-     // } 
+     public function redirect()
+    {
+        return Socialite::driver('google')->redirect();
+    }
 
- 
+    public function callback()
+    { 
+        $user = Socialite::driver('google')->user();
+
+        $authUser = $this->findOrCreateUser($user, $provider);
+        Auth::login($authUser, true);
+        return redirect($this->redirectTo);
+    }
+
+
+}
+
  
