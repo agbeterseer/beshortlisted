@@ -57,6 +57,7 @@ class LoginController extends Controller
     {
         $authUser = User::where('provider_id', $user->id)->first();
         if ($authUser) {
+            //return redirect()->route('show.resume');
             return $authUser;
         }
         return User::create([
