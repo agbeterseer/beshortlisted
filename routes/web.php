@@ -120,12 +120,12 @@ Route::get('/test/start_test-{id}-candidate-{user}',[
 	'uses'=> 'LoginController@logout',
 	'as'=> 'logout'
 	]);
-
-
-	Route::get('auth/{provider}', 'Auth\LoginController@socialLogin')
-   ->where(['provider' => 'facebook|google']);
-   Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback2')
-   ->where(['provider' => 'facebook|google']);
+Route::get('auth/{provider}', 'LoginController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'LoginController@handleProviderCallback');
+// Route::get('auth/{provider}', 'Auth\LoginController@socialLogin')
+ //   ->where(['provider' => 'facebook|google']);
+ //   Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback2')
+ //   ->where(['provider' => 'facebook|google']);
 	Route::group(array('before' => 'auth', 'after' => 'no-cache', 'middleware' => 'web'),  function (){
 	Route::get('/employer/create-card', [
 		'as' => 'create.card',
