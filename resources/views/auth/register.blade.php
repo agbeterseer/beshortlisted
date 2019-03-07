@@ -280,7 +280,7 @@ tr:hover {background-color:#f5f5f5;}
                     </div>
                     <div class="clearfix"></div>
                     <ul class="careerfy-login-media">
-                        <li><a href="{{ url('/facebook') }}"><i class="fa fa-facebook"></i> Sign In with Facebook</a></li>
+                        <li><a href="{{ url('/auth/facebook') }}"><i class="fa fa-facebook"></i> Sign In with Facebook</a></li>
                         <li><a href="{{ url('/redirect') }}" data-original-title="google"><i class="fa fa-google"></i> Sign In with Google</a></li>
                         <!-- <li><a href="#" data-original-title="twitter"><i class="fa fa-twitter"></i> Sign In with Twitter</a></li> -->
                         <!-- <li><a href="{{ url('/auth/likedin') }}" data-original-title="linkedin"><i class="fa fa-linkedin"></i> Sign In with LinkedIn</a></li> -->

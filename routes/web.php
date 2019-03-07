@@ -120,10 +120,12 @@ Route::get('/test/start_test-{id}-candidate-{user}',[
 	'uses'=> 'LoginController@logout',
 	'as'=> 'logout'
 	]);
- Route::get('/redirect', 'LoginController@redirect');
-Route::get('/callback', 'LoginController@callback');
- 
-	// Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+ 	Route::get('/redirect', 'LoginController@redirect');
+	Route::get('/callback', 'LoginController@callback');
+  
+  	Route::get('auth/{provider}', 'LoginController@redirectToProvider');
+	Route::get('auth/{provider}/callback', 'LoginControllerr@handleProviderCallback');
+
 	 Route::get('/{provider}', 'LoginController@redirectToProvider');
 	//Route::get('auth/{provider}', 'LoginController@auth')
    // ->where(['provider' => 'facebook|google|twitter|linkedin']);

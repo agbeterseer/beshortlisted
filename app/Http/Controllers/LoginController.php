@@ -106,7 +106,7 @@ protected function authenticated(Request $request, $user)
      */
     public function handleProviderCallback($provider)
     {
-        dd($provider);
+       
         $user = Socialite::driver($provider)->user();
 
         $authUser = $this->findOrCreateUser($user, $provider);
@@ -124,6 +124,7 @@ protected function authenticated(Request $request, $user)
     public function findOrCreateUser($user, $provider)
     {
         $authUser = User::where('provider_id', $user->id)->first();
+  
         if ($authUser) {
             return $authUser;
         }
@@ -152,12 +153,14 @@ protected function authenticated(Request $request, $user)
 
      public function redirect()
     {
+
         return Socialite::driver('google')->redirect();
     }
 
     public function callback()
     { 
-        $user = Socialite::driver('google')->user();
+        dd('here');
+        $user = Socialite::driver('google')->user(); 
 
         $authUser = $this->findOrCreateUser($user, 'google');
         Auth::login($authUser, true);
