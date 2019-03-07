@@ -159,7 +159,7 @@ protected function authenticated(Request $request, $user)
     { 
         $user = Socialite::driver('google')->user();
 
-        $authUser = $this->findOrCreateUser($user, $provider);
+        $authUser = $this->findOrCreateUser($user, 'google');
         Auth::login($authUser, true);
         return redirect($this->redirectTo);
     }
