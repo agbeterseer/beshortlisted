@@ -2206,7 +2206,7 @@ return $get_Job_by_common_industries;
     $resume_list = RecruitResume::where('user_id', $user->id)->get();
     $get_all_user_list = User::all();
     $menus = $this->displayMenu();
-     return view('jobs.job_details', compact('tag','employement_terms', 'jobcareer_levels', 'industries', 'educational_levels', 'skillsets', 'job_assessments', 'job_requirements', 'get_Job_by_common_industries', 'get_Job_by_common_industries_similler', 'cities', 'get_all_user_list', 'user_single_resume_by_date', 'resume_list', 'industry_professions', 'menus'), array('user' => Auth::user()));
+     return view('jobs.details', compact('tag','employement_terms', 'jobcareer_levels', 'industries', 'educational_levels', 'skillsets', 'job_assessments', 'job_requirements', 'get_Job_by_common_industries', 'get_Job_by_common_industries_similler', 'cities', 'get_all_user_list', 'user_single_resume_by_date', 'resume_list', 'industry_professions', 'menus'), array('user' => Auth::user()));
       }else{
   return redirect()->route('auth.login');
      // return url('/login?redirect_to=' . urlencode(request()->url()));
