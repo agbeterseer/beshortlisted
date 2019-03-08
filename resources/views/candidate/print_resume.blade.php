@@ -25,7 +25,7 @@
 <div class="careerfy-employer-box-section" style="background-color: #FFFFFF;"> 
 
 
-        <div class="col-md-8 col-md-offset-2">>
+        <div class="col-md-8 col-md-offset-2">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet light bordered">
                 <div class="portlet-title">
