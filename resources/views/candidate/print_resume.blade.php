@@ -294,7 +294,7 @@ Previous
 <div class="col-md-12 cv_content" >
 <div class="pageactionIn" id="additional_information_topsection">
 <div class="title4">
-<p class="editov2"><a class="edits" href="{{route('update.pinformation', $person_info->id)}}">Edit</a></p>
+<!-- <p class="editov2"><a class="edits" href="{{route('update.pinformation', $person_info->id)}}">Edit</a></p> -->
 <h4>Personal Information</h4>
  <hr>
 </div>
