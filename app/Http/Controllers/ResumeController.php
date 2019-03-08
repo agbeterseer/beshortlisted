@@ -2607,7 +2607,7 @@ return response()->json($response);
           $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
    // dd($referee_list);
      $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
-            return view('candidate.freshertemplates.tabular_resume', compact('documents', 'roles', 'users', 'resumes_by_user', 'resumes','industries', 'industry_profession', 'industry_group', 'get_industry_child', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'dtwork', 'ddtwork', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+            return view('candidate.freshertemplates.tabular_resume', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
                 'job_category_list', 'referee_list', 'profile_pix'), array('user' => Auth::user()));
                // return view('candidate.freshertemplates.tabular_resume', array('user' => Auth::user()));
         }else{
@@ -2675,7 +2675,7 @@ return response()->json($response);
           $job_category_list = $this->GetJobcategory();
           $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
 
-     $pdf = PDF::loadView('candidate.PDF.tabular_pdf',  compact('documents', 'roles', 'users', 'resumes_by_user', 'resumes','industries', 'industry_profession', 'industry_group', 'get_industry_child', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'dtwork', 'ddtwork', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+     $pdf = PDF::loadView('candidate.PDF.tabular_pdf',  compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
                 'job_category_list', 'regions', 'referee_list')); 
       return $pdf->download('tabular_resume.pdf');  
     }
@@ -2730,9 +2730,6 @@ return response()->json($response);
         // get 
         $job_by_candidate_list = $this->GetAvailableJobs();
         // dd($job_by_candidate_list);
-
-
-
         $users = $this->GetUsers();
         $countries = $this->GetCountries();
         $cities = $this->GetCities();
@@ -2744,13 +2741,7 @@ return response()->json($response);
  // dd($section_candidatelist_count);
           $job_category_list = $this->GetJobcategory();
           $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
-   // dd($referee_list);
-
-        //get educational_levels
-
-
-
-            return view('candidate.freshertemplates.classic', compact('documents', 'roles', 'users', 'resumes_by_user', 'resumes','industries', 'industry_profession', 'industry_group', 'get_industry_child', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'dtwork', 'ddtwork', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+          return view('candidate.freshertemplates.classic', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
                 'job_category_list', 'referee_list'), array('user' => Auth::user()));
            // return view('candidate.freshertemplates.classic', array('user' => Auth::user()));
         }else{
@@ -2926,7 +2917,7 @@ public function UpdateReferees(Request $request)
 
 
       
-    $pdf = PDF::loadView('candidate.PDF.classic_pdf',  compact('documents', 'roles', 'users', 'resumes_by_user', 'resumes','industries', 'industry_profession', 'industry_group', 'get_industry_child', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'dtwork', 'ddtwork', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+    $pdf = PDF::loadView('candidate.PDF.classic_pdf',  compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
                 'job_category_list', 'regions', 'referee_list')); 
       return $pdf->download('classic_resume.pdf');  
     }
@@ -3005,7 +2996,7 @@ public function UpdateReferees(Request $request)
 
 
       
-    $pdf = PDF::loadView('candidate.PDF.standard_pdf',  compact('documents', 'roles', 'users', 'resumes_by_user', 'resumes','industries', 'industry_profession', 'industry_group', 'get_industry_child', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'dtwork', 'ddtwork', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+    $pdf = PDF::loadView('candidate.PDF.standard_pdf',  compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
                 'job_category_list', 'regions', 'referee_list')); 
       return $pdf->download('standard_resume.pdf');  
          
@@ -3073,7 +3064,7 @@ public function UpdateReferees(Request $request)
           $job_category_list = $this->GetJobcategory();
           $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
         //get educational_levels 
-        return view('candidate.freshertemplates.standard', compact('documents', 'roles', 'users', 'resumes_by_user', 'resumes','industries', 'industry_profession', 'industry_group', 'get_industry_child', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'dtwork', 'ddtwork', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+        return view('candidate.freshertemplates.standard', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
                 'job_category_list', 'referee_list'), array('user' => Auth::user()));
            // return view('candidate.freshertemplates.classic', array('user' => Auth::user()));
         }else{
@@ -3180,11 +3171,8 @@ public function UpdateReferees(Request $request)
   // dd($job_category_list);
    $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
         //get educational_levels
-
-
       
-    $pdf = PDF::loadView('candidate.PDF.classic_experienced_pdf',  compact('documents', 'roles', 'users', 'resumes_by_user', 'resumes','industries', 'industry_profession', 'industry_group', 'get_industry_child', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'dtwork', 'ddtwork', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
-                'job_category_list', 'regions', 'referee_list')); 
+    $pdf = PDF::loadView('candidate.PDF.classic_experienced_pdf',  compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 'job_category_list', 'regions', 'referee_list')); 
       return $pdf->download('classic_experienced_resume.pdf');  
        
     }
@@ -3257,7 +3245,7 @@ public function UpdateReferees(Request $request)
 
         //get educational_levels 
  
-            return view('candidate.experienced.expirenced_classic', compact('documents', 'roles', 'users', 'resumes_by_user', 'resumes','industries', 'industry_profession', 'industry_group', 'get_industry_child', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'dtwork', 'ddtwork', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+            return view('candidate.experienced.expirenced_classic', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
                 'job_category_list', 'referee_list'), array('user' => Auth::user()));
            // return view('candidate.freshertemplates.classic', array('user' => Auth::user()));
         }else{

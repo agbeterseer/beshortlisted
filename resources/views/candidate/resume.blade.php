@@ -101,7 +101,13 @@ height: 92px;
  @php
 $check = 'second';
  @endphp
-@include('partials.employee_breadcomb')
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div> 
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div> 
+@include('partials.employee_breadcomb') 
             <!-- Main Section -->
             <div class="careerfy-main-section careerfy-dashboard-fulltwo">
                 <div class="container " id="page" >

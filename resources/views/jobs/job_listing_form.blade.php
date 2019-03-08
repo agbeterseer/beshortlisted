@@ -26,19 +26,7 @@ border-color: white !important;
     body{background-color: #FAFAFA;}
 </style>
   <!-- SubHeader -->
-    <!--     <div class="careerfy-subheader">
-            <span class="careerfy-banner-transparent"></span>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="careerfy-page-title">
-                            <h1>Jobs For Good Programmers</h1>
-                            <p>Yes! You make or may not find the right job for you, but that’s ok......</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+ 
         <div class="space">&nbsp;</div>
         <div class="space">&nbsp;</div>
         <div class="space">&nbsp;</div>
@@ -202,7 +190,10 @@ border-color: white !important;
                                                 <figure><a href="{{route('apply.job', $tag->id)}}"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-joblisting-text">
                                                     <div class="careerfy-list-option">
-                                                        <h2><a href="{{route('apply.job', $tag->id)}}"> {{$tag->job_title}} </a> <!-- <span>Featured</span> --> </h2>
+                                                        <h2><a href="{{route('apply.job', $tag->id)}}"> {{$tag->job_title}} </a> 
+                                                    @foreach($employement_term_list as $employement_term) 
+                                                    @if($employement_term->id === $tag->job_type)
+                                                    <span class="careerfy-option-btn careerfy-{{$employement_term->category}}"> {{$employement_term->name}} </span> @endif @endforeach </h2>
                                                         <ul style="color: #13b5ea;">
                                                       
                                                             <li><i class="careerfy-icon careerfy-maps-and-flags"></i> {{$tag->country}}, {{$tag->city}}</li>

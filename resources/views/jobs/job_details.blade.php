@@ -46,15 +46,12 @@
         </div>
         @endif
      <!-- SubHeader careerfy-subheader-without-bg-->
-        <div class="careerfy-job-subheader careerfy-subheader-without-bg">
-             <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        
-                    </div>
-                </div>
-            </div>
-        </div> 
+          <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div> 
         <!-- SubHeader -->
 
         <!-- Main Content -->
@@ -68,7 +65,7 @@
                         <div class="careerfy-column-12">
                             <div class="careerfy-typo-wrap">
                                 <figure class="careerfy-jobdetail-list">
-                                    <span class="careerfy-jobdetail-listthumb"><img src="img/extra-images/job-detail-logo-1.png" alt=""></span>
+                                    <span class="careerfy-jobdetail-listthumb"><img src="{{asset('/img/job.png')}}" alt=""></span>
                                     <figcaption>
                                         <h2>{{$tag->job_title}}</h2>
                                         <span><small class="careerfy-jobdetail-type">@foreach($employement_terms as $employement_term) @if($tag->job_type === $employement_term->id)  {{$employement_term->name}} @endif @endforeach</small> Huntington Learning Center <small class="careerfy-jobdetail-postinfo">Posted now</small></span>
@@ -79,14 +76,7 @@
                                             <li><i class="careerfy-icon careerfy-summary"></i> Applications 4</li>
                                             <!-- <li><a href="#"><i class="careerfy-icon careerfy-view"></i> Views 3806</a></li> -->
                                         </ul>
-                                 <!--        <a href="#" class="careerfy-jobdetail-btn active"><i class="careerfy-icon careerfy-add-list"></i> Shortlist</a> -->
-                                  <!--       <a href="#" class="careerfy-jobdetail-btn"><i class="careerfy-icon careerfy-envelope"></i> Email Job</a>
-                                        <ul class="careerfy-jobdetail-media">
-                                            <li><span>Share:</span></li>
-                                            <li><a href="#" data-original-title="facebook" class="careerfy-icon careerfy-facebook-logo-in-circular-button-outlined-social-symbol"></a></li>
-                                            <li><a href="#" data-original-title="twitter" class="careerfy-icon careerfy-twitter-circular-button"></a></li>
-                                            <li><a href="#" data-original-title="linkedin" class="careerfy-icon careerfy-linkedin"></a></li>
-                                        </ul> -->
+              
                                     </figcaption>
                                 </figure>
                             </div>
@@ -211,18 +201,21 @@
                                
                                         <li class="careerfy-column-12">
                                             <div class="careerfy-joblisting-classic-wrap">
-                                                <figure><a href="#"><img src="img/extra-images/job-listing-logo-1.png" alt=""></a></figure>
+                                                <figure><a href="#"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-joblisting-text">
                                                     <div class="careerfy-list-option">
-                                                        <h2><a href="#"> {{$common_job->job_title}}</a> <span>Featured</span></h2>
-                                                        <ul>
-                                                            <li><a href="#">@ Massimo Artemisis</a></li>
+                                                        <h2><a href="#"> {{$common_job->job_title}}</a>  
+                                                    @foreach($employement_terms as $employement_term) 
+                                                          @if($employement_term->id === $tag->job_type)
+                                                    <span class="careerfy-option-btn careerfy-{{$employement_term->category}}"> {{$employement_term->name}} </span> @endif @endforeach </h2>
+                                                        <ul> 
                                                             <li><i class="careerfy-icon careerfy-maps-and-flags"></i>{{$common_job->country}}, {{$common_job->city}}</li>
                                                             <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> @foreach($industry_professions as $profession) @if($profession->id === $common_job->job_category){{$profession->name}} @endif @endforeach</li>
                                                         </ul>
                                                     </div>
-                                                    <div class="careerfy-job-userlist">
-                                                        <a href="#" class="careerfy-option-btn"> {{$common_job->job_type}}Freelance</a>
+                                                    <div class="careerfy-job-userlist"> 
+                                 <a href="{{route('apply.job', $tag->id)}}" class="careerfy-option-btn">APPLY </a> 
+                                                        <!-- <a href="#" class="careerfy-option-btn"> {{$common_job->job_type}}Freelance</a> -->
                                                         <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
                                                     </div>
                                                 <div class="clearfix"></div>
@@ -256,7 +249,7 @@
                                         </li>
                                         @endforeach 
                                     </ul>
-                                    <a href="#" class="widget_view_jobs_btn">View all jobs <i class="careerfy-icon careerfy-arrows32"></i></a>
+                                    <a href="{{route('list.job', 'job-list')}}" class="widget_view_jobs_btn">View all jobs <i class="careerfy-icon careerfy-arrows32"></i></a>
                                 </div>
                             </div>
                         </aside>

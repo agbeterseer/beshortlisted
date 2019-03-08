@@ -13,23 +13,23 @@
 </style>
     </head>
     <body class="transparent-header transparent-menu-below pace-on pace-minimal">
-        <!-- SubHeader -->
-<!--         <div class="careerfy-job-subheader careerfy-subheader-without-bg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        
-                    </div>
-                </div>
-            </div>
-        </div> -->
+
               @include('partials.job_menu')
+              <div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div> 
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div> 
+
+@if(Auth::user()->account_type === 'employee')
+@include('partials.employee_breadcomb') 
+@endif
         <!-- SubHeader -->
   
-                   <!-- Main Section ->
+                   <!-- Main Section -->
 
 
-                            <!--  Fancy Title -->
                              <!--  Fancy Title -->
                                          <div class="careerfy-main-section">
                 <div class="container">

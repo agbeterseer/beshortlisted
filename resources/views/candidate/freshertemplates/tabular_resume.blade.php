@@ -52,7 +52,8 @@ th, td {
                         <i class="icon-settings font-dark"></i>
                         <span class="caption-subject bold uppercase"> TabularResume</span>
                     </div>
-                
+                 <a href="{{url('/templates')}}" class="btn red mt-ladda-btn ladda-button btn-outline"> Close </a>
+                  <a href="javascript:window.print();" class="btn blue mt-ladda-btn ladda-button btn-outline"> PRINT </a>
                 </div>
 <div class="portlet-body">
 
@@ -174,12 +175,12 @@ th, td {
 
 </div>
 
-        <form action="{{route('export_tabular')}}"  method="POST"> 
+ <!--        <form action="{{route('export_tabular')}}"  method="POST"> 
         <input type="text" name="resume_id" hidden="hidden" value="{{$user_single_resume_by_date->id}}">
         {{csrf_field()}}
         <button  class="btn blue mt-ladda-btn ladda-button btn-outline" >  <i class="fa fa-download"></i>PDF</button>
 
-        </form>
+        </form> -->
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->
         </div>

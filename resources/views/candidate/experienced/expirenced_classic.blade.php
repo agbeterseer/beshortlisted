@@ -77,6 +77,8 @@ hr {
                         <i class="icon-settings font-dark"></i>
                         <span class="caption-subject bold uppercase"> Fresher's Standard Resume</span>
                     </div>
+ <a href="{{url('/templates')}}" class="btn red mt-ladda-btn ladda-button btn-outline"> Close </a>
+                   <a href="javascript:window.print();" class="btn red mt-ladda-btn ladda-button btn-outline"> PRINT </a>
                 
                 </div>
                 <div class="portlet-body"> 
@@ -234,12 +236,12 @@ Sotfware Developer
  @else
 
  @endif
-                                                 <form action="{{route('export_classic_experienced')}}"  method="POST"> 
+<!--                                                  <form action="{{route('export_classic_experienced')}}"  method="POST"> 
         <input type="text" name="resume_id" hidden="hidden" value="{{$user_single_resume_by_date->id}}">
         {{csrf_field()}}
         <button  class="btn blue mt-ladda-btn ladda-button btn-outline" >  <i class="fa fa-download"></i>PDF</button>
 
-        </form>           
+        </form> -->           
                 </div>
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->

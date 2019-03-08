@@ -207,11 +207,10 @@ nav li:after {
                 <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
-                        <span class="caption-subject bold uppercase"> Fresher's Resume</span>
-
-                        Choose Colors:
+                        <span class="caption-subject bold uppercase"> Fresher's Resume</span> 
                     </div>
-                
+                 <a href="{{url('/templates')}}" class="btn red mt-ladda-btn ladda-button btn-outline"> Close </a>
+                   <a href="javascript:window.print();" class="btn red mt-ladda-btn ladda-button btn-outline"> PRINT </a>
                 </div>
         <div class="portlet-body">  
 
