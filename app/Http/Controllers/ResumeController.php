@@ -1961,8 +1961,9 @@ $pr_caption= RecruitResume::where('user_id', $user->id)->where('status',1)->firs
         $job_category_list = $this->GetJobcategory();
         $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
         //get educational_levels
+        $menus = $this->displayMenu(); 
             return view('candidate.print_resume', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
-                'job_category_list', 'regions', 'referee_list'), array('user' => Auth::user()));
+                'job_category_list', 'regions', 'referee_list', 'menus'), array('user' => Auth::user()));
         }
        public function AddPersonalInformation(Request $request)
         {

@@ -1135,7 +1135,7 @@ Previous
 </div>
 </div>
  @endif
- <a href="{{route('display.templates')}}" class="careerfy-resume-addbtn"><span class="fa fa-plus"></span> Convert Resume To PDF</a>
+ <!-- <a href="{{route('display.templates')}}" class="careerfy-resume-addbtn"><span class="fa fa-plus"></span> Convert Resume To PDF</a> -->
 <!-- wards was here -->
 <!-- <div class="col-md-12 cv_content">
 <div class="careerfy-candidate-resume-wrap">    
