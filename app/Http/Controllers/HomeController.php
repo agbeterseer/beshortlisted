@@ -65,7 +65,14 @@ class HomeController extends Controller
     $units = null;
        return $units;
    }
-    public function index()
+
+   public function welcome()
+   {
+    //dd('home');
+    return redirect()->route('home');
+   }
+
+    public function home()
     {
         $job_post = \App\Tag::job_post();
         $documents = Document::all()->count();
@@ -103,7 +110,7 @@ class HomeController extends Controller
         $posts = $this->listPages();
         $job_match_count = DB::table('job_matches')->where('rate', '>', 2)->count(); 
        $page_information = DB::table('page_informations')->where('category', 'index')->first();
-      return view('index', compact('documents', 'roles', 'users', 'resumes','industries', 'resume_builder_list', 'industries', 'jobs', 'resume_count', 'jobs_count', 'industry_professions', 'employement_term_list', 'cities','industry_count', 'industries_paginage', 'job_function_count', 'jobs_8', 'job_post', 'tag_cities', 'employement_terms', 'menus', 'job_match_count', 'posts', 'page_information', 'all_jobs'), array('user' => Auth::user()));
+      return view('home', compact('documents', 'roles', 'users', 'resumes','industries', 'resume_builder_list', 'industries', 'jobs', 'resume_count', 'jobs_count', 'industry_professions', 'employement_term_list', 'cities','industry_count', 'industries_paginage', 'job_function_count', 'jobs_8', 'job_post', 'tag_cities', 'employement_terms', 'menus', 'job_match_count', 'posts', 'page_information', 'all_jobs'), array('user' => Auth::user()));
     }
     public function employement_terms()
     {
