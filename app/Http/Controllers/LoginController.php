@@ -17,10 +17,11 @@ use Redirect;
 class LoginController extends Controller
 {
 
+
 public function __construct()
 {
-    $this->redirectTo = url()->previous();
     $this->middleware('guest', ['except' => 'logout']);
+    Session::put('backUrl', URL::previous());
 }
  
  
@@ -37,6 +38,9 @@ protected function authenticated(Request $request, $user)
     return redirect(session('link'));
 }
  
+
+
+
         public function login(Request $request){
 
       
