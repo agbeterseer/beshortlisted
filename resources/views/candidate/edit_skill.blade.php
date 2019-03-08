@@ -19,6 +19,10 @@
 <div class="space">&nbsp;</div>
 <div class="space">&nbsp;</div> 
 @include('partials.employee_breadcomb') 
+      <div class="careerfy-main-section careerfy-dashboard-fulltwo">
+                <div class="container " id="page" style="" >
+            <div class="careerfy-employer-dasboard">
+<div class="careerfy-employer-box-section" style="background-color: #FFFFFF;"> 
     <div class="col-md-8" id="page">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
            
@@ -124,5 +128,9 @@
 </div>
 
 </div> 
- 
+ </div>
+</div>
+</div>
+
+</div> 
 @endsection

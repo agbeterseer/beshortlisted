@@ -2002,13 +2002,13 @@ $pr_caption= RecruitResume::where('user_id', $user->id)->where('status',1)->firs
             if ($id) {
 
             $person_info = PersonalInformation::findOrFail($id);
-
+$menus = $this->displayMenu();
             }else{   
             Session::flash('error', 'something went wrong');
             return redirect()->back();
             }
 
-            return view('candidate.update_personal_information', compact('person_info'), array('user' => Auth::user()));
+            return view('candidate.update_personal_information', compact('person_info', 'menus'), array('user' => Auth::user()));
         }
         /// forms 
         public function EducationFormBuilder(FormBuilder $formBuilder){

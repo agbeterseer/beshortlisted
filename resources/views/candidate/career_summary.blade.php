@@ -21,7 +21,8 @@
 @include('partials.employee_breadcomb') 
     <div class="col-md-12 ">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
-           
+     <div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div>      
  <div class="portlet light bordered">
 
                  @if(session()->has('message.level'))
@@ -52,7 +53,7 @@
 <label class="control-label col-md-3"> </label>
 <div class="col-md-12">
 Title <span class="required">*</span>
-<textarea class="form-control" placeholder="A result-driven and dedicated Application Developer, seeking a software engineering position to utilize logical thinking skills and programming expertise to provide the company with excellent software solutions" name="career_summary" required="required">{{$career->summary}}</textarea> 
+<textarea class="form-control" placeholder="A result-driven and dedicated Application Developer, seeking a software engineering position to utilize logical thinking skills and programming expertise to provide the company with excellent software solutions" name="career_summary" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 142px;">{{$career->summary}}</textarea> 
 <input type="hidden" name="resume" value="{{$code}}" >
  <input type="hidden" name="career" value="{{$career->id}}" >
 </div>
