@@ -1,3 +1,4 @@
+             @if(Auth::check())
              <div class="clearfix"></div>
             <div class="careerfy-breadcrumb">
                 <ul>
@@ -8,4 +9,4 @@
                 <li><a href="{{route('featured.jobs')}}">FEATURED JOBS</a></li>  
                 </ul>
             </div>
-    
+    @endif
