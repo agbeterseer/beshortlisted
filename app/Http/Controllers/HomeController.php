@@ -55,7 +55,13 @@ class HomeController extends Controller
      public function displayUnits()
     {
       $user = Auth::user();
-      return $units = EmployerPackage::where('status', 1)->where('userfkp', $user->id)->first();
+      //dd($user);
+      if ($user === null) {
+         return $units = 0;
+      }else{
+       return $units = EmployerPackage::where('status', 1)->where('userfkp', $user->id)->first();   
+      }
+      return back();
     }
    public function listPages()
    {
