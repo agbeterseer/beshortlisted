@@ -41,7 +41,7 @@ border-color: white !important;
                 <form method="POST" action="{{route('tag.store')}}" class="mt-repeater" >
                                         {{ csrf_field() }} 
    </td> -->
-                        <div class="careerfy-column-12 careerfy-typo-wrap">
+                        <!-- <div class="careerfy-column-12 careerfy-typo-wrap"> -->
     <!-- Main Section -->
 
                               <div class="lds-ripplee" style="display: none;"><div></div><div></div></div>
@@ -305,6 +305,6 @@ Eg. Do You have Experience in building API's?
                          </div>
                         </div> 
                     </div>
- 
+ <!-- </div> -->
 
      @endsection

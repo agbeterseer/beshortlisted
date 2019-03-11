@@ -4,13 +4,66 @@
     <title>Job Board</title>
     <!-- Css -->
         @include('partials.job_board_header')
- <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+ <!-- <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet"> -->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+    .careerfy-parallex-box {
+    background: url(img/parallex-box-bg.png);
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-color: #4f87fb;
+    padding: 137px 60px 136px 60px;
+    text-align: center;
+}
+    .search-web {
+    background: url(img/search-web.png);
+    background-position: left bottom;
+    background-repeat: no-repeat; 
+    text-align: center;
+}
+.singup a:hover {
+ color: #ffffff;
+}
+
+</style>
+   <style type="text/css">
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    height: 10px;
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    border-color: #13B5EA;
+}
+
+tr:hover {background-color:#f5f5f5;}
+.responsive {
+  width: 100%;
+  height: auto;
+}
+   </style> 
+   <style type="text/css"> 
+    .scroll_div{
+    overflow:scroll;
+    overflow-x:hidden;
+    overflow-y:scroll;
+    height:200px;
+    }
+    .mini_header{
+border-color: white !important;
+
+    }
+ 
+</style> 
 </head>
 <body>
 <script>
@@ -85,118 +138,24 @@
            @yield('content')      
 
 </div>
+
 </div>
 </div>
-                        
-            <!-- Main Section -->
-            
-            <!-- Main Section -->
-
-            <!-- Main Section -->
-  
-            <!-- Main Section -->
-
-            <!-- Main Section -->
-        
-            <!-- Main Section -->
-
-            <!-- Main Section -->
-             
-            <!-- Main Section -->
-
-            <!-- Main Section -->
-         
-            <!-- Main Section -->
-
-            <!-- Main Section -->
-         
-            <!-- Main Section -->
-
+ 
         </div>
         <!-- Main Content -->
         
         <!-- Footer -->
                @include('partials.job_footer')
         <!-- Footer -->
+   
     </div>
+ 
+
     <!-- Wrapper -->
 
     <!-- ModalLogin Box -->
-    <div class="careerfy-modal fade careerfy-typo-wrap" id="JobSearchModalSignup">
-        <div class="modal-inner-area">&nbsp;</div>
-        <div class="modal-content-area">
-            <div class="modal-box-area">
-
-                <div class="careerfy-modal-title-box">
-                    <h2>Login to your account</h2>
-                    <span class="modal-close"><i class="fa fa-times"></i></span>
-                </div>
-              <form class="login-form" role="form" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-                    <div class="careerfy-box-title">
-                        <span>Choose your Account Type</span>
-                    </div>
-                    <div class="careerfy-user-options">
-                        <ul>
-                            <li class="active">
-                                <a href="#">
-                                     <i class="careerfy-icon careerfy-user"></i>
-                                     <span>Candidate</span>
-                                     <small>I want to discover awesome companies.</small>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                     <i class="careerfy-icon careerfy-building"></i>
-                                     <span>Employer</span>
-                                     <small>I want to attract the best talent.</small>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <form>  
-                    <div class="careerfy-user-form">
-                        <ul>
-                            <li>
-                                <label>Email Address:</label>
-                                <input value="Enter Your Email Address" onblur="if(this.value == '') { this.value ='Enter Your Email Address'; }" onfocus="if(this.value =='Enter Your Email Address') { this.value = ''; }" type="text" name="username" autocomplete="off">
-                                <i class="careerfy-icon careerfy-mail"></i>
-                            </li>
-                            <li>
-                                <label>Password:</label>
-                                <input value="Enter Password" onblur="if(this.value == '') { this.value ='Enter Password'; }" onfocus="if(this.value =='Enter Password') { this.value = ''; }" type="password" class="form-control" name="password" autocomplete="off">
-                                <i class="careerfy-icon careerfy-multimedia"></i>
-                            </li>
-                            <li>
-                       
-                                <input type="submit" value="Sign In">
-                            </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                        <div class="careerfy-user-form-info">
-                            <p>Forgot Password? | <a href="#">Sign Up</a></p>
-                            <div class="careerfy-checkbox">
-                                <input type="checkbox" id="r10" name="rr" />
-                                <label for="r10"><span></span> Remember Password</label>
-                            </div>
-                        </div>
-                    </div>
-                    </form>
-                    <div class="careerfy-box-title careerfy-box-title-sub">
-                        <span>Or Sign In With</span>
-                    </div>
-                    <div class="clearfix"></div>
-                    <ul class="careerfy-login-media">
-                        <li><a href="{{ url('/auth/facebook') }}"><i class="fa fa-facebook"></i> Sign In with Facebook</a></li>
-                        <li><a href="#" data-original-title="google"><i class="fa fa-google"></i> Sign In with Google</a></li>
-                        <li><a href="#" data-original-title="twitter"><i class="fa fa-twitter"></i> Sign In with Twitter</a></li>
-                        <li><a href="#" data-original-title="linkedin"><i class="fa fa-linkedin"></i> Sign In with LinkedIn</a></li>
-                    </ul>
-                </form>
-                
-            </div>
-        </div>
-    </div>
+ 
     <!-- Modal Signup Box -->
  
       

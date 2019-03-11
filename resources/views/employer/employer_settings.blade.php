@@ -1,5 +1,5 @@
-@extends('layouts.jobboard', [
-  'page_header' => 'Candidates',
+@extends('layouts.employer_layout', [
+  'page_header' => 'Employer',
   'dash' => '',
   'quiz' => '',
   'users' => '',
@@ -7,23 +7,50 @@
   'top_re' => '',
   'all_re' => '',
   'sett' => '',
-  'candidate' => '',
-   'resume_' => '',
-   'employer_infor' => 'active'
+  'employer' => '',
+  'profile' => '',
+  'manage_jobs' => '',
+  'job_post' => 'active',
+  'profile' => '',
+  'shortlisted' => '',
+  'transaction' => '',
+  'package' => '',
 ])
 
-@section('content') 
-@if(Auth::check())
-@include('partials.employer_breadcomb')
-@endif
 
- <div class="careerfy-main-content" style="background-color: #ffffff;">
-             <!-- Main Section --> 
-            <!-- Main Section -->
-            <div class="careerfy-main-section careerfy-plain-services-full">
-                <div class="container">
-                    <div class="row">
-   
+@section('content')
+<style type="text/css">
+    p{
+        font-family:  'Open Sans', sans-serif;
+    }
+</style>
+<style type="text/css"> 
+    .scroll_div{
+    overflow:scroll;
+    overflow-x:hidden;
+    overflow-y:scroll;
+    height:200px;
+    }
+    .mini_header{
+border-color: white !important;
+
+    }
+
+</style> 
+<!--    <td height="80" align="center" valign="middle" bgcolor="#00aecc" style="font-family:Arial, Helvetica, sans-serif; color:#ffffff;"><div style="font-size:15px;"><b>R</b></div><div style="font-size:15px;"><b>C</b></div>
+                <form method="POST" action="{{route('tag.store')}}" class="mt-repeater" >
+                                        {{ csrf_field() }} 
+   </td> -->
+                        <!-- <div class="careerfy-column-12 careerfy-typo-wrap"> -->
+    <!-- Main Section -->
+
+                              <div class="lds-ripplee" style="display: none;"><div></div><div></div></div>
+                               <div id="info"></div>
+                            <div id="confirmation"></div>
+                              {{ csrf_field() }} 
+
+               <div class="careerfy-typo-wrap hideme">
+                 
       <div class="tabbable-line boxless tabbable-reversed">
                                     <ul class="nav nav-tabs">
                                         <li class="active">
@@ -177,7 +204,7 @@
                                                                  <div class="careerfy-typo-wrap">
  <form  id="frm" method="POST" action="{{route('add.card')}}"  >
                                         {{ csrf_field() }} 
-                            <div class="careerfy-employer-box-section">
+                            <div class="careerfy-employer-box-section" style="background-color: #ffffff;">
                                    <div class="careerfy-profile-title"><h2>Add Card</h2></div>
                                     <ul class="careerfy-row careerfy-employer-profile-form">
                                             <li class="careerfy-column-6">
@@ -212,51 +239,9 @@
 
                 </div>
             </div>
-            <!-- Main Section -->
- 
- </div>
-  </div>
-   </div>
+                    </div>
+ <!-- </div> -->
 
-    </div>
-  </div>
-</div>
-<style type="text/css">
-input {
- 
-}
-label {
-  display: block;
-}
-div {
-  margin: 0 0 1rem 0;
-}
+     @endsection
 
-.shell {
-  position: relative;
-  line-height: 1; }
-  .shell span {
-    position: absolute;
-    left: 3px;
-    top: 1px;
-    color: #ccc;
-    pointer-events: none;
-    z-index: -1; }
-    .shell span i {
-      font-style: normal;
-      /* any of these 3 will work */
-      color: transparent;
-      opacity: 0;
-      visibility: hidden; }
 
-input.masked,
-.shell span {
-  font-size: 16px;
-  font-family: monospace;
-  padding-right: 10px;
-  background-color: transparent;
-  text-transform: uppercase; }
-
-</style>
- 
-@endsection

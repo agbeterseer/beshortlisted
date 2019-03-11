@@ -10,12 +10,13 @@
   'employer' => '',
   'profile' => '',
   'manage_jobs' => '',
-  'job_post' => '',
-  'profile' => 'active',
+  'job_post' => 'active',
+  'profile' => '',
   'shortlisted' => '',
   'transaction' => '',
   'package' => '',
 ])
+
 
 
 @section('content')
