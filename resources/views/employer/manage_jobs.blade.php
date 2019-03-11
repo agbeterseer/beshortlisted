@@ -1,5 +1,3 @@
-
-
 @extends('layouts.employer_layout', [
   'page_header' => 'Employer',
   'dash' => '',
@@ -64,7 +62,7 @@
                                                                 <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#">{{$tag->job_category}}</a></li>
                                                             </ul>
                                                         </div>
-                                                        <div class="careerfy-table-cell"><a href="#" class="careerfy-managejobs-appli">@foreach($group_application as $group_) @if($tag->id == $group_->tag_id) {{$group_->total}} @endif @endforeach Application(s)</a></div>
+                                                        <div class="careerfy-table-cell"><div class="careerfy-managejobs-appli">@foreach($group_application as $group_) @if($tag->id == $group_->tag_id) {{$group_->total}} @endif @endforeach Application(s)</div></div>
                                                         <div class="careerfy-table-cell"><i class="fa fa-star-o"></i></div>
                                                         <div class="careerfy-table-cell"><span class="careerfy-managejobs-option">@if($tag->status === 0) Pending @elseif($tag->status === 1) Active  @elseif($tag->status === 2) Expired @endif</span></div>
                                                         <div class="careerfy-table-cell">

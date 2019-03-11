@@ -114,6 +114,7 @@ Route::get('/test/start_test-{id}-candidate-{user}',[
 		'uses' =>'LoginController@showLoginForm'
 		]
 		);
+ 
 	Route::post('/login',[
 	'uses'=> 'LoginController@login',
 	'as'=> 'login'
@@ -738,6 +739,8 @@ Route::get('/employer/post-jobs', [
 	'as' => 'post.jobs',
 	'uses' => 'TagController@PostJobs'
 	]);
+
+Route::post('/tag/save-job', 'TagController@SaveJob');
 Route::get('/employer/job/save-to-draft/{id}', [
 	'as' => 'show.draft',
 	'uses' => 'TagController@showSaveToDraft'
@@ -769,7 +772,7 @@ Route::get('/employer/job-post-successfull-{id}', [
 	]);
 Route::post('/tag/approve-job-post/{id}', [
 	'as' => 'approve.job',
-	'uses' => 'TagController@ApproveJobPost'
+	'uses' => 'TagController@approvejobpost'
 	]);
 Route::post('/tag/turn-off-job-post/{id}', [
 	'as' => 'turnoff.job',

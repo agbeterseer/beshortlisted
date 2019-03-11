@@ -36,16 +36,23 @@ border-color: white !important;
 
     }
 
-</style>
-@include('partials.employer_breadcomb')
+</style> 
 <!--    <td height="80" align="center" valign="middle" bgcolor="#00aecc" style="font-family:Arial, Helvetica, sans-serif; color:#ffffff;"><div style="font-size:15px;"><b>R</b></div><div style="font-size:15px;"><b>C</b></div>
-
+                <form method="POST" action="{{route('tag.store')}}" class="mt-repeater" >
+                                        {{ csrf_field() }} 
    </td> -->
                         <div class="careerfy-column-12 careerfy-typo-wrap">
     <!-- Main Section -->
-                            <div class="careerfy-typo-wrap">
+
+                              <div class="lds-ripplee" style="display: none;"><div></div><div></div></div>
+                               <div id="info"></div>
+                            <div id="confirmation"></div>
+                              {{ csrf_field() }} 
+
+                            <div class="careerfy-typo-wrap hideme">
                                 <div class="careerfy-employer-dasboard" style="background-color: #ffffff;">
-                                    <form method="POST" action="{{route('tag.store')}}" class="mt-repeater" >
+                                    <div  class="mt-repeater" >
+                                     <form method="POST" action="{{route('tag.store')}}" class="mt-repeater" >
                                         {{ csrf_field() }} 
                                         <div class="careerfy-employer-box-section">
                                             <!-- Profile Title -->
@@ -195,7 +202,7 @@ border-color: white !important;
                                                 <li>
                                                     <input type="checkbox" id="r_{{$fields_of_study->id}}" name="fieldsos[]" value="{{$fields_of_study->id}}" />
                                                     <label for="r_{{$fields_of_study->id}}"><span></span>{{$fields_of_study->fields}}</label>
-                                                    <small>10</small>
+                                                    <small></small>
                                                 </li>
                                                 @endforeach 
                                             </ul> 
@@ -292,7 +299,8 @@ Eg. Do You have Experience in building API's?
                                 </div>
                              </ul>
                           </div>
-           <input type="submit" class="careerfy-employer-profile-submit" value="Save Job"> 
+                          <button class="careerfy-employer-profile-submit" name="save_job">Save Job </button>
+           <!-- <input type="submit" class="careerfy-employer-profile-submit" value="Save Job" name="save_job">  -->
                             </form>
                          </div>
                         </div> 

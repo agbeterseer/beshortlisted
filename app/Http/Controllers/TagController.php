@@ -55,9 +55,10 @@ class TagController extends Controller
      */
     public function index() {
 
-        $tags = DB::table('tags')->get();
+        $tags = DB::table('tags')->orderBy('created_at', 'DESC')->get();
+        $users = DB::table('clients')->get();
         //
-        return view('admin.tags.index', compact('tags'), array('user' => Auth::user()));
+        return view('admin.tags.index', compact('tags', 'users'), array('user' => Auth::user()));
     }
 
     public function findJob(Request $request)
@@ -121,18 +122,18 @@ $ddt = Carbon::now();
 $job_id = $id; 
 $job_record = Tag::findOrFail($job_id);
  $List_applicants_by_job_id = Application::where('tag_id', $job_id)->where('delete', 0)->where('sorted', 0)->orderBy('created_at', 'desc')->get();
-$get_applicants_profile = Document::find(3741)->applications;
+
+//$get_applicants_profile = Document::find(3741)->applications;
 // get all applicants by job code 
 // get the resume of each candidate that applied for a job
- $get_applicants_by_jobRevers = Application::find(12)->document->document_id;
+// $get_applicants_by_jobRevers = Application::find(12)->document->document_id;
         $location = $request->location;
         $s = $request->input('s');
         $c = $request->input('c');
+
         // use this to sort
         $documentList = Document::all();
-        $documents = Document::latest()
-        ->search($s)
-        ->paginate(20);      
+        $documents = Document::latest()->paginate(20); 
         $industries = Industry::all();
         $professions = IndustryProfession::all();
         $cities = City::all();
@@ -152,6 +153,7 @@ $get_applicants_profile = Document::find(3741)->applications;
         $person_info_list = PersonalInformation::all();
         $awards = Award::all();
         $users = User::all();
+
         $user_info_application = DB::table('documents')
              ->select('tag_fk', DB::raw('count(*) as total'))
              ->groupBy('tag_fk')->get();
@@ -178,9 +180,9 @@ $get_applicants_profile = Document::find(3741)->applications;
             $shortlisted_list = Application::where('tag_id',$job_id)->where('shortlisted', 1)->where('delete', 0)->get();
             $review_list = $this->GetReviewNewApplicationList($job_id);         
             $shortlisted_list = Application::where('tag_id',$job_id)->where('shortlisted', 1)->where('delete', 0)->get();
-             $menus = $this->displayMenu();
+             $menus = $this->displayMenu(); 
             $units = $this->displayUnit();
-return view('employer.candidates_listing',  compact('documents', 'industries', 'employement_terms', 'educationallevels', 'jobcareer_levels', 'professions', 's', 'cities', 'c', 'work_experiences', 'users', 'educationallevels', 'job_applciation_list', 'List_applicants_by_job_id', 'jobap', 'documentList', 'countries', 'careerlist', 'jobskills', 'educationaList', 'dt', 'ddt', 'work_histories', 'jobcertifications', 'person_info', 'person_info_list', 'rejected_count', 'sorted_count', 'review_count', 'shortlisted_count', 'offered_count', 'hired_count', 'review_list', 'rejected_list', 'shortlisted_list', 'offered_list', 'hired_list', 'offered_list', 'job_id', 'job_record', 'industry_profession_list', 'menus', 'units'), array('user' => Auth::user()));
+return view('employer.candidates_listing',  compact('documents', 'industries', 'employement_terms', 'educationallevels', 'jobcareer_levels', 'professions', 's', 'cities', 'c', 'work_experiences', 'users', 'educationallevels', 'List_applicants_by_job_id', 'documentList', 'countries', 'careerlist', 'jobskills', 'educationaList', 'dt', 'ddt', 'work_histories', 'jobcertifications', 'person_info_list', 'rejected_count', 'sorted_count', 'review_count', 'shortlisted_count', 'offered_count', 'hired_count', 'review_list', 'rejected_list', 'shortlisted_list', 'offered_list', 'hired_list', 'offered_list', 'job_id', 'job_record', 'menus', 'units'), array('user' => Auth::user()));
 }
 
 
@@ -1447,7 +1449,7 @@ $units = $this->displayUnit();
       // check if employer has units to post a job
       ///employer_packages
       $employer_packages = DB::table('employer_packages')->where('userfkp' , $user->id)->where('status', 1)->first();
-    
+    //dd($employer_packages);
     if ($employer_packages !=null  && $employer_packages->units != 0) {
     //dd('NO');
     $resumes = RecruitResume::all(); 
@@ -1465,12 +1467,11 @@ $units = $this->displayUnit();
     $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
     $menus = $this->displayMenu();
     $units = $this->displayUnit();
-     //dd($user);
     return view('employer.create_job', compact('resumes','countries','cities', 'regions', 'educational_levels', 'industries', 'employement_terms', 'jobcareer_levels', 'industry_professions', 'recruit_profile_pix_list', 'recruit_profile_pix', 'fields_of_study_list', 'menus', 'units') ,array('user' => Auth::user()));
       }else{
-        dd('YES');
-         
-           return redirect()->route('employer_infor');
+        //dd('YES'); subscribe for units
+            Session::flash('no_unit_infor', 'Choose a plan below to start posting Jobs');
+          return redirect()->route('employer_infor');  
       }
  
     }else{
@@ -1661,6 +1662,186 @@ return redirect()->back();
     }
 
 
+public function SaveJob(Request $request)
+{
+  // After Job is posted
+      // 1. status is set to 0
+      // active is set to 0
+      // admin to publish only Job Post with status 1 and active 1
+      // waiting approval status = 2
+      // draft status 3
+      // blacklist status = 4 
+        $user = Auth::user();
+        $returnCurrentTime = $this->returnCurrentTime();
+        $end_date = $request->end_date;
+        $job_code = $request->job_code;
+        $name = $request->name;
+        $job_title = $request->job_title;
+        $client = $request->client;
+        $profession = $request->profession;
+        $display_name = $request->display_name;
+        $description = $request->description;
+        $field_of_study = $request->fieldsos;
+        
+        $experience = $request->p_experience;
+        $job_level = $request->p_job_level;
+        $salary_range = $request->salary_range;
+        $industry = $request->p_industry;
+        $qualification = $request->p_qualification;
+        $deadline_submission = $request->deadline_submission;
+        $country = $request->p_country;
+        $region = $request->region;
+        $city = $request->location;
+        $full_address = $request->full_address;
+        $email_address = $request->email_address;
+        $job_category = $request->job_category;
+        $job_type = $request->job_type;
+        $gender = $request->p_gender;
+ 
+        $reqirements = $request->group_a;
+        $assessments = $request->group_b;
+        $skillist = $request->group_c;
+
+     $rules = [
+        'job_title'=>'required|string',
+        'description' =>'required|string',
+        'full_address'=>'required|string',
+        'gender' => 'required|string',
+        'job_type' => 'required', 
+        'salary_range' => 'required|string',
+        'deadline_submission' => 'required|string',
+        'region' => 'required',
+        'experience' => 'required',
+        'country' =>'required',
+        ];
+
+        $input = Input::only(
+        'job_title',
+        'description', 
+        'full_address',
+        'gender',
+        'job_type',
+        'salary_range',
+        'deadline_submission',
+        'region',
+        'experience',
+        'country'
+
+    );
+ 
+        $validator = Validator::make($input, $rules);
+
+         if(!$validator)
+        {
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
+
+        //  
+        if ($job_category) {
+       $profession = IndustryProfession::findOrFail($job_category);
+          }
+     
+        if ($client) {
+           $client_name = Client::findOrFail($client);
+        }else{
+           $client_name = $user->name . '' .$user->username .'' .$user->lastname;
+        }
+      
+       //job_requirements
+    //dd($profession->id);
+        
+      if($end_date !=null && $job_title !=null && $job_level !=null && $industry !=null){
+ 
+        try {
+            DB::transaction(function () use ($job_title, $display_name, $client, $profession, $client_name, $end_date, $job_code, $request, $user, $reqirements, $assessments, $skillist, $field_of_study)  {
+// .'-'. str_limit(strtoupper($client_name),3)
+
+          $tag = Tag::firstOrNew(['job_title' => $request->input('job_title')]);
+          $tag->display_name = $display_name;
+          $tag->code = $job_code;
+          $tag->client = $user->id;
+          $tag->created_at = $this->returnCurrentTime();
+          $tag->status = 0; 
+          $tag->end_date = $request->input('end_date');
+          $tag->experience = $request->input('p_experience');
+          $tag->job_level = $request->input('p_job_level');
+          $tag->job_type = $request->input('job_type');
+          $tag->salary_range = $request->input('p_salary_range');
+          $tag->industry = $request->input('p_industry');
+          $tag->qualification = $request->input('p_qualification');
+          $tag->deadline_submission = $request->input('deadline_submission');
+          $tag->country = $request->input('p_country');
+          $tag->region = $request->input('region');
+          $tag->city = $request->input('location');
+          $tag->full_address = $request->input('full_address');
+          $tag->email_address = $request->input('email_address');
+          $tag->job_category = $request->input('job_category');
+          $tag->description = $request->input('description');
+          $tag->gender = $request->input('p_gender');
+          $tag->draft = 0;
+          $tag->active = 0;
+          $tag->delete = 0;
+          $tag->awaiting_aproval = 1;
+          $tag->save();
+ 
+
+       foreach ($assessments as $key => $value) {
+        //dd($value['assessment']);
+             DB::table('job_assessments')->insert(['question' => $value['assessment'], 'client_id' => $user->id, 'job_id' =>$tag->id, 'status' => 1, 'created_at' =>$this->returnCurrentTime()]);
+        }
+
+        foreach ($field_of_study as $key => $value) {
+          DB::table('job_field_of_studies')->insert(['fostudy' => $value, 'tag_id' =>$tag->id, 'status' => 1, 'created_at' =>$this->returnCurrentTime()]);
+        }
+
+           });
+       
+ 
+    $tagid = DB::table('tags')->orderby('created_at', 'DESC')->first();
+   // redirect to payment Packages
+ 
+    $new_unit = 0;
+
+   // get employers abailable units
+  // subtract one from the abailable units
+  // update employer with new unite
+$employer_package = EmployerPackage::where('userfkp', $user->id)->where('status',1)->first();
+
+if ($employer_package->jobs_remaining !=0 ) {
+ $new_unit = $employer_package->jobs_remaining - 1;
+$employer_packages = DB::table('employer_packages')->where(['userfkp' => $user->id, 'package_id' => $employer_package->package_id, 'status'=> 1])->update([ 'jobs_remaining' => $new_unit ]);
+}else{
+  Session::flash('you have no availabile unit');
+}
+
+        
+    $this->SendJobAlert($tagid->id, $job_type, $city, $country, $email_address, $industry, $job_category);
+
+    $this->SendJobPostAlertToAdmin($tagid->id);
+
+    $admin = $request->admin;
+
+if ($admin) {
+  Session::flash('success','Job created successfuly');
+    return redirect()->back();
+}else{
+  Session::flash('success','Job created successfuly');
+  return redirect()->route('jp.success', $tagid->id);
+    // $success_image = url('/') . 'img/employer-confirmation-icon.png';
+//     // $dashboard = url('/') .'/employer/dashboard';
+//     // $job_detail = url('/') . '/job/job-detail/';
+//   $response = array('status' => 'success', 'msg' => 'Setting created successfully', 'tagid' => $tagid->id, 'success_image' => $success_image, 'dashboard' => $dashboard , 'job_detail' => $job_detail);
+// return response()->json($response);
+ }
+   // insert into ProfessionMeta of candidates to im     
+        } catch (\Exception $e) {
+        return redirect()->back()->withErrors(['error' => 'somthing went wrong']);
+        }
+  }
+//dd('here');
+        return back()->with(['error' => 'somthing went wrong']);
+}
+
      public function store(Request $request){
       // After Job is posted
       // 1. status is set to 0
@@ -1796,11 +1977,9 @@ return redirect()->back();
        
  
     $tagid = DB::table('tags')->orderby('created_at', 'DESC')->first();
-   //  dd($tagid->id);
-
    // redirect to payment Packages
  
-$new_unit = 0;
+    $new_unit = 0;
 
    // get employers abailable units
   // subtract one from the abailable units
@@ -1827,6 +2006,9 @@ if ($admin) {
 }else{
   Session::flash('success','Job created successfuly');
   return redirect()->route('jp.success', $tagid->id);
+//     $success_image = url('/') . 'img/employer-confirmation-icon.png';
+//   $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'tagid' => $tagid->id, 'success_image' => $success_image);
+// return response()->json($response);
  }
    // insert into ProfessionMeta of candidates to im     
         } catch (\Exception $e) {
@@ -2248,11 +2430,11 @@ Session::flash('error', 'something went wrong');
       $job_field_of_studies = DB::table('job_field_of_studies')->get();
     $menus = $this->displayMenu();
     $units = $this->displayUnit();
-    return view('employer.edit_job_post', compact('fields_of_study_list','recruit_profile_pix_list', 'recruit_profile_pix','tag','resumes','countries','cities', 'regions', 'educational_levels', 'industries', 'employement_terms', 'jobcareer_levels', 'industry_professions','job_requirements', 'job_assessments', 'job_field_of_studies', 'menus', 'units'), array('user' => Auth::user()));
+    return view('employer.edit_job_post', compact('fields_of_study_list','recruit_profile_pix_list', 'recruit_profile_pix','tag','countries','cities', 'regions', 'educational_levels', 'industries', 'employement_terms', 'jobcareer_levels', 'industry_professions','job_requirements', 'job_assessments', 'job_field_of_studies', 'menus', 'units'), array('user' => Auth::user()));
     }
 
     public function UpdateJobPost(Request $request){
-       // dd($request->all());
+    //dd($request->all());
         $tag_id = $request->tag_id;
         
         $user = Auth::user();
@@ -2282,8 +2464,10 @@ Session::flash('error', 'something went wrong');
         $job_type = $request->job_type;
         $gender = $request->p_gender;
 
-        $reqirements = $request->group_a;
+        //$reqirements = $request->group_a;
         $assessments = $request->group_b;
+
+       // dd($assessments);
 
            $rules = [
         'job_title'=>'required|string|max:55',
@@ -2306,9 +2490,9 @@ Session::flash('error', 'something went wrong');
         {
             return Redirect::back()->withInput()->withErrors($validator);
         }
-    if ($id) {
+    if ($tag_id) {
   
-          $tag = Tag::findOrFail($id);
+          $tag = Tag::findOrFail($tag_id);
           $tag->job_title = $job_title;
           $tag->display_name = $display_name;
           $tag->code = $job_code;
@@ -2330,24 +2514,24 @@ Session::flash('error', 'something went wrong');
           $tag->email_address = $request->input('email_address');
           $tag->job_category = $request->input('job_category');
           $tag->description = $request->input('description');
-          $tag->gender = $request->input('gender');
-          $tag->delete = 0;
-          $tag->status = 0;
-          $tag->active = 0;
-          $tag->awaiting_aproval = 1;
-          $tag->draft = 0;
+          $tag->gender = $request->input('p_gender');
+          // $tag->delete = 0;
+          // $tag->status = 0;
+          // $tag->active = 0;
+          // $tag->awaiting_aproval = 1;
+          // $tag->draft = 0;
     
           $tag->save();
 
 
-       foreach ($reqirements as $key => $value) {
+       // foreach ($reqirements as $key => $value) {
  
-           DB::table('job_requirements')->where('id',$id)->update(['title' => $value['jrequirement'], 'client_id' => $user->id, 'job_id' =>$tag->id, 'status' => 1, 'created_at' =>$this->returnCurrentTime()]);
-        }
+       //     DB::table('job_requirements')->where('id',$tag_id)->update(['title' => $value['jrequirement'], 'client_id' => $user->id, 'job_id' =>$tag->id, 'status' => 1, 'created_at' =>$this->returnCurrentTime()]);
+       //  }
 
        foreach ($assessments as $key => $value) {
  
-            DB::table('job_assessments')->where('id',$id)->update(['question' => $value['assessment'], 'client_id' => $user->id, 'job_id' =>$tag->id, 'status' => 1, 'created_at' =>$this->returnCurrentTime()]);
+            DB::table('job_assessments')->where('id', $value['requirement_id'])->update(['question' => $value['assessment'], 'client_id' => $user->id, 'job_id' =>$tag_id, 'status' => 1, 'created_at' =>$this->returnCurrentTime()]);
         }
 
 Session::flash('success', 'done successfully'); 
@@ -2412,7 +2596,7 @@ public function BlackListJobPost($id){
  
 }
 
-public function ApproveJobPost($id){
+public function approvejobpost($id){
   //dd($id);
   if ($id) {
   $tag = Tag::find($id);
@@ -2422,6 +2606,15 @@ public function ApproveJobPost($id){
   $tag->awaiting_aproval = 0;
   $tag->draft = 0;
   $tag->save();
+
+  // go to employee units and subtract from the available units
+    $employer_package = DB::table('employer_packages')->where('status', 1)->where('userfkp', $tag->client)->first();
+    $remaining_units = $employer_package->units - 1;
+    $remaining_jobs = $employer_package->jobs_remaining - 1;
+
+    $employer_packages = DB::table('employer_packages')->where(['userfkp' => $tag->client, 'package_id' => $employer_package->package_id])->update([ 'jobs_remaining' => $remaining_jobs, 'units' => $remaining_units ]);
+
+
 // Send  Email to Employer  
   $content = [
   'tag' => $tag,

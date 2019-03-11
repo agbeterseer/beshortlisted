@@ -29,6 +29,7 @@ use App\Post;
 use App\ReachUs;
 use Mail;
 use Alert;
+use App\EmployerPackage;
 use App\Http\Requests\UpdateContactRequest;
 class HomeController extends Controller
 {
@@ -51,6 +52,11 @@ class HomeController extends Controller
     public function displayMenu(){
      return $menus = Menu::where('status', 1)->orderBy('menu_order', 'ASC')->paginate(5);
    }
+     public function displayUnits()
+    {
+      $user = Auth::user();
+      return $units = EmployerPackage::where('status', 1)->where('userfkp', $user->id)->first();
+    }
    public function listPages()
    {
     $posts = DB::table('posts')->where('status',1)->get();
@@ -61,11 +67,7 @@ class HomeController extends Controller
     $posts = $this->listPages();
      return view('single_page' , compact('posts'));
    }
-   public function displayUnits(){
-    $units = null;
-       return $units;
-   }
-
+ 
    public function welcome()
    {
     //dd('home');
@@ -149,7 +151,8 @@ public function employement_term_list()
     $plans = DB::table('planpackages')->orderBy('created_at', 'ASC')->get();
     $menus = $this->displayMenu();
     $posts = $this->listPages();
-    return view('employer_info', compact('plans', 'menus', 'posts'));
+    $units = $this->displayUnits();
+    return view('employer_info', compact('plans', 'menus', 'posts', 'units'));
   }
         /**
      * Show the application dashboard.

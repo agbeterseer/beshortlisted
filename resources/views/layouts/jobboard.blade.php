@@ -86,7 +86,8 @@ border-color: white !important;
 
     <!-- ModalLogin Box -->
       <!-- ModalLogin Box -->
-    <div class="careerfy-modal fade careerfy-typo-wrap" id="JobSearchModalSignup">
+    
+<!--     <div class="careerfy-modal fade careerfy-typo-wrap" id="JobSearchModalSignup">
         <div class="modal-inner-area">&nbsp;</div>
         <div class="modal-content-area">
             <div class="modal-box-area">
@@ -159,9 +160,11 @@ border-color: white !important;
                 
             </div>
         </div>
-    </div>
+    </div> -->
+
+
     <!-- Modal Signup Box -->
-    <div class="careerfy-modal fade careerfy-typo-wrap" id="JobSearchModalLogin">
+    <!-- <div class="careerfy-modal fade careerfy-typo-wrap" id="JobSearchModalLogin">
         <div class="modal-inner-area">&nbsp;</div>
         <div class="modal-content-area">
             <div class="modal-box-area">
@@ -195,9 +198,9 @@ border-color: white !important;
                     </div>
 
                     <div class="tab-content">
-                    <div id="candidate" class="tab-pane fade in active">
-       <form class="form-horizontal tab-pane" method="POST" action="{{ route('register') }}"  >
-             
+                    <div id="candidate" class="tab-pane fade in active"> 
+             <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                        {{ csrf_field() }}
                   <input type="hidden" name="account_type" value="candidate" />
                         candidate
                     <div class="careerfy-user-form careerfy-user-form-coltwo">
@@ -233,7 +236,7 @@ border-color: white !important;
                                 <input onblur="if(this.value == '') { this.value ='password'; }" onfocus="if(this.value =='password') { this.value = ''; }" type="password" name="confirm_password" class="form-control">
                                 <i class="careerfy-icon careerfy-password"></i>
                             </li>
-             <!--                <li class="careerfy-user-form-coltwo-full">
+                            <li class="careerfy-user-form-coltwo-full">
                                 <label>Categories:</label>
                                 <div class="careerfy-profile-select">
                                     <select name="category">
@@ -241,13 +244,12 @@ border-color: white !important;
                                         <option>Sales & Marketing</option>
                                     </select>
                                 </div>
-                            </li> -->
+                            </li>
                             <li class="careerfy-user-form-coltwo-full">
                                 <img src="extra-images/login-robot.png" alt="">
                             </li>
                             <li class="careerfy-user-form-coltwo-full">
-                          <!--   <button type="submit"> Sign Up </button> -->
-                                <input type="submit" value="Sign Up candidate">
+                            <button type="submit"> Sign Up Candidate</button>
                             </li>
                         </ul>
                     </div>
@@ -328,7 +330,7 @@ employee
                 
             </div>
         </div>
-    </div>
+    </div> -->
       
 @if(session()->has('flash-message'))
     <div class="alert alert-danger text-center" role="alert">

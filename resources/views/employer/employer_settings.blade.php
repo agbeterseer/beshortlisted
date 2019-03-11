@@ -17,7 +17,7 @@
 @include('partials.employer_breadcomb')
 @endif
 
- <div class="careerfy-main-content" style="background-color: #ffffff;" style="margin-top: -50px;">
+ <div class="careerfy-main-content" style="background-color: #ffffff;">
              <!-- Main Section --> 
             <!-- Main Section -->
             <div class="careerfy-main-section careerfy-plain-services-full">

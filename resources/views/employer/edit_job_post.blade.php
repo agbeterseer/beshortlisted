@@ -41,21 +41,16 @@ border-color: white !important;
 
 </style>
 <div class="space"></div>
-<!-- <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
- 
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Manage Jobs</a></li>
-      <li><a href="#">Shortlist</a></li>
-      <li><a href="#">Company Profile</a></li>
-      <li><a href="#">Setting</a></li>
-        <li><a href="#">Unsorted</a></li>
-    </ul>
-  </div>
-</nav> -->
                  @if(session()->has('message.level'))
                         <div class="alert alert-{{ session('message.level') }}"> 
                         {!! session('message.content') !!}
+                        </div>
+                        @endif
+
+                        
+                                @if(Session()->has('success'))
+                        <div class="alert alert-success"> 
+                        {!! Session::get('success') !!}
                         </div>
                         @endif
                        @if(Session()->has('error'))
@@ -77,13 +72,7 @@ border-color: white !important;
                                                 <h2>Edit a Job</h2>
                                             </div>
                                             <!-- New Job -->
-                                            <nav class="careerfy-employer-jobnav">
-                                                <ul>
-                                                    <li class="active"><a href="employer-dashboard-newjob.html"><i class="careerfy-icon careerfy-briefcase-1"></i> <span>Job Detail</span></a></li>
-                                                    <li><a href=""><i class="careerfy-icon careerfy-credit-card"></i> <span>Package & Payments</span></a></li>
-                                                    <li><a href="employer-dashboard-confitmation.html"><i class="careerfy-icon careerfy-checked"></i> <span>Confirmation</span></a></li>
-                                                </ul>
-                                            </nav>
+                                      
                                             <ul class="careerfy-row careerfy-employer-profile-form">
                                                 <li class="careerfy-column-6">
                                                     <label>Job Title *</label>
@@ -98,10 +87,7 @@ border-color: white !important;
                                                     <label>Email Address</label>
                                                     <input value="{{$tag->email_address}}"    type="text" name="email_address" >
                                                 </li>
-                                  <!--               <li class="careerfy-column-6">
-                                                    <label>Username</label>
-                                                    <input onblur="if(this.value == '') { this.value ='Graveholdings'; }" onfocus="if(this.value =='Graveholdings') { this.value = ''; }" type="text" name="username">
-                                                </li> -->
+        
                                                 <li class="careerfy-column-6">
                                                     <label>Job Category/ *</label>
                                                     <div class="careerfy-profile-select">
@@ -171,15 +157,7 @@ border-color: white !important;
                                                         </select>
                                                     </div>
                                                 </li>
-                                     <!--            <li class="careerfy-column-6">
-                                                    <label>Salary To</label>
-                                                    <div class="careerfy-profile-select">
-                                                        <select>
-                                                            <option>Enter Salary To</option>
-                                                            <option>Enter Salary To</option>
-                                                        </select>
-                                                    </div>
-                                                </li> -->
+ 
                                                 <li class="careerfy-column-6">
                                                     <label>Experience*</label>
                                                     <div class="careerfy-profile-select">
@@ -233,16 +211,7 @@ border-color: white !important;
                                            <ul class="careerfy-checkbox">
                                                @foreach($fields_of_study_list as $fields_of_study)
                                                 <li>
-                                  <!--               @foreach($job_field_of_studies as $job_field)
-
-                                                @if($job_field->fostudy === $fields_of_study->id)
-                                                    <input type="checkbox" id="r_{{$fields_of_study->id}}" name="fieldsos[]" value="{{$fields_of_study->id}}" checked="checkbox" />
-                                                    <label for="r_{{$fields_of_study->id}}"><span></span>{{$fields_of_study->fields}}</label> 
-
-                                                    @endif
-
-
-                                                    @endforeach -->
+   
  
                 <input type="checkbox" id="r_{{$fields_of_study->id}}" name="fieldsos[]" value="{{$fields_of_study->id}}" />
                                                     <label for="r_{{$fields_of_study->id}}"><span></span>{{$fields_of_study->fields}}</label>
@@ -307,149 +276,14 @@ border-color: white !important;
                                                 </li>  
                                             </ul>
                                         </div>
-<!--                                                      <div class="careerfy-employer-box-section">
-                                            <div class="careerfy-profile-title"><h2>Required Skills</h2></div>
-                                            <ul class="careerfy-row careerfy-employer-profile-form">
-                                            <div class="note note-primary">
-  <pre> Write your skills in the box below with percentage. Click on Add Skill button to add more skills<br> Eg. "Java 80%, php 71%, Javascript 59%, hibernate 90..."</pre>  
-</div>
-
- <div class="portlet-body form">
-                                <div class="form-body">
-                                    <div class="form-group">
-                                                <div class="mt-repeater form-horizontal">
-                                            <div data-repeater-list="group-a">
-                                                <div data-repeater-item class="mt-repeater-item">
-                                                 
-                                                    <div class="mt-repeater-input"> 
-                                                    <div class="mt-repeater">
-                                                        <div data-repeater-list="group_b">
-  <div data-repeater-item class="careerfy-row careerfy-employer-profile-form">
-   <div class="careerfy-column-5"><label >Skill</label>
-   <input type="text" class="form-control" name="skill" placeholder="Eg. Java"> </div>
-    <div class="careerfy-column-3"><label >(%) </label> 
-    <input type="text" class="form-control" name="percentage" placeholder=" Eg. 89%"> </div>
-     <div class="careerfy-column-2">
-     <a href="javascript:;" data-repeater-delete class="btn btn-danger make_x">
-<i class="fa fa-close"></i>
-</a> </div>
- </div>
-   <div data-repeater-item class="careerfy-row careerfy-employer-profile-form">
-   <div class="careerfy-column-5"><label >Skill</label>
-   <input type="text" class="form-control" name="skill" placeholder="Eg. hibernate"> </div>
-    <div class="careerfy-column-3"><label >(%) </label> 
-    <input type="text" class="form-control" name="percentage" placeholder=" Eg. 89%"> </div>
-     <div class="careerfy-column-2">
-     <a href="javascript:;" data-repeater-delete class="btn btn-danger make_x">
-<i class="fa fa-close"></i>
-</a> </div>
- </div>
-  <div data-repeater-item class="careerfy-row careerfy-employer-profile-form">
-   <div class="careerfy-column-5"><label >Skill</label>
-   <input type="text" class="form-control" name="skill" placeholder="Eg. php"> </div>
-    <div class="careerfy-column-3"><label >(%) </label> 
-    <input type="text" class="form-control" name="percentage" placeholder=" Eg. 89%"> </div>
-     <div class="careerfy-column-2">
-     <a href="javascript:;" data-repeater-delete class="btn btn-danger make_x">
-<i class="fa fa-close"></i>
-</a> </div>
- </div>
-    <div data-repeater-item class="careerfy-row careerfy-employer-profile-form">
-   <div class="careerfy-column-5"><label >Skill</label>
-   <input type="text" class="form-control" name="skill" placeholder="Eg. Springboot"> </div>
-    <div class="careerfy-column-3"><label >(%) </label> 
-    <input type="text" class="form-control" name="percentage" placeholder=" Eg. 89%"> </div>
-     <div class="careerfy-column-2">
-     <a href="javascript:;" data-repeater-delete class="btn btn-danger make_x">
-<i class="fa fa-close"></i>
-</a> </div>
- </div>
-    <div data-repeater-item class="careerfy-row careerfy-employer-profile-form">
-   <div class="careerfy-column-5"><label >Skill</label>
-   <input type="text" class="form-control" name="skill" placeholder="Eg. Android"> </div>
-    <div class="careerfy-column-3"><label >(%) </label> 
-    <input type="text" class="form-control" name="percentage" placeholder=" Eg. 89%"> </div>
-     <div class="careerfy-column-2">
-     <a href="javascript:;" data-repeater-delete class="btn btn-danger make_x"  >
-<i class="fa fa-close"></i>
-</a> </div>
- </div>
-
-</div>
-</div> 
-</div>
-    <div class="mt-repeater-input" >
-    <a href="javascript:;" data-repeater-delete class="careerfy-employer-profile-submit"  style="border-color: red; background-color: red;"> 
-      <i class="fa fa-close"></i> Delete</a>
-    </div>
-    </div>
-
-    </div>
-    <a href="javascript:;" data-repeater-create class="careerfy-employer-profile-submit">
-<i class="fa fa-plus"></i> Add Input</a>
-</div>
-
-</div>
-</div>
-   </div>
-
-        </ul>
-    </div> -->
-
-<!--              <div class="careerfy-employer-box-section">
-                                            <div class="careerfy-profile-title"><h2>Requirements</h2></div>
-                                            <ul class="careerfy-row careerfy-employer-profile-form">
-  <div class="note note-primary">
  
-<p> 1. Enter requirement(s), as intended for your job Ad and then click on the 'Add Input' button to add another requirement <br>
-2. click on 'Delete' to remove a requirement 
-</p>
-</div>
-                                                 <div class="portlet-body form"> 
-                                <div class="form-body">
-                                    <div class="form-group">
-                                        <div class="mt-repeater form-horizontal">
-                                            
-                                            <div data-repeater-list="group_a">
-                                            @foreach($job_requirements as  $job_requirements)
-                                                <div data-repeater-item class="mt-repeater-item">  
-                                <div class="mt-repeater-input" >
-                                <textarea name="jrequirement" class="form-control" required="required" placeholder="Make a list of requirements" maxlength="250">{{$job_requirements->title}}</textarea>
-                             </div>
-                            <div class="mt-repeater-input" >
-                            <input type="hidden" name="requirement_id" value="{{$job_requirements->id}}">
-                            
-                             </div>
-                
-                                                    <div class="mt-repeater-input">
-                                                        <a href="javascript:;" data-repeater-delete class="careerfy-employer-profile-submit" style="border-color: red; background-color: red;">
-                                                            <i class="fa fa-close"></i> Delete</a>
-                                                    </div>
-                                                </div>
-       @endforeach
-
-
-                                            </div>
-                                            <a href="javascript:;" data-repeater-create class="btn careerfy-employer-profile-submit">
-                                                <i class="fa fa-plus"></i> Add Input</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                
-                                            </ul>
-                                        </div> -->
 
                                                      <div class="careerfy-employer-box-section">
                                             <div class="careerfy-profile-title"><h2>Assessment</h2></div>
                                             <ul class="careerfy-row careerfy-employer-profile-form">
                                             <div class="note note-primary">
  <p> 
-1. Enter question(s), one at a time and then click 'Add' button <br>
-2. Leave "Value" on "Ture" for every question you enter.<br>
-3. click on 'Delete' to remove a question 
+ Enter question(s), one at a time and then click 'Add' button <br>
 <br>
 Eg. Do You have Experience in building API's?
 </p>
@@ -469,31 +303,7 @@ Eg. Do You have Experience in building API's?
                             <input type="hidden" name="requirement_id" value="{{$job_assessment->id}}">
                             
                              </div>
-                                      
-                                                   
-                                                  <!--   <div class="mt-repeater-input mt-checkbox-inline">
-                                                        <label class="control-label">Multiple Choice</label>
-                                                        <br/>
-                                                        <label class="mt-checkbox">
-                                                            <input type="checkbox" id="inlineCheckbox21" value="option1"> English
-                                                            <span></span>
-                                                        </label>
-                                                        <label class="mt-checkbox">
-                                                            <input type="checkbox" id="inlineCheckbox22" value="option2"> French
-                                                            <span></span>
-                                                        </label>
-                                                    </div> -->
-<!-- 
-                                            <div class="mt-repeater-input">
-                                                        <label class="control-label">Value</label>
-                                                        <br/>
-                                                        <select name="answer" class="form-control"  required="required">
-                                                            <option value="YES" selected>True</option>
-                                                            <option value="NO" disabled="disabled">False</option>
-                                                            
-                                                        </select>
-                                                    </div> -->
-                                 
+                     
                                                                   <div class="mt-repeater-input">
                                                         <a href="javascript:;" data-repeater-delete class="careerfy-employer-profile-submit" style="border-color: red; background-color: red;">
                                                             <i class="fa fa-close"></i> Delete</a>
@@ -513,10 +323,7 @@ Eg. Do You have Experience in building API's?
 
                                             </ul>
                                         </div>
-
-
-
-
+ 
                                         <input type="submit" class="careerfy-employer-profile-submit" value="Update Setting">
                                     </form>
                                 </div>

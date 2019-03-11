@@ -12,20 +12,11 @@
 ])
 
 @section('content')
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
-
 @include('partials.employee_breadcomb')
 
- <div class="careerfy-main-content"> 
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>  
+ <div class="careerfy-main-content">   
                         <section class="careerfy-fancy-title">
-                                <h2>employee section</h2>
+                                <h2>Welcome candidate</h2>
                         </section> 
                                      <!-- Main Section -->
             <div class="careerfy-main-section">
@@ -85,7 +76,7 @@
 
                                 <h2>{{$page_information->name}}</h2>
                                 <p>{{$page_information->description}}</p>
-                                <a href="#" class="careerfy-static-btn careerfy-bgcolor"><span>Search Jobs</span></a>
+                                <!-- <a href="#" class="careerfy-static-btn careerfy-bgcolor"><span>Search Jobs</span></a> -->
                             </div>
                         </aside>
                         <aside class="col-md-6 careerfy-typo-wrap"> <div class="careerfy-right">

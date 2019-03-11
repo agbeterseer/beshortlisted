@@ -31,7 +31,7 @@
         <!-- Banner -->
         <!-- Banner -->
         <!-- Main Content -->
-   <div class="careerfy-main-content" style="margin-top: -50px;">
+   <div class="careerfy-main-content" style="margin-top: -60px;">
 <style type="text/css"> 
     .scroll_div{
     overflow:scroll;
@@ -50,279 +50,6 @@ border-color: white !important;
 @include('partials.employer_breadcomb')
       
 
-
-<!--    <button type="button" class="btn blue mt-ladda-btn ladda-button btn-outline" data-toggle="collapse" data-target="#expand"><i class="careerfy-icon careerfy-sort"></i>Filter</button>
-   -->
-<!--   <div id="expand" class="collapse">
-
-
-  <div class="cscroll_div scroll_div" >
-            <div class="container "> 
-            
-                <div class="row"> 
-                    <div class="col-md-12">
-                    <div class="col-md-4">   
-
-                         <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Gender</a></h2>
-                                        <div class="careerfy-checkbox-toggle" id="gender">
-                                            <ul class="careerfy-checkbox">
-                                                <li>
-                                                    <input type="checkbox" id="g1" name="gender[]" value="Male" />
-                                                    <label for="g1"><span></span>Male</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="g2"  name="gender[]" value="Female" />
-                                                    <label for="g2"><span></span> Female</label>
-                                                </li>
-                 
-                                              
-                                            </ul>
-                                        </div>
-                                    </div> </div>
-
-                        <div class="col-md-4">       <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Job Function</a></h2>
-                                        <div class="careerfy-checkbox-toggle scroll_div" id="profession">
-                                            <ul class="careerfy-checkbox">
-                                               @foreach($professions as $profession)
-                                                <li>
-                                                    <input type="checkbox" id="r_{{$profession->id}}" name="profession[]" value="{{$profession->id}}" />
-                                                    <label for="r_{{$profession->id}}"><span></span>{{$profession->name}}</label>
-                                                    <small>10</small>
-                                                </li>
-                                                @endforeach 
-                                            </ul> 
-                                        </div>
-                                    </div>
-                            </div>
-
-                                    <div class="col-md-4">
-        <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Career Level</a></h2>
-                                        <div class="careerfy-checkbox-toggle croll_div">
-                                            <ul class="careerfy-checkbox">
-                                  @foreach($jobcareer_levels as $jobcareer_level)
-                                                <li>
-                                                    <input type="checkbox" id="jc{{$jobcareer_level->id}}" name="career_level[]" value="{{$jobcareer_level->id}}" />
-                                                    <label for="jc{{$jobcareer_level->id}}"><span></span>{{$jobcareer_level->name}}</label>
-                                                    <small>4</small>
-                                                </li>
-                                @endforeach
-                                          
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    </div>
-                    </div>
-                </div>
-
-                <div class="row"> 
-                <div class="col-md-12">
-                    <div class="col-md-4"> 
-                  <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Minimum Salary</a></h2>
-                                        <div class="careerfy-checkbox-toggle scroll_div" id="salary">
-                                            <ul class="careerfy-checkbox">
-                                                <li>
-                                                    <input type="checkbox" id="salary1" name="salary[]" value="N50,000-N100,000" />
-                                                    <label for="salary1"><span></span>N50,000-N100,000</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="salary2" name="salary[]" value="N150,000-N250,000" />
-                                                    <label for="salary2"><span></span>N150,000-N250,000</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="salary3"  name="salary[]" value="N350,000-N600,000" />
-                                                    <label for="salary3"><span></span>N350,000-N600,000</label>
-                                                </li>
-                                               <li>
-                                                    <input type="checkbox" id="salary4"  name="salary[]" value="N750,000-N1,000," />
-                                                    <label for="salary4"><span></span>N750,000-N1,000,000</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="salary5"  name="salary[]" value="N1,000,000-N5,000,000" />
-                                                    <label for="salary5"><span></span>N1,000,000-N5,000,000</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="salary6"  name="salary[]" value="N550,000-N10,000,000" />
-                                                    <label for="salary6"><span></span>N5,050,000-N10,000,000</label>
-                                                </li>
-                                                  <li>
-                                                    <input type="checkbox" id="salary7"  name="salary[]" value="N10,000,000-N15,000,000" />
-                                                    <label for="salary7"><span></span>N10,000,000-N15,000,000</label>
-                                                </li>
-                                                  <li>
-                                                    <input type="checkbox" id="salary8"  name="salary[]" value="N15,000,000-Above" />
-                                                    <label for="salary8"><span></span>N15,000,000-Above</label>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                </div></div>
-                    <div class="col-md-4">                 <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Availability</a></h2>
-                                        <div class="careerfy-checkbox-toggle" id="availability">
-                                            <ul class="careerfy-checkbox">
-                                                <li>
-                                                    <input type="checkbox" id="avail1" name="avail[]" value="now" />
-                                                    <label for="avail1"><span></span>Immediate</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="avail2" name="avail[]" value="1 week" />
-                                                    <label for="avail2"><span></span>1 week</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="avail3"  name="avail[]" value="2 weeks" />
-                                                    <label for="avail3"><span></span>2 weeks</label>
-                                                </li>
-                                               <li>
-                                                    <input type="checkbox" id="avail4"  name="avail[]" value="1 month" />
-                                                    <label for="avail4"><span></span>1 month</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="avail5"  name="avail[]" value="2 months" />
-                                                    <label for="avail5"><span></span>2 months</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="avail6"  name="avail[]" value="Specific date" />
-                                                    <label for="avail6"><span></span>Specific date</label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                </div>  </div>
-                    <div class="col-md-4">                              <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Years Of Experience</a></h2>
-                                        <div class="careerfy-checkbox-toggle" id="yearofexperience">
-                                            <ul class="careerfy-checkbox">
-                                                <li>
-                                                    <input type="checkbox" id="g1yoe" name="yoe[]" value="0-5" />
-                                                    <label for="g1yoe"><span></span>0-5</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="g2yoe"  name="yoe[]" value="6-10" />
-                                                    <label for="g2yoe"><span></span>6-10</label>
-                                                </li>
-                                               <li>
-                                                    <input type="checkbox" id="g3yoe"  name="yoe[]" value="11-15" />
-                                                    <label for="g3yoe"><span></span>11-15</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="g4yoe"  name="yoe[]" value="16-20" />
-                                                    <label for="g4yoe"><span></span>16-20</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="g5yoe"  name="yoe[]" value="20 Above" />
-                                                    <label for="g5yoe"><span></span>20 Above</label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                </div> </div> 
-                </div> 
-                </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-4">                                <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Age</a></h2>
-                                        <div class="careerfy-checkbox-toggle" id="age">
-                                            <ul class="careerfy-checkbox">
-                                                <li>
-                                                    <input type="checkbox" id="rag1" name="ag[]" value="18-25" />
-                                                    <label for="rag1"><span></span>18-25</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="rag2" name="ag[]" value="26-30" />
-                                                    <label for="rag2"><span></span>26-30</label>
-                                                </li>
-                                                    <li>
-                                                    <input type="checkbox" id="rag3" name="ag[]" value="31-35" />
-                                                    <label for="rag3"><span></span>31-35</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="rag4" name="ag[]" value="36-40" />
-                                                    <label for="rag4"><span></span>36-40</label>
-                                                </li>
-                                                     <li>
-                                                    <input type="checkbox" id="rag5" name="ag[]" value="41-45" />
-                                                    <label for="rag5"><span></span>41-45</label>
-                                                </li> 
-                                                <li>
-                                                    <input type="checkbox" id="rag6" name="ag[]" value="46-50" />
-                                                    <label for="rag6"><span></span>46-50</label>
-                                                </li> 
-                                                <li>
-                                                    <input type="checkbox" id="rag7" name="ag[]" value="51 Above" />
-                                                    <label for="rag7"><span></span>51 Above</label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div> </div>
-                            <div class="col-md-4">                                
-                            <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Qualification</a></h2>
-                                        <div class="careerfy-checkbox-toggle scroll_div"  >
-                                        <div id="qualify">
-
-                                            <ul class="careerfy-checkbox">
-                                             @foreach($educationallevels as $educational_level)
-                                                    <li>
-                                         <input type="checkbox" id="qu_{{$educational_level->id}}" name="qu[]" value="{{$educational_level->id}}" />
-                                                    <label for="qu_{{$educational_level->id}}"><span></span>{{$educational_level->name}}</label>
-                                                </li>
-                                                @endforeach
-                                        
-                                                 </ul>
-                                                 </div>
-                                        </div>
-                                    </div> </div>
-                            <div class="col-md-4">                                          
-                            <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Location</a></h2>
-                                        <div class="careerfy-checkbox-toggle scroll_div" id="location" >
-                                            <ul class="careerfy-checkbox">
-                                            @foreach($cities as $city) 
-                                                <li>
-                                                    <input type="checkbox" id="r{{$city->id}}" name="city[]" value="{{$city->id}}" />
-                                                    <label for="r{{$city->id}}"><span></span>{{$city->name}}</label>
-                                                </li> 
-                                            @endforeach 
-                                            </ul> 
-                                        </div>
-                                    </div> </div>
-                        </div> 
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-4"> 
-                            <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Employement Terms</a></h2>
-                                        <div class="careerfy-checkbox-toggle" id="job_terms">
-                                            <ul class="careerfy-checkbox">
-                                  @foreach($employement_terms as $employement_term)
-                                                <li>
-                                                    <input type="checkbox" id="jr{{$employement_term->id}}" name="job[]" value="{{$employement_term->id}}" />
-                                                    <label for="jr{{$employement_term->id}}"><span></span>{{$employement_term->name}}</label>
-                                                    <small>4</small>
-                                                </li>
-                                @endforeach
-                                          
-                                            </ul>
-                                        </div>
-                                    </div></div>
-                            <div class="col-md-4">                             
-                          XXX</div>
-                                    <div class="col-md-4"> xxx</div>
-                        </div>
-
-
-                    </div>
-            
-            </div>
-        </div>
-          </div>  -->
         <!-- SubHeader -->
  
         <!-- Main Content -->
@@ -351,42 +78,7 @@ border-color: white !important;
                 </div>
             </div>
          
-            <!-- <div class="careerfy-main-section careerfy-subheader-form-full">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-md-12 careerfy-typo-wrap">
-                    
-                            <div class="careerfy-subheader-form">
-                                <form class="careerfy-banner-search" action="{{route('job.title')}}" method="POST">
-                                   {{ csrf_field() }}
-                                    <ul>
-                                        <li>
-                                            <input placeholder="Job Title, Keywords" onblur="if(this.value == '') { this.value ='Job Title, Keywords'; }" onfocus="if(this.value =='Job Title, Keywords') { this.value = ''; }" type="text" name="job_title">
-                                        </li>
-                                        <li>
-                                            <input placeholder="City, State" onblur="if(this.value == '') { this.value ='City, State or ZIP'; }" onfocus="if(this.value =='City, State') { this.value = ''; }" type="text" name="candidate_city">
-                                            <i class="careerfy-icon careerfy-location"></i>
-                                        </li>
-                                        <li>
-                                            <div class="careerfy-select-style" >
-                                                <select>
-                                                    <option>Categories</option>
-                                                    <option>Categories</option>
-                                                    <option> <a href="{{url('/employer/candidates-listing')}}"> All</a></option>
-                                                </select>
-                                            </div>
-                                        </li>
-                                        <li class="careerfy-banner-submit"> <input type="submit" value=""> <i class="careerfy-icon careerfy-search"></i> </li>
-                                    </ul>
-                                </form>
-                            </div>
-                            
-                        </div>       
-
-                    </div>
-                </div>
-            </div> -->
+          
             <!-- Main Section -->
 
         <!-- SubHeader -->
@@ -436,8 +128,9 @@ border-color: white !important;
 <div class="careerfy-candidate careerfy-candidate-default">
 <div class="careerfy-search-filter-wrap careerfy-without-toggle">
 <div class="careerfy-search-box">
-<div id=" " class="btn  mt-ladda-btn mini_header" data-toggle="collapse" data-target="#expand_unsorted" > 
-<i class="careerfy-icon careerfy-sort"></i>  <h2>Filter</h2>
+<div id="" class="btn mt-ladda-btn mini_header" data-toggle="collapse" data-target="#expand_unsorted" > 
+<i class="careerfy-icon careerfy-sort"></i> <h2> Filter </h2> 
+<div class="space">&nbsp;</div>
 </div>
 </div></div>
 <ul class="careerfy-row nav-tabs tabs-left" id="applicants_list">
@@ -446,8 +139,7 @@ border-color: white !important;
  @if(!$List_applicants_by_job_id->isEmpty())
 @forelse($List_applicants_by_job_id as $List_applicant)
    
-<li class="careerfy-column-12">
- 
+<li class="careerfy-column-12"> 
  <a href="#tab_6_1{{$List_applicant->id}}" data-toggle="tab">
                                           
 

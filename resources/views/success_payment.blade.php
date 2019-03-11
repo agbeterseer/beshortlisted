@@ -31,9 +31,7 @@ border-color: white !important;
     }
 
 </style>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
+@include('partials.employer_breadcomb')
       <div class="careerfy-main-section careerfy-dashboard-fulltwo">
                 <div class="container " id="page" style="" >
             <div class="careerfy-employer-dasboard">
@@ -50,7 +48,8 @@ border-color: white !important;
                                         <!-- Confitmation -->
                                         <div class="careerfy-employer-confitmation">
                                         <div align="center"> <img src="{{asset('img/employer-confirmation-icon.png')}}" alt="" align="center"></div> 
-                                            <h2>Your Payment has been successful</h2> 
+                                            <h2>Your Payment has been successful</h2>  
+                                            <p style="color: green"><strong>{{$units->units}} </strong> Units has been added to your account</p>
                                             <div class="clearfix"></div> 
                                         </div>
                                     </div>

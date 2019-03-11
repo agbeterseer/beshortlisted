@@ -543,10 +543,10 @@ address                         { font-style: italic; }
     margin-bottom: 3px;
     text-transform: uppercase;
 }
-/*.careerfy-fancy-title h4 {
+.careerfy-fancy-title h4 {
     margin-bottom: 3px;
     text-transform: uppercase;
-}*/
+}
 .careerfy-fancy-title p {
     margin-bottom: 0px;
     font-weight: 300;
@@ -1484,7 +1484,7 @@ li:hover .careerfy-read-more { background-color: transparent; }
     width: 100%;
 }
 .careerfy-plain-services h2, p{
-    text-align: center;
+    /*text-align: center;*/
 }
 i{
  align-content: center;  
@@ -2207,5 +2207,73 @@ div.process_outer.process_outer_column3 .title3 {
   .highlited {
     color: red !important;
     -webkit-print-color-adjust: exact;
+  }
+}
+
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #13B5EA;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 28px;
+    left: 28px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 58px;
+    height: 58px;
+    opacity: 0;
+  }
+}
+
+.lds-ripplee {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+
+}
+.lds-ripplee div {
+  position: absolute;
+  border: 4px solid #13B5EA;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripplee 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+
+}
+.lds-ripplee div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripplee {
+  0% {
+    top: 28px;
+    left: 28px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 58px;
+    height: 58px;
+    opacity: 0;
   }
 }

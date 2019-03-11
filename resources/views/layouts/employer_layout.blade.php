@@ -27,7 +27,7 @@
 @include('partials.employer_breadcomb') 
         <!-- Banner -->
         <!-- Main Content -->
-        <div class="careerfy-main-content" style="margin-top: -50px;">
+             <div class="careerfy-main-content" style="margin-top: -60px;">
             <!-- Main Section -->
                 <!-- <section id="app"></section> -->      
             <!-- Main Section -->
@@ -48,18 +48,7 @@
                 </div>
 </div>
 </div>
- 
-              <!--     <a href="#" class="employer-dashboard-thumb"><img src="extra-images/candidate-dashboard-navthumb.jpg" alt=""></a>
-              <figcaption>
-              <div class="careerfy-fileUpload">
-              <span><i class="careerfy-icon careerfy-add"></i> Upload Photo</span>
-              <input type="file" class="careerfy-upload" />
-              </div>
-              @if(Auth::user())
-              <h2> {{Auth::user()->name}}</h2>
-              <span class="careerfy-dashboard-subtitle">UI/UX Designer</span>
-              @endif
-              </figcaption> job.details-->
+  
                                     </figure>
  
 
@@ -1020,7 +1009,72 @@ function isEmpty(obj) {
   });
  
     });
+  
+   $(document.getElementsByName('save_job')).click(function() {
+ alert($('input[name=job_title]').val());
+         $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
  
+        $.ajax({
+            type:'post',
+            url:'/tag/save-job', 
+            data:{
+                // '_token':$('input[name=_token').val(), 
+                // 'job_title':$('input[name=job_title]').val(),
+                // 'email_address':$('input[name=email_address]').val(),
+                // 'job_category':$('input[name=job_category]').val(),
+                // 'job_type':$('input[name=job_type]').val(),
+                // 'p_job_level':$('input[name=p_job_level').val(),
+                // 'p_gender':$('input[name=p_gender]').val(),
+                // 'p_salary_range':$('input[name=p_salary_range]').val(),
+                // 'p_experience':$('input[name=p_experience]').val(),
+                // 'p_industry':$('input[name=p_industry]').val(),
+                // 'p_qualification':$('input[name=p_qualification]').val(),
+                // 'end_date':$('input[name=end_date]').val(),
+                // 'fieldsos':$('input[name=fieldsos]').val(),
+                // 'description':$('textarea[name=description]').val(),
+                // 'p_country':$('input[name=p_country]').val(),
+                // 'region':$('input[name=region]').val(),
+                // 'location':$('input[name=location]').val(),
+                // 'full_address':$('textarea[name=full_address]').val(),
+                // 'group_a':$('input[name=group_a]').val(),
+                // 'group_b':$('input[name=group_b]').val(),
+                // 'group_c':$('input[name=group_c]').val(),
+           
+            },
+              beforeSend: function(){
+            //Show image container
+            $(".lds-ripplee").show(); 
+            $(".hideme").hide();
+            $("#info").append('<i class="btn-success btn-xs" style="color:#ffffff;"> sending data to the server... </i>');
+             },
+            success:function(data){
+            console.log(data); 
+     },
+     complete:function(data){
+    // Hide image container 
+    $(".lds-ripplee").hide();
+    $("#info").hide();
+    },
+    }).done(function (data) {
+     $(".hideme").hide();
+        var code = data.tagid; 
+        var success_image = data.success_image; 
+        var dashboard = data.dashboard; 
+        var job_detail = data.job_detail;
+        console.log(dashboard);
+        console.log(job_detail);
+
+        var  success  =  '<div class="careerfy-column-9"><div class="careerfy-typo-wrap"><div class="careerfy-employer-dasboard"> <div class="careerfy-employer-box-section" style="background-color: #ffffff;"> <nav class="careerfy-employer-jobnav"> </nav> <div class="careerfy-employer-confitmation"><div align="center"> <img src="'+success_image+'" alt="" align="center"></div> <h2>Thank you for submitting</h2> <p>Your job will be reviewed by our team and published soon. If you need help please contact us via email hr@rhizomeng.com</p> <div class="clearfix"></div> <a href="'+dashboard+'">Dashboard</a> <a href="'+job_detail +'/'+ code;'">View Job</a></div> </div> </div> </div> </div>';
+  
+       $('#confirmation').append(success);  
+  });
+ 
+    });
+
  function selectImage(image_id){
 
  
@@ -1101,7 +1155,15 @@ function isEmpty(obj) {
 
 </script>
 
+ <script>
 
+   $(".lds-ripple").hide();
+   $(".lds-ripplee").hide();
+   $(".info").hide();
+    $(".delete").on("submit", function(){
+        return confirm("Do you want to delete this item?");
+    });
+</script>
 </body>
 
 </html>

@@ -2185,8 +2185,9 @@ return $get_Job_by_common_industries;
 // Job Application 
     public function JobApplicationForm($id){
     //$id = 28;
-    if (Auth::check()) {
-        $user = Auth::user();
+    if (Auth::user()->account_type === 'employee') {
+ 
+      $user = Auth::user();
       $tag = Tag::findOrFail($id);
       //$tag = Tag::findOrFail($id);
       $employement_terms = DB::table('employement_terms')->get();
@@ -2208,7 +2209,7 @@ return $get_Job_by_common_industries;
     $menus = $this->displayMenu();
      return view('jobs.details', compact('tag','employement_terms', 'jobcareer_levels', 'industries', 'educational_levels', 'skillsets', 'job_assessments', 'job_requirements', 'get_Job_by_common_industries', 'get_Job_by_common_industries_similler', 'cities', 'get_all_user_list', 'user_single_resume_by_date', 'resume_list', 'industry_professions', 'menus'), array('user' => Auth::user()));
       }else{
-  return redirect()->route('auth.login');
+  return redirect()->back()->withErrors(['is_not_employee' => 'You cannot view this information']);
      // return url('/login?redirect_to=' . urlencode(request()->url()));
       }
     return redirect()->back();
@@ -2377,7 +2378,7 @@ public function ApplicationSuccess($id)
   $users = DB::table('applications')->distinct()->get(); 
   $distinct_job_applications = Application::distinct('tag_id')->pluck('tag_id');
   $user = Auth::user();
-    // get candidate by educational qualification  
+    // get candidate by educational qualification  jobs_count
     $s = $request->input('s');
     $user = Auth::user();
     $tag_fk_record = DB::table('documents')
@@ -2391,7 +2392,8 @@ public function ApplicationSuccess($id)
              ->groupBy('educational_level')->get();
      $jobs_byemployer = Tag::where('delete',0)->latest()->paginate(10);
 
-    $jobs_count = Tag::where('client', $user->id)->where('delete',0)->where('active', 0)->where('status',0)->count(); 
+    $jobs_count = Tag::where('client', $user->id)->count(); 
+  
   
     $job_draft_count = Tag::where('client', $user->id)->where('draft', 1)->where('delete',0)->where('active', 0)->where('status',0)->count();
     $jobs_draft_list = Tag::where('client', $user->id)->where('draft', 1)->where('delete',0)->where('active', 0)->where('status',0)->latest()->paginate(10);
@@ -2426,7 +2428,7 @@ public function ApplicationSuccess($id)
              ->groupBy('tag_id', 'in_review')->get();
 
 // dd($tag_record); 
-    $tags = Tag::all();
+    $tags = Tag::where('client', $user->id)->get();
 $applications = Application::where('clientfk', $user->id)->get();
 $applications_employer = DB::table('applications')->where('clientfk', $user->id)->get(); 
     $sorted = $applications->where('sorted', 0);
@@ -2469,7 +2471,7 @@ $applications_employer = DB::table('applications')->where('clientfk', $user->id)
     // get candidates Resume
     $menus = $this->displayMenu();
     $units = $this->displayUnits();
-    return view('employer',compact('tag_fk_record', 'educational_level', 'unsorted', 'jobs_byemployer', 'employement_terms', 'jobs_count', 'professions', 'cities', 'employement_terms', 's', 'jobs_draft_list', 'job_draft_count', 'job_awaiting_approval_count', 'jobs_awaiting_approval_list', 'job_blacklist_count', 'job_black_list', 'job_activelist_count', 'job_active_list', 'job_not_active_list', 'job_not_activelist_count', 'groups_count', 'allapplicants', 'unsorted_count', 'dt', 'hired_count', 'offered_count', 'rejected_count', 'shortlisted_count', 'in_review_count', 'groups_count', 'hired_', 'tag_record', 'applications_employer', 'distinct_job_applications', 'sorted', 'menus', 'units', 'app_count'), array('user' => Auth::user()));
+    return view('employer',compact('tag_fk_record', 'educational_level', 'unsorted', 'jobs_byemployer', 'employement_terms', 'jobs_count', 'professions', 'cities', 'employement_terms', 's', 'jobs_draft_list', 'job_draft_count', 'job_awaiting_approval_count', 'jobs_awaiting_approval_list', 'job_blacklist_count', 'job_black_list', 'job_activelist_count', 'job_active_list', 'job_not_active_list', 'job_not_activelist_count', 'groups_count', 'allapplicants', 'unsorted_count', 'dt', 'hired_count', 'offered_count', 'rejected_count', 'shortlisted_count', 'in_review_count', 'groups_count', 'hired_', 'tag_record', 'applications_employer', 'distinct_job_applications', 'sorted', 'menus', 'units', 'app_count', 'tags'), array('user' => Auth::user()));
   }
 
   public function ShowCandidateCV($id)

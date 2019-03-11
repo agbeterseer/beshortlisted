@@ -26,16 +26,12 @@ border-color: white !important;
     body{background-color: #FAFAFA;}
 </style>
   <!-- SubHeader -->
- 
+
         <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div> 
         <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div> 
+        <div class="space">&nbsp;</div> >         
         <!-- SubHeader -->
 
         <!-- Main Content -->

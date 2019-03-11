@@ -66,7 +66,8 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',  
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed', 
+            'password' => 'required|min:6|confirmed',  
+          
         ]);
     }
 
@@ -77,20 +78,30 @@ class RegisterController extends Controller
      * @return User
      */
 
-    public function create(array $data) { 
-     $user = User::firstOrNew(['email'=>$data['email']]); 
-      $user->name = $data['name'];
-      $user->password = bcrypt($data['password']);
-      $user->account_type = $data['account_type'];
-      $user->save();
+    public function create(array $data) {
+        
+        if ($data['account_type'] === 'employee') {
+            //dd($data);
+    $user = User::firstOrNew(['email'=>$data['email']]); 
+    $user->name = $data['name'];
+    $user->password = bcrypt($data['password']);
+    $user->account_type = $data['account_type'];
+    $user->save();
+        }elseif ($data['account_type'] === 'employer') {
+            //dd($data);
+    $user = User::firstOrNew(['email'=>$data['email']]); 
+    $user->name = $data['name']; 
+    $user->password = bcrypt($data['password']);
+    $user->account_type = $data['account_type'];
+    $user->save(); 
 
-      if ($data['account_type'] === 'employer') {
-    $client = Client::firstOrNew(['name'=> $data['firstname']]);
+    $client = Client::firstOrNew(['name'=> $data['name']]);
     $client->created_at = Carbon::now();
     $client->user_id = $user->id;
     $client->save(); 
-      }
-
+      
+    }
+   
      $recruit_profile_pix = DB::table('recruit_profile_pixs')->insert(['user_id' => $user->id, 'order' => 1, 'status' => 1, 'created_at' => $this->returnCurrentTime()]);
      return $user;
     }

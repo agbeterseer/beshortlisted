@@ -24,7 +24,7 @@
 .careerfy-row:after,
 .careerfy-row:before,
 .careerfy-typo-wrap .careerfy-row:after,
-.careerfy-typo-wrap .careerfy-row:before {
+.careerfy-typo-wrap .careerfy-row:before {-
     display: table;
     content: "";
 }
@@ -215,7 +215,7 @@
     }*/
  .text-content{ 
  font-size: 11px ;
-margin-top: 10px;
+margin-top: 0px;
  }
   .careerfy-banner-btn {
    margin-left: 60px !important;
@@ -3624,7 +3624,7 @@ body.careerfy-modal-active{
     float: left;
     width: 50%;
     list-style: none;
-    padding: 0px 10px 15px 10px;
+    padding: 0px 1px 15px 10px;
     line-height: 1;
 }
 .careerfy-login-media li:last-child,.careerfy-login-media li:nth-child(3) { padding-bottom: 0px; }
@@ -3642,7 +3642,7 @@ body.careerfy-modal-active{
 .careerfy-login-media li i {
     display: inline-block;
     font-size: 19px;
-    margin-right: 14px;
+    margin-right: 11px;
     padding-right: 14px;
     border-right: 1px solid rgba(0,0,0,0.20);
 }

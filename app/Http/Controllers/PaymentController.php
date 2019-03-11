@@ -60,21 +60,13 @@ public function displayUnit()
       $user = Auth::user();
     $paymentDetails = Paystack::getPaymentData();
 
-  //dd($paymentDetails['data']);
-  //$paymentDetails['data']['amount']
-  //$paymentDetails['data']['email']
-  //$paymentDetails['data']['amount']
-  //$paymentDetails['data']['customer']['email'])
-//$paymentDetails['data']['status']
-    //$paymentDetails['data']['paid_at']
-
   if ($paymentDetails['data']['status'] === 'success') {
 
   $planpackages = DB::table('planpackages')->where('price', $paymentDetails['data']['amount'])->first();
   //dd($planpackages);
         $user = Auth::user();
         $employer_package = EmployerPackage::firstOrNew(['userfkp'=>$user->id, 'package_id' => $planpackages->id]);
-        $employer_package->jobs_remaining = 0;
+        $employer_package->jobs_remaining = $planpackages->jobs_posting;
         $employer_package->features_remaining = $planpackages->featured_jobs;
         $employer_package->renew_remaining = 0;
         $employer_package->job_duration = $planpackages->job_duration;
@@ -84,15 +76,14 @@ public function displayUnit()
         $employer_package->amount = $paymentDetails['data']['amount'];
         $employer_package->save();
 
-
-        // $employer_packages = DB::table('employer_packages')->insert(['userfkp' => $user->id, 'package_id' => $planpackages->id, 'jobs_remaining' => 0, 'features_remaining' => $planpackages->featured_jobs, 'renew_remaining' => 0, 'job_duration' => $planpackages->job_duration, 'status' => 1, 'units' => $planpackages->jobs_posting, 'created_at' => $this->returnCurrentTime(), 'amount' => $paymentDetails['data']['amount']]);
         // Now you have the payment,
         // you can store the authorization_code in your db to allow for recurrent subscriptions
         // you can then redirect or do whatever you want
     }
     $menus = $this->displayMenu();
+    $units = $this->displayUnit();
    // return Redirect::intended();
-    return view('success_payment', compact('menus'));
+    return view('success_payment', compact('menus', 'units'));
     }
 
     public function employerPayment(Request $request)

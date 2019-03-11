@@ -1,4 +1,19 @@
-@extends('admin.tags.layout.tags')
+@extends('layouts.admin_layout', [
+  'page_header' => 'Policy',
+  'dash' => '',
+  'quiz' => '',
+  'users' => '',
+  'questions' => '',
+  'top_re' => '',
+  'all_re' => '',
+  'sett' => '',
+  'candidate' => '',
+    'policy' => 'active', 
+  'package' => '',
+  'page' => ' ',
+     'role' => '',
+  'user' => '',
+])
 @section('content')
  
 
@@ -349,27 +364,39 @@
 <h2>Required Skills</h2>
       <div class="skills_inner">
 <ul>
+    @if(!$jobskills->isEmpty())
 @foreach($jobskills as $jobskill)
     <li>{{$jobskill->title}}</li>
     @endforeach
+    @else
+    No Records Found
+    @endif
 </ul>
 </div> </div>
     <div class="col-md-3">
         <h2>Requirements</h2>
         <div class="skills_inner">
 <ul>
+    @if(!$jobrequirements->isEmpty())
 @foreach($jobrequirements as $jobrequirement)
     <li>{{$jobrequirement->title}}</li>
     @endforeach
+    @else
+    No Records Found
+    @endif
 </ul>
 </div>
     </div>
 <div class="col-md-3"><h2>Assessment</h2>
 
 <ol>
+    @if(!$jobassessments->isEmpty())
 @foreach($jobassessments as $jobassessment)
     <li>{{$jobassessment->question}}</li>
 @endforeach
+@else
+No Records Found
+@endif
 </ol>
 </div>
 

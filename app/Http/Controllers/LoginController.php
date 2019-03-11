@@ -14,6 +14,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Input;
 use Validator;
 use Redirect;
+use App\Menu;
 class LoginController extends Controller
 {
 
@@ -24,15 +25,31 @@ public function __construct()
     Session::put('backUrl', URL::previous());
 }
  
+     public function displayMenu(){
+
+     return $menus = Menu::where('status', 1)->orderBy('menu_order', 'ASC')->get();
+   }
+    public function displayUnits()
+    {
+      $user = Auth::user();
+      return $units = EmployerPackage::where('status', 1)->where('userfkp', $user->id)->first();
+    }
  
 
 public function showLoginForm()
 { 
+    $menus = $this->displayMenu();
     session(['link' => url()->previous()]);
-    return view('auth.login');
+    return view('auth.login', compact('menus'));
 }
 
 
+public function showRegisterForm()
+{ 
+    $menus = $this->displayMenu();
+    session(['link' => url()->previous()]);
+    return view('auth.register', compact('menus'));
+}
 protected function authenticated(Request $request, $user)
 {
     return redirect(session('link'));
@@ -78,7 +95,7 @@ protected function authenticated(Request $request, $user)
           return redirect()->intended('board');
           }elseif(!$user->is_admin() && !$user->is_candidate()){ 
            if ($user->account_type === 'employee') { 
-                return redirect()->route('show.resume'); // candidate
+                return redirect()->route('candidates'); // candidate
             }else{
               return redirect()->route('dashboard');
             }

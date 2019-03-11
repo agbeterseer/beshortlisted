@@ -48,6 +48,9 @@ th, td {
     border-color: #13B5EA;
 }
 tr:hover {background-color:#f5f5f5;}
+     
+              body{background-color: #FAFAFA;}
+
    </style>
 </head>
 
@@ -57,12 +60,12 @@ tr:hover {background-color:#f5f5f5;}
     <div class="careerfy-wrapper">
 
         <!-- Header -->
-      <header id="careerfy-header" class="careerfy-header-one">
+ <header id="careerfy-header" class="careerfy-header-one">
             <div class="container">
                 <div class="row">
-                    <aside class="col-md-2"> <a href="{{asset('/')}}" class="careerfy-logo" style="margin-top: 0px;"><img src="{{asset('logo/logo2.jpg')}}" alt="TREEPHR"></a> </aside>
+                    <aside class="col-md-2">
+  <a href="{{asset('/')}}" class="careerfy-logo" style="margin-top: 10px;" ><img src="{{asset('logo/logo2.jpg')}}" alt="TREEPHR" width="200" height="00">  </a></aside> 
                     <aside class="col-md-6">
-
                         <nav class="careerfy-navigation">
                             <div class="navbar-header">
                                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#careerfy-navbar-collapse-1" aria-expanded="false">
@@ -72,51 +75,36 @@ tr:hover {background-color:#f5f5f5;}
                                 </button>
                             </div>
                             <div class="collapse navbar-collapse" id="careerfy-navbar-collapse-1">
-                    <ul class="navbar-nav">
-                                <li class="active"><a href="{{asset('/')}}">HOME</a></li>  
-                                <li><a href="{{route('employer_infor')}}">EMPLOYER</a></li> 
-                                <li><a href="{{route('candidates')}}">CANDIDATES</a> </li>
-                                <li><a href="#">CONTACT</a></li> 
-                    </ul>                      
- 
-             </div>
+                                <ul class="navbar-nav">
+
+                 <li><a class="navbar-item" href="{{asset('/')}}">Home</a> </li>
+                <li> <a class="navbar-item" href="{{route('employer_infor')}}">Employer</a> </li>
+                 <li> <a class="navbar-item" href="{{route('candidates')}}">Candidate</a> </li>
+                <li> <a class="navbar-item" href="#">Contact</a> </li> 
+               
+                                </ul>
+                            </div>
                       </nav>
                     </aside>
-                    <aside class="col-md-4">
+                    <aside class="col-md-4 showHide">
                         <div class="careerfy-right">
                             <ul class="careerfy-user-section">
-                                  @if(!Auth::user())
-                                <!-- <li>  <a class="careerfy-color careerfy-open-signin-tab" href="#">DOOO</a></li> -->
-                               <li><a class="careerfy-color" href="{{ route('register') }}">REGISTER</a>
-                               </li>
-                          
-                               <li><a class="careerfy-color " href="{{ route('auth.login') }}">SIGN IN</a></li>
-                                @else
-                              
-                                  <li> <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            <i class="icon-key"></i> LOGOUT 
-                                        </a>
-                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> {{ csrf_field() }}
-                                        </form> </li>
-                                @endif
+                                <li><a class="careerfy-color" href="{{route('register')}}">Register</a></li>
+                                <li><a class="careerfy-color" href="{{route('auth.login')}}">Sign in</a></li>
                             </ul>
-                             @if(Auth::user())
+                              @if(Auth::user())
                                  
-                            <a href="{{route('post.jobs')}}" class="careerfy-simple-btn careerfy-bgcolor"><span> <i class="careerfy-icon careerfy-arrows-2"></i> Post Job</span></a>
-                     
-  
-                            @endif
+                            <a href="{{route('post.jobs')}}" class="careerfy-simple-btn careerfy-bgcolor post_job"><span> <i class="careerfy-icon careerfy-arrows-2"></i> Post Job</span></a>
+                             @endif
                              @if(!Auth::user())
-                          <a href="{{route('post.jobs')}}" class="careerfy-simple-btn careerfy-bgcolor"><span> <i class="careerfy-icon careerfy-arrows-2"></i> Post Job</span></a>
+                          <a href="{{route('post.jobs')}}" class="careerfy-simple-btn careerfy-bgcolor post_job "><span> <i class="careerfy-icon careerfy-arrows-2"></i> Post Job</span></a>
                             @endif
-
                         </div>
                     </aside>
                 </div>
             </div>
         </header>
+
  
 
         <!-- Header -->
@@ -125,9 +113,11 @@ tr:hover {background-color:#f5f5f5;}
         <!-- Banner -->
 
         <!-- Main Content -->
+
+
         <div class="careerfy-main-content" style="margin-top: -50px;">
-        
-            <!-- Main Section -->
+
+          <!-- Main Section -->
  <div class="space">&nbsp;</div>
   <div class="col-md-6 col-md-offset-3 careerfy-typo-wrap">
      <div class="portlet light bordered">
@@ -197,7 +187,7 @@ tr:hover {background-color:#f5f5f5;}
                              
                             <label >Password</label> 
                                 <input id="password" type="password" name="password" required class="form-control">
-<i class="careerfy-icon careerfy-typo-wrap"></i>
+ <i class="careerfy-icon careerfy-multimedia"></i>
                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -208,7 +198,7 @@ tr:hover {background-color:#f5f5f5;}
                             <label>Confirm Password</label> 
                            
                                 <input id="password-confirm" type="password"  name="password_confirmation" required class="form-control">
-                                 <i class="careerfy-icon careerfy-typo-wrap"></i> 
+                                <i class="careerfy-icon careerfy-multimedia"></i>
                         </li>
                             <li class="careerfy-user-form-coltwo-full">
                                 <img src="extra-images/login-robot.png" alt="">
@@ -232,20 +222,30 @@ tr:hover {background-color:#f5f5f5;}
                     <div class="careerfy-user-form careerfy-user-form-coltwo">
                         <ul>
                         <li>
-                                <label>First Name:</label>
+                                <label>Name:</label>
        <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="name">
                                 <i class="careerfy-icon careerfy-user"></i>
+                              @if ($errors->has('fristname'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('fristname') }}</strong>
+                                    </span>
+                                @endif
                             </li>
-                            <li>
+              <!--               <li>
                                 <label>Last Name:</label>
                                 <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="lastname">
                                 <i class="careerfy-icon careerfy-user"></i>
-                            </li>
+                            </li> -->
                       
                             <li>
                                 <label>Email Address:</label>
                                 <input onblur="if(this.value == '') { this.value ='Enter Your Email Address'; }" onfocus="if(this.value =='Enter Your Email Address') { this.value = ''; }" type="text" name="email"  >
                                 <i class="careerfy-icon careerfy-mail"></i>
+                                     @if ($errors->has('email2'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email2') }}</strong>
+                                    </span>
+                                @endif
                             </li>
                      
                     <li>
@@ -257,12 +257,19 @@ tr:hover {background-color:#f5f5f5;}
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
-                            </li>
-                            <li> 
+                            </li> 
+                                <li> 
                             <label>Confirm Password</label>  
                                 <input id="password-confirm" type="password"  name="password_confirmation" class="form-control">
                                  <i class="careerfy-icon careerfy-typo-wrap"></i> 
-                                    </li> 
+                                    </li>
+                        <!--      <li>
+                                <label>Phone Number:</label>
+                                <input value="Enter Your Phone Number" onblur="if(this.value == '') { this.value ='Enter Your Phone Number'; }" onfocus="if(this.value =='Enter Your Phone Number') { this.value = ''; }" type="text" name="phone">
+                                <i class="careerfy-icon careerfy-technology"></i>
+                            </li> -->
+                        
+                         
                             <li class="careerfy-user-form-coltwo-full">
                                 <img src="extra-images/login-robot.png" alt="">
                             </li>
@@ -279,12 +286,15 @@ tr:hover {background-color:#f5f5f5;}
                         <span>Or Sign Up With</span>
                     </div>
                     <div class="clearfix"></div>
-                    <ul class="careerfy-login-media">
+                    <div class="">
+                               <ul class="careerfy-login-media">
                         <li><a href="{{ url('/auth/facebook') }}"><i class="fa fa-facebook"></i> Sign In with Facebook</a></li>
                         <li><a href="{{ url('/redirect') }}" data-original-title="google"><i class="fa fa-google"></i> Sign In with Google</a></li>
                         <!-- <li><a href="#" data-original-title="twitter"><i class="fa fa-twitter"></i> Sign In with Twitter</a></li> -->
                         <!-- <li><a href="{{ url('/auth/likedin') }}" data-original-title="linkedin"><i class="fa fa-linkedin"></i> Sign In with LinkedIn</a></li> -->
-                    </ul>
+                    </ul> 
+                    </div>
+            
                 </form>
                 
             </div>

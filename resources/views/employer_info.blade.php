@@ -26,6 +26,11 @@
                     <div class="row"> 
                         <div class="col-md-12">
                             <!-- Fancy Title -->
+                        @if(session()->has('no_unit_infor'))
+                        <div class="alert alert-danger"> 
+                        {!! Session::get('no_unit_infor') !!}
+                        </div>
+                        @endif
                             <section class="careerfy-fancy-title">
                                 <h2>What We Have</h2>
                                 <p>A better career is out there. We'll help you find it.</p>

@@ -147,24 +147,24 @@
                 <span aria-hidden="true"></span>
             </a>
             <ul>
-                <li>
-                    <a href="{{ route('user.index') }}"  class="active">
+<!--                 <li>
+                    <a href=""  class="active">
                         <span>Applicant</span>
                         <i class="icon-users"></i>
                     </a>
-                </li>
-                <li>
-                    <a href="{{route('document.index')}}">
+                </li> -->
+       <!--          <li>
+                    <a href="">
                         <span>Shortlisted</span>
                         <i class="icon-users"></i>
                     </a>
-                </li>
-                <li>
-                    <a href="{{route('index')}}" >
+                </li> -->
+         <!--        <li>
+                    <a href="" >
                         <span>Scheduled for Interview</span>
                         <i class="icon-graph"></i>
                     </a>
-                </li>
+                </li> -->
             </ul>
             <span aria-hidden="true" class="quick-nav-bg"></span>
         </nav>

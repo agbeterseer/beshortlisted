@@ -27,8 +27,7 @@
                         </div>
                         @endif
  
-                
-                            <div class="careerfy-typo-wrap">
+                 
   <form class="careerfy-employer-dasboard" id="frm" method="POST" action="{{route('employer.update', $client->id)}}"  enctype="multipart/form-data">
                                    {{ method_field('PATCH')}}
                         {{ csrf_field() }}
@@ -230,7 +229,7 @@
                                     </div> -->
                                     <input type="submit" class="careerfy-employer-profile-submit" value="Save Setting">
                                 </form>
-                            </div>
+                           
  
 
 
