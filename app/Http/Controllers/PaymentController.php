@@ -62,10 +62,9 @@ public function displayUnit()
 
   if ($paymentDetails['data']['status'] === 'success') {
 
-  $planpackages = DB::table('planpackages')->where('price', $paymentDetails['data']['amount'])->first();
-  //dd($planpackages);
-        $user = Auth::user();
-        $employer_package = EmployerPackage::firstOrNew(['userfkp'=>$user->id, 'package_id' => $planpackages->id]);
+  $planpackage = DB::table('planpackages')->where('price', $paymentDetails['data']['amount'])->first();
+  //dd($planpackages); 
+        $employer_package = EmployerPackage::firstOrNew(['userfkp'=>$user->id, 'package_id' => $planpackage->id]);
         $employer_package->jobs_remaining = $planpackages->jobs_posting;
         $employer_package->features_remaining = $planpackages->featured_jobs;
         $employer_package->renew_remaining = 0;
