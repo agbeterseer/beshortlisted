@@ -12,12 +12,6 @@
 
 @section('content')
 
-  <!-- SubHeader -->
-             <div class="space">&nbsp;</div>
-                    <div class="space">&nbsp;</div>
-                    <div class="space">&nbsp;</div>
-                    <div class="space">&nbsp;</div>
-        <!-- SubHeader -->
 
         <!-- Main Content -->
         <div class="careerfy-main-content">
@@ -33,23 +27,7 @@
                         <div class="careerfy-column-12">
                             <div class="careerfy-typo-wrap">
                                 <!-- FilterAble -->
-                    <!--             <div class="careerfy-filterable">
-                                    <h2>Showing 0-12 of 37 results</h2>
-                                    <ul>
-                                        <li>
-                                            <i class="careerfy-icon careerfy-sort"></i>
-                                            <div class="careerfy-filterable-select">
-                                                <select>
-                                                    <option>Sort</option>
-                                                    <option>Sort</option>
-                                                    <option>Sort</option>
-                                                </select>
-                                            </div>
-                                        </li>
-                                        <li><a href="#"><i class="careerfy-icon careerfy-squares"></i> Grid</a></li>
-                                        <li><a href="#"><i class="careerfy-icon careerfy-list"></i> List</a></li>
-                                    </ul>
-                                </div> -->
+ 
                                 <!-- FilterAble -->
                                 <!-- JobGrid -->
                                      <!-- Main Section -->
@@ -59,35 +37,32 @@
         <section class="careerfy-element-text" align="center">
         <h2>Industries</h2> 
         </section> 
-          <div class="col-md-12 careerfy-typo-wrap">
-            
-                          <table>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Industry</th>
-        <th>#</th>
-      </tr>
-    </thead>
-    <tbody>
-    <?php $count = 0; ?>
+   
 
-  @forelse($industries as $key => $industry)
-        <tr>
-        <td width="25%">{{$count}}</td>
-        <td width="50%"> <i class="careerfy-icon careerfy-filter-tool-black-shape"></i>{{$industry->name}} </td>
-        <td width="25%"># </td>
-      </tr>
-      <?php  $count++; ?>
-        @empty
-     @endforelse
-  
+                                      <div class="" style="background-color: #ffffff;">
+                <div class="container">
+                    <div class="row">
+          <div class="col-md-12 careerfy-typo-wrap">
+                 <div class="space">&nbsp;</div>
+                  <div class="space">&nbsp;</div>
+                          </div>
+                        <div class="col-md-15 careerfy-typo-wrap ">
+                            @foreach($industries as $industry)
+                            <div class="col-md-4">
+                                <li>@foreach($job_function_count as $function_count) @if($function_count->job_category === $industry->id) <span style="font-weight: bold;"> ({{ $function_count->total}}) </span> 
+                                          @endif  @endforeach <a href="{{route('job_opening', $industry->id)}}"> {{$industry->name}} </a>
+                                </li>
+                            </div>
+                            @endforeach
  
-    </tbody>
-  </table>
-        <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
-                          </div> 
+                        </div>
+                    <div class="space">&nbsp;</div>
+                    <div class="space">&nbsp;</div>
+                    <div class="space">&nbsp;</div>
+                    <div class="space">&nbsp;</div>
+                    </div>
+                </div>
+            </div>
 
               <!--       </div>
                 </div> -->
@@ -98,14 +73,7 @@
                     <div class="space">&nbsp;</div>
                 
                                 <!-- Pagination -->
-                                <div class="careerfy-pagination-blog">
-                            <ul class="page-numbers">
-                           
-                             {{ $industries->appends(['s' => $s])->links() }}
-                             
-                                       
-                                    </ul>
-                                </div>
+                       
                             </div>
                         </div>
 

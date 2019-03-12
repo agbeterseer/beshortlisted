@@ -315,10 +315,13 @@ public function DisplayTemplates()
     }
     public function AllIndustries(Request $request)
     {
-      $s = $request->input('s');
-      $industries = DB::table('industries')->where('status', 1)->paginate(8);
+      $s = $request->input('s'); 
+    $industries = DB::table('industries')->where('status',1)->orderBy('created_at', 'DESC')->get();
       $menus = $this->displayMenu();
-     return view('jobs.industry_list',  compact('industries', 's', 'menus'));
+         $job_function_count = DB::table('tags')
+             ->select('job_category', DB::raw('count(*) as total'))
+             ->groupBy('job_category')->get();   
+     return view('jobs.industry_list',  compact('industries', 's', 'menus', 'job_function_count'));
     }
     public function SubscribeToNewsletter(Request $request)
     {

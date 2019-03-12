@@ -21,17 +21,17 @@
  
   	<div class="pull-left">
     	<h1>
-      <a href="javascript:"><img src="img/icon.png" alt="Documentation" /> <span>Rhizomeng</span></a></h1>
+      <a href="javascript:"><img src="img/icon.png" alt="Documentation" /> <span>Beshortlisted</span></a></h1>
     </div>
     
-    <div class="pull-right">
+<!--     <div class="pull-right">
     	<a href="/uploads/R-24 user Manual.docx" target="_blank" class="btn btn-download"><img src="img/download.png" width="25" alt="Rhizomeng" /> Download Now</a>
     </div>
-
+ -->
 </nav>
 <header>
   <div class="container">
-    <h2 class="lone-header">CV-Management Documentation</h2>
+    <h2 class="lone-header">Beshortlisted</h2>
   </div>
 </header>
 <section>
