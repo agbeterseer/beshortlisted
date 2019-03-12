@@ -126,9 +126,8 @@ tr:hover {background-color:#f5f5f5;}
         <div class="modal-inner-area">&nbsp;</div>
         <div class="modal-content-area">
             <div class="modal-box-area">
- 
                     <div class="careerfy-box-title">
-                        <span>Choose your Account Type</span>
+                        <h2>Choose your Account Type</h2>
                     </div>
              
                     <div class="careerfy-user-options nav-tabs">
