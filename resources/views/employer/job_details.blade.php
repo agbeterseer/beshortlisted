@@ -65,20 +65,20 @@
                                         <h2>{{$tag->job_title}}</h2>
                                         <span><small class="careerfy-jobdetail-type">@foreach($employement_terms as $employement_term) @if($tag->job_type === $employement_term->id)  {{$employement_term->name}} @endif @endforeach</small> Huntington Learning Center <small class="careerfy-jobdetail-postinfo">Posted now</small></span>
                                         <ul class="careerfy-jobdetail-options">
-                                            <li><i class="fa fa-map-marker"></i> {{$tag->full_address}} <a href="#" class="careerfy-jobdetail-view">View om Map</a></li>
+                                            <li><i class="fa fa-map-marker"></i> {{$tag->full_address}} <!-- <a href="#" class="careerfy-jobdetail-view">View om Map</a> --></li>
                                             <li><i class="careerfy-icon careerfy-calendar"></i> Post Date:{{ date('M d, Y', strtotime($tag->created_at)) }} </li>
                                             <li><i class="careerfy-icon careerfy-calendar"></i> Apply Before: {{ date('M d, Y', strtotime($tag->end_date)) }}</li>
                                             <li><i class="careerfy-icon careerfy-summary"></i> Applications 4</li>
                                             <!-- <li><a href="#"><i class="careerfy-icon careerfy-view"></i> Views 3806</a></li> -->
                                         </ul>
-                                 <!--        <a href="#" class="careerfy-jobdetail-btn active"><i class="careerfy-icon careerfy-add-list"></i> Shortlist</a> -->
-                                  <!--       <a href="#" class="careerfy-jobdetail-btn"><i class="careerfy-icon careerfy-envelope"></i> Email Job</a>
-                                        <ul class="careerfy-jobdetail-media">
-                                            <li><span>Share:</span></li>
-                                            <li><a href="#" data-original-title="facebook" class="careerfy-icon careerfy-facebook-logo-in-circular-button-outlined-social-symbol"></a></li>
+                                        <a href="#" class="careerfy-jobdetail-type active"><i class="careerfy-icon careerfy-add-list"></i> Apply</a>
+                                        <!-- <a href="#" class="careerfy-jobdetail-btn"><i class="careerfy-icon careerfy-envelope"></i> Email Job</a> -->
+                                        <ul class="careerfy-jobdetail-media"> 
+                                            <li><span>Share:</span></li> 
+                                            <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbeshortlisted.com%2Fjob%2Fjob-descriptions%2F{{$tag->id}}%2F&amp;src=sdkpreparse" data-original-title="facebook" class="careerfy-icon careerfy-facebook-logo-in-circular-button-outlined-social-symbol" data-href="https://beshortlisted.com/job/job-descriptions/{{$tag->id}}"></a></li>
                                             <li><a href="#" data-original-title="twitter" class="careerfy-icon careerfy-twitter-circular-button"></a></li>
                                             <li><a href="#" data-original-title="linkedin" class="careerfy-icon careerfy-linkedin"></a></li>
-                                        </ul> -->
+                                        </ul>
                                     </figcaption>
                                 </figure>
                             </div>
@@ -147,8 +147,9 @@
   <div class="space">&nbsp;</div>
   <div class="space">&nbsp;</div>
   <div class="space">&nbsp;</div>
-    <!-- <span style="color: red;">Kindly answer the evaluation question(s) below to begin your screening process</span> -->
 
+    <!-- <span style="color: red;">Kindly answer the evaluation question(s) below to begin your screening process</span> -->
+     <a href="{{route('apply.job', $tag->id)}}" class="careerfy-applyjob-btn"><i class="careerfy-icon careerfy-add-list"></i>APPLY </a>
                                 </div> 
 
                                 <!-- display jobs in the same industry -->
