@@ -2,8 +2,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
      <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta property="og:url"           content="https://www.beshortlisted.com" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Online platform for job recruitment" />
+  <meta property="og:description"   content="Your description" />
+  <meta property="og:image"         content="" />
+
     <link href="{{ asset('recruit/css/bootstrap.css')}}" rel="stylesheet">
-    
     <link href="{{ asset('recruit/css/font-awesome.css')}}" rel="stylesheet">
     <link href="{{ asset('recruit/css/flaticon.css')}}" rel="stylesheet">
     <link href="{{ asset('recruit/css/slick-slider.css')}}" rel="stylesheet">
