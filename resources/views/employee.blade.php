@@ -12,8 +12,9 @@
 ])
 
 @section('content')
-@include('partials.employee_breadcomb')
-
+@if(Auth::check())
+@include('partials.employee_breadcomb') 
+@endif
  <div class="careerfy-main-content">   
                         <section class="careerfy-fancy-title">
                                 <h2>Welcome candidate</h2>
