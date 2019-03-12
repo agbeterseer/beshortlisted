@@ -65,12 +65,12 @@ public function displayUnit()
   $planpackage = DB::table('planpackages')->where('price', $paymentDetails['data']['amount'])->first();
   //dd($planpackages); 
         $employer_package = EmployerPackage::firstOrNew(['userfkp'=>$user->id, 'package_id' => $planpackage->id]);
-        $employer_package->jobs_remaining = $planpackages->jobs_posting;
-        $employer_package->features_remaining = $planpackages->featured_jobs;
+        $employer_package->jobs_remaining = $planpackage->jobs_posting;
+        $employer_package->features_remaining = $planpackage->featured_jobs;
         $employer_package->renew_remaining = 0;
-        $employer_package->job_duration = $planpackages->job_duration;
+        $employer_package->job_duration = $planpackage->job_duration;
         $employer_package->status = 1;
-        $employer_package->units = $planpackages->jobs_posting;
+        $employer_package->units = $planpackage->jobs_posting;
         $employer_package->created_at = $this->returnCurrentTime();
         $employer_package->amount = $paymentDetails['data']['amount'];
         $employer_package->save();
@@ -96,7 +96,7 @@ public function displayUnit()
         $units = $request->quantity;
 
         $user = Auth::user();
-        $employer_packages = DB::table('employer_packages')->insert(['userfkp' => $user->id, 'package_id' => $package_id, 'jobs_remaining' => 0, 'features_remaining' => 0, 'renew_remaining' => 0, 'job_duration' => $job_duration, 'status' => 1, 'units' => $units, 'created_at' => $this->returnCurrentTime(), 'amount' => $amount ]);
+        $employer_package = DB::table('employer_packages')->insert(['userfkp' => $user->id, 'package_id' => $package_id, 'jobs_remaining' => 0, 'features_remaining' => 0, 'renew_remaining' => 0, 'job_duration' => $job_duration, 'status' => 1, 'units' => $units, 'created_at' => $this->returnCurrentTime(), 'amount' => $amount ]);
         return redirect()->back();
     }
 
@@ -123,7 +123,7 @@ $sum = $employer_package_units + $package->jobs_posting;
 // set the old or previous Plan to in-active
 $employer_packages = DB::table('employer_packages')->where(['userfkp' => $user->id, 'package_id' => $employer_package])->update([ 'status' => 0 ]);
 
-$employer_packages = DB::table('employer_packages')->insert(['userfkp' => $user->id, 'package_id' => $package->id, 'jobs_remaining' => $sum, 'features_remaining' => $package->featured_jobs, 'renew_remaining' => 0, 'job_duration' => 0, 'status' => 1, 'units' => $sum, 'created_at' => $this->returnCurrentTime(), 'amount' => $package->price ]);
+$employer_package = DB::table('employer_packages')->insert(['userfkp' => $user->id, 'package_id' => $package->id, 'jobs_remaining' => $sum, 'features_remaining' => $package->featured_jobs, 'renew_remaining' => 0, 'job_duration' => 0, 'status' => 1, 'units' => $sum, 'created_at' => $this->returnCurrentTime(), 'amount' => $package->price ]);
 
   
     $request->session()->flash('message.level', 'success');
