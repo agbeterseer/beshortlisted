@@ -1459,7 +1459,7 @@ $units = $this->displayUnit();
     $educational_levels = $this->GetQualificationLevels(); 
     $industries = DB::table('industries')->where('status',1)->get();
     $employement_terms = DB::table('employement_terms')->get();
-    $jobcareer_levels = DB::table('jobcareer_levels')->get();
+    $jobcareer_levels = DB::table('jobcareer_levels')->where('status',1)->get();
     $industry_professions = DB::table('industry_professions')->where('status',1)->get();
     $fields_of_study_list = DB::table('fields_of_studies')->get();
     $recruit_profile_pix_list = DB::table('recruit_profile_pixs')->where('user_id',$user->id)->orderBy('created_at', 'DESC')->get();
@@ -1467,7 +1467,7 @@ $units = $this->displayUnit();
     $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
     $menus = $this->displayMenu();
     $units = $this->displayUnit();
-    
+
     return view('employer.create_job', compact('resumes','countries','cities', 'regions', 'educational_levels', 'industries', 'employement_terms', 'jobcareer_levels', 'industry_professions', 'recruit_profile_pix_list', 'recruit_profile_pix', 'fields_of_study_list', 'menus', 'units') ,array('user' => Auth::user()));
       }else{
         //dd('YES'); subscribe for units
