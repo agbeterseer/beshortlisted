@@ -63,7 +63,8 @@
                                     <span class="careerfy-jobdetail-listthumb"> <figure><a href=" "><img src="{{asset('/img/job.png')}}" alt=""></a></figure></span>
                                     <figcaption>
                                         <h2>{{$tag->job_title}}</h2>
-                                        <span><small class="careerfy-jobdetail-type">@foreach($employement_terms as $employement_term) @if($tag->job_type === $employement_term->id)  {{$employement_term->name}} @endif @endforeach</small> Huntington Learning Center <small class="careerfy-jobdetail-postinfo">Posted now</small></span>
+                                        <span><small class="careerfy-jobdetail-type">@foreach($employement_terms as $employement_term) @if($tag->job_type === $employement_term->id)  {{$employement_term->name}} @endif @endforeach
+                                        </small><small class="careerfy-jobdetail-postinfo">Posted now</small></span>
                                         <ul class="careerfy-jobdetail-options">
                                             <li><i class="fa fa-map-marker"></i> {{$tag->full_address}} <!-- <a href="#" class="careerfy-jobdetail-view">View om Map</a> --></li>
                                             <li><i class="careerfy-icon careerfy-calendar"></i> Post Date:{{ date('M d, Y', strtotime($tag->created_at)) }} </li>
@@ -71,14 +72,18 @@
                                             <li><i class="careerfy-icon careerfy-summary"></i> Applications 4</li>
                                             <!-- <li><a href="#"><i class="careerfy-icon careerfy-view"></i> Views 3806</a></li> -->
                                         </ul>
-                                        <a href="#" class="careerfy-jobdetail-type active"><i class="careerfy-icon careerfy-add-list"></i> Apply</a>
+                                        <a href="{{route('apply.job', $tag->id)}}" class="careerfy-jobdetail-type active"><i class="careerfy-icon careerfy-add-list"></i> Apply</a>
                                         <!-- <a href="#" class="careerfy-jobdetail-btn"><i class="careerfy-icon careerfy-envelope"></i> Email Job</a> -->
-                                        <ul class="careerfy-jobdetail-media"> 
-                                            <li><span>Share:</span></li> 
-                                            <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbeshortlisted.com%2Fjob%2Fjob-descriptions%2F{{$tag->id}}%2F&amp;src=sdkpreparse" data-original-title="facebook" class="careerfy-icon careerfy-facebook-logo-in-circular-button-outlined-social-symbol" data-href="https://beshortlisted.com/job/job-descriptions/{{$tag->id}}"></a></li>
-                                            <li><a href="#" data-original-title="twitter" class="careerfy-icon careerfy-twitter-circular-button"></a></li>
-                                            <li><a href="#" data-original-title="linkedin" class="careerfy-icon careerfy-linkedin"></a></li>
-                                        </ul>
+                                                         <ul class="careerfy-jobdetail-media">
+                                            <li><span>Share:</span></li>
+                                             <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbeshortlisted.com%2Fjob%2Fjob-descriptions%2F{{$tag->id}}%2F&amp;src=sdkpreparse" data-original-title="facebook" class="careerfy-icon careerfy-facebook-logo-in-circular-button-outlined-social-symbol" data-href="https://beshortlisted.com/job/job-descriptions/{{$tag->id}}"></a></li> 
+                                            <li><a href="https://twitter.com/share?url=https://beshortlisted.com/job/job-descriptions/{{$tag->id}}" data-original-title="twitter" class="careerfy-icon careerfy-twitter-circular-button"></a></li>
+                                            <li> 
+   <a class="careerfy-icon careerfy-linkedin" href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fbeshortlisted.com%2Fjob-descriptions%2F{{$tag->id}}%2F&amp;title=job+description&amp;mini=true" target="_blank" data-original-title="linkedin" class="careerfy-icon careerfy-linkedin"> </a>
+ 
+
+            </li>
+                                        </ul> 
                                     </figcaption>
                                 </figure>
                             </div>
