@@ -52,7 +52,7 @@ border-color: white !important;
                             <div class="careerfy-typo-wrap hideme">
                                 <div class="careerfy-employer-dasboard" style="background-color: #ffffff;">
                                     <div  class="mt-repeater" >
-                                     <form method="POST" action="{{route('tag.store')}}" class="mt-repeater" >
+                                     <form method="POST" action="{{ action('TagController@SaveJob') }}" class="mt-repeater" >
                                         {{ csrf_field() }} 
                                         <div class="careerfy-employer-box-section">
                                             <!-- Profile Title -->
@@ -308,7 +308,7 @@ Eg. Do You have Experience in building API's?
                                 </div>
                              </ul>
                           </div>
-                          <button class="careerfy-employer-profile-submit" name="save_job">Save Job </button>
+                          <button class="careerfy-employer-profile-submit" >Save Job </button>
            <!-- <input type="submit" class="careerfy-employer-profile-submit" value="Save Job" name="save_job">  -->
                             </form>
                          </div>

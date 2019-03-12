@@ -1443,7 +1443,7 @@ $units = $this->displayUnit();
     }
 
     public function PostJobs(){
-
+ 
     $user = Auth::user();   
     if ($user->account_type === 'employer') {
       // check if employer has units to post a job
@@ -1665,6 +1665,7 @@ return redirect()->back();
 
 public function SaveJob(Request $request)
 {
+    //dd($request->all());
   // After Job is posted
       // 1. status is set to 0
       // active is set to 0
