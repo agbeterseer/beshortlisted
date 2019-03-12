@@ -1470,7 +1470,7 @@ $units = $this->displayUnit();
     return view('employer.create_job', compact('resumes','countries','cities', 'regions', 'educational_levels', 'industries', 'employement_terms', 'jobcareer_levels', 'industry_professions', 'recruit_profile_pix_list', 'recruit_profile_pix', 'fields_of_study_list', 'menus', 'units') ,array('user' => Auth::user()));
       }else{
         //dd('YES'); subscribe for units
-            Session::flash('no_unit_infor', 'Choose a plan below to start posting Jobs');
+            Session::flash('no_unit_infor', 'Choose a plan below to begin posting Jobs');
           return redirect()->route('employer_infor');  
       }
  
