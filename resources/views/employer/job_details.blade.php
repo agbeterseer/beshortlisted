@@ -46,11 +46,7 @@
         {!! Session::get('error') !!}
         </div>
         @endif
-     <!-- SubHeader careerfy-subheader-without-bg-->
-                    <div class="space">&nbsp;</div>
-                    <div class="space">&nbsp;</div>
-                    <div class="space">&nbsp;</div>
-                    <div class="space">&nbsp;</div> 
+     <!-- SubHeader careerfy-subheader-without-bg--> 
         <!-- SubHeader -->
 
         <!-- Main Content -->
