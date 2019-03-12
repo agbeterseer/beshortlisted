@@ -68,6 +68,10 @@ border-color: white !important;
                                                 </ul>
                                             </nav> -->
                                             <ul class="careerfy-row careerfy-employer-profile-form">
+                                                           <li class="careerfy-column-12">
+                                                    <label>Job Summary</label>
+                                                    <textarea name="job_summary" placeholder="Enter Job Summary"></textarea>
+                                                </li>
                                                 <li class="careerfy-column-6">
                                                     <label>Job Title *</label>
                                                     <input placeholder="Enter Title" onblur="if(this.value == '') { this.value ='Enter Title'; }" onfocus="if(this.value =='Enter Title') { this.value = ''; }" type="text" name="job_title" required="required">
@@ -156,9 +160,10 @@ border-color: white !important;
                                                     <div class="careerfy-profile-select">
                                                         <select name="p_experience" required="required">
                                                         <option value="">Select Experience</option>
-                                                            <option value="0-5">0-5</option>
-                                                            <option value="6-10">6-10</option>
-                                                            <option value="11-15">11-15</option>
+                                                            <!-- <option value="0-5">0-5</option> -->
+                                                            <option value="5-10">5-10</option>
+                                                            <option value="6-11">6-11</option>
+                                                            <option value="12-15">12-15</option>
                                                             <option value="16-20">16-20</option>
                                                             <option value="25 Above">25 Above</option>
                                                         </select>
@@ -210,9 +215,13 @@ border-color: white !important;
                                         </div>
                                         </div> 
                                                 </li>
-                                                       <li class="careerfy-column-12">
+                                                <li class="careerfy-column-12">
                                                     <label>Description / Responsibilities / Qualifications, Experience  *</label>
-                                                <textarea name="description" required="required" id="summernote_1" placeholder="Far much that one rank beheld bluebird after outside ignobly allegedly more when oh arrogantly vehement irresistibly fussy penguin insect additionally wow absolutely crud meretriciously hastily dalmatian a glowered inset one echidna cassowary some parrot and much as goodness some froze the sullen much connected bat wonderfully on instantaneously eel valiantly petted this along across highhandedly much dog out the much alas evasively neutral lazy reset"></textarea>
+                                                <textarea name="description" required="required" id="summernote_1"></textarea>
+                                                </li>
+                                               <li class="careerfy-column-12">
+                                                    <label>Description / Responsibilities / Qualifications, Experience  *</label>
+                                                <textarea name="job_roles" required="required" id="summernote_3"></textarea>
                                                 </li>
                                             </ul>
                                         </div>

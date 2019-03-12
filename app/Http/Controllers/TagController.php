@@ -1467,6 +1467,7 @@ $units = $this->displayUnit();
     $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
     $menus = $this->displayMenu();
     $units = $this->displayUnit();
+    
     return view('employer.create_job', compact('resumes','countries','cities', 'regions', 'educational_levels', 'industries', 'employement_terms', 'jobcareer_levels', 'industry_professions', 'recruit_profile_pix_list', 'recruit_profile_pix', 'fields_of_study_list', 'menus', 'units') ,array('user' => Auth::user()));
       }else{
         //dd('YES'); subscribe for units
@@ -1701,6 +1702,8 @@ public function SaveJob(Request $request)
         $reqirements = $request->group_a;
         $assessments = $request->group_b;
         $skillist = $request->group_c;
+        $job_summary = $request->job_summary;
+        $job_roles = $request->job_roles;
 
      $rules = [
         'job_title'=>'required|string',
@@ -1713,6 +1716,7 @@ public function SaveJob(Request $request)
         'region' => 'required',
         'experience' => 'required',
         'country' =>'required',
+        'job_summary' => 'required', 
         ];
 
         $input = Input::only(
@@ -1725,7 +1729,8 @@ public function SaveJob(Request $request)
         'deadline_submission',
         'region',
         'experience',
-        'country'
+        'country',
+        'job_summary'
 
     );
  
@@ -1782,6 +1787,8 @@ public function SaveJob(Request $request)
           $tag->active = 0;
           $tag->delete = 0;
           $tag->awaiting_aproval = 1;
+          $tag->job_summary = $request->input('job_summary');
+          $tag->Job_roles  = $request->input('Job_roles');
           $tag->save();
  
 
@@ -1961,6 +1968,8 @@ if ($admin) {
           $tag->active = 0;
           $tag->delete = 0;
           $tag->awaiting_aproval = 1;
+          $tag->job_summary = $request->input('job_summary');
+          $tag->Job_roles = $request->input('Job_roles');
           $tag->save();
  
 
@@ -2463,6 +2472,8 @@ Session::flash('error', 'something went wrong');
         $job_category = $request->job_category;
         $job_type = $request->job_type;
         $gender = $request->p_gender;
+        $job_summary = $request->job_summary;
+        $job_roles = $request->job_roles;
 
         //$reqirements = $request->group_a;
         $assessments = $request->group_b;
@@ -2515,6 +2526,8 @@ Session::flash('error', 'something went wrong');
           $tag->job_category = $request->input('job_category');
           $tag->description = $request->input('description');
           $tag->gender = $request->input('p_gender');
+          $tag->job_summary = $request->input('job_summary');
+          $tag->Job_roles  = $request->input('Job_roles');
           // $tag->delete = 0;
           // $tag->status = 0;
           // $tag->active = 0;

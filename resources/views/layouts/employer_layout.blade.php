@@ -115,7 +115,7 @@ border-color: white !important;
                                         <li class="{{$package}}"><a href="{{route('employer.packages')}}"><i class="careerfy-icon careerfy-credit-card-1"></i> Packages</a></li>
                                         <li class="{{$job_post}}"><a href="{{route('post.jobs')}}"><i class="careerfy-icon careerfy-plus"></i> Post a New Job</a></li>
                                   <!--       <li><a href="employer-dashboard-manage-jobs.html"><i class="careerfy-icon careerfy-alarm"></i> Job Alerts</a></li> -->
-                                        <li><a href="candidate-dashboard-changed-password.html"><i class="careerfy-icon careerfy-multimedia"></i> Change Password</a></li>
+                                        <li><a href="{{ url('/password/reset') }}"><i class="careerfy-icon careerfy-multimedia"></i> Change Password</a></li>
                                         <li>
                                     <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -799,7 +799,7 @@ function clearChecks(radioName) {
 
 $('#summernote_1').summernote({
        height:'300px',
-         placeholder:'Responsibilities, Qualifications, Experience and Attributes:',
+         placeholder:'Technical Requirements:',
         toolbar: [
           ['undo', ['undo',]],
           ['redo', ['redo',]],
@@ -853,7 +853,33 @@ $('#summernote_1').summernote('fontSize', 14);
 //      $('#summernote_1').summernote('<p>', '#777777');
 //     });
  
+$('#summernote_3').summernote({
+       height:'300px',
+         placeholder:'Job Roles',
+        toolbar: [
+          ['undo', ['undo',]],
+          ['redo', ['redo',]],
+          ['style', ['bold', 'italic', 'underline',]],
+          ['font', ['strikethrough',]],
+          ['fontsize', ['fontsize']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['font-family', ['FontAwesome', 'icomoon']],
+        ],
+    callbacks: {
+        onPaste: function (e) {
+            var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
 
+            e.preventDefault();
+
+            // Firefox fix
+            setTimeout(function () {
+                document.execCommand('insertText', false, bufferText);
+            }, 10);
+        }
+    }
+
+});
 
     $(document).ready(function() {
         $('#summernote_2').summernote({
