@@ -35,10 +35,10 @@
                              </div>
                            </div>
 
-                        @if(Session()->has('success'))
-                <div class="alert alert-success"> 
-                {!! Session::get('success') !!}
-                </div>
+                 @if(session()->has('message.level'))
+                        <div class="alert alert-{{ session('message.level') }}"> 
+                        {!! session('message.content') !!}
+                        </div>
                         @endif
       @if ($errors->any())
     <div class="alert alert-danger">
