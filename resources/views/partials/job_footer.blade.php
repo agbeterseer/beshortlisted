@@ -12,7 +12,7 @@
                         <aside class="col-md-12" >
                             <div class="col-md-3">
                                 <ul>
-                                    <li><a href="#" class="footer_links">Site map</a></li>
+                                    <li><a href="{{route('single.page', 'about-us')}}" class="footer_links">About Us</a></li>
                                     <li><a href="{{route('list.job', 'job-list')}}" class="footer_links">Browse Jobs</a></li>
                                     <li><a href="{{url('/usermanual')}}" class="footer_links">Help Center</a></li> 
                                 </ul>
