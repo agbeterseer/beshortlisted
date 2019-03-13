@@ -171,13 +171,7 @@ class PolicyController extends Controller
             # code...
             Session::flash('success','Done successfully');
         }
-           $response = array(
-        'status' => 'success',
-        'msg'    => 'Done successfully',
-                 );
-  
-       return response()->json($response);
-    
+ return redirect()->route('policies.index');
     }
 
     /**

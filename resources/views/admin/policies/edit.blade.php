@@ -47,7 +47,8 @@
 
 <div class="panel-body"> 
         <span id="resulto"></span>
- <div class="form-horizontal form-bordered">
+     <form class="form-horizontal" action="{{action('PolicyController@Updatepolicy')}}" method="post" role="form">
+                        {{ csrf_field() }}
  <input type="text" name="policy_id" hidden="hidden" value="{{$policy->id}}">
                <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                 <label for="title" class="col-md-2 control-label">Title 
@@ -75,14 +76,14 @@
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-offset-2 col-md-10">
-                                <button type="submit" class="btn dark" id="update_policy_markdown">
+                                <button type="submit" class="btn dark">
                                     <i class="fa fa-check"></i> Submit</button>
                                 <button type="button" class="btn default">Cancel</button>
                             </div>
                         </div>
                     </div>
                          
-</div>
+</form>
                                 
                                 </div>
 

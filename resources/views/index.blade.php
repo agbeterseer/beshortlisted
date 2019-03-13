@@ -27,8 +27,9 @@
                 <div class="container">  
  
                 <div class="text-content"> 
-                     <h1>Aim Higher. Reach Farther. Dream Bigger.</h1>
-                    <p>A better career is out there. We'll help you find it.</p> 
+                    Own your profile: Build a profile which places you in the ideal position to be recruited
+                     <h1>Build a profile which places you in the ideal position to be recruited</h1>
+                    <p>Build a profile which places you in the ideal position to be recruited</p> 
                 </div>
                     <form class="careerfy-banner-search" action="{{route('job.listing')}}" method="GET" id="find_jobs">
                         <div class=" col-md-4 careerfy-select-style">

@@ -7,7 +7,7 @@
   'top_re' => '',
   'all_re' => '',
   'sett' => '',
-  'candidate' => ''
+  'candidate' => '',
   'policy' => 'active', 
   'package' => '',
   'page' => ' ',
@@ -17,11 +17,11 @@
 
 @section('content')
  
-	<div class="panel panel-default">
-	<div class="panel-body">
-	{!! $policy->description !!}
+  <div class="panel panel-default">
+  <div class="panel-body">
+  {!! $policy->description !!}
 
-	</div>
-	</div>
+  </div>
+  </div>
   
 @endsection
