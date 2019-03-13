@@ -1160,11 +1160,23 @@ public function ShowWorkExperienceForm()
 
     public function AddWorkExperience(Request $request)
     {
- //dd($request->all());
+        $user = Auth::user();
         $resume = $request->resume;
+
+        $user_yoe = Document::where('user_id', $user->id)->first();
+        if ($user_yoe === null) {
+          $user_yoe = new Document;
+          $user_yoe->user_id = $user->id;
+          $user_yoe->resume_id = $resume;
+          $user_yoe->candidates_name = $user->name;
+          $user_yoe->save();
+          # code...
+        }
+        // dd($request->all());
+       
         //dd($resume);
         $section = $request->work_history;
-        $user = Auth::user();
+        
         $work_from_year = $request->work_from_year;
         $work_from_month = $request->work_from_month;
         $end_year = $request->end_year;
@@ -1217,9 +1229,9 @@ public function ShowWorkExperienceForm()
     return \Redirect::back()->withInput()->withErrors( $validation->messages() );
     }
      try {
-  $candidate_work_experience = DB::table('work_experiences')->insertGetId(['start_year'=>$work_from_year, 'start_month'=>$work_from_month, 'end_year'=>$end_year, 'end_month'=>$end_month, 'position_title'=>$position_title, 'career_level'=>$career_level, 'company_name'=>$company_name, 'country'=>$country, 'responsibilities'=>$responsibilities, 'status'=>1, 'userfk'=>$user->id, 'resumefk'=>$resume, 'present'=> $present]); 
+  $candidate_work_experience = DB::table('work_experiences')->insertGetId(['start_year'=>$work_from_year, 'start_month'=>$work_from_month, 'end_year'=>$end_year, 'end_month'=>$end_month, 'position_title'=>$position_title, 'career_level'=>$career_level, 'company_name'=>$company_name, 'country'=>$country, 'responsibilities'=>$responsibilities, 'status'=>1, 'userfk'=>$user->id, 'resumefk'=>$resume, 'present'=> $present, 'create_at' => $this->returnCurrentTime()]); 
 
- // dd($candidate_work_experience);
+  // dd($candidate_work_experience);
 
 // // // // //$candidate_work_experience
 // 1. get the current Years of Experience by user iD and resume ID
@@ -1241,15 +1253,16 @@ $work_e = WorkExperience::findOrFail($candidate_work_experience);
 
 $work_e->yoe +=$yer;
 $work_e->save();
-//dd($work_e);
+// dd($work_e);
 try {
-  $user_yoe = Document::where('user_id', $user->id)->where('resume_id', $resume)->first();
+  $user_yoe = Document::where('user_id', $user->id)->first();
+ 
 $user_yoe->years_of_experience +=$yer;
 $user_yoe->save();
 } catch (Exception $e) {
   
 }
-
+ //dd($work_e);
 // $years_sum = 0;
 // $years_sum +=$yer;
   // dd($work_e);
@@ -1518,6 +1531,7 @@ return redirect()->route('show.resume');
 
 public function DeleteWorkExperience($id, $section)
 {
+  //dd($id);
     $user = Auth::user();
 
     // remove work_experience instance
