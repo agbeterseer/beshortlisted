@@ -70,6 +70,7 @@ hr {
                    <a href="javascript:window.print();" class="btn red mt-ladda-btn ladda-button btn-outline"> PRINT </a>
                 </div>
                 <div class="portlet-body"> 
+                  @if($document)
                                         <div class="careerfy-profile-title" align="center">
                                          <br>
                                        <strong>{{Auth::user()->firstname}} {{Auth::user()->lastname}}</strong> <br>
@@ -77,11 +78,14 @@ hr {
                                         <strong> {{Auth::user()->email}}</strong> <br>
                                         <strong>{{$document->phonenumber}} </strong> 
                                         </div>
+                                        @endif
                 <div class="space">&nbsp;</div>
 
                                         <div><h4> <strong style="vertical-align: middle;">Career Objectives</strong>.</h4></div>
                                             <hr>
+                                            @if($career)
                          {{$career->summary}}
+                         @endif
                                           <!-- EDUCATIONAL QUALIFICATION-->
                                               <div class="space">&nbsp;</div>
 @if(!$educationaList->isEmpty())

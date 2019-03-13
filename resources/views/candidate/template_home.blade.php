@@ -12,15 +12,9 @@
     body{background-color: #ffffff;}
 </style>
     </head>
-    <body class="transparent-header transparent-menu-below pace-on pace-minimal">
-
+    <body class="transparent-header transparent-menu-below pace-on pace-minimal"> 
               @include('partials.job_menu')
               <div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
 
 @if(Auth::user()->account_type === 'employee')
 @include('partials.employee_breadcomb') 

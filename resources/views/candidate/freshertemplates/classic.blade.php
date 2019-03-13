@@ -77,7 +77,7 @@ th, td {
                                         <div class="careerfy-profile-title">
  
  
- 
+ @if($document)
  <table width="100%" align="left" border="0"> 
  <tr>
  <td style="height: 20px;"><strong> Name: </strong> </td> <td>{{Auth::user()->firstname}} {{Auth::user()->lastname}}</td>
@@ -92,7 +92,7 @@ th, td {
  <td><strong>Phone:</strong></td> <td>{{$document->phonenumber}} </td>
  </tr>
  </table>  
-
+@endif
                                         </div>
  
 
@@ -102,8 +102,9 @@ th, td {
                                 <td  class="leftpad">
                                 CAREER OBJECTIVES  
                                 </td></tr></table>   
-
+@if($career)
                                {{$career->summary}}
+                               @endif
     <div class="space">&nbsp;</div>
                                               <div class="careerfy-profile-title">
                                                

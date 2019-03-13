@@ -56,7 +56,7 @@ th, td {
                   <a href="javascript:window.print();" class="btn blue mt-ladda-btn ladda-button btn-outline"> PRINT </a>
                 </div>
 <div class="portlet-body">
-
+@if($document)
 <div class="careerfy-profile-title"> 
 <br>
 
@@ -66,12 +66,14 @@ th, td {
 <strong> Email Address:</strong> {{Auth::user()->email}} <br>
 <strong>Phone:</strong> {{$document->phonenumber}}
 </div>
+@endif
 <hr>
 
  
  <h4> <strong>CAREER OBJECTIVES</strong>.</h4> 
+@if($career) 
 {{$career->summary}}
-
+@endif
 
   <div class="careerfy-profile-title" >
     <h4><strong> EDUCATIONAL QUALIFICATION</strong></h4>

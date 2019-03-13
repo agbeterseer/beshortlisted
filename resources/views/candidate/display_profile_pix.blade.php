@@ -1,4 +1,3 @@
-
 @extends('layouts.jobboard', [
   'page_header' => 'Candidates',
   'dash' => '',
@@ -12,8 +11,7 @@
   'resume_' => ''
 ])
 
-@section('content')
-<div class="space">&nbsp;</div>
+@section('content') 
 @include('partials.employee_breadcomb')  
  <div class="careerfy-main-content">
             

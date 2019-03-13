@@ -2190,7 +2190,7 @@ return $get_Job_by_common_industries;
        $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
         
       if ($user_single_resume_by_date === null) {
-      
+
       return redirect()->route('show.cation');
       }
     if ($user->account_type === 'employee') {
@@ -2629,7 +2629,12 @@ return response()->json($response);
 
     public function TabularPDF()
     {
-         $user = Auth::user();
+      $user = Auth::user();
+     $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
+      if ($user_single_resume_by_date === null) {
+      return redirect()->route('show.cation');
+      }
+      
         $dt = Carbon::now();
         $ddt = Carbon::now(); 
         $documents = Document::all()->count();
@@ -2693,7 +2698,12 @@ return response()->json($response);
 // classic Template
     public function Classic()
     {
-        $user = Auth::user();
+        $user = Auth::user(); 
+      $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first(); 
+      if ($user_single_resume_by_date === null) { 
+
+      return redirect()->route('show.cation');
+      }
         if ($user) { 
        // dd('it is our work  ooo');
         $dt = Carbon::now();
@@ -2862,7 +2872,11 @@ public function UpdateReferees(Request $request)
 
     public function ClassicPDF(Request $request)
     {
-         $user = Auth::user();
+      $user = Auth::user(); 
+      $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
+      if ($user_single_resume_by_date === null) { 
+      return redirect()->route('show.cation');
+      }
          $resume_id = $request->resume_id;
             
        // dd('it is our work  ooo');
@@ -2941,7 +2955,11 @@ public function UpdateReferees(Request $request)
 
     public function StandardPDF(Request $request)
     {
-          $user = Auth::user();
+       $user = Auth::user(); 
+      $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
+      if ($user_single_resume_by_date === null) { 
+      return redirect()->route('show.cation');
+      }
          $resume_id = $request->resume_id;
             
        // dd('it is our work  ooo');
@@ -3013,7 +3031,11 @@ public function UpdateReferees(Request $request)
     }
 
     public function Standard(){
-        $user = Auth::user();
+      $user = Auth::user(); 
+      $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
+      if ($user_single_resume_by_date === null) { 
+      return redirect()->route('show.cation');
+      }
         if ($user) { 
             
        // dd('it is our work  ooo');
@@ -3119,7 +3141,11 @@ public function UpdateReferees(Request $request)
      
        public function ClassicExperiencedPDF(Request $request)
     {
-              $user = Auth::user();
+      $user = Auth::user(); 
+      $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
+      if ($user_single_resume_by_date === null) { 
+      return redirect()->route('show.cation');
+      }
          $resume_id = $request->resume_id;
             
        // dd('it is our work  ooo');
@@ -3187,9 +3213,13 @@ public function UpdateReferees(Request $request)
        
     }
 
-           public function ClassicExperienced()
+   public function ClassicExperienced()
     {
-          $user = Auth::user();
+      $user = Auth::user(); 
+      $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
+      if ($user_single_resume_by_date === null) { 
+      return redirect()->route('show.cation');
+      }
         if ($user) { 
             
        // dd('it is our work  ooo');
