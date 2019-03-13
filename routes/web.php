@@ -173,7 +173,7 @@ Route::get('auth/{provider}/callback', 'LoginController@handleProviderCallback')
 		'as' => 'add.contact',
 		'uses'=> 'SettingController@addContact'
 	]);
-	Route::post('update-contact/{id}', [
+	Route::post('update-contact', [
 		'as' => 'update.contact',
 		'uses'=> 'SettingController@updateContact'
 	]);

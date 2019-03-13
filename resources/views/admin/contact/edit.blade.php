@@ -44,8 +44,7 @@
                                     </div>
 
           <div class="panel-body"> 
-             <form class="form-horizontal" action="{{route('update.contact', $contact->id)}}" method="post" role="form">
-                      {{ method_field('POST')}}
+             <form class="form-horizontal" action="{{route('update.contact')}}" method="post" role="form"> 
                         {{ csrf_field() }}
                         <input type="hidden" name="id" value="{{$contact->id}}">
      <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">

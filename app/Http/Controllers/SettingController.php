@@ -384,9 +384,10 @@ public function addContact (CreateContactRequest $request)
        return  redirect()->back();
 }
 
-public function updateContact(UpdateContactRequest $request, $id)
+public function updateContact(Request $request)
 {
-   // $id = $request->id;
+  //dd($request->all());
+  $id = $request->id;
    // dd($id);
     try {
         if ($id) {
@@ -398,8 +399,7 @@ public function updateContact(UpdateContactRequest $request, $id)
             $contact->country = $request->country;
             $contact->postalcode = $request->postal_code;
             $contact->phonenumber = $request->official_number;
-            $contact->email = $request->email;
-            $contact->status = 0;
+            $contact->email = $request->email; 
             $contact->updated_at = $this->returnCurrentTime();
             $contact->save();
             Session::flash('success','Done successfully');

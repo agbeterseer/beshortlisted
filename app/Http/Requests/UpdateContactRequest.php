@@ -22,10 +22,16 @@ class UpdateContactRequest extends FormRequest
      */
     public function rules()
     {
+ 
         return [
-            'name' => 'required',
-            'email' => 'required',
-            'message' => 'required', 
+            'fulladdress' => 'required',
+            'street_name' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'postalcode' => 'required', 
+            'phonenumber' => 'required',
+            'email' => 'required', 
         ];
     }
 }
