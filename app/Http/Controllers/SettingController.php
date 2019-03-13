@@ -419,6 +419,7 @@ public function updateContact(UpdateContactRequest $request, $id)
 
 public function deleteContact(Request $request)
 {
+  $id = $request->delete;
       if ($id) {
     $contact = Contact::findOrFail($id);
     $contact->status = 3;
@@ -427,6 +428,7 @@ public function deleteContact(Request $request)
     }else{
     return  redirect()->back()->with('message','ID is required');
     }
+      return  redirect()->back();
 }
 
 public function PublishContactForm($id)

@@ -327,6 +327,7 @@
                 </a>
        
             </li>
+         
           </ul>
 
                                   </li>
@@ -389,7 +390,11 @@
                                         <span class="title">@lang('cvmanagement.fields-of-study.title') </span>
                                           </a>
                                       </li> 
-                         
+                                    <li class="nav-item {{ $request->segment(1) == 'contact' ? 'active' : '' }}">
+                                          <a href="{{route('show.contacts')}}" class="nav-link ">
+                                        <span class="title">@lang('cvmanagement.contact.title') </span>
+                                          </a>
+                                      </li> 
                                       
                                     </ul> 
                                   </li>

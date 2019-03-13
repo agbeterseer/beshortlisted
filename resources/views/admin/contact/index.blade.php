@@ -94,8 +94,7 @@
                                          
                                                     <form action="{{route('delete.contact')}}" method="POST">
                                                       <input type="hidden" name="delete" value="{{$contact->id}}">
-                                                        {{csrf_field()}}
-                                                        {{method_field('DELETE')}}
+                                                        {{csrf_field()}} 
                                     <input class="btn btn-sm btn-danger" type="submit" value="Delete">
                                              
                                                     </form>
