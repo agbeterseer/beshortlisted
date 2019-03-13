@@ -42,7 +42,7 @@
                           <div class="space">&nbsp;</div>  
                           <div class="row">
                             <div class="col-md-3"> <label>Street Name :</label></div>
-                            <div class="col-md-3">{{$cont->street_name}}<br></div>
+                            <div class="col-md-8">{{$cont->street_name}}<br></div>
                           </div>
                           <div class="space">&nbsp;</div>  
                           <div class="row">
