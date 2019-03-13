@@ -12,7 +12,7 @@
 ])
 
 @section('content')
-@include('partials.employee_breadcomb')
+ 
 <style type="text/css"> 
     .scroll_div{
     overflow:scroll;
@@ -28,7 +28,7 @@ border-color: white !important;
     font-family: "Open Sans",sans-serif;
   }
 </style>
- 
+
  <div class="careerfy-main-content">
 
  <div class="space">&nbsp;</div>
