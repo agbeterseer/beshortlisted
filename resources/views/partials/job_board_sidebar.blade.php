@@ -142,7 +142,7 @@
                                         <li>No Jobs Available</li>
                                         @endforelse
                                     </ul>
-                                    <a href="#" class="widget_view_jobs_btn">View all jobs <i class="careerfy-icon careerfy-arrows32"></i></a>
+                                    <a href="{{route('list.job', 'job-list')}}" class="widget_view_jobs_btn">View all jobs <i class="careerfy-icon careerfy-arrows32"></i></a>
                                 </div>
                             </div>
                             <div class="careerfy-typo-wrap">
