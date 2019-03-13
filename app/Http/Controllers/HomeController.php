@@ -396,9 +396,10 @@ public function DisplayTemplates()
     $countries = DB::table('countries')->get();
     return view('contactus', compact('posts', 'menus', 'contact', 'countries'), array('user' => Auth::user()));
     }
-public function addContactUs (UpdateContactRequest $request)
+public function addContactUs (Request $request)
 { 
     try {
+      if ($request->name !=null && $request->name !='' && $request->email !=null && $request->email !='') {
            $contact = new ReachUs; 
             $contact->name = $request->name;
             $contact->email = $request->email;
@@ -406,7 +407,8 @@ public function addContactUs (UpdateContactRequest $request)
             $contact->created_at = $this->returnCurrentTime();
             $contact->save();
             Session::flash('success','Thank you for contacting us. your email has been sent successfully');
-            return redirect()->back();
+            return redirect()->back();#
+          }
     } catch (Exception $e) {
             return redirect()->back()->withErrors(['error'=> 'something went wrong']); 
     } 
