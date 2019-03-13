@@ -2185,9 +2185,13 @@ return $get_Job_by_common_industries;
 // Job Application 
     public function JobApplicationForm($id){
     //$id = 28;
-    if (Auth::user()->account_type === 'employee') {
- 
       $user = Auth::user();
+       $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
+      if ($user_single_resume_by_date) {
+      return redirect()->route('show.cation');
+      }
+    if ($user->account_type === 'employee') {
+ 
       $tag = Tag::findOrFail($id);
       //$tag = Tag::findOrFail($id);
       $employement_terms = DB::table('employement_terms')->get();
