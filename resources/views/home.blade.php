@@ -21,7 +21,7 @@
                         @endif
         <!-- Banner -->
 
-        <div class="careerfy-banner careerfy-typo-wrap"> 
+        <div class="careerfy-banner careerfy-typo-wrap" style="margin-top: -5px;"> 
             <span class="careerfy-banner-transparent"></span>
             <div class="careerfy-banner-caption">
                 <div class="container"> 

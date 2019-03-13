@@ -49,7 +49,7 @@ border-color: white !important;
                                             <p>Your job will be reviewed by our team and published soon. If you need help please contact us via email hr@rhizomeng.com</p>
                                             <div class="clearfix"></div>
                                             <a href="{{route('dashboard')}}">Dashboard</a>
-                                            <a href="{{route('job.details', $tag->id)}}">View Job</a>
+                                            <a href="{{route('job.description', $tag->id)}}">View Job</a>
                                         </div>
                                     </div>
                                 </div>
