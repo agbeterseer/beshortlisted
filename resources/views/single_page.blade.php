@@ -24,8 +24,11 @@
 border-color: white !important;
 
     }
-
+  body{
+    font-family: "Open Sans",sans-serif;
+  }
 </style>
+ 
  <div class="careerfy-main-content">
 
  <div class="space">&nbsp;</div>

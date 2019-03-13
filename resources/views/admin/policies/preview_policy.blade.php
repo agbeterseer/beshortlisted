@@ -19,6 +19,7 @@
 <style type="text/css">
   body{
     font-family: "Open Sans",sans-serif;
+  }
 </style>
  
   <div class="panel panel-default">
