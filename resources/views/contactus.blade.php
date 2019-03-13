@@ -19,6 +19,11 @@
         <div class="careerfy-main-section" >
                 <div class="container">
                     <div class="row">
+                             @if(Session()->has('success'))
+                        <div class="alert alert-success"> 
+                        {!! Session::get('success') !!}
+                        </div>
+                            @endif
 
                            <div class="careerfy-employer-box-section" style="background-color: #ffffff;">
                                             <div class="careerfy-profile-title"><h2>Address / Location</h2></div>
@@ -77,9 +82,9 @@
          
          <div class="careerfy-main-content"> 
                    @if(Session()->has('success'))
-                        <div class="alert alert-success"> 
+                   <!--      <div class="alert alert-success"> 
                         {!! Session::get('success') !!}
-                        </div>
+                        </div> -->
                   @else
             <div class="container">
                     <div class="row">
