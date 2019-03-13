@@ -26,7 +26,7 @@
         <!-- Banner -->
         <!-- Banner -->
         <!-- Main Content -->
-        <div class="careerfy-main-content" style="margin-top: -50px;">
+        <div class="careerfy-main-content" style="margin-top: -60px;">
  
 <style type="text/css">
     .scroll_div{

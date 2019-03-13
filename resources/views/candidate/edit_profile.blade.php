@@ -12,11 +12,6 @@
 
 @section('content')
 <div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
 @include('partials.employee_breadcomb') 
 
       <div class="careerfy-main-section careerfy-dashboard-fulltwo">

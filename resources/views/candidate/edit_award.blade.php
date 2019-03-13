@@ -13,11 +13,6 @@
 
 @section('content')
 <div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
 @include('partials.employee_breadcomb') 
     <div class="col-md-8" id="page">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
