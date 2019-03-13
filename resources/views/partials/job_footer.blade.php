@@ -27,7 +27,7 @@
                             <div class="col-md-3">
                                 <ul> 
                                     <li><a href="{{route('show.resume')}}" class="footer_links">Resume Builder</a></li>
-                                    <li><a href="{{route('post.jobs')}}" class="footer_links">Add Job</a></li>
+                                    <li><a href="{{route('post.jobs')}}" class="footer_links">Add a Job</a></li>
                                     <li><a href="{{route('single.page', 'terms-of-use')}}" class="footer_links">Terms of Use</a></li>
                                 </ul>
                             </div>
