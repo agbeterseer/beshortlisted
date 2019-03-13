@@ -26,10 +26,10 @@ border-color: white !important;
     }
 
 </style>
- <div class="careerfy-main-content" style="background-color: #ffffff;">
+ <div class="careerfy-main-content">
 
  <div class="space">&nbsp;</div>
-
+ <div class="space">&nbsp;</div>
 
           <div class="careerfy-main-section">
                 <div class="container"> 
@@ -41,12 +41,12 @@ border-color: white !important;
                </div> 
           </div>
 
-            <div class="careerfy-main-section careerfy-parallex-full">
+    <!--         <div class="careerfy-main-section careerfy-parallex-full">
                 <div class="container">
                     <div class="row">
                     
                     </div>
                 </div>
-            </div>
+            </div> -->
 </div>
 @endsection

@@ -87,7 +87,7 @@ Route::get('/email-subscription', [
 	'as' => 'subscribe',
 	'uses' => 'HomeController@SubscribeToNewsletter'
 	]);
-Route::get('/page/policy-document', [
+Route::get('/policy-document', [
 	'as' => 'display.policy',
 	'uses' => 'HomeController@DisplayPolicy'
 	]);

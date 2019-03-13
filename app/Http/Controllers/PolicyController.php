@@ -124,7 +124,7 @@ class PolicyController extends Controller
     public function show($id)
     {
      $policy = Policy::where('id',$id)->where('status', 1)->orderBy('created_at', 'DESC')->first(); 
-
+        dd($policy);
       return view('policy_document', compact('policy'), array('user' => Auth::user())); 
     }
     public function DisplayPolicy()

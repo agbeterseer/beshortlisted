@@ -354,13 +354,14 @@ public function DisplayTemplates()
     public function PreivewPolicy($id)
     {
     $policy = Policy::findOrFail($id);
-    $posts = $this->listPages();
+    $posts = $this->listPages(); 
     return view('admin.policies.preview_policy', compact('policy', 'posts'), array('user' => Auth::user())); 
     }
     public function DisplayPolicy()
     {
      $menus = $this->displayMenu();
      $policy = Policy::where('status', 1)->orderBy('created_at', 'DESC')->first(); 
+
       return view('policy_document', compact('policy', 'menus'), array('user' => Auth::user())); 
     }
     public function DisplayJobListing()
