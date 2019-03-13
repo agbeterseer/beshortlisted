@@ -47,12 +47,6 @@
         @endif
      <!-- SubHeader careerfy-subheader-without-bg-->
           <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div> 
-         <div class="space">&nbsp;</div> 
         <!-- SubHeader -->
 
         <!-- Main Content -->
