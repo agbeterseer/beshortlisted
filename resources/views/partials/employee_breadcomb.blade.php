@@ -1,6 +1,6 @@
               @if(Auth::user()->account_type === 'employee')
              <div class="clearfix"></div>
-            <div class="careerfy-breadcrumb">
+            <div class="careerfy-breadcrumb" style="margin-top: -7px;">
                 <ul>
                 <li><a href="{{route('show.resume')}}">ONLINE RESUME</a></li>                
                 <li><a href="{{route('display.templates')}}">RESUME TEMPLATES</a></li>  

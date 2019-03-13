@@ -1,6 +1,6 @@
             @if(Auth::user()->account_type === 'employer')
            <div class="clearfix"></div>
-            <div class="careerfy-breadcrumb">
+            <div class="careerfy-breadcrumb" style="margin-top: -7px;">
             <!--     <span ><div style="margin-bottom: -190px;"></div><a href="#">CV BANK</a> </span> -->
                 <ul>
                 <li style="background-color: orange;"><span><a href="{{route('list.all')}}">CV BANK</a> </span></li> 

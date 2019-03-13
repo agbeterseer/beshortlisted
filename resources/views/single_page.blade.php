@@ -12,7 +12,7 @@
 ])
 
 @section('content')
- 
+
 <style type="text/css"> 
     .scroll_div{
     overflow:scroll;
@@ -29,9 +29,7 @@ border-color: white !important;
   }
 </style>
 
- <div class="careerfy-main-content">
-
- <div class="space">&nbsp;</div>
+ <div class="careerfy-main-content"> 
  <div class="space">&nbsp;</div>
 
           <div class="careerfy-main-section">

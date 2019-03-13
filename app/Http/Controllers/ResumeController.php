@@ -529,7 +529,7 @@ return redirect()->back()->with('done', 'Done successfully');
         $name = $request->name;
 
         try {
-        //dd($request->all());
+      
         if ($resume_id !=null && $resume_id !='') {
 
             $resume = RecruitResume::findOrFail($resume_id);

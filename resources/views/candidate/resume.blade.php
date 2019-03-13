@@ -73,7 +73,22 @@ height: 92px;
     margin-top: 1px;
 
    </style>
-         @if ($errors->any())
+       
+
+ @php
+$check = 'second';
+ @endphp
+<!-- <div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div> 
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div>  -->
+<div class="space">&nbsp;</div>
+@include('partials.employee_breadcomb') 
+<div class="space">&nbsp;</div> 
+<div class="space">&nbsp;</div> 
+  @if ($errors->any())
           <div class="alert alert-danger">
               <ul>
                   @foreach ($errors->all() as $error)
@@ -97,17 +112,6 @@ height: 92px;
         {!! session('message.content') !!}
         </div>
         @endif
-
- @php
-$check = 'second';
- @endphp
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
-@include('partials.employee_breadcomb') 
             <!-- Main Section -->
             <div class="careerfy-main-section careerfy-dashboard-fulltwo">
                 <div class="container " id="page" >
@@ -1002,10 +1006,10 @@ Previous
  </div>
  @else
     <div class="careerfy-candidate-resume-wrap" >    
-    <div class="careerfy-candidate-title"> <h2>
+    <div class="careerfy-candidate-title"> <h4>
     <i class="careerfy-icon careerfy-user"></i> Personal Information 
     <a href="#static_personal" class="careerfy-resume-addbtn2" style="width: 30%" data-toggle="modal" data-style="slide-left" data-spinner-color="#333" ><span class="fa fa-plus"></span>  Add Personal Information </a>
-    </h2> </div>
+    </h4> </div>
 
     </div>
  
