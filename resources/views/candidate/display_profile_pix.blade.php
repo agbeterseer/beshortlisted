@@ -24,7 +24,7 @@
                         <div class="careerfy-column-9">
   <div class="careerfy-employer-dashboard-nav" style="background-color: #ffffff;">
       <figure>
-            <form action="{{route('employee_postimage')}}" role="form" enctype="multipart/form-data" method="POST">
+            <form action="{{route('post.image')}}" role="form" enctype="multipart/form-data" method="POST">
                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                                         <div class="form-group">

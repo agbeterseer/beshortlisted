@@ -721,7 +721,7 @@ Route::get('/index/featured-jobs/', [
 	]);
 Route::post('employee-upload-image', [
 	'as' => 'employee_postimage',
-	'uses' => 'EmployerController@UpdateCandidatesLogo'
+	'uses' => 'EmployerController@UpdateProfilePix'
 	]);
 Route::get('/index/display-profile-pix', [
 	'as' => 'display.pix',
