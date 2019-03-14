@@ -122,15 +122,14 @@ border-color: white !important;
                                         <div class="tab-pane active" id="tab_01">
    <!-- <div class="careerfy-candidate-default-wrap">   -->
    <aside class="careerfy-column-4">
-<div class="careerfy-typo-wrap" >
-
+<div class="careerfy-typo-wrap" > 
 <div class="careerfy-search-filter"> 
 <div class="careerfy-candidate careerfy-candidate-default">
 <div class="careerfy-search-filter-wrap careerfy-without-toggle">
 <div class="careerfy-search-box">
 <div id="" class="btn mt-ladda-btn mini_header" data-toggle="collapse" data-target="#expand_unsorted" > 
 <i class="careerfy-icon careerfy-sort"></i> <h2> Filter </h2> 
-<div class="space">&nbsp;</div>
+ 
 </div>
 </div></div>
 <ul class="careerfy-row nav-tabs tabs-left" id="applicants_list">
@@ -4811,7 +4810,6 @@ document.getElementById('present').style.display = 'block';
 }); 
 
   </script>
-
  <script type="text/javascript">
  function isEmpty(obj) {
     for(var key in obj) {
@@ -4838,7 +4836,7 @@ document.getElementById('present').style.display = 'block';
 //     console.log(files);
 //  });
   $('#savedescription').click(function() {
- alert('here');
+ //alert('here');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -4878,7 +4876,7 @@ document.getElementById('present').style.display = 'block';
   // AUTOMATCH applicants
  @foreach($List_applicants_by_job_id as $List_applicant)  
   $('#savedescription{{$List_applicant->id}}').click(function() {
- alert('Rejected');
+ //alert('Rejected');
  //alert($('input[name=rejected{{$List_applicant->id}}]').val());
  
          $.ajaxSetup({
@@ -6109,7 +6107,7 @@ $('#hire{{$List_applicant->id}}').click(function() {
             $("#review_section").empty();
             $("#reject_section").empty();
             // hide review Side display
-      // window.location.reload(); 
+      window.location.reload(); 
      },
      complete:function(data){
     // Hide image container 
@@ -6529,7 +6527,7 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
 // in Review Section
    @foreach($review_list as $review)  
   $('#savedescription{{$review->id}}').click(function() {
-    alert('Rejected hereeerereerexxxxxxxxxxx');
+    //alert('Rejected hereeerereerexxxxxxxxxxx');
    // alert($('input[name=rejected{{$review->id}}]').val());
          
          $.ajaxSetup({
@@ -6668,7 +6666,7 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
     });
  
     $('#in_review{{$review->id}}').click(function() {
-        alert('in_review nowsssssssssssssssssssss');
+        //alert('in_review nowsssssssssssssssssssss');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -6840,7 +6838,7 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
             $("#review_section").empty();
             $("#shortlist_section").empty(); 
 
-       //window.location.reload(); 
+       window.location.reload(); 
      },
      complete:function(data){
     // Hide image container 
@@ -6973,7 +6971,7 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
            $("#offered_count").empty();
             $("#hire_count").empty();   
 
-        //  window.location.reload(); 
+         window.location.reload(); 
      },
      complete:function(data){
     // Hide image container 
@@ -7068,7 +7066,7 @@ $('#hire{{$review->id}}').click(function() {
 
 @foreach($shortlisted_list as $shortlisted)
   $('#savedescription{{$shortlisted->id}}').click(function() {
-    alert('Rejected hereeerereerexxxxxxxxxxx'); 
+    //alert('Rejected hereeerereerexxxxxxxxxxx'); 
          
          $.ajaxSetup({
             headers: {
@@ -7205,7 +7203,7 @@ $('#hire{{$review->id}}').click(function() {
     });
  
     $('#in_review{{$shortlisted->id}}').click(function() {
-        alert('in_review nowsssssssssssssssssssss');
+        //alert('in_review nowsssssssssssssssssssss');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -7343,7 +7341,7 @@ $('#hire{{$review->id}}').click(function() {
     });
 
    $('#shortlist{{$shortlisted->id}}').click(function() {
-        alert('shortlist...s dddddddddddddddd');
+        //alert('shortlist...s dddddddddddddddd');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -7404,7 +7402,7 @@ $('#hire{{$review->id}}').click(function() {
     });
 
    $('#offered{{$shortlisted->id}}').click(function() {
-        alert('From shortlist, make na offer');
+        //alert('From shortlist, make na offer');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -7532,7 +7530,7 @@ $('#hire{{$review->id}}').click(function() {
     });
    
 $('#hire{{$shortlisted->id}}').click(function() {
-        alert('hire now');
+       // alert('hire now');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -7687,7 +7685,7 @@ $('#hire{{$shortlisted->id}}').click(function() {
 @foreach($offered_list as $offered)
 
  $('#savedescription{{$offered->id}}').click(function() {
-    alert('Rejected hereeerereerexxxxxxxxxxx'); 
+    //alert('Rejected hereeerereerexxxxxxxxxxx'); 
          
          $.ajaxSetup({
             headers: {

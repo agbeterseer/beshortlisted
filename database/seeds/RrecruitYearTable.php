@@ -133,36 +133,55 @@ class RrecruitYearTableSeeder extends Seeder
 
     $pageinformation = [
 	    [ 
-	    'name' => 'Accounting',
-	    'status' => 'Accounting',
-	    'description' => 'Accounting',
-	    'image' => '1551453579.jpg',
-	    'status'=> '1'
+	    'name' => '2019',
+	    'status' => '1' 
 	    ],
 	    [ 
-	    'name' => 'Administrative officer',
-	    'display_name' => 'Administrative',
-	    'description' => 'Accounting'
+	    'name' => '2020',
+	    'status' => '1' 
 	    ],
 	    [ 
-	    'name' => 'Agriculture',
-	    'display_name' => 'South-East',
-	    'description' => 'Accounting'
+	    'name' => '2021',
+	    'status' => '1'
 	    ],
 	    [ 
-	    'name' => 'Architecture',
-	    'display_name' => 'South-West',
-	    'description' => 'Accounting'
+	    'name' => '2022',
+	    'status' => '1'
 	    ],
 	    [ 
-	    'name' => 'Busines Development Manager',
-	    'display_name' => 'South',
-	    'description' => 'Accounting'
+	    'name' => '2023',
+	    'status' => '1'
 	    ],
 	    [ 
-	    'name' => 'Communications Officer',
-	    'display_name' => 'South',
-	    'description' => 'Accounting'
+	    'name' => '2024',
+	    'status' => '1'
+	    ],
+	    [ 
+	    'name' => '2025',
+	    'status' => '1'
+	    ],
+	   	[ 
+	    'name' => '2026',
+	    'status' => '1'
+	    ],
+	    [ 
+	    'name' => '2027',
+	    'status' => '1'
+	    [ 
+	    'name' => '2028',
+	    'status' => '1'
+	    ],
+	    [ 
+	    'name' => '2029',
+	    'status' => '1'
+	    ],
+	    	    [ 
+	    'name' => '2030',
+	    'status' => '1'
+	    ],
+	   	[ 
+	    'name' => '2031',
+	    'status' => '1'
 	    ]
 
     ];
