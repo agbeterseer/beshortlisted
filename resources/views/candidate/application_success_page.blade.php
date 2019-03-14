@@ -57,7 +57,7 @@
                                        @foreach($get_Job_by_common_industries as $common_job)                             
                                         <li class="careerfy-column-12">
                                             <div class="careerfy-joblisting-classic-wrap">
-                                                <figure><a href="#"><img src="img/extra-images/job-listing-logo-1.png" alt=""></a></figure>
+                                             <figure><a href="{{route('job.description', $common_job->id)}}"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-joblisting-text">
                                                     <div class="careerfy-list-option">
                                                         <h2><a href="#"> {{$common_job->job_title}}</a> <span>Featured</span></h2>

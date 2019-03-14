@@ -113,7 +113,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->content = $request->content;
         $post->url = url('/index') . '/'. $path;
-        $post->post_type = $request->post_type;
+        $post->post_type = $request->category;
         $post->image_link = $filename2;
         $post->status = 1;
         $post->user_id = $user->id;

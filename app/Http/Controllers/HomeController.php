@@ -194,7 +194,8 @@ public function employement_term_list()
           $tags = Tag::where('status',1)->where('active',1)->paginate(20);  
           $menus = $this->displayMenu();
           $posts = $this->listPages();
-          $page = Post::where('display_name', $code)->where('status',1)->first();
+          // $page = Post::where('display_name', $code)->where('status',1)->first();
+         
      return view('jobs.job_listing_form', compact('industry_professions', 'industries', 'cities', 'city_count', 'employement_term_list','job_type_count', 'tags', 's', 'menus', 'posts') );
     }
     public function JobListing(Request $request){

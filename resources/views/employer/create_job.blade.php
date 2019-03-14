@@ -76,10 +76,16 @@ border-color: white !important;
                                                     <label>Job Title *</label>
                                                     <input placeholder="Enter Title" onblur="if(this.value == '') { this.value ='Enter Title'; }" onfocus="if(this.value =='Enter Title') { this.value = ''; }" type="text" name="job_title" required="required">
                                                 </li>
-                                                <li class="careerfy-column-6">
+                                                 <li class="careerfy-column-6"> 
+                                                    <label>Application Deadline Date *</label>
+                                                    <div class="careerfy-profile-select">
+                                            <input type="date" name="end_date" required="required" class="form-control">
+                                                    </div>
+                                                </li>
+                            <!--                     <li class="careerfy-column-6">
                                                     <label>Deadline Submission *</label>
                                                     <input placeholder="Enter Deadline Submission" onblur="if(this.value == '') { this.value ='Enter Deadline Submission'; }" onfocus="if(this.value =='Enter Deadline Submission') { this.value = ''; }" type="text" name="deadline_submission" required="required">
-                                                </li>
+                                                </li> -->
                                          
                                                 <li class="careerfy-column-6">
                                                     <label>Email Address *</label>
@@ -191,12 +197,12 @@ border-color: white !important;
                                                     </select>
                                                     </div>
                                                 </li>
-                                                    <li class="careerfy-column-6"> 
+                               <!--                      <li class="careerfy-column-6"> 
                                                     <label>Application Deadline Date *</label>
                                                     <div class="careerfy-profile-select">
                                             <input type="date" name="end_date" required="required" class="form-control">
                                                     </div>
-                                                </li>
+                                                </li> -->
                                                 <li class="careerfy-column-12">
                                                  <label>Field Of Study *</label>
                                          <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">          

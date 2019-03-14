@@ -82,12 +82,16 @@
                         <div class="careerfy-column-8">
                             <div class="careerfy-typo-wrap">
                                 <div class="careerfy-jobdetail-content white_background">
-                                    <div class="careerfy-content-title"><h2>Job Detail</h2></div>
+                                  <div class="careerfy-content-title"><h2>Job Summary</h2></div>
+                                     <div class="careerfy-description">
+                                        <p>{!! $tag->job_summary !!}</p>
+                                    </div>
+                                    <div class="careerfy-content-title"><h2>Job Description</h2></div>
                                     <div class="careerfy-jobdetail-services">
                                         <ul class="careerfy-row">
                                             <li class="careerfy-column-4">
                                                 <i class="careerfy-icon careerfy-salary"></i>
-                                                <div class="careerfy-services-text">Offerd Salary <small>{{$tag->salary_range}}</small></div>
+                                                <div class="careerfy-services-text">Offered Salary <small>{{$tag->salary_range}}</small></div>
                                             </li>
                                             <li class="careerfy-column-4">
                                                 <i class="careerfy-icon careerfy-social-media"></i>
@@ -111,23 +115,16 @@
                                             </li>
                                         </ul>
                                     </div>
+                                 <div class="careerfy-content-title"><h2>Technical Requirements</h2></div> 
                                     <div class="careerfy-description">
-                                        <p>{!! $tag->description !!}</p>
+                                        {!! $tag->description !!}
                                     </div>
-                                    <div class="careerfy-content-title"><h2>Job Requirements</h2></div>
-                                    <div class="careerfy-description"> 
-                                     <ol>
-                                     @foreach($job_requirements as $job_requirement)
-                                        <li>{{$job_requirement->title}}</li>
-                                        @endforeach
-                                    </ol>
-                                     </div>
-                                     <div class="careerfy-content-title"><h2>Required skills</h2></div>
-                                    <div class="careerfy-jobdetail-tags">
-                                    @foreach($skillsets as $skillset)
-                                        <a href="#">{{$skillset->title}} </a>
-                                        @endforeach 
-                                    </div> 
+                            
+                                    <div class="careerfy-content-title"><h2>Job Funtions</h2></div>
+                                    <div class="careerfy-description">  
+                                     {!! $tag->job_roles !!}
+            
+                                    </div>
   <div class="space">&nbsp;</div>
     <span style="color: red;">Kindly answer the evaluation question(s) below to begin your screening process</span>
 <form method="POST" action="{{route('make.application')}}" name="requirements"> 

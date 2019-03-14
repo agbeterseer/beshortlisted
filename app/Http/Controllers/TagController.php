@@ -1888,6 +1888,7 @@ if ($admin) {
         $reqirements = $request->group_a;
         $assessments = $request->group_b;
         $skillist = $request->group_c;
+        $job_roles = $request->job_roles;        
 
      $rules = [
         'job_title'=>'required|string',
@@ -1943,8 +1944,8 @@ if ($admin) {
             DB::transaction(function () use ($job_title, $display_name, $client, $profession, $client_name, $end_date, $job_code, $request, $user, $reqirements, $assessments, $skillist, $field_of_study)  {
 // .'-'. str_limit(strtoupper($client_name),3)
 
-          $tag = Tag::firstOrNew(['job_title' => $request->input('job_title')]);
-          $tag->display_name = $display_name;
+          $tag = Tag::firstOrNew(['job_title' => ucwords($request->input('job_title'))]);
+          $tag->display_name = ucwords($display_name);
           $tag->code = $job_code;
           $tag->client = $user->id;
           $tag->created_at = $this->returnCurrentTime();
@@ -1970,7 +1971,7 @@ if ($admin) {
           $tag->delete = 0;
           $tag->awaiting_aproval = 1;
           $tag->job_summary = $request->input('job_summary');
-          $tag->Job_roles = $request->input('Job_roles');
+          $tag->Job_roles = $request->input('job_roles');
           $tag->save();
  
 
