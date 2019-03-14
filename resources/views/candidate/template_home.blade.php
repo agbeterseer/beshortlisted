@@ -14,6 +14,7 @@
     </head>
     <body class="transparent-header transparent-menu-below pace-on pace-minimal"> 
               @include('partials.job_menu')
+              <div class="space">&nbsp;</div>
 
 @if(Auth::user()->account_type === 'employee')
 @include('partials.employee_breadcomb') 
