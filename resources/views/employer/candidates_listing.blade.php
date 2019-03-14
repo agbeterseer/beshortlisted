@@ -126,10 +126,9 @@ border-color: white !important;
 <div class="careerfy-search-filter"> 
 <div class="careerfy-candidate careerfy-candidate-default">
 <div class="careerfy-search-filter-wrap careerfy-without-toggle">
-<div class="careerfy-search-box">
-<div id="" class="btn mt-ladda-btn mini_header" data-toggle="collapse" data-target="#expand_unsorted" > 
-<i class="careerfy-icon careerfy-sort"></i> <h2> Filter </h2> 
- 
+<div > 
+<div id="" data-toggle="collapse" data-target="#expand_unsorted" > 
+    <i class="careerfy-icon careerfy-sort"></i><h2> Filter </h2> 
 </div>
 </div></div>
 <ul class="careerfy-row nav-tabs tabs-left" id="applicants_list">
