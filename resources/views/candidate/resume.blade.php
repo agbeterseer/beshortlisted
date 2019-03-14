@@ -522,7 +522,7 @@ $check = 'second';
 <a href="javascript:void(0)" class="careerfy-resume-addbtn"><span class="fa fa-plus"></span> Add Skills</a>
 -->
 </p> 
-<h4><i class="careerfy-icon careerfy-design-skills"></i>Specialties and Skills</h4>
+<h4><!-- <i class="careerfy-icon careerfy-design-skills"></i> -->Specialties and Skills</h4>
 </div>
  
 <div class="skills_inner">
@@ -643,7 +643,7 @@ $check = 'second';
 <div class="title4">
 <p class="editov2"><a class="adds"  href="{{route('show.education_form', $user_single_resume_by_date->id)}}" >Add Education</a></p>
 
-<h4> <i class="careerfy-icon careerfy-mortarboard"></i>Educational History </h4>
+<h4> <!-- <i class="careerfy-icon careerfy-mortarboard"></i> -->Educational History </h4>
 </div>
 @foreach($educationaList as $educational)
 
@@ -815,7 +815,7 @@ Feild of Study:<span class="required">*</span>
 <div class="pageactionIn" id="work_history_topsection">
 <div class="title4">
 <p class="editov2"><a class="adds" data-toggle="modal" data-style="slide-left" data-spinner-color="#333" href="#static_work" >Add Work History</a></p>
-<h4> <i class="careerfy-icon careerfy-social-media"></i>Work History</h4>
+<h4> <!-- <i class="careerfy-icon careerfy-social-media"></i> -->Work History</h4>
 </div>
 <?php $count = 0; ?>
 @foreach($work_histories as $work_history)

@@ -2147,6 +2147,19 @@ public function GetAvailableJobs()
         }
     return $jobs_by_candidates_industry;
 }
+function cutText($str, $limit, $brChar = ' ', $pad = '...') 
+{
+    if (empty($str) || strlen($str) <= $limit) {
+        return $str;
+    }
+    $output = substr($str, 0, ($limit+1));
+    $brCharPos = strrpos($output, $brChar);
+    $output = substr($output, 0, $brCharPos);
+    $output = preg_replace('#\W+$#', '', $output);
+    $output .= $pad;
+    return $output;
+}
+
     public function ApplicationHistoryPage(Request $request)
     {
       $s = $request->input('s');
@@ -2160,9 +2173,9 @@ public function GetAvailableJobs()
       $countries = DB::table('countries')->get();
    $job_applied_by_candidate = DB::table('applications')->where('user_id', $user->id)
             ->join('tags', 'tags.id', '=', 'applications.tag_id')
-            ->select('applications.id', 'applications.resume_id', 'applications.user_id', 'tags.email_address', 'tags.job_title', 'applications.created_at', 'applications.updated_at')
+            ->select('applications.id', 'applications.resume_id', 'applications.user_id', 'tags.email_address', 'tags.job_title', 'applications.created_at', 'applications.updated_at', 'tags.id')
             ->paginate(8);
-     //dd($get_applicants_profile);
+     //dd($job_applied_by_candidate);
    // check for candidates current resume
    $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->first();
         // fresh user test pass
