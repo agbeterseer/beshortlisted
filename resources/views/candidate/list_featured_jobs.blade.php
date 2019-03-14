@@ -46,7 +46,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach($featured_jobs as $job_applied)
+                                                    @forelse($featured_jobs as $job_applied)
  
                                                     <tr>
                                                         <td>
@@ -61,7 +61,9 @@
                                                             <a href="{{route('job.description', $job_applied->id)}}" class="careerfy-savedjobs-links"><i class="careerfy-icon careerfy-view"></i></a>
                                                         </td>
                                                     </tr>
-                                                    @endforeach
+                                                    @empty
+                                                    <tr><td colspan="5"> No Record(s) Found !</td> </tr>
+                                                    @endforelse
                                                     
                                                 </tbody>
                                             </table>
