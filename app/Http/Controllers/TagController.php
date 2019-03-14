@@ -2711,7 +2711,22 @@ public function ExpireJob($id)
 
  return redirect()->back(); 
 }
-
+public function MakeFeaturedJob($id)
+{
+ 
+    if ($id) {
+  $tag = Tag::find($id);
+  $tag->delete = 0;
+  $tag->status = 1;
+  $tag->active = 1;
+  $tag->awaiting_aproval = 0;
+  $tag->featured = 1;
+  $tag->draft = 0;
+$tag->save();
+  }
+Session::flash('success','Done successfully');
+ return redirect()->back(); 
+}
 
   /**
      * Remove the specified resource from storage.

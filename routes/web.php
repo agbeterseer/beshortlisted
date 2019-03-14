@@ -774,6 +774,10 @@ Route::post('/tag/approve-job-post/{id}', [
 	'as' => 'approve.job',
 	'uses' => 'TagController@approvejobpost'
 	]);
+Route::post('tag/make-featured/{id}', [
+	'as' => 'make.featured',
+	'uses' => 'TagController@MakeFeaturedJob'
+]);
 Route::post('/tag/turn-off-job-post/{id}', [
 	'as' => 'turnoff.job',
 	'uses' => 'TagController@TurnOfJob'

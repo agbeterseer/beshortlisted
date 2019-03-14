@@ -47,13 +47,18 @@
         
                         @elseif($tag->active === 0 && $tag->status === 3 && $tag->awaiting_aproval === 0 && $tag->draft === 0)
                         
-                           <span class="badge badge-empty badge-danger" style="background-color: black;"></span> Blacklist</span>
+                           <span class="badge badge-empty badge-danger" style="background-color: black;"></span> Blacklist 
                         @elseif($tag->active === 1 &&  $tag->draft === 0 && $tag->status === 1 && $tag->awaiting_aproval === 0)
                 <span class="item-status">
 <span class="badge badge-empty badge-success"></span> Active</span>
                         @elseif($tag->active === 2 &&  $tag->draft === 0 && $tag->status === 2 && $tag->awaiting_aproval === 0)
                   
-                        <span class="badge badge-empty badge-danger"></span> Offline</span>
+                        <span class="badge badge-empty badge-danger"></span> Offline 
+
+
+                        @endif
+                        @if($tag->active === 1 &&  $tag->draft === 0 && $tag->status === 1 && $tag->awaiting_aproval === 0 && $tag->featured === 1)
+                        <span class="badge badge-empty badge-danger"></span> featured 
                         @endif
                              </div>   
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -92,6 +97,16 @@
             <i class="icon-plus"></i>BlackList</span>
             </button>
       </form> </td>
+      <td>
+              @if($tag->active === 1 &&  $tag->draft === 0 && $tag->status === 1 && $tag->awaiting_aproval === 0)                     
+      <form action="{{route('make.featured', $tag->id)}}" method="POST" name="black">
+{{ csrf_field() }}
+            <button type="submit" class="btn red mt-ladda-btn ladda-button btn-outline" data-style="slide-left" data-spinner-color="#333">
+            <span class="ladda-label">
+            <i class="icon-plus"></i>Featured</span>
+            </button>
+      </form>  @endif</td>
+
 </tr></table>
 
 

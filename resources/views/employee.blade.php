@@ -36,7 +36,7 @@
                                                     <li class="careerfy-column-6 animation-test">
                                         <div class="careerfy-table-layer" style="background-color: #ffffff;">
                                             <div class="careerfy-table-row">
-                                 <figure><a href="{{route('apply.job', $job->id)}}"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
+                                 <figure><a href="{{route('job.description', $job->id)}}"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-featured-listing-text">
                                                     <h2><a href="{{route('job.description', $job->id)}}"> {{$job->job_title}}<!--  <span>Featured</span> --></a></h2>
                                                     <a href="#" class="careerfy-like-list"><i class="careerfy-icon careerfy-heart"></i></a>
