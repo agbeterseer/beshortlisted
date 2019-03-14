@@ -1182,25 +1182,25 @@ public function GetRejectedCount($job_id)
 
 public function GetReivewCount($job_id)
 {
-    $review_count = Application::where('tag_id',$job_id)->where('in_review', 1)->where('delete', 0)->count();
+    $review_count = Application::where('tag_id',$job_id)->where('in_review', 1)->where('sorted',1)->where('delete', 0)->count();
  return $review_count;
 }
 
 public function GetOfferedCount($job_id)
 {
-     $offered_count = Application::where('tag_id',$job_id)->where('offered', 1)->where('delete', 0)->count();
+     $offered_count = Application::where('tag_id',$job_id)->where('offered', 1)->where('sorted',1)->where('delete', 0)->count();
      return $offered_count;
 }
 
 public function GetShortlistedCount($job_id)
 {
-    $shortlisted_count = Application::where('tag_id',$job_id)->where('shortlisted', 1)->where('delete', 0)->count();
+    $shortlisted_count = Application::where('tag_id',$job_id)->where('shortlisted', 1)->where('sorted',1)->where('delete', 0)->count();
     return $shortlisted_count;
 }
 
 public function GetHiredCount($job_id)
 {
-   $hire_count = Application::where('tag_id',$job_id)->where('hired', 1)->count();
+   $hire_count = Application::where('tag_id',$job_id)->where('hired', 1)->where('sorted',1)->count();
    return $hire_count;
 }
 
