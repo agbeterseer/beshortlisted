@@ -888,8 +888,8 @@ Previous
 <form class="careerfy-search-filter"> 
 <div class="careerfy-candidate careerfy-candidate-default">
 <div class="careerfy-search-filter-wrap careerfy-without-toggle">
-<div class="careerfy-search-box">
-<div id=" " class="btn  mt-ladda-btn mini_header" data-toggle="collapse" data-target="#expand_rejected" > 
+<div>
+<div id=""  data-toggle="collapse" data-target="#expand_rejected" > 
 <i class="careerfy-icon careerfy-sort"></i>  <h2>Filter</h2>
 </div>
 </div></div>
@@ -1636,8 +1636,8 @@ Previous
 <div class="careerfy-candidate careerfy-candidate-default">
 
 <div class="careerfy-search-filter-wrap careerfy-without-toggle">
-<div class="careerfy-search-box">
-<div id=" " class="btn  mt-ladda-btn mini_header" data-toggle="collapse" data-target="#expand_inreview"> 
+<div >
+<div id="" data-toggle="collapse" data-target="#expand_inreview"> 
 <i class="careerfy-icon careerfy-sort"></i>  <h2>Filter</h2>
 </div>
 </div></div>
@@ -2396,8 +2396,8 @@ Previous
 <div class="careerfy-candidate careerfy-candidate-default">
 
 <div class="careerfy-search-filter-wrap careerfy-without-toggle">
-<div class="careerfy-search-box">
-<div id="" class="btn mt-ladda-btn mini_header" data-toggle="collapse" data-target="#expand_shortlist"> 
+<div>
+<div id="" data-toggle="collapse" data-target="#expand_shortlist"> 
 <i class="careerfy-icon careerfy-sort"></i>  <h2>Filter</h2>
 </div>
 </div></div>
@@ -3144,8 +3144,8 @@ Previous
 <form class="careerfy-search-filter"> 
 <div class="careerfy-candidate careerfy-candidate-default">
 <div class="careerfy-search-filter-wrap careerfy-without-toggle">
-<div class="careerfy-search-box">
-<div id="" class="btn mt-ladda-btn mini_header" data-toggle="collapse" data-target="#expand_offered"> 
+<div>
+<div id="" data-toggle="collapse" data-target="#expand_offered"> 
 <i class="careerfy-icon careerfy-sort"></i>  <h2>Filter</h2>
 </div>
 </div></div>
@@ -3894,8 +3894,8 @@ Previous
 <form class="careerfy-search-filter"> 
 
 <div class="careerfy-search-filter-wrap careerfy-without-toggle">
-<div class="careerfy-search-box">
-<div id=" " class="btn  mt-ladda-btn mini_header" data-toggle="collapse" data-target="#expand_hired" > 
+<div>
+<div id=" " data-toggle="collapse" data-target="#expand_hired" > 
 <i class="careerfy-icon careerfy-sort"></i>  <h2>Filter</h2>
 </div>
 </div></div>
