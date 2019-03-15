@@ -313,7 +313,7 @@ public function JobFilter(Request $request)
     })->where('status',1)->where('active',1)->paginate(10);
 }else{
 
-  $jobs = Tag::where('status',1)->where('');
+  $jobs = Tag::where('status',1)->where('active',1)->paginate(10);
 }
     //$jobs= Tag::all();
         $industry_professions = DB::table('industry_professions')->get();

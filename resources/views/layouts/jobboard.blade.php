@@ -607,7 +607,6 @@ JobFilterIndex(location,profession,job_type);
      var cboxValue = $(this).val(); 
       $(this).prop('checked', true);
       itemExistsChecker(cboxValue); 
-      alert(industry);
     }); 
     
  console.log(industry);
@@ -702,7 +701,7 @@ checked_featured = '';
 
 }else{
 console.log('am here');
-   
+
 
 }
       });
