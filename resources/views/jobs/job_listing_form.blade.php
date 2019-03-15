@@ -31,7 +31,7 @@ border-color: white !important;
         <div class="space">&nbsp;</div> 
         <div class="space">&nbsp;</div>
         <div class="space">&nbsp;</div> 
-        <div class="space">&nbsp;</div> >         
+        <div class="space">&nbsp;</div>        
         <!-- SubHeader -->
 
         <!-- Main Content -->
@@ -105,10 +105,10 @@ border-color: white !important;
                      <aside class="careerfy-column-4 careerfy-typo-wrap"  >
                             <div class="careerfy-typo-wrap" >
                                 <form class="careerfy-search-filter"> 
-    <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+    <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle" style="background-color: #ffffff;">
                                         <h2><a href="#" class="careerfy-click-btn">Location</a></h2>
-                                        <div class="careerfy-checkbox-toggle scroll_div" id="job_location" >
-                                            <ul class="careerfy-checkbox" style="background-color: #ffffff;"> 
+                                        <div class="careerfy-checkbox-toggle scroll_div" id="job_location">
+                                            <ul class="careerfy-checkbox" > 
                                             @foreach($cities as $city_record) 
                                                 <li> 
        <input type="checkbox" id="r{{$city_record->id}}" name="city[]" value="{{$city_record->id}}" />
@@ -119,7 +119,7 @@ border-color: white !important;
                                             </ul> 
                                         </div>
                                     </div> 
-                                <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle" style="background-color: #ffffff;">
                                         <h2><a href="#" class="careerfy-click-btn">Vacancy Type</a></h2>
                                         <div class="careerfy-checkbox-toggle" id="job_terms">
                                             <ul class="careerfy-checkbox">
@@ -133,7 +133,7 @@ border-color: white !important;
                                             </ul>
                                         </div>
                                         </div>
-                                     <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                     <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle" style="background-color: #ffffff;">
                                         <h2><a href="#" class="careerfy-click-btn">Job Function</a></h2>
                                         <div class="careerfy-checkbox-toggle scroll_div" id="job_profession">
                                             <ul class="careerfy-checkbox">
@@ -141,26 +141,27 @@ border-color: white !important;
                                                 <li>
                                                     <input type="checkbox" id="r_{{$profession->id}}" name="profession[]" value="{{$profession->id}}" />
                                                     <label for="r_{{$profession->id}}"><span></span>{{$profession->name}}</label>
-                                                    <small>10</small>
+                                                    <small></small>
                                                 </li>
                                                 @endforeach 
                                             </ul> 
                                         </div>
                                     </div>
-                                    <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                    <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle" style="background-color: #ffffff;">
                                         <h2><a href="#" class="careerfy-click-btn">Industry</a></h2>
-                                        <div class="careerfy-checkbox-toggle scroll_div" id="job_profession">
+                                        <div class="careerfy-checkbox-toggle scroll_div" id="job_industry">
                                             <ul class="careerfy-checkbox">
-                                               @foreach($industries as $industry)
+                                             @foreach($industries as $industry)
                                                 <li>
-                                                    <input type="checkbox" id="r_{{$industry->id}}" name="industry[]" value="{{$industry->id}}" />
-                                                    <label for="r_{{$industry->id}}"><span></span>{{$industry->name}}</label>
-                                                    <small>10</small>
+                                                    <input type="checkbox" id="in_{{$industry->id}}" name="industry[]" value="{{$industry->id}}" />
+                                                    <label for="in_{{$industry->id}}"><span></span>{{$industry->name}}</label>
+                                                    <small></small>
                                                 </li>
                                                 @endforeach 
                                             </ul> 
                                         </div>
-                                    </div> 
+                                    </div>
+                        
                                 </form>
                             </div>
                         </aside>
@@ -189,12 +190,12 @@ border-color: white !important;
                                                         <h2><a href="{{route('job.description', $tag->id)}}}"> {{$tag->job_title}} </a> 
                                                     @foreach($employement_term_list as $employement_term) 
                                                     @if($employement_term->id === $tag->job_type)
-                                                    <span class="careerfy-option-btn careerfy-{{$employement_term->category}}"> {{$employement_term->name}} </span> @endif @endforeach </h2>
-                                                        <ul style="color: #13b5ea;">
+                                                    <span class="careerfy-option-btn careerfy-{{$employement_term->category}}"> {{$employement_term->name}} </span> @endif @endforeach @if($tag->featured === 1)<small class="careerfy-jobdetail-postinfo">Featured</small>@endif</h2>
+                                                        <ul>
                                                       
-                                                            <li><i class="careerfy-icon careerfy-maps-and-flags"></i> {{$tag->country}}, {{$tag->city}}</li>
+                                                            <li style="color: #13b5ea;"><i class="careerfy-icon careerfy-maps-and-flags"></i> {{$tag->country}}, {{$tag->city}}</li>
                                                             <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> @foreach($industry_professions as $profession) @if($profession->id === $tag->job_category){{$profession->name}} @endif @endforeach</li>
-                                                            <li></li>
+                                                            <li style="color: #F1630D";> @foreach($industries as $industry) @if($tag->industry === $industry->id){{$industry->name}} @endif @endforeach</li>
                                                         </ul>
                                                     </div>
 
@@ -203,7 +204,7 @@ border-color: white !important;
                                                     @if($employement_term->id === $tag->job_type)
                                  <a href="{{route('apply.job', $tag->id)}}" class="careerfy-option-btn  careerfy-{{$employement_term->category}}">APPLY </a>
                                  @endif @endforeach
-                                                        <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
+                                                        <!-- <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a> -->
                                                     </div>
                                                 <div class="clearfix"></div>
                                                 </div>

@@ -269,11 +269,22 @@ public function JobFilter(Request $request)
     $location = $request->location;
     $profession = $request->profession;
     $job_type = $request->job_type;
-    $jobs = Tag::where(function ($query) use($location, $job_type){
+    $industry = $request->industry;
+    if($industry !=null || $location !=null || $profession !=null || $job_type !=null){
+
+    $jobs = Tag::where(function ($query) use($location, $job_type, $profession, $industry){
         if (isset($location)) {
            foreach ($location as $loca) {
            $location_id = City::findOrFail($loca);
             $query->orWhere('city', $location_id->name); 
+           }
+        }elseif (isset($location) && isset($industry)) {
+            foreach ($location as $loca) {
+           $location_id = City::findOrFail($loca);
+            $query->orWhere('city', $location_id->name); 
+           }
+        foreach ($industry as $key => $indus) {
+               $query->orWhere('industry',$indus);
            }
         }
         if (isset($job_type)) {
@@ -286,11 +297,30 @@ public function JobFilter(Request $request)
                $query->orWhere('job_category',$prof);
            }
         }
-    })->paginate(10);
+          if (isset($industry)) {
+           foreach ($industry as $key => $indus) {
+               $query->orWhere('industry',$indus);
+           }
+        }elseif (isset($industry) && isset($profession)) {
+         foreach ($industry as $key => $indus) {
+               $query->orWhere('industry',$indus);
+           }
+        }elseif (isset($industry) && isset($profession) && isset($job_type)) {
+         foreach ($industry as $key => $indus) {
+               $query->orWhere('industry',$indus);
+           }
+        }
+    })->where('status',1)->where('active',1)->paginate(10);
+}else{
+
+  $jobs = Tag::where('status',1)->where('');
+}
+    //$jobs= Tag::all();
         $industry_professions = DB::table('industry_professions')->get();
         $employement_term_list = DB::table('employement_terms')->get();
+        $industries = DB::table('industries')->get();
         $cities = DB::table('cities')->get(); 
-   $response = array( 'status' => 'success', 'msg' => 'Setting created successfully',  'jobs'=>$jobs, 'industry_professions'=>$industry_professions, 'employement_term_list'=>$employement_term_list, 's'=>$s);
+   $response = array( 'status' => 'success', 'msg' => 'Setting created successfully',  'jobs'=>$jobs, 'industry_professions'=>$industry_professions, 'employement_term_list'=>$employement_term_list, 's'=>$s, 'industries' => $industries);
 return response()->json($response);
 }
 public function DisplayTemplates()
@@ -425,7 +455,7 @@ public function addContactUs (Request $request)
 
 public function getJobsByIndustries($code)
 { 
-  
+
   $menus = $this->displayMenu();
   $posts = $this->listPages();
   $jobs_by_industries = DB::table('tags')->where('industry',$code)->where('status', 1)->get(); 

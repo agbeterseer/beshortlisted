@@ -487,7 +487,7 @@ document.getElementById('present').style.display = 'block';
     var location = [];
     var profession = [];
     var job_type = [];
- 
+    var industry = [];
 
     function itemExistsChecker(cboxValue) {
           
@@ -520,7 +520,7 @@ JobFilterIndex(location,profession,job_type);
     var location = [];
     var profession = [];
     var job_type = [];
-
+    var industry = [];
     function itemExistsChecker(cboxValue) {
           
     var len = job_type.length; 
@@ -552,6 +552,7 @@ JobFilterIndex(location,profession,job_type);
     var location = [];
     var profession = [];
     var job_type = [];
+    var industry = [];
 
     function itemExistsChecker(cboxValue) {
           
@@ -578,6 +579,42 @@ JobFilterIndex(location,profession,job_type);
  
   }
 });
+
+
+ $('#job_industry').change(function() {
+
+    var location = [];
+    var profession = [];
+    var job_type = [];
+    var industry = [];
+
+    function itemExistsChecker(cboxValue) {
+          
+    var len = industry.length; 
+    if (len > 0) {
+      for (var i = 0; i < len; i++) {
+        if (industry[i] == cboxValue) {
+          return true;
+        }
+      }
+    }
+          
+    industry.push(cboxValue);
+  } 
+   
+  {
+    $('#job_industry :checked').each(function() { 
+     var cboxValue = $(this).val(); 
+      $(this).prop('checked', true);
+      itemExistsChecker(cboxValue); 
+      alert(industry);
+    }); 
+    
+ console.log(industry);
+JobFilterIndex(location,profession,job_type, industry);
+ 
+  }
+});
 function isEmpty(obj) {
     for(var key in obj) {
         if(obj.hasOwnProperty(key))
@@ -585,10 +622,11 @@ function isEmpty(obj) {
     }
     return true;
 }
- function JobFilterIndex(location, profession, job_type){
+ function JobFilterIndex(location, profession, job_type, industry){
     console.log(location);
     console.log(profession);
     console.log(job_type);
+    console.log(industry);
     var check_section = 'rejected';
          $.ajaxSetup({
             headers: {
@@ -604,6 +642,7 @@ function isEmpty(obj) {
                 'location':location,
                 'profession':profession,
                 'job_type':job_type,
+                'industry':industry,
             },
               beforeSend: function(){
             //Show image container
@@ -624,6 +663,7 @@ function isEmpty(obj) {
   var employement_term_list = data.employement_term_list;
   var industry_professions = data.industry_professions;
   var jobs_list = data.jobs_list;
+  var industries = data.industries;
   var candidates_name = '';
   var user = null;
   var resume_id = null;
@@ -638,28 +678,50 @@ function isEmpty(obj) {
   var job_terms = '';
   var job_title = '';
   var category = '';
+  var image_url = 'https://beshortlisted.com/img/job.png'; 
+  console.log(image_url);
      // hired list
       $.each(code['data'], function(key, value){
             var id = value.id; 
 
   if(value.status === 1 && value.active === 1){
-
+    var industryname = getIndustries(industries, value.id);
     employement_term = getJobTerms(employement_term_list, value.job_type);
     profession_name = getJobFunction(industry_professions, value.job_category);
     job_title = value.job_title;
     category = getJobTermsCategory(employement_term_list, value.job_type);
-     var content2 = '<li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><figure><a href="'+apply_route+'/ '+value.id+'"><img src="/img/extra-images/job-listing-logo-1.png" alt=""></a></figure><div class="careerfy-joblisting-text"><div class="careerfy-list-option"><h2><a href="">'+job_title+' </a> <span>Featured</span></h2><ul><li><a href="#" class="careerfy-option-btn careerfy-'+category+'" style="color:#ffffff;">'+employement_term+'</a></li><li><i class="careerfy-icon careerfy-maps-and-flags"></i> '+value.country+', '+value.city+'</li><li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>'+profession_name+'</li></ul></div><div class="careerfy-job-userlist"> <a href="'+apply_route+'/'+value.id+'" class="careerfy-option-btn careerfy-'+category+'">Apply</a><a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a></div><div class="clearfix"></div></div></div></li>';
+    var checked_featured = '';
+    if (value.featured === 1) {
+checked_featured = '<small class="careerfy-jobdetail-postinfo">Featured</small>';
+    }else{
+checked_featured = ''; 
+    }
+     var content2 = '<li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><figure><a href="'+apply_route+'/ '+value.id+'"><img src="'+image_url+'" alt=""></a></figure><div class="careerfy-joblisting-text"><div class="careerfy-list-option"><h2><a href="">'+job_title+' </a>'+checked_featured +'</h2><ul><li><a href="#" class="careerfy-option-btn careerfy-'+category+'" style="color:#ffffff;">'+employement_term+'</a></li><li><i class="careerfy-icon careerfy-maps-and-flags"></i> '+value.country+', '+value.city+'</li><li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>'+profession_name+'</li>   <li style="color: #F1630D";>  '+industryname+'</li></ul></div><div class="careerfy-job-userlist"> <a href="'+apply_route+'/'+value.id+'" class="careerfy-option-btn careerfy-'+category+'">Apply</a> </div><div class="clearfix"></div></div></div></li>';
 
         $('#job_section').append(content2);
 
 }else{
 console.log('am here');
+   
 
 }
       });
    
   });
 }
+
+ 
+
+   function getIndustries(industries,tag){
+    var industryname = '';
+      $.each(industries, function(key, value) { 
+        if (value['id'] === tag) {  
+ 
+             industryname = value['name'];
+             }
+  });
+return industryname;
+   }
 
 function getJobTerms(terms,category) {
 var employement_term = '';
