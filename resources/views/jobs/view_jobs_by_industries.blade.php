@@ -16,14 +16,28 @@
 @include('partials.employee_breadcomb')
  <div class="careerfy-main-content">
              <!-- Main Section -->
-        <div class="space">&nbsp;</div>
+    <!--     <div class="space">&nbsp;</div>
          <div class="space">&nbsp;</div>
-          <div class="space">&nbsp;</div>
+          <div class="space">&nbsp;</div> -->
+          <div class="font-up-bold text-uppercase">
+<div class="container">
+  <nav aria-label="breadcrumb" style="background-color: #45526E; color: #ffffff;">
+    <ol class="breadcrumb" style="background-color: #45526E; color: #ffffff;">
+      <li class="breadcrumb-item active">
+        <h5 class="mr-3 mb-0"><strong> <a href="javascript: history.go(-1)"  style="color: #ffffff;"><< PREVIOUS</a> </strong></h5>
+      </li>
+    </ol>
+  </nav>
+</div>
+</div>
+
+           <?php  $get_industry = \App\Industry::where('id', $code)->where('status', 1)->first(); ?>
+           
                   <div class="careerfy-main-section animation-test" >
                 <div class="container">
                     <div class="row">
                  <div class="careerfy-element-text" align="center" data-os-animation="fadeIn">
-                       <h2>Jobs Listings</h2>
+                       <h2>Jobs in {{$get_industry->name}}</h2>
                         </div> 
                         <div class="col-md-12 careerfy-typo-wrap">
                             <!-- Fancy Title -->  

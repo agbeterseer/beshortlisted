@@ -270,7 +270,7 @@
                         <div class="col-md-15 careerfy-typo-wrap ">
                             @foreach($industries as $industry)
                             <div class="col-md-4">
-                                <li>@foreach($job_function_count as $function_count) @if($function_count->job_category === $industry->id) <span style="font-weight: bold;"> ({{ $function_count->total}}) </span> 
+                                <li>@foreach($job_function_count as $function_count) @if($function_count->industry === $industry->id) <span style="font-weight: bold;"> ({{ $function_count->total}}) </span> 
                                           @endif  @endforeach <a href="{{route('job_opening', $industry->id)}}"> {{$industry->name}} </a>
                                 </li>
                             </div>

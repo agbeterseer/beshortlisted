@@ -108,14 +108,18 @@ class HomeController extends Controller
              ->select('industry', DB::raw('count(*) as total'))
              ->groupBy('industry');
         $industry_count = $query_count->paginate(8);
-      // dd($industry_count);
+      // dd($industry_count);function_count
         $tag_cities = DB::table('tags')
              ->select('city', DB::raw('count(*) as total'))
              ->groupBy('city')->get();
       // dd($tag_city);
-        $job_function_count = DB::table('tags')
-             ->select('job_category', DB::raw('count(*) as total'))
-             ->groupBy('job_category')->get();     
+        // $job_function_count = DB::table('tags')
+        //      ->select('job_category', DB::raw('count(*) as total'))
+        //      ->groupBy('job_category')->get(); 
+      $job_function_count = DB::table('tags')->where('status', 1)->where('active',1)->where('awaiting_aproval', 0)
+             ->select('industry', DB::raw('count(*) as total'))
+             ->groupBy('industry')->get();  
+             //dd($job_function_count);   
         $menus = $this->displayMenu();
         $posts = $this->listPages();
         $job_match_count = DB::table('job_matches')->where('rate', '>', 2)->count(); 
@@ -421,13 +425,14 @@ public function addContactUs (Request $request)
 
 public function getJobsByIndustries($code)
 { 
+  
   $menus = $this->displayMenu();
   $posts = $this->listPages();
-  $jobs_by_industries = DB::table('tags')->where('industry',$code)->where('status', 1)->where('active',1)->get(); 
+  $jobs_by_industries = DB::table('tags')->where('industry',$code)->where('status', 1)->get(); 
   $industry_professions = DB::table('industry_professions')->where('status',1)->get();
   $employement_term_list = DB::table('employement_terms')->get();
  //dd($jobs_by_industries);
- return view('jobs.view_jobs_by_industries', compact('jobs_by_industries', 'menus', 'posts', 'industry_professions', 'employement_term_list'), array('user' => Auth::user()));
+ return view('jobs.view_jobs_by_industries', compact('jobs_by_industries', 'menus', 'posts', 'industry_professions', 'employement_term_list', 'code'), array('user' => Auth::user()));
 }
 
 }

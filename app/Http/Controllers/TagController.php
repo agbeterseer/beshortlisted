@@ -55,7 +55,7 @@ class TagController extends Controller
      */
     public function index() {
 
-        $tags = DB::table('tags')->orderBy('created_at', 'DESC')->get();
+        $tags = DB::table('tags')->where('delete', 0)->orderBy('created_at', 'DESC')->get();
         $users = DB::table('clients')->get();
         //
         return view('admin.tags.index', compact('tags', 'users'), array('user' => Auth::user()));
@@ -1789,7 +1789,7 @@ public function SaveJob(Request $request)
           $tag->delete = 0;
           $tag->awaiting_aproval = 1;
           $tag->job_summary = $request->input('job_summary');
-          $tag->Job_roles  = $request->input('Job_roles');
+          $tag->Job_roles  = $request->input('Job_roles'); 
           $tag->save();
  
 
@@ -2637,10 +2637,17 @@ public function approvejobpost($id){
 
   // go to employee units and subtract from the available units
     $employer_package = DB::table('employer_packages')->where('status', 1)->where('userfkp', $tag->client)->first();
-    $remaining_units = $employer_package->units - 1;
+   
+    if ($employer_package !=null) {
+        return back()->withErrors(['error' => 'something went wrong']);
+
+    }else{
+          $remaining_units = $employer_package->units - 1;
     $remaining_jobs = $employer_package->jobs_remaining - 1;
 
-    $employer_packages = DB::table('employer_packages')->where(['userfkp' => $tag->client, 'package_id' => $employer_package->package_id])->update([ 'jobs_remaining' => $remaining_jobs, 'units' => $remaining_units ]);
+    $employer_packages = DB::table('employer_packages')->where(['userfkp' => $tag->client, 'package_id' => $employer_package->package_id])->update([ 'jobs_remaining' => $remaining_jobs, 'units' => $remaining_units ]);  
+    }
+
 
 
 // Send  Email to Employer  
@@ -2738,7 +2745,8 @@ Session::flash('success','Done successfully');
     if ($id) {
     $tag = Tag::find($id);
     $tag->status = 3;
-    $tag-save();
+    $tag->delete = 1;
+    $tag->save();
     Session::flash('success','Tag has been deleted successfully');
     }else{
     return 'ID is required';
