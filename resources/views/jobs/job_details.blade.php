@@ -55,7 +55,7 @@
             <div class="careerfy-main-section">
                 <div class="container">
                     <div class="row">
-                        
+                          <?php  $number_of_applicants = \App\Application::where('tag_id', $tag->id)->count(); ?>
                         <!-- Job Detail List -->
                         <div class="careerfy-column-12">
                             <div class="careerfy-typo-wrap">
@@ -63,15 +63,24 @@
                                     <span class="careerfy-jobdetail-listthumb"><img src="{{asset('/img/job.png')}}" alt=""></span>
                                     <figcaption>
                                         <h2>{{$tag->job_title}}</h2>
-                                        <span><small class="careerfy-jobdetail-type">@foreach($employement_terms as $employement_term) @if($tag->job_type === $employement_term->id)  {{$employement_term->name}} @endif @endforeach</small> Huntington Learning Center <small class="careerfy-jobdetail-postinfo">Posted now</small></span>
+                                        <span><small class="careerfy-jobdetail-type">@foreach($employement_terms as $employement_term) @if($tag->job_type === $employement_term->id)  {{$employement_term->name}} @endif @endforeach</small> <!-- <small class="careerfy-jobdetail-postinfo">Posted now</small> --></span>
                                         <ul class="careerfy-jobdetail-options">
-                                            <li><i class="fa fa-map-marker"></i> {{$tag->full_address}} <a href="#" class="careerfy-jobdetail-view">View om Map</a></li>
-                                            <li><i class="careerfy-icon careerfy-calendar"></i> Post Date:{{ date('M d, Y', strtotime($tag->created_at)) }} </li>
-                                            <li><i class="careerfy-icon careerfy-calendar"></i> Apply Before: {{ date('M d, Y', strtotime($tag->end_date)) }}</li>
-                                            <li><i class="careerfy-icon careerfy-summary"></i> Applications 4</li>
+                                            <li><i class="fa fa-map-marker"></i> {{$tag->full_address}} <!-- <a href="#" class="careerfy-jobdetail-view">View om Map</a> --></li>
+                                            <li><i class="careerfy-icon careerfy-calendar"></i> <strong>Post Date:</strong> {{ date('M d, Y', strtotime($tag->created_at)) }} </li>
+                                            <li><i class="careerfy-icon careerfy-calendar"></i> <strong>Apply Before:</strong> {{ date('M d, Y', strtotime($tag->end_date)) }}</li>
+                                            <li><i class="careerfy-icon careerfy-summary"></i> <strong>Applications</strong> {{$number_of_applicants}}</li>
                                             <!-- <li><a href="#"><i class="careerfy-icon careerfy-view"></i> Views 3806</a></li> -->
                                         </ul>
-              
+              <ul class="careerfy-jobdetail-media">
+                                            <li><span>Share:</span></li>
+                                             <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbeshortlisted.com%2Fjob%2Fjob-descriptions%2F{{$tag->id}}%2F&amp;src=sdkpreparse" data-original-title="facebook" class="careerfy-icon careerfy-facebook-logo-in-circular-button-outlined-social-symbol" data-href="https://beshortlisted.com/job/job-descriptions/{{$tag->id}}"></a></li> 
+                                            <li><a href="https://twitter.com/share?url=https://beshortlisted.com/job/job-descriptions/{{$tag->id}}" data-original-title="twitter" class="careerfy-icon careerfy-twitter-circular-button"></a></li>
+                                            <li> 
+   <a class="careerfy-icon careerfy-linkedin" href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fbeshortlisted.com%2Fjob-descriptions%2F{{$tag->id}}%2F&amp;title=job+description&amp;mini=true" target="_blank" data-original-title="linkedin" class="careerfy-icon careerfy-linkedin"> </a>
+ 
+
+            </li>
+                                        </ul>
                                     </figcaption>
                                 </figure>
                             </div>
@@ -99,11 +108,11 @@
                                             </li>
                                             <li class="careerfy-column-4">
                                                 <i class="careerfy-icon careerfy-briefcase"></i>
-                                                <div class="careerfy-services-text">Experience <small> {{$tag->experience}} Years </small></div>
+                                                <div class="careerfy-services-text">Experience <small> {{$tag->experience}} Years <div style="color: #ffffff;">Executive (SVP, VP, Department Head, etc)</div></small></div>
                                             </li>
                                             <li class="careerfy-column-4">
                                                 <i class="careerfy-icon careerfy-user"></i>
-                                                <div class="careerfy-services-text">Gender <small> {{$tag->gender}} </small></div>
+                                                <div class="careerfy-services-text">Gender <small> {{$tag->gender}} <div style="color: #ffffff;">Executive (SVP, VP, Department Head, etc)</div></small></div>
                                             </li>
                                             <li class="careerfy-column-4">
                                                 <i class="careerfy-icon careerfy-network"></i>
@@ -111,7 +120,7 @@
                                             </li>
                                             <li class="careerfy-column-4">
                                                 <i class="careerfy-icon careerfy-mortarboard"></i>
-                                                <div class="careerfy-services-text">Qualification <small>@foreach($educational_levels as $educational_level) @if($tag->qualification === $educational_level->id) {{$educational_level->name}} @endif @endforeach   </small></div>
+                                                <div class="careerfy-services-text"><strong>Qualification</strong> <small>@foreach($educational_levels as $educational_level) @if($tag->qualification === $educational_level->id) {{$educational_level->name}} @endif @endforeach   </small></div>
                                             </li>
                                         </ul>
                                     </div>

@@ -12,3 +12,12 @@
             </div>
              @endif
              @endif
+<div class="container">
+  <nav aria-label="breadcrumb" style="background-color: #E3E3E3; color: #000000;">
+    <ol class="breadcrumb" style="background-color: #E3E3E3; color: #000000;">
+      <li class="breadcrumb-item active">
+        <h5 class="mr-3 mb-0"><strong> <a href="javascript: history.go(-1)"  style="color: #000000; margin-top: 9px;"> || Previous</a> </strong></h5>
+      </li> 
+    </ol>
+  </nav>
+</div>

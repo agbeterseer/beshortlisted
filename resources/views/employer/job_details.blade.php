@@ -26,7 +26,7 @@
         <!-- Banner -->
         <!-- Banner -->
         <!-- Main Content -->
-        <div class="careerfy-main-content" style="margin-top: -50px;">
+        <div class="careerfy-main-content" style="margin-top: -40px;">
  
 <style type="text/css">
     .scroll_div{
@@ -40,7 +40,7 @@
   background-color: #ffffff;
  }
 </style>
-
+@include('partials.employee_breadcomb')
          @if(Session()->has('error'))
         <div class="alert alert-danger"> 
         {!! Session::get('error') !!}
@@ -55,7 +55,7 @@
             <div class="careerfy-main-section">
                 <div class="container">
                     <div class="row">
-                        
+                         <?php  $number_of_applicants = \App\Application::where('tag_id', $tag->id)->count(); ?>
                         <!-- Job Detail List -->
                         <div class="careerfy-column-12">
                             <div class="careerfy-typo-wrap">
@@ -64,12 +64,12 @@
                                     <figcaption>
                                         <h2>{{$tag->job_title}}</h2>
                                         <span><small class="careerfy-jobdetail-type">@foreach($employement_terms as $employement_term) @if($tag->job_type === $employement_term->id)  {{$employement_term->name}} @endif @endforeach
-                                        </small><small class="careerfy-jobdetail-postinfo">Posted now</small></span>
+                                        </small><!-- <small class="careerfy-jobdetail-postinfo">Posted now</small> --></span>
                                         <ul class="careerfy-jobdetail-options">
                                             <li><i class="fa fa-map-marker"></i> {{$tag->full_address}} <!-- <a href="#" class="careerfy-jobdetail-view">View om Map</a> --></li>
-                                            <li><i class="careerfy-icon careerfy-calendar"></i> Post Date:{{ date('M d, Y', strtotime($tag->created_at)) }} </li>
-                                            <li><i class="careerfy-icon careerfy-calendar"></i> Apply Before: {{ date('M d, Y', strtotime($tag->end_date)) }}</li>
-                                            <li><i class="careerfy-icon careerfy-summary"></i> Applications 4</li>
+                                            <li><i class="careerfy-icon careerfy-calendar"></i> <strong>Post Date:</strong> {{ date('M d, Y', strtotime($tag->created_at)) }} </li>
+                                            <li><i class="careerfy-icon careerfy-calendar"></i> <strong>Apply Before:</strong> {{ date('M d, Y', strtotime($tag->end_date)) }}</li>
+                                            <li><i class="careerfy-icon careerfy-summary"></i> Applications {{$number_of_applicants}}</li>
                                             <!-- <li><a href="#"><i class="careerfy-icon careerfy-view"></i> Views 3806</a></li> -->
                                         </ul>
                                         <a href="{{route('apply.job', $tag->id)}}" class="careerfy-jobdetail-type active"><i class="careerfy-icon careerfy-add-list"></i> Apply</a>
@@ -103,23 +103,23 @@
                                         <ul class="careerfy-row">
                                             <li class="careerfy-column-4">
                                                 <i class="careerfy-icon careerfy-salary"></i>
-                                                <div class="careerfy-services-text">Offered Salary <small>{{$tag->salary_range}}</small></div>
+                                                <div class="careerfy-services-text"><strong>Offered Salary</strong> <small>{{$tag->salary_range}}</small></div>
                                             </li>
                                             <li class="careerfy-column-4">
                                                 <i class="careerfy-icon careerfy-social-media"></i>
-                                                <div class="careerfy-services-text">Career Level <small> @foreach($jobcareer_levels as $jobcareer_level) @if($tag->job_level === $jobcareer_level->id) {{$jobcareer_level->name}} @endif @endforeach</small></div>
+                                                <div class="careerfy-services-text"><strong>Career Level </strong><small> @foreach($jobcareer_levels as $jobcareer_level) @if($tag->job_level === $jobcareer_level->id) {{$jobcareer_level->name}} @endif @endforeach</small></div>
                                             </li>
                                             <li class="careerfy-column-4">
                                                 <i class="careerfy-icon careerfy-briefcase"></i>
-                                                <div class="careerfy-services-text">Experience <small> {{$tag->experience}} Years </small></div>
+                                                <div class="careerfy-services-text"><strong>Experience </strong><small> {{$tag->experience}} Years <div style="color: #ffffff;">Experienced (Non-Manager)</div></small></div>
                                             </li>
                                             <li class="careerfy-column-4">
                                                 <i class="careerfy-icon careerfy-user"></i>
-                                                <div class="careerfy-services-text">Gender <small> {{$tag->gender}} </small></div>
+                                                <div class="careerfy-services-text"><strong>Gender </strong><small> {{$tag->gender}}<div style="color: #ffffff;">Experienced (Non-Manager)</div> </small></div>
                                             </li>
                                             <li class="careerfy-column-4">
                                                 <i class="careerfy-icon careerfy-network"></i>
-                                                <div class="careerfy-services-text">Industry <small>@foreach($industries as $industry) @if($tag->industry === $industry->id) {{$industry->name}} @endif @endforeach</small></div>
+                                                <div class="careerfy-services-text"><strong>Industry</strong> <small>@foreach($industries as $industry) @if($tag->industry === $industry->id) {{$industry->name}} @endif @endforeach</small></div>
                                             </li>
                                             <li class="careerfy-column-4">
                                                 <i class="careerfy-icon careerfy-mortarboard"></i>
@@ -159,7 +159,7 @@
                                                 <figure><a href="#"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-joblisting-text">
                                                     <div class="careerfy-list-option">
-                                                        <h2><a href="#"> {{$common_job->job_title}}</a> <span>Featured</span></h2>
+                                                        <h2><a href="#"> {{$common_job->job_title}}</a> <!-- <span>Featured</span> --></h2>
                                                         <ul>
                                                             <li><a href="#"> </a></li>
                                                             <li><i class="careerfy-icon careerfy-maps-and-flags"></i>{{$common_job->country}}, {{$common_job->city}}</li>

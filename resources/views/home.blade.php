@@ -128,7 +128,7 @@
                                             <div class="careerfy-table-row">
                                        <figure><a href="{{route('job.description', $job->id)}}"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-featured-listing-text">
-                                                    <h2><a href="{{route('job.description', $job->id)}}"> {{ ucwords($job->job_title)}} <i>Featured</i></a></h2>
+                                                    <h2><a href="{{route('job.description', $job->id)}}"> {{ ucwords($job->job_title)}}</a><small class="careerfy-jobdetail-postinfo">Featured</small></h2>
                                                     <a href="#" class="careerfy-like-list"><i class="careerfy-icon careerfy-heart"></i></a>
                                                     <time datetime="2008-02-14 20:00">Post Date: {{ date('M d, Y', strtotime($job->updated_at)) }}  |  &nbsp;&nbsp;Apply Before: <span style="color: orange;">{{ date('M d, Y', strtotime($job->end_date)) }}</span></time> 
                                                     <div class="careerfy-featured-listing-options">
