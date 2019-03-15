@@ -170,7 +170,7 @@
 
 
 
-                  <div class="careerfy-main-section animation-test" >
+                  <div class="careerfy-main-sectiont" >
                 <div class="container">
                     <div class="row">
                  <div class="careerfy-element-text" align="center" data-os-animation="fadeIn">
@@ -179,11 +179,11 @@
                         <div class="col-md-12 careerfy-typo-wrap">
                             <!-- Fancy Title -->  
                           <div class="space">&nbsp;</div>
-                            <!-- Featured Jobs Listings  jobs-->
+                            <!-- Featured Jobs Listings  jobs animation-test-->
                             <div class="careerfy-job-listing careerfy-featured-listing" >
                                 <ul class="careerfy-row">
                                 @forelse($jobs as $job)
-                                    <li class="careerfy-column-6 animation-test" >
+                                    <li class="careerfy-column-6 " >
                                         <div class="careerfy-table-layer" style="background-color: #ffffff;">
                                             <div class="careerfy-table-row">
                                        <figure><a href="{{route('job.description', $job->id)}}"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>

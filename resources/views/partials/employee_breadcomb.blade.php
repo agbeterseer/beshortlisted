@@ -1,3 +1,4 @@
+              @if(Auth::check())
               @if(Auth::user()->account_type === 'employee')
              <div class="clearfix"></div>
             <div class="careerfy-breadcrumb" style="margin-top: -7px;">
@@ -9,4 +10,5 @@
                 <li><a href="{{route('featured.jobs')}}">FEATURED JOBS</a></li>  
                 </ul>
             </div>
+             @endif
              @endif

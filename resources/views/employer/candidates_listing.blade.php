@@ -31,7 +31,7 @@
         <!-- Banner -->
         <!-- Banner -->
         <!-- Main Content -->
-   <div class="careerfy-main-content" style="margin-top: -50px;">
+   <div class="careerfy-main-content" style="margin-top: -45px;">
 <style type="text/css"> 
     .scroll_div{
     overflow:scroll;

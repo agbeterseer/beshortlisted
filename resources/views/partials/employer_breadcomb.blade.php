@@ -1,3 +1,4 @@
+            @if(Auth::check())
             @if(Auth::user()->account_type === 'employer')
            <div class="clearfix"></div>
             <div class="careerfy-breadcrumb" style="margin-top: -7px;">
@@ -15,4 +16,5 @@
                                     </span> </li>
                 </ul>
             </div>
+            @endif
             @endif
