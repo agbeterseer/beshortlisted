@@ -16,9 +16,9 @@
 @include('partials.employee_breadcomb') 
 @endif
  <div class="careerfy-main-content">   
-                        <section class="careerfy-fancy-title">
+<!--                         <section class="careerfy-fancy-title">
                                 <h2>Welcome candidate</h2>
-                        </section> 
+                        </section>  -->
                                      <!-- Main Section -->
             <div class="careerfy-main-section">
                 <div class="container">
@@ -27,7 +27,7 @@
                             <!-- Fancy Title -->
                             <section class="careerfy-fancy-title">
                                 <h2>Featured Jobs Listings</h2>
-                                <p>A better career is out there. We'll help you find it to use.</p>
+                                <p>Find jobs that fit, your industry, your experience and a current role on your dashboard.<br>{Tailor dashboard by industry and role}, receive newsletters and job notifications.</p>
                             </section>
                             <!-- Featured Jobs Listings -->
                             <div class="careerfy-job-listing careerfy-featured-listing">
@@ -94,20 +94,20 @@
                             <!-- Fancy Title -->
                             <section class="careerfy-fancy-title">
                                 <h2>From Our Blogs</h2>
-                                <p>A better career is out there. We'll help you find it to use.</p>
+                                <!-- <p>A better career is out there. We'll help you find it to use.</p> -->
                             </section>
                             <!-- Blog -->
                             <div class="careerfy-blog careerfy-blog-grid"  style="background-color: #ffffff;">
                                 <ul class="row">
                                     @forelse($posts as $post)
                                     <li class="col-md-4">
-                                <!-- <figure><a href="#"><img src="extra-images/blog-grid-1.jpg" alt=""></a></figure> -->
+                                <figure><a href="#"><img src="extra-images/blog-grid-1.jpg" alt=""></a></figure>
                                         <div class="careerfy-blog-grid-text">
                                             <div class="careerfy-blog-tag"> <a href="#">{{$post->category}}</a> </div>
                                             <h2><a href="{{$post->url}}"> {{$post->title}}</a></h2>
                                             <ul class="careerfy-blog-grid-option">
                                                 <li>BY <a href="#" class="careerfy-color">Click mag staff</a></li>
-                                                <li><time datetime="2008-02-14 20:00">OCT 6, 2016</time></li>
+                                                <li><time datetime="2008-02-14 20:00">{{$post->created_at}}</time></li>
                                             </ul>
                                             <p> </p>
                                             <a href="{{route('blog.show', $post->id)}}" class="careerfy-read-more careerfy-bgcolor">Read Articles</a>

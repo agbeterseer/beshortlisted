@@ -24,9 +24,8 @@ border-color: white !important;
     }
     body{background-color: #FAFAFA;}
 </style>
+@include('partials.employee_breadcomb') 
   <!-- SubHeader -->
-        <div class="space">&nbsp;</div>
-        <div class="space">&nbsp;</div>
        <div class="space">&nbsp;</div>
         <div class="space">&nbsp;</div>  
         <!-- SubHeader --> 
@@ -100,7 +99,7 @@ border-color: white !important;
                             <div class="careerfy-typo-wrap">
                                 <form class="careerfy-search-filter">
                    
-    <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+    <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle" style="background-color: #ffffff;">
                                         <h2><a href="#" class="careerfy-click-btn">Location</a></h2>
                                         <div class="careerfy-checkbox-toggle scroll_div" id="job_location" >
                                             <ul class="careerfy-checkbox">
@@ -126,7 +125,7 @@ border-color: white !important;
                                     </div>
  
 
-                                       <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                       <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle" style="background-color: #ffffff;">
                                         <h2><a href="#" class="careerfy-click-btn">Vacancy Type</a></h2>
                                         <div class="careerfy-checkbox-toggle" id="job_terms">
                                             <ul class="careerfy-checkbox">
@@ -141,7 +140,7 @@ border-color: white !important;
                                             </ul>
                                         </div>
                                         </div>
-                                     <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                     <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle" style="background-color: #ffffff;">
                                         <h2><a href="#" class="careerfy-click-btn">Job Function</a></h2>
                                         <div class="careerfy-checkbox-toggle scroll_div" id="job_profession">
                                             <ul class="careerfy-checkbox">
@@ -155,15 +154,15 @@ border-color: white !important;
                                             </ul> 
                                         </div>
                                     </div>
-                                    <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                    <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle" style="background-color: #ffffff;">
                                         <h2><a href="#" class="careerfy-click-btn">Industry</a></h2>
-                                        <div class="careerfy-checkbox-toggle scroll_div" id="job_profession">
+                                        <div class="careerfy-checkbox-toggle scroll_div" id="job_industry">
                                             <ul class="careerfy-checkbox">
-                                               @foreach($industries as $industry)
+                                             @foreach($industries as $industry)
                                                 <li>
-                                                    <input type="checkbox" id="r_{{$industry->id}}" name="industry[]" value="{{$industry->id}}" />
-                                                    <label for="r_{{$industry->id}}"><span></span>{{$industry->name}}</label>
-                                                    <small>10</small>
+                                                    <input type="checkbox" id="in_{{$industry->id}}" name="industry[]" value="{{$industry->id}}" />
+                                                    <label for="in_{{$industry->id}}"><span></span>{{$industry->name}}</label>
+                                                    <small></small>
                                                 </li>
                                                 @endforeach 
                                             </ul> 

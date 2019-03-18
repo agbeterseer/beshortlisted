@@ -1,7 +1,7 @@
             @if(Auth::check())
             @if(Auth::user()->account_type === 'employer')
            <div class="clearfix"></div>
-            <div class="careerfy-breadcrumb" style="margin-top: -7px;">
+            <div class="careerfy-breadcrumb" style="margin-top: 0px;">
             <!--     <span ><div style="margin-bottom: -190px;"></div><a href="#">CV BANK</a> </span> -->
                 <ul>
                 <li style="background-color: orange;"><span><a href="{{route('list.all')}}">CV BANK</a> </span></li> 
@@ -18,6 +18,7 @@
             </div>
             @endif
             @endif
+              <div class="space">&nbsp;</div>
 <div class="container">
   <nav aria-label="breadcrumb" style="background-color: #E3E3E3; color: #000000;">
     <ol class="breadcrumb" style="background-color: #E3E3E3; color: #000000;">

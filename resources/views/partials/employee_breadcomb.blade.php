@@ -1,7 +1,7 @@
               @if(Auth::check())
               @if(Auth::user()->account_type === 'employee')
              <div class="clearfix"></div>
-            <div class="careerfy-breadcrumb" style="margin-top: -7px;">
+            <div class="careerfy-breadcrumb" style="margin-top: 0px;">
                 <ul>
                 <li><a href="{{route('show.resume')}}">ONLINE RESUME</a></li>                
                 <li><a href="{{route('display.templates')}}">RESUME TEMPLATES</a></li>  
@@ -11,8 +11,8 @@
                 </ul>
             </div>
              @endif
-             @endif
-<div class="container">
+             @endif 
+<div class="container" style="margin-top: 4px;">
   <nav aria-label="breadcrumb" style="background-color: #E3E3E3; color: #000000;">
     <ol class="breadcrumb" style="background-color: #E3E3E3; color: #000000;">
       <li class="breadcrumb-item active">

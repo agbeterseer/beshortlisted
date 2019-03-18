@@ -465,4 +465,12 @@ public function getJobsByIndustries($code)
  return view('jobs.view_jobs_by_industries', compact('jobs_by_industries', 'menus', 'posts', 'industry_professions', 'employement_term_list', 'code'), array('user' => Auth::user()));
 }
 
+public function listPageInfo(Request $request)
+{
+  $menus = $this->displayMenu();
+  $posts = $this->listPages();
+  $all_pages = DB::table('personal_informations')->get();
+return view('pages.page_infor_list', compact('menus', 'post', 'all_pages'), array('user' => Auth::user()));
+}
+
 }

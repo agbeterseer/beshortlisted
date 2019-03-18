@@ -22,7 +22,89 @@
  window.Laravel = <?php echo json_encode([
  'csrfToken' => csrf_token(),
  ]); ?>
+
+
+
+
+
+
 </script>
+
+<style type="text/css">
+ 
+        
+  
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #13B5EA;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+
+@keyframes lds-ripple {
+  0% {
+    top: 28px;
+    left: 28px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 58px;
+    height: 58px;
+    opacity: 0;
+  }
+}
+<?php foreach ($applications as $key => $value): ?> 
+.lds-ripplee {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+
+}
+.lds-ripplee{{$value->user_id}} div {
+  position: absolute;
+  border: 4px solid #13B5EA;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripplee 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+
+}
+.lds-ripplee{{$value->user_id}} div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripplee{{$value->user_id}} {
+  0% {
+    top: 28px;
+    left: 28px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 58px;
+    height: 58px;
+    opacity: 0;
+  }
+}
+  <?php endforeach ?>    
+
+</style>
     <!-- Wrapper -->
     <div class="careerfy-wrapper">
         <!-- Header -->
@@ -31,7 +113,7 @@
         <!-- Banner -->
         <!-- Banner -->
         <!-- Main Content -->
-   <div class="careerfy-main-content" style="margin-top: -45px;">
+   <div class="careerfy-main-content" style="margin-top: -50px;">
 <style type="text/css"> 
     .scroll_div{
     overflow:scroll;
@@ -50,6 +132,279 @@ border-color: white !important;
 @include('partials.employer_breadcomb')
       
 
+
+<!--    <button type="button" class="btn blue mt-ladda-btn ladda-button btn-outline" data-toggle="collapse" data-target="#expand"><i class="careerfy-icon careerfy-sort"></i>Filter</button>
+   -->
+<!--   <div id="expand" class="collapse">
+
+
+  <div class="cscroll_div scroll_div" >
+            <div class="container "> 
+            
+                <div class="row"> 
+                    <div class="col-md-12">
+                    <div class="col-md-4">   
+
+                         <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                        <h2><a href="#" class="careerfy-click-btn">Gender</a></h2>
+                                        <div class="careerfy-checkbox-toggle" id="gender">
+                                            <ul class="careerfy-checkbox">
+                                                <li>
+                                                    <input type="checkbox" id="g1" name="gender[]" value="Male" />
+                                                    <label for="g1"><span></span>Male</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="g2"  name="gender[]" value="Female" />
+                                                    <label for="g2"><span></span> Female</label>
+                                                </li>
+                 
+                                              
+                                            </ul>
+                                        </div>
+                                    </div> </div>
+
+                        <div class="col-md-4">       <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                        <h2><a href="#" class="careerfy-click-btn">Job Function</a></h2>
+                                        <div class="careerfy-checkbox-toggle scroll_div" id="profession">
+                                            <ul class="careerfy-checkbox">
+                                               @foreach($professions as $profession)
+                                                <li>
+                                                    <input type="checkbox" id="r_{{$profession->id}}" name="profession[]" value="{{$profession->id}}" />
+                                                    <label for="r_{{$profession->id}}"><span></span>{{$profession->name}}</label>
+                                                    <small>10</small>
+                                                </li>
+                                                @endforeach 
+                                            </ul> 
+                                        </div>
+                                    </div>
+                            </div>
+
+                                    <div class="col-md-4">
+        <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                        <h2><a href="#" class="careerfy-click-btn">Career Level</a></h2>
+                                        <div class="careerfy-checkbox-toggle croll_div">
+                                            <ul class="careerfy-checkbox">
+                                  @foreach($jobcareer_levels as $jobcareer_level)
+                                                <li>
+                                                    <input type="checkbox" id="jc{{$jobcareer_level->id}}" name="career_level[]" value="{{$jobcareer_level->id}}" />
+                                                    <label for="jc{{$jobcareer_level->id}}"><span></span>{{$jobcareer_level->name}}</label>
+                                                    <small>4</small>
+                                                </li>
+                                @endforeach
+                                          
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    </div>
+                    </div>
+                </div>
+
+                <div class="row"> 
+                <div class="col-md-12">
+                    <div class="col-md-4"> 
+                  <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                        <h2><a href="#" class="careerfy-click-btn">Minimum Salary</a></h2>
+                                        <div class="careerfy-checkbox-toggle scroll_div" id="salary">
+                                            <ul class="careerfy-checkbox">
+                                                <li>
+                                                    <input type="checkbox" id="salary1" name="salary[]" value="N50,000-N100,000" />
+                                                    <label for="salary1"><span></span>N50,000-N100,000</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="salary2" name="salary[]" value="N150,000-N250,000" />
+                                                    <label for="salary2"><span></span>N150,000-N250,000</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="salary3"  name="salary[]" value="N350,000-N600,000" />
+                                                    <label for="salary3"><span></span>N350,000-N600,000</label>
+                                                </li>
+                                               <li>
+                                                    <input type="checkbox" id="salary4"  name="salary[]" value="N750,000-N1,000," />
+                                                    <label for="salary4"><span></span>N750,000-N1,000,000</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="salary5"  name="salary[]" value="N1,000,000-N5,000,000" />
+                                                    <label for="salary5"><span></span>N1,000,000-N5,000,000</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="salary6"  name="salary[]" value="N550,000-N10,000,000" />
+                                                    <label for="salary6"><span></span>N5,050,000-N10,000,000</label>
+                                                </li>
+                                                  <li>
+                                                    <input type="checkbox" id="salary7"  name="salary[]" value="N10,000,000-N15,000,000" />
+                                                    <label for="salary7"><span></span>N10,000,000-N15,000,000</label>
+                                                </li>
+                                                  <li>
+                                                    <input type="checkbox" id="salary8"  name="salary[]" value="N15,000,000-Above" />
+                                                    <label for="salary8"><span></span>N15,000,000-Above</label>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                </div></div>
+                    <div class="col-md-4">                 <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                        <h2><a href="#" class="careerfy-click-btn">Availability</a></h2>
+                                        <div class="careerfy-checkbox-toggle" id="availability">
+                                            <ul class="careerfy-checkbox">
+                                                <li>
+                                                    <input type="checkbox" id="avail1" name="avail[]" value="now" />
+                                                    <label for="avail1"><span></span>Immediate</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="avail2" name="avail[]" value="1 week" />
+                                                    <label for="avail2"><span></span>1 week</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="avail3"  name="avail[]" value="2 weeks" />
+                                                    <label for="avail3"><span></span>2 weeks</label>
+                                                </li>
+                                               <li>
+                                                    <input type="checkbox" id="avail4"  name="avail[]" value="1 month" />
+                                                    <label for="avail4"><span></span>1 month</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="avail5"  name="avail[]" value="2 months" />
+                                                    <label for="avail5"><span></span>2 months</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="avail6"  name="avail[]" value="Specific date" />
+                                                    <label for="avail6"><span></span>Specific date</label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                </div>  </div>
+                    <div class="col-md-4">                              <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                        <h2><a href="#" class="careerfy-click-btn">Years Of Experience</a></h2>
+                                        <div class="careerfy-checkbox-toggle" id="yearofexperience">
+                                            <ul class="careerfy-checkbox">
+                                                <li>
+                                                    <input type="checkbox" id="g1yoe" name="yoe[]" value="0-5" />
+                                                    <label for="g1yoe"><span></span>0-5</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="g2yoe"  name="yoe[]" value="6-10" />
+                                                    <label for="g2yoe"><span></span>6-10</label>
+                                                </li>
+                                               <li>
+                                                    <input type="checkbox" id="g3yoe"  name="yoe[]" value="11-15" />
+                                                    <label for="g3yoe"><span></span>11-15</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="g4yoe"  name="yoe[]" value="16-20" />
+                                                    <label for="g4yoe"><span></span>16-20</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="g5yoe"  name="yoe[]" value="20 Above" />
+                                                    <label for="g5yoe"><span></span>20 Above</label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                </div> </div> 
+                </div> 
+                </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-4">                                <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                        <h2><a href="#" class="careerfy-click-btn">Age</a></h2>
+                                        <div class="careerfy-checkbox-toggle" id="age">
+                                            <ul class="careerfy-checkbox">
+                                                <li>
+                                                    <input type="checkbox" id="rag1" name="ag[]" value="18-25" />
+                                                    <label for="rag1"><span></span>18-25</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="rag2" name="ag[]" value="26-30" />
+                                                    <label for="rag2"><span></span>26-30</label>
+                                                </li>
+                                                    <li>
+                                                    <input type="checkbox" id="rag3" name="ag[]" value="31-35" />
+                                                    <label for="rag3"><span></span>31-35</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="rag4" name="ag[]" value="36-40" />
+                                                    <label for="rag4"><span></span>36-40</label>
+                                                </li>
+                                                     <li>
+                                                    <input type="checkbox" id="rag5" name="ag[]" value="41-45" />
+                                                    <label for="rag5"><span></span>41-45</label>
+                                                </li> 
+                                                <li>
+                                                    <input type="checkbox" id="rag6" name="ag[]" value="46-50" />
+                                                    <label for="rag6"><span></span>46-50</label>
+                                                </li> 
+                                                <li>
+                                                    <input type="checkbox" id="rag7" name="ag[]" value="51 Above" />
+                                                    <label for="rag7"><span></span>51 Above</label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div> </div>
+                            <div class="col-md-4">                                
+                            <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                        <h2><a href="#" class="careerfy-click-btn">Qualification</a></h2>
+                                        <div class="careerfy-checkbox-toggle scroll_div"  >
+                                        <div id="qualify">
+
+                                            <ul class="careerfy-checkbox">
+                                             @foreach($educationallevels as $educational_level)
+                                                    <li>
+                                         <input type="checkbox" id="qu_{{$educational_level->id}}" name="qu[]" value="{{$educational_level->id}}" />
+                                                    <label for="qu_{{$educational_level->id}}"><span></span>{{$educational_level->name}}</label>
+                                                </li>
+                                                @endforeach
+                                        
+                                                 </ul>
+                                                 </div>
+                                        </div>
+                                    </div> </div>
+                            <div class="col-md-4">                                          
+                            <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                        <h2><a href="#" class="careerfy-click-btn">Location</a></h2>
+                                        <div class="careerfy-checkbox-toggle scroll_div" id="location" >
+                                            <ul class="careerfy-checkbox">
+                                            @foreach($cities as $city) 
+                                                <li>
+                                                    <input type="checkbox" id="r{{$city->id}}" name="city[]" value="{{$city->id}}" />
+                                                    <label for="r{{$city->id}}"><span></span>{{$city->name}}</label>
+                                                </li> 
+                                            @endforeach 
+                                            </ul> 
+                                        </div>
+                                    </div> </div>
+                        </div> 
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-4"> 
+                            <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
+                                        <h2><a href="#" class="careerfy-click-btn">Employement Terms</a></h2>
+                                        <div class="careerfy-checkbox-toggle" id="job_terms">
+                                            <ul class="careerfy-checkbox">
+                                  @foreach($employement_terms as $employement_term)
+                                                <li>
+                                                    <input type="checkbox" id="jr{{$employement_term->id}}" name="job[]" value="{{$employement_term->id}}" />
+                                                    <label for="jr{{$employement_term->id}}"><span></span>{{$employement_term->name}}</label>
+                                                    <small>4</small>
+                                                </li>
+                                @endforeach
+                                          
+                                            </ul>
+                                        </div>
+                                    </div></div>
+                            <div class="col-md-4">                             
+                          XXX</div>
+                                    <div class="col-md-4"> xxx</div>
+                        </div>
+
+
+                    </div>
+            
+            </div>
+        </div>
+          </div>  -->
         <!-- SubHeader -->
  
         <!-- Main Content -->
@@ -77,8 +432,7 @@ border-color: white !important;
                     <div class="col-md-6" style="text-align: right;"> Status @if($job_record->status === 1 && $job_record->active === 1)<span class="badge" style="background-color: green;"> ONLINE</span> @else<span class="badge" style="background-color: red;">OFFLINE</span>  @endif</div>
                 </div>
             </div>
-         
-          
+ 
             <!-- Main Section -->
 
         <!-- SubHeader -->
@@ -122,13 +476,14 @@ border-color: white !important;
                                         <div class="tab-pane active" id="tab_01">
    <!-- <div class="careerfy-candidate-default-wrap">   -->
    <aside class="careerfy-column-4">
-<div class="careerfy-typo-wrap" > 
+<div class="careerfy-typo-wrap" >
+
 <div class="careerfy-search-filter"> 
 <div class="careerfy-candidate careerfy-candidate-default">
 <div class="careerfy-search-filter-wrap careerfy-without-toggle">
-<div > 
-<div id="" data-toggle="collapse" data-target="#expand_unsorted" > 
-    <i class="careerfy-icon careerfy-sort"></i><h2> Filter </h2> 
+<div >
+<div id="" data-toggle="collapse" data-target="#expand_inreview"> 
+<i class="careerfy-icon careerfy-sort"></i>  <h2>Filter</h2>
 </div>
 </div></div>
 <ul class="careerfy-row nav-tabs tabs-left" id="applicants_list">
@@ -137,13 +492,18 @@ border-color: white !important;
  @if(!$List_applicants_by_job_id->isEmpty())
 @forelse($List_applicants_by_job_id as $List_applicant)
    
-<li class="careerfy-column-12"> 
+<li class="careerfy-column-12">
+ 
  <a href="#tab_6_1{{$List_applicant->id}}" data-toggle="tab">
                                           
 
                                             <div class="careerfy-candidate-default-wrap"> 
                                                 <figure> 
-                                             <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure> 
+                                                    <?php $record = \App\RecruitProfilePix::where('status', 1)->where('user_id', $List_applicant->user_id)->orderBy('created_at', 'DESC')->first(); ?>
+                                                @if($record)
+                                             <img src="/uploads/avatars/{{ $record->pic }}" alt=""> @else
+                                             <img src="/uploads/avatars/{{ $user->avatar }}" alt="">
+                                              @endif </figure> 
                                                 <div class="careerfy-candidate-default-text">
                                                     <div class="careerfy-candidate-default-left">
                                                         <h2>
@@ -232,7 +592,7 @@ border-color: white !important;
                                                 <li>
                                                     <input type="checkbox" id="r_{{$profession->id}}_unsorted" name="profession[]" value="{{$profession->id}}" />
                                                     <label for="r_{{$profession->id}}_unsorted"><span></span>{{$profession->name}}</label>
-                                                    <small>10</small>
+                                                    <small></small>
                                                 </li>
                                                 @endforeach 
                                             </ul> 
@@ -518,13 +878,14 @@ border-color: white !important;
                                   <div id="emalForm">
   <button type="button" class="btn green mt-ladda-btn ladda-button btn-outline" data-toggle="collapse" data-target="#{{$List_applicant->id}}"><i class="careerfy-icon careerfy-envelope" ></i>Send Email</button>
             <div class="space">&nbsp;</div> 
-
+                                  <div class="lds-ripplee{{$List_applicant->user_id}}" style="display: none;"><div></div><div></div></div>
+                              <div id="info"></div>
+<div id="emailsent{{$List_applicant->user_id}}"></div>
   <div id="{{$List_applicant->id}}" class="collapse">
      <div class="col-md-7">
-        <div class="row">
+        <div class="row" id="sendEmailStatus{{$List_applicant->user_id}}">
         
-        
- {!! Form::model($List_applicant, ['method' => 'POST',  'action'=> 'TagController@EmailCandidates', 'files' => true]) !!}
+ {!! Form::model($List_applicant, ['files' => true]) !!}
   {{ csrf_field() }}
 <div class="space"></div>
   <div class="row">
@@ -534,7 +895,7 @@ border-color: white !important;
  <div class="space">&nbsp;</div> 
    <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
             {!! Form::label('title', 'Subject') !!} 
-            {!! Form::text('title', null, ['class' => 'form-control' ]) !!}
+            <input type="tex" name="title{{$List_applicant->user_id}}"> 
             <input type="hidden" name="email_address" value="{{$List_applicant->email}}">
             <input type="hidden" name="name" value="{{$List_applicant->candidates_name}}">
             <small class="text-danger">{{ $errors->first('title') }}</small>
@@ -542,12 +903,11 @@ border-color: white !important;
  <div class="space">&nbsp;</div> 
           <div class="form-group{{ $errors->has('body_of_email') ? ' has-error' : '' }}">
             {!! Form::label('body_of_email', 'Email') !!}
-         
-            {!! Form::textarea('body_of_email', null, ['class' => 'form-control', ]) !!}
+         <textarea name="body_of_email{{$List_applicant->user_id}}" class="form-control" required="required"></textarea> 
             <small class="text-danger">{{ $errors->first('body_of_email') }}</small>
           </div>
     <div class="space">&nbsp;</div> 
-          {!! Form::submit("Send Email", ['class' => 'btn blue mt-ladda-btn ladda-button btn-outline btn-block', 'id' => 'sendEmail']) !!}
+    <button type="submit" class="btn blue mt-ladda-btn ladda-button btn-outline btn-block" id="sendEmail{{$List_applicant->user_id}}">Send Email</button> 
         </div>
       </div>
     </div>
@@ -852,7 +1212,7 @@ Previous
 
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Personal page</span>
-<span class="highlightable"><a class="breakword" href="https://www.linkedin.com/in/terseer-agbe-61287677/" rel="external">{{$person_info->personal_page}}</a></span>
+<span class="highlightable"><a class="breakword" href="#" rel="external">{{$person_info->personal_page}}</a></span>
 </div>
 @endif
 @endforeach
@@ -888,8 +1248,8 @@ Previous
 <form class="careerfy-search-filter"> 
 <div class="careerfy-candidate careerfy-candidate-default">
 <div class="careerfy-search-filter-wrap careerfy-without-toggle">
-<div>
-<div id=""  data-toggle="collapse" data-target="#expand_rejected" > 
+<div >
+<div id="" data-toggle="collapse" data-target="#expand_rejected"> 
 <i class="careerfy-icon careerfy-sort"></i>  <h2>Filter</h2>
 </div>
 </div></div>
@@ -903,7 +1263,10 @@ Previous
 <li class="careerfy-column-12"> 
       <a href="#tab_6_1{{$rejected_applicant->id}} " data-toggle="tab"> 
                                             <div class="careerfy-candidate-default-wrap"> 
-                                                <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure> 
+                                                  <?php $record = \App\RecruitProfilePix::where('status', 1)->where('user_id', $rejected_applicant->user_id)->orderBy('created_at', 'DESC')->first(); ?>
+                                                <figure> @if($record)<img src="/uploads/avatars/{{ $record->pic }}" alt=""> @else
+                                                    <img src="/uploads/avatars/{{ $user->avatar }}" alt="">
+                                                 @endif </figure> 
                                                 <div class="careerfy-candidate-default-text">
                                                     <div class="careerfy-candidate-default-left">
                                                         <h2>
@@ -1105,22 +1468,25 @@ Previous
                                         <div class="careerfy-checkbox-toggle" id="yearofexperience_rejected">
                                             <ul class="careerfy-checkbox">
                                                 <li>
-                                                    <input type="checkbox" id="g1yoe_rejected" name="yoe[]" value="5-10" />
-                                                    <label for="g1yoe_rejected"><span></span>5-10</label>
+                                                    <input type="checkbox" id="g1yoe_rejected" name="yoe[]" value="0-5" />
+                                                    <label for="g1yoe_rejected"><span></span>0-5</label>
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" id="g2yoe_rejected"  name="yoe[]" value="10-15" />
-                                                    <label for="g2yoe_rejected"><span></span>10-15</label>
+                                                    <input type="checkbox" id="g2yoe_rejected"  name="yoe[]" value="6-10" />
+                                                    <label for="g2yoe_rejected"><span></span>6-10</label>
                                                 </li>
                                                <li>
-                                                    <input type="checkbox" id="g3yoe_rejected"  name="yoe[]" value="15-20" />
-                                                    <label for="g3yoe_rejected"><span></span>15-20</label>
+                                                    <input type="checkbox" id="g3yoe_rejected"  name="yoe[]" value="11-15" />
+                                                    <label for="g3yoe_rejected"><span></span>11-15</label>
                                                 </li>
                                                 <li>
-                                                    <input type="checkbox" id="g4yoe_rejected"  name="yoe[]" value="20 Above" />
-                                                    <label for="g4yoe_rejected"><span></span>20 Above</label>
+                                                    <input type="checkbox" id="g4yoe_rejected"  name="yoe[]" value="16-20" />
+                                                    <label for="g4yoe_rejected"><span></span>16-20</label>
                                                 </li>
- 
+                                                <li>
+                                                    <input type="checkbox" id="g5yoe_rejected"  name="yoe[]" value="20 Above" />
+                                                    <label for="g5yoe_rejected"><span></span>20 Above</label>
+                                                </li>
                                             </ul>
                                         </div>
                                 </div> </div> 
@@ -1277,13 +1643,15 @@ Previous
                                   <div id="emalForm">
   <button type="button" class="btn blue mt-ladda-btn ladda-button btn-outline" data-toggle="collapse" data-target="#{{$rejected_applicant->id}}"><i class="careerfy-icon careerfy-envelope" ></i>Send Email</button>
             <div class="space">&nbsp;</div> 
-
+                          <div class="lds-ripplee{{$rejected_applicant->user_id}}" style="display: none;"><div></div><div></div></div>
+                              <div id="info"></div>
+<div id="emailsent{{$rejected_applicant->user_id}}"></div>
   <div id="{{$rejected_applicant->id}}" class="collapse">
      <div class="col-md-7">
-        <div class="row">
+        <div class="row" id="sendEmailStatus{{$rejected_applicant->user_id}}">
         
         
- {!! Form::model($rejected_applicant, ['method' => 'POST',  'action'=> 'TagController@EmailCandidates', 'files' => true]) !!}
+ {!! Form::model($rejected_applicant, ['files' => true]) !!}
   {{ csrf_field() }}
 <div class="space"></div>
   <div class="row">
@@ -1293,20 +1661,19 @@ Previous
  <div class="space">&nbsp;</div> 
    <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
             {!! Form::label('title', 'Subject') !!} 
-            {!! Form::text('title', null, ['class' => 'form-control' ]) !!}
-            <input type="hidden" name="email_address" value="{{$rejected_applicant->email}}">
-            <input type="hidden" name="name" value="{{$rejected_applicant->candidates_name}}">
+            <input type="text" name="title{{$rejected_applicant->user_id}}" class="form-control" required="required"> 
+            <input type="hidden" name="email_address{{$rejected_applicant->user_id}}" value="{{$rejected_applicant->email}}">
+            <input type="hidden" name="name{{$rejected_applicant->user_id}}" value="{{$rejected_applicant->candidates_name}}">
             <small class="text-danger">{{ $errors->first('title') }}</small>
           </div>
  <div class="space">&nbsp;</div> 
           <div class="form-group{{ $errors->has('body_of_email') ? ' has-error' : '' }}">
             {!! Form::label('body_of_email', 'Email') !!}
-         
-            {!! Form::textarea('body_of_email', null, ['class' => 'form-control', ]) !!}
+         <textarea name="body_of_email{{$rejected_applicant->user_id}}" class="form-control" required="required"></textarea> 
             <small class="text-danger">{{ $errors->first('body_of_email') }}</small>
           </div>
     <div class="space">&nbsp;</div> 
-          {!! Form::submit("Send Email", ['class' => 'btn blue mt-ladda-btn ladda-button btn-outline btn-block', 'id' => 'sendEmail']) !!}
+    <button class="btn blue mt-ladda-btn ladda-button btn-outline btn-block" id="sendEmail{{$rejected_applicant->user_id}}">Send Email</button>
         </div>
       </div>
     </div>
@@ -1599,7 +1966,7 @@ Previous
 
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Personal page</span>
-<span class="highlightable"><a class="breakword" href="https://www.linkedin.com/in/terseer-agbe-61287677/" rel="external">{{$person_info->personal_page}}</a></span>
+<span class="highlightable"><a class="breakword" href="#" rel="external">{{$person_info->personal_page}}</a></span>
 </div>
 @endif
 @endforeach
@@ -1651,9 +2018,12 @@ Previous
  
       <a href="#tab_6_1{{$review_applicant->id}}" data-toggle="tab">
  
-
+  <?php $record = \App\RecruitProfilePix::where('status', 1)->where('user_id', $review_applicant->user_id)->orderBy('created_at', 'DESC')->first(); ?>
                                             <div class="careerfy-candidate-default-wrap"> 
-                                                <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure> 
+                                                <figure>@if($record) <img src="/uploads/avatars/{{ $record->pic }}" alt=""> 
+                                                    @else
+                                                    <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> 
+                                                @endif</figure> 
                                                 <div class="careerfy-candidate-default-text">
                                                     <div class="careerfy-candidate-default-left">
                                                         <h2>
@@ -2025,13 +2395,14 @@ Previous
                                   <div id="emalForm">
   <button type="button" class="btn blue mt-ladda-btn ladda-button btn-outline" data-toggle="collapse" data-target="#{{$review_applicant->id}}"><i class="careerfy-icon careerfy-envelope" ></i>Send Email</button>
             <div class="space">&nbsp;</div> 
-
+                                 <div class="lds-ripplee{{$review_applicant->user_id}}" style="display: none;"><div></div><div></div></div>
+                              <div id="info{{$review_applicant->user_id}}"></div>
+<div id="emailsent{{$review_applicant->user_id}}"></div>
   <div id="{{$review_applicant->id}}" class="collapse">
      <div class="col-md-7">
-        <div class="row">
+        <div class="row" id="sendEmailStatus{{$review_applicant->user_id}}">
         
-        
- {!! Form::model($review_applicant, ['method' => 'POST',  'action'=> 'TagController@EmailCandidates', 'files' => true]) !!}
+ {!! Form::model($review_applicant, ['files' => true]) !!}
   {{ csrf_field() }}
 <div class="space"></div>
   <div class="row">
@@ -2041,7 +2412,7 @@ Previous
  <div class="space">&nbsp;</div> 
    <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
             {!! Form::label('title', 'Subject') !!} 
-            {!! Form::text('title', null, ['class' => 'form-control' ]) !!}
+            <input type="text" name="title{{$review_applicant->user_id}}" class="form-control" required="required"> 
             <input type="hidden" name="email_address" value="{{$review_applicant->email}}">
             <input type="hidden" name="name" value="{{$review_applicant->candidates_name}}">
             <small class="text-danger">{{ $errors->first('title') }}</small>
@@ -2049,12 +2420,11 @@ Previous
  <div class="space">&nbsp;</div> 
           <div class="form-group{{ $errors->has('body_of_email') ? ' has-error' : '' }}">
             {!! Form::label('body_of_email', 'Email') !!}
-         
-            {!! Form::textarea('body_of_email', null, ['class' => 'form-control', ]) !!}
+         <textarea name="body_of_email{{$review_applicant->user_id}}" class="form-control" required="required"></textarea> 
             <small class="text-danger">{{ $errors->first('body_of_email') }}</small>
           </div>
     <div class="space">&nbsp;</div> 
-          {!! Form::submit("Send Email", ['class' => 'btn blue mt-ladda-btn ladda-button btn-outline btn-block', 'id' => 'sendEmail']) !!}
+    <button class="btn blue mt-ladda-btn ladda-button btn-outline btn-block" id="sendEmail{{$review_applicant->user_id}}">Send Email</button> 
         </div>
       </div>
     </div>
@@ -2357,7 +2727,7 @@ Previous
 
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Personal page</span>
-<span class="highlightable"><a class="breakword" href="https://www.linkedin.com/in/terseer-agbe-61287677/" rel="external">{{$person_info->personal_page}}</a></span>
+<span class="highlightable"><a class="breakword" href="" rel="external">{{$person_info->personal_page}}</a></span>
 </div>
 @endif
 @endforeach
@@ -2396,7 +2766,7 @@ Previous
 <div class="careerfy-candidate careerfy-candidate-default">
 
 <div class="careerfy-search-filter-wrap careerfy-without-toggle">
-<div>
+<div >
 <div id="" data-toggle="collapse" data-target="#expand_shortlist"> 
 <i class="careerfy-icon careerfy-sort"></i>  <h2>Filter</h2>
 </div>
@@ -2409,8 +2779,11 @@ Previous
 @forelse($shortlisted_list as $shortlisted)
                             <li class="careerfy-column-12">
                                   <a href="#tab_6_1{{$shortlisted->id}}" data-toggle="tab">
+                                     <?php $record = \App\RecruitProfilePix::where('status', 1)->where('user_id', $shortlisted->user_id)->orderBy('created_at', 'DESC')->first(); ?>
                                             <div class="careerfy-candidate-default-wrap"> 
-                                                <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure> 
+                                                <figure>@if($record) <img src="/uploads/avatars/{{ $record->pic }}" alt=""> @else
+                                                        <img src="/uploads/avatars/{{ $user->avatar }}" alt="">
+                                                 @endif</figure> 
                                                 <div class="careerfy-candidate-default-text">
                                                     <div class="careerfy-candidate-default-left">
                                                         <h2>
@@ -2603,13 +2976,10 @@ Previous
                                         <h2><a href="#" class="careerfy-click-btn">Years Of Experience</a></h2>
                                         <div class="careerfy-checkbox-toggle" id="yearofexperience_shorlist">
                                             <ul class="careerfy-checkbox">
+                                          
                                                 <li>
-                                                    <input type="checkbox" id="g1yoe_shorlist" name="yoe[]" value="0-5" />
-                                                    <label for="g1yoe_shorlist"><span></span>0-5</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="g2yoe_shorlist"  name="yoe[]" value="6-10" />
-                                                    <label for="g2yoe_shorlist"><span></span>6-10</label>
+                                                    <input type="checkbox" id="g2yoe_shorlist"  name="yoe[]" value="5-10" />
+                                                    <label for="g2yoe_shorlist"><span></span>5-10</label>
                                                 </li>
                                                <li>
                                                     <input type="checkbox" id="g3yoe_shorlist"  name="yoe[]" value="11-15" />
@@ -2779,13 +3149,14 @@ Previous
                                   <div id="emalForm">
   <button type="button" class="btn blue mt-ladda-btn ladda-button btn-outline" data-toggle="collapse" data-target="#{{$shortlisted->id}}"><i class="careerfy-icon careerfy-envelope" ></i>Send Email</button>
             <div class="space">&nbsp;</div> 
-
+              <div class="lds-ripplee{{$shortlisted->user_id}}" style="display: none;"><div></div><div></div></div>
+                              <div id="info{{$shortlisted->user_id}}"></div>
+<div id="emailsent{{$shortlisted->user_id}}"></div>
   <div id="{{$shortlisted->id}}" class="collapse">
      <div class="col-md-7">
-        <div class="row">
+        <div class="row" id="sendEmailStatus{{$shortlisted->user_id}}">
         
-        
- {!! Form::model($shortlisted, ['method' => 'POST',  'action'=> 'TagController@EmailCandidates', 'files' => true]) !!}
+ {!! Form::model($shortlisted, ['files' => true]) !!}
   {{ csrf_field() }}
 <div class="space"></div>
   <div class="row">
@@ -2794,21 +3165,21 @@ Previous
         <div class="box-body settings-block">
  <div class="space">&nbsp;</div> 
    <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-            {!! Form::label('title', 'Subject') !!} 
-            {!! Form::text('title', null, ['class' => 'form-control' ]) !!}
-            <input type="hidden" name="email_address" value="{{$shortlisted->email}}">
-            <input type="hidden" name="name" value="{{$shortlisted->candidates_name}}">
+            {!! Form::label('title', 'Subject') !!}  
+            <input type="text" name="title{{$shortlisted->user_id}}" required="required" class="form-control">
+            <input type="hidden" name="email_address{{$shortlisted->user_id}}" value="{{$shortlisted->email}}">
+            <input type="hidden" name="name{{$shortlisted->user_id}}" value="{{$shortlisted->candidates_name}}">
             <small class="text-danger">{{ $errors->first('title') }}</small>
           </div>
  <div class="space">&nbsp;</div> 
           <div class="form-group{{ $errors->has('body_of_email') ? ' has-error' : '' }}">
             {!! Form::label('body_of_email', 'Email') !!}
-         
-            {!! Form::textarea('body_of_email', null, ['class' => 'form-control', ]) !!}
+         <textarea name="body_of_email{{$shortlisted->user_id}}" class="form-control" required="required"></textarea> 
             <small class="text-danger">{{ $errors->first('body_of_email') }}</small>
           </div>
-    <div class="space">&nbsp;</div> 
-          {!! Form::submit("Send Email", ['class' => 'btn blue mt-ladda-btn ladda-button btn-outline btn-block', 'id' => 'sendEmail']) !!}
+    <div class="space">&nbsp;</div>  
+    <button class="btn blue mt-ladda-btn ladda-button btn-outline btn-block" id="sendEmail{{$shortlisted->user_id}}">Send Email</button>
+     
         </div>
       </div>
     </div>
@@ -3111,7 +3482,7 @@ Previous
 
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Personal page</span>
-<span class="highlightable"><a class="breakword" href="https://www.linkedin.com/in/terseer-agbe-61287677/" rel="external">{{$person_info->personal_page}}</a></span>
+<span class="highlightable"><a class="breakword" href="#" rel="external">{{$person_info->personal_page}}</a></span>
 </div>
 @endif
 @endforeach
@@ -3144,7 +3515,7 @@ Previous
 <form class="careerfy-search-filter"> 
 <div class="careerfy-candidate careerfy-candidate-default">
 <div class="careerfy-search-filter-wrap careerfy-without-toggle">
-<div>
+<div >
 <div id="" data-toggle="collapse" data-target="#expand_offered"> 
 <i class="careerfy-icon careerfy-sort"></i>  <h2>Filter</h2>
 </div>
@@ -3158,8 +3529,12 @@ Previous
    
 <li class="careerfy-column-12"> 
       <a href="#tab_6_1{{$offered_applicant->id}}" data-toggle="tab"> 
+        <?php $record = \App\RecruitProfilePix::where('status', 1)->where('user_id', $offered_applicant->user_id)->orderBy('created_at', 'DESC')->first(); ?>
                                             <div class="careerfy-candidate-default-wrap"> 
-                                                <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure> 
+                                                <figure>@if($record) <img src="/uploads/avatars/{{ $record->pic }}" alt=""> @else
+                                                    <img src="/uploads/avatars/{{ $user->avatar }}" alt="">
+                                                    @endif
+                                                </figure> 
                                                 <div class="careerfy-candidate-default-text">
                                                     <div class="careerfy-candidate-default-left">
                                                         <h2>
@@ -3487,29 +3862,29 @@ Previous
                         <i class="icon-plus"></i> REJECT
                     </div>
                                    
-                     <div id="in_review{{$offered_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
+                  <!--    <div id="in_review{{$offered_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
                     <input type="hidden" value="in_review" name="in_review{{$offered_applicant->id}}">
                     <input type="hidden" value="{{$offered_applicant->id}}" name="application_id{{$offered_applicant->id}}">
                     <input type="hidden" value="{{$offered_applicant->user_id}}" name="user_id{{$offered_applicant->id}}">
                      <input type="hidden" value="{{$offered_applicant->tag_id}}" name="job_id{{$offered_applicant->tag_id}}">
                         <i class="icon-plus"></i> KEEP IN VIEW
-                    </div>
+                    </div> -->
  
-                 <div id="shortlist{{$offered_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
+             <!--     <div id="shortlist{{$offered_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
                     <input type="hidden" value="in_review" name="shortlist{{$offered_applicant->id}}">
                     <input type="hidden" value="{{$offered_applicant->id}}" name="application_id{{$offered_applicant->id}}">
                     <input type="hidden" value="{{$offered_applicant->user_id}}" name="user_id{{$offered_applicant->id}}">
                      <input type="hidden" value="{{$offered_applicant->tag_id}}" name="job_id{{$offered_applicant->tag_id}}">
                         <i class="icon-plus"></i> SHORTLIST
-                    </div> 
+                    </div>  -->
 
-                  <div id="offered{{$offered_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
+      <!--             <div id="offered{{$offered_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header"  >
                     <input type="hidden" value="offer" name="offer{{$offered_applicant->id}}">
                     <input type="hidden" value="{{$offered_applicant->id}}" name="application_id{{$offered_applicant->id}}">
                     <input type="hidden" value="{{$offered_applicant->user_id}}" name="user_id{{$offered_applicant->id}}">
                      <input type="hidden" value="{{$offered_applicant->tag_id}}" name="job_id{{$offered_applicant->tag_id}}">
                         <i class="icon-plus"></i> OFFER
-                    </div>
+                    </div> -->
             <div id="hire{{$offered_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
                     <input type="hidden" value="hire" name="hire{{$offered_applicant->id}}">
                     <input type="hidden" value="{{$offered_applicant->id}}" name="application_id{{$offered_applicant->id}}">
@@ -3527,13 +3902,14 @@ Previous
                                   <div id="emalForm">
   <button type="button" class="btn blue mt-ladda-btn ladda-button btn-outline" data-toggle="collapse" data-target="#{{$offered_applicant->id}}"><i class="careerfy-icon careerfy-envelope" ></i>Send Email</button>
             <div class="space">&nbsp;</div> 
-
+      <div class="lds-ripplee{{$offered_applicant->user_id}}" style="display: none;"><div></div><div></div></div>
+                              <div id="info{{$offered_applicant->user_id}}"></div>
+<div id="emailsent{{$offered_applicant->user_id}}"></div>
   <div id="{{$offered_applicant->id}}" class="collapse">
      <div class="col-md-7">
-        <div class="row">
+        <div class="row" id="sendEmailStatus{{$offered_applicant->user_id}}">
         
-        
- {!! Form::model($offered_applicant, ['method' => 'POST',  'action'=> 'TagController@EmailCandidates', 'files' => true]) !!}
+ {!! Form::model($offered_applicant, [ 'files' => true]) !!}
   {{ csrf_field() }}
 <div class="space"></div>
   <div class="row">
@@ -3542,21 +3918,21 @@ Previous
         <div class="box-body settings-block">
  <div class="space">&nbsp;</div> 
    <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-            {!! Form::label('title', 'Subject') !!} 
-            {!! Form::text('title', null, ['class' => 'form-control' ]) !!}
-            <input type="hidden" name="email_address" value="{{$offered_applicant->email}}">
-            <input type="hidden" name="name" value="{{$offered_applicant->candidates_name}}">
+            {!! Form::label('title', 'Subject') !!}  
+            <input type="text" name="title{{$offered_applicant->user_id}}" class="form-control" required="required">
+            <input type="hidden" name="email_address{{$offered_applicant->user_id}}" value="{{$offered_applicant->email}}">
+            <input type="hidden" name="name{{$offered_applicant->user_id}}" value="{{$offered_applicant->candidates_name}}">
             <small class="text-danger">{{ $errors->first('title') }}</small>
           </div>
  <div class="space">&nbsp;</div> 
           <div class="form-group{{ $errors->has('body_of_email') ? ' has-error' : '' }}">
             {!! Form::label('body_of_email', 'Email') !!}
-         
-            {!! Form::textarea('body_of_email', null, ['class' => 'form-control', ]) !!}
+         <textarea name="body_of_email{{$offered_applicant->user_id}}" class="form-control" required="required"></textarea> 
             <small class="text-danger">{{ $errors->first('body_of_email') }}</small>
           </div>
     <div class="space">&nbsp;</div> 
-          {!! Form::submit("Send Email", ['class' => 'btn blue mt-ladda-btn ladda-button btn-outline btn-block', 'id' => 'sendEmail']) !!}
+       <button class="btn blue mt-ladda-btn ladda-button btn-outline btn-block" id="sendEmail{{$offered_applicant->user_id}}">Send Email</button>
+  
         </div>
       </div>
     </div>
@@ -3859,7 +4235,7 @@ Previous
 
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Personal page</span>
-<span class="highlightable"><a class="breakword" href="https://www.linkedin.com/in/terseer-agbe-61287677/" rel="external">{{$person_info->personal_page}}</a></span>
+<span class="highlightable"><a class="breakword" href="#" rel="external">{{$person_info->personal_page}}</a></span>
 </div>
 @endif
 @endforeach
@@ -3894,8 +4270,8 @@ Previous
 <form class="careerfy-search-filter"> 
 
 <div class="careerfy-search-filter-wrap careerfy-without-toggle">
-<div>
-<div id=" " data-toggle="collapse" data-target="#expand_hired" > 
+<div >
+<div id="" data-toggle="collapse" data-target="#expand_hired"> 
 <i class="careerfy-icon careerfy-sort"></i>  <h2>Filter</h2>
 </div>
 </div></div>
@@ -3912,9 +4288,12 @@ Previous
                                                  @else
  <a href="#tab_6_1{{$hired_applicant->id}}" data-toggle="tab">
                                                  @endif 
-
+                   <?php $record = \App\RecruitProfilePix::where('status', 1)->where('user_id', $hired_applicant->user_id)->orderBy('created_at', 'DESC')->first(); ?>
                                             <div class="careerfy-candidate-default-wrap"> 
-                                                <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure> 
+                                                <figure> @if($record)<img src="/uploads/avatars/{{ $record->pic }}" alt="">@else 
+                                                    <img src="/uploads/avatars/{{ $user->avatar }}" alt="">
+                                                    @endif
+                                                </figure> 
                                                 <div class="careerfy-candidate-default-text">
                                                     <div class="careerfy-candidate-default-left">
                                                         <h2>
@@ -4241,46 +4620,46 @@ Previous
 
               <div class="col-md-12 cv_content"  >
 
-                    <div id="savedescription{{$hired_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
+    <!--                 <div id="savedescription{{$hired_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
                     <input type="hidden" value="rejected" name="rejected{{$hired_applicant->id}}">
                     <input type="hidden" value="{{$hired_applicant->id}}" name="application_id{{$hired_applicant->id}}">
                     <input type="hidden" value="{{$hired_applicant->user_id}}" name="user_id{{$hired_applicant->id}}">
                      <input type="hidden" value="{{$hired_applicant->tag_id}}" name="job_id{{$hired_applicant->tag_id}}">
                         <i class="icon-plus"></i> REJECT
-                    </div>
+                    </div> -->
                                    
-                     <div id="in_review{{$hired_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
+<!--                      <div id="in_review{{$hired_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
                     <input type="hidden" value="in_review" name="in_review{{$hired_applicant->id}}">
                     <input type="hidden" value="{{$hired_applicant->id}}" name="application_id{{$hired_applicant->id}}">
                     <input type="hidden" value="{{$hired_applicant->user_id}}" name="user_id{{$hired_applicant->id}}">
                      <input type="hidden" value="{{$hired_applicant->tag_id}}" name="job_id{{$hired_applicant->tag_id}}">
                         <i class="icon-plus"></i> kEEP IN VIEW
-                    </div>
+                    </div> -->
  
-                 <div id="shortlist{{$hired_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
+       <!--           <div id="shortlist{{$hired_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
                     <input type="hidden" value="in_review" name="shortlist{{$hired_applicant->id}}">
                     <input type="hidden" value="{{$hired_applicant->id}}" name="application_id{{$hired_applicant->id}}">
                     <input type="hidden" value="{{$hired_applicant->user_id}}" name="user_id{{$hired_applicant->id}}">
                      <input type="hidden" value="{{$hired_applicant->tag_id}}" name="job_id{{$hired_applicant->tag_id}}">
                         <i class="icon-plus"></i> SHORTLIST
-                    </div> 
+                    </div>  -->
 
-                  <div id="offered{{$hired_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
+             <!--      <div id="offered{{$hired_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
                     <input type="hidden" value="offer" name="offer{{$hired_applicant->id}}">
                     <input type="hidden" value="{{$hired_applicant->id}}" name="application_id{{$hired_applicant->id}}">
                     <input type="hidden" value="{{$hired_applicant->user_id}}" name="user_id{{$hired_applicant->id}}">
                      <input type="hidden" value="{{$hired_applicant->tag_id}}" name="job_id{{$hired_applicant->tag_id}}">
                         <i class="icon-plus"></i> OFFER
-                    </div>
-            <div id="hire{{$hired_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
+                    </div> -->
+<!--             <div id="hire{{$hired_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
                     <input type="hidden" value="hire" name="hire{{$hired_applicant->id}}">
                     <input type="hidden" value="{{$hired_applicant->id}}" name="application_id{{$hired_applicant->id}}">
                     <input type="hidden" value="{{$hired_applicant->user_id}}" name="user_id{{$hired_applicant->id}}">
                      <input type="hidden" value="{{$hired_applicant->tag_id}}" name="job_id{{$hired_applicant->tag_id}}">
                         <i class="icon-plus"></i> HIRE
-                    </div>
+                    </div> -->
 
-                    <div id="hire{{$hired_applicant->id}}" class="btn  mt-ladda-btn mini_header" data-toggle="collapse" data-target="#expand_hired" >
+                    <div id="toggle{{$hired_applicant->id}}" class="btn  mt-ladda-btn mini_header" data-toggle="collapse" data-target="#expand_hired" >
                    
                        <i class="careerfy-icon careerfy-sort"></i> Sort
                     </div>
@@ -4295,13 +4674,15 @@ Previous
                                   <div id="emalForm">
   <button type="button" class="btn blue mt-ladda-btn ladda-button btn-outline" data-toggle="collapse" data-target="#{{$hired_applicant->id}}"><i class="careerfy-icon careerfy-envelope" ></i>Send Email</button>
             <div class="space">&nbsp;</div> 
-
+      <div class="lds-ripplee{{$hired_applicant->user_id}}" style="display: none;"><div></div><div></div></div>
+                              <div id="info{{$hired_applicant->user_id}}"></div>
+<div id="emailsent{{$hired_applicant->user_id}}"></div>
   <div id="{{$hired_applicant->id}}" class="collapse">
      <div class="col-md-7">
-        <div class="row">
+        <div class="row" id="sendEmailStatus{{$hired_applicant->user_id}}">
         
         
- {!! Form::model($hired_applicant, ['method' => 'POST',  'action'=> 'TagController@EmailCandidates', 'files' => true]) !!}
+ {!! Form::model($hired_applicant, [ 'files' => true]) !!}
   {{ csrf_field() }}
 <div class="space"></div>
   <div class="row">
@@ -4310,21 +4691,22 @@ Previous
         <div class="box-body settings-block">
  <div class="space">&nbsp;</div> 
    <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-            {!! Form::label('title', 'Subject') !!} 
-            {!! Form::text('title', null, ['class' => 'form-control' ]) !!}
-            <input type="hidden" name="email_address" value="{{$hired_applicant->email}}">
-            <input type="hidden" name="name" value="{{$hired_applicant->candidates_name}}">
+            {!! Form::label('title', 'Subject') !!}  
+            <input type="text" name="title{{$hired_applicant->user_id}}"  class="form-control">
+            <input type="hidden" name="email_address{{$hired_applicant->user_id}}" value="{{$hired_applicant->email}}">
+            <input type="hidden" name="name{{$hired_applicant->user_id}}" value="{{$hired_applicant->candidates_name}}">
             <small class="text-danger">{{ $errors->first('title') }}</small>
           </div>
  <div class="space">&nbsp;</div> 
           <div class="form-group{{ $errors->has('body_of_email') ? ' has-error' : '' }}">
             {!! Form::label('body_of_email', 'Email') !!}
-         
-            {!! Form::textarea('body_of_email', null, ['class' => 'form-control', ]) !!}
+          
+            <textarea class="form-control" name="body_of_email{{$hired_applicant->user_id}}"> </textarea>
             <small class="text-danger">{{ $errors->first('body_of_email') }}</small>
           </div>
     <div class="space">&nbsp;</div> 
-          {!! Form::submit("Send Email", ['class' => 'btn blue mt-ladda-btn ladda-button btn-outline btn-block', 'id' => 'sendEmail']) !!}
+    <button class="btn blue mt-ladda-btn ladda-button btn-outline btn-block" id="sendEmail{{$hired_applicant->user_id}}">Send Email</button>
+
         </div>
       </div>
     </div>
@@ -4631,7 +5013,7 @@ Previous
 
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Personal page</span>
-<span class="highlightable"><a class="breakword" href="https://www.linkedin.com/in/terseer-agbe-61287677/" rel="external">{{$person_info->personal_page}}</a></span>
+<span class="highlightable"><a class="breakword" href="#" rel="external">{{$person_info->personal_page}}</a></span>
 </div>
 @endif
 @endforeach
@@ -4806,6 +5188,7 @@ document.getElementById('present').style.display = 'block';
 }); 
 
   </script>
+
  <script type="text/javascript">
  function isEmpty(obj) {
     for(var key in obj) {
@@ -4832,7 +5215,7 @@ document.getElementById('present').style.display = 'block';
 //     console.log(files);
 //  });
   $('#savedescription').click(function() {
- //alert('here');
+ alert('here');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -4872,7 +5255,7 @@ document.getElementById('present').style.display = 'block';
   // AUTOMATCH applicants
  @foreach($List_applicants_by_job_id as $List_applicant)  
   $('#savedescription{{$List_applicant->id}}').click(function() {
- //alert('Rejected');
+ alert('Rejected');
  //alert($('input[name=rejected{{$List_applicant->id}}]').val());
  
          $.ajaxSetup({
@@ -4907,6 +5290,8 @@ document.getElementById('present').style.display = 'block';
             $("#move_to").empty();
             $("#review_section").empty();
             $("#reject_section").empty();
+            $("#hire_section").empty();
+            
 
         //window.location.reload(); 
      },
@@ -4922,6 +5307,7 @@ document.getElementById('present').style.display = 'block';
         var newapplication_list = data.newapplication_list;
         var new_reject_list = data.new_reject_list;
         var work_experiences = data.work_experiences;
+        var hired_list = data.hired_list;
         console.log(rejected);
         console.log(newapplication_list);
 
@@ -4940,6 +5326,28 @@ document.getElementById('present').style.display = 'block';
         var count = 0;
         var status = '';
         var content_v = '';
+         $.each(hired_list, function(key, value){
+            var application_id = value.id;
+            var email = value.email;
+            var user = value.user_id;
+            var candidates_name = value.candidates_name; 
+            var company = value.id;
+            var title = value.id;
+            var tag_id = value.tag_id;
+            if (count === 0 ) {
+                status = 'active';
+            }else{
+                status = '';
+            }
+    company = getWorkExperienceCompanyName(work_experiences, user);
+    title = getWorkExperienceTitle(work_experiences, user);
+
+            //loop through experience to get candidates experience@foreach($documentList as $document) 
+            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
+        $("#hire_section").append(content); 
+
+ });
+
  $.each(new_reject_list, function(key, value){
             var application_id = value.id;
             var email = value.email;
@@ -4994,7 +5402,7 @@ document.getElementById('present').style.display = 'block';
  
     });
     $('#in_review{{$List_applicant->id}}').click(function() {
-        //alert('in_reviewssss');
+        alert('in_reviewssss');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -5003,7 +5411,7 @@ document.getElementById('present').style.display = 'block';
  
         $.ajax({
             type:'post',
-            url:'/review_appllicant', 
+            url:'/review_applicant', 
             data:{
                 '_token':$('input[name=_token').val(),
                 'rejected':$('input[name=rejected{{$List_applicant->id}}]').val(),
@@ -5134,7 +5542,7 @@ document.getElementById('present').style.display = 'block';
     });
 
    $('#shortlist{{$List_applicant->id}}').click(function() {
-        //alert('shortlist');
+        alert('shortlist');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -5197,7 +5605,7 @@ document.getElementById('present').style.display = 'block';
 
 
    $('#offered{{$List_applicant->id}}').click(function() {
-        //alert('shortlist');
+        alert('shortlist');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -5258,7 +5666,7 @@ document.getElementById('present').style.display = 'block';
     });
    
 $('#hire{{$List_applicant->id}}').click(function() {
-        //alert('Hire Now');
+        alert('Hire Now');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -5444,7 +5852,7 @@ $('#hire{{$List_applicant->id}}').click(function() {
 
    @foreach($List_applicants_by_job_id as $List_applicant)  
   $('#savedescription{{$List_applicant->id}}').click(function() {
- //alert('Rejected');
+ alert('Rejected');
  //alert($('input[name=rejected{{$List_applicant->id}}]').val());
  
          $.ajaxSetup({
@@ -5566,7 +5974,7 @@ $('#hire{{$List_applicant->id}}').click(function() {
  
     });
     $('#in_review{{$List_applicant->id}}').click(function() {
-        //alert('in_reviewssss');
+        alert('in_reviewssss');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -5575,7 +5983,7 @@ $('#hire{{$List_applicant->id}}').click(function() {
  
         $.ajax({
             type:'post',
-            url:'/review_appllicant', 
+            url:'/review_applicant', 
             data:{
                 '_token':$('input[name=_token').val(),
                 'rejected':$('input[name=rejected{{$List_applicant->id}}]').val(),
@@ -5706,7 +6114,7 @@ $('#hire{{$List_applicant->id}}').click(function() {
     });
 
    $('#shortlist{{$List_applicant->id}}').click(function() {
-        //alert('shortlist');
+        alert('shortlist');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -5769,7 +6177,7 @@ $('#hire{{$List_applicant->id}}').click(function() {
 
 
    $('#offered{{$List_applicant->id}}').click(function() {
-        //alert('shortlist');
+        alert('shortlist');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -5830,7 +6238,7 @@ $('#hire{{$List_applicant->id}}').click(function() {
     });
    
 $('#hire{{$List_applicant->id}}').click(function() {
-        //alert('Hire Now');
+        alert('Hire Now');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -6012,8 +6420,8 @@ $('#hire{{$List_applicant->id}}').click(function() {
 
    @foreach($rejected_list as $rejected_applicant)  
   $('#savedescription{{$rejected_applicant->id}}').click(function() {
- //alert('Rejected on reject section');
- //alert($('input[name=rejected{{$rejected_applicant->id}}]').val());
+ alert('Rejected on reject section');
+ alert($('input[name=rejected{{$rejected_applicant->id}}]').val());
  
          $.ajaxSetup({
             headers: {
@@ -6069,7 +6477,7 @@ $('#hire{{$List_applicant->id}}').click(function() {
  
     });
     $('#in_review{{$rejected_applicant->id}}').click(function() {
-        //alert('in_review on rejected section');
+        alert('in_review on rejected section');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -6103,7 +6511,7 @@ $('#hire{{$List_applicant->id}}').click(function() {
             $("#review_section").empty();
             $("#reject_section").empty();
             // hide review Side display
-      window.location.reload(); 
+      // window.location.reload(); 
      },
      complete:function(data){
     // Hide image container 
@@ -6222,7 +6630,7 @@ $('#hire{{$List_applicant->id}}').click(function() {
 
     });
     $('#shortlist{{$rejected_applicant->id}}').click(function() {
-        //alert('shortlist');
+        alert('shortlist');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -6340,7 +6748,7 @@ $('#hire{{$List_applicant->id}}').click(function() {
 
 
    $('#offered{{$rejected_applicant->id}}').click(function() {
-        //alert('Offer');
+        alert('Offer');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -6523,7 +6931,7 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
 // in Review Section
    @foreach($review_list as $review)  
   $('#savedescription{{$review->id}}').click(function() {
-    //alert('Rejected hereeerereerexxxxxxxxxxx');
+    alert('Rejected review hereeerereerexxxxxxxxxxx');
    // alert($('input[name=rejected{{$review->id}}]').val());
          
          $.ajaxSetup({
@@ -6659,10 +7067,10 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
  
   });
  
-    // });
+    });
  
     $('#in_review{{$review->id}}').click(function() {
-        //alert('in_review nowsssssssssssssssssssss');
+        alert('in_review review nowsssssssssssssssssssss');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -6671,7 +7079,7 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
  
         $.ajax({
             type:'post',
-            url:'/review_appllicant', 
+            url:'/review_applicant', 
             data:{
                 '_token':$('input[name=_token').val(),
                 'rejected':$('input[name=rejected{{$review->id}}]').val(),
@@ -6695,7 +7103,8 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
             $("#move_to").empty();
             $("#review_section").empty();
             $("#reject_section").empty();
-         window.location.reload(); 
+            $("#hired_count").empty();
+         //window.location.reload(); 
      },
      complete:function(data){
     // Hide image container 
@@ -6708,15 +7117,16 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
         var shortlisted_count = data.shortlisted_count;
         var newapplication_list = data.newapplication_list;
         var new_reject_list = data.new_reject_list;
-        var new_reivew_list = data.new_reivew_list;
+        var review_list = data.review_list;
+        var hired_count = data.hired_count;
         console.log(rejected);
-        console.log(newapplication_list);
+        console.log(newapplication_list); 
         $("#reject_count").append(rejected);
         $("#review_count").append(in_review_count);
         $('#sorted_count').append(sorted_count);
         $('#shortlist_count').append(shortlisted_count);
         $("#offered_count").append(offered_count);
-        $("#hire_count").append(hire_count);
+        $("#hired_count").append(hired_count);
 
         if(isEmpty(newapplication_list)) {
         $('#applicants_list').append('<li class="careerfy-column-12"> <p>No Record(s) Found</p></li>');  
@@ -6730,7 +7140,7 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
         var status = '';
         var content_v = '';
 // // update rejected List
- $.each(new_reject_list, function(key, value){
+ $.each(review_list, function(key, value){
         var application_id = value.id;
             var email = value.email;
             var user = value.user_id;
@@ -6744,12 +7154,11 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
                 status = '';
             }
 
-            //loop through experience to get candidates experience 
             var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#reject_section").append(content); 
+        $("#review_section").append(content); 
  });
 // update In-review List
-  $.each(new_reivew_list, function(key, value){
+  $.each(review_list, function(key, value){
         var application_id = value.id;
             var email = value.email;
             var user = value.user_id;
@@ -6800,7 +7209,7 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
     });
 
    $('#shortlist{{$review->id}}').click(function() {
-        //alert('shortlisting applicant ?');
+        alert('shortlisting applicant ?');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -6834,7 +7243,7 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
             $("#review_section").empty();
             $("#shortlist_section").empty(); 
 
-       window.location.reload(); 
+       //window.location.reload(); 
      },
      complete:function(data){
     // Hide image container 
@@ -6965,9 +7374,11 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
            $("#sorted_count").empty();
            $("#shortlist_count").empty(); 
            $("#offered_count").empty();
-            $("#hire_count").empty();   
+            $("#hire_count").empty();  
+            $("#review_section").empty();
+            $("#offered_section").empty();   
 
-         window.location.reload(); 
+        //  window.location.reload(); 
      },
      complete:function(data){
     // Hide image container 
@@ -6979,7 +7390,12 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
         var rejected = data.reject_count;
         var shortlisted_count = data.shortlisted_count;
         var offered_count = data.offered_count;
-        var hire_count = data.hire_count;
+        var hired_count = data.hired_count;
+
+        var newapplication_list = data.newapplication_list;
+        var new_review_list = data.new_review_list;
+        var new_offered_list = data.new_offered_list;
+        var work_experiences  = data.work_experiences; 
 
         console.log(in_review_count);
         console.log(sorted_count);
@@ -6988,8 +7404,71 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
     $("#review_count").append(in_review_count);
     $("#sorted_count").append(sorted_count);
    $("#shortlist_count").append(shortlisted_count);
-   $("#offered_count").append(offered_count);
-    $("#hire_count").append(hire_count);
+   $("#offered_count").append(offered_count); 
+     $("#hired_count").append(hired_count);
+
+            if(isEmpty(new_offered_list)) {
+        $('#review_section').append('<li class="careerfy-column-12"> No Record(s) Found</li>');  
+        $('#resume_body').empty();
+        $('#resume_body').append('No Record(s) Found'); 
+
+        }
+ 
+        var count = 0;
+        var status = '';
+        var content_v = '';
+        var company = '';
+        var title = '';
+        var candidates_name = '';
+
+  $.each(new_offered_list, function(key, value){
+        var application_id = value.id;
+            var email = value.email;
+            var user = value.user_id;
+            candidates_name = value.candidates_name; 
+            company = value.id;
+            title = value.id;
+            var tag_id = value.tag_id;
+            if (count === 0 ) {
+                status = 'active';
+            }else{
+                status = '';
+            }
+
+            company = getWorkExperienceCompanyName(work_experiences, user);
+            title = getWorkExperienceTitle(work_experiences, user);
+
+            //loop through experience to get candidates experience  
+            var content_r = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
+        $("#offered_section").append(content_r); 
+ });
+
+
+      $.each(new_review_list, function(key, value) {
+         console.log(value.id);
+            var application_id = value.id;
+            var email = value.email;
+            var user = value.user_id;
+            candidates_name = value.candidates_name; 
+                company = value.id;
+                title = value.id;
+            var tag_id = value.tag_id;
+            if (count === 0 ) {
+                status = 'active';
+            }else{
+                status = '';
+            }
+            company = getWorkExperienceCompanyName(work_experiences, user);
+            title = getWorkExperienceTitle(work_experiences, user);
+            //loop through experience to get candidates experience 
+            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
+                // $('#e').append(newapplication_content);  
+       $("#review_section").append(newapplication_content); 
+
+
+        count++;
+        // content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
+        });
 
   });
  
@@ -7026,7 +7505,9 @@ $('#hire{{$review->id}}').click(function() {
            $("#sorted_count").empty();
            $("#shortlist_count").empty(); 
            $("#offered_count").empty();
-           $("#hire_count").empty();  
+           $("#hired_count").empty();  
+            $("#review_section").empty();
+            $("#hire_section").empty();   
 
         //  window.location.reload(); 
      },
@@ -7040,18 +7521,87 @@ $('#hire{{$review->id}}').click(function() {
         var rejected = data.reject_count;
         var shortlisted_count = data.shortlisted_count;
          var offered_count = data.offered_count;
-        var hire_count = data.hire_count;
+        var hired_count = data.hired_count;
 
-        console.log(in_review_count);
-        console.log(sorted_count);
-        console.log(rejected);
+      
+        var newapplication_list = data.newapplication_list;
+        var new_review_list = data.new_review_list;
+        var hired_list = data.hired_list;
+        var work_experiences  = data.work_experiences; 
+        console.log(hired_count);
+        console.log(hired_list);
+        console.log(new_review_list); 
     $("#reject_count").append(rejected);
     $("#review_count").append(in_review_count);
     $("#sorted_count").append(sorted_count);
    $("#shortlist_count").append(shortlisted_count);
    $("#offered_count").append(offered_count);
-   $("#hire_count").append(hire_count);
+    $("#hired_count").append(hired_count);
 
+
+            if(isEmpty(hired_list)) {
+        $('#review_section').append('<li class="careerfy-column-12"> No Record(s) Found</li>');  
+        $('#resume_body').empty();
+        $('#resume_body').append('No Record(s) Found'); 
+
+        }
+ 
+        var count = 0;
+        var status = '';
+        var content_v = '';
+        var company = '';
+        var title = '';
+        var candidates_name = '';
+
+  $.each(hired_list, function(key, value){
+    console.log(value.id);
+        var application_id = value.id;
+            var email = value.email;
+            var user = value.user_id;
+            candidates_name = value.candidates_name; 
+            company = value.id;
+            title = value.id;
+            var tag_id = value.tag_id;
+            if (count === 0 ) {
+                status = 'active';
+            }else{
+                status = '';
+            }
+
+            company = getWorkExperienceCompanyName(work_experiences, user);
+            title = getWorkExperienceTitle(work_experiences, user);
+
+            //loop through experience to get candidates experience  
+            var content_r = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
+        $("#hire_section").append(content_r); 
+ });
+
+
+      $.each(new_review_list, function(key, value) {
+         console.log(value.id);
+            var application_id = value.id;
+            var email = value.email;
+            var user = value.user_id;
+            candidates_name = value.candidates_name; 
+                company = value.id;
+                title = value.id;
+            var tag_id = value.tag_id;
+            if (count === 0 ) {
+                status = 'active';
+            }else{
+                status = '';
+            }
+            company = getWorkExperienceCompanyName(work_experiences, user);
+            title = getWorkExperienceTitle(work_experiences, user);
+            //loop through experience to get candidates experience 
+            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
+                // $('#e').append(newapplication_content);  
+       $("#review_section").append(newapplication_content); 
+
+
+        count++;
+        // content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
+        });
   });
  
     });
@@ -7062,7 +7612,7 @@ $('#hire{{$review->id}}').click(function() {
 
 @foreach($shortlisted_list as $shortlisted)
   $('#savedescription{{$shortlisted->id}}').click(function() {
-    //alert('Rejected hereeerereerexxxxxxxxxxx'); 
+    alert('Rejected shortlisted hereeerereerexxxxxxxxxxx'); 
          
          $.ajaxSetup({
             headers: {
@@ -7096,8 +7646,9 @@ $('#hire{{$review->id}}').click(function() {
             $("#move_to").empty();
             $("#review_section").empty();
             $("#reject_section").empty();
+            $("#shortlist_section").empty();
 
-         window.location.reload(); 
+         //window.location.reload(); 
      },
      complete:function(data){
     // Hide image container 
@@ -7111,6 +7662,7 @@ $('#hire{{$review->id}}').click(function() {
         var newapplication_list = data.newapplication_list;
         var review_list = data.review_list;
         var new_reject_list = data.new_reject_list;
+        var new_shortlisted = data.new_shortlisted;
         console.log(rejected);
         console.log(newapplication_list);
 
@@ -7143,7 +7695,8 @@ $('#hire{{$review->id}}').click(function() {
             }else{
                 status = '';
             }
-
+           company = getWorkExperienceCompanyName(work_experiences, user);
+            title = getWorkExperienceTitle(work_experiences, user);
             //loop through experience to get candidates experience@foreach($documentList as $document) 
             var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
         $("#reject_section").append(content); 
@@ -7161,10 +7714,31 @@ $('#hire{{$review->id}}').click(function() {
             }else{
                 status = '';
             }
-
+           company = getWorkExperienceCompanyName(work_experiences, user);
+            title = getWorkExperienceTitle(work_experiences, user);
             //loop through experience to get candidates experience@foreach($documentList as $document) 
             var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
         $("#review_section").append(content); 
+      
+ });
+        $.each(new_shortlisted, function(key, value){
+        var application_id = value.id;
+            var email = value.email;
+            var user = value.user_id;
+            var candidates_name = value.candidates_name; 
+            var company = value.id;
+            var title = value.id;
+            var tag_id = value.tag_id;
+            if (count === 0 ) {
+                status = 'active';
+            }else{
+                status = '';
+            }
+           company = getWorkExperienceCompanyName(work_experiences, user);
+            title = getWorkExperienceTitle(work_experiences, user);
+            //loop through experience to get candidates experience@foreach($documentList as $document) 
+            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
+        $("#shortlist_section").append(content); 
       
  });
 
@@ -7182,7 +7756,8 @@ $('#hire{{$review->id}}').click(function() {
             }else{
                 status = '';
             }
-
+           company = getWorkExperienceCompanyName(work_experiences, user);
+            title = getWorkExperienceTitle(work_experiences, user);
             //loop through experience to get candidates experience@foreach($documentList as $document) 
             var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
         $('#applicants_list').append(newapplication_content);  
@@ -7199,7 +7774,7 @@ $('#hire{{$review->id}}').click(function() {
     });
  
     $('#in_review{{$shortlisted->id}}').click(function() {
-        //alert('in_review nowsssssssssssssssssssss');
+        alert('in_review shortlisted');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -7208,7 +7783,7 @@ $('#hire{{$review->id}}').click(function() {
  
         $.ajax({
             type:'post',
-            url:'/review_appllicant', 
+            url:'/review_applicant', 
             data:{
                 '_token':$('input[name=_token').val(),
                 'rejected':$('input[name=rejected{{$shortlisted->id}}]').val(),
@@ -7232,7 +7807,9 @@ $('#hire{{$review->id}}').click(function() {
             $("#move_to").empty();
             $("#review_section").empty();
             $("#reject_section").empty();
-         window.location.reload(); 
+            $("#hired_count").empty();
+            $("#shortlist_section").empty();
+         //window.location.reload(); 
      },
      complete:function(data){
     // Hide image container 
@@ -7245,7 +7822,10 @@ $('#hire{{$review->id}}').click(function() {
         var shortlisted_count = data.shortlisted_count;
         var newapplication_list = data.newapplication_list;
         var new_reject_list = data.new_reject_list;
-        var new_reivew_list = data.new_reivew_list;
+        var review_list = data.review_list;
+        var hired_count = data.hired_count;
+        var shortlisted_list = data.shortlisted_list;
+        var work_experiences = data.work_experiences;
         console.log(rejected);
         console.log(newapplication_list);
         $("#reject_count").append(rejected);
@@ -7253,7 +7833,7 @@ $('#hire{{$review->id}}').click(function() {
         $('#sorted_count').append(sorted_count);
         $('#shortlist_count').append(shortlisted_count);
         $("#offered_count").append(offered_count);
-        $("#hire_count").append(hire_count);
+        $("#hired_count").append(hired_count);
 
         if(isEmpty(newapplication_list)) {
         $('#applicants_list').append('<li class="careerfy-column-12"> <p>No Record(s) Found</p></li>');  
@@ -7280,13 +7860,14 @@ $('#hire{{$review->id}}').click(function() {
             }else{
                 status = '';
             }
-
+           company = getWorkExperienceCompanyName(work_experiences, user);
+            title = getWorkExperienceTitle(work_experiences, user);
             //loop through experience to get candidates experience@foreach($documentList as $document) 
             var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
         $("#reject_section").append(content); 
  });
 // update In-review List
-  $.each(new_reivew_list, function(key, value){
+  $.each(review_list, function(key, value){
         var application_id = value.id;
             var email = value.email;
             var user = value.user_id;
@@ -7299,13 +7880,33 @@ $('#hire{{$review->id}}').click(function() {
             }else{
                 status = '';
             }
-
+           company = getWorkExperienceCompanyName(work_experiences, user);
+            title = getWorkExperienceTitle(work_experiences, user);
             //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content_r = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#reject_section").append(content_r); 
+            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
+        $("#review_section").append(content); 
+ });
+   $.each(shortlisted_list, function(key, value){
+        var application_id = value.id;
+            var email = value.email;
+            var user = value.user_id;
+            var candidates_name = value.candidates_name; 
+            var company = value.id;
+            var title = value.id;
+            var tag_id = value.tag_id;
+            if (count === 0 ) {
+                status = 'active';
+            }else{
+                status = '';
+            }
+           company = getWorkExperienceCompanyName(work_experiences, user);
+            title = getWorkExperienceTitle(work_experiences, user);
+            //loop through experience to get candidates experience@foreach($documentList as $document) 
+            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
+        $("#shortlist_section").append(content); 
  });
 
-
+ 
       $.each(newapplication_list, function(key, value) {
          console.log(value.id);
             var application_id = value.id;
@@ -7320,7 +7921,8 @@ $('#hire{{$review->id}}').click(function() {
             }else{
                 status = '';
             }
-
+           company = getWorkExperienceCompanyName(work_experiences, user);
+            title = getWorkExperienceTitle(work_experiences, user);
             //loop through experience to get candidates experience@foreach($documentList as $document) 
             var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
         $('#applicants_list').append(newapplication_content);  
@@ -7337,7 +7939,7 @@ $('#hire{{$review->id}}').click(function() {
     });
 
    $('#shortlist{{$shortlisted->id}}').click(function() {
-        //alert('shortlist...s dddddddddddddddd');
+        alert('shortlist...s dddddddddddddddd');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -7398,7 +8000,7 @@ $('#hire{{$review->id}}').click(function() {
     });
 
    $('#offered{{$shortlisted->id}}').click(function() {
-        //alert('From shortlist, make na offer');
+        alert('From shortlist, make na offer');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -7526,7 +8128,7 @@ $('#hire{{$review->id}}').click(function() {
     });
    
 $('#hire{{$shortlisted->id}}').click(function() {
-       // alert('hire now');
+        alert('hire now');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -7680,8 +8282,8 @@ $('#hire{{$shortlisted->id}}').click(function() {
 
 @foreach($offered_list as $offered)
 
- //$('#savedescription{{$offered->id}}').click(function() {
-    //alert('Rejected hereeerereerexxxxxxxxxxx'); 
+ $('#savedescription{{$offered->id}}').click(function() {
+    alert('Rejected offered hereeerereerexxxxxxxxxxx'); 
          
          $.ajaxSetup({
             headers: {
@@ -7818,7 +8420,7 @@ $('#hire{{$shortlisted->id}}').click(function() {
     });
  
     $('#in_review{{$offered->id}}').click(function() {
-        //alert('in_review nowsssssssssssssssssssss');
+        alert('in_review offered nowsssssssssssssssssssss');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -7827,7 +8429,7 @@ $('#hire{{$shortlisted->id}}').click(function() {
  
         $.ajax({
             type:'post',
-            url:'/review_appllicant', 
+            url:'/review_applicant', 
             data:{
                 '_token':$('input[name=_token').val(),
                 'rejected':$('input[name=rejected{{$offered->id}}]').val(),
@@ -7865,6 +8467,7 @@ $('#hire{{$shortlisted->id}}').click(function() {
         var newapplication_list = data.newapplication_list;
         var new_reject_list = data.new_reject_list;
         var new_reivew_list = data.new_reivew_list;
+        var hired_count = data.hired_count;
         console.log(rejected);
         console.log(newapplication_list);
         $("#reject_count").append(rejected);
@@ -7872,7 +8475,7 @@ $('#hire{{$shortlisted->id}}').click(function() {
         $('#sorted_count').append(sorted_count);
         $('#shortlist_count').append(shortlisted_count);
         $("#offered_count").append(offered_count);
-        $("#hire_count").append(hire_count);
+        $("#hired_count").append(hired_count);
 
         if(isEmpty(newapplication_list)) {
         $('#applicants_list').append('<li class="careerfy-column-12"> <p>No Record(s) Found</p></li>');  
@@ -7956,7 +8559,7 @@ $('#hire{{$shortlisted->id}}').click(function() {
     });
 
    $('#shortlist{{$offered->id}}').click(function() {
-        //alert('shortlist...s dddddddddddddddd');
+        alert('shortlist...s dddddddddddddddd');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -8019,7 +8622,7 @@ $('#hire{{$shortlisted->id}}').click(function() {
 
 
    $('#offered{{$offered->id}}').click(function() {
-        //alert('Offered');
+        alert('Offered');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -8080,7 +8683,7 @@ $('#hire{{$shortlisted->id}}').click(function() {
     });
    
 $('#hire{{$offered->id}}').click(function() {
-        //alert('hire now');
+        alert('hire now offered');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -8130,6 +8733,7 @@ $('#hire{{$offered->id}}').click(function() {
         var hired_count = data.hired_count; 
         var hired_list = data.hired_list;
         var newoffered_list = data.newoffered_list; 
+        var work_experiences = data.work_experiences;
   
      
         if(isEmpty(newoffered_list)) {
@@ -8170,9 +8774,6 @@ $('#hire{{$offered->id}}').click(function() {
             var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
         $('#offered_section').append(newapplication_content);  
         // $("#review_section").append(content); 
-
-
-        count++;
   
         });
 
@@ -8193,9 +8794,6 @@ $('#hire{{$offered->id}}').click(function() {
             var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
         $('#hire_section').append(newapplication_content);  
         // $("#review_section").append(content); 
-
-
-        count++;
   
         });
 
@@ -8207,7 +8805,7 @@ $('#hire{{$offered->id}}').click(function() {
 
 @foreach($hired_list as $hired)
   $('#savedescription{{$hired->id}}').click(function() {
- //alert('Rejected'); 
+ alert('Rejected From Hire'); 
  
          $.ajaxSetup({
             headers: {
@@ -8242,7 +8840,7 @@ $('#hire{{$offered->id}}').click(function() {
             $("#review_section").empty();
             $("#reject_section").empty();
 
-        window.location.reload(); 
+        //window.location.reload(); 
      },
      complete:function(data){
     // Hide image container 
@@ -8255,6 +8853,8 @@ $('#hire{{$offered->id}}').click(function() {
         var shortlisted_count = data.shortlisted_count;
         var newapplication_list = data.newapplication_list;
         var new_reject_list = data.new_reject_list;
+        var work_experiences = data.work_experiences;
+        var hired_list = data.hired_list;
         console.log(rejected);
         console.log(newapplication_list);
 
@@ -8286,7 +8886,8 @@ $('#hire{{$offered->id}}').click(function() {
             }else{
                 status = '';
             }
-
+    company = getWorkExperienceCompanyName(work_experiences, user);
+    title = getWorkExperienceTitle(work_experiences, user);
             //loop through experience to get candidates experience@foreach($documentList as $document) 
             var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
         $("#reject_section").append(content); 
@@ -8325,7 +8926,7 @@ $('#hire{{$offered->id}}').click(function() {
  
     });
     $('#in_review{{$hired->id}}').click(function() {
-        //alert('in_reviewssss');
+        alert('in_reviewssss');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -8334,7 +8935,7 @@ $('#hire{{$offered->id}}').click(function() {
  
         $.ajax({
             type:'post',
-            url:'/review_appllicant', 
+            url:'/review_applicant', 
             data:{
                 '_token':$('input[name=_token').val(),
                 'rejected':$('input[name=rejected{{$hired->id}}]').val(),
@@ -8465,7 +9066,7 @@ $('#hire{{$offered->id}}').click(function() {
     });
 
    $('#shortlist{{$hired->id}}').click(function() {
-        //alert('shortlist');
+        alert('shortlist');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -8528,7 +9129,7 @@ $('#hire{{$offered->id}}').click(function() {
 
 
    $('#offered{{$hired->id}}').click(function() {
-        //alert('Offered');
+        alert('Offered');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -8589,7 +9190,7 @@ $('#hire{{$offered->id}}').click(function() {
     });
    
 $('#hire{{$hired->id}}').click(function() {
-        //alert('Hire Now');
+        alert('Hire Now');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -13121,6 +13722,59 @@ var company_name = '';
  
 </script>
  <script>
+    <?php foreach ($applications as $key => $value): ?>
+        
+    
+     $("#sendEmail{{$value->user_id}}").click(function(e) {
+        
+        e.preventDefault();  
+         $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        // body...
+ 
+        $.ajax({
+            type:'post',
+            url:'/send-candidates-email', 
+            data:{
+                '_token':$('input[name=_token').val(),
+                'email_address':$('[name=email_address{{$value->user_id}}]').val(),
+                'candidate_name':$('input[name=name{{$value->user_id}}]').val(),
+                'subject':$('input[name=subject{{$value->user_id}}]').val(),
+                'body':$('textarea[name=body_of_email{{$value->user_id}}]').val(),
+            }
+            ,
+              beforeSend: function(){
+            //Show image container
+            $("#loader").show(); 
+            $(".lds-ripplee{{$value->user_id}}").show(); 
+            $("#info{{$value->user_id}}").append('<i class="btn-success btn-xs" style="color:#ffffff;"> Sending email... </i>'); 
+             $("#sendEmailStatus{{$value->user_id}}").hide(); 
+             },
+
+             
+            success:function(data){
+            console.log(data); 
+     },
+     complete:function(data){
+    // Hide image container 
+    $("#loader").hide();
+    $(".lds-ripplee{{$value->user_id}}").hide(); 
+    $("#info{{$value->user_id}}").hide(); 
+
+    },
+}).done(function (data) { 
+    var message = data.msg;
+      console.log(data); 
+    $('#emailsent{{$value->user_id}}').append('<i class="btn-success btn-xs" style="color:#ffffff;"> '+message+' </i>');
+ 
+  });
+
+
+    });
+<?php endforeach ?>
     $(".delete").on("submit", function(){
         return confirm("Do you want to delete this item?");
     });
@@ -13199,6 +13853,16 @@ function validate() {
  
 
 
+</script>
+ <script>
+        <?php foreach ($applications as $key => $value): ?>
+   $(".lds-ripple{{$value->user_id}}").hide();
+   $(".lds-ripplee{{$value->user_id}}").hide();
+   
+     <?php endforeach ?>
+    $(".delete").on("submit", function(){
+        return confirm("Do you want to delete this item?");
+    });
 </script>
 
 <!-- 

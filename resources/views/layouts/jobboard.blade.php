@@ -668,6 +668,7 @@ function isEmpty(obj) {
   var resume_id = null;
   var job_id = data.job_id; 
    var apply_route = location.href ='/candidates/job-details';
+   var job_details = location.href ='/job/job-descriptions/';
     if(isEmpty(code['data'])) {
         $('#job_section').append('<li class="careerfy-column-12"> No Record(s) Found</li>');  
  
@@ -695,7 +696,7 @@ checked_featured = '<small class="careerfy-jobdetail-postinfo">Featured</small>'
     }else{
 checked_featured = ''; 
     }
-     var content2 = '<li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><figure><a href="'+apply_route+'/ '+value.id+'"><img src="'+image_url+'" alt=""></a></figure><div class="careerfy-joblisting-text"><div class="careerfy-list-option"><h2><a href="">'+job_title+' </a>'+checked_featured +'</h2><ul><li><a href="#" class="careerfy-option-btn careerfy-'+category+'" style="color:#ffffff;">'+employement_term+'</a></li><li><i class="careerfy-icon careerfy-maps-and-flags"></i> '+value.country+', '+value.city+'</li><li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>'+profession_name+'</li>   <li style="color: #F1630D";>  '+industryname+'</li></ul></div><div class="careerfy-job-userlist"> <a href="'+apply_route+'/'+value.id+'" class="careerfy-option-btn careerfy-'+category+'">Apply</a> </div><div class="clearfix"></div></div></div></li>';
+     var content2 = '<li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><figure><a href="'+apply_route+'/ '+value.id+'"><img src="'+image_url+'" alt=""></a></figure><div class="careerfy-joblisting-text"><div class="careerfy-list-option"><h2><a href="'+job_details+'/'+id +'">'+job_title+' </a>'+checked_featured +'</h2><ul><li><a href="#" class="careerfy-option-btn careerfy-'+category+'" style="color:#ffffff;">'+employement_term+'</a></li><li><i class="careerfy-icon careerfy-maps-and-flags"></i> '+value.country+', '+value.city+'</li><li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>'+profession_name+'</li>   <li style="color: #F1630D";>  '+industryname+'</li></ul></div><div class="careerfy-job-userlist"> <a href="'+apply_route+'/'+value.id+'" class="careerfy-option-btn careerfy-'+category+'">Apply</a> </div><div class="clearfix"></div></div></div></li>';
 
         $('#job_section').append(content2);
 

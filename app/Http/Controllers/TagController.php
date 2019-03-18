@@ -176,13 +176,15 @@ $job_record = Tag::findOrFail($job_id);
             $hired_count = $this->GetHiredCount($job_id); 
             $offered_list = $this->GetOfferApplicationList($job_id); //Application::where('tag_id',$job_id)->where('offered', 1)->where('delete', 0)->get(); 
             $hired_list = Application::where('tag_id',$job_id)->where('hired', 1)->where('delete', 0)->get();
+            $applications = Application::where('tag_id',$job_id)->get();
             $rejected_list = Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->get();
             $shortlisted_list = Application::where('tag_id',$job_id)->where('shortlisted', 1)->where('delete', 0)->get();
             $review_list = $this->GetReviewNewApplicationList($job_id);         
             $shortlisted_list = Application::where('tag_id',$job_id)->where('shortlisted', 1)->where('delete', 0)->get();
              $menus = $this->displayMenu(); 
             $units = $this->displayUnit();
-return view('employer.candidates_listing',  compact('documents', 'industries', 'employement_terms', 'educationallevels', 'jobcareer_levels', 'professions', 's', 'cities', 'c', 'work_experiences', 'users', 'educationallevels', 'List_applicants_by_job_id', 'documentList', 'countries', 'careerlist', 'jobskills', 'educationaList', 'dt', 'ddt', 'work_histories', 'jobcertifications', 'person_info_list', 'rejected_count', 'sorted_count', 'review_count', 'shortlisted_count', 'offered_count', 'hired_count', 'review_list', 'rejected_list', 'shortlisted_list', 'offered_list', 'hired_list', 'offered_list', 'job_id', 'job_record', 'menus', 'units'), array('user' => Auth::user()));
+
+return view('employer.candidates_listing',  compact('documents', 'industries', 'employement_terms', 'educationallevels', 'jobcareer_levels', 'professions', 's', 'cities', 'c', 'work_experiences', 'users', 'educationallevels', 'List_applicants_by_job_id', 'documentList', 'countries', 'careerlist', 'jobskills', 'educationaList', 'dt', 'ddt', 'work_histories', 'jobcertifications', 'person_info_list', 'rejected_count', 'sorted_count', 'review_count', 'shortlisted_count', 'offered_count', 'hired_count', 'review_list', 'rejected_list', 'shortlisted_list', 'offered_list', 'hired_list', 'offered_list', 'job_id', 'job_record', 'menus', 'units', 'applications'), array('user' => Auth::user()));
 }
 
 
@@ -1084,14 +1086,16 @@ public function EmailCandidates(Request $request)
         'subject' => $subject, 
         ];
   Mail::to($email_address)->queue(new EmailCandidate($content));
- 
+   $response = array('status' => 'success', 'msg' => 'Email sent successfully');
+    return response()->json($response);
     $request->session()->flash('message.level', 'success');
     $request->session()->flash('message.content', 'Done successfully!');
 } catch (Exception $e) {
     $request->session()->flash('message.level', 'danger');
     $request->session()->flash('message.content', 'something is not right!');
 }
-  return redirect()->back();
+  $response = array('status' => 'error', 'msg' => 'something is not right!');
+    return response()->json($response);
 }
 
 
@@ -1119,7 +1123,9 @@ public function RejectApplicant(Request $request)
     $hired_count = $this->GetHiredCount($job_id); //Application::where('tag_id',$job_id)->where('hired', 1)->count();
     $newapplication_list = $this->GetUnsortedNewApplicationList($job_id);
     $new_reject_list = $this->GetRejectedNewApplicationList($job_id); //Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->get();
+    $new_shortlisted = $this->GetShortlistedApplicationList($job_id);
     $review_list = $this->GetReviewNewApplicationList($job_id);
+    $hired_list = $this->GetHiredApplicationList($job_id);
     // $work_experiences = DB::table('work_experiences')->get();
 $work_experiences = DB::table('work_experiences')
             ->join('applications', 'work_experiences.resumefk', '=', 'applications.resume_id')
@@ -1128,7 +1134,7 @@ $work_experiences = DB::table('work_experiences')
 $documents = DB::table('applications')
             ->join('documents', 'documents.id', '=', 'applications.document_id') 
            ->get();
- $response = array('status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'reject_count' => $reject_count, 'sorted_count' =>$sorted_count, 'review_count' => $review_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hired_count' => $hired_count, 'newapplication_list' => $newapplication_list, 'work_experiences'=>$work_experiences, 'new_reject_list' => $new_reject_list, 'review_list' => $review_list);
+ $response = array('status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'reject_count' => $reject_count, 'sorted_count' =>$sorted_count, 'review_count' => $review_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hired_count' => $hired_count, 'newapplication_list' => $newapplication_list, 'work_experiences'=>$work_experiences, 'new_reject_list' => $new_reject_list, 'review_list' => $review_list, 'new_shortlisted' =>$new_shortlisted, 'hired_list' => $hired_list);
     return response()->json($response);
 }
 
@@ -1164,7 +1170,7 @@ public function GetOfferApplicationList($job_id)
 
 public function GetHiredApplicationList($job_id)
 {
- $hired_list = Application::where('tag_id',$job_id)->where('hired', 1)->where('sorted', 1)->where('delete', 0)->paginate(10);
+ $hired_list = Application::where('tag_id',$job_id)->where('hired', 1)->where('sorted', 1)->where('delete', 0)->get();
  return $hired_list;
 }
 
@@ -1200,8 +1206,8 @@ public function GetShortlistedCount($job_id)
 
 public function GetHiredCount($job_id)
 {
-   $hire_count = Application::where('tag_id',$job_id)->where('hired', 1)->where('sorted',1)->count();
-   return $hire_count;
+   $hired_count = Application::where('tag_id',$job_id)->where('hired', 1)->where('sorted',1)->where('delete', 0)->count();
+   return $hired_count;
 }
 
 public function GetQualificationLevels()
@@ -1234,6 +1240,7 @@ public function ReviewApplicant(Request $request)
     $newapplication_list = $this->GetUnsortedNewApplicationList($job_id);
     $new_reject_list = $this->GetRejectedNewApplicationList($job_id); //Application::where('tag_id',$job_id)->where('rejected', 1)->where('delete', 0)->get();
     $review_list = $this->GetReviewNewApplicationList($job_id);
+     $shortlisted_list = $this->GetShortlistedApplicationList($job_id);
     $work_experiences = DB::table('work_experiences')
             ->join('applications', 'work_experiences.resumefk', '=', 'applications.resume_id')
             ->join('tags', 'tags.id', '=', 'applications.tag_id')
@@ -1245,7 +1252,7 @@ $group_application = DB::table('applications')
              ->select('in_review', 'tag_id', DB::raw('count(*) as total'))
              ->groupBy('in_review', 'tag_id')->get();
  //$response = array( 'status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'review_count' => $review_count, 'group_application' => $group_application, 'sorted_count' => $sorted_count, 'reject_count'=>$reject_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hire_count' => $hire_count);
-$response = array( 'status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'reject_count' => $reject_count, 'sorted_count' =>$sorted_count, 'review_count' => $review_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hired_count' => $hired_count, 'newapplication_list' => $newapplication_list, 'work_experiences'=>$work_experiences, 'new_reject_list' => $new_reject_list, 'review_list'=>$review_list);
+$response = array( 'status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'reject_count' => $reject_count, 'sorted_count' =>$sorted_count, 'review_count' => $review_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hired_count' => $hired_count, 'newapplication_list' => $newapplication_list, 'work_experiences'=>$work_experiences, 'new_reject_list' => $new_reject_list, 'review_list'=>$review_list, 'shortlisted_list' => $shortlisted_list);
     return response()->json($response);
  
 }
@@ -1312,6 +1319,7 @@ public function OfferApplicant(Request $request)
     $offered_count = $this->GetOfferedCount($job_id); //Application::where('tag_id',$job_id)->where('offered', 1)->where('delete', 0)->count();
     $shortlisted_count = $this->GetShortlistedCount($job_id); //Application::where('tag_id',$job_id)->where('shortlisted', 1)->count();
     $hired_count = $this->GetHiredCount($job_id); //Application::where('tag_id',$job_id)->where('hired', 1)->count();
+     $new_review_list = $this->GetReviewNewApplicationList($job_id);
     $new_offered_list = $this->GetOfferApplicationList($job_id);
     $shortlisted_list = $this->GetShortlistedApplicationList($job_id);
     $work_experiences = DB::table('work_experiences')
@@ -1325,7 +1333,7 @@ public function OfferApplicant(Request $request)
    $group_application = DB::table('applications')
              ->select('in_review', 'tag_id', DB::raw('count(*) as total'))
              ->groupBy('in_review', 'tag_id')->get();
-$response = array( 'status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'reject_count' => $reject_count, 'sorted_count' =>$sorted_count, 'review_count' => $review_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hired_count' => $hired_count, 'work_experiences'=>$work_experiences, 'shortlisted_list'=>$shortlisted_list, 'new_offered_list' => $new_offered_list);
+$response = array( 'status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'reject_count' => $reject_count, 'sorted_count' =>$sorted_count, 'review_count' => $review_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hired_count' => $hired_count, 'work_experiences'=>$work_experiences, 'new_offered_list' => $new_offered_list, 'new_review_list' => $new_review_list, 'shortlisted_list' => $shortlisted_list);
     return response()->json($response);
  
 }
@@ -1356,6 +1364,7 @@ public function HireApplicant(Request $request)
     $shortlisted_count = $this->GetShortlistedCount($job_id); //Application::where('tag_id',$job_id)->where('shortlisted', 1)->count();
     $hired_count = $this->GetHiredCount($job_id); //Application::where('tag_id',$job_id)->where('hired', 1)->count();
     $newapplication_list = $this->GetUnsortedNewApplicationList($job_id);
+    $new_review_list = $this->GetReviewNewApplicationList($job_id);
     $hired_list = $this->GetHiredApplicationList($job_id);
     // $shortlisted_list = $this->GetShortlistedApplicationList($job_id);
     $newoffered_list = $this->GetOfferApplicationList($job_id);
@@ -1371,7 +1380,7 @@ public function HireApplicant(Request $request)
 $group_application = DB::table('applications')
              ->select('in_review', 'tag_id', DB::raw('count(*) as total'))
              ->groupBy('in_review', 'tag_id')->get();
-$response = array( 'status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'reject_count' => $reject_count, 'sorted_count' =>$sorted_count, 'review_count' => $review_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hired_count' => $hired_count, 'newapplication_list' => $newapplication_list, 'work_experiences'=>$work_experiences, 'hired_list'=>$hired_list,  'newoffered_list' =>$newoffered_list);
+$response = array( 'status' => 'success', 'msg' => 'Setting created successfully',  'application' => $application, 'request'=> $request->all(), 'reject_count' => $reject_count, 'sorted_count' =>$sorted_count, 'review_count' => $review_count, 'shortlisted_count' => $shortlisted_count, 'offered_count' => $offered_count, 'hired_count' => $hired_count, 'newapplication_list' => $newapplication_list, 'work_experiences'=>$work_experiences, 'hired_list'=>$hired_list,  'newoffered_list' =>$newoffered_list, 'new_review_list' => $new_review_list);
     return response()->json($response); 
 }
     // this method displays list of job post
