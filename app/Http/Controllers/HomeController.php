@@ -88,7 +88,7 @@ class HomeController extends Controller
         $users = User::all()->count();
         $resumes = RecruitResume::all();
         $resume_count = RecruitResume::all()->count();
-        $jobs_count = Tag::all()->count();
+        $jobs_count = Tag::where('status',1)->where('active', 1)->count();
         $resume_builder_list = ResumeBuilder::all();
         $employement_terms = DB::table('employement_terms')->get();
         $industry_professions = DB::table('industry_professions')->where('status',1)->get();

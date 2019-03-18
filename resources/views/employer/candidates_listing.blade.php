@@ -500,6 +500,7 @@ border-color: white !important;
                                             <div class="careerfy-candidate-default-wrap"> 
                                                 <figure> 
                                                     <?php $record = \App\RecruitProfilePix::where('status', 1)->where('user_id', $List_applicant->user_id)->orderBy('created_at', 'DESC')->first(); ?>
+                                                    {{$record->user_id}}
                                                 @if($record)
                                              <img src="/uploads/avatars/{{ $record->pic }}" alt=""> @else
                                              <img src="/uploads/avatars/{{ $user->avatar }}" alt="">
@@ -5386,7 +5387,8 @@ document.getElementById('present').style.display = 'block';
             }else{
                 status = '';
             }
-
+    company = getWorkExperienceCompanyName(work_experiences, user);
+    title = getWorkExperienceTitle(work_experiences, user);
             //loop through experience to get candidates experience@foreach($documentList as $document) 
             var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
         $('#applicants_list').append(newapplication_content);  
