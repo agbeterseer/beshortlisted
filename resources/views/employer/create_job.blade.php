@@ -221,14 +221,15 @@ border-color: white !important;
                                         </div>
                                         </div> 
                                                 </li>
+                                             <li class="careerfy-column-12">
+                                                    <label>Description / Responsibilities / Qualifications, Experience  *</label>
+                                                <textarea name="job_roles" required="required" id="summernote_3"></textarea>
+                                                </li>
                                                 <li class="careerfy-column-12">
                                                     <label>Description / Responsibilities / Qualifications, Experience  *</label>
                                                 <textarea name="description" required="required" id="summernote_1"></textarea>
                                                 </li>
-                                               <li class="careerfy-column-12">
-                                                    <label>Description / Responsibilities / Qualifications, Experience  *</label>
-                                                <textarea name="job_roles" required="required" id="summernote_3"></textarea>
-                                                </li>
+
                                             </ul>
                                         </div>
                                         <div class="careerfy-employer-box-section">

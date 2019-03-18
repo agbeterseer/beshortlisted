@@ -855,7 +855,7 @@ $('#summernote_1').summernote('fontSize', 14);
  
 $('#summernote_3').summernote({
        height:'300px',
-         placeholder:'Job Roles',
+         placeholder:'Job Functions',
         toolbar: [
           ['undo', ['undo',]],
           ['redo', ['redo',]],
