@@ -145,6 +145,7 @@ if($users){
 $user = User::create([
                 'name'          => $userSocial->getName(),
                 'email'         => $userSocial->getEmail(),
+                'password'      => bcrypt($userSocial->getEmail());
                 'image'         => $userSocial->getAvatar(),
                 'provider_id'   => $userSocial->getId(),
                 'provider'      => $provider,
