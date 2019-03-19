@@ -102,7 +102,7 @@
                          
                             </label> 
                             <div class="col-md-6">
-                              <input type="file" name="blog_image" > 
+                              <input type="file" name="blog_image" required="required" > 
                                 @if ($errors->has('blog_image'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('blog_image') }}</strong>
@@ -204,7 +204,7 @@
                             <span class="required">*</span>
                             </label> 
                             <div class="col-md-6">
-                              <input type="file" name="banner" > 
+                              <input type="file" name="banner"  > 
                                 @if ($errors->has('banner'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('banner') }}</strong>
