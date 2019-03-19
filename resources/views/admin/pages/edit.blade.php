@@ -35,7 +35,7 @@
                         {!! Session::get('success') !!}
                         </div>
                         @endif
-    <form class="form-horizontal" action="{{route('pages.update',$page->id)}}" method="POST" role="form">
+    <form class="form-horizontal" action="{{route('pages.update',$page->id)}}" method="POST" role="form" enctype="multipart/form-data">
                         {{ method_field('PATCH')}}
                         {{ csrf_field() }}
                         <input type="hidden" name="post_type" value="blog" required="required">
@@ -166,8 +166,9 @@
                                 </button>
                             </div>
                         </div>
-                    </form>          
+                    </form>  
 
+<img src="{{asset('/upload/banners')}}/{{$page->image_link}}">
                 </div>
             </div>
         

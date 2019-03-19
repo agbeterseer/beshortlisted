@@ -23,7 +23,7 @@
             <div class="careerfy-main-section">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12 careerfy-typo-wrap">
+                        <div class="col-md-12 ">
                             <!-- Fancy Title -->
                             <section class="careerfy-fancy-title">
                                 <h2>Featured Jobs Listings</h2>
@@ -101,7 +101,7 @@
                                 <ul class="row">
                                     @forelse($posts as $post)
                                     <li class="col-md-4">
-                                <figure><a href="#"><img src="extra-images/blog-grid-1.jpg" alt=""></a></figure>
+                            <figure><a href="#"><img src="{{ asset('/uploads/banners')}}/{{ $post->image_link }}" alt="" height="351" width="192"></a></figure>
                                         <div class="careerfy-blog-grid-text">
                                             <div class="careerfy-blog-tag"> <a href="#">{{$post->category}}</a> </div>
                                             <h2><a href="{{$post->url}}"> {{$post->title}}</a></h2>

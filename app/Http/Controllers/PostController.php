@@ -186,7 +186,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($request->all());
+         //dd($request->all());
         $user = Auth::user();
         $string = $request->title;
         $substr = '';
@@ -214,6 +214,7 @@ class PostController extends Controller
         $banner->move(public_path('/uploads/banners/'), $filename);
         $validator = Validator::make($input, $rules);
      
+
          if(!$validator)
         {
           Session::flash('error-avatar', 'error');
@@ -225,7 +226,7 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->url = $request->link;
         $post->post_type = $request->post_type;
-        $post->image_link = $banner;
+        $post->image_link = $filename;
         $post->status = 1;
         $post->user_id = $user->id;
         $post->user_name = $user->firstname . $user->lastname;
@@ -236,10 +237,10 @@ class PostController extends Controller
         $post->footer = $request->footer;
         $post->banner_top = $request->top_banner;
         $post->banner_buttom = $request->banner_buttom;
-        $post->top_banner_link = $filename2;
+        $post->top_banner_link = $filename;
         $post->save();
        }else{
-        //dd('here');
+   
         $post = Post::findOrFail($id);
         $post->title = $request->title;
         $post->content = $request->content;
