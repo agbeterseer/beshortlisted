@@ -1,3 +1,63 @@
+<style type="text/css">
+  /* Dropdown Button */
+.dropbtn {
+
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+</style>
+<script type="text/javascript">
+  function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
 <header id="careerfy-header" class="careerfy-header-one">
             <div class="container">
                 <div class="row">
@@ -19,6 +79,7 @@
                           @foreach($menus as $menu) 
                        <li> <a href="{{$menu->routes}}"> {{$menu->name}}</a> </li>
                           @endforeach 
+
                                 </ul>
                             </div>
                       </nav>
@@ -30,13 +91,15 @@
                                 <li><a class="careerfy-color" href="{{route('register')}}">Register</a></li>
                                 <li><a class="careerfy-color" href="{{route('auth.login')}}">Sign in</a></li>
                                 @else
-                                 <li> <a href="{{ route('logout') }}"
+                                 <li>  
+<div class="dropdown">  
+    <button onclick="myFunction()" class="dropbtn" style="background-color: #ffffff;"><i class="careerfy-icon careerfy-user"></i> &nbsp; Hi, {{ str_limit(Auth::user()->name, $limit = 10, $end = '...') }}</button>
+  <div id="myDropdown" class="dropdown-content"> 
+                                      <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            <i class="icon-key"></i> Logout 
-                                        </a>
-                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> {{ csrf_field() }}
-                                        </form>  
+                                            Logout 
+                                        </a> </div> </div> 
                                      </li>
                                 @endif
 
@@ -54,3 +117,5 @@
             </div>
         </header>
 
+                                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> {{ csrf_field() }}
+                                        </form> 

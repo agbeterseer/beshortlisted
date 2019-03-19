@@ -66,7 +66,7 @@
              <tr class="odd gradeX">
                
                         <td>{{$tag->job_title}}</td>
-                        <td>@foreach($users as $client) @if($client->id === $tag->client) {{$tag->client}} @endif @endforeach{{$tag->client}}</td>
+                        <td>@foreach($users as $client) @if($client->id == $tag->client) {{$client->name}} @endif @endforeach</td>
                         <td>
                         @if($tag->awaiting_aproval === 1)
                        <span class="label label-sm label-default "><i> Awaiting Approval</i></span>

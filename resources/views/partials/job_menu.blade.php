@@ -1,83 +1,69 @@
-<!--      <nav class="navbar navbar-fixed-top" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="https://bulma.io"> 
-      <img src="{{asset('logo/logo2.jpg')}}" alt="TREEPHR" width="112" height="">
-    </a>
+<style type="text/css">
+  /* Dropdown Button */
+.dropbtn {
 
-    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
+}
 
-  <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-start">
-        @foreach($menus as $menu)
-     <a class="navbar-item" href="{{$menu->routes}}"> {{strtoupper($menu->name)}}</a> 
-        @endforeach 
-    </div>
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  
+}
 
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-           @if(!Auth::user()) 
-          <a href="{{ route('register') }}" class="button is-primary">
-            <strong>REGISTER</strong>
-          </a>
-          <a class="button is-light">
-            SIGN IN
-          </a>
-          @else
-             <a class="button is-light">
-            LOGOUT
-          </a>
-           @endif
-           @if(Auth::user())
- <a href="{{ route('post.jobs') }}" class="button is-primary">
-            <strong>Post Job</strong>
-          </a>
-          @endif
-          @if(!Auth::user())
- <a href="{{ route('post.jobs') }}" class="button is-primary">
-            <strong>Post Job</strong>
-          </a>
-          @endif
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
- -->
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar w/ text</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-    </ul>
-    <span class="navbar-text">
-      Navbar text with an inline element
-    </span>
-  </div>
-</nav> -->
- 
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+</style>
+<script type="text/javascript">
+  function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
 
  <header id="careerfy-header" class="careerfy-header-one">
             <div class="container">
                 <div class="row">
                     <aside class="col-md-2">
-  <a href="{{asset('/')}}" class="careerfy-logo" style="margin-top: 10px;" ><img src="{{asset('logo/logo2.jpg')}}" alt="TREEPHR" width="200" height="00">  </a> 
+  <a href="{{asset('/')}}" class="careerfy-logo" style="margin-top:10px;" ><img src="{{asset('logo/logo2.jpg')}}" alt="TREEPHR" width="200" height="00">  </a> 
                 
                    <!--   <a href="#" class="careerfy-logo" style="margin-top: 10px;"><img src="{{asset('logo/logo2.jpg')}}"" alt=""></a> --></aside> 
                     <aside class="col-md-6">
@@ -105,13 +91,16 @@
                                 <li><a class="careerfy-color" href="{{route('register')}}">Register</a></li>
                                 <li><a class="careerfy-color" href="{{route('auth.login')}}">Sign in</a></li>
                                 @else
-                                 <li> <a href="{{ route('logout') }}"
+                       <li>  
+<div class="dropdown">  
+    <button onclick="myFunction()" class="dropbtn" style="background-color: #ffffff;"><i class="careerfy-icon careerfy-user"></i> &nbsp; Hi, {{ str_limit(Auth::user()->name, $limit = 10, $end = '...') }}</button>
+  <div id="myDropdown" class="dropdown-content"> 
+                                      <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            <i class="icon-key"></i> Logout 
-                                        </a>
-                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> {{ csrf_field() }}
-                                        </form> </li>
+                                            Logout 
+                                        </a> </div> </div> 
+                                     </li>
                                 @endif
                             </ul>
                               @if(Auth::user())
@@ -126,3 +115,5 @@
                 </div>
             </div>
         </header>
+                                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> {{ csrf_field() }}
+                                        </form> 
