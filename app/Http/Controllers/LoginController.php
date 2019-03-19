@@ -135,24 +135,6 @@ protected function authenticated(Request $request, $user)
         return redirect($this->redirectTo);
     }
 
-    public function Callback($provider){
-        $userSocial =   Socialite::driver($provider)->stateless()->user();
-        $users       =   User::where(['email' => $userSocial->getEmail()])->first();
-if($users){
-            Auth::login($users);
-            return redirect('/');
-        }else{
-$user = User::create([
-                'name'          => $userSocial->getName(),
-                'email'         => $userSocial->getEmail(),
-                'image'         => $userSocial->getAvatar(),
-                'provider_id'   => $userSocial->getId(),
-                'provider'      => $provider,
-            ]);
-         return redirect()->route('home');
-        }
-}
-
     /**
      * If a user has registered before using social auth, return the user
      * else, create a new user object.
@@ -190,7 +172,24 @@ $user = User::create([
     }
 
 
- 
+
+     public function redirect()
+    {
+
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function callback()
+    { 
+        dd('here');
+        $user = Socialite::driver('google')->user(); 
+
+        $authUser = $this->findOrCreateUser($user, 'google');
+        Auth::login($authUser, true);
+        return redirect($this->redirectTo);
+    }
+
+
 }
 
  

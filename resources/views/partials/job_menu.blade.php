@@ -93,7 +93,7 @@ window.onclick = function(event) {
                                 @else
                        <li>  
 <div class="dropdown">  
-    <button onclick="myFunction()" class="dropbtn" style="background-color: #ffffff;"><i class="careerfy-icon careerfy-user"></i> &nbsp; Hi, {{ str_limit(Auth::user()->name, $limit = 10, $end = '...') }}</button>
+    <button onclick="myFunction()" class="dropbtn" style="background-color: #ffffff;"><i class="careerfy-icon careerfy-user"></i> &nbsp; Hi, {{ str_limit(Auth::user()->name, $limit = 7, $end = '...') }}</button>
   <div id="myDropdown" class="dropdown-content"> 
                                       <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
