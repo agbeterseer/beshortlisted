@@ -132,7 +132,7 @@ protected function authenticated(Request $request, $user)
 
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
-        return redirect('/home');
+        return redirect($this->redirectTo);
     }
  
     /**
