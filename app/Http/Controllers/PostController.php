@@ -117,7 +117,7 @@ class PostController extends Controller
         $post->image_link = $filename2;
         $post->status = 1;
         $post->user_id = $user->id;
-        $post->user_name = $user->firstname . $user->lastname;
+        $post->user_name = $user->name;
         $post->category = $request->category;
         $post->display_name = $path;
         $post->created_at = $this->returnCurrentTime();
@@ -229,7 +229,7 @@ class PostController extends Controller
         $post->image_link = $filename;
         $post->status = 1;
         $post->user_id = $user->id;
-        $post->user_name = $user->firstname . $user->lastname;
+        $post->user_name = $user->name;
         $post->category = $request->category;
         $post->display_name = $path;
         $post->updated_at = $this->returnCurrentTime();
