@@ -204,7 +204,7 @@
                                 <li class="nav-item">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-puzzle"></i>
-                                      <span class="title">Post</span>
+                                      <span class="title">Pages</span>
                                       <span class="arrow"></span>
                                   </a>
                                    <ul class="sub-menu">

@@ -13,6 +13,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\CreatePageContent;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\ImageManagerStatic as Image;
 class PostController extends Controller
 {
 
