@@ -167,8 +167,7 @@
                             </div>
                         </div>
                     </form>  
-
-<img src="{{asset('/upload/banners')}}/{{$page->image_link}}">
+ 
                 </div>
             </div>
         

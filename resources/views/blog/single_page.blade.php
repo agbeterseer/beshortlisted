@@ -32,6 +32,7 @@
                             </section>
                             <!-- Featured Jobs Listings -->
                             <div class="careerfy-job-listing" style="text-align: center;" >
+                    <figure> <img src="{{ asset('/uploads/banners')}}/{{ $post->image_link }}" alt=""> </figure>
                                {!!  $post->content !!}
 
                             </div>
@@ -54,8 +55,8 @@
                         <div class="col-md-12">
                             <!-- Fancy Title -->
                             <section class="careerfy-fancy-title">
-                                <h2>From Our Blogs</h2>
-                                <p>A better career is out there. We'll help you find it to use.</p>
+                                <h2>Related  Post</h2>
+                                <!-- <p>A better career is out there. We'll help you find it to use.</p> -->
                             </section>
                             <!-- Blog -->
                             <div class="careerfy-blog careerfy-blog-grid">
@@ -63,16 +64,16 @@
                                     @forelse($posts as $post)
                                     @if($post->post_type === 'blog')
                                     <li class="col-md-4">
-                                        <figure><a href="#"><img src="extra-images/blog-grid-1.jpg" alt=""></a></figure>
+                                        <figure><a href="#"><img src="{{ asset('/uploads/banners')}}/{{ $post->image_link }}" alt="" height="351" width="192"></a></figure>
                                         <div class="careerfy-blog-grid-text">
                                             <div class="careerfy-blog-tag"> <a href="#">{{$post->category}}</a> </div>
                                             <h2><a href="{{$post->url}}">{{$post->title}}</a></h2>
                                             <ul class="careerfy-blog-grid-option">
-                                                <li>BY <a href="#" class="careerfy-color"><!-- name --></a></li>
+                                                <li>BY <a href="#" class="careerfy-color">{{$post->user_name}}</a></li>
                                                 <li><time datetime="2008-02-14 20:00">OCT 6, 2016</time></li>
                                             </ul>
                                             <!-- <p></p> -->
-                                            <a href="#" class="careerfy-read-more careerfy-bgcolor">Read Articles</a>
+                                            <a href="{{route('blog.show', $post->id)}}" class="careerfy-read-more careerfy-bgcolor">Read Articles</a>
                                         </div>
                                     </li>
                                     @endif

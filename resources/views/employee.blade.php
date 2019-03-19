@@ -106,7 +106,7 @@
                                             <div class="careerfy-blog-tag"> <a href="#">{{$post->category}}</a> </div>
                                             <h2><a href="{{$post->url}}"> {{ str_limit($post->title, $limit = 29, $end = '...') }}</a></h2>
                                             <ul class="careerfy-blog-grid-option">
-                                                <li>BY <a href="#" class="careerfy-color">Click mag staff</a></li>
+                                                <li>BY <a href="#" class="careerfy-color">{{$post->user_name}}</a></li>
                                                 <li><time datetime="2008-02-14 20:00">{{$post->created_at}}</time></li>
                                             </ul>
                                             <p> </p>
