@@ -245,6 +245,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->content = $request->content;
         $post->url = $request->link;
+        $post->image_link = 'blog-default.jpg';
         $post->post_type = $request->post_type;
         $post->status = 1; 
         $post->user_id = $user->id;
