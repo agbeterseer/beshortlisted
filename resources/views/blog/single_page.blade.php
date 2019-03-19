@@ -12,6 +12,14 @@
 ])
 @section('content')
 @include('partials.employee_breadcomb')
+<style type="text/css">
+    .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+</style>
  <div class="careerfy-main-content" style="background-color: #ffffff;">
              <!-- Main Section -->
                         <section class="careerfy-fancy-title">
@@ -21,18 +29,19 @@
             <!-- Main Section -->
 
               <!-- Main Section -->
-            <div class="careerfy-main-section">
+            <div class="careerfy-main-section" >
                 <div class="container">
                     <div class="row">
 
                         <div class="col-md-12 careerfy-typo-wrap">
                             <!-- Fancy Title -->
+                           
                             <section class="careerfy-fancy-title">
-                                <h2>{{$post->title}}d</h2> 
+                                <h2>{{$post->title}}</h2> 
                             </section>
                             <!-- Featured Jobs Listings -->
-                            <div class="careerfy-job-listing" style="text-align: center;" >
-                    <figure> <img src="{{ asset('/uploads/banners')}}/{{ $post->image_link }}" alt=""> </figure>
+                            <div class="careerfy-job-listing" style="text-align: center;"  >
+                   <img src="{{ asset('/uploads/banners')}}/{{ $post->image_link }}" alt="" class="center">
                                {!!  $post->content !!}
 
                             </div>
@@ -64,7 +73,7 @@
                                     @forelse($posts as $post)
                                     @if($post->post_type === 'blog')
                                     <li class="col-md-4">
-                                        <figure><a href="#"><img src="{{ asset('/uploads/banners')}}/{{ $post->image_link }}" alt="" height="351" width="192"></a></figure>
+                                        <figure><a href="{{route('blog.show', $post->id)}}"><img src="{{ asset('/uploads/banners')}}/{{ $post->image_link }}" alt="" height="351" width="192"></a></figure>
                                         <div class="careerfy-blog-grid-text">
                                             <div class="careerfy-blog-tag"> <a href="#">{{$post->category}}</a> </div>
                                             <h2><a href="{{route('blog.show', $post->id)}}">{{ str_limit($post->title, $limit = 29, $end = '...') }}</a></h2>

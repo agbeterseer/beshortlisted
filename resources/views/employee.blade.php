@@ -27,7 +27,7 @@
                             <!-- Fancy Title -->
                             <section class="careerfy-fancy-title">
                                 <h2>Featured Jobs Listings</h2>
-                                <p>Find jobs that fit, your industry, your experience and a current role on your dashboard.<br>{Tailor dashboard by industry and role}, receive newsletters and job notifications.</p>
+                                <p>Find jobs that fit, your industry, your experience and a current role on your dashboard.<br> receive newsletters and job notifications.</p>
                             </section>
                             <!-- Featured Jobs Listings -->
                             <div class="careerfy-job-listing careerfy-featured-listing">
