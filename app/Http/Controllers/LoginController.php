@@ -132,9 +132,9 @@ protected function authenticated(Request $request, $user)
 
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
-        return redirect($this->redirectTo);
+        return redirect('/home');
     }
-
+ 
     /**
      * If a user has registered before using social auth, return the user
      * else, create a new user object.
