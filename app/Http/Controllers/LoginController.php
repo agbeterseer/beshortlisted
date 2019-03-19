@@ -190,24 +190,7 @@ $user = User::create([
     }
 
 
-
-     public function redirect()
-    {
-
-        return Socialite::driver('google')->redirect();
-    }
-
-    public function callback()
-    { 
-        dd('here');
-        $user = Socialite::driver('google')->user(); 
-
-        $authUser = $this->findOrCreateUser($user, 'google');
-        Auth::login($authUser, true);
-        return redirect($this->redirectTo);
-    }
-
-
+ 
 }
 
  
