@@ -149,6 +149,7 @@ $user = User::create([
                 'image'         => $userSocial->getAvatar(),
                 'provider_id'   => $userSocial->getId(),
                 'provider'      => $provider,
+                 'account_type' => 'employee',
             ]);
          return redirect()->route('home');
         }
