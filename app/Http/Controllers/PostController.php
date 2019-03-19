@@ -211,6 +211,7 @@ class PostController extends Controller
 
         //$avatar = $request->file('avatar');
         $filename = time() . '.' . $banner->getClientOriginalExtension();
+        Image::make($banner)->resize(1583, 300)->save(public_path('/uploads/banners/' . $filename));
         $banner->move(public_path('/uploads/banners/'), $filename);
         $validator = Validator::make($input, $rules);
      

@@ -101,7 +101,7 @@
                                 <ul class="row">
                                     @forelse($posts as $post)
                                     <li class="col-md-4">
-                            <figure><a href="#"><img src="{{ asset('/uploads/banners')}}/{{ $post->image_link }}" alt="" height="351" width="192"></a></figure>
+                            <figure><a href="#"><img src="{{ asset('/uploads/banners')}}/{{ $post->image_link }}" alt="" height="351%" width="192%"></a></figure>
                                         <div class="careerfy-blog-grid-text">
                                             <div class="careerfy-blog-tag"> <a href="#">{{$post->category}}</a> </div>
                                             <h2><a href="{{route('blog.show', $post->id)}}"> {{ str_limit($post->title, $limit = 29, $end = '...') }}</a></h2>
