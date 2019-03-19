@@ -67,7 +67,7 @@
                                         <figure><a href="#"><img src="{{ asset('/uploads/banners')}}/{{ $post->image_link }}" alt="" height="351" width="192"></a></figure>
                                         <div class="careerfy-blog-grid-text">
                                             <div class="careerfy-blog-tag"> <a href="#">{{$post->category}}</a> </div>
-                                            <h2><a href="{{$post->url}}">{{$post->title}}</a></h2>
+                                            <h2><a href="{{route('blog.show', $post->id)}}">{{$post->title}}</a></h2>
                                             <ul class="careerfy-blog-grid-option">
                                                 <li>BY <a href="#" class="careerfy-color">{{$post->user_name}}</a></li>
                                                 <li><time datetime="2008-02-14 20:00">OCT 6, 2016</time></li>
