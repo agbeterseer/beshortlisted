@@ -22,9 +22,6 @@
 </style>
  <div class="careerfy-main-content" style="background-color: #ffffff;">
              <!-- Main Section -->
-                        <section class="careerfy-fancy-title">
-                                <h2>Blog Post</h2>
-                        </section>
     
             <!-- Main Section -->
 
