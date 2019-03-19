@@ -197,7 +197,7 @@ $user = User::create([
         return Socialite::driver('google')->redirect();
     }
 
-    public function callback()
+    public function callback2()
     { 
         dd('here');
         $user = Socialite::driver('google')->user(); 
