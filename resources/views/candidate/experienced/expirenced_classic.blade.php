@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Candidate Profile Setting</title>
+    <title>Expirenced Classic</title>
     
     <!-- Css -->
 <!--    <link href="{{ asset('recruit/css/bootstrap.css')}}" rel="stylesheet">
@@ -75,25 +75,32 @@ hr {
                 <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
-                        <span class="caption-subject bold uppercase"> Fresher's Standard Resume</span>
+                        <span class="caption-subject bold uppercase">Experienced Resume</span>&nbsp;
                     </div>
  <a href="{{url('/templates')}}" class="btn red mt-ladda-btn ladda-button btn-outline"> Close </a>
                    <a href="javascript:window.print();" class="btn red mt-ladda-btn ladda-button btn-outline"> PRINT </a>
                 
                 </div>
                 <div class="portlet-body"> 
+                                      @if($document)
                                         <div class="careerfy-profile-title" align="left">
                                          <br>
                                        <strong> Name: </strong> {{Auth::user()->firstname}} {{Auth::user()->lastname}}<br>
-                                        <strong> Address:</strong> {{Auth::user()->contact_address}}.<br>
+                                        <strong> Address:</strong> {{Auth::user()->contact_address}}<br>
                                         <strong> Email Address:</strong> {{Auth::user()->email}}<br>
                                         <strong>Phone:</strong> {{$document->phonenumber}}
                                         </div>
+                                      @endif
                 <div class="space">&nbsp;</div>
 
                                         <div><h4> <strong style="vertical-align: middle;">Career Objectives</strong>.</h4></div>
                                             <hr>
+                                            @if($career)
                                               {{$career->summary}}
+                                              @else
+                                              N/A
+                                            @endif
+
                                           <!-- EDUCATIONAL QUALIFICATION-->
                     
   <div class="space">&nbsp;</div>
@@ -127,7 +134,7 @@ Previous
 </div>
 
 <div style="clear: both;"></div>
-Sotfware Developer
+{{$work_history->position_title}}
  <br> 
  <br> 
  <strong>Description:</strong>

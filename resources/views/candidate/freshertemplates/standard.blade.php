@@ -64,7 +64,7 @@ hr {
                 <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
-                        <span class="caption-subject bold uppercase"> Fresher's Standard Resume</span>
+                        <span class="caption-subject bold uppercase">Standard Resume &nbsp;</span>&nbsp;
                     </div>
                  <a href="{{url('/templates')}}" class="btn red mt-ladda-btn ladda-button btn-outline"> Close </a>
                    <a href="javascript:window.print();" class="btn red mt-ladda-btn ladda-button btn-outline"> PRINT </a>
@@ -72,8 +72,7 @@ hr {
                 <div class="portlet-body"> 
                   @if($document)
                                         <div class="careerfy-profile-title" align="center">
-                                         <br>
-                                       <strong>{{Auth::user()->firstname}} {{Auth::user()->lastname}}</strong> <br>
+                                        <strong>{{Auth::user()->firstname}} {{Auth::user()->lastname}}</strong> <br>
                                         <strong> {{Auth::user()->contact_address}}</strong> <br>
                                         <strong> {{Auth::user()->email}}</strong> <br>
                                         <strong>{{$document->phonenumber}} </strong> 
@@ -146,8 +145,8 @@ Previous
  {{ date('M, Y', strtotime($ddt)) }}  ({{$yer}} year(s) ) @endif</span><br>
 </div>
 
-<div style="clear: both;"></div>
-Sotfware Developer
+<div style="clear: both;"></div> 
+{{$work_history->position_title}}
  <br> 
  <br> 
  <strong>Description:</strong>

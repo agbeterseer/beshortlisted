@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Candidate Profile Setting</title>
+    <title>Tabular Resume</title>
     
     <!-- Css -->
 <!--    <link href="{{ asset('recruit/css/bootstrap.css')}}" rel="stylesheet">
@@ -50,7 +50,7 @@ th, td {
                 <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
-                        <span class="caption-subject bold uppercase"> TabularResume</span>
+                        <span class="caption-subject bold uppercase"> Tabular Resume</span> &nbsp;
                     </div>
                  <a href="{{url('/templates')}}" class="btn red mt-ladda-btn ladda-button btn-outline"> Close </a>
                   <a href="javascript:window.print();" class="btn blue mt-ladda-btn ladda-button btn-outline"> PRINT </a>

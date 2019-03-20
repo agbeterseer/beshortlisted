@@ -2630,7 +2630,7 @@ return response()->json($response);
           $job_category_list = $this->GetJobcategory();
           $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
    // dd($referee_list);
-     $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
+     $profile_pix = $this->getProfilePix();
             return view('candidate.freshertemplates.tabular_resume', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
                 'job_category_list', 'referee_list', 'profile_pix'), array('user' => Auth::user()));
                // return view('candidate.freshertemplates.tabular_resume', array('user' => Auth::user()));
@@ -2703,9 +2703,9 @@ return response()->json($response);
  // dd($section_candidatelist_count);
           $job_category_list = $this->GetJobcategory();
           $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
-
+$profile_pix = $this->getProfilePix();
      $pdf = PDF::loadView('candidate.PDF.tabular_pdf',  compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
-                'job_category_list', 'regions', 'referee_list')); 
+                'job_category_list', 'regions', 'referee_list', 'profile_pix')); 
       return $pdf->download('tabular_resume.pdf');  
     }
 
@@ -2775,8 +2775,9 @@ return response()->json($response);
  // dd($section_candidatelist_count);
           $job_category_list = $this->GetJobcategory();
           $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
+          $profile_pix = $this->getProfilePix();
           return view('candidate.freshertemplates.classic', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
-                'job_category_list', 'referee_list'), array('user' => Auth::user()));
+                'job_category_list', 'referee_list', 'profile_pix'), array('user' => Auth::user()));
            // return view('candidate.freshertemplates.classic', array('user' => Auth::user()));
         }else{
 
@@ -2952,11 +2953,11 @@ public function UpdateReferees(Request $request)
   // dd($job_category_list);
    $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
         //get educational_levels
-
+$profile_pix = $this->getProfilePix();
 
       
     $pdf = PDF::loadView('candidate.PDF.classic_pdf',  compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
-                'job_category_list', 'regions', 'referee_list')); 
+                'job_category_list', 'regions', 'referee_list', 'profile_pix')); 
       return $pdf->download('classic_resume.pdf');  
     }
 // End Classic Template
@@ -3036,10 +3037,10 @@ public function UpdateReferees(Request $request)
    $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
         //get educational_levels
 
-
+$profile_pix = $this->getProfilePix();
       
     $pdf = PDF::loadView('candidate.PDF.standard_pdf',  compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
-                'job_category_list', 'regions', 'referee_list')); 
+                'job_category_list', 'regions', 'referee_list', 'profile_pix')); 
       return $pdf->download('standard_resume.pdf');  
          
     }
@@ -3110,8 +3111,9 @@ public function UpdateReferees(Request $request)
           $job_category_list = $this->GetJobcategory();
           $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
         //get educational_levels 
+          $profile_pix = $this->getProfilePix();
         return view('candidate.freshertemplates.standard', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
-                'job_category_list', 'referee_list'), array('user' => Auth::user()));
+                'job_category_list', 'referee_list', 'profile_pix'), array('user' => Auth::user()));
            // return view('candidate.freshertemplates.classic', array('user' => Auth::user()));
         }else{
           return redirect('/login');
@@ -3121,8 +3123,79 @@ public function UpdateReferees(Request $request)
 
     public function Professional()
     {
-        
-        return view('candidate.freshertemplates.professional', array('user' => Auth::user()));
+             $user = Auth::user(); 
+      $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
+      if ($user_single_resume_by_date === null) { 
+      return redirect()->route('show.cation');
+      }
+        if ($user) { 
+            
+       // dd('it is our work  ooo');
+        $dt = Carbon::now();
+        $ddt = Carbon::now(); 
+        $documents = Document::all()->count();
+        $users = User::all()->count();
+        $jobskills = JobSkill::where('userid', $user->id)->get();
+
+        $industries =  DB::table('industries')->get();
+        $recruityear_list = RecruitYear::all();
+        $qualifications = Qualification::all();
+        // $countries = Country::all();
+        $job_career_levelList = JobcareerLevel::all();
+        $educationallevels = $this->GetQualificationLevels();
+        $employementterms = DB::table('employement_terms')->get();
+        $jobcertifications = DB::table('job_certifications')->where('user_id', $user->id)->get();
+        $person_info = PersonalInformation::where('user_id', $user->id)->first();
+        //employement_terms employement_terms
+        $industry_profession = DB::table('industry_professions')->get();
+        // get Awards
+        $awards = Award::where('user_id', $user->id)->get();
+        $resumes = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->get();
+        // fresh user test pass
+        //$resumes = RecruitResume::where('user_id', $user->id)->having('status', '=', 1)->orderBy('status','DESC')->get();
+        $user_resume_list = RecruitResume::where('user_id', $user->id)->orderBy('created_at','DESC')->get();
+       // fresh user test pass
+        // check for candidates current resume
+        $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->first();
+        // fresh user test pass
+        $document = Document::Where('user_id', $user->id)->where('resume_id', $user_single_resume_by_date->id)->first();
+       // dd($user_single_resume_by_date);
+        try {
+    $career = CareerSummary::where('userid', $user->id)->where('resume_id', $user_single_resume_by_date->id)->first();
+       // get Educational History
+    $educationaList = JobEducation::where('userid', $user->id)->where('resume_id', $user_single_resume_by_date->id)->get();
+        ///dd($educationaList);
+        // get Work History
+    $work_histories = WorkExperience::where('userfk', $user->id)->where('resumefk', $user_single_resume_by_date->id)->orderBy('present','DESC')->get();
+           
+        } catch (\Exception $e) { 
+                return redirect()->route('show.cation');
+            //dd('redirect to create caption page.');
+        }
+        // get 
+        $job_by_candidate_list = $this->GetAvailableJobs();
+        // dd($job_by_candidate_list);
+
+        $users = $this->GetUsers();
+        $countries = $this->GetCountries();
+        $cities = $this->GetCities();
+        $regions = DB::table('regions')->get();
+
+        $tags = $this->Tags();
+        $section_candidatelist = $this->GetCandidateSection($user_single_resume_by_date->id);
+          $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
+ // dd($section_candidatelist_count);
+          $job_category_list = $this->GetJobcategory();
+          $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
+        //get educational_levels 
+          $profile_pix = $this->getProfilePix();
+        return view('candidate.freshertemplates.professional', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+                'job_category_list', 'referee_list', 'profile_pix'), array('user' => Auth::user()));
+           // return view('candidate.freshertemplates.classic', array('user' => Auth::user()));
+        }else{
+          return redirect('/login');
+        }
+         return redirect()->back(); 
     }
 
     public function Professional2()
@@ -3138,14 +3211,156 @@ public function UpdateReferees(Request $request)
     }
     public function LefPhoto()
     {
-        
-        return view('candidate.freshertemplates.left_photo', array('user' => Auth::user()));
+         $user = Auth::user(); 
+      $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
+      if ($user_single_resume_by_date === null) { 
+      return redirect()->route('show.cation');
+      }
+        if ($user) { 
+            
+       // dd('it is our work  ooo');
+        $dt = Carbon::now();
+        $ddt = Carbon::now(); 
+        $documents = Document::all()->count();
+        $users = User::all()->count();
+        $jobskills = JobSkill::where('userid', $user->id)->get();
+
+        $industries =  DB::table('industries')->get();
+        $recruityear_list = RecruitYear::all();
+        $qualifications = Qualification::all();
+        // $countries = Country::all();
+        $job_career_levelList = JobcareerLevel::all();
+        $educationallevels = $this->GetQualificationLevels();
+        $employementterms = DB::table('employement_terms')->get();
+        $jobcertifications = DB::table('job_certifications')->where('user_id', $user->id)->get();
+        $person_info = PersonalInformation::where('user_id', $user->id)->first();
+        //employement_terms employement_terms
+        $industry_profession = DB::table('industry_professions')->get();
+        // get Awards
+        $awards = Award::where('user_id', $user->id)->get();
+        $resumes = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->get();
+        // fresh user test pass
+        //$resumes = RecruitResume::where('user_id', $user->id)->having('status', '=', 1)->orderBy('status','DESC')->get();
+        $user_resume_list = RecruitResume::where('user_id', $user->id)->orderBy('created_at','DESC')->get();
+       // fresh user test pass
+        // check for candidates current resume
+        $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->first();
+        // fresh user test pass
+        $document = Document::Where('user_id', $user->id)->where('resume_id', $user_single_resume_by_date->id)->first();
+       // dd($user_single_resume_by_date);
+        try {
+    $career = CareerSummary::where('userid', $user->id)->where('resume_id', $user_single_resume_by_date->id)->first();
+       // get Educational History
+    $educationaList = JobEducation::where('userid', $user->id)->where('resume_id', $user_single_resume_by_date->id)->get();
+        ///dd($educationaList);
+        // get Work History
+    $work_histories = WorkExperience::where('userfk', $user->id)->where('resumefk', $user_single_resume_by_date->id)->orderBy('present','DESC')->get();
+           
+        } catch (\Exception $e) { 
+                return redirect()->route('show.cation');
+            //dd('redirect to create caption page.');
+        }
+        // get 
+        $job_by_candidate_list = $this->GetAvailableJobs();
+        // dd($job_by_candidate_list);
+
+        $users = $this->GetUsers();
+        $countries = $this->GetCountries();
+        $cities = $this->GetCities();
+        $regions = DB::table('regions')->get();
+
+        $tags = $this->Tags();
+        $section_candidatelist = $this->GetCandidateSection($user_single_resume_by_date->id);
+          $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
+ // dd($section_candidatelist_count);
+          $job_category_list = $this->GetJobcategory();
+          $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
+        //get educational_levels 
+         $profile_pix = $this->getProfilePix();
+        return view('candidate.freshertemplates.left_photo', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+                'job_category_list', 'referee_list', 'profile_pix'), array('user' => Auth::user()));
+           // return view('candidate.freshertemplates.classic', array('user' => Auth::user()));
+        }else{
+          return redirect('/login');
+        }
+         return redirect()->back();
     }
 
     public function RightPhoto()
     {
-        
-        return view('candidate.freshertemplates.right_photo', array('user' => Auth::user()));
+               $user = Auth::user(); 
+      $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
+      if ($user_single_resume_by_date === null) { 
+      return redirect()->route('show.cation');
+      }
+        if ($user) { 
+            
+       // dd('it is our work  ooo');
+        $dt = Carbon::now();
+        $ddt = Carbon::now(); 
+        $documents = Document::all()->count();
+        $users = User::all()->count();
+        $jobskills = JobSkill::where('userid', $user->id)->get();
+
+        $industries =  DB::table('industries')->get();
+        $recruityear_list = RecruitYear::all();
+        $qualifications = Qualification::all();
+        // $countries = Country::all();
+        $job_career_levelList = JobcareerLevel::all();
+        $educationallevels = $this->GetQualificationLevels();
+        $employementterms = DB::table('employement_terms')->get();
+        $jobcertifications = DB::table('job_certifications')->where('user_id', $user->id)->get();
+        $person_info = PersonalInformation::where('user_id', $user->id)->first();
+        //employement_terms employement_terms
+        $industry_profession = DB::table('industry_professions')->get();
+        // get Awards
+        $awards = Award::where('user_id', $user->id)->get();
+        $resumes = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->get();
+        // fresh user test pass
+        //$resumes = RecruitResume::where('user_id', $user->id)->having('status', '=', 1)->orderBy('status','DESC')->get();
+        $user_resume_list = RecruitResume::where('user_id', $user->id)->orderBy('created_at','DESC')->get();
+       // fresh user test pass
+        // check for candidates current resume
+        $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->first();
+        // fresh user test pass
+        $document = Document::Where('user_id', $user->id)->where('resume_id', $user_single_resume_by_date->id)->first();
+       // dd($user_single_resume_by_date);
+        try {
+    $career = CareerSummary::where('userid', $user->id)->where('resume_id', $user_single_resume_by_date->id)->first();
+       // get Educational History
+    $educationaList = JobEducation::where('userid', $user->id)->where('resume_id', $user_single_resume_by_date->id)->get();
+        ///dd($educationaList);
+        // get Work History
+    $work_histories = WorkExperience::where('userfk', $user->id)->where('resumefk', $user_single_resume_by_date->id)->orderBy('present','DESC')->get();
+           
+        } catch (\Exception $e) { 
+                return redirect()->route('show.cation');
+            //dd('redirect to create caption page.');
+        }
+        // get 
+        $job_by_candidate_list = $this->GetAvailableJobs();
+        // dd($job_by_candidate_list);
+
+        $users = $this->GetUsers();
+        $countries = $this->GetCountries();
+        $cities = $this->GetCities();
+        $regions = DB::table('regions')->get();
+
+        $tags = $this->Tags();
+        $section_candidatelist = $this->GetCandidateSection($user_single_resume_by_date->id);
+          $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
+ // dd($section_candidatelist_count);
+          $job_category_list = $this->GetJobcategory();
+          $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
+        //get educational_levels 
+         $profile_pix = $this->getProfilePix();
+        return view('candidate.freshertemplates.right_photo', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+                'job_category_list', 'referee_list', 'profile_pix'), array('user' => Auth::user()));
+           // return view('candidate.freshertemplates.classic', array('user' => Auth::user()));
+        }else{
+          return redirect('/login');
+        }
+        return redirect()->back();
     }
        public function Traditional()
     {
@@ -3221,8 +3436,8 @@ public function UpdateReferees(Request $request)
   // dd($job_category_list);
    $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
         //get educational_levels
-      
-    $pdf = PDF::loadView('candidate.PDF.classic_experienced_pdf',  compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 'job_category_list', 'regions', 'referee_list')); 
+    $profile_pix = $this->getProfilePix();
+    $pdf = PDF::loadView('candidate.PDF.classic_experienced_pdf',  compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 'job_category_list', 'regions', 'referee_list', 'profile_pix')); 
       return $pdf->download('classic_experienced_resume.pdf');  
        
     }
@@ -3298,9 +3513,9 @@ public function UpdateReferees(Request $request)
    // dd($referee_list);
 
         //get educational_levels 
- 
+          $profile_pix = $this->getProfilePix();
             return view('candidate.experienced.expirenced_classic', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
-                'job_category_list', 'referee_list'), array('user' => Auth::user()));
+                'job_category_list', 'referee_list', 'profile_pix'), array('user' => Auth::user()));
            // return view('candidate.freshertemplates.classic', array('user' => Auth::user()));
         }else{
 
@@ -3309,6 +3524,13 @@ public function UpdateReferees(Request $request)
         }
         return redirect()->back();
        
+    }
+
+    public function getProfilePix()
+    {
+      $user = Auth::user();
+     $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
+     return $profile_pix;
     }
 
         public function TwoColumns2()
@@ -3336,8 +3558,85 @@ public function UpdateReferees(Request $request)
 
         public function BoldHeader()
     {
+      $user = Auth::user(); 
+      $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
+      if ($user_single_resume_by_date === null) { 
+      return redirect()->route('show.cation');
+      }
+        if ($user) { 
+            
+       // dd('it is our work  ooo');
+        $dt = Carbon::now();
+        $ddt = Carbon::now(); 
+        $documents = Document::all()->count();
+        $users = User::all()->count();
+        $jobskills = JobSkill::where('userid', $user->id)->get();
 
-       return view('candidate.experienced.bold_header', array('user' => Auth::user()));
+        $industries =  DB::table('industries')->get();
+        $recruityear_list = RecruitYear::all();
+        $qualifications = Qualification::all();
+        // $countries = Country::all();
+        $job_career_levelList = JobcareerLevel::all();
+        $educationallevels = $this->GetQualificationLevels();
+        $employementterms = DB::table('employement_terms')->get();
+        $jobcertifications = DB::table('job_certifications')->where('user_id', $user->id)->get();
+        $person_info = PersonalInformation::where('user_id', $user->id)->first();
+        //employement_terms employement_terms
+        $industry_profession = DB::table('industry_professions')->get();
+        // get Awards
+        $awards = Award::where('user_id', $user->id)->get();
+        $resumes = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->get();
+        // fresh user test pass
+        //$resumes = RecruitResume::where('user_id', $user->id)->having('status', '=', 1)->orderBy('status','DESC')->get();
+        $user_resume_list = RecruitResume::where('user_id', $user->id)->orderBy('created_at','DESC')->get();
+       // fresh user test pass
+        // check for candidates current resume
+        $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->first();
+        // fresh user test pass
+        $document = Document::Where('user_id', $user->id)->where('resume_id', $user_single_resume_by_date->id)->first();
+       // dd($user_single_resume_by_date);
+        try {
+    $career = CareerSummary::where('userid', $user->id)->where('resume_id', $user_single_resume_by_date->id)->first();
+       // get Educational History
+    $educationaList = JobEducation::where('userid', $user->id)->where('resume_id', $user_single_resume_by_date->id)->get();
+        ///dd($educationaList);
+        // get Work History
+    $work_histories = WorkExperience::where('userfk', $user->id)->where('resumefk', $user_single_resume_by_date->id)->orderBy('present','DESC')->get();
+           
+        } catch (\Exception $e) { 
+                return redirect()->route('show.cation');
+            //dd('redirect to create caption page.');
+        }
+        // get 
+        $job_by_candidate_list = $this->GetAvailableJobs();
+        // dd($job_by_candidate_list);
+
+
+
+        $users = $this->GetUsers();
+        $countries = $this->GetCountries();
+        $cities = $this->GetCities();
+        $regions = DB::table('regions')->get();
+
+        $tags = $this->Tags();
+        $section_candidatelist = $this->GetCandidateSection($user_single_resume_by_date->id);
+          $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
+ // dd($section_candidatelist_count);
+          $job_category_list = $this->GetJobcategory();
+          $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
+   // dd($referee_list);
+
+        //get educational_levels 
+          $profile_pix = $this->getProfilePix();
+            return view('candidate.experienced.bold_header', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+                'job_category_list', 'referee_list', 'profile_pix'), array('user' => Auth::user()));
+           // return view('candidate.freshertemplates.classic', array('user' => Auth::user()));
+        }else{
+
+          return redirect('/login');
+
+        }
+        return redirect()->back(); 
     }
     
     public function LeftSide()
@@ -3353,7 +3652,84 @@ public function UpdateReferees(Request $request)
 
     public function StylishRed()
     {
-    return view('candidate.experienced.stylish_red', array('user' => Auth::user()));
+            $user = Auth::user(); 
+      $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
+      if ($user_single_resume_by_date === null) { 
+      return redirect()->route('show.cation');
+      }
+        if ($user) { 
+            
+       // dd('it is our work  ooo');
+        $dt = Carbon::now();
+        $ddt = Carbon::now(); 
+        $documents = Document::all()->count();
+        $users = User::all()->count();
+        $jobskills = JobSkill::where('userid', $user->id)->get();
+
+        $industries =  DB::table('industries')->get();
+        $recruityear_list = RecruitYear::all();
+        $qualifications = Qualification::all();
+        // $countries = Country::all();
+        $job_career_levelList = JobcareerLevel::all();
+        $educationallevels = $this->GetQualificationLevels();
+        $employementterms = DB::table('employement_terms')->get();
+        $jobcertifications = DB::table('job_certifications')->where('user_id', $user->id)->get();
+        $person_info = PersonalInformation::where('user_id', $user->id)->first();
+        //employement_terms employement_terms
+        $industry_profession = DB::table('industry_professions')->get();
+        // get Awards
+        $awards = Award::where('user_id', $user->id)->get();
+        $resumes = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->get();
+        // fresh user test pass
+        //$resumes = RecruitResume::where('user_id', $user->id)->having('status', '=', 1)->orderBy('status','DESC')->get();
+        $user_resume_list = RecruitResume::where('user_id', $user->id)->orderBy('created_at','DESC')->get();
+       // fresh user test pass
+        // check for candidates current resume
+        $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->orderBy('status','DESC')->first();
+        // fresh user test pass
+        $document = Document::Where('user_id', $user->id)->where('resume_id', $user_single_resume_by_date->id)->first();
+       // dd($user_single_resume_by_date);
+        try {
+    $career = CareerSummary::where('userid', $user->id)->where('resume_id', $user_single_resume_by_date->id)->first();
+       // get Educational History
+    $educationaList = JobEducation::where('userid', $user->id)->where('resume_id', $user_single_resume_by_date->id)->get();
+        ///dd($educationaList);
+        // get Work History
+    $work_histories = WorkExperience::where('userfk', $user->id)->where('resumefk', $user_single_resume_by_date->id)->orderBy('present','DESC')->get();
+           
+        } catch (\Exception $e) { 
+                return redirect()->route('show.cation');
+            //dd('redirect to create caption page.');
+        }
+        // get 
+        $job_by_candidate_list = $this->GetAvailableJobs();
+        // dd($job_by_candidate_list);
+
+
+
+        $users = $this->GetUsers();
+        $countries = $this->GetCountries();
+        $cities = $this->GetCities();
+        $regions = DB::table('regions')->get();
+
+        $tags = $this->Tags();
+        $section_candidatelist = $this->GetCandidateSection($user_single_resume_by_date->id);
+          $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
+ // dd($section_candidatelist_count);
+          $job_category_list = $this->GetJobcategory();
+          $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
+   // dd($referee_list);
+
+        //get educational_levels  
+            return view('candidate.experienced.stylish_red', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
+                'job_category_list', 'referee_list', 'user_single_resume_by_date'), array('user' => Auth::user()));
+           // return view('candidate.freshertemplates.classic', array('user' => Auth::user()));
+        }else{
+
+          return redirect('/login');
+
+        }
+        return redirect()->back(); 
     }
 
     public function Hexagonal()

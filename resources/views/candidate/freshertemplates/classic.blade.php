@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Classic</title>
+    <title>Classic Resume</title>
     
     <!-- Css -->
 <!--    <link href="{{ asset('recruit/css/bootstrap.css')}}" rel="stylesheet">
@@ -67,7 +67,7 @@ th, td {
                 <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
-                        <span class="caption-subject bold uppercase">Resume</span>
+                        <span class="caption-subject bold uppercase">Resume&nbsp;</span>
                     </div>
                  <a href="{{url('/templates')}}" class="btn red mt-ladda-btn ladda-button btn-outline"> Close </a>
                   <a href="javascript:window.print();" class="btn blue mt-ladda-btn ladda-button btn-outline"> PRINT </a>
@@ -80,16 +80,16 @@ th, td {
  @if($document)
  <table width="100%" align="left" border="0"> 
  <tr>
- <td style="height: 20px;"><strong> Name: </strong> </td> <td>{{Auth::user()->firstname}} {{Auth::user()->lastname}}</td>
+ <td style="height: 20px;"><strong> Name: </strong> &nbsp;{{Auth::user()->firstname}} {{Auth::user()->lastname}}</td> <td align="left"></td>
  </tr>
   <tr>
- <td><strong> Address:</strong></td> <td>{{Auth::user()->contact_address}}</td>
+ <td><strong> Address:</strong>&nbsp;{{Auth::user()->contact_address}}</td> <td></td>
  </tr>
   <tr>
- <td><strong> Email Address:</strong></td> <td> {{Auth::user()->email}} </td>
+ <td><strong> Email Address:</strong>&nbsp;{{Auth::user()->email}}</td> <td>  </td>
  </tr>
   <tr>
- <td><strong>Phone:</strong></td> <td>{{$document->phonenumber}} </td>
+ <td><strong>Phone:</strong>&nbsp;{{$document->phonenumber}}</td> <td> </td>
  </tr>
  </table>  
 @endif

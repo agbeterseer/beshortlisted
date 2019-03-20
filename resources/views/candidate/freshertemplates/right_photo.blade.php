@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Candidate Profile Setting</title>
+    <title>Right Photo</title>
     
     <!-- Css -->
 <!--    <link href="{{ asset('recruit/css/bootstrap.css')}}" rel="stylesheet">
@@ -92,19 +92,19 @@ hr{
                 <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
-                        <span class="caption-subject bold uppercase"> Fresher's Resume</span>
+                        <span class="caption-subject bold uppercase"> Right Photo Resume &nbsp;</span>
                     </div>
                  <a href="{{url('/templates')}}" class="btn red mt-ladda-btn ladda-button btn-outline"> Close </a>
                    <a href="javascript:window.print();" class="btn blue mt-ladda-btn ladda-button btn-outline"> PRINT </a>
                 </div>
         <div class="portlet-body"> 
-
+@if($document)
          <table class="resume_title"> 
                                 <tr>
-    <td width="80%" valign="bottom" align="left"> <strong> <span style="font-size: 25px; padding-left: 10px;" class="uppercase">Terseer Agbe </span></strong></td>
+    <td width="80%" valign="bottom" align="left"> <strong> <span style="font-size: 25px; padding-left: 10px;" class="uppercase">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</span></strong></td>
  <td width="20%" class="t_label" valign="top"><div  align="left" style="padding-bottom: -1290px; padding-right: 10px; position: absolute;">
 <div class="resume_pic" align="right">
-<img src="{{asset('/img/terseer.jpg')}}" alt="Picture" height="150px;" width="150px;">
+<img src="{{asset('/uploads/avatars/')}}/{{ $profile_pix->pix }}" alt="Picture" height="150px;" width="150px;">
 <!-- <p class="editov2"><a class="edits" ><i class="icon-plus"></i>Edit</a></p> -->
 </div>
 
@@ -114,78 +114,151 @@ hr{
  <br>
 
                           <div align="left">
-                          <strong>  Flat 100A Block B NIA Quarters Karu-Site Abuja, Nigeria.</strong><br>
-                          <strong>07030355396|</strong> agbe.terseer@gmail<br>
+                          <strong>{{Auth::user()->contact_address}}</strong><br>
+                          <strong>{{$document->phonenumber}} |</strong> {{Auth::user()->email}}<br>
                           </div>
+                          @endif
   <div class="space">&nbsp;</div>
 
                                         <div><h4> <strong style="vertical-align: middle;">Career Objectives</strong>.</h4></div>
                                             <hr>
-                                              Nulla bibendum commodo rhoncus. Sed mattis magna nunc, ac varius quam pharetra vitae. Praesent vitae ipsum eu magna pretium aliquam. Curabitur interdum quis velit non tincidunt. Donec pretium gravida erat, a faucibus velit egestas eget. Nulla bibendum commodo rhoncus. Sed mattis magna nunc, ac varius quam itae ipsum eu magna pretium aliquam. Curabitur interdum quis velit non tincidunt. Donec pretium gravida erat, a faucibus velit egestas eget
+@if($career)
+                         {{$career->summary}}
+                         @else
+                         NA
+                         @endif
                                           <!-- EDUCATIONAL QUALIFICATION-->
                                               <div class="space">&nbsp;</div>
+                                              @if(!$educationaList->isEmpty())
          <div ><h4> <strong style="vertical-align: middle;"> Educational Qualification</strong>.</h4></div>
-                                            <hr>
+ @foreach($educationaList as $educational)
+
+<?php
+    $dt->year   = $educational->start_year;
+    $dt->month  = $educational->start_month;
+
+    $ddt->year   = $educational->end_year;
+    $ddt->month  = $educational->end_month;
+
+    //$dtt->addYear($dt);  
+    $yer = $ddt->diffInYears($dt);     
+    $weeks = $ddt->diffInWeeks($dt);                  // 62
+    $months = $ddt->diffInMonths($dt);  
+?>                                           <hr>
 <div id="textbox">
-  <span class="alignleft">University Of Agriculture Makurdi</span>
-  <span class="alignright">2009-2014.</span><br>
+  <span class="alignleft">{{$educational->school_name}}</span>
+  <span class="alignright">{{ date('M, Y', strtotime($dt)) }} - {{ date('M, Y', strtotime($ddt)) }} </span><br>
 </div>
 <div style="clear: both;"></div>
-Mathematics / Computer Sci
+{{$educational->feild_of_study}}
                                                   
- 
+      @endforeach
+          @else
+          @endif
 <div class="space">&nbsp;</div>
+ @if(!$work_histories->isEmpty())
 <div><h4> <strong style="vertical-align: middle;"> Work Experience</strong>.</h4></div>
-<hr> 
+<hr>
+ <?php $count = 0; ?>
+@foreach($work_histories as $work_history)
+
+<?php 
+    $dt->year = $work_history->start_year;
+    $dt->month = $work_history->start_month;
+
+    $ddt->year = $work_history->end_year;
+    $ddt->month = $work_history->end_month;
+  
+    $yer = $ddt->diffInYears($dt);     
+    // $weeks = $ddt->diffInWeeks($dt);                  // 62
+    $months = $ddt->diffInMonths($dt);    
+?>  
  <!-- <span class="space">&nbsp;</span> -->
  <div id="textbox">
-  <span class="alignleft">Panet Technologies.</span>
-  <span class="alignright">2009-2014.</span><br>
+  <span class="alignleft">{{$work_history->company_name}}</span>
+  <span class="alignright">{{ date('M, Y', strtotime($dt)) }} - 
+@if($work_history->end_year === null && $work_history->end_month === null && $work_history->present == '1') Present
+@elseif($work_history->end_year === null && $work_history->end_month === null && $work_history->present == '2')
+Previous
+@else
+ {{ date('M, Y', strtotime($ddt)) }}  ({{$yer}} year(s) ) @endif</span><br>
 </div>
 
 <div style="clear: both;"></div>
-Sotfware Developer
+{{$work_history->position_title}}
  <br>  
            <span style="margin-top: 20px;"> 
                                  <span class="job_description detail highlightable" style="font-size: 12px;">
-Duties: Design and Implementation of Document Management System
-<br>•   Analysis and design of database and user interface Unit testing 
-<br>•   Developing user manuals
-<br>•   Study and analyze the Rhizome operations, processes and procedures to determine the best database design 
-<br>•   Deploying on AWS cloud hosting
-<span class="space">&nbsp;</span><br>
-Duties: Design and Implementation of Human Resource Management System
-<br>•   Study and analyze the Rhizome operations, processes and procedures to determine the best database design
-<br>•   Unit testing 
-<br>•   Developed user manuals
-<br>•   Deploying application on Aws cloud hosting 
-<br>•   Setting up all application servers
-<br>Security:
-<br>•   Conducted Pentest on both platforms
-<br>•   Protected Queries from SQL injection
-<br>•   Conduct software validation for Human Resource Management System platform 
-<br>•   Securing connection with OpenSSL 
-<br>•   Conduct software validation on database platform 
+  {!! $work_history->responsibilities !!} 
 <br></span>
                                  </span>
-
+@endforeach
+@else
+@endif
+            @if(!$jobskills->isEmpty())
                              <div class="space">&nbsp;</div>
 <h4> <strong style="vertical-align: middle;"> Area of Interest</strong>.</h4>
 <hr>  
-                                 <span style="margin-top: 20px;"> velit non tincidunt. Donec pretium gravida erat, a faucibus velit egestas eget
+                                 <span style="margin-top: 20px;"><div class="skills_inner">
+@foreach($jobskills as $jobskill)
+  <span style="margin-top: 20px;">  <span class="jellybean">{{$jobskill->job_skill}},&nbsp;</span>      </span>
+@endforeach
+
+</div> </td>
+                @else
+                N/A
+@endif
                                  </span>
                                  <div class="space">&nbsp;</div>
-
+@if($jobcertifications->isEmpty())
 <h4> <strong style="vertical-align: middle;"> Training of Interest</strong>.</h4>
 <hr>
-                
-                                        velit non tincidunt. Donec pretium gravida erat, a faucibus velit egestas eget
+@foreach($jobcertifications as $jobcertification)
+<li>{{$jobcertification->name}} &nbsp; {{ date('M, Y', strtotime($jobcertification->date_received)) }}</li>
+@endforeach
+</ul>
+  <div class="space">&nbsp;</div></td>
+                   @else
+
+@endif   
+        @if($person_info)
+      @if($person_info->association) 
+      <h4> <strong style="vertical-align: middle;">Associations </strong></h4>
+<hr>                                     
+{{$person_info->association}}    
+        
+        @else
+
+        @endif
+     
+
                                         <div class="space">&nbsp;</div>
-<h4> <strong style="vertical-align: middle;"> Workshop Attended</strong></h4>
+<h4> <strong style="vertical-align: middle;"> Hobbies</strong></h4>
 <hr>                                     
 
-                                        velit non tincidunt. Donec pretium gravida erat, a faucibus velit egestas eget
+     {{$person_info->interest}}
+    
+       @endif
+           @if(!$referee_list->isEmpty()) 
+                                        <div class="space">&nbsp;</div>
+<h4> <strong style="vertical-align: middle;">Referee</strong></h4>
+<hr>                                     
+ <ul>
+ @foreach($referee_list as $referee)
+     <li><strong> {{$referee->name}}</strong><br>
+     {{$referee->position}}<br>
+     {{$referee->office_address}}<br>
+    <strong> {{$referee->phone_number}} | {{$referee->email}}</strong><br>
+     </li>
+<div class="space">&nbsp;</div>
+ @endforeach
+ </ul>
         
+@else
+
+ @endif
+
+
                 </div>
             </div>
             <!-- END EXAMPLE TABLE PORTLET-->
