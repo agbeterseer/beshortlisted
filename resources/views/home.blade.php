@@ -11,6 +11,14 @@
   'index' => 'active'
 ])
 @section('content') 
+<style type="text/css">
+    .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+</style>
     <!-- Wrapper --> 
         <!-- Header --> 
         <!-- Header -->
@@ -77,40 +85,8 @@
             </div>
         </div>
         <!-- Banner -->
- 
-        <!-- Main Content -->
-        <div class="careerfy-main-content" > 
-            <!-- Main Section -->
-            <div class="careerfy-main-section careerfy-counter-full">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- Counter -->
-                            <div class="careerfy-counter">
-                                <ul class="row">
-                                    <li class="col-md-4">
-                                        <span class="word-counter">{{$jobs_count}}<!-- 123,012 --></span>
-                                        <small>Jobs Added</small>
-                                    </li>
-                                    <li class="col-md-4">
-                                        <span class="word-counter">{{$resume_count}}</span>
-                                        <small>Active Resumes</small>
-                                    </li>
-                                    <li class="col-md-4">
-                                        <span class="word-counter">{{$job_match_count}}</span>
-                                        <small>Positions Matched</small>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- Counter -->
-                        </div> 
-                    </div>
-                </div>
-            </div>
-            <!-- Main Section -->
-       
-            <!-- Main Section -->
-            <div class="careerfy-main-section" >
+  <div class="space">&nbsp;</div>
+            <div class="careerfy-main-section animation-test" >
                 <div class="container">
                     <div class="row">
                  <div class="careerfy-element-text" align="center" data-os-animation="fadeIn">
@@ -167,6 +143,122 @@
                     </div>
                 </div>
             </div>
+
+  <!-- Main Section -->
+            <div class="careerfy-main-section careerfy-counter-styletwo-full">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <!-- FancyTitle -->
+                            <div class="careerfy-fancy-title careerfy-fancy-title-four">
+                                <h2 style="color: #fff;">Our Successful Milestones</h2>
+                                <p style="color: #fff;">We're your first step to becoming everything you want to be.</p>
+                                <span> <i class="fa fa-circle" style="color: #fff;"></i> <i class="fa fa-circle circle-two-size" style="color: #fff;"></i> <i class="fa fa-circle circle-three-size" style="color: #fff;"></i> </span>
+                            </div>
+                            <!-- FancyTitle -->
+                            <!-- Counter -->
+                            <div class="careerfy-counter careerfy-counter-styletwo">
+                                <ul class="row">
+                                    <li class="col-md-3">
+                                        <i class="careerfy-icon careerfy-briefcase-1 "></i>
+                                        <span class="word-counter">{{$jobs_count}}</span>
+                                        <small>Jobs Addes</small>
+                                    </li>
+                                    <li class="col-md-3">
+                                        <i class="careerfy-icon careerfy-hospital"></i>
+                                        <span class="word-counter">{{$company_count}}</span>
+                                        <small>Companies Registered</small>
+                                    </li>
+                                    <li class="col-md-3">
+                                        <i class="careerfy-icon careerfy-accounting"></i>
+                                        <span class="word-counter">{{$resume_count}}</span>
+                                        <small>Candidtate Profiles</small>
+                                    </li>
+                                    <li class="col-md-3">
+                                        <i class="careerfy-icon careerfy-briefcase-1"></i>
+                                        <span class="word-counter">{{$job_match_count}}</span>
+                                        <small>Positions Matched</small>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Counter -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Main Section -->
+
+            <!-- Main Section -->
+            <div class="careerfy-main-section careerfy-services-stylefour-full">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <!-- Services -->
+                            <div class="careerfy-services careerfy-services-stylefour">
+                                <ul class="row">
+                                    <li class="col-md-4">
+                                        <div class="careerfy-services-stylefour-wrap" style="background-color: #ffbb44;">
+                                            <i class="careerfy-icon careerfy-people-1"></i>
+                                            <h2>Post a job offer</h2>
+                                            <p>Attract candidates that best fit you</p>
+                                        </div>
+                                    </li>
+                                    <li class="col-md-4">
+                                        <div class="careerfy-services-stylefour-wrap active">
+                                            <i class="careerfy-icon careerfy-target"></i>
+                                            <h2>Find your candidate</h2>
+                                            <p>Get the Top 10 candidates, Thanks to our autmatch</p>
+                                            <a href="#" class="careerfy-services-stylefour-btn"><small class="careerfy-icon careerfy-right-arrow"></small></a>
+                                        </div>
+                                    </li>
+                                    <li class="col-md-4">
+                                        <div class="careerfy-services-stylefour-wrap" style="background-color: #ed6950;">
+                                            <i class="careerfy-icon careerfy-human-resources"></i>
+                                            <h2>Hire the best one</h2>
+                                            <p>Access candidates’ profiles</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Services -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        <!-- Main Content -->
+        <div class="careerfy-main-content" > 
+            <!-- Main Section -->
+  <!--           <div class="careerfy-main-section careerfy-counter-full">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12"> 
+                            <div class="careerfy-counter">
+                                <ul class="row">
+                                    <li class="col-md-4">
+                                        <span class="word-counter">{{$jobs_count}}</span>
+                                        <small>Jobs Added</small>
+                                    </li>
+                                    <li class="col-md-4">
+                                        <span class="word-counter">{{$resume_count}}</span>
+                                        <small>Active Resumes</small>
+                                    </li>
+                                    <li class="col-md-4">
+                                        <span class="word-counter">{{$job_match_count}}</span>
+                                        <small>Positions Matched</small>
+                                    </li>
+                                </ul>
+                            </div> 
+                        </div> 
+                    </div>
+                </div>
+            </div> -->
+            <!-- Main Section -->
+       
+            <!-- Main Section -->
 
 
 
@@ -257,6 +349,28 @@
         <div class="space">&nbsp;</div>
                     <div class="space">&nbsp;</div>
             <!-- Main Section -->
+               <div class="careerfy-main-section" >
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 careerfy-parallex-box">
+                            <div class="careerfy-parallex-box-wrap">
+                                <h2>Start your Career Today by Singing Up Now!</h2>
+                                <p> Get the notified with the latest job ad sent to your inbox. Be informed; who is hiring, who is offering what, and others.</p>
+                       <a href="#email_subscription" class="careerfy-static-btn careerfy-parallex-box-btn"  >Sing Up for Newsletter</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                     <div class="careerfy-subheader careerfy-subheader-without-bg">
+                            <div class="careerfy-parallex-text" style="color: white !important;">
+                                <h2 style="color: white !important;">Millions of jobs. <br> Find the one that’s right for you.</h2>
+                                <p>Search all the open positions on the web.</p>
+                        <a href="{{route('list.job', 'job-list')}}" class="careerfy-static-btn careerfy-bgcolor"  ><span>Search Jobs</span></a>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
             <div class="" style="background-color: #ffffff;">
                 <div class="container">
                     <div class="row">
@@ -286,84 +400,30 @@
             </div>
 
                       </div>
+
             <!-- Main Section -->
-<div class="jobsearch-main-section careerfy-element-list-full animation-test">
-                <div class="container">
-                    <div class="row">
-                    <section class="careerfy-element-text h2_center" >
-                           &nbsp;&nbsp;<h2 class="h2_center">How it works?</h2>        
-                        <div class="space">&nbsp;</div>
-                        <div class="space">&nbsp;</div>
-                        <div class="space">&nbsp;</div>
-                        <div class="space">&nbsp;</div>
-                        <div class="careerfy-element-text col-md-3 h2_center">
-                            <h2>Just 3 steps</h2>
-                            we will match you with your best fit.
-                 <!--            <a href="#">Our Services <i class="careerfy-icon careerfy-right-arrow-long"></i></a> -->
-                        </div>
-                        <div class="col-md-8 ">
-                            <ul class="careerfy-element-list row">
-                                <li class="col-md-4">
-                                    <img src="{{asset('/img/iconv8-01.png')}}" alt="">
-                                    <h3>Post a job offer</h3>
-                                </li>
-                                <li class="col-md-4">
-                                 <img src="{{asset('img/iconv8-03.png')}}" alt="">
-                                    <h3>Find your candidate</h3>
-                                </li>
-                                <li class="col-md-4">
-                                         <img src="{{asset('/img/iconv8-02.png')}}" alt="">
-                                    <h3>Hire the best one</h3>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-            </section>
-                </div>
             </div>
                     <div class="space">&nbsp;</div>
                     <div class="space">&nbsp;</div>
                     <div class="space">&nbsp;</div>
                     <div class="space">&nbsp;</div>
-                    <div class="careerfy-main-section animation-test" >
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6 careerfy-parallex-box">
-                            <div class="careerfy-parallex-box-wrap">
-                                <h2>Start your Career Today by Singing Up Now!</h2>
-                                <p> Get the notified with the latest job ad sent to your inbox. Be informed; who is hiring, who is offering what, and others.</p>
-                       <a href="#email_subscription" class="careerfy-static-btn careerfy-parallex-box-btn"  >Sing Up for Newsletter</a>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                     <div class="careerfy-subheader careerfy-subheader-without-bg">
-                            <div class="careerfy-parallex-text" style="color: white !important;">
-                                <h2 style="color: white !important;">Millions of jobs. <br> Find the one that’s right for you.</h2>
-                                <p>Search all the open positions on the web.</p>
-                        <a href="{{route('list.job', 'job-list')}}" class="careerfy-static-btn careerfy-bgcolor"  ><span>Search Jobs</span></a>
-                            </div>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-            </div>
+                 
             <!-- Main Section -->
-            <div class="careerfy-main-section careerfy-parallex-full animation-test"  style="background-color: #ffffff;">
+<!--             <div class="careerfy-main-section careerfy-parallex-full animation-test"  style="background-color: #ffffff;">
                 <div class="container">
                     <div class="row">
                         <aside class="col-md-6 careerfy-typo-wrap">
                             <div class="careerfy-parallex-text">
                                 
                                 <h2>{{$page_information->name}}</h2>
-                                <p>{{$page_information->description}} </p>
-                                <!-- <a href="#" class="careerfy-static-btn careerfy-bgcolor"><span>User Jobs</span></a> -->
+                                <p>{{$page_information->description}} </p> 
                             </div>
                         </aside>
                      <aside class="col-md-6 careerfy-typo-wrap"> <div class="careerfy-right">
                             <img src="{{asset('/uploads/banners')}}/{{$page_information->image}}" alt=""></div> </aside>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <!-- Main Content -->
         <style type="text/css">

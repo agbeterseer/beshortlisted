@@ -72,7 +72,7 @@ border-color: white !important;
         <!-- Banner v #1E3142 -->
         <!-- Banner -->
         <!-- Main Content -->
-        <div class="careerfy-main-content" style="margin-top: -40px;">
+        <div class="careerfy-main-content" style="margin-top: -50px;">
         @yield('content')
        
    

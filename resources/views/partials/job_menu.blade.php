@@ -78,8 +78,9 @@ window.onclick = function(event) {
                             <div class="collapse navbar-collapse" id="careerfy-navbar-collapse-1">
                                 <ul class="navbar-nav">
                           @foreach($menus as $menu) 
-                       <li> <a href="{{$menu->routes}}"> {{$menu->name}}</a> </li>
+                       <li  id="menu{{$menu->id}}"> <a href="{{$menu->routes}}"> {{$menu->name}}</a> </li>
                           @endforeach 
+ 
                                 </ul>
                             </div>
                       </nav>
@@ -117,3 +118,15 @@ window.onclick = function(event) {
         </header>
                                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> {{ csrf_field() }}
                                         </form> 
+
+                                        <script type="text/javascript">
+ 
+  <?php foreach ($menus as $key => $menu): ?> 
+ var button = button + {{$menu->id}} = document.getElementById('menu{{$menu->id}}');
+   <?php endforeach ?>
+button.onclick= function() {
+    // this adds the 'active' class to the classes that the element already has
+    var maptab = document.getElementById('maptab');
+    maptab.className = maptab.className + ' active';
+};
+                                        </script>

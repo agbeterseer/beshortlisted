@@ -40,7 +40,7 @@ class PackagesController extends Controller
     public function index()
     {
         //
-        $packages  = Planpackage::all();
+        $packages  = Planpackage::where('status',1)->get();
         return view('admin.plans.index', compact('packages'), array('user' => Auth::user()));
     }
 
@@ -57,35 +57,38 @@ class PackagesController extends Controller
 
     public function store(Request $request)
     {
+     
    	$title = $request->title;
     $price = $request->price;
     $jobs_posting = $request->jobs_posting;
     $featured_jobs = $request->featured_jobs;
     $renew_jobs = $request->renew_jobs;
     $job_duration = $request->job_duration;
+    $most_popular = $request->most_popular;
      $rules = [
                 'title' => 'required|string',
-                'jobs_posting' => 'required|integer',
-                'renew_jobs'=> 'required|integer',
+                'jobs_posting' => 'required',
+                'renew_jobs'=> 'required',
         ];
         $input = Input::only(
         'title',
         'jobs_posting',
         'renew_jobs'
     );
-      //dd($request->all());
+       
     $this->validate($request, $rules); 
 try {
         if ($title !=null && $title !='' && $price !=null && $price !='' && $jobs_posting !=null && $jobs_posting !='') {
        
         $package = Planpackage::firstOrNew(['title' =>$title]);
         $package->price = $price;
-        $package->status = 0;
+        $package->status = 1;
         $package->jobs_posting = $jobs_posting;
         $package->featured_jobs = $featured_jobs;
         $package->renew_jobs = $renew_jobs;
         $package->job_duration = $job_duration;
         $package->created_at = $this->returnCurrentTime();
+        $package->make_active = $most_popular;
         $package->save();
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'done successfully!'); 
@@ -139,8 +142,7 @@ try {
        
         $package = Planpackage::findOrFail($id);
         $package->title = $title;
-        $package->price = $price;
-        $package->status = 0;
+        $package->price = $price; 
         $package->jobs_posting = $jobs_posting;
         $package->featured_jobs = $featured_jobs;
         $package->renew_jobs = $renew_jobs;
@@ -170,7 +172,7 @@ return redirect()->back();
      */
     public function destroy($id)
     {
-        DB::table("planpackages")->where('id',$id)->delete();
+        DB::table("planpackages")->where('id',$id)->update(['status'=> 0]);
         Session::flash('success','Document has been deleted successfully');
        return redirect()->route('plans.index')->withMessage('Plan Deleted');
     }
@@ -290,11 +292,18 @@ public function deleteProperty(Request $request)
     public function UpgradePackageInfo($id)
     {
       $user = Auth::user();
-      $menus = $this->displayMenu();
+      if ($user->account_type === 'employer') {
+          $menus = $this->displayMenu();
       $employer_package = EmployerPackage::where('userfkp', $user->id)->where('status',1)->first();
       $packages = Planpackage::all();
       //dd($package);
       return view('employer.upgrade_package_info', compact('employer_package', 'menus', 'packages', 'id') );
+      }else{
+
+        return redirect()->back();
+      }
+ return redirect()->back();
+
     }
 
 

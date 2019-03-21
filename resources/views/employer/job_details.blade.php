@@ -26,7 +26,7 @@
         <!-- Banner -->
         <!-- Banner -->
         <!-- Main Content -->
-        <div class="careerfy-main-content" style="margin-top: -40px;">
+        <div class="careerfy-main-content" style="margin-top: -50px;">
  
 <style type="text/css">
     .scroll_div{
@@ -96,7 +96,11 @@
                                 <div class="careerfy-jobdetail-content white_background">
                                 <div class="careerfy-content-title"><h2>Job Summary</h2></div>
                                      <div class="careerfy-description">
+                                            @if($tag->job_summary)
                                         <p>{!! $tag->job_summary !!}</p>
+                                        @else
+                                        N/A
+                                        @endif
                                     </div>
                                     <div class="careerfy-content-title"><h2>Job Description</h2></div>
                                     <div class="careerfy-jobdetail-services">

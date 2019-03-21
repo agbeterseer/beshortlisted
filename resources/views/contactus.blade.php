@@ -13,6 +13,8 @@
 
 @section('content')
   @include('partials.employee_breadcomb') 
+
+  
         <div class="space">&nbsp;</div>
         <div class="space">&nbsp;</div> 
         <div class="careerfy-main-section" >

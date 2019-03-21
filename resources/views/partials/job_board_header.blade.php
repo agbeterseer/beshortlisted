@@ -17,6 +17,10 @@
     <link href="{{ asset('recruit/css/color.css')}}" rel="stylesheet">
     <link href="{{ asset('recruit/style.css')}}" rel="stylesheet">
     <link href="{{ asset('recruit/base.css')}}" rel="stylesheet">
+        <link href="{{ asset('recruit/css/home-four-color.css')}}" rel="stylesheet">
+<link href="{{ asset('recruit/css/homepage-four-typo.css')}}" rel="stylesheet">
+<link href="{{ asset('recruit/css/home-two-color.css')}}" rel="stylesheet"> 
+<link href="{{ asset('recruit/css/home-three-color.css')}}" rel="stylesheet"> 
 
     <!-- <link href="{{ asset('bulma-0.7.2/css/bulma.min.css')}}" rel="stylesheet"> -->
     <style type="text/css">

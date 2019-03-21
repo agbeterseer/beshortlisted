@@ -4,11 +4,20 @@
     top: 0px;
     width: 100%;
     border-bottom: 1px solid rgba(223,223,223,0.20);
+    z-index: 9;
 }
 .careerfy-header-four .careerfy-logo { margin: 24px 0px 21px 0px; }
 .careerfy-header-option {
     float: right;
 }
+.careerfy-header-four .careerfy-navigation {
+    float: left;
+    display: none;
+}
+.careerfy-header-four .navbar-nav > li {
+    padding: 0px 16px 0px 16px; }
+.careerfy-header-four .navbar-nav > li a {
+    color: #ffffff; }
 .careerfy-header-option li {
     float: left;
     list-style: none;
@@ -411,7 +420,10 @@ a.banner-four-btn i {
     border-radius: 4px;
 }
 /* Footer Four */
-.careerfy-footer-four { padding: 60px 0px 15px 0px; }
+.careerfy-footer-four {
+    padding: 60px 0px 15px 0px;
+    border-top: 1px solid #ddd;
+}
 .careerfy-footer-title4 {
     float: left;
     width: 100%;
@@ -489,3 +501,4 @@ a.banner-four-btn i {
 .footer-four-social li a.careerfy-linkedin-button { color: #007eb3; }
 .footer-four-social li a.careerfy-dribbble-logo { color: #f95c94; }
 .footer-four-social li a.careerfy-google-plus-logo-button { color: #e24046; }
+.subtop-spacer-add { padding-top: 120px !important; background-size: cover !important; }

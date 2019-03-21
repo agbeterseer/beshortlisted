@@ -86,6 +86,7 @@ class HomeController extends Controller
         $documents = Document::all()->count();
         $roles = Role::all()->count();
         $users = User::all()->count();
+        $company_count = User::where('account_type', 'employer')->count();
         $resumes = RecruitResume::all();
         $resume_count = RecruitResume::all()->count();
         $jobs_count = Tag::where('status',1)->where('active', 1)->count();
@@ -124,7 +125,7 @@ class HomeController extends Controller
         $posts = $this->listPages();
         $job_match_count = DB::table('job_matches')->where('rate', '>', 2)->count(); 
        $page_information = DB::table('page_informations')->where('category', 'index')->first();
-      return view('home', compact('documents', 'roles', 'users', 'resumes','industries', 'resume_builder_list', 'industries', 'jobs', 'resume_count', 'jobs_count', 'industry_professions', 'employement_term_list', 'cities','industry_count', 'industries_paginage', 'job_function_count', 'jobs_8', 'job_post', 'tag_cities', 'employement_terms', 'menus', 'job_match_count', 'posts', 'page_information', 'all_jobs', 'featured_jobs'), array('user' => Auth::user()));
+      return view('home', compact('documents', 'roles', 'users', 'resumes','industries', 'resume_builder_list', 'industries', 'jobs', 'resume_count', 'jobs_count', 'industry_professions', 'employement_term_list', 'cities','industry_count', 'industries_paginage', 'job_function_count', 'jobs_8', 'job_post', 'tag_cities', 'employement_terms', 'menus', 'job_match_count', 'posts', 'page_information', 'all_jobs', 'featured_jobs', 'company_count'), array('user' => Auth::user()));
     }
     public function employement_terms()
     {
@@ -160,7 +161,7 @@ public function employement_term_list()
   }
   public function employer(Request $request)
   {
-    $plans = DB::table('planpackages')->orderBy('created_at', 'ASC')->get();
+    $plans = DB::table('planpackages')->orderBy('created_at', 'ASC')->where('status', 1)->get();
     $menus = $this->displayMenu();
     $posts = $this->listPages();
     $units = $this->displayUnits();

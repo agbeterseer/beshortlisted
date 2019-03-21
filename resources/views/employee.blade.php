@@ -15,7 +15,26 @@
 @if(Auth::check())
 @include('partials.employee_breadcomb') 
 @endif
- <div class="careerfy-main-content">   
+<div class="careerfy-main-section careerfy-parallax-style4-full">
+                <div class="container">
+                    <div class="row">
+                        
+                        <!-- Parallax -->
+                        <div class="col-md-7 careerfy-parallax-style4">
+                            <span>Create Resume Free</span>
+                            <h2>We will help you reach out to employers</h2>
+                            <p>Help recruiters find you. Let recruiters know more about you than is on your CV.</p>
+                            <a href="{{route('register')}}" class="careerfy-parallax-style4-btn">Register with us</a>
+                        </div>
+                        <div class="col-md-5"><img src="{{asset('/recruit/images/parallex-style4-img.png')}}" alt=""></div>
+                        <!-- Parallax -->
+
+                    </div>
+                </div>
+            </div>
+ <div class="careerfy-main-content"> 
+
+
 <!--                         <section class="careerfy-fancy-title">
                                 <h2>Welcome candidate</h2>
                         </section>  -->
@@ -69,7 +88,7 @@
                 </div>
             </div>
             <!-- Main Section -->
-            <div class="careerfy-main-section careerfy-parallex-full" style="background-color: #ffffff;">
+   <!--          <div class="careerfy-main-section careerfy-parallex-full" style="background-color: #ffffff;">
                 <div class="container">
                     <div class="row">-
                         <aside class="col-md-6 careerfy-typo-wrap">
@@ -77,14 +96,13 @@
 
                                 <h2>{{$page_information->name}}</h2>
                                 <p>{{$page_information->description}}</p>
-                                <!-- <a href="#" class="careerfy-static-btn careerfy-bgcolor"><span>Search Jobs</span></a> -->
                             </div>
                         </aside>
                         <aside class="col-md-6 careerfy-typo-wrap"> <div class="careerfy-right">
                             <img src="{{asset('/uploads/banners')}}/{{$page_information->image}}" alt=""></div> </aside>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Main Section -->
  
  <div class="careerfy-main-section">

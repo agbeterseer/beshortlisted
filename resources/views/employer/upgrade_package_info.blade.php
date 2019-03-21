@@ -12,7 +12,7 @@
    'employer_infor' => 'active'
 ])
 @section('content') 
-
+     @include('partials.employer_breadcomb')
 <div class="careerfy-main-content" style="background-color: #ffffff;">
  <!-- Main Section -->
             <div class="careerfy-main-section careerfy-plain-services-full">
