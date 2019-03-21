@@ -371,6 +371,10 @@
                   </div>
                 </div>
             </div>
+                    <div class="space">&nbsp;</div>
+                    <div class="space">&nbsp;</div>
+                    <div class="space">&nbsp;</div>
+                    <div class="space">&nbsp;</div>
             <div class="" style="background-color: #ffffff;">
                 <div class="container">
                     <div class="row">
@@ -403,10 +407,7 @@
 
             <!-- Main Section -->
             </div>
-                    <div class="space">&nbsp;</div>
-                    <div class="space">&nbsp;</div>
-                    <div class="space">&nbsp;</div>
-                    <div class="space">&nbsp;</div>
+       
                  
             <!-- Main Section -->
 <!--             <div class="careerfy-main-section careerfy-parallex-full animation-test"  style="background-color: #ffffff;">
