@@ -137,9 +137,12 @@
                                     </div>
                             
                                     <div class="careerfy-content-title"><h2>Job Funtions</h2></div>
-                                    <div class="careerfy-description">  
+                                    <div class="careerfy-description">
+                                    @if($tag->job_roles)  
                                      {!! $tag->job_roles !!}
-            
+                                    @else
+                                        N/A
+                                    @endif
                                     </div>
  
  
