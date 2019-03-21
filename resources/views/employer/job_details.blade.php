@@ -166,7 +166,7 @@
                                                 <figure><a href="#"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-joblisting-text">
                                                     <div class="careerfy-list-option">
-                                                        <h2><a href="#"> {{$common_job->job_title}}</a> <!-- <span>Featured</span> --></h2>
+                                                        <h2><a href="{{route('job.description', $common_job->id)}}"> {{$common_job->job_title}}</a> <!-- <span>Featured</span> --></h2>
                                                         <ul>
                                                             <li><a href="#"> </a></li>
                                                             <li><i class="careerfy-icon careerfy-maps-and-flags"></i>{{$common_job->country}}, {{$common_job->city}}</li>
@@ -204,7 +204,7 @@
                                                                         <ul>
                                     @foreach($get_Job_by_common_industries_similler as $similar_job)
                                         <li>
-                                            <h6><a href="#">{{$similar_job->job_title}} </a></h6>
+                                            <h6><a href="{{route('job.description', $similar_job->id)}}">{{$similar_job->job_title}} </a></h6>
                                             <span>{{$similar_job->salary_range}} per annum</span>
                                             <small>{{$similar_job->country}},  @foreach($cities as $city) @if($similar_job->city === $city->id) {{$city->name}} @endif @endforeach</small>
                                         </li>
