@@ -661,7 +661,7 @@ Route::get('/index/resume/{resume_id}/personal_information', [
 	]);
 Route::post('update/personal_information', [
 	'as' => 'update.pfform',
-	'uses' => 'ResumeController@ShowUpdatePersonalInformationForm'
+	'uses' => 'ResumeController@UpdatePersonalInformation'
 	]);
 Route::post('status_change-{id}',[
 	'uses' => 'TagController@changeStatus',

@@ -703,7 +703,7 @@ $check = 'second';
                                                 </h4> </div>
 
               <div class="careerfy-add-popup">
-
+                                                    <a href="javascript:void(0)"  data-dismiss="modal" class="careerfy-resume-addbtn" style="background-color: red" ><span class="fa fa-minus"></span></a>
                   <ul class="careerfy-row careerfy-employer-profile-form">
   <form class="form-horizontal" action="{{ route('add.education') }}" method="post" role="form" name="form23">
 {{ csrf_field() }}

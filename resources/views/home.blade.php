@@ -52,8 +52,7 @@
                                        <div class="careerfy-user-form-info">
                        <a class="btn btn-link center" href="#" style="color: #ffffff;">
                                     Login
-                                </a>
-                                </a>
+                                </a> 
                   
                        <!--      <div class="careerfy-checkbox"  style="text-align: center;">
                                 <input type="checkbox" id="r10" name="rr" />

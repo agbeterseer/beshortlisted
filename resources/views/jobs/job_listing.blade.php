@@ -191,7 +191,7 @@ border-color: white !important;
                                     @forelse($tags as $tag)
                                         <li class="careerfy-column-12">
                                             <div class="careerfy-joblisting-classic-wrap">
-                                                <figure><a href="{{route('apply.job', $tag->id)}}"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
+                                                <figure><a href="{{route('job.description', $tag->id)}}"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-joblisting-text">
                                                     <div class="careerfy-list-option">
                                                         <h2><a href="{{route('apply.job', $tag->id)}}"> {{$tag->job_title}} </a> @foreach($employement_term_list as $employement_term) 

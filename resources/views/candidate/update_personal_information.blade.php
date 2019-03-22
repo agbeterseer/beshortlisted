@@ -54,8 +54,9 @@ height: 92px;
                     </div>                
                 </div>
 
-<form class="form-horizontal" action="{{ route('personal.information') }}" method="post" role="form">
+<form class="form-horizontal" action="{{ route('update.pfform') }}" method="post" role="form">
 {{ csrf_field() }}
+<input type="hidden" name="info_id" value="{{$person_info->id}}">
 <!-- <form role="form"> -->
 <div class="row">
 <div class="col-md-12">
@@ -63,7 +64,7 @@ height: 92px;
 <label class="control-label col-md-3"> </label>
 <div class="col-md-12">
 Interests <span class="required">*</span>
-<textarea class="form-control textarea" placeholder="" name="interest" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; ">{{$person_info->interest}}</textarea>  
+<textarea class="form-control textarea" placeholder="" name="interest" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="120">{{$person_info->interest}}</textarea>  
 <p></p>
  <pre>Eg. Photography, Marathon, Yoga, Rock Climbing, Football, Fishing, Snowboard, Investment etc.</pre>
 </div>
@@ -83,7 +84,7 @@ Interests <span class="required">*</span>
 <label class="control-label col-md-3"> </label>
 <div class="col-md-12">
 Associations <span class="required">*</span>
-<textarea class="form-control textarea" placeholder="" name="associations" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; ">{{$person_info->association}}</textarea> 
+<textarea class="form-control textarea" placeholder="" name="associations" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="120">{{$person_info->association}}</textarea> 
  
 </div>
 </div>
@@ -102,7 +103,7 @@ Associations <span class="required">*</span>
 <label class="control-label col-md-3"> </label>
 <div class="col-md-12">
 Awards <span class="required">*</span>
-<textarea class="form-control textarea" placeholder="" name="award" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; ">{{$person_info->award}}</textarea> 
+<textarea class="form-control textarea" placeholder="" name="award" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="120">{{$person_info->award}}</textarea> 
 
 </div>
 </div>
@@ -118,7 +119,7 @@ Awards <span class="required">*</span>
 <label class="control-label col-md-3"> </label>
 <div class="col-md-12">
 Trainings <span class="required">*</span>
-<textarea class="form-control textarea" placeholder="" name="training" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; ">{{$person_info->training}}</textarea> 
+<textarea class="form-control textarea" placeholder="" name="training" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="120">{{$person_info->training}}</textarea> 
 
 </div>
 </div>

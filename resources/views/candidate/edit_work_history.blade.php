@@ -86,6 +86,8 @@ strong{
                         </div>
                         @endif
 
+
+
                         @php 
                         $workhistory = 'work_history';
 
@@ -112,7 +114,7 @@ strong{
 <form class="form-horizontal" action="{{ route('update.work_history') }}" method="post" role="form" name="workform">
 {{ csrf_field() }} 
 <input type="hidden" name="resume" value="{{$user_single_resume_by_id->id}}">
-<input type="hidden" name="work_history" value="{{$work_history->id}}">
+<input type="hidden" name="work_history_id" value="{{$work_history->id}}">
    <input type="hidden" value="workhistory" name="work_history">
  <div class="row">
 <div class="col-md-6"> 
@@ -343,28 +345,12 @@ Functions: <span class="required">*</span>
 
  @if($industry->id === $industry_pr->industry_id )
  <li><label class="group_children" for="function-{{$industry_pr->id}}">
-<input type="checkbox" id="function-{{$industry_pr->id}}" name="professions_[]" class="group_function_{{$industry_pr->id}}" value="{{$industry_pr->id}}">{{$industry_pr->name}}</label></li>
-
-<!-- @foreach($work_history->industryprofessions as $work_experience_id)    
-@if($work_experience_id->id === $industry_pr->id) 
-  
- <li><label class="group_children" for="function-{{$industry_pr->id}}">
-<input type="checkbox" id="function-{{$industry_pr->id}}" name="professions_[]" class="group_function_{{$industry_pr->id}}" value="{{$industry_pr->id}}" checked="checked">{{$industry_pr->name}}</label></li>
-
-
- @endif 
- @endforeach 
- -->
+<input type="checkbox" id="function-{{$industry_pr->id}}" name="work_professions[]" class="group_function_{{$industry_pr->id}}" value="{{$industry_pr->id}}">{{$industry_pr->name}}</label></li>
+ 
 
  @endif 
 
-<!-- 
-
- @if($industry->id === $industry_pr->industry_id ) 
-
- <li><label class="group_children" for="function-{{$industry_pr->id}}">
-<input type="checkbox" id="function-{{$industry_pr->id}}" name="professions_[]" class="group_function_{{$industry_pr->id}}" value="{{$industry_pr->id}}">{{$industry_pr->name}}</label></li> @endif -->
-
+ 
  @endforeach 
 
 

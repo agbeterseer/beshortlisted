@@ -56,10 +56,9 @@
                  
               <figcaption>
               
-              <div class="careerfy-fileUpload">
-              <span><i class="careerfy-icon careerfy-add"></i> Upload Photo</span>
-              <input type="file" class="careerfy-upload" name="avatar" />
-              </div>
+              <a class="careerfy-fileUpload" href="{{route('display.pix', Auth::user()->id)}}">
+              <span><i class="careerfy-icon careerfy-add"></i> Upload Photo</span> 
+              </a>
               @if(Auth::user())
               <h4> {{Auth::user()->name}}</h4>
               <span class="careerfy-dashboard-subtitle">{{$pr_caption->pr_caption}}</span>
@@ -152,10 +151,10 @@
  
                                           <li>
                                             <div class="careerfy-joblisting-classic-wrap">
-                                                <figure><a href="#"><img src="img/extra-images/job-listing-logo-3.png" alt=""></a></figure>
+                                                <figure><a href="{{route('job.description', $tag->id)}}"><img src="{{asset('/img/job.png')}}" alt="" height="20" width="20"></a></figure>
                                                 <div class="careerfy-joblisting-text">
                                                     <div class="careerfy-list-option">
-                                                        <h6><a href="#">{{$tag->job_title}}</a></h6>
+                                                        <h6><a href="{{route('job.description', $tag->id)}}">{{$tag->job_title}}</a></h6>
                                                         <ul>                                    
                                                             <!-- <li><a href="#">@ Mindshare</a></li> -->
                                         <li><i class="careerfy-icon careerfy-maps-and-flags"></i> 

@@ -39,7 +39,7 @@
                                 </ul>
                             </div>
 </span>
-<p><p>
+<p><p><div class="space">&nbsp;</div>
                             <div class="careerfy-footer-newslatter">
                                 <form id="email_subscription" action="{{route('subscribe')}}" method="get">
                                     <label>Subscribe for weekly newsletter</label> 

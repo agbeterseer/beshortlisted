@@ -424,7 +424,7 @@ return redirect()->back()->with('done', 'Done successfully');
     public function ShowCaptionForm(){
 
     $user = Auth::user();
-    $recruit_resume = RecruitResume::where('user_id', $user->id)->first();
+    $recruit_resume = RecruitResume::where('user_id', $user->id)->orderBy('created_at','DESC')->first();
      
     // check if user has default avatar.
 
@@ -433,7 +433,7 @@ return redirect()->back()->with('done', 'Done successfully');
     if ($recruit_resume === null) {
         $recruit_resume = 'default';
     }else{
-        $recruit_resume = $recruit_resume;
+        $recruit_resume = $recruit_resume->id;
     }
 
  // check if resume id exist 
@@ -452,35 +452,39 @@ return redirect()->back()->with('done', 'Done successfully');
         $name = $request->name;
         $old_id = $request->old_name;
 
-        // dd($old_id);
+        $recruit_resume = RecruitResume::where('id', $old_id)->orderBy('created_at','DESC')->first();
+
         try {
 
         if ($name !=null && $name !='') {
 
         //      //change resume status to 0 by user ID
             if ($this->GetResumeByID()) {
+             
        
             foreach ($this->GetResumeByID() as  $value) {
+
                 $recruit_resumes = DB::table('recruit_resumes')->where('id',$value->id)->update(['status' => 0]);
                 # code...
             }
         }
-            // dd($request->all());
+
+            // dd($recruit_resumes);
             // create a new instance / new record of a resume
             // set this new record to be the latest and active for selection
             // $recruit_resumes = RecruitResume::where('id', $old_id)->where('user_id', $user->id)->where('status', 1)->update(['status' => 0]);
 
             $resume_record = new RecruitResume;
             $resume_record->pr_caption = $name;
-            $resume_record->user_id = Auth::user()->id;
+            $resume_record->user_id = $user->id;
             $resume_record->status = 1;
             $resume_record->order = 1;
             $resume_record->created_at = $this->returnCurrentTime();
             $resume_record->save();
-   
+     //dd($resume_record);
             if ($old_id != 'default') {
-                    $get_previous_rec = Document::where('user_id',$user->id)->where('resume_id', $old_id->id)->first();
-                 //dd($get_previous_rec);
+                    $get_previous_rec = Document::where('user_id',$user->id)->where('resume_id', $recruit_resume->id)->first();
+                
                     if ($get_previous_rec) {
 
                     $document = new Document;
@@ -505,9 +509,10 @@ return redirect()->back()->with('done', 'Done successfully');
             } 
     $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->orderBy('created_at','DESC')->first();
     //dd($user_single_resume_by_date);
-    return redirect()->route('get.resume', $user_single_resume_by_date->id);
-        $request->session()->flash('message.level', 'success');
+          $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Done successfully!');
+    return redirect()->route('get.resume', $user_single_resume_by_date->id);
+  
         }
         } catch (\Exception $e) {
         $request->session()->flash('message.level', 'danger');
@@ -1437,9 +1442,10 @@ public function SowUpdateWorkHistoryForm($code,$id)
 }
 public function UpdateWorkHistory(Request $request)
 {
-  //dd($request->all());
+ //dd($request->all());
 
         $resume = $request->resume;
+        $work_history_id = $request->work_history_id;
         $work_history = $request->work_history;
         $education_id = $request->education;
         $user = Auth::user();
@@ -1453,7 +1459,7 @@ public function UpdateWorkHistory(Request $request)
         $company_name = $request->company_name;
         $country = $request->country;
         $work_industries = $request->work_industries;
-        $professions_ = $request->professions_;
+        $work_professions = $request->professions_;
         $responsibilities = $request->responsibilities;
         
 
@@ -1484,7 +1490,7 @@ public function UpdateWorkHistory(Request $request)
     }
  try {
  
-    $candidate_work_experience = WorkExperience::findOrFail($work_history);
+    $candidate_work_experience = WorkExperience::findOrFail($work_history_id);
     $candidate_work_experience->start_year = $work_from_year;
     $candidate_work_experience->start_month = $work_from_month;
     $candidate_work_experience->end_year = $end_year;
@@ -1500,8 +1506,7 @@ public function UpdateWorkHistory(Request $request)
     $candidate_work_experience->status = 1;
     $candidate_work_experience->save();
 
-
-      //  dd($work_e); chech this method very well
+ 
     $work_industrylist = DB::table('work_industry')->where('work_experience_id',$candidate_work_experience->id)->get();
     foreach ($work_industrylist as $key => $value) { 
     DB::table('work_industry')->where('work_experience_id',$candidate_work_experience->id)->delete();
@@ -1509,19 +1514,33 @@ public function UpdateWorkHistory(Request $request)
 foreach ($work_industries as $key => $industry) { 
         $candidate_work_experience->industries()->attach($industry);
         }
-foreach ($professions_ as $key => $profession) {
-    //experience_profession
-    DB::table('experience_profession')->where('industry_profession_id',$profession)->delete();  
-     $candidate_work_experience->industryprofessions()->attach($profession);
+// foreach ($professions_ as $key => $profession) {
+//   dd($profession);
+//     DB::table('experience_profession')->where('industry_profession_id',$profession)->delete();  
+//      $candidate_work_experience->industryprofessions()->attach($profession);
+// }
+if ($work_professions) {
+foreach ($work_professions as $key => $profession) {
+      //dd($profession);
+    $userprofession = UserProfession::firstOrFail(['industry_profession_id' => $profession]);
+    $userprofession->industry_profession_id = $profession;
+    $userprofession->user_id = $user->id;
+    $userprofession->resume_id = $resume;
+    $userprofession->created_at = $this->returnCurrentTime();
+
+    $work_e->industryprofessions()->attach($profession);
+
 }
+}
+
 $request->session()->flash('message.level', 'success');
 $request->session()->flash('message.content', 'Done successfully!'); 
-// return redirect()->route('get.resume',$resume);
+ 
 return redirect()->route('show.resume');
 
     } catch (\Exception $e) {
         $request->session()->flash('message.level', 'danger');
-        $request->session()->flash('message.content', 'Cannot create record');
+        $request->session()->flash('message.content', $e->getMessage());
 
         return redirect()->back()->withErrors($e->getMessage());
         Session::flash('error', $e->getMessage()); 
@@ -2011,7 +2030,42 @@ $pr_caption= RecruitResume::where('user_id', $user->id)->where('status',1)->firs
             }
             return redirect()->back();
         }
-
+       public function UpdatePersonalInformation(Request $request)
+        {
+          //dd($request->all());
+            $user = Auth::user();
+            $info_id = $request->info_id;
+            $interest = $request->interest;
+            $associations = $request->associations;
+            $award = $request->award;
+            $personal_page = $request->personal_page;
+            $training = $request->training;
+            $section = $request->pinfor;
+            $resume = $request->resume;
+            try {
+            $pinformation = PersonalInformation::findOrFail($info_id);
+            $pinformation->user_id = $user->id;
+            $pinformation->interest = $interest;
+            $pinformation->association = $associations;
+            $pinformation->award = $award;
+            $pinformation->personal_page = $personal_page;
+            $pinformation->status = 1;
+            $pinformation->created_at =  $this->returnCurrentTime();
+            $pinformation->training = $training;
+            $pinformation->save();
+            //dd($pinformation);
+            //$this->AddSection($section, $user->id, $resume);
+                    $request->session()->flash('message.level', 'success');
+            $request->session()->flash('message.content', 'Done successfully!'); 
+            return redirect()->route('show.resume');
+    
+            } catch (\Exception $e) {
+        $request->session()->flash('message.level', 'danger');
+        $request->session()->flash('message.content', 'Cannot create record'); 
+        Session::flash('error', $e->getMessage());
+            }
+            return redirect()->back();
+        }
         public function ShowUpdatePersonalInformationForm($id)
         {
             if ($id) {
