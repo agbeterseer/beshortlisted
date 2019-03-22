@@ -28,13 +28,13 @@
                         </div>
                         @endif
         <!-- Banner -->
-
+    
         <div class="careerfy-banner careerfy-typo-wrap" style="margin-top: -10px;"> 
             <span class="careerfy-banner-transparent"></span>
             <div class="careerfy-banner-caption">
                 <div class="container"> 
                 <div class="text-content"> 
-                     <h1>Aim Higher. Reach Farther. Dream Bigger.</h1>
+                     <h1>We Meet You at Your Desk</h1>
                     <p>Build a profile which places you in the ideal position to be recruited</p> 
                 </div>
                    

@@ -2271,7 +2271,7 @@ Responsibilities and Achievements
 <label class="control-label col-md-3"> </label>
 <div class="col-md-12">
 Interests 
-<textarea class="form-control textarea" placeholder="" name="interest" style="margin-top: 0px; margin-bottom: 0px; height: 100px; "></textarea> 
+<textarea class="form-control textarea" placeholder="" name="interest" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="125"></textarea> 
  
 <span style="color:#827e7e;">Eg. Photography, Marathon, Yoga, Rock Climbing, Football, Fishing, Snowboard, Investment etc.</span>
 </div>
@@ -2291,7 +2291,7 @@ Interests
 <label class="control-label col-md-3"> </label>
 <div class="col-md-12">
 Associations 
-<textarea class="form-control textarea"  name="associations" style="margin-top: 0px; margin-bottom: 0px; height: 100px; "></textarea> 
+<textarea class="form-control textarea"  name="associations" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="125"></textarea> 
 <span style="color:#827e7e;">Eg. (ITAN) Information Technology Association of Nigeria </span>
 </div>
 </div>
@@ -2310,7 +2310,7 @@ Associations
 <label class="control-label col-md-3"> </label>
 <div class="col-md-12">
 Awards 
-<textarea class="form-control textarea" name="award" style="margin-top: 0px; margin-bottom: 0px; height: 100px; "></textarea> 
+<textarea class="form-control textarea" name="award" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="125"></textarea> 
 
 </div>
 </div>
@@ -2326,7 +2326,7 @@ Awards
 <label class="control-label col-md-3"> </label>
 <div class="col-md-12">
 Training 
-<textarea class="form-control textarea" name="training" style="margin-top: 0px; margin-bottom: 0px; height: 100px; "></textarea> 
+<textarea class="form-control textarea" name="training" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="125"></textarea> 
 
 </div>
 </div>

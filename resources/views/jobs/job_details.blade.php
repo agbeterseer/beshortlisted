@@ -100,7 +100,7 @@
                                         <ul class="careerfy-row">
                                             <li class="careerfy-column-4">
                                                 <i class="careerfy-icon careerfy-salary"></i>
-                                                <div class="careerfy-services-text">Offered Salary <small>{{$tag->salary_range}}</small></div>
+                                                <div class="careerfy-services-text">Salary Range <small>{{$tag->salary_range}}</small></div>
                                             </li>
                                             <li class="careerfy-column-4">
                                                 <i class="careerfy-icon careerfy-social-media"></i>

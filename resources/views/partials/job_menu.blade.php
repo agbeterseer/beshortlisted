@@ -119,14 +119,4 @@ window.onclick = function(event) {
                                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> {{ csrf_field() }}
                                         </form> 
 
-                                        <script type="text/javascript">
  
-  <?php foreach ($menus as $key => $menu): ?> 
- var button = button + {{$menu->id}} = document.getElementById('menu{{$menu->id}}');
-   <?php endforeach ?>
-button.onclick= function() {
-    // this adds the 'active' class to the classes that the element already has
-    var maptab = document.getElementById('maptab');
-    maptab.className = maptab.className + ' active';
-};
-                                        </script>

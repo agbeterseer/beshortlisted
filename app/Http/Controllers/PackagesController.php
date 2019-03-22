@@ -121,7 +121,7 @@ return redirect()->back();
     $featured_jobs = $request->featured_jobs;
     $renew_jobs = $request->renew_jobs;
     $job_duration = $request->job_duration;
-  
+   $most_popular = $request->most_popular;
 
      $rules = [
                 'title' => 'required|string',
@@ -147,6 +147,7 @@ try {
         $package->featured_jobs = $featured_jobs;
         $package->renew_jobs = $renew_jobs;
         $package->job_duration = $job_duration;
+        $package->make_active = $most_popular;
         $package->created_at = $this->returnCurrentTime();
         $package->save();
         $request->session()->flash('message.level', 'success');

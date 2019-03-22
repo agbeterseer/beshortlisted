@@ -56,7 +56,7 @@
                                     <ul>
                                       <div class="col-md-6" style="color: #ffffff; size: 18px;">  
                                                <input type="radio" name="email_user" value="employee" required="required">
-                                              I am looking for Job &nbsp;&nbsp;&nbsp;&nbsp;
+                                              I am looking for a Job &nbsp;&nbsp;&nbsp;&nbsp;
                                            <input type="radio" name="email_user" value="employer" required="required">
                                               I am an Employer</div> 
                                     </ul>

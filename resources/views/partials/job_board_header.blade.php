@@ -21,7 +21,7 @@
 <link href="{{ asset('recruit/css/homepage-four-typo.css')}}" rel="stylesheet">
 <link href="{{ asset('recruit/css/home-two-color.css')}}" rel="stylesheet"> 
 <link href="{{ asset('recruit/css/home-three-color.css')}}" rel="stylesheet"> 
-
+<link rel="shortcut icon" type="image/png" href="/favicon.png"/>
     <!-- <link href="{{ asset('bulma-0.7.2/css/bulma.min.css')}}" rel="stylesheet"> -->
     <style type="text/css">
     .header {

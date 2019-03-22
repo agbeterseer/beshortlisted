@@ -356,9 +356,13 @@ public function DisplayTemplates()
       $s = $request->input('s'); 
     $industries = DB::table('industries')->where('status',1)->orderBy('created_at', 'DESC')->get();
       $menus = $this->displayMenu();
-         $job_function_count = DB::table('tags')
-             ->select('job_category', DB::raw('count(*) as total'))
-             ->groupBy('job_category')->get();   
+         // $job_function_count = DB::table('tags')
+         //     ->select('job_category', DB::raw('count(*) as total'))
+         //     ->groupBy('job_category')->get(); 
+
+              $job_function_count = DB::table('tags')->where('status', 1)->where('active',1)->where('awaiting_aproval', 0)
+             ->select('industry', DB::raw('count(*) as total'))
+             ->groupBy('industry')->get();  
      return view('jobs.industry_list',  compact('industries', 's', 'menus', 'job_function_count'));
     }
     public function SubscribeToNewsletter(Request $request)

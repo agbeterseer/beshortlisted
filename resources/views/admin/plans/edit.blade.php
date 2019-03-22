@@ -128,7 +128,23 @@
                                 @endif
                             </div>
                         </div>
-              
+                                 <div class="form-group{{ $errors->has('most_popular') ? ' has-error' : '' }}">
+                            <label for="most_popular" class="col-md-4 control-label">  Most popular </label>
+
+                            <div class="col-md-6">
+                                <select name="most_popular">
+                                    <option value="0">Most popular</option>
+                                     <option value="1">YES</option>
+                                      <option value="0" selected="">NO</option>
+                                </select> 
+
+                                @if ($errors->has('most_popular'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('most_popular') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

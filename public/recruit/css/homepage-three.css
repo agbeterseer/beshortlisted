@@ -80,8 +80,8 @@
 /* Banner Search Three */
 .careerfy-banner-search-three {
     float: left;
-    width: 75%;
-    background-color: rgba(255,255,255,0.50);
+    width: 85%;
+    background-color: rgba(255,255,255,0.150);
     padding: 10px 10px 0px 10px;
 }
 .careerfy-banner-search-three ul { margin: 0px -5px; }
@@ -95,11 +95,19 @@
 }
 .careerfy-banner-search-three ul li:last-child { width: 16%; }
 .careerfy-banner-search-three input[type="text"],
+.careerfy-banner-search-three input[type="password"],
 .careerfy-banner-search-three input[type="submit"] {
     float: left;
     width: 100%;
 }
 .careerfy-banner-search-three input[type="text"] {
+    background-color: #ffffff;
+    border: none;
+    height: 50px;
+    padding: 7px 14px;
+    font-size: 12px;
+}
+.careerfy-banner-search-three input[type="password"] {
     background-color: #ffffff;
     border: none;
     height: 50px;
