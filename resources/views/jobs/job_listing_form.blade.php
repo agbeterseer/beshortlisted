@@ -30,6 +30,8 @@ border-color: white !important;
 @include('partials.employee_breadcomb') 
  
         <div class="space">&nbsp;</div> 
+        <div class="space">&nbsp;</div>  
+        <div class="space">&nbsp;</div> 
         <div class="space">&nbsp;</div>        
         <!-- SubHeader -->
 
@@ -187,9 +189,9 @@ border-color: white !important;
                                                 <div class="careerfy-joblisting-text">
                                                     <div class="careerfy-list-option">
                                                         <h2><a href="{{route('job.description', $tag->id)}}}"> {{$tag->job_title}} </a> 
-                                                    @foreach($employement_term_list as $employement_term) 
+                                               <!--      @foreach($employement_term_list as $employement_term) 
                                                     @if($employement_term->id === $tag->job_type)
-                                                    <span class="careerfy-option-btn careerfy-{{$employement_term->category}}"> {{$employement_term->name}} </span> @endif @endforeach @if($tag->featured === 1)<small class="careerfy-jobdetail-postinfo">Featured</small>@endif</h2>
+                                                    <span class="careerfy-option-btn careerfy-{{$employement_term->category}}"> {{$employement_term->name}} </span> @endif @endforeach @if($tag->featured === 1)<small class="careerfy-jobdetail-postinfo">Featured</small>@endif --></h2>
                                                         <ul>
                                                       
                                                             <li style="color: #13b5ea;"><i class="careerfy-icon careerfy-maps-and-flags"></i> {{$tag->country}}, {{$tag->city}}</li>
@@ -201,7 +203,7 @@ border-color: white !important;
                                                     <div class="careerfy-job-userlist">
                                                     @foreach($employement_term_list as $employement_term) 
                                                     @if($employement_term->id === $tag->job_type)
-                                 <a href="{{route('apply.job', $tag->id)}}" class="careerfy-option-btn  careerfy-{{$employement_term->category}}">APPLY </a>
+                                 <a href="{{route('apply.job', $tag->id)}}" class="careerfy-option-btn  careerfy-blue">APPLY </a>
                                  @endif @endforeach
                                                         <!-- <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a> -->
                                                     </div>
