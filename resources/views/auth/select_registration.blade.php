@@ -52,6 +52,27 @@ tr:hover {background-color:#f5f5f5;}
               body{background-color: #FAFAFA;}
 
    </style>
+   <style type="text/css">
+    .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+    .center2 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+.select_label{
+font-size: 20px;
+padding-left: 75px; 
+
+}
+
+ 
+</style>
 </head>
 
 <body>
@@ -60,246 +81,108 @@ tr:hover {background-color:#f5f5f5;}
     <div class="careerfy-wrapper">
 
         <!-- Header -->
- <header id="careerfy-header" class="careerfy-header-one">
-            <div class="container">
-                <div class="row">
-                    <aside class="col-md-2">
-  <a href="{{asset('/')}}" class="careerfy-logo" style="margin-top: 10px;" ><img src="{{asset('logo/logo2.jpg')}}" alt="TREEPHR" width="200" height="00">  </a></aside> 
-                    <aside class="col-md-6">
-                        <nav class="careerfy-navigation">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#careerfy-navbar-collapse-1" aria-expanded="false">
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                            </div>
-                            <div class="collapse navbar-collapse" id="careerfy-navbar-collapse-1">
-                                <ul class="navbar-nav">
-
-                 <li><a class="navbar-item" href="{{asset('/')}}">Home</a> </li>
-                <li> <a class="navbar-item" href="{{route('employer_infor')}}">Employer</a> </li>
-                 <li> <a class="navbar-item" href="{{route('candidates')}}">Candidate</a> </li>
-                <li> <a class="navbar-item" href="#">Contact</a> </li> 
-               
-                                </ul>
-                            </div>
-                      </nav>
-                    </aside>
-                    <aside class="col-md-4 showHide">
-                        <div class="careerfy-right">
-                            <ul class="careerfy-user-section">
-                                <li><a class="careerfy-color" href="{{route('sign.up')}}">Register</a></li>
-                                <li><a class="careerfy-color" href="{{route('auth.login')}}">Sign in</a></li>
-                            </ul>
-                              @if(Auth::user())
-                                 
-                            <a href="{{route('post.jobs')}}" class="careerfy-simple-btn careerfy-bgcolor post_job"><span> <i class="careerfy-icon careerfy-arrows-2"></i> Post Job</span></a>
-                             @endif
-                             @if(!Auth::user())
-                          <a href="{{route('post.jobs')}}" class="careerfy-simple-btn careerfy-bgcolor post_job "><span> <i class="careerfy-icon careerfy-arrows-2"></i> Post Job</span></a>
-                            @endif
-                        </div>
-                    </aside>
-                </div>
-            </div>
-        </header>
-
- 
-
+ @include('partials.job_menu')
         <!-- Header -->
         
         <!-- Banner v #1E3142 -->
         <!-- Banner -->
-
-        <!-- Main Content -->
-
-
-        <div class="careerfy-main-content" style="margin-top: -50px;">
-
-          <!-- Main Section -->
- <div class="space">&nbsp;</div>
-  <div class="col-md-6 col-md-offset-3 careerfy-typo-wrap">
-     <div class="portlet light bordered">
-  
- 
-        <div class="modal-inner-area">&nbsp;</div>
-        <div class="modal-content-area">
-            <div class="modal-box-area">
-                    <div class="careerfy-box-title">
-                        <h2>Choose your Account Type</h2>
-                    </div>
-             
-                    <div class="careerfy-user-options nav-tabs">
+ <div class="careerfy-main-content" style="margin-top: -50px;">
+        <!-- Main Content --> 
+          <div class="space">&nbsp;</div>
+          <div class="space">&nbsp;</div>
+<div class="col-md-8 col-md-offset-2">
+    <div class="center"><h2>Choose your Account Type</h2> </div> 
+     <!-- <div class="portlet light bordered" > -->
+        <div class="panel panel-default">
+            
+                <div class="panel-body">
+<div class="col-md-12" > 
+           <div class="careerfy-user-options nav-tabs">
+               <div class="space">&nbsp;</div>
+                        <div class="clearfix"></div>
                         <ul>
                             <li class="active candidate" >
                                 <a href="#candidate">
                                      <i class="careerfy-icon careerfy-user"></i>
                                      <span>Candidate</span>
-                                     <small>I want to discover awesome companies.</small>
+                                     <div class="space">&nbsp;</div> 
                                 </a>
                             </li>
-                            <li class="employer">
+                            <li class="active employer">
                                 <a href="#employer" >
                                      <i class="careerfy-icon careerfy-building"></i>
-                                     <span>Employer</span>
-                                     <small>I want to attract the best talent.</small>
+                                     <span>Employer</span> 
+                                     <div class="space">&nbsp;</div>
                                 </a>
                             </li>
                         </ul>
                     </div>
-
-                    <div class="tab-content">
-                    <div id="candidate" class="tab-pane fade in active">
-
-   
-<form class="form-horizontal" method="POST" action="{{ route('register') }}" id="candidate" name="candidate">
-                        {{ csrf_field() }}
- <input type="hidden" name="account_type" value="employee" >
-                        <div class="careerfy-user-form careerfy-user-form-coltwo">
-                        <ul> 
-                        <li>
-                                 
-                            <label >Name</label> 
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}"  autofocus>
-                                 <i class="careerfy-icon careerfy-user"></i>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                        </li>
-                        <li> 
-                            <label >E-Mail Address</label>
+    <div class="col-md-6">
+                        <div class="space">&nbsp;</div>
+                        <div class="clearfix"></div>
+                        <div class="space">&nbsp;</div>
+                        <div class="space">&nbsp;</div>
+       <div class="center2 select_label">I want to discover awesome jobs<br></div> 
  
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-                                <i class="careerfy-icon careerfy-mail"></i>
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif 
-                        </li>
-
-                        <li>
-                             
-                            <label >Password</label> 
-                                <input id="password" type="password" name="password" required class="form-control">
- <i class="careerfy-icon careerfy-multimedia"></i>
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif 
-                        </li>
-                        <li> 
-                            <label>Confirm Password</label> 
-                           
-                                <input id="password-confirm" type="password"  name="password_confirmation" required class="form-control">
-                                <i class="careerfy-icon careerfy-multimedia"></i>
-                        </li>
-                            <li class="careerfy-user-form-coltwo-full">
-                                <img src="extra-images/login-robot.png" alt="">
-                            </li>
-           
-                           <li class="careerfy-user-form-coltwo-full">
-                                <input type="submit" value="Sign Up Candidate">
-                            </li>
-
-                        </ul>
-
-                        </div> 
-                    </form>
-
-
+                        <div class="space">&nbsp;</div>
+                        <div class="clearfix"></div>
+                        <div class="space">&nbsp;</div>
+                        <div class="space">&nbsp;</div>
+      <div class="careerfy-user-form-coltwo-full careerfy-user-form">
+                            <a href="{{ route('employee.sigup') }}">    <input type="submit" value="Candidate Sign Up"></a>
+                            </div>
 </div>
-<div id="employer" class="tab-pane fade"> 
-  <form class="form-horizontal" method="POST" action="{{ route('register') }}" id="employer" name="employer" >
-                        {{ csrf_field() }} 
-<input type="hidden" name="account_type" value="employer" >
-                    <div class="careerfy-user-form careerfy-user-form-coltwo">
-                        <ul>
-                        <li>
-                                <label>Name:</label>
-       <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="name">
-                                <i class="careerfy-icon careerfy-user"></i>
-                              @if ($errors->has('fristname'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('fristname') }}</strong>
-                                    </span>
-                                @endif
-                            </li>
-              <!--               <li>
-                                <label>Last Name:</label>
-                                <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="lastname">
-                                <i class="careerfy-icon careerfy-user"></i>
-                            </li> -->
-                      
-                            <li>
-                                <label>Email Address:</label>
-                                <input onblur="if(this.value == '') { this.value ='Enter Your Email Address'; }" onfocus="if(this.value =='Enter Your Email Address') { this.value = ''; }" type="text" name="email"  >
-                                <i class="careerfy-icon careerfy-mail"></i>
-                                     @if ($errors->has('email2'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email2') }}</strong>
-                                    </span>
-                                @endif
-                            </li>
-                     
-                    <li>
-                      <label >Password</label> 
-                                <input id="password" type="password"  name="password" required class="form-control">
-<i class="careerfy-icon careerfy-typo-wrap"></i>
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </li> 
-                                <li> 
-                            <label>Confirm Password</label>  
-                                <input id="password-confirm" type="password"  name="password_confirmation" class="form-control">
-                                 <i class="careerfy-icon careerfy-typo-wrap"></i> 
-                                    </li>
-                        <!--      <li>
-                                <label>Phone Number:</label>
-                                <input value="Enter Your Phone Number" onblur="if(this.value == '') { this.value ='Enter Your Phone Number'; }" onfocus="if(this.value =='Enter Your Phone Number') { this.value = ''; }" type="text" name="phone">
-                                <i class="careerfy-icon careerfy-technology"></i>
-                            </li> -->
-                        
-                         
-                            <li class="careerfy-user-form-coltwo-full">
-                                <img src="extra-images/login-robot.png" alt="">
-                            </li>
-                            <li class="careerfy-user-form-coltwo-full">
-                                <input type="submit" value="Sign Up Employer">
-                            </li>
-                        </ul>
-                    </div>
+    <div class="col-md-6">
+                        <div class="space">&nbsp;</div>
+                        <div class="clearfix"></div>
+                        <div class="space">&nbsp;</div>
+                        <div class="space">&nbsp;</div>
+        <div class="container center2 select_label">I want to attract the best talent. <br></div>
+                        <div class="space">&nbsp;</div>
+                        <div class="space">&nbsp;</div>
+                        <div class="space">&nbsp;</div>
+                        <div class="clearfix"></div>
+      <div class="careerfy-user-form-coltwo-full careerfy-user-form">
+        <a href="{{ route('employer.sigup') }}">
+                                <input type="submit" value="Employer Sign Up"></a>
+                            </div>
+</div>
+</div>
+<!-- <form class="form-horizontal" action="{{ route('add.caption') }}" method="post" role="form" name="caption_form" >
+{{ csrf_field() }} 
+                    <div class="careerfy-user-form">   
+<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+<div class="col-md-12">
+Title  
+<input id="name" type="text" class="form-control" name="name" placeholder=" Enter title here"    required>
+@if ($errors->has('name'))
+<span class="help-block">
+<strong>{{ $errors->first('name') }}</strong>
+</span>
+@endif
+</div>
+</div>
  
+                <div class="space">&nbsp;</div>
+                <div class="row">
+                <div class="modal-footer">
+ 
+
+</div>  
+                </div> 
+                   <div class="space">&nbsp;</div>
+                        <div class="clearfix"></div>
+
+                    </div>
+             
+                    </form> -->
+</div>
 </div>
 </div>
 
-                    <div class="careerfy-box-title careerfy-box-title-sub">
-                        <span>Or Sign Up With</span>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="">
-                               <ul class="careerfy-login-media">
-                        <li><a href="{{ url('/auth/facebook') }}"><i class="fa fa-facebook"></i> Sign In with Facebook</a></li>
-                        <li><a href="{{ url('/redirect') }}" data-original-title="google"><i class="fa fa-google"></i> Sign In with Google</a></li>
-                        <!-- <li><a href="#" data-original-title="twitter"><i class="fa fa-twitter"></i> Sign In with Twitter</a></li> -->
-                        <!-- <li><a href="{{ url('/auth/likedin') }}" data-original-title="linkedin"><i class="fa fa-linkedin"></i> Sign In with LinkedIn</a></li> -->
-                    </ul> 
-                    </div>
-            
-                </form>
-                
-            </div>
-        </div>
-    </div>
- </div>
+       
+
+          <!-- Main Section -->  
  </div>
 
             <!-- Main Section -->

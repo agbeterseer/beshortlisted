@@ -6,7 +6,7 @@
 @if ($level == 'error')
 # Whoops!
 @else
-# Hello!
+# Hello! 
 @endif
 @endif
 
@@ -16,7 +16,8 @@
 
 @endforeach
 
-{{-- Action Button --}} 
+{{-- Action Button --}}
+@isset($actionText)
 <?php
     switch ($level) {
         case 'success':
@@ -31,7 +32,8 @@
 ?>
 @component('mail::button', ['url' => $actionUrl, 'color' => $color])
 {{ $actionText }}
-@endcomponent 
+@endcomponent
+@endisset
 
 {{-- Outro Lines --}}
 @foreach ($outroLines as $line)
@@ -46,10 +48,11 @@
 Regards,<br>{{ config('app.name') }}
 @endif
 
-{{-- Subcopy --}} 
+{{-- Subcopy --}}
+@isset($actionText)
 @component('mail::subcopy')
 If you’re having trouble clicking the "{{ $actionText }}" button, copy and paste the URL below
 into your web browser: [{{ $actionUrl }}]({{ $actionUrl }})
 @endcomponent
- 
+@endisset
 @endcomponent

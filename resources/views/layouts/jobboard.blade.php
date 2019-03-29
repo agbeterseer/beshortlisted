@@ -820,7 +820,25 @@ $("#phone").inputmask({"mask": "(999) 999-9999"});
     }
     $(window).resize(expandCollapse); // calls the function when the window first loads    
 </script>
+<script type="text/javascript">
+    $("#educationend_year").change(function() { 
+ //alert($(this).val());
+    if ( $(this).val() !=null) {
+    
+var start_d = document.getElementById('education_start_date').value; 
+var end_d = document.getElementById('educationend_year').value;
+        // alert(start_d);
+            
+            if (document.getElementById('education_start_date').value > document.getElementById('educationend_year').value) {
 
+             alert('The Year you started working must be greater than the later');  
+             document.getElementById('educationend_year').value = '';  
+            }else{
+
+            }
+    } 
+});
+</script>
 </body>
 
 </html>

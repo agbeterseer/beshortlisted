@@ -40,10 +40,51 @@
                      <h1>We Meet You at Your Desk</h1>
                     <p>Build a profile which places you in the ideal position to be recruited</p> 
                 </div>
-                                    <div class="careerfy-banner-btn">
+                        <div class="careerfy-banner-btn">
                         <a href="{{route('show.resume')}}" class="careerfy-bgcolorhover"><i class="careerfy-icon careerfy-up-arrow"></i> Build Your Resume</a>
                         <a href="{{route('post.jobs')}}" class="careerfy-bgcolorhover"><i class="careerfy-icon careerfy-portfolio"></i> Hiring? Post a job for free</a>
                     </div>
+                    <div class="space">&nbsp;</div> 
+                                        <form class="careerfy-banner-search" action="{{route('job.listing')}}" method="GET" id="find_jobs"> 
+                        <ul>
+                            <li>
+                                <div class="careerfy-select-style">
+                        <select name="s"  required="required">
+                                    <option value="">Select Industry</option>
+                                    @foreach($industries as $industry)
+                                        <option value="{{$industry->id}}">{{$industry->name}}</option> 
+                                        @endforeach 
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                               <div class="careerfy-select-style"> 
+                                  <select name="location"  required="required">
+                                    <option value="">Select City</option>
+                                    @foreach($cities as $city)
+                                        <option value="{{$city->id}}">{{$city->name}}</option> 
+                                        @endforeach 
+                                    </select>
+                                </div>
+                            
+                            </li>
+                            <li>
+                                      <div class=" careerfy-select-style">
+                                    <select name="job_function" required="required" >
+                                    <option value="">Select Job Function</option>
+                                    @foreach($industry_professions as $industry_profession)
+                                        <option value="{{$industry_profession->id}}">{{$industry_profession->name}}</option>
+                                        @endforeach
+                                     
+                                </select>
+                                </div>
+                               
+                            </li>
+
+                            <li class="careerfy-banner-submit"> <input type="submit" value="Find"> <i class="careerfy-icon careerfy-search"></i> </li>
+                        </ul>
+                    </form>                   
+
                    </div>
             <div class="col-md-4"> 
             <form class="careerfy-banner-search-three"  role="form" method="POST" action="{{ route('login') }}" id="candidate">
@@ -52,15 +93,10 @@
                                        <div class="careerfy-user-form-info">
                        <a class="btn btn-link center" href="#" style="color: #ffffff;">
                                     Login
-                                </a> 
-                  
-                       <!--      <div class="careerfy-checkbox"  style="text-align: center;">
-                                <input type="checkbox" id="r10" name="rr" />
-                                <label for="r10" style="color: #ffffff;"><span></span> Remember Password</label>
-                            </div> -->
+                                </a>
                         </div>  
                         <div class="row"> 
-                                <input  type="text" name="email" placeholder="Email Address:" class="form-control"> 
+                                <input  type="text" name="email" placeholder="Email Address:" class="form-control" required="required"> 
                                                      @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -69,7 +105,7 @@
                       </div>
                        <div class="space">&nbsp;</div>
                    <div class="row">
-                       <input  type="password" name="password" placeholder="Password" class="form-control">
+                       <input  type="password" name="password" placeholder="Password" class="form-control" required="required">
                        @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
@@ -77,8 +113,11 @@
                                 @endif
                 </div>
                 <div class="space">&nbsp;</div>
-                <div class="row">
-                  <input type="submit" value="Sign In">  
+                <div class="row">   
+                  <button  type="submit" class="btn white mt-ladda-btn ladda-button btn-outline" >
+<span class="ladda-label">
+<i class="icon-plus"></i> Sign In</span>
+</button>
                 </div> 
                    <div class="space">&nbsp;</div>
                         <div class="clearfix"></div>
@@ -185,7 +224,7 @@
                                     <li class="col-md-3">
                                         <i class="careerfy-icon careerfy-briefcase-1 "></i>
                                         <span class="word-counter">{{$jobs_count}}</span>
-                                        <small>Jobs Addes</small>
+                                        <small>Jobs Added</small>
                                     </li>
                                     <li class="col-md-3">
                                         <i class="careerfy-icon careerfy-hospital"></i>
@@ -224,14 +263,14 @@
                                     <li class="col-md-4">
                                         <div class="careerfy-services-stylefour-wrap" style="background-color: #ffbb44;">
                                             <i class="careerfy-icon careerfy-people-1"></i>
-                                            <h2>Post a job offer</h2>
+                                            <h2>Post a Job Offer</h2>
                                             <p>Attract candidates that best fit you.</p>
                                         </div>
                                     </li>
                                     <li class="col-md-4">
                                         <div class="careerfy-services-stylefour-wrap active">
                                             <i class="careerfy-icon careerfy-target"></i>
-                                            <h2>Find your candidate</h2>
+                                            <h2>Find Your Candidate</h2>
                                             <p>Get the Top 10 candidates, Thanks to our automatch.</p>
                                             <a href="#" class="careerfy-services-stylefour-btn"><small class="careerfy-icon careerfy-right-arrow"></small></a>
                                         </div>
@@ -288,7 +327,7 @@
                 <div class="container">
                     <div class="row">
                  <div class="careerfy-element-text" align="center" data-os-animation="fadeIn">
-                       <h2>Latest Jobs Listings</h2>
+                       <h2>Latest Job Listings</h2>
                         </div> 
                         <div class="col-md-12 careerfy-typo-wrap">
                             <!-- Fancy Title -->  
@@ -336,7 +375,7 @@
                     <div class="space">&nbsp;</div>
                     <div class="space">&nbsp;</div>
             <!-- Main Section -->
-            <div class="" style="background-color: #ffffff;">
+<!--             <div class="" style="background-color: #ffffff;">
                 <div class="container">
                     <div class="row">
         <div class="careerfy-element-text" align="center">
@@ -367,7 +406,7 @@
                           </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         <div class="space">&nbsp;</div>
                     <div class="space">&nbsp;</div>
             <!-- Main Section -->

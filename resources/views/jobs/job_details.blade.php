@@ -45,6 +45,7 @@
         {!! Session::get('error') !!}
         </div>
         @endif
+        @include('partials.employee_breadcomb') 
      <!-- SubHeader careerfy-subheader-without-bg-->
           <div class="space">&nbsp;</div>
         <!-- SubHeader -->
@@ -68,7 +69,7 @@
                                             <li><i class="fa fa-map-marker"></i> {{$tag->full_address}} <!-- <a href="#" class="careerfy-jobdetail-view">View om Map</a> --></li>
                                             <li><i class="careerfy-icon careerfy-calendar"></i> <strong>Post Date:</strong> {{ date('M d, Y', strtotime($tag->created_at)) }} </li>
                                             <li><i class="careerfy-icon careerfy-calendar"></i> <strong>Apply Before:</strong> {{ date('M d, Y', strtotime($tag->end_date)) }}</li>
-                                            <li><i class="careerfy-icon careerfy-summary"></i> <strong>Applications</strong> {{$number_of_applicants}}</li>
+                                            <li><i class="careerfy-icon careerfy-summary"></i> <strong>Applications:</strong> {{$number_of_applicants}}</li>
                                             <!-- <li><a href="#"><i class="careerfy-icon careerfy-view"></i> Views 3806</a></li> -->
                                         </ul>
               <ul class="careerfy-jobdetail-media">
@@ -124,16 +125,17 @@
                                             </li>
                                         </ul>
                                     </div>
+                              <div class="careerfy-content-title"><h2>Job Responsibilities</h2></div>
+                                    <div class="careerfy-description">  
+                                     {!! $tag->job_roles !!}
+            
+                                    </div>
                                  <div class="careerfy-content-title"><h2>Technical Requirements</h2></div> 
                                     <div class="careerfy-description">
                                         {!! $tag->description !!}
                                     </div>
                             
-                                    <div class="careerfy-content-title"><h2>Job Funtions</h2></div>
-                                    <div class="careerfy-description">  
-                                     {!! $tag->job_roles !!}
-            
-                                    </div>
+
   <div class="space">&nbsp;</div>
     <span style="color: red;">Kindly answer the evaluation question(s) below to begin your screening process</span>
 <form method="POST" action="{{route('make.application')}}" name="requirements"> 

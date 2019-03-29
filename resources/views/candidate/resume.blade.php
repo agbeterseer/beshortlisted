@@ -206,7 +206,7 @@ $check = 'second';
 
  <div class="overviewtitle2">
 <span class="ovtitle"><strong>Age</strong></span>
-<span class="detail highlightable">{{$document->age}}</span>
+@if($document->age)<span class="detail highlightable">{{$document->age}}</span>@else<span class="detail highlightable">N/A</span>  @endif
 </div>
 
  <div class="overviewtitle2">
@@ -230,26 +230,33 @@ $check = 'second';
 
  <div class="overviewtitle2">
 <span class="ovtitle"><strong>Willing to relocate:</strong></span>
-<span class="detail highlightable">{{$document->relocate_nationaly}}   </span>
+@if($document->relocate_nationaly)<span class="detail highlightable">{{$document->relocate_nationaly}}   </span>@else
+<span class="detail highlightable">N/A</span>
+@endif
 </div>
+
 
  <div class="overviewtitle2">
 <span class="ovtitle"><strong>Educational Level:</strong></span>
+@if($document->educational_level)
 <span class="detail highlightable">
-
 @foreach($educationallevels as $educationallevel)  
-@if($educationallevel->id == $document->educational_level) {{$educationallevel->name}} @endif @endforeach</span>
+@if($educationallevel->id == $document->educational_level) {{$educationallevel->name}} @endif @endforeach</span> @else<span class="detail highlightable"> N/A</span>@endif
 </div>
-
+ 
  <div class="overviewtitle2">
 <span class="ovtitle"><strong>Career Level:</strong></span>
-<span class="detail highlightable"> @foreach($job_career_levelList as $job_career_level) @if($job_career_level->id == $document->career_level) {{$job_career_level->name}}  @endif @endforeach </span>
+@if($document->career_level)<span class="detail highlightable"> @foreach($job_career_levelList as $job_career_level)   @if($job_career_level->id == $document->career_level) {{$job_career_level->name}}  @endif @endforeach </span>@else <span class="detail highlightable"> N/A</span> @endif
 </div>
+
 
  <div class="overviewtitle2">
 <span class="ovtitle"><strong> Minimum Salary:</strong></span>
-<span class="detail highlightable">{{$document->minimum_salary}} / Year</span>
+@if($document->minimum_salary)<span class="detail highlightable">{{$document->minimum_salary}} / Year </span>@else
+<span class="detail highlightable"> N/A</span>
+@endif
 </div>
+
 
  <div class="overviewtitle2">
 <span class="ovtitle"><strong>Availability:</strong></span>
@@ -487,7 +494,7 @@ $check = 'second';
                                                 </h4> </div>
                                 <div class="careerfy-add-popup">
                                 <div class="careerfy-candidate-title"> <h4>
-                                Career Objectives
+                               Add Career Objectives
                                 <a href="#" class="careerfy-resume-addbtn" style="background-color: red"><span class="fa fa-minus"></span></a>
                                 </h4> </div>
                           <form class="form-horizontal" action="{{ route('add.career_summary') }}" method="post" role="form">
@@ -535,14 +542,20 @@ $check = 'second';
 @else
                   <div class="careerfy-candidate-resume-wrap">    
                                                 <div class="careerfy-candidate-title"> <h4>
+
                                                     <i class="careerfy-icon careerfy-design-skills"></i> Skills 
                                                     <a href="javascript:void(0)" class="careerfy-resume-addbtn" style="width: 30%"><span class="fa fa-plus"></span>  Add Skills</a>
                                                 </h4> </div>
 
                                                 <div class="careerfy-add-popup">
-                                                 
-          <pre> Write your skills in the box below with percentage. <br>click on Add Skill button to add more skills<br> Eg. "Java 80%, php 71%, Javascript, hibernate, Spring Tomcat, LAMP, XAMP, Netbean"</pre>                              
-         <a href="javascript:void(0)"  data-dismiss="modal" class="careerfy-resume-addbtn" style="background-color: red" ><span class="fa fa-minus"></span></a>
+                               <div class="careerfy-candidate-title"> <h4>
+                              Add Skills
+                                <a href="#" class="careerfy-resume-addbtn" style="background-color: red"><span class="fa fa-minus"></span></a>
+                                </h4> </div>
+                         
+          <notice> Write your skills in the box below. click on Add Input button to add more skills<br> Eg. "javascript", "hibernate", "Spring Tomcat", "LAMP", "XAMP", "Netbean""</notice>
+          <div class="space">&nbsp;</div>                              
+      
 <p></p>
  
  <div class="portlet-body form">
@@ -559,70 +572,29 @@ $check = 'second';
                                                     <div class="mt-repeater">
                                                         <div data-repeater-list="group_b">
   <div data-repeater-item class="careerfy-row careerfy-employer-profile-form">
-   <div class="careerfy-column-5"><label >Skill</label>
+    <div class="careerfy-column-3"> </div>
+   <div class="careerfy-column-6">
    <input type="text" class="form-control" name="skill" placeholder="Eg. Java"> </div>
-    <div class="careerfy-column-3"><label >(%) </label> 
-    <input type="text" class="form-control" name="percentage" placeholder=" Eg. 89%"> </div>
-     <div class="careerfy-column-2">
-     <a href="javascript:;" data-repeater-delete class="btn btn-danger">
-<i class="fa fa-close"></i>
-</a> </div>
- </div>
-   <div data-repeater-item class="careerfy-row careerfy-employer-profile-form">
-   <div class="careerfy-column-5"><label >Skill</label>
-   <input type="text" class="form-control" name="skill" placeholder="Eg. hibernate"> </div>
-    <div class="careerfy-column-3"><label >(%) </label> 
-    <input type="text" class="form-control" name="percentage" placeholder=" Eg. 89%"> </div>
-     <div class="careerfy-column-2">
-     <a href="javascript:;" data-repeater-delete class="btn btn-danger">
-<i class="fa fa-close"></i>
-</a> </div>
- </div>
-  <div data-repeater-item class="careerfy-row careerfy-employer-profile-form">
-   <div class="careerfy-column-5"><label >Skill</label>
-   <input type="text" class="form-control" name="skill" placeholder="Eg. php"> </div>
-    <div class="careerfy-column-3"><label >(%) </label> 
-    <input type="text" class="form-control" name="percentage" placeholder=" Eg. 89%"> </div>
-     <div class="careerfy-column-2">
-     <a href="javascript:;" data-repeater-delete class="btn btn-danger">
-<i class="fa fa-close"></i>
-</a> </div>
- </div>
-    <div data-repeater-item class="careerfy-row careerfy-employer-profile-form">
-   <div class="careerfy-column-5"><label >Skill</label>
-   <input type="text" class="form-control" name="skill" placeholder="Eg. Springboot"> </div>
-    <div class="careerfy-column-3"><label >(%) </label> 
-    <input type="text" class="form-control" name="percentage" placeholder=" Eg. 89%"> </div>
-     <div class="careerfy-column-2">
-     <a href="javascript:;" data-repeater-delete class="btn btn-danger">
-<i class="fa fa-close"></i>
-</a> </div>
- </div>
-    <div data-repeater-item class="careerfy-row careerfy-employer-profile-form">
-   <div class="careerfy-column-5"><label >Skill</label>
-   <input type="text" class="form-control" name="skill" placeholder="Eg. Android"> </div>
-    <div class="careerfy-column-3"><label >(%) </label> 
-    <input type="text" class="form-control" name="percentage" placeholder=" Eg. 89%"> </div>
+ 
      <div class="careerfy-column-2">
      <a href="javascript:;" data-repeater-delete class="btn btn-danger">
 <i class="fa fa-close"></i>
 </a> </div>
  </div>
  
-                                                        </div>
-                                                        <hr>
-                                                        <a href="javascript:;" data-repeater-create class="btn btn-info mt-repeater-add">
-                                                            <i class="fa fa-plus"></i> Add Input</a>
-                                                        <br>
-                                                        <br> 
+                                                        </div> 
+                                                  
                                                         </div> 
                                                         </div>
-          <div class="mt-repeater-input">
+<!--           <div class="mt-repeater-input">
               <a href="javascript:;" data-repeater-delete class="btn btn-danger mt-repeater-delete">
                   <i class="fa fa-close"></i> Delete</a>
-          </div>
+          </div> -->
                                                 </div>
                                             </div>
+                                              <a href="javascript:;" data-repeater-create class=" mt-repeater-add btn-outline" >
+                            <i class="fa fa-plus"></i> Add Input</a> 
+                            <div class="space">&nbsp;</div>
                               <input type="submit" value="Save Skills">
                                         </form>
                                     </div>
@@ -697,13 +669,17 @@ $check = 'second';
 @else
 
 <div class="careerfy-candidate-resume-wrap">    
-                                                <div class="careerfy-candidate-title"> <h4>
+<div class="careerfy-candidate-title"> <h4>
                                 <i class="careerfy-icon careerfy-mortarboard"></i>Education 
                   <a href="javascript:void(0)" class="careerfy-resume-addbtn" style="width: 30%"><span class="fa fa-plus"></span> Add Education</a>
                                                 </h4> </div>
 
               <div class="careerfy-add-popup">
-                                                    <a href="javascript:void(0)"  data-dismiss="modal" class="careerfy-resume-addbtn" style="background-color: red" ><span class="fa fa-minus"></span></a>
+                          <div class="careerfy-candidate-title"> <h4>
+                               Add Education
+                                <a href="#" class="careerfy-resume-addbtn" style="background-color: red"><span class="fa fa-minus"></span></a>
+                                </h4> </div>
+                            
                   <ul class="careerfy-row careerfy-employer-profile-form">
   <form class="form-horizontal" action="{{ route('add.education') }}" method="post" role="form" name="form23">
 {{ csrf_field() }}
@@ -723,17 +699,18 @@ $check = 'second';
 <div class="careerfy-profile-select careerfy-three-column">                                                
 <select name="start_month" id="start_month" style="font-size: 16px; color: #000000;">
 <option value="" selected="selected">Month</option>
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-<option value="11">11</option>
-<option value="12">12</option>
+<option value="1">January</option>
+<option value="2">February</option>
+<option value="3">March</option>
+<option value="4">April</option>
+<option value="5">May</option>
+<option value="6">June</option>
+<option value="7">July</option>
+<option value="8">August</option>
+<option value="9">September</option>
+<option value="10">October</option>
+<option value="11">Novermber</option>
+<option value="12">December</option>
 </select>
                                        
       </div> 
@@ -755,17 +732,18 @@ $check = 'second';
 <div class="careerfy-profile-select careerfy-three-column">                                                
 <select name="end_month" id="end_month" required="required" class="form-control" style="font-size: 16px; color: #000000;">
 <option value="" selected="selected">Month</option>
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-<option value="11">11</option>
-<option value="12">12</option>
+<option value="1">January</option>
+<option value="2">February</option>
+<option value="3">March</option>
+<option value="4">April</option>
+<option value="5">May</option>
+<option value="6">June</option>
+<option value="7">July</option>
+<option value="8">August</option>
+<option value="9">September</option>
+<option value="10">October</option>
+<option value="11">Novermber</option>
+<option value="12">December</option>
 </select>                      
       </div>
       </div>
@@ -860,19 +838,23 @@ Previous
 <span class="ovtitle">Country</span>
 <span class="highlightable"> @foreach($countries as $country) @if($work_history->country === $country->code) {{$country->name_en}} @endif @endforeach</span>
 </div> 
-
+ 
 <div class="overviewtitle2">
 <span class="ovtitle">Industry</span>
-<span class="highlightable"> @foreach($work_history->industries as $industry) {{$industry->name}}  @endforeach</span>
+@if(!$work_history->industries->isEmpty())
+@foreach($work_history->industries as $industry) <span class="highlightable"> {{$industry->name}}  </span>@endforeach @else<span class="highlightable">N/A </span>  @endif 
 </div> 
+
 <div class="overviewtitle2">
 <span class="ovtitle">Position Type</span>
-<span class="highlightable">@foreach($work_history->industryprofessions as $profession) {{$profession->name}}  @endforeach </span>
-</div> 
+@if(!$work_history->industryprofessions->isEmpty())
+@foreach($work_history->industryprofessions as $profession) <span class="highlightable">{{$profession->name}}  </span>
+ @endforeach @else <span class="highlightable">N/A </span> @endif</div>  
 <div class="overviewtitle2">
 <span class="ovtitle">Position Description</span>
+@if($work_history->responsibilities )
 <span class="job_description detail highlightable">
- {!! $work_history->responsibilities !!} </span>
+ {!! $work_history->responsibilities !!} </span> @else<span class="highlightable">N/A</span>  @endif
 </div>
 </div>
 @endforeach
@@ -979,26 +961,33 @@ Previous
 
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Interests</span>
-<div class="highlightable">{{$person_info->interest}}</div>
+<div class="highlightable">
+    <textarea class="form-control textarea" placeholder="" name="association" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; background-color: #ffffff; " maxlength="120" disabled="disabled"> {{$person_info->interest}} </textarea> 
+</div>
 </div>
 
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Associations</span>
-<div class="highlightable">{{$person_info->association}} </div>
+<div class="highlightable">
+  <textarea class="form-control textarea" placeholder="" name="association" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; background-color: #ffffff; " maxlength="120" disabled="disabled"> {{$person_info->association}} </textarea>
+
+</div>
 </div>
 
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Awards</span>
-<div class="highlightable"> None {{$person_info->award}} </div>
+<div class="highlightable">
+    <textarea class="form-control textarea" placeholder="" name="award" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; background-color: #ffffff; " maxlength="120" disabled="disabled">{{$person_info->award}}</textarea>
+</div>
 </div>
 
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Training</span>
-<div class="highlightable"> None {{$person_info->training}} </div>
+<div class="highlightable">   <textarea class="form-control textarea" placeholder="" name="training" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; background-color: #ffffff; " maxlength="120" disabled="disabled"> {{$person_info->training}} </textarea> </div>
 </div>
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Personal page</span>
-<span class="highlightable"><a class="breakword" href="https://www.linkedin.com/in/terseer-agbe-61287677/" rel="external">{{$person_info->personal_page}}</a></span>
+<span class="highlightable"><a class="breakword" href="{{$person_info->personal_page}}" rel="external">{{$person_info->personal_page}}</a></span>
 </div>
 
 </div>
@@ -1081,7 +1070,7 @@ Previous
                                                         </li>
                                                                                    <li class="careerfy-column-6">
                                 <label >Email <span class="required" style="color: red">*</span></label>
-                                      <input id="refereer_email" type="refereer_email" class="form-control" placeholder="Enter Email" name="refereer_email"  required>
+                                      <input id="refereer_email" type="email" class="form-control" placeholder="Enter Email" name="refereer_email"  required>
 
                                 @if ($errors->has('refereer_email'))
                                     <span class="help-block">
@@ -1455,10 +1444,10 @@ Availability:
  
  <option value="">...Select one ...</option>
    <option value="now">Immediate</option>
-    <option value="1_week">1 week</option>
-    <option value="2_weeks">2 weeks</option>
-    <option value="1_month" selected="selected">1 month</option>
-    <option value="2_months">2 months</option>
+    <option value="1 week">1 week</option>
+    <option value="2 weeks">2 weeks</option>
+    <option value="1 month" selected="selected">1 month</option>
+    <option value="2 months">2 months</option>
     <option value="date">Specific date</option>
 </select>
 </div>
@@ -2026,18 +2015,19 @@ Skills
                 <div class="careerfy-profile-select careerfy-three-column">                                                
 <select name="work_from_month" id="work_from_month" required="required" style="font-size: 16px; color: #000000;">
  <option value="" selected="selected">Month</option>
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-<option value="11">11</option>
-<option value="12">12</option>
+<option value="1">January</option>
+<option value="2">February</option>
+<option value="3">March</option>
+<option value="4">April</option>
+<option value="5">May</option>
+<option value="6">June</option>
+<option value="7">July</option>
+<option value="8">August</option>
+<option value="9">September</option>
+<option value="10">October</option>
+<option value="11">Novermber</option>
+<option value="12">December</option>
+
 </select>
                                        
                 </div>
@@ -2073,18 +2063,18 @@ Skills
 <div class="careerfy-profile-select careerfy-three-column">                                            
 <select name="end_month" id="end_month_work" style="font-size: 16px; color: #000000; display: block;">
 <option value="" selected="selected">Month</option>
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-<option value="11">11</option>
-<option value="12">12</option>
+<option value="1">January</option>
+<option value="2">February</option>
+<option value="3">March</option>
+<option value="4">April</option>
+<option value="5">May</option>
+<option value="6">June</option>
+<option value="7">July</option>
+<option value="8">August</option>
+<option value="9">September</option>
+<option value="10">October</option>
+<option value="11">Novermber</option>
+<option value="12">December</option>
 </select>
  </div>
  
@@ -2370,3 +2360,4 @@ Personal page <span class="required">*</span>
 </div>
 
 @endsection
+

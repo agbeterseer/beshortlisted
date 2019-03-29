@@ -25,7 +25,7 @@
 
     <table class="wrapper" width="100%" cellpadding="0" cellspacing="0">
         <tr>
-            <td align="center">
+            <td align="center" class="logo">
                 <table class="content" width="100%" cellpadding="0" cellspacing="0">
                     {{ $header or '' }}
 
@@ -35,6 +35,7 @@
                             <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0">
                                 <!-- Body content -->
                                 <tr>
+                 
                                     <td class="content-cell">
                                         {{ Illuminate\Mail\Markdown::parse($slot) }}
 
@@ -42,8 +43,12 @@
                                     </td>
                                 </tr>
                             </table>
+
                         </td>
                     </tr>
+                    <div class="logo">
+                        
+                    </div>
 
                     {{ $footer or '' }}
                 </table>

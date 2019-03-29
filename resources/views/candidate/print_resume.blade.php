@@ -12,12 +12,6 @@
 ])
 
 @section('content')
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
 @include('partials.employee_breadcomb')
       <div class="careerfy-main-section careerfy-dashboard-fulltwo">
                 <div class="container " id="page" style="" >
@@ -29,11 +23,10 @@
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet light bordered">
                 <div class="portlet-title">
-                    <div class="caption font-dark">
+<!--                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
                         <span class="caption-subject bold uppercase"> Resume</span>
-                    </div>
-                
+                    </div>  -->
                 </div>
                 <div class="portlet-body"> 
                                         <div class="resume_title" align="center">
@@ -294,29 +287,40 @@ Previous
 <div class="col-md-12 cv_content" >
 <div class="pageactionIn" id="additional_information_topsection">
 <div class="title4">
-<!-- <p class="editov2"><a class="edits" href="{{route('update.pinformation', $person_info->id)}}">Edit</a></p> -->
+<p class="editov2"><a class="edits" href="{{route('update.pinformation', $person_info->id)}}">Edit</a></p>
 <h4>Personal Information</h4>
- <hr>
 </div>
-
+<div class="space">&nbsp;</div>
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Interests</span>
-<div class="highlightable">{{$person_info->interest}}</div>
+<div class="highlightable">
+    <textarea class="form-control textarea" placeholder="" name="association" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; background-color: #ffffff; " maxlength="120" disabled="disabled"> {{$person_info->interest}} </textarea> 
 </div>
-
+</div>
+<div class="space">&nbsp;</div>
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Associations</span>
-<div class="highlightable">{{$person_info->association}} </div>
-</div>
+<div class="highlightable">
+  <textarea class="form-control textarea" placeholder="" name="association" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; background-color: #ffffff; " maxlength="120" disabled="disabled"> {{$person_info->association}} </textarea>
 
+</div>
+</div>
+<div class="space">&nbsp;</div>
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Awards</span>
-<div class="highlightable"> None {{$person_info->award}} </div>
+<div class="highlightable">
+    <textarea class="form-control textarea" placeholder="" name="award" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; background-color: #ffffff; " maxlength="120" disabled="disabled">{{$person_info->award}}</textarea>
 </div>
-
+</div>
+<div class="space">&nbsp;</div>
+<div class="overviewtitle2 overviewtype3 several2">
+<span class="ovtitle">Training</span>
+<div class="highlightable">   <textarea class="form-control textarea" placeholder="" name="training" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; background-color: #ffffff; " maxlength="120" disabled="disabled"> {{$person_info->training}} </textarea> </div>
+</div>
+<div class="space">&nbsp;</div>
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Personal page</span>
-<span class="highlightable"><a class="breakword" href="https://www.linkedin.com/in/terseer-agbe-61287677/" rel="external">{{$person_info->personal_page}}</a></span>
+<span class="highlightable"><a class="breakword" href="{{$person_info->personal_page}}" rel="external">{{$person_info->personal_page}}</a></span>
 </div>
 
 </div>

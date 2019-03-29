@@ -682,6 +682,7 @@ public function DeleteResume($id)
         $city = $request->location;
         $full_adress = $request->full_adress;
         $phonenumber = $request->phonenumber;
+        $education_section = $request->education_section;
         // get section value sent from request
         $section = $request->jobprofile;
         // get current resume ID
@@ -730,14 +731,14 @@ public function DeleteResume($id)
         $document->save();
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Done successfully!');
-    //$this->AddSection($section, $user->id, $resume);
+     $this->AddSection($education_section, $user->id, $resume);
     } catch (\Exception $e) {
         $request->session()->flash('message.level', 'danger');
         $request->session()->flash('message.content', 'Cannot create record');
            return redirect()->back()->withErrors($e->getMessage());
       // Session::flash('error', $e->getMessage()); 
     }
-        return redirect()->back();
+        return redirect()->route('show.resume');
     }
     public function AddCareer(Request $request)
     {
@@ -942,7 +943,7 @@ public function UpdateslskillForm($id)
 {
     $user = Auth::user();
     $skill_list = JobSkill::where('userid', $user->id)->where('resumeid', $id)->get();
-    //dd($skill_list);
+   //dd($id);
     $resume = RecruitResume::findOrFail($id);
        $menus = $this->displayMenu();
 
@@ -1007,6 +1008,8 @@ public function GetQualificationLevels()
     public function AddEducation(Request $request)
     {
         //dd($request->all());
+
+
         $user = Auth::user();
         $education_start_date = $request->education_start_date;
         $start_month = $request->start_month;
@@ -1018,6 +1021,10 @@ public function GetQualificationLevels()
         $country = $request->country;
         $resume = $request->resume;
         $section = $request->education_section;
+
+        // if ($educationend_year) {
+        //   # code...
+        // }
         $resume = RecruitResume::findOrFail($resume);
       //  dd($section);
         $validation = Validator::make( $request->all(), [
@@ -1177,6 +1184,8 @@ public function ShowWorkExperienceForm()
           $user_yoe->save();
           # code...
         }
+
+
         // dd($request->all());
        
         //dd($resume);
@@ -1196,7 +1205,11 @@ public function ShowWorkExperienceForm()
         $present = $request->present;
 
         if ($end_year !=null && $end_month !=null) {
-        # code...
+
+        if ($work_from_year > $end_year ) { 
+        Session::flash('error-year', 'The Year you started working must be greater than the later.');
+          return redirect()->back()->withErrors(['error', 'cannot create account']);
+        }
 
         $present = 0;
         }else{
@@ -1887,7 +1900,7 @@ $pr_caption= RecruitResume::where('user_id', $user->id)->where('status',1)->firs
         $ddt = Carbon::now(); 
         $documents = Document::all()->count();
         $users = User::all()->count();
-        $jobskills = JobSkill::where('userid', $user->id)->get();
+       
         $document = Document::Where('user_id', $user->id)->first();
         $industries =  DB::table('industries')->get();
         $recruityear_list = RecruitYear::all();
@@ -1930,10 +1943,12 @@ $pr_caption= RecruitResume::where('user_id', $user->id)->where('status',1)->firs
         $tags = $this->Tags();
         $section_candidatelist = $this->GetCandidateSection($user_single_resume_by_date->id);
         $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
+        //dd($section_candidatelist);
         $job_category_list = $this->GetJobcategory();
         $referee_list = $this->GetRefereers($user_single_resume_by_date->id);
         $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first(); 
         $menus = $this->displayMenu(); 
+         $jobskills = JobSkill::where('userid', $user->id)->where('resumeid', $user_single_resume_by_date->id)->get();
         return view('candidate.resume', compact('documents', 'users', 'resumes','industries', 'industry_profession', 'user_single_resume_by_date', 'document', 'career', 'jobskills', 'recruityear_list', 'qualifications', 'countries', 'educationaList', 'dt', 'ddt', 'job_career_levelList', 'work_histories', 'educationallevels', 'employementterms', 'jobcertifications', 'person_info', 'awards', 'job_by_candidate_list', 'tags', 'cities', 'section_candidatelist', 'section_candidatelist_count', 
                 'job_category_list', 'regions', 'referee_list', 'profile_pix', 'menus', 'pr_caption'), array('user' => Auth::user()));
         }
@@ -2069,9 +2084,8 @@ $pr_caption= RecruitResume::where('user_id', $user->id)->where('status',1)->firs
         public function ShowUpdatePersonalInformationForm($id)
         {
             if ($id) {
-
             $person_info = PersonalInformation::findOrFail($id);
-$menus = $this->displayMenu();
+            $menus = $this->displayMenu();
             }else{   
             Session::flash('error', 'something went wrong');
             return redirect()->back();

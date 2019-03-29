@@ -11,7 +11,7 @@
 ])
 
 @section('content')
-<div class="space">&nbsp;</div>
+
 @include('partials.employee_breadcomb') 
 
       <div class="careerfy-main-section careerfy-dashboard-fulltwo">
@@ -39,6 +39,7 @@
 {{ csrf_field() }}
 <input type="hidden" name="document_id" value="{{$document->id}}">
 <input type="hidden" name="resume" value="{{$resume_id}}">
+  <input type="hidden" value="personalinfor" name="personalinfor_section">
 <!-- <form role="form"> -->
 <div class="row">
 <div class="col-md-6">

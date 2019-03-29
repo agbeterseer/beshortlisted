@@ -35,8 +35,7 @@
                 <div class="panel-body">
 
 <form class="form-horizontal" action="{{ route('add.caption') }}" method="post" role="form" name="caption_form" >
-{{ csrf_field() }}
-                {{ csrf_field() }}
+{{ csrf_field() }} 
                     <div class="careerfy-user-form">  
 <input type="hidden" name="old_name" value="{{$recruit_resume}}">
 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

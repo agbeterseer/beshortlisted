@@ -71,7 +71,7 @@
                                                 <div class="col-md-12">
                                                     <div class="mt-repeater">
                                                         <div data-repeater-list="group_b">
-
+                                                         
                                                         @foreach($skill_list as $jobskill)
                                                             <div data-repeater-item class="row">
                                                                 <div class="col-md-7">
@@ -94,8 +94,7 @@
                                                    
                                                         </div>
                                                         <hr>
-                                                        <a href="javascript:;" data-repeater-create class="btn btn-info mt-repeater-add">
-                                                            <i class="fa fa-plus"></i> Add Input</a>
+                                             
                                                         <br>
                                                         <br> </div>
                                                 </div>
@@ -107,7 +106,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                           
+                                                      <a href="javascript:;" data-repeater-create class="btn btn-info mt-repeater-add">
+                                                            <i class="fa fa-plus"></i> Add Input</a>
 <a  href="{{url('/index/resume')}}"  class="btn dark btn-outline" data-dismiss="modal">Close</a>
 <button type="submit" class="btn green">Save changes</button>
  

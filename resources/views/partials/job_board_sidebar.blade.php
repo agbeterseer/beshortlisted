@@ -110,15 +110,7 @@
 
                         <li><a href="{{route('show.cation')}}"><i class="careerfy-icon careerfy-resume"></i> Create Resume</a></li>
                    
-                                  
-                                    <!--
-                                      <li class="active"><a href="candidate-dashboard-profile-seting.html"><i class="careerfy-icon careerfy-user"></i> My Profile</a></li>
-                                         <li><a href="candidate-dashboard-saved-jobs.html"><i class="careerfy-icon careerfy-heart"></i> Saved jobs</a></li>
-                                        <li><a href="candidate-dashboard-applied-jobs.html"><i class="careerfy-icon careerfy-briefcase-1"></i> Applied jobs</a></li>
-                                        <li><a href="candidate-dashboard-job-alert.html"><i class="careerfy-icon careerfy-alarm"></i> Job Alerts</a></li>
-                                        <li><a href="candidate-dashboard-cv-manager.html"><i class="careerfy-icon careerfy-id-card"></i> CV Manager</a></li>
-                                        <li><a href="candidate-dashboard-changed-password.html"><i class="careerfy-icon careerfy-multimedia"></i> Change Password</a></li>
-                                        <li><a href="index.html"><i class="careerfy-icon careerfy-logout"></i> Logout</a></li> -->
+          
                                     </ul>
                                 </div>
                             </div>
@@ -162,11 +154,11 @@
                                                           </li>
                          </ul>
 
-                          <i class="careerfy-icon careerfy-filter-tool-black-shape"></i>
+                          <!-- <i class="careerfy-icon careerfy-filter-tool-black-shape"></i> -->
                                      @foreach($job_category_list as $job_category) @if($job_category->id === $tag->job_type) 
                                         <div class="careerfy-job-userlist">
                                   <a href="#" class="careerfy-option-btn careerfy-blue">{{$job_category->name}}</a>
-                                                        <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
+                                                        <!-- <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a> -->
                                                     </div>
                                        @endif  @endforeach
  

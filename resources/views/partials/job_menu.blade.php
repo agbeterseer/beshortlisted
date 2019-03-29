@@ -89,7 +89,7 @@ window.onclick = function(event) {
                         <div class="careerfy-right">
                             <ul class="careerfy-user-section">
                                 @if(!Auth::user()) 
-                                <li><a class="careerfy-color" href="{{route('register')}}">Register</a></li>
+                                <li><a class="careerfy-color" href="{{route('sign.up')}}">Register</a></li>
                                 <li><a class="careerfy-color" href="{{route('auth.login')}}">Sign in</a></li>
                                 @else
                        <li>  

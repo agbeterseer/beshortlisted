@@ -12,12 +12,7 @@
 ])
 
 @section('content')
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
+
 @include('partials.employee_breadcomb') 
 <style type="text/css">
   .textarea{
@@ -62,11 +57,11 @@ height: 92px;
 <div class="col-md-12">
 <div class="form-group">
 <label class="control-label col-md-3"> </label>
-<div class="col-md-12">
+<div class="col-md-6">
 Interests <span class="required">*</span>
-<textarea class="form-control textarea" placeholder="" name="interest" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="120">{{$person_info->interest}}</textarea>  
+<textarea class="form-control textarea" placeholder="Photography, Marathon, Yoga, Rock Climbing, Football, Fishing, Snowboard, Investment etc." name="interest" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="100">{{$person_info->interest}}</textarea>  
 <p></p>
- <pre>Eg. Photography, Marathon, Yoga, Rock Climbing, Football, Fishing, Snowboard, Investment etc.</pre>
+  Eg. Photography, Marathon, Yoga, Rock Climbing, Football, Fishing, Snowboard, Investment etc. 
 </div>
 </div>
 <!-- /input-group -->
@@ -82,9 +77,9 @@ Interests <span class="required">*</span>
 <div class="col-md-12">
 <div class="form-group">
 <label class="control-label col-md-3"> </label>
-<div class="col-md-12">
+<div class="col-md-6">
 Associations <span class="required">*</span>
-<textarea class="form-control textarea" placeholder="" name="associations" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="120">{{$person_info->association}}</textarea> 
+<textarea class="form-control textarea" placeholder="Make a list of your associations" name="associations" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="120">{{$person_info->association}}</textarea> 
  
 </div>
 </div>
@@ -101,7 +96,7 @@ Associations <span class="required">*</span>
 <div class="col-md-12">
 <div class="form-group">
 <label class="control-label col-md-3"> </label>
-<div class="col-md-12">
+<div class="col-md-6">
 Awards <span class="required">*</span>
 <textarea class="form-control textarea" placeholder="" name="award" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="120">{{$person_info->award}}</textarea> 
 
@@ -117,7 +112,7 @@ Awards <span class="required">*</span>
 <div class="col-md-12">
 <div class="form-group">
 <label class="control-label col-md-3"> </label>
-<div class="col-md-12">
+<div class="col-md-6">
 Trainings <span class="required">*</span>
 <textarea class="form-control textarea" placeholder="" name="training" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="120">{{$person_info->training}}</textarea> 
 
@@ -135,7 +130,7 @@ Trainings <span class="required">*</span>
 <div class="col-md-12">
 <div class="form-group">
 <label class="control-label col-md-3"> </label>
-<div class="col-md-12">
+<div class="col-md-6">
 Personal page <span class="required">*</span>
 <input type="text" name="personal_page" class="form-control" value="{{$person_info->personal_page}}" placeholder="Eg. http://linkedin/profile-page">
  

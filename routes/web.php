@@ -28,6 +28,41 @@ Route::post('/test', [
 	'uses' => 'HomeController@sendEmail'
 ]);
 
+Route::get('/sign-up', [
+	'as'=> 'sign.up',
+	'uses'=> 'HomeController@SingUp'
+]);
+Route::get('/register/account-creation-success', [
+	'as'=> 'create_account.success',
+	'uses'=> 'HomeController@account_creation_success'
+]);
+
+Route::get('/employer/verify-account/{confirmationCode}/{account_type}', 
+		[
+			'as' => 'confirmation_path',
+			'uses' => 'HomeController@confirm',
+		]);
+Route::get('/register/sign-up/verification-link/{account_type}', [
+	'as'=> 'employer.activeted',
+	'uses'=> 'HomeController@activeted'
+]);
+Route::get('/employer/sign-up', [
+	'as'=> 'employer.sigup',
+	'uses'=> 'HomeController@EmployerSignUp'
+]);
+Route::get('/employee/sign-up', [
+	'as'=> 'employee.sigup',
+	'uses'=> 'HomeController@EmployeeSignUp'
+]);
+
+Route::post('register-employee', [
+	'as'=> 'register.employee',
+	'uses'=> 'HomeController@RegisterEmployee'
+]);
+Route::post('employer-sign-up', [
+	'as'=> 'employer.postsigup',
+	'uses'=> 'HomeController@RegisterEmployer'
+]);
 Route::get('/industries-with-job-opening/{id}', [
 	'as'=> 'job_opening',
 	'uses'=> 'HomeController@getJobsByIndustries'
@@ -70,6 +105,10 @@ Route::get('/index/employer-information', [
 Route::get('/index/contact-information', [
 	'as' => 'contactus',
 	'uses' => 'HomeController@contact'
+	]);
+Route::get('/index/about-us', [
+	'as' => 'aboutus',
+	'uses' => 'HomeController@aboutus'
 	]);
 Route::post('contactus', [
 	'as' => 'post.message',
