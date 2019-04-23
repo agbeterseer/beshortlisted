@@ -21,9 +21,9 @@
   width: 50%;
 }
 </style>
-@if(Auth::check())
+ 
 @include('partials.employer_breadcomb')
-@endif  
+ 
              <div class="careerfy-main-section careerfy-parallax-style4-full2">
                 <div class="container">
                     <div class="row">

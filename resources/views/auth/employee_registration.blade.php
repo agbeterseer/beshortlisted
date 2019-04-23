@@ -259,8 +259,7 @@ tr:hover {background-color:#f5f5f5;}
 <option value="11">Novermber</option>
 <option value="12">December</option>
 </select>
- </div>
- 
+ </div> 
 <input type="checkbox" name="current" value="1" id="present" style="display: block;"> 
  
 <input type="checkbox" name="current" value="0" id="present2" hidden="hidden"> 
@@ -354,16 +353,14 @@ tr:hover {background-color:#f5f5f5;}
                                         <strong>{{ $errors->first('profession') }}</strong>
                                     </span>
                                 @endif
-                     
-                        </ul> 
-
+                     </li> 
+                  </ul>  
                    </div>
                         <ul class="careerfy-user-form careerfy-user-form-coltwo"> 
-                          <li>
-                                   
-                            </li>
+                          <li> 
+                      Upload CV <input type="file" name="upload-cv">  </li>
                             <div class="space">&nbsp;</div> 
- <input type="checkbox" name="newsletter" > I would like to receive top jobs and career tips
+ <input type="checkbox" name="newsletter" checked="checked" > I would like to receive top jobs and career tips
                         </ul>
                     </div>
                   </div>
@@ -394,34 +391,7 @@ tr:hover {background-color:#f5f5f5;}
                
 
  </div>
-<!-- <form class="form-horizontal" action="{{ route('add.caption') }}" method="post" role="form" name="caption_form" >
-{{ csrf_field() }} 
-                    <div class="careerfy-user-form">   
-<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-<div class="col-md-12">
-Title  
-<input id="name" type="text" class="form-control" name="name" placeholder=" Enter title here"    required>
-@if ($errors->has('name'))
-<span class="help-block">
-<strong>{{ $errors->first('name') }}</strong>
-</span>
-@endif
-</div>
-</div>
  
-                <div class="space">&nbsp;</div>
-                <div class="row">
-                <div class="modal-footer">
- 
-
-</div>  
-                </div> 
-                   <div class="space">&nbsp;</div>
-                        <div class="clearfix"></div>
-
-                    </div>
-             
-                    </form> -->
 </div>
 </div>
 </div>

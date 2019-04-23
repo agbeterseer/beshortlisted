@@ -636,38 +636,36 @@ if ($end_year !=null && $end_month !=null) {
   $confirmation_code = str_random(30); 
 
 if ($email !=null && $email !="" && $firstname !=null && $firstname !="") {
-
-  $user = User::firstOrNew(['email'=>$email]); 
-  $user->name = $firstname;
-  $user->password = bcrypt($password);
-  $user->account_type = $account_type;
-  $user->active = 0;
-  $user->confirmation_code = $confirmation_code;
-  $user->confirmed = 0;
-  $user->save();
-
-$profession = DB::table('professions')->where('id',$profession)->first();
-  $resume_record = new RecruitResume;
-  $resume_record->pr_caption = $profession->name;
-  $resume_record->user_id = $user->id;
-  $resume_record->status = 1;
-  $resume_record->order = 1;
-  $resume_record->created_at = $this->returnCurrentTime();
-  $resume_record->save();
-
-  $document = new Document;
-  $document->candidates_name = $firstname;
-  $document->user_id = $user->id;
-  $document->resume_id = $resume_record->id;
-  $document->gender = $gender;
-  $document->date_of_birth = $date_of_birth;
-  $document->nationality = $country;
-  $document->email = $email;
-  $document->phonenumber = $phone; 
-  $document->availability = $availability;  
-  $document->save();
-
+ //Save user
+ $user = $this->SaveUser($email, $firstname, $password, $account_type, $confirmation_code);
+  // initialise candidates resume
+ $resume_record = $this->SaveCaption($position_title, $user); 
+ $profession = DB::table('professions')->where('id',$profession)->first();
+ // save docment
+ $this->SaveDocument($firstname, $user, $resume_record, $gender, $date_of_birth, $country, $email, $phone, $availability);
  $recruit_profile_pix = DB::table('recruit_profile_pixs')->insert(['user_id' => $user->id, 'order' => 1, 'status' => 1, 'created_at' => $this->returnCurrentTime()]);
+// save candidate work experience
+$this->SaveWorkExperience($work_from_year, $work_from_month, $end_year, $end_month, $position_title, $company_name, $country, $user, $resume_record, $present);
+ 
+  if ($newsletter !=null && $newsletter === 'on') {
+   $subemail = new Email();
+   $subemail->email = $email;
+   $subemail->user = $user->id;
+   $subemail->industry = $industry;
+   $subemail->account_type = $account_type;
+   $subemail->save();
+  }
+
+  $this->SendEmployerVerificaionEmail($email, $confirmation_code, $user, $account_type);
+// redirect to employer_email_info_page  show.resume
+ 
+}else{
+  return redirect()->back()->withErrors(['error', 'cannot create account']);
+}
+return redirect()->route('create_account.success');
+}
+
+public function SaveWorkExperience($work_from_year, $work_from_month, $end_year, $end_month, $position_title, $company_name, $country, $user, $resume_record, $present) {
 
   $work_experience = new WorkExperience();
   $work_experience->start_year =  $work_from_year;
@@ -682,26 +680,51 @@ $profession = DB::table('professions')->where('id',$profession)->first();
   $work_experience->resumefk = $resume_record->id;
   $work_experience->present = $present; 
   $work_experience->save();
- 
-  if ($newsletter !=null && $newsletter === 'on') {
-   $subemail = new Email();
-   $subemail->email = $email;
-   $subemail->user = $user->id;
-   $subemail->industry = $industry;
-   $subemail->account_type = $account_type;
-   $subemail->save();
-  }
-  $this->SendEmployerVerificaionEmail($email, $confirmation_code, $user, $account_type);
-// redirect to employer_email_info_page
-
-}else{
-  return redirect()->back()->withErrors(['error', 'cannot create account']);
+  return redirect()->back();
 }
 
-
-return redirect()->route('create_account.success');
+// add document
+public function SaveDocument($firstname, $user, $resume_record, $gender, $date_of_birth, $country, $email, $phone, $availability)
+{
+  $document = new Document;
+  $document->candidates_name = $firstname;
+  $document->user_id = $user->id;
+  $document->resume_id = $resume_record->id;
+  $document->gender = $gender;
+  $document->date_of_birth = $date_of_birth;
+  $document->nationality = $country;
+  $document->email = $email;
+  $document->phonenumber = $phone; 
+  $document->availability = $availability;  
+  $document->save();
+return redirect()->back();
 }
 
+// add user
+ public function SaveUser($email, $firstname, $password, $account_type, $confirmation_code)
+ {
+  $user = User::firstOrNew(['email'=>$email]); 
+  $user->name = $firstname;
+  $user->password = bcrypt($password);
+  $user->account_type = $account_type;
+  $user->active = 0;
+  $user->confirmation_code = $confirmation_code;
+  $user->confirmed = 0;
+  $user->save();
+  return $user;
+ }
+
+ public function SaveCaption($position_title, $user)
+ {
+  $resume_record = new RecruitResume;
+  $resume_record->pr_caption = $position_title;
+  $resume_record->user_id = $user->id;
+  $resume_record->status = 1;
+  $resume_record->order = 1;
+  $resume_record->created_at = $this->returnCurrentTime();
+  $resume_record->save();
+  return $resume_record;
+ }
 
 public function SendEmployerVerificaionEmail2($contact_person, $email, $confirmation_code, $user, $account_type){
  

@@ -1884,8 +1884,10 @@ $pr_caption= RecruitResume::where('user_id', $user->id)->where('status',1)->firs
     }
 
 // get all resume by default first time
-      public function ShowResume() { 
+      public function ShowResume() {
+
        $user = Auth::user();
+       // dd($user);
        $check_pix = RecruitProfilePix::where('user_id', $user->id)->first();
     if ($check_pix == null) {
       DB::table('recruit_profile_pixs')->insert(['user_id'=> $user->id, 'pix' => 'default.png', 'order' => 1, 'status' => 1, 'created_at' => $this->returnCurrentTime()]);
