@@ -1,25 +1,18 @@
 /* Base */
+
 body, body *:not(html):not(style):not(br):not(tr):not(code) {
-     font-family: 'Open Sans', sans-serif;
+    font-family: Avenir, Helvetica, sans-serif;
     box-sizing: border-box;
 }
- 
 
 body {
-    /*//#f5f8fa*//*
-    background-color:#f5f8fa;*/
-    color: #000000;
+    background-color: #F2F4F6;
+    color: #74787E;
     height: 100%;
-    hyphens: auto;
-    line-height: 1;
+    line-height: 1.4;
     margin: 0;
-    -moz-hyphens: auto;
-    -ms-word-break: break-all;
     width: 100% !important;
-    -webkit-hyphens: auto;
     -webkit-text-size-adjust: none;
-    word-break: break-all;
-    word-break: break-word;
 }
 
 p,
@@ -65,9 +58,9 @@ h3 {
 }
 
 p {
-    color: #74787E; 
-   /* line-height: 1.5em;*/
-   line-height: 1;
+    color: #74787E;
+    font-size: 16px;
+    line-height: 1.5em;
     margin-top: 0;
     text-align: left;
 }
@@ -99,7 +92,6 @@ img {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
-     background-color: #b5cc17;
 }
 
 /* Header */
@@ -107,18 +99,14 @@ img {
 .header {
     padding: 25px 0;
     text-align: center;
-    background-color: #009dc7;
-    color: #000000;
 }
 
 .header a {
     color: #bbbfc3;
-    /*color: #bbbfc3;*/
     font-size: 19px;
     font-weight: bold;
     text-decoration: none;
     text-shadow: 0 1px 0 white;
-
 }
 
 /* Body */
@@ -163,16 +151,14 @@ img {
     margin: 0 auto;
     padding: 0;
     text-align: center;
-    width: 570px;/*
+    width: 570px;
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
-    -premailer-width: 570px;*/
-    background-color: #AEAEAE;
+    -premailer-width: 570px;
 }
 
 .footer p {
     color: #AEAEAE;
-    /*color: #AEAEAE;*/
     font-size: 12px;
     text-align: center;
 }
@@ -193,7 +179,7 @@ img {
 }
 
 .table td {
-    color: #000000;
+    color: #74787E;
     font-size: 15px;
     line-height: 18px;
     padding: 10px 0;
@@ -290,8 +276,4 @@ img {
 .promotion p {
     font-size: 15px;
     text-align: center;
-}
-
-.logo{
-    background-image: url('https://localhost:8000/public/css/assets/layouts/layout4/img/rhizome.jpg'); 
 }
