@@ -197,6 +197,8 @@
                                     <ul class="careerfy-row">
                                        <div id="joblist">
                                           @if(!$jobs_draft_list->isEmpty())
+                                          
+                                            @if($tags)
                                      @foreach($tags as $job)  
  <li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><div class="careerfy-joblisting-text">
     <div class="col-md-12 careerfy-list-option" >
@@ -286,7 +288,7 @@
     </div>
 
     <div class="clearfix"></div></div></div></li>  <div class="space">&nbsp;</div>
-
+@endif
                                      @endforeach 
  @else
 
