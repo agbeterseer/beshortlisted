@@ -177,9 +177,7 @@ tr:hover {background-color:#f5f5f5;}
                             </li> 
                             <li>
                                                 <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Reset Password
-                                </button>
+                                <input type="submit" value="Reset Password">
                             </div>
                             </li>
                         </ul>
