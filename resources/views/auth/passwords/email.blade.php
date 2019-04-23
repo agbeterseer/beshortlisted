@@ -74,11 +74,11 @@ tr:hover {background-color:#f5f5f5;}
                             </div>
                             <div class="collapse navbar-collapse" id="careerfy-navbar-collapse-1">
                                 <ul class="navbar-nav">
-                                    <li class="active"><a href="{{asset('/')}}">HOME</a></li>  
-                                    <li><a href="{{route('list.job', 'job-list')}}"> JOBS</a> </li>
-                                  <li><a href="{{route('employer_infor')}}">EMPLOYER</a></li> 
-                                <li><a href="{{route('candidates')}}">CANDIDATES</a> </li>
-                       <li><a href="#">CONTACT</a>  
+                                    <li class="active"><a href="{{asset('/')}}">Home</a></li>  
+                                    <li><a href="{{route('list.job', 'job-list')}}"> Jobs</a> </li>
+                                  <li><a href="{{route('employer_infor')}}">Employer</a></li> 
+                                <li><a href="{{route('candidates')}}">Candidates</a> </li>
+                       <li><a href="#">Contact</a>  
                     </li> 
                  </div>
                       </nav>
@@ -88,10 +88,10 @@ tr:hover {background-color:#f5f5f5;}
                             <ul class="careerfy-user-section">
                                   @if(!Auth::user())
                                 <!-- <li>  <a class="careerfy-color careerfy-open-signin-tab" href="#">DOOO</a></li> -->
-                               <li><a class="careerfy-color" href="{{ route('register') }}">REGISTER</a>
+                               <li><a class="careerfy-color" href="{{ route('sign.up') }}">Register</a>
                                </li>
                           
-                               <li><a class="careerfy-color " href="{{ url('/login') }}">SIGN IN</a></li>
+                               <li><a class="careerfy-color " href="{{ url('/login') }}">Sign in</a></li>
                                 @else 
                               
                                   <li> <a href="{{ route('logout') }}"
