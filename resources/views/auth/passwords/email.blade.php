@@ -143,6 +143,7 @@ tr:hover {background-color:#f5f5f5;}
                             {{ session('status') }}
                         </div>
                     @endif   
+                    <div class="space">&nbsp;</div>
                     <div id="candidate" class="tab-pane fade in active"> 
                   <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
                         {{ csrf_field() }}
