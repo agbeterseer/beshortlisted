@@ -45,12 +45,7 @@
                             <div class="careerfy-typo-wrap">
                                 <div class="careerfy-employer-dashboard-nav"  style="background-color: #FFFFFF;">
  <figure>
-<!--  <div class="resume_pic_outer">
-<div class="resume_pic">
-<img src="{{asset('/img/terseer.jpg')}}" alt="Picture" class="employer-dashboard-thumb">
-<p class="editov2"><a class="edits" ><i class="icon-plus"></i>Edit</a></p>
-</div>
-</div> -->
+
 
  <a href="{{route('display.pix', Auth::user()->id)}}" class="employer-dashboard-thumb"><img src="/uploads/avatars/{{$profile_pix->pix }}" alt=""></a>
                  
@@ -76,32 +71,12 @@
  @if($resume->status === 1)
 <li class="active"><a href="{{route('get.resume', $resume->id)}}"><i class="careerfy-icon careerfy-resume"></i> {{$resume->pr_caption}}  </a>
 @else
-<!-- <div class="resumename" style="font-size: 8px;"><span class="title2">{{$resume->pr_caption}}</span>
-<span class="progressbar">
-<span style="width: 60%;"><span></span></span>
-</span>
-<span class="progress">60% complete</span>
-<span class="clear"></span>
 
-</div> -->
-
-<!-- <div class="overviewtitle2 overviewtype3 several2">
-<span class="ovtitle"><a href="" class="side1"> Professional Profile</a></span>
-<div class="highlightable">+ 20%</div>
-</div>
-<div class="overviewtitle2 overviewtype3 several2">
-<span class="ovtitle"><a href=""  style="background-color: #E1E1E1">Work Experience</a></span>
-<div class="highlightable">+ 20%</div>
-</div>
--->
 </li>
                        
 
                 <li class=""><a href="{{route('get.resume', $resume->id)}}"> {{$resume->pr_caption}}  </a>
                   <div class="progress">
-             <!--      <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                  <span class="sr-only">70% Complete</span>
-                  </div> -->
                   </div>
                 </li>
 

@@ -83,8 +83,46 @@ $check = 'second';
 <div class="space">&nbsp;</div>
 <div class="space">&nbsp;</div> 
 <div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>  --> 
-@include('partials.employee_breadcomb') 
+<div class="space">&nbsp;</div> --> 
+        <div class="careerfy-subheader careerfy-subheader-without-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="col-md-4"><img src="/uploads/avatars/{{$profile_pix->pix }}" class="img-circle" alt="Picture" height="180px;" width="150px;"></div>
+                      <div class="col-md-4">dssdf</div>
+                      <div class="col-md-4">sdfsdf</div>
+                        <div class="careerfy-page-title">
+                            <h1>Companies</h1>
+                            <p>Thousands of prestigious employers for you, search for a recruiter right now.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!-- <div class="clearfix"></div> -->
+<!-- <div class="careerfy-breadcrumb">
+<ul>
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Pages</a></li>
+  <li>Candidates</li>
+</ul>
+ </div> 
+-->
+        </div>
+<!--             <div class="careerfy-main-section careerfy-parallex-full animation-test"  style="background-color: #ffffff;">
+                <div class="container">
+                    <div class="row">
+                        <aside class="col-md-6 careerfy-typo-wrap">
+                            <div class="careerfy-parallex-text">
+                                
+                                <h2> </h2>
+                                <p>  </p> 
+                            </div>
+                        </aside>
+                     <aside class="col-md-6 careerfy-typo-wrap"> <div class="careerfy-right">
+                           </aside>
+                    </div>
+                </div>
+            </div>  -->
 <div class="space">&nbsp;</div> 
 <div class="space">&nbsp;</div> 
   @if ($errors->any())
@@ -154,7 +192,8 @@ $check = 'second';
 <p class="editov2"><a class="copy" href="{{route('show.cation')}}">Create</a></p>
 <p class="editov2"><a class="print print_link" href="{{route('print.resume', $user_single_resume_by_date->id)}}">Print</a></p>
 <!-- <p class="editov2"><a class="delete" href="">Delete</a></p> -->
-</div><!-- END action -->
+</div>
+<!-- END action -->
 
 <h3> {{$user_single_resume_by_date->pr_caption}}</h3><a class="snote" data-toggle="modal"  data-style="slide-left" data-spinner-color="#333" href="#static_update">[Edit]</a>                                   <h3>      
 @if($section_candidatelist_count === 1)

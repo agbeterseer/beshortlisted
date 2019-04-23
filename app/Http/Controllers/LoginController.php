@@ -22,7 +22,7 @@ class LoginController extends Controller
 public function __construct()
 {
     $this->middleware('guest', ['except' => 'logout']);
-    Session::put('backUrl', URL::previous());
+    Session::put('backUrl', URL::previous()); 
 }
  
      public function displayMenu(){
@@ -40,6 +40,7 @@ public function showLoginForm()
 { 
     $menus = $this->displayMenu();
     session(['link' => url()->previous()]);
+    Session::put('url.intended',URL::previous()); 
     return view('auth.login', compact('menus'));
 }
 
@@ -92,10 +93,12 @@ protected function authenticated(Request $request, $user)
         $user = User::where('email', $request->email)->first();
         $user_id=$user->id;
          if ($user->is_admin()) {
-          return redirect()->intended('board');
+          return redirect()->route('board');
           }elseif(!$user->is_admin() && !$user->is_candidate()){ 
            if ($user->account_type === 'employee') { 
-                return redirect()->route('candidates'); // candidate
+            // dd('here');
+               // return redirect()->route('candidates'); // candidate
+                return Redirect::to(Session::get('url.intended'));
             }else{
               return redirect()->route('dashboard');
             }

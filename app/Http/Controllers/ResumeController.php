@@ -630,7 +630,7 @@ public function DeleteResume($id)
         $document->save();
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Done successfully!');
-      // $this->AddSection($section, $user->id, $resume);
+        $this->AddSection($section, $user->id, $resume);
     } catch (\Exception $e) {
         $request->session()->flash('message.level', 'danger');
         $request->session()->flash('message.content', 'Cannot create record');
@@ -731,7 +731,7 @@ public function DeleteResume($id)
         $document->save();
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Done successfully!');
-     $this->AddSection($education_section, $user->id, $resume);
+     //$this->AddSection($education_section, $user->id, $resume);
     } catch (\Exception $e) {
         $request->session()->flash('message.level', 'danger');
         $request->session()->flash('message.content', 'Cannot create record');
@@ -929,6 +929,8 @@ try {
             foreach ($group_b as $key => $value) {
                 $skill = DB::table('job_skills')->insert(['userid' => $user->id, 'resumeid' => $resume->id, 'job_skill' => $value['skill'], 'percentage' => $value['percentage'], 'status' => 1, 'created_at' => $this->returnCurrentTime()]);
         }
+
+         $this->AddSection($section, $user, $resume->id);
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Done successfully!');
 
@@ -1128,9 +1130,6 @@ public function UpdateEducation(Request $request)
 
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'Done successfully!');
-//dd($request->all());
-
-        // return ();
         return redirect()->route('show.resume');
 } catch (\Exception $e) {
     
@@ -1181,14 +1180,9 @@ public function ShowWorkExperienceForm()
           $user_yoe->user_id = $user->id;
           $user_yoe->resume_id = $resume;
           $user_yoe->candidates_name = $user->name;
-          $user_yoe->save();
-          # code...
+          $user_yoe->save(); 
         }
-
-
-        // dd($request->all());
-       
-        //dd($resume);
+ 
         $section = $request->work_history;
         
         $work_from_year = $request->work_from_year;
@@ -2136,9 +2130,7 @@ if ( $validation->fails() ) {
     // change below as required
     return \Redirect::back()->withInput()->withErrors( $validation->messages() );
 }
-
-          //dd($request->all());
-
+ 
     try {
 
         $award = new Award;
@@ -2492,6 +2484,7 @@ public function ApplicationSuccess($id)
     $job_black_list = Tag::where('client', $user->id)->where('status', 3)->where('delete', 1)->latest()->paginate(10);
     $job_active_list = Tag::where('client', $user->id)->where('status', 1)->where('active', 1)->where('awaiting_aproval', 0)->where('delete',0)->latest()->paginate(10);
     $job_activelist_count = Tag::where('client', $user->id)->where('status', 1)->where('active', 1)->where('awaiting_aproval', 0)->where('delete',0)->count();
+    //dd($job_activelist_count);
     $job_not_active_list = Tag::where('client', $user->id)->where('status', 2)->where('active', 2)->where('awaiting_aproval', 0)->where('delete', 0)->latest()->paginate(10);
     $job_not_activelist_count = Tag::where('client', $user->id)->where('status', 2)->where('active', 2)->where('awaiting_aproval', 0)->where('delete', 0)->count();
     $dt = Carbon::now();

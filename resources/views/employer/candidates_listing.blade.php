@@ -233,12 +233,15 @@ border-color: white !important;
                                                         <ul class="careerfy-column-12" >
 
                                                         <!-- to get work experience; get job_id from application table and resume_id, then goto workexperience table and find by resume_id and jpob_id  -->
-                                                   
+                                                   @if(!$work_experiences->isEmpty())
                                                         @foreach($work_experiences as $work_experience)
                                                         @if($work_experience->userfk === $List_applicant->user_id && $work_experience->present === 1)
                                                             <li>{{$work_experience->position_title}} at <span href="#" class="careerfy-candidate-default-studio">{{$work_experience->company_name}}</span></li>
-                                                            @endif
-                                                        @endforeach
+                                                        @endif
+                                                        @endforeach                                                
+                                                            @else
+                                                             N/A
+                                                             @endif
                                                         </ul>
                                                     </div>
                                               <!--       <a href="#" class="careerfy-candidate-default-btn"><i class="careerfy-icon careerfy-add-list"></i> Shortlist</a> -->

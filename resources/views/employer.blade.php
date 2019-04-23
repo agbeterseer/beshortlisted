@@ -50,7 +50,15 @@
 
 </style>
  
-
+    <?php  
+            $unsorted_co = 0;
+            $total = 0;
+            $shortlisted = 0;
+            $in_review = 0;
+            $rejected = 0;
+            $offered = 0;
+            $hired = 0;
+    ?> 
 
     <!-- Wrapper -->
     <div class="careerfy-wrapper">
@@ -188,6 +196,7 @@
                                 <div class="careerfy-job careerfy-joblisting-classic">
                                     <ul class="careerfy-row">
                                        <div id="joblist">
+                                          @if(!$jobs_draft_list->isEmpty())
                                      @foreach($tags as $job)  
  <li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><div class="careerfy-joblisting-text">
     <div class="col-md-12 careerfy-list-option" >
@@ -219,8 +228,8 @@
     ?> 
    
      <?php  $total = \App\Application::where('sorted', 0)->where('tag_id',$job->id)->count(); ?>
-          {{$total}}
-
+        
+{{$total}}
     </font> <br><br><p></p>  <font  style="font-size: 20px; color: orange;"> Unsorted </font></div></div>
  
     <div class="col-md-2" align="center">
@@ -279,6 +288,13 @@
     <div class="clearfix"></div></div></div></li>  <div class="space">&nbsp;</div>
 
                                      @endforeach 
+ @else
+
+<li> 
+<div class="careerfy-employer-confitmation">
+<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="400" width="400" alt="" align="center"></div>
+<div class="clearfix"></div>
+</div> </li> @endif
  
     </div> </ul></div>
                                 <!-- Pagination -->
@@ -334,24 +350,34 @@
      <div class="row"><div class="col-md-12"> 
  
  <div class="col-md-2" align="center">
-    <div class="badge" style="background-color: #ffffff;"><font style=" font-weight: bold; font-size: 35px; color: orange;">0
+    <div class="badge" style="background-color: #ffffff;"><font style=" font-weight: bold; font-size: 35px; color: orange;">
+  
+     <?php  $total = \App\Application::where('sorted', 0)->where('tag_id',$job->id)->where('delete', 0)->count(); ?>
+      
+      {{$total}}
     </font>   <br><br><p></p>  <font  style="font-size: 20px; color: orange;"> Unsorted </font></div></div>
  
     <div class="col-md-2" align="center">
-    <div class="badge" style="background-color: #ffffff;"><font style=" font-weight: bold; font-size: 35px; color: orange;">0</font>   <br><br><p></p>  <font  style="font-size: 20px; color: orange;"> In Review </font></div></div>
+    <div class="badge" style="background-color: #ffffff;"><font style=" font-weight: bold; font-size: 35px; color: orange;">
+      <?php  $in_review = \App\Application::where('in_review', 1)->where('tag_id',$job->id)->count(); ?>
+{{$in_review}}</font>   <br><br><p></p>  <font  style="font-size: 20px; color: orange;"> In Review </font></div></div>
 
-    <div class="col-md-2" align="center"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: orange;">0</font> <br><br><p></p>
+    <div class="col-md-2" align="center"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: orange;"><?php  $shortlisted = \App\Application::where('shortlisted', 1)->where('tag_id',$job->id)->count(); ?>
+{{$shortlisted}}</font> <br><br><p></p>
     <font  style="font-size: 20px; color: red;">  Shortlisted</font></div></div>
 
-    <div class="col-md-2" align="center">  <div class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: red;"> 0</font>  <br><br><p></p>
+    <div class="col-md-2" align="center">  <div class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: red;"><?php  $rejected = \App\Application::where('rejected', 1)->where('tag_id',$job->id)->count(); ?>
+{{$rejected}}</font>  <br><br><p></p>
     <font  style="font-size: 20px; color: red;">  Rejected</font>
     </div></div>
 
-    <div class="col-md-2" align="center"> <div class="badge" style=" background-color: #ffffff;"><font style="font-weight: bold; font-size: 35px; color: green;">35</font><br><br><p></p>
+    <div class="col-md-2" align="center"> <div class="badge" style=" background-color: #ffffff;"><font style="font-weight: bold; font-size: 35px; color: green;">    <?php  $offered = \App\Application::where('offered', 1)->where('tag_id',$job->id)->count(); ?>
+{{$offered}}</font><br><br><p></p>
     <font  style="font-size: 20px; color: green;">  Offered</font>
 
     </div><br></div>
-    <div class="col-md-1" align="center"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: green;">11</font><br><br><p></p>
+    <div class="col-md-1" align="center"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: green;">  <?php  $hired = \App\Application::where('hired', 1)->where('tag_id',$job->id)->count(); ?>
+{{$hired}} </font><br><br><p></p>
     <font  style="font-size: 20px; color: green;">  Hired</font>
     </div></div>
 
@@ -1007,15 +1033,17 @@ function FilterAllJobs(city,employement_term,job_function){
     } 
     var msg = '';
     var newname = '';
-    var category = '';
+    var category = ''; 
        var terms_ = '';
-        $.each(code['data'], function(key, value) {  
+        $.each(code['data'], function(key, value) {
+          var id = value.id;
               var country = value.country;
               var city = value.city;
               var job_title = value.job_title;
               var job_category = value.job_category;
               var email = value.email_address;
               var job_type = value.job_type;
+              var jobStatus = "";
        $.each(professions , function(key, value){
                 var id = value.id;
                 var name = value.name;
@@ -1033,13 +1061,27 @@ function FilterAllJobs(city,employement_term,job_function){
                 terms_ = value.name;
                 } 
          });
+        if (value.status === 1 && value.active === 1) { 
+        jobStatus = '<span class="badge" style="background-color: green;"> ONLINE</span>';
+        }else{
+        jobStatus = '<span class="badge" style="background-color: red;">OFFLINE</span>'
+        }
+
+ 
+        //var created_at = Date('M, d, Y', value.created_at);{{route('get.applicants_byid', $job->id)}}
           //loop through experience to get candidates experience <span>Featured</span>
-            var content ='<li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><div class="careerfy-joblisting-text"><div class="careerfy-list-option"> <h2><a href="#">'+ job_title +'  </a> </h2> <ul> <li><a href="#">'+email+'</a></li><li><i class="careerfy-icon careerfy-maps-and-flags"></i> '+country +', '+ city +'</li><li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>'+ newname +'</li></ul> </div> <br><hr><div class="row"><div class="col-md-12"><div class="col-md-2"><span class="badge" style="background-color: #ffffff;"><font  style="font-size: 35px;  color: orange;">0</font></span></div><div class="col-md-2"><span class="badge" style="background-color: #ffffff;"><font style="font-size: 35px; color: orange;">0</font></span></div><div class="col-md-2"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-size: 35px; color: orange;">0</font> </div></div><div class="col-md-2">  <span class="badge" style=" background-color: #ffffff;"><font  style="font-size: 35px; color: red;">0</font></span></div><div class="col-md-2"> <span class="badge" style=" background-color: #ffffff;"><font style="font-size: 35px; color: green;">0</font></span><br></div><div class="col-md-1"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-size: 35px; color: green;">11</font></div></div></div></div><div class="row"><div class="col-md-12"><div class="col-md-2"><br><div style="font-weight: normal; size: 25px ">Unsorted</div> </div><div class="col-md-2"><br><div style="font-weight: normal;">In Review </div> </div><div class="col-md-2"><br><div style="font-weight: normal;">Shortlisted</div></div><div class="col-md-2"><br><div style="font-weight: normal;">Rejected</div></div><div class="col-md-2"><br> <div style="font-weight: normal;">Offered</div></div><div class="col-md-1"><br> <div style="font-weight: normal;">Hired </div></div></div></div> <hr> <div class="careerfy-job-userlist"> <span class="careerfy-option-btn careerfy-'+category +'">'+terms_+'</span> <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a></div><div class="clearfix"></div></div></div></li><div class="space">&nbsp;</div>';  
+            var content =' <li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><div class="careerfy-joblisting-text"><div class="col-md-12 careerfy-list-option" ><div class="col-md-6"> <h2><a href="'+value.id+ '" style="font-weight: 400px; font-size: 17px"> '+ job_title +'  </a> </h2></div> <div class="col-md-6" align="right"> <div class="status-mark" align="right"><div class=""></div> STATUS: '+ jobStatus +' </div> </div> <hr><ul> <li><i class="careerfy-icon careerfy-maps-and-flags"></i> '+country +', '+ city +'</li><li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>'+ newname +'</li></ul> </div><div class="row"><div class="col-md-12"><div class="col-md-2"><span class="badge" style="background-color: #ffffff;"><font  style="font-size: 35px;  color: orange;">0</font></span></div><div class="col-md-2"><span class="badge" style="background-color: #ffffff;"><font style="font-size: 35px; color: orange;">0</font></span></div><div class="col-md-2"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-size: 35px; color: orange;">0</font> </div></div><div class="col-md-2">  <span class="badge" style=" background-color: #ffffff;"><font  style="font-size: 35px; color: red;">0</font></span></div><div class="col-md-2"> <span class="badge" style=" background-color: #ffffff;"><font style="font-size: 35px; color: green;">0</font></span><br></div><div class="col-md-1"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-size: 35px; color: green;">'+0 +'</font></div></div></div></div><div class="row"><div class="col-md-12"><div class="col-md-2"><br><div style="font-weight: normal; size: 25px ">Unsorted</div> </div><div class="col-md-2"><br><div style="font-size: 20px; color: orange;">In Review </div> </div><div class="col-md-2"><br><div style="font-size: 20px;">Shortlisted</div></div><div class="col-md-2"><br><div style="font-size: 20px;">Rejected</div></div><div class="col-md-2"><br> <div style="font-size: 20px;">Offered</div></div><div class="col-md-1"><br> <div style="font-size: 20px;">Hired </div></div></div></div> <hr> <div class="col-sm-12"><div class="col-sm-6" align="left"><div class="careerfy-job-userlist2 careerfy-list-option" > <ul><li>Published  '+value.created_at+'</li> <li>  Expires in '+ value.end_date +'</li></ul>   </div></div> <div class="col-sm-6" align="right"><div class="careerfy-job-userlist"> <span class="careerfy-option-btn careerfy-'+category +'">'+terms_+'</span> <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a></div></div></div><div class="clearfix"></div></div></div></li><div class="space">&nbsp;</div>';  
     $('#joblist').append(content);  
         }); 
     });
+} 
+
+
+function function_name(argument) {
+  // body...
+
 }
- 
+// console.log(
      $(document.getElementsByName('e_terms')).click(function() {
      // alert($('input[name=e_terms]:checked').val());
          $.ajaxSetup({

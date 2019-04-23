@@ -122,7 +122,7 @@
                    <div class="space">&nbsp;</div>
                         <div class="clearfix"></div>
                         <div class="careerfy-user-form-info">
-                       <a class="btn btn-link" href="{{route('register')}}" style="color: #ffffff;">
+                       <a class="btn btn-link" href="{{route('sign.up')}}" style="color: #ffffff;">
                                     Create New Account
                                 </a>|    <a class="btn btn-link" href="{{ url('/password/reset') }}" style="color: #ffffff;">
                                     Forgot Your Password?

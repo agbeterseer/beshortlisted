@@ -29,6 +29,10 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/home';
 
+ 
+    protected function redirectTo(){
+    return url()->previous();
+}
     /**
      * Create a new controller instance.
      *
