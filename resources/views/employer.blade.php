@@ -288,8 +288,9 @@
     </div>
 
     <div class="clearfix"></div></div></div></li>  <div class="space">&nbsp;</div>
-@endif
+
                                      @endforeach 
+                                     @endif
  @else
 
 <li> 
