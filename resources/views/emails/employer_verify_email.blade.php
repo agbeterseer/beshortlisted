@@ -5,7 +5,7 @@ Thank you for creating an account with us, Please click on "Activate" to confirm
 <p></p>
 
 	@component('mail::button', ['url' => $url])
-	click here to Activate
+	Activate
 	@endcomponent  
 <p></p>
 Best Regards, 

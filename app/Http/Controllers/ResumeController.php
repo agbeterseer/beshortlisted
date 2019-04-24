@@ -2455,6 +2455,7 @@ public function ApplicationSuccess($id)
 
   public function employer(Request $request)
   {
+
       $documents = Document::all();
       $industries = Industry::all(); 
       $allapplicants = Application::all();
@@ -2493,6 +2494,7 @@ public function ApplicationSuccess($id)
     $unsorted_count = DB::table('applications')
              ->select('tag_id', DB::raw('count(*) as total'))
              ->groupBy('tag_id')->get();
+  //dd($jobs_draft_list);
   //$tagss = Tag::find(20)->applications;
   // $number_of_applicants_per_job = DB::table('tags')->join('applications', 'applications.tag_id', '=', 'tags.id') ->get();
           //  dd($number_of_applicants_per_job);
@@ -2511,8 +2513,9 @@ public function ApplicationSuccess($id)
              ->select('tag_id', 'in_review', DB::raw('count(*) as total'))
              ->groupBy('tag_id', 'in_review')->get();
 
-// dd($tag_record); 
+
     $tags = Tag::where('client', $user->id)->get();
+
 $applications = Application::where('clientfk', $user->id)->get();
 $applications_employer = DB::table('applications')->where('clientfk', $user->id)->get(); 
     $sorted = $applications->where('sorted', 0);

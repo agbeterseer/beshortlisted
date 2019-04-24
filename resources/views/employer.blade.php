@@ -336,6 +336,7 @@
                                     <ul class="careerfy-row">
                                        <div id="joblist">
                                          @if(!$jobs_draft_list->isEmpty())
+                                         @if($jobs_draft_list)
          @foreach($jobs_draft_list as $job)
    <li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><div class="careerfy-joblisting-text">
     <div class="col-md-12 careerfy-list-option" >
@@ -403,7 +404,11 @@
      </div>
     </div>
 
-    <div class="clearfix"></div></div></div></li>  <div class="space">&nbsp;</div> @endforeach    @else
+    <div class="clearfix"></div></div></div></li>  <div class="space">&nbsp;</div> 
+    
+    @endforeach    
+@endif
+    @else
 
 <li> 
 <div class="careerfy-employer-confitmation">
@@ -451,6 +456,7 @@
                                     <ul class="careerfy-row">
                                        <div>
                    @if(!$jobs_awaiting_approval_list->isEmpty())
+                   @if($jobs_awaiting_approval_list)
                 @foreach($jobs_awaiting_approval_list as $job)
       <li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><div class="careerfy-joblisting-text">
     <div class="col-md-12 careerfy-list-option" >
@@ -504,7 +510,7 @@
      </div>
     </div>
 
-    <div class="clearfix"></div></div></div></li>  <div class="space">&nbsp;</div> @endforeach @else <li> 
+    <div class="clearfix"></div></div></div></li>  <div class="space">&nbsp;</div> @endforeach @endif @else <li> 
 <div class="careerfy-employer-confitmation">
 <div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="400" width="400" alt="" align="center"></div>
 <div class="clearfix"></div>
@@ -546,6 +552,7 @@
 
                                    
                                        @if(!$job_black_list->isEmpty())
+                                       @if($job_black_list)
                                     @foreach($job_black_list as $job)
       <li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><div class="careerfy-joblisting-text">
     <div class="col-md-12 careerfy-list-option" >
@@ -599,7 +606,7 @@
      </div>
     </div>
 
-    <div class="clearfix"></div></div></div></li> <div class="space">&nbsp;</div> @endforeach    @else
+    <div class="clearfix"></div></div></div></li> <div class="space">&nbsp;</div> @endforeach  @endif  @else
 <li> 
 <div class="careerfy-employer-confitmation">
 <div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="400" width="400" alt="" align="center"></div>
@@ -642,6 +649,7 @@
 
                                    
                                        @if(!$job_not_active_list->isEmpty())
+                                       @if($job_not_active_list)
                                     @foreach($job_not_active_list as $job)
       <li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><div class="careerfy-joblisting-text">
     <div class="col-md-12 careerfy-list-option" >
@@ -695,7 +703,7 @@
      </div>
     </div>
 
-    <div class="clearfix"></div></div></div></li>  <div class="space">&nbsp;</div> @endforeach    @else
+    <div class="clearfix"></div></div></div></li>  <div class="space">&nbsp;</div> @endforeach @endif   @else
 <li> 
 <div class="careerfy-employer-confitmation">
 <div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="400" width="400" alt="" align="center"></div>
@@ -736,6 +744,7 @@
                                 <div class="careerfy-job careerfy-joblisting-classic">
                                     <ul class="careerfy-row">
                                        @if(!$job_active_list->isEmpty())
+                                       @if($job_active_list)
                                     @foreach($job_active_list as $job)
                                     <?php 
                                         $h_hired = 0;
@@ -817,7 +826,7 @@
      </div>
     </div>
 
-    <div class="clearfix"></div></div></div></li> <div class="space">&nbsp;</div> @endforeach    @else
+    <div class="clearfix"></div></div></div></li> <div class="space">&nbsp;</div> @endforeach  @endif  @else
 <li> 
 <div class="careerfy-employer-confitmation">
 <div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="400" width="400" alt="" align="center"></div>
@@ -986,9 +995,9 @@ FilterAllJobs(city,employement_term,job_function);
 
 
 function FilterAllJobs(city,employement_term,job_function){
-    console.log(city);
-    console.log(employement_term);
-    console.log(job_function);
+    // console.log(city);
+    // console.log(employement_term);
+    // console.log(job_function);
           $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1012,7 +1021,7 @@ function FilterAllJobs(city,employement_term,job_function){
             $("#joblist").hide();
              },
             success:function(data){
-            console.log(data);
+            //console.log(data);
           $('#joblist').empty();
           $("#industry-div").hide();
         //  window.location.reload(); 
@@ -1071,7 +1080,7 @@ function FilterAllJobs(city,employement_term,job_function){
         }
 
  
-        //var created_at = Date('M, d, Y', value.created_at);{{route('get.applicants_byid', $job->id)}}
+ 
           //loop through experience to get candidates experience <span>Featured</span>
             var content =' <li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><div class="careerfy-joblisting-text"><div class="col-md-12 careerfy-list-option" ><div class="col-md-6"> <h2><a href="'+value.id+ '" style="font-weight: 400px; font-size: 17px"> '+ job_title +'  </a> </h2></div> <div class="col-md-6" align="right"> <div class="status-mark" align="right"><div class=""></div> STATUS: '+ jobStatus +' </div> </div> <hr><ul> <li><i class="careerfy-icon careerfy-maps-and-flags"></i> '+country +', '+ city +'</li><li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>'+ newname +'</li></ul> </div><div class="row"><div class="col-md-12"><div class="col-md-2"><span class="badge" style="background-color: #ffffff;"><font  style="font-size: 35px;  color: orange;">0</font></span></div><div class="col-md-2"><span class="badge" style="background-color: #ffffff;"><font style="font-size: 35px; color: orange;">0</font></span></div><div class="col-md-2"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-size: 35px; color: orange;">0</font> </div></div><div class="col-md-2">  <span class="badge" style=" background-color: #ffffff;"><font  style="font-size: 35px; color: red;">0</font></span></div><div class="col-md-2"> <span class="badge" style=" background-color: #ffffff;"><font style="font-size: 35px; color: green;">0</font></span><br></div><div class="col-md-1"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-size: 35px; color: green;">'+0 +'</font></div></div></div></div><div class="row"><div class="col-md-12"><div class="col-md-2"><br><div style="font-weight: normal; size: 25px ">Unsorted</div> </div><div class="col-md-2"><br><div style="font-size: 20px; color: orange;">In Review </div> </div><div class="col-md-2"><br><div style="font-size: 20px;">Shortlisted</div></div><div class="col-md-2"><br><div style="font-size: 20px;">Rejected</div></div><div class="col-md-2"><br> <div style="font-size: 20px;">Offered</div></div><div class="col-md-1"><br> <div style="font-size: 20px;">Hired </div></div></div></div> <hr> <div class="col-sm-12"><div class="col-sm-6" align="left"><div class="careerfy-job-userlist2 careerfy-list-option" > <ul><li>Published  '+value.created_at+'</li> <li>  Expires in '+ value.end_date +'</li></ul>   </div></div> <div class="col-sm-6" align="right"><div class="careerfy-job-userlist"> <span class="careerfy-option-btn careerfy-'+category +'">'+terms_+'</span> <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a></div></div></div><div class="clearfix"></div></div></div></li><div class="space">&nbsp;</div>';  
     $('#joblist').append(content);  
@@ -1080,10 +1089,6 @@ function FilterAllJobs(city,employement_term,job_function){
 } 
 
 
-function function_name(argument) {
-  // body...
-
-}
 // console.log(
      $(document.getElementsByName('e_terms')).click(function() {
      // alert($('input[name=e_terms]:checked').val());
@@ -1108,7 +1113,7 @@ function function_name(argument) {
             $("#loader").show(); 
              },
             success:function(data){
-            console.log(data);
+           // console.log(data);
            $('#joblist').empty();
       $("#industry-div").hide();
         //  window.location.reload(); 
@@ -1183,7 +1188,7 @@ function function_name(argument) {
             $("#loader").show(); 
              },
             success:function(data){
-            console.log(data);
+           // console.log(data);
            $('#joblist').empty();
       $("#industry-div").hide();
         //  window.location.reload(); 
@@ -1261,7 +1266,7 @@ function function_name(argument) {
             $("#loader").show(); 
              },
             success:function(data){
-            console.log(data);
+            //console.log(data);
            $('#joblist').empty();
       $("#industry-div").hide();
         //  window.location.reload(); 
