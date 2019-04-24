@@ -116,7 +116,7 @@ border-color: white !important;
                                                 <li> 
        <input type="checkbox" id="r{{$city_record->id}}" name="city[]" value="{{$city_record->id}}" />
          <label for="r{{$city_record->id}}"><span></span>{{$city_record->name}}</label>
-           <small> @foreach($city_count as $city_) @if($city_->city === $city_record->name) {{$city_->total}}  @endif @endforeach</small> 
+           <small> @foreach($city_count as $city_) @if($city_->city === $city_record->name) {{$city_->total}} @endif @endforeach</small> 
                                                 </li> 
                                             @endforeach 
                                             </ul> 

@@ -85,7 +85,7 @@ tr:hover {background-color:#f5f5f5;}
                     </aside>
                     <aside class="col-md-4">
                         <div class="careerfy-right">
-                            <ul class="careerfy-user-section">
+                            <ul class="careerfy-user-section hide_inner">
                                   @if(!Auth::user())
                                 <!-- <li>  <a class="careerfy-color careerfy-open-signin-tab" href="#">DOOO</a></li> -->
                                <li><a class="careerfy-color" href="{{ route('sign.up') }}">Register</a>

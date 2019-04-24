@@ -196,7 +196,7 @@ public function employement_term_list()
           $city_count = DB::table('tags')
              ->select('city', DB::raw('count(*) as total'))
              ->groupBy('city')->get();
-    $employement_term_list = DB::table('employement_terms')->get();
+    $employement_term_list = DB::table('employement_terms')->where('status',1)->get();
     $job_type_count = DB::table('tags')
              ->select('job_type', DB::raw('count(*) as total'))
              ->groupBy('job_type')->get();

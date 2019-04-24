@@ -24,7 +24,7 @@
                             <span>Create Resume Free</span>
                             <h2>We will help you reach out to employers</h2>
                             <p>Help recruiters find you. Let recruiters know more about you than is on your CV.</p>
-                            <a href="{{route('register')}}" class="careerfy-parallax-style4-btn">Register with us</a>
+                            <a href="{{route('sign.up')}}" class="careerfy-parallax-style4-btn">Register with us</a>
                         </div>
                         <div class="col-md-5"><img src="{{asset('/recruit/images/parallex-style4-img.png')}}" alt=""></div>
                         <!-- Parallax -->

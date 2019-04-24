@@ -122,7 +122,7 @@ padding-left: 75px;
                         <div class="clearfix"></div>
                         <div class="space">&nbsp;</div>
                         <div class="space">&nbsp;</div>
-       <div class="center2 select_label">I want to discover awesome jobs<br></div> 
+       <div class="center2 select_label">Discover awesome jobs<br></div> 
  
                         <div class="space">&nbsp;</div>
                         <div class="clearfix"></div>
@@ -137,7 +137,7 @@ padding-left: 75px;
                         <div class="clearfix"></div>
                         <div class="space">&nbsp;</div>
                         <div class="space">&nbsp;</div>
-        <div class="container center2 select_label">I want to attract the best talent. <br></div>
+        <div class="container center2 select_label">Attract the best talent. <br></div>
                         <div class="space">&nbsp;</div>
                         <div class="space">&nbsp;</div>
                         <div class="space">&nbsp;</div>

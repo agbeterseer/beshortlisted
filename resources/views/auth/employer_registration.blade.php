@@ -77,8 +77,13 @@ tr:hover {background-color:#f5f5f5;}
         <!-- Main Content --> 
           <div class="space">&nbsp;</div>
           <div class="space">&nbsp;</div>
-<div class="col-md-12 col-md-offset-2">
-    <div class="center"><h2>Create an Employer Account</h2> 
+          <div class=" col-md-offset-2">
+          <div class="center">
+          <h2>Create an Employer Account</h2> 
+        </div>
+      </div>
+<div class="col-md-8 col-md-offset-2">
+    <div class="center">
 <br>
      <div class="space">&nbsp;</div>
           <div class="space">&nbsp;</div>
@@ -88,7 +93,7 @@ tr:hover {background-color:#f5f5f5;}
         <div class="panel panel-default">
             
                 <div class="panel-body">
-<div class="col-md-8" > 
+<div class="col-md-12" > 
   <div class="center"><h2>Personal Information</h2>  </div>
  
                      <!-- class="tab-pane fade" -->

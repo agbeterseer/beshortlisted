@@ -77,8 +77,13 @@ tr:hover {background-color:#f5f5f5;}
         <!-- Main Content --> 
           <div class="space">&nbsp;</div>
           <div class="space">&nbsp;</div>
+                    <div class=" col-md-offset-2">
+          <div class="center">
+          <h2>Create Candidate Account</h2> 
+        </div>
+      </div>
 <div class="col-md-8 col-md-offset-2">
-    <div class="center"><h2>Create an Employee Account</h2> 
+    <div class="center"><h2></h2> 
 <br>
      <div class="space">&nbsp;</div>
           <div class="space">&nbsp;</div>

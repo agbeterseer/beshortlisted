@@ -2528,8 +2528,7 @@ $applications_employer = DB::table('applications')->where('clientfk', $user->id)
     $applications_employer_job_id_hired = DB::table('applications')->where('tag_id', 20)->where('clientfk', $user->id)->where('hired', 1)->count(); 
     $applications_employer_job_id_rejected = DB::table('applications')->where('tag_id', 20)->where('clientfk', $user->id)->where('rejected', 1)->count();
     $applications_employer_job_id_offered = DB::table('applications')->where('tag_id', 20)->where('clientfk', $user->id)->where('offered', 1)->count();
-    $applications_employer_job_id_inreview = DB::table('applications')->where('tag_id', 20)->where('clientfk', $user->id)->where('in_review', 1)->count();    
-    $usersss = Application::find(20)->tag;
+    $applications_employer_job_id_inreview = DB::table('applications')->where('tag_id', 20)->where('clientfk', $user->id)->where('in_review', 1)->count();     
     //get 
    $groups_count = DB::table('applications')->where('clientfk', $user->id)
              ->select('in_review', 'tag_id', 'hired', 'rejected', 'offered', 'shortlisted', 'sorted', DB::raw('count(*) as total'))

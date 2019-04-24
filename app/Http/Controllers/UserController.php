@@ -15,6 +15,7 @@ use Hash;
 use Auth;
 use Image;
 use Illuminate\Support\Facades\Input;
+use App\Notifications\AccountVerification;
 class UserController extends Controller
 {
 	 //use RegistersUsers;
@@ -45,9 +46,8 @@ class UserController extends Controller
 	{
 		$user_ = Auth::user();
  
-		   $users = User::all();
-		   $allRoles=Role::all();
-
+		   $users = User::orderBy('created_at', 'ASC')->get();
+		   $allRoles=Role::all(); 
 	 return view('admin.user.index',compact(['users','allRoles', 'user_']),array('user' => Auth::user()));
 	}
 
@@ -92,20 +92,47 @@ class UserController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(array $data)
+	public function store(Request $data)
 	{
-		//dd($data);
-	  
-	   $user = User::create([
-			'name' => $data['name'],
-			'email' => $data['email'],
-			'password' => bcrypt($data['password']),
-		]);
-
-		$user->attachRole(Role::where('name','general-user')->first());
-	   return redirect()->route('user.index', array('user' => Auth::user()));
+		 $confirmation_code = str_random(30); 
+		$user = new User;
+		$user->name = $data->name;
+		$user->email = $data->email;
+		$user->password = bcrypt($data->password);
+		$user->account_type = 'admin';
+		$user->admin  = 1;
+		$user->confirmation_code = $confirmation_code; 
+		$user->save();
+ 
+		$user->attachRole(Role::where('name','admin')->first());
+		
+		$this->SendEmployerVerificaionEmail($data->email, $confirmation_code, $user, "admin");
+	   // return redirect()->route('user.index', array('user' => Auth::user()));
+		Session::flash('success', 'Email sent successfully');
+	   return redirect()->back();
 	}
 
+public function SendEmployerVerificaionEmail($email, $confirmation_code, $user, $account_type)
+{
+ 
+  $content = [
+     'email' => $email,
+     'confirmation_code' => $confirmation_code,
+     'contact_person' => $user->name,
+     'account_type' => $account_type,
+ 
+  ];
+ 
+  try {
+
+    // Mail::to($email)->queue(new EmailAccountCreation($content));
+     $user->notify(new AccountVerification($content));
+
+    } catch (Exception $e) {
+       return redirect()->back()->withErrors(['error'=> 'something went wrong']); 
+    } 
+   
+}
  
 	/**
 	 * Display the specified resource.

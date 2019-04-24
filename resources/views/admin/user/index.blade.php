@@ -34,7 +34,7 @@
                             <div class="col-md-6">
                                 <div class="btn-group">
 
-<a class="btn btn-success" href="{{url('register')}}"><i class="fa fa-plus"></i>Create User</a>
+<a class="btn btn-success" href="{{route('user.create')}}"><i class="fa fa-plus"></i>Create User</a>
                                 </div>
                             </div>
       
