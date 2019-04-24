@@ -41,6 +41,29 @@
                     <form class="careerfy-banner-search" action="{{route('job.listing')}}" method="GET" id="find_jobs"> 
                         <ul>
                             <li>
+
+                        <div class="careerfy-select-style"> 
+                                  <select name="location"  required="required">
+                                    <option value="">Select City</option>
+                                    @foreach($cities as $city)
+                                        <option value="{{$city->id}}">{{$city->name}}</option> 
+                                        @endforeach 
+                                    </select>
+                                </div>
+                            </li>
+                   <li>
+                                      <div class=" careerfy-select-style">
+                                    <select name="job_function" required="required" >
+                                    <option value="">Select Job Function</option>
+                                    @foreach($industry_professions as $industry_profession)
+                                        <option value="{{$industry_profession->id}}">{{$industry_profession->name}}</option>
+                                        @endforeach
+                                     
+                                </select>
+                                </div>
+                               
+                            </li>
+                            <li> 
                                 <div class="careerfy-select-style">
                         <select name="s"  required="required">
                                     <option value="">Select Industry</option>
@@ -49,28 +72,7 @@
                                         @endforeach 
                                     </select>
                                 </div>
-                            </li>
-                            <li>
-                               <div class="careerfy-select-style"> 
-                                  <select name="location"  required="required">
-                                    <option value="">Select City</option>
-                                    @foreach($cities as $city)
-                                        <option value="{{$city->id}}">{{$city->name}}</option> 
-                                        @endforeach 
-                                    </select>
-                                </div>
                             
-                            </li>
-                            <li>
-                                      <div class=" careerfy-select-style">
-                                    <select name="job_function" required="required" >
-                                    <option value="">Select Job Function</option>
-                                    @foreach($industry_professions as $industry_profession)
-                                        <option value="{{$industry_profession->id}}">{{$industry_profession->name}}</option>
-                                        @endforeach
-                                </select>
-                                </div>
-                               
                             </li>
 
                              <li class="careerfy-banner-submit"> <input type="submit" value=""> <i class="careerfy-icon careerfy-search"></i> </li>

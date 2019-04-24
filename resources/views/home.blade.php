@@ -34,8 +34,7 @@
             <span class="careerfy-banner-transparent"></span>
             <div class="careerfy-banner-caption">
                 <div class="">  
-        <div class="col-md-12">
-            <div class="col-md-8"> 
+        <div class="col-md-12"> 
                 <div class="text-content"> 
                      <h1>We Meet You at Your Desk</h1>
                     <p>Build a profile which places you in the ideal position to be recruited</p> 
@@ -48,17 +47,8 @@
                                         <form class="careerfy-banner-search" action="{{route('job.listing')}}" method="GET" id="find_jobs"> 
                         <ul>
                             <li>
-                                <div class="careerfy-select-style">
-                        <select name="s"  required="required">
-                                    <option value="">Select Industry</option>
-                                    @foreach($industries as $industry)
-                                        <option value="{{$industry->id}}">{{$industry->name}}</option> 
-                                        @endforeach 
-                                    </select>
-                                </div>
-                            </li>
-                            <li>
-                               <div class="careerfy-select-style"> 
+
+                        <div class="careerfy-select-style"> 
                                   <select name="location"  required="required">
                                     <option value="">Select City</option>
                                     @foreach($cities as $city)
@@ -66,9 +56,8 @@
                                         @endforeach 
                                     </select>
                                 </div>
-                            
                             </li>
-                            <li>
+                   <li>
                                       <div class=" careerfy-select-style">
                                     <select name="job_function" required="required" >
                                     <option value="">Select Job Function</option>
@@ -80,63 +69,26 @@
                                 </div>
                                
                             </li>
+                            <li> 
+                                <div class="careerfy-select-style">
+                        <select name="s"  required="required">
+                                    <option value="">Select Industry</option>
+                                    @foreach($industries as $industry)
+                                        <option value="{{$industry->id}}">{{$industry->name}}</option> 
+                                        @endforeach 
+                                    </select>
+                                </div>
+                            
+                            </li>
+
 
                             <li class="careerfy-banner-submit"> <input type="submit" value="Find"> <i class="careerfy-icon careerfy-search"></i> </li>
                         </ul>
                     </form>                   
+ 
+<!--             <div class="col-md-4"> 
 
-                   </div>
-            <div class="col-md-4"> 
-            <form class="careerfy-banner-search-three"  role="form" method="POST" action="{{ route('login') }}" id="candidate">
-                {{ csrf_field() }}
-                    <div class="careerfy-user-form">  
-                                       <div class="careerfy-user-form-info">
-                       <a class="btn btn-link center" href="#" style="color: #ffffff;">
-                                    Login
-                                </a>
-                        </div>  
-                        <div class="row"> 
-                                <input  type="text" name="email" placeholder="Email Address:" class="form-control" required="required"> 
-                                                     @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif  
-                      </div>
-                       <div class="space">&nbsp;</div>
-                   <div class="row">
-                       <input  type="password" name="password" placeholder="Password" class="form-control" required="required">
-                       @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                </div>
-                <div class="space">&nbsp;</div>
-                <div class="row">   
-                  <button  type="submit" class="btn white mt-ladda-btn ladda-button btn-outline" >
-<span class="ladda-label">
-<i class="icon-plus"></i> Sign In</span>
-</button>
-                </div> 
-                   <div class="space">&nbsp;</div>
-                        <div class="clearfix"></div>
-                        <div class="careerfy-user-form-info">
-                       <a class="btn btn-link" href="{{route('sign.up')}}" style="color: #ffffff;">
-                                    Create New Account
-                                </a>|    <a class="btn btn-link" href="{{ url('/password/reset') }}" style="color: #ffffff;">
-                                    Forgot Your Password?
-                                </a>
-                  
-                       <!--      <div class="careerfy-checkbox"  style="text-align: center;">
-                                <input type="checkbox" id="r10" name="rr" />
-                                <label for="r10" style="color: #ffffff;"><span></span> Remember Password</label>
-                            </div> -->
-                        </div>
-                    </div>
-             
-                    </form>
-            </div>
+            </div> -->
         </div> 
 
 

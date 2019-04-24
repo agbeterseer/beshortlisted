@@ -140,7 +140,7 @@
                                                     <input type="checkbox" id="jr{{$employement_term->id}}" name="e_terms[]" value="{{$employement_term->id}}"/>
                                                     <label for="jr{{$employement_term->id}}"><span></span>
                                                     {{$employement_term->name}}</label>
-                                                    <small>4</small>
+                                                    <small></small>
                                                 </li>
                                   @endforeach 
                                             </ul>
@@ -213,10 +213,7 @@
      <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>@foreach($professions as $profession) @if($profession->id === $job->job_category) {{$profession->name}} @endif @endforeach</li>
      </ul> </div>
      <div class="space">&nbsp;</div>  
-     <div class="row"><div class="col-md-12">
-
-
- 
+     <div class="row"><div class="col-md-12"> 
  <div class="col-md-2" align="center">
     <div class="badge" style="background-color: #ffffff;"><font style=" font-weight: bold; font-size: 35px; color: orange;">
     <?php  

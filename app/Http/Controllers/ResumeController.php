@@ -2474,7 +2474,7 @@ public function ApplicationSuccess($id)
     $unsorted = DB::table('documents')
              ->select('educational_level', DB::raw('count(*) as total'))
              ->groupBy('educational_level')->get();
-     $jobs_byemployer = Tag::where('delete',0)->latest()->paginate(10);
+    $jobs_byemployer = Tag::where('delete',0)->latest()->paginate(10);
 
     $jobs_count = Tag::where('client', $user->id)->count(); 
   
@@ -2547,12 +2547,12 @@ $applications_employer = DB::table('applications')->where('clientfk', $user->id)
 
     $industries = Industry::all();
     $professions = IndustryProfession::all();
-    $cities = City::all();
+    $cities = City::orderBy('name')->get(); 
     $educational_levels = $this->GetQualificationLevels(); 
     // get all records
     $sort_categories_list = DB::table('sort_categories')->get();
     $educational_qualifications = $this->GetQualificationLevels();
-    $employement_terms = DB::table('employement_terms')->get();
+    $employement_terms = DB::table('employement_terms')->where('status', 1)->get();
     $jobcareer_levels = DB::table('jobcareer_levels')->get();
     $users = User::all();
     // get candidates Resume

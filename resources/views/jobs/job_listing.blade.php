@@ -42,6 +42,31 @@ border-color: white !important;
                      
                         <ul>
                             <li>
+                            <div class="careerfy-select-style"> 
+                                    <select name="location">
+                                    <option value="">Select City</option>
+                                    @foreach($cities as $city)
+                                 
+    <option value="{{$city->id}}">{{$city->name}}</option> 
+                                 
+                                        @endforeach 
+                                    </select>
+                                </div> 
+ 
+                            </li>
+                            <li>
+                            <div class="careerfy-select-style" >
+                                    <select name="job_function" >
+                                    <option value="">Select Job Function</option>
+                                    @foreach($industry_professions as $industry_profession)
+                                        <option value="{{$industry_profession->id}}">{{$industry_profession->name}}</option>
+
+                                        @endforeach
+                               
+                                    </select>
+                                </div> 
+                            </li>
+                            <li>
                         <div class="careerfy-select-style">
                                     <select name="s"  >
                                     <option value="">Select Industry</option>
@@ -52,31 +77,6 @@ border-color: white !important;
                                 
                                         @endforeach  
                                         
-                                    </select>
-                                </div> 
-                            </li>
-                            <li>
-             <div class="careerfy-select-style"> 
-                                    <select name="location">
-                                    <option value="">Select City</option>
-                                    @foreach($cities as $city)
-                                 
-    <option value="{{$city->id}}">{{$city->name}}</option> 
-                                 
-                                        @endforeach 
-                                    </select>
-                                </div> 
-                               
-                            </li>
-                            <li>
-                                <div class="careerfy-select-style" >
-                                    <select name="job_function" >
-                                    <option value="">Select Job Function</option>
-                                    @foreach($industry_professions as $industry_profession)
-                                        <option value="{{$industry_profession->id}}">{{$industry_profession->name}}</option>
-
-                                        @endforeach
-                               
                                     </select>
                                 </div>
                             </li>
