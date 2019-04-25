@@ -59,6 +59,13 @@ tr:hover {background-color:#f5f5f5;}
   margin-right: auto;
   width: 50%;
 }
+.center2{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%; 
+  text-align:center;
+}
 </style>
 </head>
 
@@ -372,13 +379,13 @@ tr:hover {background-color:#f5f5f5;}
 <div class="space">&nbsp;</div>
 <div class="space">&nbsp;</div>
 <div class="space">&nbsp;</div>
-                        <div class="center" style="align-content: center;">
+                        <div class="center2">
                           <button type="submit" class="btn dark btn" data-dismiss="modal">Create Account</button>
                             <a href="{{url('/login')}}" class="btn dark btn-outline" data-dismiss="modal">Do you have an account already?</a>
-                                <div class="space">&nbsp;</div>
+                            <div class="space">&nbsp;</div>
                            <label style="font-size: 15px;">By clicking "Create Account", you agree to our<br>
                             <div class="space">&nbsp;</div>
-                            <span style=""><a href="{{route('single.page', 'terms-of-use')}}" target="_blank">TERMS & CONDITIONS</a> and <a href="{{route('display.policy')}}" target="_blank">PRIVACY POLICY</a></span></label> 
+                            <div><a href="{{route('single.page', 'terms-of-use')}}" target="_blank">Terms & Conditions</a> and <a href="{{route('display.policy')}}" target="_blank"> Privacy Policy</a></div></label> 
                         </div>
                 </div>
               </div>

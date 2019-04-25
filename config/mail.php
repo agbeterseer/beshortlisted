@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 465),
+    'port' => env('MAIL_PORT', 587),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
     | used globally for all e-mails that are sent by your application.
     |
     */
-
+ 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hr@rhizomeng.com'),
         'name' => env('MAIL_FROM_NAME', 'Rhizome Consulting'),

@@ -595,6 +595,8 @@ return redirect()->route('create_account.success');
 public function RegisterEmployee(Request $request)
 {
   //dd($request->all());
+ 
+
   $account_type = $request->account_type;
   $email = $request->email;
   $password = $request->password;
@@ -615,6 +617,12 @@ public function RegisterEmployee(Request $request)
   $position_title = $request->position_title;
   $company_name = $request->company_name;
   $gender = $request->gender; 
+   // check if user exist
+
+  $user = User::findOrFail($email);
+  if ($user) {
+   return redirect()->back();
+  }
     if ($end_year !=null && $end_month !=null) {
 
         $present = 0;

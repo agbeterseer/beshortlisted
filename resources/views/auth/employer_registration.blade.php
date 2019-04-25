@@ -53,11 +53,18 @@ tr:hover {background-color:#f5f5f5;}
 
    </style>
    <style type="text/css">
-    .center {
+.center {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 50%; 
+}
+.center2 {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%; 
+  text-align:center;
 }
 </style>
 </head>
@@ -89,19 +96,19 @@ tr:hover {background-color:#f5f5f5;}
           <div class="space">&nbsp;</div>
 <!-- Reach top talent and find the right candidate today  -->
     </div> 
+      <form class="careerfy-row careerfy-employer-profile-form" method="POST" action="{{ route('employer.postsigup') }}"   name="frm">
+                        {{ csrf_field() }} 
+<input type="hidden" name="account_type" value="employer" >
      <!-- <div class="portlet light bordered" > -->
-        <div class="panel panel-default">
-            
-                <div class="panel-body">
-<div class="col-md-12" > 
+          <div class="panel panel-default"> 
+          <div class="panel-body">
+          <div class="col-md-12" > 
   <div class="center"><h2>Personal Information</h2>  </div>
  
                      <!-- class="tab-pane fade" -->
              <div class="tab-content">
                     <div id="personal" class="tab-pane fade in active">
-  <form class="careerfy-row careerfy-employer-profile-form" method="POST" action="{{ route('employer.postsigup') }}"  >
-                        {{ csrf_field() }} 
-<input type="hidden" name="account_type" value="employer" >
+
                     <div class="careerfy-user-form careerfy-user-form-coltwo">
                         <ul>
                           <li>
@@ -132,7 +139,7 @@ tr:hover {background-color:#f5f5f5;}
                                     </li>
                              <li>
                                 <label>Phone Number:</label>
-                                <input value="Enter Your Phone Number" onblur="if(this.value == '') { this.value ='Enter Your Phone Number'; }" onfocus="if(this.value =='Enter Your Phone Number') { this.value = ''; }" type="number" name="phone" maxlength="11">
+                                <input type="text" name="phone" maxlength="11" id="phone" onkeypress="onlyNumbers()" >
                                 <i class="careerfy-icon careerfy-technology"></i>
                             </li>
                         
@@ -154,16 +161,6 @@ tr:hover {background-color:#f5f5f5;}
                             <div class="center"><h2>Company Information</h2>  </div>
 
                             <ul>
-<!--                            <li>
-                                <label>Company Name<label>
-       <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="number" name="number_of_employees">
-                                <i class="careerfy-icon careerfy-user"></i>
-                              @if ($errors->has('number_of_employees'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('number_of_employees') }}</strong>
-                                    </span>
-                                @endif
-                            </li> -->
                  <li>
                                 <label>Comany Name:</label>
                                 <input onblur="if(this.value == '') { this.value ='Enter Comany Name'; }" onfocus="if(this.value =='Enter Comany Name') { this.value = ''; }" type="text" name="comany_name" required="required">
@@ -204,12 +201,6 @@ tr:hover {background-color:#f5f5f5;}
                                     </span>
                                 @endif
                             </li>
-
-
-<!--                              <li class="careerfy-user-forml">
-<a href="#company" class="btn blue btn-outline" data-dismiss="modal" style="align-content: left;">Next</a>
-                                <input type="submit" value="Next">
-                            </li> class="careerfy-column-6"-->
                         </ul>
                            </div>
                                  <ul class="careerfy-column-12"> 
@@ -243,7 +234,7 @@ tr:hover {background-color:#f5f5f5;}
                             </li>
                              <li>
                                 <label>Phone Number:</label>
-       <input onblur="if(this.value == '') { this.value ='Enter Phone Number'; }" onfocus="if(this.value =='Enter Phone Number') { this.value = ''; }" type="number" name="contact_phone_number" required="required" maxlength="11"> 
+       <input  type="text" name="contact_phone_number" required="required" maxlength="11" onkeypress="onlyNumbers()" id="phone"> 
                               @if ($errors->has('contact_phone_number'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('contact_phone_number') }}</strong>
@@ -258,69 +249,34 @@ tr:hover {background-color:#f5f5f5;}
                                         <option value="{{$country->code}}">{{$country->name_en}}</option> 
                                         @endforeach 
                                     </select> 
-                            </li>                
+                                 </li>                
                                     <li>
                                          <label>Description *</label>
                                         <textarea name="contact_address" required="required" > </textarea>
                                     </li>
                             <li class="careerfy-column-12">
            
-                                <button type="submit" class="btn dark btn" data-dismiss="modal">Submit</button>
-           <!-- <a href="" class="btn dark btn" data-dismiss="modal"></a> -->
-                            <!-- <input type="submit" value="Submit"> -->
-                        </li>
+                         </li>
                         </ul>
+                  <div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div>
+<div class="space">&nbsp;</div> 
 
-<!-- <a href="#" class="btn dark btn-outline" data-dismiss="modal" style="align-content: left;">Close</a> -->
-
-                    
-                        <div class="center" style="align-content: center;">
-                            <a href="{{url('/login')}}" class="btn dark btn-outline" data-dismiss="modal">Do you have an account already?</a>
-                                <div class="space">&nbsp;</div>
-                           <label style="font-size: 15px;">By clicking "Submit", you agree to our<br>
-                            <div class="space">&nbsp;</div>
-                            <span style=""><a href="{{route('single.page', 'terms-of-use')}}" target="_blank">TERMS & CONDITIONS</a> and <a href="{{route('display.policy')}}" target="_blank">PRIVACY POLICY</a></span></label> 
-                        </div>
-                
  </div>
- </form>
+                        <div class="center2"> 
+                                <button type="submit" class="btn dark btn" data-dismiss="modal">Submit</button>
+                            <a href="{{url('/login')}}" class="btn dark btn-outline" data-dismiss="modal">Do you have an account already?</a> 
+                                <div class="space">&nbsp;</div>
+                              <label style="font-size: 15px;">By clicking "Create Account", you agree to our<br>
+                            <div class="space">&nbsp;</div>
+                            <div><a href="{{route('single.page', 'terms-of-use')}}" target="_blank">Terms & Conditions</a> and <a href="{{route('display.policy')}}" target="_blank"> Privacy Policy</a></div></label> 
+                           </div> 
 
                     </div>
           
-                </div> 
-
-                    
-               
-
+                </div>  
+                 </form>
  </div>
-<!-- <form class="form-horizontal" action="{{ route('add.caption') }}" method="post" role="form" name="caption_form" >
-{{ csrf_field() }} 
-                    <div class="careerfy-user-form">   
-<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-<div class="col-md-12">
-Title  
-<input id="name" type="text" class="form-control" name="name" placeholder=" Enter title here"    required>
-@if ($errors->has('name'))
-<span class="help-block">
-<strong>{{ $errors->first('name') }}</strong>
-</span>
-@endif
-</div>
-</div>
- 
-                <div class="space">&nbsp;</div>
-                <div class="row">
-                <div class="modal-footer">
- 
-
-</div>  
-                </div> 
-                   <div class="space">&nbsp;</div>
-                        <div class="clearfix"></div>
-
-                    </div>
-             
-                    </form> -->
 </div>
 </div>
 </div>
@@ -563,7 +519,35 @@ document.getElementById('present').style.display = 'block';
     x.type = "password";
   }
 }
+           function accountNumber(){          
+            $('#account_number').keypress(function(e) {
+                var a = [];
+                var k = e.which;
 
+                for (i = 48; i < 58; i++)
+                    a.push(i);
+
+                if (!(a.indexOf(k)>=0))
+                    e.preventDefault();
+            });
+        }
+  function onlyNumbers(){          
+            $('#phone').keypress(function(e) {
+                var a = [];
+                var k = e.which;
+
+                for (i = 48; i < 58; i++)
+                    a.push(i);
+
+                if (!(a.indexOf(k)>=0))
+                    e.preventDefault();
+            });
+        }
+ 
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
  </script>
 
  
