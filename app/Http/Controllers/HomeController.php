@@ -700,7 +700,7 @@ return redirect()->route('create_account.success');
 
 public function SaveWorkExperience($work_from_year, $work_from_month, $end_year, $end_month, $position_title, $company_name, $country, $user, $resume_record, $present) {
 
-  $work_experience = new WorkExperience();
+  $work_experience = new WorkExperience;
   $work_experience->start_year =  $work_from_year;
   $work_experience->start_month = $work_from_month;
   $work_experience->end_year = $end_year;
