@@ -335,7 +335,27 @@
                                         <span class="title">@lang('cvmanagement.contact.title') </span>
                                           </a>
                                       </li> 
-                                      
+                                  <li class="nav-item ">
+                                          <a href="{{route('banner.index')}}" class="nav-link ">
+                                        <span class="title">Banner </span>
+                                          </a>
+                                      </li> 
+                                     <li class="nav-item ">
+                                          <a href="{{route('aboutus.index')}}" class="nav-link ">
+                                        <span class="title">AboutUs </span>
+                                          </a>
+                                      </li>
+                                       <li class="nav-item ">
+                                          <a href="{{route('frequently.index')}}" class="nav-link ">
+                                        <span class="title">Frequently Questions </span>
+                                          </a>
+                                      </li> 
+                                     <li class="nav-item ">
+                                          <a href="{{route('admin.tickets')}}" class="nav-link ">
+                                        <span class="title">Support Tickets </span>
+                                          </a>
+                                      </li>   
+                                       
                                     </ul> 
                                   </li>
                              

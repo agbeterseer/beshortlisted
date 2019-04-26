@@ -142,6 +142,10 @@ Route::get('/job/industries', [
 	'as' => 'list_industries',
 	'uses' => 'HomeController@AllIndustries'
 	]);
+Route::get('/tickets', [
+	'as' => 'ticket_page',
+	'uses' => 'TicketController@index'
+]);
 // Auth::logout()
 Route::get('/onlinetest_link/link/{id}/candidate/{user}',  'IndexController@beginTest');
 Route::get('/test/start_test-{id}-candidate-{user}',[
@@ -177,10 +181,19 @@ Route::get('auth/{provider}/callback', 'LoginController@Callback');
 		'as' => 'add.card',
 		'uses' => 'SettingController@AddCard'
 	]);
-		// Route::get('/employer/setting/', [
-		// 	'as' => 'employer.setting',
-		// 	'uses'=> 'SettingController@EmplpoyerSetting'
-		// ]);
+
+Route::get('/pending-tickets', [
+	'as' => 'admin.tickets',
+	'uses'=> 'TicketController@adminShowTickets'
+]);
+Route::get('/open-support-ticket-{id}', [
+	'as' => 'open.ticket',
+	'uses' => 'TicketController@openTicket'
+]);
+Route::post('/closed-ticket', [
+	'as' => 'closed.ticket',
+	'uses' => 'TicketController@closedTicket'
+]);
 
 	Route::post('/add-page-information', [
 		'as' => 'add.page_infor',
@@ -1123,6 +1136,10 @@ Route::get('/index/resume/edit-referees/{id}', [
 	Route::resource('menu', 'MenuController');
 	Route::resource('pages', 'PostController');
 	Route::resource('blog', 'BlogController');
+	Route::resource('banner', 'BannerController');
+	Route::resource('aboutus', 'AboutUsController');
+	Route::resource('ticket', 'TicketController');
+	Route::resource('frequently', 'FrequentlyController');
 	// Route::resource('')
 		Route::get('/employer/post-jobs/{region_id}',
 	array('as'=>'post_job.get_region','uses'=>'TagController@getCitiesByRegioinAjax')); 

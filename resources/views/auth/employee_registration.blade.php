@@ -102,6 +102,11 @@ tr:hover {background-color:#f5f5f5;}
             {!! Session::get('error-year') !!}
             </div>
             @endif
+                 @if(Session()->has('error-email'))
+            <div class="alert alert-danger"> 
+            {!! Session::get('error-email') !!}
+            </div>
+            @endif       
      <!-- <div class="portlet light bordered" > -->
   <form class="careerfy-row careerfy-employer-profile-form" method="POST" action="{{ route('register.employee') }}"  >
                         {{ csrf_field() }} 

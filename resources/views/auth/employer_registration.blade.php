@@ -96,6 +96,13 @@ tr:hover {background-color:#f5f5f5;}
           <div class="space">&nbsp;</div>
 <!-- Reach top talent and find the right candidate today  -->
     </div> 
+                    @if(Session()->has('error-email'))
+            <div class="alert alert-danger"> 
+            {!! Session::get('error-email') !!}
+            </div>
+            @endif 
+
+            
       <form class="careerfy-row careerfy-employer-profile-form" method="POST" action="{{ route('employer.postsigup') }}"   name="frm">
                         {{ csrf_field() }} 
 <input type="hidden" name="account_type" value="employer" >
@@ -267,7 +274,7 @@ tr:hover {background-color:#f5f5f5;}
                                 <button type="submit" class="btn dark btn" data-dismiss="modal">Submit</button>
                             <a href="{{url('/login')}}" class="btn dark btn-outline" data-dismiss="modal">Do you have an account already?</a> 
                                 <div class="space">&nbsp;</div>
-                              <label style="font-size: 15px;">By clicking "Create Account", you agree to our<br>
+                              <label style="font-size: 15px;">By clicking "Submit", you agree to our<br>
                             <div class="space">&nbsp;</div>
                             <div><a href="{{route('single.page', 'terms-of-use')}}" target="_blank">Terms & Conditions</a> and <a href="{{route('display.policy')}}" target="_blank"> Privacy Policy</a></div></label> 
                            </div> 

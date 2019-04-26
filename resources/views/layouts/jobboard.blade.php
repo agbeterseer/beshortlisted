@@ -119,8 +119,8 @@ border-color: white !important;
       <script src="{{ asset('css/assets/pages/scripts/form-repeater.min.js')}}" type="text/javascript"></script>
       <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/masking-input.js" data-autoinit="true"></script> 
 <script src="{{ asset('js/card/jquery.payform.min.js')}}" charset="utf-8"></script>
-<script src="{{ asset('js/card/script.js')}}"></script>
-
+<script src="{{ asset('js/card/script.js')}}"></script> 
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> 
  <script type="text/javascript">
  
 

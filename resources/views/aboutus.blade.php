@@ -51,9 +51,9 @@
                     <div class="row">
 
                         <div class="col-md-6 careerfy-typo-wrap">
-                            <div class="careerfy-about-text">
+                            <div class="careerfy-about-text" style="text-align: center;">
                                 <h2>About Our Company</h2>
-                                {!! $page->content !!}  
+                                {{ $about->history }}  
                             </div>
                         </div>
                         <div class="col-md-6 careerfy-typo-wrap"><div class="careerfy-about-thumb"><img src="{{asset('extra-images/about-us-thumb.png')}}" alt=""></div></div>
@@ -75,6 +75,8 @@
                                         <span class="word-counter">{{$job_match_count}}</span>
                                         <small>Positions Matched</small>
                                     </li>
+
+
                                 </ul>
                             </div>
                         </div>
@@ -99,39 +101,40 @@
                                 <p>A better career is out there. We'll help you find it to use.</p>
                             </section>
                             <div class="careerfy-classic-services">
-                                <ul class="row">
-                           <!--          <li class="col-md-4">
+                                  <ul class="row">
+                                    <li class="col-md-4">
                                         <span>1</span>
                                         <i class="careerfy-icon careerfy-coding"></i>
-                                        <h2>Cross Browsers</h2>
-                                        <p>Etiam lobortis egestas orci vitaa laort ed at nunc nec mas pretiuem lao.</p>
-                                    </li> -->
-                                   <li class="col-md-4">
-                                        <span>1</span>
-                                        <i class="careerfy-icon careerfy-24-hours"></i>
-                                        <h2>Quick Support</h2>
-                                        <p>Our team are hands on to giving you a technical aid if need be.</p>
+                                        <h2>Our Vision</h2>
+                                        <p>{{$about->vision}}</p>
                                     </li>
                                     <li class="col-md-4">
                                         <span>2</span>
                                         <i class="careerfy-icon careerfy-support"></i>
-                                        <h2>Easy Online Resume</h2>
-                                        <p>Our system is build to hand detailed online resume. You as well have multiple Resume Profile.</p>
+                                        <h2>Our Mission</h2>
+                                        <p>{{$about->mission}}</p>
                                     </li>
                                     <li class="col-md-4">
                                         <span>3</span>
                                         <i class="careerfy-icon careerfy-pen"></i>
-                                        <h2>Modern CV Templates</h2>
-                                        <p>Make use of our state-of-the-art templates to generate your resume.</p>
+                                        <h2>Our Core Values</h2>
+                                        <p>{{$about->values}}</p>
                                     </li>
-                
-                           <!--          <li class="col-md-4">
+                                    @if($about->philosophy)
+                                    <li class="col-md-4">
+                                        <span>4</span>
+                                        <i class="careerfy-icon careerfy-24-hours"></i>
+                                        <h2>Philosophy</h2>
+                                        <p>{{$about->philosophy}}</p>
+                                    </li>
+                                    @endif
+<!--                                     <li class="col-md-4">
                                         <span>5</span>
                                         <i class="careerfy-icon careerfy-company-workers"></i>
                                         <h2>Permanent Staffing</h2>
                                         <p>Etiam lobortis egestas orci vitaa laort ed at nunc nec mas pretiuem lao.</p>
-                                    </li>
-                                    <li class="col-md-4">
+                                    </li> -->
+<!--                                     <li class="col-md-4">
                                         <span>6</span>
                                         <i class="careerfy-icon careerfy-graphic"></i>
                                         <h2>Payroll Management</h2>

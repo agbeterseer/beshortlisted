@@ -22,7 +22,8 @@
 <link href="{{ asset('recruit/css/home-two-color.css')}}" rel="stylesheet"> 
 <link href="{{ asset('recruit/css/home-three-color.css')}}" rel="stylesheet"> 
 <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
-    <!-- <link href="{{ asset('bulma-0.7.2/css/bulma.min.css')}}" rel="stylesheet"> -->
+ 
+    
     <style type="text/css">
     .header {
   padding: 10px 16px;
@@ -43,7 +44,7 @@
   width: 100%
 }
 
-/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0)FAFAFA; */
 .sticky + .content {
   padding-top: 102px;
 }
@@ -55,5 +56,5 @@
         <link href="{{ asset('css/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.css')}}" rel="stylesheet" type="text/css" />
                 <link href="{{ asset('css/assets/global/plugins/bootstrap-summernote/summernote.css') }}" rel="stylesheet" type="text/css" />
          <style type="text/css">
-              body{background-color: #FAFAFA;}
+              body{background-color: #ECECEC;}
          </style>

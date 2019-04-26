@@ -12,7 +12,8 @@
   'package' => '',
    'page' => '',
   'role' => '',
-  'user' => 'active'
+  'user' => 'active',
+  'settings' => ''
 ]) 
 
 @section('content')

@@ -459,13 +459,7 @@ address                         { font-style: italic; }
 /* Banner */ 
 .careerfy-parallax-style4-full {  background: url(extra-images/otherimage.jpg) no-repeat; }
 .careerfy-parallax-style4-full2 {  background: url(extra-images/sunset.jpg) no-repeat; }
-.careerfy-banner {
-    float: left;
-    width: 100%;
-    background: url(extra-images/banner-bg.jpg) no-repeat;
-    position: relative;
-    padding: 138px 0px 139px 0px; 
-}
+
 .careerfy-banner-transparent {
     background-color: #1e3142;
     opacity: 0.76;

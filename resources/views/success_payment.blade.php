@@ -56,7 +56,7 @@ border-color: white !important;
                                 </div>
                             </div>
                         </div> 
-                                                            </div>
+ </div>
                                 </div>
                             </div>
                         </div>

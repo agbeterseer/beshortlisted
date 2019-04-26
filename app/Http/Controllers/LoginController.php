@@ -145,16 +145,17 @@ if($users){
             Auth::login($users);
             return redirect('/');
         }else{
-$user = User::create([
-                'name'          => $userSocial->getName(),
-                'email'         => $userSocial->getEmail(),
-                'password'      => bcrypt($userSocial->getEmail()),
-                'image'         => $userSocial->getAvatar(),
-                'provider_id'   => $userSocial->getId(),
-                'provider'      => $provider,
-                'account_type' => 'employee'
-            ]);
-         return redirect()->route('home');
+// $user = User::create([
+//                 'name'          => $userSocial->getName(),
+//                 'email'         => $userSocial->getEmail(),
+//                 'password'      => bcrypt($userSocial->getEmail()),
+//                 'image'         => $userSocial->getAvatar(),
+//                 'provider_id'   => $userSocial->getId(),
+//                 'provider'      => $provider,
+//                 'account_type' => 'employee'
+//             ]);
+
+         return redirect()->route('sign.up');
         }
 }
 

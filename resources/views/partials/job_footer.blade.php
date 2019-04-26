@@ -14,14 +14,14 @@
                                 <ul>
                                     <li><a href="{{route('aboutus')}}" class="footer_links">About Us</a></li>
                                     <li><a href="{{route('list.job', 'job-list')}}" class="footer_links">Browse Jobs</a></li>
-                                    <li><a href="{{url('/usermanual')}}" class="footer_links">Help Center</a></li> 
+                                   @if(Auth::check()) <li><a href="{{route('ticket.index')}}" class="footer_links">Tickets</a></li> @endif
                                 </ul>
                             </div>
                             <div class="col-md-3">
                                 <ul>
                                     <li><a href="{{route('list_industries')}}" class="footer_links">Browse Industries</a></li>
                                     <li><a href="{{route('employer_infor')}}" class="footer_links">Employer</a></li>
-                                    <li><a href="{{route('single.page', 'guidelines')}}" class="footer_links">Guidelines</a></li>
+                                    <li><a href="{{url('/usermanual')}}" class="footer_links">Guidelines</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-3">
@@ -39,18 +39,24 @@
                                 </ul>
                             </div>
 </span>
+
+ 
+
+<!--End mc_embed_signup-->
 <p><p><div class="space">&nbsp;</div>
                             <div class="careerfy-footer-newslatter">
-                                <form id="email_subscription" action="{{route('subscribe')}}" method="get">
+               <form action="https://gmail.us20.list-manage.com/subscribe/post?u=cec7f4a0933c7c0b27cadce4a&amp;id=1b1e028f7f" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
                                     <label>Subscribe for weekly newsletter</label> 
                                     <ul>
                                         <li>
                                             <i class="careerfy-icon careerfy-mail"></i>
+      <!-- <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required> -->
                                             <input name="email" placeholder="Sign up for newsletter" type="text">
                                         </li>
                                         <li>
                                     <i class="careerfy-icon careerfy-arrows22"></i>
-                                       <input type="submit" value="Subcribe" style="background-color:#13B5EA;">
+                                        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cec7f4a0933c7c0b27cadce4a_1b1e028f7f" tabindex="-1" value=""></div>
+                                       <input type="submit" value="Subcribe" style="background-color:#13B5EA;" id="mc-embedded-subscribe">
                                         </li> 
                                     </ul>
                                     <ul>

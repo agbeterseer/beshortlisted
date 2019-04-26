@@ -11,6 +11,10 @@
   'index' => 'active'
 ])
 @section('content') 
+
+@php
+
+@endphp
 <style type="text/css">
     .center {
   display: block;
@@ -18,7 +22,13 @@
   margin-right: auto;
   width: 50%;
 }
- 
+.careerfy-banner {
+    float: left;
+    width: 100%;
+    background: url("{{asset('/uploads/banners/')}}/{{$banner->banner}} ") no-repeat;
+    position: relative;
+    padding: 138px 0px 139px 0px; 
+}
 </style>
     <!-- Wrapper --> 
         <!-- Header --> 
@@ -28,8 +38,7 @@
                         {!! Session::get('success') !!}
                         </div>
                         @endif
-        <!-- Banner -->
-
+        <!-- Banner -->   
         <div class="careerfy-banner careerfy-typo-wrap" > 
             <span class="careerfy-banner-transparent"></span>
             <div class="careerfy-banner-caption">

@@ -12,7 +12,7 @@
   'package' => '',
   'page' => '',
   'role' => '',
-  'user' => 'active'
+  'user' => 'active', 
 ]) 
 @section('content')
     

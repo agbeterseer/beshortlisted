@@ -250,8 +250,7 @@ try {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-               
+    {         
          if ($id) {
 
        DB::table("menu")->where('id',$id)->delete();

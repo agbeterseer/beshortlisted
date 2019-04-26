@@ -33,6 +33,7 @@ use App\Notifications\AccountVerification;
 use App\EmployerPackage;
 use App\Http\Requests\UpdateContactRequest;
 use App\WorkExperience;
+use App\AboutUs;
 class HomeController extends Controller
 {
     /**
@@ -127,7 +128,10 @@ class HomeController extends Controller
         $posts = $this->listPages();
         $job_match_count = DB::table('job_matches')->where('rate', '>', 2)->count(); 
        $page_information = DB::table('page_informations')->where('category', 'index')->first();
-      return view('home', compact('documents', 'roles', 'users', 'resumes','industries', 'resume_builder_list', 'industries', 'jobs', 'resume_count', 'jobs_count', 'industry_professions', 'employement_term_list', 'cities','industry_count', 'industries_paginage', 'job_function_count', 'jobs_8', 'job_post', 'tag_cities', 'employement_terms', 'menus', 'job_match_count', 'posts', 'page_information', 'all_jobs', 'featured_jobs', 'company_count'), array('user' => Auth::user()));
+       // get banner file
+       $banner = DB::table('banners')->orderBy('created_at', 'DESC')->first();
+      
+      return view('home', compact('documents', 'roles', 'users', 'resumes','industries', 'resume_builder_list', 'industries', 'jobs', 'resume_count', 'jobs_count', 'industry_professions', 'employement_term_list', 'cities','industry_count', 'industries_paginage', 'job_function_count', 'jobs_8', 'job_post', 'tag_cities', 'employement_terms', 'menus', 'job_match_count', 'posts', 'page_information', 'all_jobs', 'featured_jobs', 'company_count', 'banner'), array('user' => Auth::user()));
     }
     public function employement_terms()
     {
@@ -355,7 +359,7 @@ public function DisplayTemplates()
     }
     public function AllIndustries(Request $request)
     {
-      $s = $request->input('s'); 
+    $s = $request->input('s'); 
     $industries = DB::table('industries')->where('status',1)->orderBy('created_at', 'DESC')->get();
       $menus = $this->displayMenu();
          // $job_function_count = DB::table('tags')
@@ -447,12 +451,21 @@ public function DisplayTemplates()
     $posts = $this->listPages();
     $contact = DB::table('contacts')->where('status',1)->get();
     $countries = DB::table('countries')->get();
-    $page = Post::where('display_name', 'about-us')->where('status',1)->first();  
+    // $page = Post::where('display_name', 'about-us')->where('status',1)->first();  
+    $about = DB::table('aboutuses')->orderBy('created_at', 'DESC')->first();
     $resume_count = RecruitResume::all()->count();
     $jobs_count = Tag::where('status',1)->where('active', 1)->count();
      $job_match_count = DB::table('job_matches')->where('rate', '>', 2)->count();
-
-    return view('aboutus', compact('posts', 'menus', 'contact', 'countries', 'page', 'job_match_count', 'resume_count', 'jobs_count'), array('user' => Auth::user()));
+// $to_name = 'Terseer Agbe';
+// $to_email = 'agbe.terseer@gmail.com';
+// $data = array('name'=>"Sam Jose", "body" => "Test mail");
+    
+// Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+//     $message->to($to_email, $to_name)
+//             ->subject('Artisans Web Testing Mail');
+//     $message->from('hr@rhizomeng.com','Testing');
+// });
+    return view('aboutus', compact('posts', 'menus', 'contact', 'countries', 'about', 'job_match_count', 'resume_count', 'jobs_count'), array('user' => Auth::user()));
     }
 public function addContactUs (Request $request)
 { 
@@ -534,6 +547,8 @@ return view('auth.employee_registration', compact('menus', 'posts', 'all_pages',
 public function RegisterEmployer(Request $request)
 {
  // dd($request->all());
+
+
   $account_type = $request->account_type;
   $email = $request->email;
   $password = $request->password;
@@ -552,6 +567,14 @@ public function RegisterEmployer(Request $request)
   $email_notificaiton = $request->email_notificaiton;
   $contact_person = $request->contact_person;
   $country = $request->country;
+
+  //check user
+  $user = DB::table('users')->where('email', $email)->first();
+  if ($user) {
+   Session::flash('error-email', 'email address already taken');
+  return redirect()->back();
+  }
+
   $confirmation_code = str_random(30);
 //dd($request->all());
 if ($contact_person !=null && $contact_person !="" && $lastname !=null && $lastname !="") {
@@ -619,10 +642,12 @@ public function RegisterEmployee(Request $request)
   $gender = $request->gender; 
    // check if user exist
 
-  $user = User::findOrFail($email);
+  $user = DB::table('users')->where('email', $email)->first();
   if ($user) {
-   return redirect()->back();
+    Session::flash('error-email', 'email address already taken');
+  return redirect()->back();
   }
+
     if ($end_year !=null && $end_month !=null) {
 
         $present = 0;
@@ -811,5 +836,7 @@ public function account_creation_success()
   $posts = $this->listPages();
  return view('employer_email_information', compact('menus','posts'), array('user' => Auth::user()));
 }
+
+
 
 }
