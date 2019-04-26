@@ -147,7 +147,8 @@ tr:hover {background-color:#f5f5f5;}
                                     </li>
                              <li>
                                 <label>Phone Number:<span class="required" style="color: red">*</span></label>
-                                <input value="Enter Your Phone Number" onblur="if(this.value == '') { this.value ='Enter Your Phone Number'; }" onfocus="if(this.value =='Enter Your Phone Number') { this.value = ''; }" type="number" name="phone" maxlength="11">
+                                 <input type="text" name="phone" maxlength="11" id="phone" onkeypress="onlyNumbers()" >
+                     
                                 <i class="careerfy-icon careerfy-technology"></i>
                             </li>
                         
@@ -669,14 +670,19 @@ document.getElementById('present').style.display = 'block';
     }
 }).apply(this, [ jQuery ]);
 
- function myFunction() {
-  var x = document.getElementById("myInput");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-}
+  function onlyNumbers(){          
+            $('#phone').keypress(function(e) {
+                var a = [];
+                var k = e.which;
+
+                for (i = 48; i < 58; i++)
+                    a.push(i);
+
+                if (!(a.indexOf(k)>=0))
+                    e.preventDefault();
+            });
+        }
+ 
 
  </script>
 
