@@ -164,7 +164,7 @@ tr:hover {background-color:#f5f5f5;}
                         <div class="careerfy-user-form-info">
                          <a class="btn btn-link" href="{{ url('/password/reset') }}">
                                     Forgot Your Password?
-                                </a>| <a href="{{route('register')}}">Sign Up</a>
+                                </a>| <a href="{{route('sign.up')}}">Sign Up</a>
                             <div class="careerfy-checkbox">
                                 <input type="checkbox" id="r10" name="rr" />
                                 <label for="r10"><span></span> Remember Password</label>
