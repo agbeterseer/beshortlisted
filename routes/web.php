@@ -1042,6 +1042,7 @@ Route::post('/review_applicant', 'TagController@ReviewApplicant');
 Route::post('/shortlist_applicant', 'TagController@ShortlistApplicant');
 Route::post('/offered_applicant', 'TagController@OfferApplicant');
 Route::post('/hire_applicant', 'TagController@HireApplicant');
+Route::post('/view_user_record', 'TagController@GetUserRecords');
 // Export to PDF
 Route::post('exprort-classic-to-pdf', [
 	'as' => 'export_classic',
