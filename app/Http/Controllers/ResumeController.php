@@ -2215,7 +2215,8 @@ public function GetUsers(){
   return User::all();
 }
 public function GetCities(){
-   return City::all();
+  $cities = DB::table('cities')->orderBy('name')->get();
+   return $cities;
 }
 public function GetCountries(){
     return Country::all();
@@ -2546,7 +2547,7 @@ $applications_employer = DB::table('applications')->where('clientfk', $user->id)
 
     $industries = Industry::all();
     $professions = IndustryProfession::all();
-    $cities = City::orderBy('name')->get(); 
+    $cities = $this->GetCities(); 
     $educational_levels = $this->GetQualificationLevels(); 
     // get all records
     $sort_categories_list = DB::table('sort_categories')->get();

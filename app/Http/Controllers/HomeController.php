@@ -186,21 +186,26 @@ public function employement_term_list()
     }
     public function GetQualificationLevels()
     {
-    $qualifications = DB::table('qualification_levels')->get();
+    $qualifications = DB::table('qualification_levels')->orderBy('name')->get();
      return $qualifications;
     }
+    public function GetCities()
+    {
+    $cities = DB::table('cities')->orderBy('name')->get();
+    return $cities;
+    }
     public function ShowJobFilterForm(Request $request, $code){
-   $s = $request->input('s');
+    $s = $request->input('s');
     $countries = DB::table('countries')->get();
-    $cities = DB::table('cities')->get();
+    $cities = $this->GetCities();
     $regions = DB::table('regions')->get();
     $educational_levels = $this->GetQualificationLevels(); 
-    $industries = DB::table('industries')->get();
+    $industries = DB::table('industries')->orderBy('name')->get();
       $industry_professions = DB::table('industry_professions')->get();
           $city_count = DB::table('tags')
              ->select('city', DB::raw('count(*) as total'))
              ->groupBy('city')->get();
-    $employement_term_list = DB::table('employement_terms')->where('status',1)->get();
+    $employement_term_list = DB::table('employement_terms')->orderBy('name')->where('status',1)->get();
     $job_type_count = DB::table('tags')
              ->select('job_type', DB::raw('count(*) as total'))
              ->groupBy('job_type')->get();
