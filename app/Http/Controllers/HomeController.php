@@ -94,10 +94,10 @@ class HomeController extends Controller
         $resume_count = RecruitResume::all()->count();
         $jobs_count = Tag::where('status',1)->where('active', 1)->count();
         $resume_builder_list = ResumeBuilder::all();
-        $employement_terms = DB::table('employement_terms')->get();
-        $industry_professions = DB::table('industry_professions')->where('status',1)->get();
+        $employement_terms = DB::table('employement_terms')->orderBy('name')->get();
+        $industry_professions = DB::table('industry_professions')->orderBy('name')->where('status',1)->get();
         //$industries = Industry::all();
-        $industries = DB::table('industries')->where('status',1)->orderBy('created_at', 'DESC')->get();
+        $industries = DB::table('industries')->where('status',1)->orderBy('name')->orderBy('created_at', 'DESC')->get();
        // $query = IndustryProfession::all();
         $industries_paginage = DB::table('industry_professions')->where('status',1)->orderBy('created_at', 'DESC')->paginate(8);
         $jobs_8 = DB::table('tags')->where('status',1)->where('active', 1)->orderBy('created_at', 'DESC')->paginate(8);
@@ -106,7 +106,7 @@ class HomeController extends Controller
         $jobs = DB::table('tags')->where('status',1)->where('active', 1)->orderBy('created_at', 'DESC')->paginate(4);
         $all_jobs = DB::table('tags')->where('active', 1)->orderBy('created_at', 'DESC')->get(); 
         $employement_term_list = DB::table('employement_terms')->get();
-        $cities = DB::table('cities')->get();
+        $cities = $this->GetCities();
         // 
         $query_count = DB::table('tags')
              ->select('industry', DB::raw('count(*) as total'))
