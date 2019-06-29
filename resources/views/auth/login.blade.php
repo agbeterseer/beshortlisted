@@ -183,7 +183,8 @@ tr:hover {background-color:#f5f5f5;}
 
                     </div>
   
-         
+                <div class="clearfix"></div> 
+                      <div class="clearfix"></div>
         
     </div>
 </div>

@@ -167,6 +167,13 @@ tr:hover {background-color:#f5f5f5;}
                     </div>
                 </form> 
                     <div class="clearfix"></div> 
+                      <div class="clearfix"></div>
+                        <div class="careerfy-user-form-info">
+                          <a href="{{route('auth.login')}}">Sign in</a>
+                            
+                        </div>
+                             <div class="clearfix"></div> 
+                      <div class="clearfix"></div>
                     </div> 
     </div>
 </div>
