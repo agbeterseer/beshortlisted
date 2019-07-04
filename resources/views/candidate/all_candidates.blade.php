@@ -2720,6 +2720,15 @@ function validate() {
 }
  
 </script>
+<script type="text/javascript" language="">
+     var num1 = 100;
+ if(isNaN(num1)){
+  document.write(num1 + " is not a number <br/>");
+ }else{
+  document.write(num1 + " is a number <br/>");
+
+
+</script>
 
 <!-- 
 <select class="width-full" required="" id="category_id" data-parsley-error-message="Please select a job function" name="category_id[]">
