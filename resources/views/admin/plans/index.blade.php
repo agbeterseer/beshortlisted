@@ -64,7 +64,7 @@
                                                          <th>Action</th>
                                                         <th>Title</th>
                                                         <th>Price</th>
-                                                        <th>Jobs Posting</th>
+                                                        <th>Job Posting</th>
                                                         <th>Feature Jobs</th>
                                                         <th>Renew Jobs</th>
                                                         <th>Job Duration</th>

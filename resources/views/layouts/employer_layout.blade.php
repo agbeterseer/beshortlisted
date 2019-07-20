@@ -96,7 +96,7 @@ border-color: white !important;
 <div class="resume_pic" id="imagesection">
  <img src="/uploads/avatars/{{ $recruit_profile_pix->pix }}"  alt="Picture" class="employer-dashboard-thumb" >
                 <div class="careerfy-fileUpload">
-                <span><i class="careerfy-icon careerfy-add"></i><a href="{{route('upload.images', Auth::user()->id )}}">  Upload Photo</span>
+                <span><i class="careerfy-icon careerfy-add"></i><a href="{{route('upload.images', Auth::user()->id )}}">  Upload Logo</span>
               
                 </div>
 </div>

@@ -75,7 +75,7 @@ protected function authenticated(Request $request, $user)
 
 
         $input = Input::only('email', 'password');
-        //dd($request->all());
+      
 
       if ( ! Auth::validate(Input::only('email', 'password')))
       {
@@ -85,13 +85,15 @@ protected function authenticated(Request $request, $user)
                   'credentials' => 'We were unable to sign you in. check your password'
               ]);
       }
- 
+
           if (Auth::attempt([
                'email' => $request->email,
                'password' => $request->password
-          ])){
-        $user = User::where('email', $request->email)->first();
-        $user_id=$user->id;
+          ])){ 
+            //   
+         $user = User::where('email', $request->email)->first();
+        //$user_id=$user->id;
+        //dd($user->is_admin());
          if ($user->is_admin()) {
           return redirect()->route('board');
           }elseif(!$user->is_admin() && !$user->is_candidate()){ 

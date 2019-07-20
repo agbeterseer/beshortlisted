@@ -114,7 +114,7 @@ tr:hover {background-color:#f5f5f5;}
 
         <!-- Main Content -->
 
-
+ <ion-icon name="person" size="large"></ion-icon>
         <div class="careerfy-main-content" style="margin-top: -50px;">
 
           <!-- Main Section -->

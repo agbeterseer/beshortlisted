@@ -37,12 +37,7 @@ border-color: white !important;
     }
 
 </style> 
-<!--    <td height="80" align="center" valign="middle" bgcolor="#00aecc" style="font-family:Arial, Helvetica, sans-serif; color:#ffffff;"><div style="font-size:15px;"><b>R</b></div><div style="font-size:15px;"><b>C</b></div>
-                <form method="POST" action="{{route('tag.store')}}" class="mt-repeater" >
-                                        {{ csrf_field() }} 
-   </td> -->
-                        <!-- <div class="careerfy-column-12 careerfy-typo-wrap"> -->
-    <!-- Main Section -->
+ 
 
                               <div class="lds-ripplee" style="display: none;"><div></div><div></div></div>
                                <div id="info"></div>
@@ -58,10 +53,7 @@ border-color: white !important;
                                         </li>
                                         <li>
                                       <a href="#tab_1" data-toggle="tab">BILLING &nbsp; </a>
-                                        </li>
-                              <!--           <li>
-                                            <a href="#tab_2" data-toggle="tab">OTHERS &nbsp; </a>
-                                        </li> -->
+                                        </li> 
                                  
                                     </ul>
                                       <div class="tab-content">
@@ -214,8 +206,7 @@ border-color: white !important;
             <input type="text" class="form-control" id="cardNumber" name="card_number">
                                             </li>
                                             <li class="careerfy-column-6">
-                                                <label for="date">Expiration Date</label>
-                             <!-- <input value="09/18" onblur="if(this.value == '') { this.value ='09/18'; }" onfocus="if(this.value =='09/18') { this.value = ''; }" type="text" name="expiration_date"> -->
+                                                <label for="date">Expiration Date</label> 
                  <input id="cc" type="text" placeholder="MM/YY" class="masked" pattern="(1[0-2]|0[1-9])\/(1[5-9]|2\d)" data-valid-example="05/18" name="expiration_date"/>
                                             </li>
                                             <li class="careerfy-column-6">
@@ -223,8 +214,7 @@ border-color: white !important;
                                                 <input value="Terseer Agbe" onblur="if(this.value == '') { this.value ='Terseer Agbe'; }" onfocus="if(this.value =='Terseer Agbe') { this.value = ''; }" type="text" name="card_holder_name">
                                             </li>
                                             <li class="careerfy-column-6" class="form-group CVV">
-                                                <label>CVV</label>
-                          <!--                       <input value="CVV" onblur="if(this.value == '') { this.value ='CVV'; }" onfocus="if(this.value =='CVV') { this.value = ''; }" type="text" name="cvv"> -->
+                                                <label>CVV</label> 
                                                  <input type="text" name="cvv" class="form-control" id="cvv" maxlength="3">
                                             </li>
                                         </ul>

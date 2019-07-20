@@ -27,6 +27,7 @@
 }
 
 
+
 .careerfy-user-log {
     float: right;
     padding-left: 15px;
@@ -454,6 +455,7 @@
             transition: all 0.4s ease-in-out;
 }
 /* PricePlan Style5 */
+
 .careerfy-priceplan-style5 {
     float: left;
     width: 100%;
@@ -468,7 +470,7 @@
     margin-bottom: 27px;
 }
 .careerfy-priceplan-style5 span {
-    font-size: 75px;
+    font-size: 55px;
     color: #333;
     display: inline-block;
     line-height: 1;
@@ -480,6 +482,44 @@
     display: inline-block;
     vertical-align: super;
 }
+.price_list{
+    margin: 0px 0px 0px 90px;
+}
+.align_left{
+    text-align: left;
+}
+   @media (min-width: 292px) {
+     .careerfy-priceplan-style5 {  
+    float: left;
+    width: 100%;
+    background-color: #fafafa;
+    text-align: center;
+    padding: 57px 0px 33px 0px;
+    margin-bottom: 30px;
+     }
+
+.careerfy-priceplan-style5 h6 {
+    text-transform: uppercase;
+    line-height: 0;
+    margin-bottom: 17px;
+}
+
+.careerfy-priceplan-style5 span {
+    font-size: 55px;
+    color: #333;
+    display: inline-block;
+    line-height: 1;
+    margin-bottom: 14px;
+}
+
+.price_list{ 
+    margin: 0px 0px 0px 20px;
+}
+.align_left{
+    text-align: left;
+}
+}
+
 .careerfy-priceplan-style5 span small { font-size: 20px; }
 .careerfy-priceplan-style5 ul { margin-bottom: 40px; }
 .careerfy-priceplan-style5 ul,.careerfy-plan-thumb,

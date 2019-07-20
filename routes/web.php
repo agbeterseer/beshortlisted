@@ -791,7 +791,10 @@ Route::get('/employer/post-jobs', [
 	'as' => 'post.jobs',
 	'uses' => 'TagController@PostJobs'
 	]);
-
+Route::get('/employer/pricing', [
+	'as' => 'pricing',
+	'uses' => 'TagController@show_price'
+]);
 Route::post('/tag/save-job', 'TagController@SaveJob');
 Route::get('/employer/job/save-to-draft/{id}', [
 	'as' => 'show.draft',

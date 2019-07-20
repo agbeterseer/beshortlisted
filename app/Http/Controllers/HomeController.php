@@ -167,7 +167,12 @@ public function employement_term_list()
   }
   public function employer(Request $request)
   {
-    $plans = DB::table('planpackages')->orderBy('created_at', 'ASC')->where('status', 1)->get();
+    $user = Auth::user();
+    if ($user) {
+    $is_empty = DB::table('employer_packages')->where('userfkp', $user->id)->get();
+    }
+    //dd($is_empty);
+    $plans = DB::table('planpackages')->orderBy('created_at', 'ASC')->where('status', 1)->get(); 
     $menus = $this->displayMenu();
     $posts = $this->listPages();
     $units = $this->displayUnits();
@@ -607,6 +612,7 @@ if ($contact_person !=null && $contact_person !="" && $lastname !=null && $lastn
   $client->contact_person_name = $contact_person;
   $client->contact_person_email = $email_notificaiton; 
   $client->contact_person_number = $contact_phone_number; 
+  $client->user_id = $user->id;
   $client->created_at = $this->returnCurrentTime();
   $client->save(); 
 

@@ -8,7 +8,8 @@
     <!-- Css -->
  
         @include('partials.job_board_header')
-
+<link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

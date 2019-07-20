@@ -391,7 +391,7 @@ public function SelectionImage(Request $request){
 
     $client = DB::table('clients')->where('user_id', $user->id)->first();
 $recruit_profile_pix  = $this->showImageForm($id);
-    //dd($client);
+     //dd($client);
         $recruit_profile_pix_list = DB::table('recruit_profile_pixs')->where('user_id',$user->id)->orderBy('created_at', 'DESC')->get();
      $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
 

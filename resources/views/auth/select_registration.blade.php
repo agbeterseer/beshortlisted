@@ -8,7 +8,8 @@
     <!-- Css -->
  
         @include('partials.job_board_header')
-
+<link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -91,11 +92,12 @@ padding-left: 75px;
           <div class="space">&nbsp;</div>
           <div class="space">&nbsp;</div>
 <div class="col-md-8 col-md-offset-2">
-    <div class="center"><h2>Choose your Account Type</h2> </div> 
+    <!-- <div class="center"><h2>Choose your Account Type</h2> </div>  -->
      <!-- <div class="portlet light bordered" > -->
         <div class="panel panel-default">
             
                 <div class="panel-body">
+                      <div class="center"><h2>Choose your Account Type</h2> </div> 
 <div class="col-md-12" > 
            <div class="careerfy-user-options nav-tabs">
                <div class="space">&nbsp;</div>
@@ -112,15 +114,17 @@ padding-left: 75px;
                                 <a href="#employer" >
                                      <i class="careerfy-icon careerfy-building"></i>
                                      <span>Employer</span> 
-                                     <div class="space">&nbsp;</div>
+                                     <div class="space">&nbsp;</div> 
+                                    
                                 </a>
                             </li>
                         </ul>
                     </div>
     <div class="col-md-6">
+        <!-- <ion-icon name="briefcase" size="large" class="center"></ion-icon>  -->
+        <img src="{{asset('recruit/images/job-search.svg')}}" width="190px" height="90px" class="center" >
                         <div class="space">&nbsp;</div>
-                        <div class="clearfix"></div>
-                        <div class="space">&nbsp;</div>
+                        <div class="clearfix"></div> 
                         <div class="space">&nbsp;</div>
        <div class="center2 select_label">Discover awesome jobs<br></div> 
  
@@ -132,10 +136,11 @@ padding-left: 75px;
                             <a href="{{ route('employee.sigup') }}">    <input type="submit" value="Candidate Sign Up"></a>
                             </div>
 </div>
-    <div class="col-md-6">
+    <div class="col-md-6"> 
+         <img src="{{asset('recruit/images/job-search-cv.svg')}}" width="190px" height="90px" class="center" >
+
                         <div class="space">&nbsp;</div>
-                        <div class="clearfix"></div>
-                        <div class="space">&nbsp;</div>
+                        <div class="clearfix"></div> 
                         <div class="space">&nbsp;</div>
         <div class="container center2 select_label">Attract the best talent. <br></div>
                         <div class="space">&nbsp;</div>

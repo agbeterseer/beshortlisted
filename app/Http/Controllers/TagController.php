@@ -69,12 +69,24 @@ class TagController extends Controller
 
      return $menus = Menu::where('status', 1)->orderBy('menu_order', 'ASC')->get();
    }
-
-public function displayUnit()
-{
-  $user = Auth::user();
-  return $units = EmployerPackage::where('status', 1)->where('userfkp', $user->id)->first();
-}
+ 
+ 
+     public function displayUnit()
+    {
+      $user = Auth::user();
+      //dd($user);
+      if ($user === null) {
+         return $units = 0;
+      }else{
+       return $units = EmployerPackage::where('status', 1)->where('userfkp', $user->id)->first();   
+      }
+      return back();
+    }
+   public function listPages()
+   {
+    $posts = DB::table('posts')->where('status',1)->get();
+    return $posts;
+   }
 
 // public function viewCVByTag($id) {
 //   if ($id) {
@@ -1213,7 +1225,7 @@ public function GetHiredCount($job_id)
 
 public function GetQualificationLevels()
 {
-    $qualifications = DB::table('qualification_levels')->get();
+    $qualifications = DB::table('qualification_levels')->where('status', 1)->get();
  return $qualifications;
 }
 
@@ -1489,9 +1501,9 @@ $units = $this->displayUnit();
 
     return view('employer.create_job', compact('resumes','countries','cities', 'regions', 'educational_levels', 'industries', 'employement_terms', 'jobcareer_levels', 'industry_professions', 'recruit_profile_pix_list', 'recruit_profile_pix', 'fields_of_study_list', 'menus', 'units') ,array('user' => Auth::user()));
       }else{
-        //dd('YES'); subscribe for units
+        //dd('YES'); subscribe for units employer_infor
             Session::flash('no_unit_infor', 'Choose a plan below to begin posting Jobs');
-          return redirect()->route('employer_infor');  
+          return redirect()->route('pricing');  
       }
  
     }else{
@@ -1503,7 +1515,14 @@ $units = $this->displayUnit();
 
     }
 
-
+public function show_price()
+{
+    $plans = DB::table('planpackages')->orderBy('created_at', 'ASC')->where('status', 1)->get(); 
+    $menus = $this->displayMenu();
+    $posts = $this->listPages();
+    $units = $this->displayUnit();
+return view('employer.pricing', compact('plans', 'menus', 'posts', 'units'), array('user' => Auth::user()));
+}
 
     
     public function JobDetail($id)
