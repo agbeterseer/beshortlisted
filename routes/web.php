@@ -23,6 +23,10 @@ Route::get('/', 'HomeController@welcome');
 Route::get('/home', 'HomeController@home')->name('home');
 Auth::routes();
 
+Route::get('/testemail',function () { 
+    return view('test_page');
+});
+
 Route::post('/test', [
 	'as' => 'send.email',
 	'uses' => 'HomeController@sendEmail'

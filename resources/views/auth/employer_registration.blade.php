@@ -110,12 +110,13 @@ tr:hover {background-color:#f5f5f5;}
           <div class="panel panel-default"> 
           <div class="panel-body">
           <div class="col-md-12" > 
-  <div class="center"><h2>Personal Information</h2>  </div>
+
  
                      <!-- class="tab-pane fade" -->
              <div class="tab-content">
-                    <div id="personal" class="tab-pane fade in active">
 
+                    <div id="personal" class="tab-pane fade in active">
+   <div style="text-align: center;"><h2>Personal Information</h2>  </div>
                     <div class="careerfy-user-form careerfy-user-form-coltwo">
                         <ul>
                           <li>
@@ -165,7 +166,7 @@ tr:hover {background-color:#f5f5f5;}
                                 <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="lastname">
                                 <i class="careerfy-icon careerfy-user"></i>
                             </li></ul>
-                            <div class="center"><h2>Company Information</h2>  </div>
+                            <div style="text-align: center;"><h2>Company Information</h2>  </div>
 
                             <ul>
                  <li>
@@ -222,7 +223,7 @@ tr:hover {background-color:#f5f5f5;}
                                 @endif                               
                             </li>
                         </ul>
-                            <div class="center"><h2>Company Contact Person</h2>  </div>
+                            <div style="text-align: center;"><h2>Company Contact Person</h2>  </div>
                            <div class="careerfy-column-8 careerfy-user-form" >
                          
                            <ul class="careerfy-column-12"> 
