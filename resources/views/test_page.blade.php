@@ -436,6 +436,7 @@ ul.social li{
                     <h2>Dear Terseer,</h2>
                    Thank you for creating an account with us, Please click on "Activate" to confirm your email.
                   </div> 
+                     <br>
                   <p><a href="#" class="btn btn-primary">Activate</a></p>
                   <p></p>
 Best Regards, 
@@ -491,7 +492,7 @@ The beShortlisted Team. <br>
                 <td valign="top" width="33.333%">
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
-                      <td style="text-align: right; padding-left: 5px; padding-right: 5px;">
+                      <td style="text-align: right; padding-left: 5px; padding-right: 10px;">
                         <p><a href="#" style="color: rgba(255,255,255,.4);">Unsubcribe</a></p>
                       </td>
                     </tr>

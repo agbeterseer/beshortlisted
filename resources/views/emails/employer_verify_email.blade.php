@@ -436,6 +436,7 @@ ul.social li{
                     <h2>Dear {{$content['contact_person']}},</h2>
                    Thank you for creating an account with us, Please click on "Activate" to confirm your email.
                   </div> 
+                  <br>
                   <p><a href="{{$url}}" class="btn btn-primary">Activate</a></p>
                   
                   <p></p>
