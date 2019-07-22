@@ -468,7 +468,7 @@ The beShortlisted Team <br>
               <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                       <td style="text-align: left; padding-left: 5px; padding-right: 5px;">
-                        <h3 class="heading">Contact Info</h3>
+                        <h3 class="heading">Contact Infomation</h3>
                         <ul>
                           <li><span class="text">No 5 Eric Close Maitama Abuja</span></li>
                           <!-- <li><span class="text">+2 392 3929 210</span></a></li> -->
@@ -484,7 +484,7 @@ The beShortlisted Team <br>
                   
                     <tr>
                       <td style="text-align: left; padding-right: 10px;">
-                        <p>&copy; 2018 Beshortlisted. All Rights Reserved</p>
+                        <p>&copy; 2019 Beshortlisted. All Rights Reserved</p>
                       </td>
                     </tr>
                   </table>
