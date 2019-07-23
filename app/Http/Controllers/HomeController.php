@@ -56,7 +56,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function displayMenu(){
-     return $menus = Menu::where('status', 1)->orderBy('menu_order', 'ASC')->paginate(5);
+     return $menus = Menu::where('status', 1)->orderBy('menu_order', 'ASC')->get();
    }
      public function displayUnits()
     {

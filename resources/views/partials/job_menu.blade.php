@@ -78,9 +78,9 @@ window.onclick = function(event) {
                             <div class="collapse navbar-collapse" id="careerfy-navbar-collapse-1">
                                 <ul class="navbar-nav">
                           @foreach($menus as $menu) 
-                       <li  id="menu{{$menu->id}}"> <a href="{{$menu->routes}}"> {{$menu->name}}</a> </li>
+                       <li  id="menu{{$menu->id}}"> <a href="{{asset($menu->routes)}}"> {{$menu->name}}</a> </li>
                           @endforeach 
-                        <li id="menu"> <a href="{{url('/pricing')}}"> Price</a></li>
+                      
                                 </ul>
                             </div>
                       </nav>
