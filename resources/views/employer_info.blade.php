@@ -152,18 +152,18 @@
                                       <div class="active-plan">Most popular</div>
                                       @endif
                                         <h6>{{$plan->title}} </h6>
-                                        <span><strong>N</strong>{{$plan->price}}<small>/yr</small></span>
-                                        <ul>
+                                        <span><strong>N</strong>{{$plan->price}}<small></small></span>
+                                       <div class="price_list"> <ul>
                             <?php $properties = \App\Planpackage::find($plan->id)->properties; ?>
                                 @foreach($properties as $property_)
-                                <li> <i class="careerfy-icon careerfy-check-square"></i>{{$property_->property}}</li>
+                                <li> <div class="align_left"><i class="careerfy-icon careerfy-check-square"></i>{{$property_->property}}</div></li>
                                 @endforeach
          
                                     <?php ?> 
                               <!--               <li>10 <small>Job Posts</small></li>
                                             <li>No Access</li>
                                             <li>No Support</li> -->
-                                        </ul>
+                                        </ul></div>
                                         <div class="clearfix"></div>
                                         <a href="{{route('employer.payment', $plan->id)}}" class="careerfy-priceplan-style5-btn">Buy now</a>
                                     </div>
@@ -173,18 +173,18 @@
                                 <div class="col-md-4"> 
                                     <div class="careerfy-priceplan-style5">
                                        <h6>{{$plan->title}} </h6>
-                                        <span><strong>N</strong>{{$plan->price}}<small>/yr</small></span>
-                                        <ul>
+                                        <span><strong>N</strong>{{$plan->price}}<small></small></span>
+                                       <div class="price_list">  <ul>
                             <?php $properties = \App\Planpackage::find($plan->id)->properties; ?>
                                 @foreach($properties as $property_)
-                                <li><i class="careerfy-icon careerfy-check-square"></i> {{$property_->property}}</li>
+                                <li><div class="align_left"><i class="careerfy-icon careerfy-check-square"></i> {{$property_->property}}</div></li>
                                 @endforeach
          
                                     <?php ?> 
                               <!--               <li>10 <small>Job Posts</small></li>
                                             <li>No Access</li>
                                             <li>No Support</li> -->
-                                        </ul>
+                                        </ul></div>
                                         <div class="clearfix"></div>
                                         <a href="{{route('employer.payment', $plan->id)}}" class="careerfy-priceplan-style5-btn">Buy now</a>
                                     </div>

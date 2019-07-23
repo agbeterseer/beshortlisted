@@ -143,7 +143,7 @@
                         </li>
                         
                         <li class="divider"> </li> 
-                        <form action="{{route('delete.properties')}}" method="POST" class="delete">
+                        <form action="{{route('delete.properties')}}" method="POST">
                             {{csrf_field()}}
                           <input type="hidden" name="package_id" value="{{$property_->id}}">
                         <input class="btn btn-sm btn-danger" type="submit" value="Delete"  data-toggle="confirmation" data-singleton="true">
