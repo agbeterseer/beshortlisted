@@ -23,9 +23,10 @@ Route::get('/', 'HomeController@welcome');
 Route::get('/home', 'HomeController@home')->name('home');
 Auth::routes();
 
-Route::get('/testemail',function () { 
-    return view('test_page');
-});
+Route::get('/pricing', [
+	'as' => 'pricing',
+	'uses' => 'HomeController@show_price'
+]);
 
 Route::post('/test', [
 	'as' => 'send.email',
@@ -795,10 +796,7 @@ Route::get('/employer/post-jobs', [
 	'as' => 'post.jobs',
 	'uses' => 'TagController@PostJobs'
 	]);
-Route::get('/employer/pricing', [
-	'as' => 'pricing',
-	'uses' => 'TagController@show_price'
-]);
+
 Route::post('/tag/save-job', 'TagController@SaveJob');
 Route::get('/employer/job/save-to-draft/{id}', [
 	'as' => 'show.draft',

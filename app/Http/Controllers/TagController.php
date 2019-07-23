@@ -1515,15 +1515,6 @@ $units = $this->displayUnit();
 
     }
 
-public function show_price()
-{
-    $plans = DB::table('planpackages')->orderBy('created_at', 'ASC')->where('status', 1)->get(); 
-    $menus = $this->displayMenu();
-    $posts = $this->listPages();
-    $units = $this->displayUnit();
-return view('employer.pricing', compact('plans', 'menus', 'posts', 'units'), array('user' => Auth::user()));
-}
-
     
     public function JobDetail($id)
     {

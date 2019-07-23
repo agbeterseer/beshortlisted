@@ -47,6 +47,9 @@ class HomeController extends Controller
         $currentTime->toDateTimeString();
         return $currentTime;
     }
+
+
+
     /**
      * Show the application dashboard.
      *
@@ -82,6 +85,14 @@ class HomeController extends Controller
     //dd('home');
     return redirect()->route('home');
    }
+   public function show_price()
+{
+    $plans = DB::table('planpackages')->orderBy('created_at', 'ASC')->where('status', 1)->get(); 
+    $menus = $this->displayMenu();
+    $posts = $this->listPages();
+    $units = $this->displayUnits();
+return view('employer.pricing', compact('plans', 'menus', 'posts', 'units'), array('user' => Auth::user()));
+}
 
     public function home()
     {

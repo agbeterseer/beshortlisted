@@ -80,7 +80,7 @@ window.onclick = function(event) {
                           @foreach($menus as $menu) 
                        <li  id="menu{{$menu->id}}"> <a href="{{$menu->routes}}"> {{$menu->name}}</a> </li>
                           @endforeach 
- 
+                        <li id="menu"> <a href="{{url('/pricing')}}"> Price</a></li>
                                 </ul>
                             </div>
                       </nav>
