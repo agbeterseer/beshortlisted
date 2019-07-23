@@ -30,8 +30,7 @@
  </div>
  
  <div class="careerfy-priceplan-style5-wrap">
-      <div class="container">
-        <div class=""> 
+      <div class="container"> 
    @foreach($plans as $plan) 
        @if($plan->make_active === 1) 
                                 <div class="col-md-4 active"> 
@@ -51,6 +50,10 @@
                                     <?php ?>
                                         </ul></div>
                                         <div class="clearfix"></div>
+
+                                        <div class="space">&nbsp;</div>
+                                        <div class="space">&nbsp;</div>
+                                        <div class="space">&nbsp;</div>
                                         <a href="{{route('employer.payment', $plan->id)}}" class="careerfy-priceplan-style5-btn">Buy now</a>
                                     </div>
                                     </div>
@@ -76,8 +79,7 @@
 
 
                                 @endforeach
-  
-                              </div>
+   
                             </div> 
                             </div>   
 @endsection
