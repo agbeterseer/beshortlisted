@@ -20,7 +20,7 @@
                             <!-- Fancy Title -->
                             <section class="careerfy-fancy-title">
                                 <h2>Plans that grow with your business</h2>
-                                <p>30 Day Money Back Guarantee. 100% satisfied or your money back</p>
+                                <p></p>
                             </section>
                         </div>     
  <!-- Main Section -->
