@@ -20,6 +20,10 @@
   margin-right: auto;
   width: 50%;
 }
+.activem{
+  background-color: #ffffff !important;
+  size: 10ex !important; 
+}
 </style>
  
 @include('partials.employer_breadcomb')
@@ -145,7 +149,7 @@
       <div class="container">
    @foreach($plans as $plan) 
        @if($plan->make_active === 1) 
-                                <div class="col-md-4 active"> 
+                                <div class="col-md-4 active"  > 
                                     <div class="careerfy-priceplan-style5">
                                       @if($plan->make_active === 1) 
 
@@ -165,7 +169,7 @@
                                             <li>No Support</li> -->
                                         </ul></div>
                                         <div class="clearfix"></div>
-                                        
+
                                         <div class="space">&nbsp;</div>
                                         <div class="space">&nbsp;</div>
                                         <div class="space">&nbsp;</div>

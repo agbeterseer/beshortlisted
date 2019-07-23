@@ -33,7 +33,7 @@
       <div class="container"> 
    @foreach($plans as $plan) 
        @if($plan->make_active === 1) 
-                                <div class="col-md-4"> 
+                                <div class="col-md-4 active""> 
                                     <div class="careerfy-priceplan-style5" >
                                       @if($plan->make_active === 1) 
 

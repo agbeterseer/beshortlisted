@@ -553,14 +553,7 @@
 }
 .careerfy-priceplan-style5:hover .careerfy-priceplan-style5-btn,.active .careerfy-priceplan-style5-btn { color: #ffffff; }
 .col-md-4.active {
-    padding: 0px;
-    position: relative;
-    z-index: 1;
-    -webkit-transform: scale(1.14);
-       -moz-transform: scale(1.14);
-        -ms-transform: scale(1.14);
-         -o-transform: scale(1.14);
-            transform: scale(1.14);
+
 }
 .active .careerfy-priceplan-style5 {
     background-color: #ffffff;
