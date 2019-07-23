@@ -28,7 +28,8 @@
            
            
  </div>
- 
+ <div class="space">&nbsp;</div>
+ <div class="space">&nbsp;</div>
  <div class="careerfy-priceplan-style5-wrap">
       <div class="container"> 
    @foreach($plans as $plan) 
@@ -44,7 +45,7 @@
                                        <div class="price_list"> <ul>
                             <?php $properties = \App\Planpackage::find($plan->id)->properties; ?>
                                 @foreach($properties as $property_)
-                                <li><div class="align_left"> <i class="careerfy-icon careerfy-check-square"></i>{{$property_->property}}</div></li>
+                                <li><div class="align_left"> <i class="careerfy-icon careerfy-check-square"></i>&nbsp;{{$property_->property}}</div></li>
                                 @endforeach
          
                                     <?php ?>
@@ -66,14 +67,19 @@
                                       <div class="price_list" >  <ul >
                             <?php $properties = \App\Planpackage::find($plan->id)->properties; ?>
                                 @foreach($properties as $property_)
-                                <li > <div class="align_left"><i class="careerfy-icon careerfy-check-square"></i> {{$property_->property}}</div></li>
+                                <li > <div class="align_left"><i class="careerfy-icon careerfy-check-square"></i> {{$property_->property}}</div>
+
+                                </li>
+                           
                                 @endforeach
          
                                     <?php ?> 
                                         </ul></div>
                                         <div class="clearfix"></div>
+
                                         <a href="{{route('employer.payment', $plan->id)}}" class="careerfy-priceplan-style5-btn">Buy now</a>
                                     </div>
+                               
                                     </div>
                                   @endif
 

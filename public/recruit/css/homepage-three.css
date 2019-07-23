@@ -490,6 +490,7 @@
 }
    @media (min-width: 292px) {
      .careerfy-priceplan-style5 {  
+    height: 490px;
     float: left;
     width: 100%;
     background-color: #fafafa;
@@ -513,7 +514,7 @@
 }
 
 .price_list{ 
-    margin: 0px 0px 0px 20px;
+    margin: 0px 40px 0px 50px;
 }
 .align_left{
     text-align: left;
@@ -553,7 +554,14 @@
 }
 .careerfy-priceplan-style5:hover .careerfy-priceplan-style5-btn,.active .careerfy-priceplan-style5-btn { color: #ffffff; }
 .col-md-4.active {
-
+    padding: 0px;
+    position: relative;
+    z-index: 1;
+    -webkit-transform: scale(1.12);
+       -moz-transform: scale(1.12);
+        -ms-transform: scale(1.12);
+         -o-transform: scale(1.12);
+            transform: scale(1.12);
 }
 .active .careerfy-priceplan-style5 {
     background-color: #ffffff;
