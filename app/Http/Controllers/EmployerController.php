@@ -244,6 +244,10 @@ function generatePIN($digits = 4){
         $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
 
         $package_record = Planpackage::findOrFail($id);
+
+        $content = [
+          'price' => $package_record->price . "00",
+        ];
  
       //If I want a 6-digit PIN code.
         $orderID = $this->generatePIN(4);
@@ -257,7 +261,7 @@ function generatePIN($digits = 4){
         return redirect()->route('upgrade.package', $employer_package);
      
         }else{
-       return view('employer.kpgpayment', compact('package_record','recruit_profile_pix', 'recruit_profile_pix_list', 'menus', 'orderID', 'units') ,array('user' => Auth::user()));
+       return view('employer.kpgpayment', compact('package_record','recruit_profile_pix', 'recruit_profile_pix_list', 'menus', 'orderID', 'units', 'content') ,array('user' => Auth::user()));
   
         }
 return redirect()->back();
