@@ -51,10 +51,7 @@
                                     <?php ?>
                                         </ul></div>
                                         <div class="clearfix"></div>
-
-                                        <div class="space">&nbsp;</div>
-                                        <div class="space">&nbsp;</div>
-                                        <div class="space">&nbsp;</div>
+ 
                                         <a href="{{route('employer.payment', $plan->id)}}" class="careerfy-priceplan-style5-btn">Buy now</a>
                                     </div>
                                     </div>
@@ -71,7 +68,7 @@
 
                                 </li>
           
-                       
+
                            
                                 @endforeach
          
