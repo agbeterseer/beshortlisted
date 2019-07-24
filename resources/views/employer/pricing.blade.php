@@ -40,8 +40,15 @@
 
                                       <div class="active-plan">Most popular</div>
                                       @endif
-                                        <h6>{{$plan->title}} </h6>
-                                        <span><strong>N</strong>{{$plan->price}}<small></small></span>
+                                      <div style="border: solid 1px #eeeeee; margin: 10px 10px 10px 10px;">
+                                        <h4>{{$plan->title}} </h4>
+
+                                        <a href="{{route('employer.payment', $plan->id)}}" class="careerfy-priceplan-style5-btn">Buy now</a>
+                                         <div class="space">&nbsp;</div>
+                                        <span><strong>N</strong>{{number_format($plan->price,2)}}<small></small></span>
+
+                                      </div>
+                                      <div class="space">&nbsp;</div>
                                        <div class="price_list"> <ul>
                             <?php $properties = \App\Planpackage::find($plan->id)->properties; ?>
                                 @foreach($properties as $property_)
@@ -52,15 +59,20 @@
                                         </ul></div>
                                         <div class="clearfix"></div>
  
-                                        <a href="{{route('employer.payment', $plan->id)}}" class="careerfy-priceplan-style5-btn">Buy now</a>
                                     </div>
                                     </div>
  
                                     @else
                                 <div class="col-md-4 active"> 
                                     <div class="careerfy-priceplan-style5">
-                                       <h6>{{$plan->title}} </h6>
-                                        <span><strong>N</strong>{{$plan->price}}<small></small></span>
+                                   
+                                            <div style="border: solid 1px #eeeeee; margin: 10px 10px 10px 10px;"> 
+                                  <h4>{{$plan->title}} </h4>
+                                            <a href="{{route('employer.payment', $plan->id)}}" class="careerfy-priceplan-style5-btn">Buy now</a>
+                                            <div class="space">&nbsp;</div>
+        <span><strong>N</strong> {{number_format($plan->price,2)}}<small></small></span>
+                                            </div>
+                                <div class="space">&nbsp;</div>
                                       <div class="price_list" >  <ul >
                             <?php $properties = \App\Planpackage::find($plan->id)->properties; ?>
                                 @foreach($properties as $property_)
@@ -76,7 +88,7 @@
                                         </ul></div>
                                         <div class="clearfix"></div>
 
-                                        <a href="{{route('employer.payment', $plan->id)}}" class="careerfy-priceplan-style5-btn">Buy now</a>
+                                   
                                     </div>
                                
                                     </div>
