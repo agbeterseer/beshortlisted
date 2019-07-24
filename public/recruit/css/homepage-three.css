@@ -495,7 +495,7 @@
 }
    @media (min-width: 292px) {
      .careerfy-priceplan-style5 {  
-   /* height: 590px;*/
+    height: 590px;
     float: left;
     width: 100%;
     background-color: #fafafa;
