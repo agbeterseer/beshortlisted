@@ -168,17 +168,13 @@
                                             <li>No Access</li>
                                             <li>No Support</li> -->
                                         </ul></div>
-                                        <div class="clearfix"></div>
-
-                                        <div class="space">&nbsp;</div>
-                                        <div class="space">&nbsp;</div>
-                                        <div class="space">&nbsp;</div>
+                                        <div class="clearfix"></div> 
                                         <a href="{{route('employer.payment', $plan->id)}}" class="careerfy-priceplan-style5-btn">Buy now</a>
                                     </div>
                                     </div>
  
                                     @else
-                                <div class="col-md-4"> 
+                                <div class="col-md-4 active"> 
                                     <div class="careerfy-priceplan-style5">
                                        <h6>{{$plan->title}} </h6>
                                         <span><strong>N</strong>{{$plan->price}}<small></small></span>
