@@ -57,7 +57,7 @@
                                     </div>
  
                                     @else
-                                <div class="col-md-4"> 
+                                <div class="col-md-4 active"> 
                                     <div class="careerfy-priceplan-style5">
                                        <h6>{{$plan->title}} </h6>
                                         <span><strong>N</strong>{{$plan->price}}<small></small></span>
