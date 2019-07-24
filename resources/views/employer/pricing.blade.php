@@ -70,6 +70,8 @@
                                 <li > <div class="align_left"><i class="careerfy-icon careerfy-check-square"></i> {{$property_->property}}</div>
 
                                 </li>
+          
+                       
                            
                                 @endforeach
          

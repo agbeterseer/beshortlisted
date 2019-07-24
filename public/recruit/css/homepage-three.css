@@ -463,6 +463,11 @@
     text-align: center;
     padding: 57px 0px 33px 0px;
     margin-bottom: 30px;
+        -webkit-transform: scale(1.12);
+       -moz-transform: scale(1.12);
+        -ms-transform: scale(1.12);
+         -o-transform: scale(1.12);
+            transform: scale(1.12);
 }
 .careerfy-priceplan-style5 h6 {
     text-transform: uppercase;
@@ -490,7 +495,7 @@
 }
    @media (min-width: 292px) {
      .careerfy-priceplan-style5 {  
-    height: 490px;
+    height: 590px;
     float: left;
     width: 100%;
     background-color: #fafafa;
@@ -557,11 +562,11 @@
     padding: 0px;
     position: relative;
     z-index: 1;
-    -webkit-transform: scale(1.12);
-       -moz-transform: scale(1.12);
-        -ms-transform: scale(1.12);
-         -o-transform: scale(1.12);
-            transform: scale(1.12);
+    -webkit-transform: scale(1.0);
+       -moz-transform: scale(1.0);
+        -ms-transform: scale(1.0);
+         -o-transform: scale(1.0);
+            transform: scale(1.0);
 }
 .active .careerfy-priceplan-style5 {
     background-color: #ffffff;
