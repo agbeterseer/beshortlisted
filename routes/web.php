@@ -865,13 +865,14 @@ Route::get('/iit', [
 		'as' => 'iit.show',
 		'uses'=> 'ResumeController@IIT'
 		]);
-Route::get('/employer/show-payment-{id}', [
-	'as' => 'employer.payment',
-	'uses' => 'EmployerController@Payment'
-	]);
-	Route::get('/employer/show-payment-for-upgrade-{id}', [
+ 
+	Route::get('/make-payment-{id}', [
+		'as' => 'make_payment',
+		'uses' => 'EmployerController@Payment'
+		]);
+	Route::get('/employer-upgrade-payment-{id}', [
 		'as' => 'upgrade.payment',
-		'uses' => 'EmployerController@UpdatePayment'
+		'uses' => 'EmployerController@DisplayPaymentForUpgrade'
 		]);
 Route::get('/employer/upgrade-package/{id}', [
 	'as' => 'upgrade.package',

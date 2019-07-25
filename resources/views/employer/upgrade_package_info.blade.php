@@ -68,9 +68,9 @@ and your current unit is:  {{$employer_package->units}}
                                       <div class="active-plan">Most popular</div>
                                       @endif
                                       <div style="border: solid 1px #eeeeee; margin: 10px 10px 10px 10px;">
-                                        <h4>{{$plan->title}} </h4>
+                                        <h6>{{$plan->title}} </h6>
 
-                                        <a href="{{route('employer.payment', $plan->id)}}" class="careerfy-priceplan-style5-btn">Buy now</a>
+                                        <a href="{{route('upgrade.payment', $plan->id)}}" class="careerfy-priceplan-style5-btn">Buy now</a>
                                          <div class="space">&nbsp;</div>
                                         <span><strong>N</strong>{{number_format($plan->price,2)}}<small></small></span>
 
