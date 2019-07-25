@@ -87,7 +87,7 @@ class HomeController extends Controller
    }
    public function show_price()
 {
-    $plans = DB::table('planpackages')->orderBy('created_at', 'ASC')->where('status', 1)->get(); 
+    $plans = DB::table('planpackages')->orderBy('created_at', 'ASC')->where('status', 1)->get();
     $menus = $this->displayMenu();
     $posts = $this->listPages();
     $units = $this->displayUnits();

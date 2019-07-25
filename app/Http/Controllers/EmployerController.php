@@ -237,8 +237,8 @@ function generatePIN($digits = 4){
     return $pin;
 }
   
-    public function Payment($id){
-
+    public function Payment($id){ 
+      
         $user = Auth::user();
         $recruit_profile_pix_list = DB::table('recruit_profile_pixs')->where('user_id',$user->id)->orderBy('created_at', 'DESC')->get();
         $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
@@ -254,19 +254,40 @@ function generatePIN($digits = 4){
         $menus = $this->displayMenu();
         $units = $this->displayUnits();
 
-        $employer_package = EmployerPackage::where('userfkp', $user->id)->where('status',1)->first();
+        $employer_package = EmployerPackage::where('userfkp', $user->id)->where('status', 1)->where('units', '!=', '0')->first();      
+        $emplyer_with_current_plan = EmployerPackage::where('userfkp', $user->id)->where('status', 1)->where('units', '>', '0')->first();      
         
-        //dd($employer_package); s
-        if ($employer_package) {
-        return redirect()->route('upgrade.package', $employer_package);
+     if ($employer_package) {
+        //dd($id);
+        return redirect()->route('upgrade.package', $id);
      
-        }else{
+        }else if($emplyer_with_current_plan){
+         
        return view('employer.kpgpayment', compact('package_record','recruit_profile_pix', 'recruit_profile_pix_list', 'menus', 'orderID', 'units', 'content') ,array('user' => Auth::user()));
   
         }
-return redirect()->back();
+        return view('employer.kpgpayment', compact('package_record','recruit_profile_pix', 'recruit_profile_pix_list', 'menus', 'orderID', 'units', 'content') ,array('user' => Auth::user()));
+// return redirect()->back();
      }
-
+     public function DisplayPaymentForUpgrade($id){
+        //dd($id);
+                $user = Auth::user();
+                $recruit_profile_pix_list = DB::table('recruit_profile_pixs')->where('user_id',$user->id)->orderBy('created_at', 'DESC')->get();
+                $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
+        
+                $package_record = Planpackage::findOrFail($id);
+        
+                $content = [
+                  'price' => $package_record->price . "00",
+                ];
+         
+              //If I want a 6-digit PIN code.
+                $orderID = $this->generatePIN(4);
+                $menus = $this->displayMenu();
+                $units = $this->displayUnits();
+        
+            return view('employer.kpgpayment', compact('package_record','recruit_profile_pix', 'recruit_profile_pix_list', 'menus', 'orderID', 'units', 'content') ,array('user' => Auth::user()));      
+        }
     // get Employers packages
     public function Packages(){
     

@@ -11,9 +11,9 @@
                     <li><a href="{{route('dashboard')}}">SHORTLIST</a></li> 
                      <li><a href="{{route('employer.edit', Auth::user()->id )}}">SETTINGS</a></li> 
                     <li><a href="{{route('post.jobs')}}"> POST A JOB</a></li> 
-                    <li>Units &nbsp;<span class="badge" style="background-color: orange">
+                    <li><a href="{{url('/pricing')}}">Units &nbsp;<span class="badge" style="background-color: orange">
                                         @if($units) {{$units->units}} @else 0 @endif 
-                                    </span> </li>
+                                    </span></a> </li>
                 </ul>
             </div>
             @endif

@@ -187,6 +187,7 @@ if($users){
 
      public function logout(Request $request)
     {
+        dd($request->all());
         $this->guard()->logout();
         $request->session()->flush();
         $request->session()->regenerate();

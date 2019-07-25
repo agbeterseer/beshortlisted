@@ -1,135 +1,30 @@
-@extends('layouts.appp')
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="utf-8"> <!-- utf-8 works for most cases -->
+    <meta name="viewport" content="width=device-width"> <!-- Forcing initial-scale shouldn't be necessary -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Use the latest (edge) version of IE rendering engine -->
+    <meta name="x-apple-disable-message-reformatting">  <!-- Disable auto-scale in iOS 10 Mail entirely -->
+    <title>First App</title> <!-- The title tag shows in email notifications, like Android 4.4. -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script>
+window.laravel = { csrfToken: '{{ csrf_token() }}' }
+</script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900" rel="stylesheet">
 
-@section('head')
-  <link href="{{ asset('onlinetest/css/app.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
-  <script>
-    window.Laravel =  <?php echo json_encode([
-        'csrfToken' => csrf_token(),
-    ]); ?>
-  </script>
-@endsection
+    <!-- CSS Reset : BEGIN -->
 
-@section('top_bar')
-  <nav class="navbar navbar-default navbar-static-top">
-    <div class="logo-main-block">
-      <div class="container">
-     
-      </div>
+
+</head>
+
+<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #ffffff;">
+  Test
+
+  <div id="app">
+    <div class="container">
+    <articles></articles>
     </div>
-    <div class="nav-bar">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="navbar-header">
-              <!-- Branding Image -->
-        
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-              <!-- Left Side Of Navbar -->
-              <ul class="nav navbar-nav">
-                &nbsp;
- <ul class="nav navbar-nav navbar-right">
-                <!-- Authentication Links -->
-                @guest
-                  <li><a href="{{ route('login') }}" title="Login">Login</a></li> 
-                @else
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                      {{ Auth::user()->name }} <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                      @if ($auth->role == 'A')
-                        <li><a href="{{url('/admin')}}" title="Dashboard">Dashboard</a></li>
-                      @elseif ($auth->role == 'S')
-                        <li><a href="{{url('/admin/my_reports')}}" title="Dashboard">Dashboard</a></li>
-                      @endif
-                      <li>
-                        <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                        Logout
-                      </a>
-                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                      </form>
-                    </li>
-                  </ul>
-                </li>
-              @endguest
-
-              </ul>
-              <!-- Right Side Of Navbar -->
-         
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-@endsection
-
-@section('content')
-<div class="container">
- 
-    <div class="quiz-main-block">
-      <div class="row">
-        @if ($topic)
-       
-            <div class="col-md-4">
-              <div class="topic-block">
-                <div class="card blue-grey darken-1">
-                  <div class="card-content white-text">
-                    <span class="card-title">{{$topic->title}}</span>
-                    <p title="{{$topic->description}}">{{str_limit($topic->description, 120)}}</p>
-                    <div class="row">
-                      <div class="col-xs-6 pad-0">
-                        <ul class="topic-detail">
-                          <li>Per Question Mark <i class="fa fa-long-arrow-right"></i></li>
-                          <li>Total Marks <i class="fa fa-long-arrow-right"></i></li>
-                          <li>Total Questions <i class="fa fa-long-arrow-right"></i></li>
-                          <li>Total Time <i class="fa fa-long-arrow-right"></i></li>
-                        </ul>
-                      </div>
-                      <div class="col-xs-6">
-                        <ul class="topic-detail right">
-                          <li>{{$topic->per_q_mark}}</li>
-                          <li>
-                            @php
-                                $qu_count = 0;
-                            @endphp
-                            @foreach($questions as $question)
-                              @if($question->topic_id == $topic->id)
-                                @php 
-                                  $qu_count++;
-                                @endphp
-                              @endif
-                            @endforeach
-                            {{$topic->per_q_mark*$qu_count}}
-                          </li>
-                          <li>
-                            {{$qu_count}} 
-                          </li>
-                          <li>
-                            {{$topic->timer}} minutes 
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-action">
-                  <!-- add usercode here -->
-                    <a href="{{route('start.test', ['id' => $topic->id, 'user' => $user->id])}}" class="btn btn-block" title="Start Test">Start Quiz</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-         
-        @endif
-      </div>
-    </div>
- 
- 
-</div>
-@endsection
+  </div>
+  <script src=" {{ asset('js/app.js')}}"></script>
+</body>
+</html>

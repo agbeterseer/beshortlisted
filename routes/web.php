@@ -20,6 +20,9 @@ use App\Menu;
 Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 Route::get('/', 'HomeController@welcome');
+// Route::get('/vue', function () {
+// 	return view('testhome');
+//   });
 Route::get('/home', 'HomeController@home')->name('home');
 Auth::routes();
 
@@ -27,6 +30,9 @@ Route::get('/pricing', [
 	'as' => 'pricing',
 	'uses' => 'HomeController@show_price'
 ]);
+Route::get('/terseer-agbe', function () {
+  return view('post');
+})->where('any', '.*');
 
 Route::post('/test', [
 	'as' => 'send.email',
@@ -859,10 +865,14 @@ Route::get('/iit', [
 		'as' => 'iit.show',
 		'uses'=> 'ResumeController@IIT'
 		]);
-Route::get('/employer/payment/{id}', [
+Route::get('/employer/show-payment-{id}', [
 	'as' => 'employer.payment',
 	'uses' => 'EmployerController@Payment'
 	]);
+	Route::get('/employer/show-payment-for-upgrade-{id}', [
+		'as' => 'upgrade.payment',
+		'uses' => 'EmployerController@UpdatePayment'
+		]);
 Route::get('/employer/upgrade-package/{id}', [
 	'as' => 'upgrade.package',
 	'uses' => 'PackagesController@UpgradePackageInfo'

@@ -31,8 +31,14 @@ class PackagesController extends Controller
 
      return $menus = Menu::where('status', 1)->orderBy('menu_order', 'ASC')->get();
    }
+   public function displayUnit()
+   {
+     $user = Auth::user();
+     return $units = EmployerPackage::where('status', 1)->where('userfkp', $user->id)->first();
+   }
 
-    /**
+
+   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -292,16 +298,16 @@ public function deleteProperty(Request $request)
     }
     public function UpgradePackageInfo($id)
     {
+    $info = "Upgrading to another plan will discontinue with the previous plan and left over units";
       $user = Auth::user();
       if ($user->account_type === 'employer') {
           $menus = $this->displayMenu();
+          $units = $this->displayUnit();
       $employer_package = EmployerPackage::where('userfkp', $user->id)->where('status',1)->first();
       $packages = Planpackage::all();
-      //dd($package);
-      return view('employer.upgrade_package_info', compact('employer_package', 'menus', 'packages', 'id') );
-      }else{
-
-        return redirect()->back();
+      $plan = DB::table('planpackages')->where('id', $id)->first(); 
+     // dd($plan);
+      return view('employer.upgrade_package_info', compact('employer_package', 'menus', 'packages', 'id', 'units', 'plan') );
       }
  return redirect()->back();
 

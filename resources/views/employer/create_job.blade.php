@@ -263,7 +263,7 @@ border-color: white !important;
                                                     <label>City / Town *</label>
                                                     <div class="careerfy-profile-select">
  <select name="location" id="location" class="form-control" required="required" >
-           <option value="">...Select City...</option>
+           <option value="">Select City</option>
    </select> 
                                 @if ($errors->has('location'))
                                     <span class="help-block">
@@ -283,12 +283,11 @@ border-color: white !important;
                                             <div class="careerfy-profile-title"><h2>Assessment</h2></div>
                                             <ul class="careerfy-row careerfy-employer-profile-form">
                                             <div class="note note-primary">
-  
+<span style="line-height: 2.6;"> 
 1. Enter question(s), one at a time and then click 'Add' button <br> 
-2. click on 'Delete' to remove a question 
-<br>
-Eg. Do You have Experience in building API's?
- 
+2. Click on 'Delete' to remove a question 
+<br> 
+</span> 
 </div>
                                 <div class="portlet-body form"> 
                                 <div class="form-body">
@@ -311,13 +310,16 @@ Eg. Do You have Experience in building API's?
                             <a href="javascript:;" data-repeater-create class="careerfy-employer-profile-submit" >
                                                 <i class="fa fa-plus"></i> Add Assessement</a>
                                             </div>
+                    <div style="align:center"> 
+                    <div class="space">&nbsp;</div>     
+                          <button class="careerfy-employer-profile-submit" >Save Job </button>
+                          </div>
                                          </div>
                                      </div> 
                                 </div>
                              </ul>
-                          </div>
-                          <button class="careerfy-employer-profile-submit" >Save Job </button>
-           <!-- <input type="submit" class="careerfy-employer-profile-submit" value="Save Job" name="save_job">  -->
+                             
+                          </div> 
                             </form>
                          </div>
                         </div> 

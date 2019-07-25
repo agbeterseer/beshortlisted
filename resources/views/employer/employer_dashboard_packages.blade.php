@@ -19,8 +19,8 @@
 
 @section('content')
  
-                            <div class="careerfy-typo-wrap">
-                                <div class="careerfy-employer-dasboard">
+                            <div class="careerfy-typo-wrap"> 
+                                <div class="careerfy-employer-dasboard" style="background-color: #ffffff;">
                                     <div class="careerfy-employer-box-section">
                                         <!-- Profile Title -->
                                         <div class="careerfy-profile-title">
@@ -62,7 +62,7 @@
                                             </div>
                                         </div>
                                         <!-- Pagination -->
-                                        <div class="careerfy-pagination-blog">
+                                        <!-- <div class="careerfy-pagination-blog">
                                             <ul class="page-numbers">
                                                 <li><a class="prev page-numbers" href="#"><span><i class="careerfy-icon careerfy-arrows4"></i></span></a></li>
                                                 <li><span class="page-numbers current">01</span></li>
@@ -71,7 +71,7 @@
                                                 <li><a class="page-numbers" href="#">04</a></li>
                                                 <li><a class="next page-numbers" href="#"><span><i class="careerfy-icon careerfy-arrows4"></i></span></a></li>
                                             </ul>
-                                        </div>
+                                        </div> -->
 
                                     </div>
                                 </div>
