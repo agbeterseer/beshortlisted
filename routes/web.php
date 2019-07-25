@@ -866,8 +866,8 @@ Route::get('/iit', [
 		'uses'=> 'ResumeController@IIT'
 		]);
  
-	Route::get('/make-payment-{id}', [
-		'as' => 'make_payment',
+	Route::get('/employer-make-payment-{id}', [
+		'as' => 'employer.payment',
 		'uses' => 'EmployerController@Payment'
 		]);
 	Route::get('/employer-upgrade-payment-{id}', [
