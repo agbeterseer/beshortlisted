@@ -17,14 +17,12 @@ window.laravel = { csrfToken: '{{ csrf_token() }}' }
 
 </head>
 
-<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #ffffff;">
-  Test
-
-  <div id="app">
+<body>
+   <div id="app">
     <div class="container">
     <articles></articles>
     </div>
   </div>
-  <script src=" {{ asset('js/app.js')}}"></script>
+  <script src="{{ asset('js/app.js') }}"></script>
 </body>
-</html>
+</html>  

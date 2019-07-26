@@ -51,6 +51,8 @@ class UserController extends Controller
 	 return view('admin.user.index',compact(['users','allRoles', 'user_']),array('user' => Auth::user()));
 	}
 
+
+
 		  public function ShowRegisterForm(Request $request)
 	{
 

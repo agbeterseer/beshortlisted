@@ -20,9 +20,9 @@ use App\Menu;
 Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 Route::get('/', 'HomeController@welcome');
-// Route::get('/vue', function () {
-// 	return view('testhome');
-//   });
+Route::get('/vue', function () {
+	return view('testhome');
+  });
 Route::get('/home', 'HomeController@home')->name('home');
 Auth::routes();
 

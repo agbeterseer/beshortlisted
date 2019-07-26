@@ -381,13 +381,15 @@
                        <a href="#email_subscription" class="careerfy-static-btn careerfy-parallex-box-btn"  >Sign Up for Newsletter</a>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 ">
                      <div class="careerfy-subheader careerfy-subheader-without-bg">
                             <div class="careerfy-parallex-text" style="color: white !important;">
                                 <h2 style="color: white !important;">Millions of jobs. <br> Find the one that’s right for you.</h2>
                                 <p>Search all the open positions on the web.</p>
                         <a href="{{route('list.job', 'job-list')}}" class="careerfy-static-btn careerfy-bgcolor"  ><span>Search Jobs</span></a>
                             </div>
+                   
+                            <img src="{{ asset('recruit/images/job.png') }}">
                         </div>
                       </div>
                   </div>

@@ -47,7 +47,12 @@ class HomeController extends Controller
         $currentTime->toDateTimeString();
         return $currentTime;
     }
-
+    public function indexapi()
+    {
+      $users = User::orderBy('created_at', 'ASC')->paginate(5);
+      $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'users' => $users);
+      return response()->json($response);
+    }
 
 
     /**
