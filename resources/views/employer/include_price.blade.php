@@ -37,8 +37,7 @@
                                    <a href="{{route('employer.payment', $plan->id)}}" class="careerfy-priceplan-style5-btn">Buy now</a>
                                             <div class="space">&nbsp;</div>
         
-                                            </div>
-                                <div class="space">&nbsp;</div>
+                                            </div> 
                                       <div class="price_list" >  <ul >
                             <?php $properties = \App\Planpackage::find($plan->id)->properties; ?>
                                 @foreach($properties as $property_)
