@@ -95,6 +95,7 @@ try {
         $package->job_duration = $job_duration;
         $package->created_at = $this->returnCurrentTime();
         $package->make_active = $most_popular;
+        $package->price_in_kobo = $price . '00';
         $package->save();
         $request->session()->flash('message.level', 'success');
         $request->session()->flash('message.content', 'done successfully!'); 
