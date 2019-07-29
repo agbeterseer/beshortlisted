@@ -34,7 +34,7 @@
                             <div class="col-md-3">
                                 <ul>
                                     <li><a href="{{route('candidates')}}" class="footer_links">Candidate</a></li>
-                                    <li><a href="{{route('employer_infor')}}" class="footer_links">Job Packages</a></li>
+                                    <li><a href="{{route('employer_infor')}}" class="footer_links">Pricing</a></li>
                                     <li><a href="{{route('display.policy')}}" class="footer_links">Privacy &amp; Cookies</a></li>
                                 </ul>
                             </div>
