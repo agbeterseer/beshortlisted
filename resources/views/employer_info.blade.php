@@ -40,7 +40,7 @@
                             <a href="{{route('post.jobs')}}" class="careerfy-parallax-style4-btn">Post a Job</a>
                         </div>
                         <div class="col-md-5"><img src="{{asset('/recruit/images/parallex-style4-img.png')}}" alt=""></div>
-                        <!-- Parallax -->
+                        <!-- Parallax alphanumeric -->
 
                     </div>
                 </div>
