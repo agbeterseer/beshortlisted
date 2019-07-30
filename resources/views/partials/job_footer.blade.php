@@ -86,7 +86,7 @@
 
                 </div>
              <div style="text-align: left">
-                    <p style="text-align: left; color: #ffffff;">Copyrights © 2019 All Rights Reserved beShorlisted.com</p></div>
+                    <p style="text-align: left; color: #ffffff;">Copyrights © 2019 All Rights Reserved beshortlisted.com</p></div>
                 <!-- CopyRight -->
             </div>
         </footer>

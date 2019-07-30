@@ -221,7 +221,7 @@ public function employement_term_list()
     $cities = $this->GetCities();
     $regions = DB::table('regions')->get();
     $educational_levels = $this->GetQualificationLevels(); 
-    $industries = DB::table('industries')->orderBy('name')->get();
+    $industries = DB::table('industries')->where('status', 1)->orderBy('name')->get();
       $industry_professions = DB::table('industry_professions')->get();
           $city_count = DB::table('tags')
              ->select('city', DB::raw('count(*) as total'))

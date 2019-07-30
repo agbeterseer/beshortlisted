@@ -377,7 +377,7 @@
                         <div class="col-md-6 careerfy-parallex-box">
                             <div class="careerfy-parallex-box-wrap">
                                 <h2>Start your Career Today by Signing Up Now!</h2>
-                                <p> Get the notified with the latest job ad sent to your inbox. Be informed; who is hiring, who is offering what, and others.</p>
+                                <p> Get notified with the latest job ad sent to your inbox. Be informed; who is hiring, who is offering what, and others.</p>
                        <a href="#email_subscription" class="careerfy-static-btn careerfy-parallex-box-btn"  >Sign Up for Newsletter</a>
                             </div>
                         </div>

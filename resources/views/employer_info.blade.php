@@ -70,12 +70,12 @@
                                     <li class="col-md-4">
                                         <i class="careerfy-icon careerfy-curriculum"></i>
                                         <h2>CV Search</h2>
-                                        <p>Find CV’s specific to your industry and Vacant<br> position, Choose Industry, Choose position Years of experience, View profiles </p>
+                                        <p>Find CV’s specific to your industry and Vacant<br> position, choose industry, choose position years of experience, view profiles </p>
                                     </li>
                              <li class="col-md-4">
                                         <i class="careerfy-icon careerfy-handshake"></i>
                                         <h2>Display jobs</h2>
-                                        <p>Job Matching -Benefit from our robust database <br>and reduce recruitment time. Get recommendations in 72 hours of your requestoGuaranteed<br> 80% interview attendanceoWe do the candidate sourcing & pre-screening for youoSave time </p>
+                                        <p>Job Matching -Benefit from our robust database <br>and reduce recruitment time. Get recommendations in 72 hours of your reques to Guaranteed<br> 80% interview attendanceoWe do the candidate sourcing & pre-screening for youoSave time </p>
                                     </li>
                                     <li class="col-md-4">
                                         <i class="careerfy-icon careerfy-briefcase-1"></i>
