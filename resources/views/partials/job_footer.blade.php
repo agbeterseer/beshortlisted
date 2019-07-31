@@ -21,7 +21,7 @@
                                 <ul>
                                     <li><a href="{{route('list_industries')}}" class="footer_links">Browse Industries</a></li>
                                     <li><a href="{{route('employer_infor')}}" class="footer_links">Employer</a></li>
-                                    <li><a href="{{url('/usermanual')}}" class="footer_links">Guidelines</a></li>
+                                    <li><a href="{{url('/usermanual')}}" class="footer_links" target="_blank">Guidelines</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-3">
