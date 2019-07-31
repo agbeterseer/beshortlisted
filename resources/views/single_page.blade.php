@@ -29,25 +29,20 @@ border-color: white !important;
   }
 </style>
 
- <div class="careerfy-main-content"> 
- <div class="space">&nbsp;</div>
-
-          <div class="careerfy-main-section">
-                <div class="container"> 
-              @if($page) 
+         <div class="space">&nbsp;</div>
+        <div class="space">&nbsp;</div> 
+   <div class="careerfy-main-section" >
+                <div class="container">
+                    <div class="row"> 
+                           <div class="careerfy-employer-box-section" style="background-color: #ffffff;">
+                                  @if($page) 
                       {!! $page->content !!} 
               @else 
                       Page Not Found!
               @endif
-               </div> 
-          </div>
 
-    <!--         <div class="careerfy-main-section careerfy-parallex-full">
-                <div class="container">
-                    <div class="row">
-                    
-                    </div>
-                </div>
-            </div> -->
-</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 @endsection
