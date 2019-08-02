@@ -83,14 +83,14 @@
  
       <div style="color: #000000;">  
  <ol style="color: #000000;">
-       <li>Goto www.beshortlisted.com  and</li>
-       <li>Click on register as shown in the figure below</li>   
-     <img src="{{asset('/img/Untitled.jpg')}}" alt="this" >
+      <li>Goto www.beshortlisted.com  and</li>
+      <li>Click on register as shown in the figure below</li>   
+      <img src="{{asset('/img/Untitled.jpg')}}" alt="this" >
 
       <li> Next click candidate sign up as shown in the figure below</li>  
       <img src="{{asset('/img/candidatereg.png')}}">
-  <li>complete the in the next window same as the figure below</li>
-  <img src="{{asset('/img/regform.png')}}">
+      <li>complete the in the next window same as the figure below</li>
+      <img src="{{asset('/img/regform.png')}}">
 
 
 
