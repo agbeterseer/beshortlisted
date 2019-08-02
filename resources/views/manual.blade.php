@@ -31,6 +31,18 @@
   background-color: #555;
 }
 
+.collapsible:after {
+  content: '\002B';
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
 .content {
   padding: 0 18px;
   max-height: 0;
@@ -76,7 +88,7 @@
     </ul>
 
     <div class="docs-content">
-      <h3 id="welcome"> For Candidate</h3>
+      <h3 id="candidate"> For Candidate</h3>
  
 <button class="collapsible">How to Register?</button>
 <div class="content">
@@ -87,9 +99,9 @@
       <li>Click on register as shown in the figure below</li>   
       <img src="{{asset('/img/Untitled.jpg')}}" alt="this" >
 
-      <li> Next click candidate sign up as shown in the figure below</li>  
+      <li>Next click candidate sign up as shown in the figure below</li>  
       <img src="{{asset('/img/candidatereg.png')}}">
-      <li>complete the in the next window same as the figure below</li>
+      <li>Complete the in the next window same as the figure below</li>
       <img src="{{asset('/img/regform.png')}}">
 
 
@@ -102,20 +114,20 @@
 <p></p>
 <button class="collapsible">How do I create my profile?</button>
 <div class="content">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <p>Check later</p>
 </div>
 <p></p>
 <button class="collapsible">How do I search for a job?</button>
 <div class="content">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+ <p>Check later</p>
 </div>
 <p></p>
 <button class="collapsible">How do I apply for a job?</button>
 <div class="content">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+ <p>check later</p>
 </div>
 
-<h3 id="welcome"> For Employer</h3>
+<h3 id="employee"> For Employer</h3>
 
  <button class="collapsible">How do I register</button>
 <div class="content">
@@ -126,77 +138,40 @@
      <img src="{{asset('/img/Untitled.jpg')}}" alt="this" >
   <li> Next click candidate sign up as shown in the figure below</li>  
      <img src="{{asset('/img/employeereg.png')}}">
-  <li>complete the in the next window same as the figure below</li>
+  <li>Complete the in the next window same as the figure below</li>
   <img src="{{asset('/img/regform.png')}}">
-
-
+  <li>Next click on the verification link sent to your email</li>
+<li>Login to begin using the platform</li>
 
  </ol>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 </div>
 <p></p>
-<button class="collapsible">How do I search for a job?</button>
+<button class="collapsible">How do I post a job?</button>
 <div class="content">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+ <ol style="color: #000000;">
+       <li>Goto www.beshortlisted.com  and</li>
+       <li>Goto on POST A JOB as shown in the figure below</li>   
+     <img src="{{asset('/img/jobpost.png')}}" alt="this" >
+  <li> Fill in your job details in the form shown in the figure below</li>  
+     <img src="{{asset('/img/postjobform-new.png')}}">
+  <li>A link will be sent to Admin for reivew and approval</li>
+ 
+ </ol>
 </div>
 <p></p>
 <button class="collapsible">How do I apply for a job?</button>
 <div class="content">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+ <p>Check later</p>
 </div>
-    
-    
-   
-      <p> The following customization options are available in Opineo:</p>
-      <h3 id="candidate"> 4.0 Role Management</h3>
-      <ul>
-        <li>Description</li>
-      </ul>
      
-      <pre class="prettyprint"> 
-
-      4.0.1 Add Role
-
-      • Sign in to the Web Interface. 
-      • Click on Role Management at the top left corner of the home page. 
-      • Click on View Roles. 
-      • In the new window, click [Create Role] 
-      • Fill in the text fields, click the desired permission
-      • Click the [Create Roles] Button
-
-      4.0.2 Edit Role
-
-      • Click on Role Management at the top left corner of the home page. 
-      • Click on View Roles. 
-      • In the new window, see table> click on action to edit a record 
-      • Fill in the text fields, click the desired
-      • Click the [Edit Roles] Button
-
-      4.0.3 Search Role
-
-      • Enter name or Display name or Description in the search input provide
-      • To see a specific search
-
-      4.0.4 Delete Role
-
-      • Click on Role Management at the top left corner of the home page. 
-      • Click on View Roles. 
-      • In the new window, see table> click on action
-      • Click on delete
-
-      </pre>
-     
- 
-     
-   
-  
     </div>
   </div>
 </section>
  
 <footer>
   <div class="">
-    <p>2017 &copy; Copyright Rhizomeng. All Rights Reserved.</p>
+    <p>2019 &copy; Copyright Beshortlisted. All Rights Reserved.</p>
   </div>
 </footer>
 </div> 
