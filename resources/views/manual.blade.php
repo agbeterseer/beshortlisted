@@ -100,7 +100,7 @@
  
 </div>
 <p></p>
-<button class="collapsible">How do create my profile?</button>
+<button class="collapsible">How do I create my profile?</button>
 <div class="content">
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 </div>
