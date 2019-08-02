@@ -13,7 +13,32 @@
 <!-- <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/prettify.css"> -->
  <link href="{{ asset('css/prettify.css') }}" rel="stylesheet">
- <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+ <link href="{{ asset('css/style.css') }}" rel="stylesheet"> 
+ <style type="text/css">
+ .collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border:none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  background-color: #fff;
+}
+ </style>
 </head>
 <body>
 <div class="wrapper">
@@ -37,74 +62,93 @@
 <section>
   <div class="container">
     <ul class="docs-nav">
-      <li><strong>Getting Started</strong></li>
+      <li><strong>Get Started</strong></li>
       <li><a href="#welcome" class="cc-active">Welcome</a></li>
-      <!-- <li><a href="#benefits" class="cc-active">Benefits</a></li> -->
-      <li><a href="#features" class="cc-active">Features</a></li>
+      <!-- <li><a href="#benefits" class="cc-active">Benefits</a></li> --><!-- 
+      <li><a href="#features" class="cc-active">Features</a></li> -->
  
       <li class="separator"></li>
       <li><strong>Customization</strong></li>
-      <li><a href="#rolemanagement" class="cc-active">4.0 Role Management</a></li>
-      <li><a href="#usermanagement" class="cc-active">5.0 User Management</a></li>
-      <li><a href="#document_management" class="cc-active">6.0 Document Management</a></li>
+      <li><a href="#candidate" class="cc-active">Candidate</a></li>
+      <li><a href="#employee" class="cc-active">Employee</a></li>
+      <!-- <li><a href="#document_management" class="cc-active">6.0 Document Management</a></li> -->
     
     </ul>
+
     <div class="docs-content">
-      <h2> Getting Started</h2>
-      <h3 id="welcome"> Welcome</h3>
+      <h3 id="welcome"> For Candidate</h3>
+ 
+<button class="collapsible">How to Register?</button>
+<div class="content">
+ 
+      <div style="color: #000000;">  
+ <ol style="color: #000000;">
+       <li>Goto www.beshortlisted.com  and</li>
+       <li>Click on register as shown in the figure below</li>   
+     <img src="{{asset('/img/Untitled.jpg')}}" alt="this" >
+
+      <li> Next click candidate sign up as shown in the figure below</li>  
+      <img src="{{asset('/img/candidatereg.png')}}">
+  <li>complete the in the next window same as the figure below</li>
+  <img src="{{asset('/img/regform.png')}}">
+
+
+
+ </ol>
+ <a href="">Next</a>
+      </div>
+ 
+</div>
+<p></p>
+<button class="collapsible">How do create my profile?</button>
+<div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+<p></p>
+<button class="collapsible">How do I search for a job?</button>
+<div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+<p></p>
+<button class="collapsible">How do I apply for a job?</button>
+<div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+
+<h3 id="welcome"> For Employer</h3>
+
+ <button class="collapsible">How do I register</button>
+<div class="content">
+
+ <ol style="color: #000000;">
+       <li>Goto www.beshortlisted.com  and</li>
+       <li>Click on register as shown in the figure below</li>   
+     <img src="{{asset('/img/Untitled.jpg')}}" alt="this" >
+  <li> Next click candidate sign up as shown in the figure below</li>  
+     <img src="{{asset('/img/employeereg.png')}}">
+  <li>complete the in the next window same as the figure below</li>
+  <img src="{{asset('/img/regform.png')}}">
+
+
+
+ </ol>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+<p></p>
+<button class="collapsible">How do I search for a job?</button>
+<div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+<p></p>
+<button class="collapsible">How do I apply for a job?</button>
+<div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
     
-In this orientation manual you will learn how to get started with the CV Management System.
-
-To have a good grasp of the system, complete this user manual, read through the material on this page, including the linked references if any. 
-<p>
- 
-<p>
- 
-     <!--  <h3 id="benefits"> Benefits</h3>
-      <ul>
-        <li>Use Opineo to conduct pre-release surveys before launching new products or services</li>
-        <li>Analyze new trends in the industry</li>
-        <li>Run crowd-sourced campaigns with Opineo to mature new ideas, website designs or
-          logos</li>
-        <li>Conduct popularity surveys with free Opineo widget</li>
-        <li>Create and host polling surveys with Opineo</li>
-      </ul>
-       -->
-      <h3 id="features"> Features</h3>
-      <ul>
-  
-  <li>4.0 Role Management</li>
-  <li>4.0.1 Add Role </li>
-  <li>4.0.2 Edit Role </li>
-  <li>4.0.3 Search Role </li>
-  <li>4.0.4 Delete Role </li>
-  <li>5.0 User Management </li>
-  <li>5.0.1 Add User  </li>
-  <li>5.0.2 Assign Role to User</li>
-  <li>5.0.3 Delete User </li>
-  <li>5.0.4 Search User </li>
-  <li>6.0 Document Management</li>
-  <li>6.0.1 Add CV  </li>
-  <li>6.0.2 Edit CV </li>
-  <li>6.0.3 Delete CV </li>
-  <li>6.0.4 Upload CV From CSV </li>
-  <li>6.0.5 Document Custom Search </li>
-  <li>6.0.6 Accessing CV </li>
-
-        <li>Facility to customize to match your website theme</li>
-        <li>Detailed and Compact view options</li>
-        <li>Comprehensive options to customize animation, colors, orientation and style</li>
-        <li>All the power and flexibility of jQuery</li>
-        <li>Easy install; 100% integration</li>
-        <li>Facility to customize rating icons</li>
-      </ul>
-      <hr> 
-      <ul>
-        <li>A reference to latest jQuery library </li>
-        <li>A reference to Opineo script file sudo nano opineo.js</li>
-      </ul>
+    
+   
       <p> The following customization options are available in Opineo:</p>
-      <h3 id="rolemanagement"> 4.0 Role Management</h3>
+      <h3 id="candidate"> 4.0 Role Management</h3>
       <ul>
         <li>Description</li>
       </ul>
@@ -142,96 +186,8 @@ To have a good grasp of the system, complete this user manual, read through the 
 
       </pre>
      
-
-      <h3 id="usermanagement"> 5.0 User Management</h3>
-      <ul>
-        <li>Description</li>
-      </ul>
- <pre class="prettyprint"> 
-      5.0 User Management
-      5.0.1 Add User
-      • Sign in to the Web Interface. 
-      • Click on User Management at the left side menu of the home page. 
-      • Click on User. 
-      • In the new window, click [Create User] to create user
-      • In the new window, fill in the form 
-      • Click the [Register] Button
-
-      5.0.2 Assign Role to User
-      • Sign in to the Web Interface. 
-      • Click on User Management at the left side menu of the home page. 
-      • Click on User. 
-      • In the new window, see table> click on Assign
-      • In the new popup window, select one role or multiple role to assign to the user 
-      • Click the [Save Changes] Button
-
-      5.0.3 Delete User
-      • Sign in to the Web Interface. 
-      • Click on User Management at the left side menu of the home page. 
-      • Click on User. 
-      • In the new window, see table> click on Delete
-
-      5.0.4 Search User
-      • Click on User Management at the left side menu of the home page. 
-      • Click on User. 
-      • In the new window, see table > search by username in the input field
-
-      </pre>
-    
-      <h3 id="document_management">6.0 Document Management</h3>
-      <ul>
-        <li>Description</li>
-      </ul>
-      <pre class="prettyprint"> 
-      
-      6.0.1 Add CV
-
-      • Sign in to the Web Interface. 
-      • Click on Document Management at the left side menu of the home page. 
-      • Click on Candidates Records. 
-      • In the new window, see a list of CV’s > click on [Add CV] button
-      • In the new window, enter all fields
-      • Click the [Add Candidates] Button
-
-      6.0.2  Edit CV
-
-      • Sign in to the Web Interface. 
-      • Click on Document Management at the left side menu of the home page. 
-      • Click on Candidates Records. 
-      • In the new window, see a list of CV’s > click on [Edit CV] button
-      • In the new window, enter all fields
-      • Click the [Edit Candidate] Button
-
-      6.0.3  CV Table filter 
-
-      • Sign in to the Web Interface. 
-      • Click on Document Management at the left side menu of the home page. 
-      • Click on Candidates Records. 
-      • In the new window, see a search input field on top of the table
-      • Enter any of the column data to search 
-
-      6.0.4  Upload CV from CSV(comma delimited)
-
-      • Sign in to the Web Interface. 
-      • Click on Document Management at the left side menu of the home page. 
-      • Click on Upload CV From CSV menu
-      • In the new window, click choose File to select the desired .csv file for upload
-      • Click Upload
-
-      6.0.5 Document Custom Search
-
-      • Sign in to the Web Interface. 
-      • Click on Document Management at the left side menu of the home page. 
-      • Click on Document Search menu
-      • In the new window, select Filter by city [to search by city] or select Filter by Profession to do same
-       
-
-      6.0.6 Accessing CV
-
-      • Sign in to the Web Interface. 
-      • Click on Document Management at the left side menu of the home page. 
-      • In the new window, see a list of CVs’ > click on [CV] under file to download CV 
-      </pre>
+ 
+     
    
   
     </div>
@@ -243,7 +199,7 @@ To have a good grasp of the system, complete this user manual, read through the 
     <p>2017 &copy; Copyright Rhizomeng. All Rights Reserved.</p>
   </div>
 </footer>
-</div>
+</div> 
    <script src="{{ asset('js/jquery.min.js') }}" type="text/javascript"></script>
      <script src="{{ asset('js/prettify/prettify.js') }}" type="text/javascript"></script>
 
@@ -251,6 +207,22 @@ To have a good grasp of the system, complete this user manual, read through the 
 <!-- <script type="text/javascript" src="js/prettify/prettify.js"></script>  -->
 <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
   <script src="{{ asset('js/layout.js') }}" type="text/javascript"></script>
+  <script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script>
 <!-- <script src="js/layout.js"></script> -->
 </body>
 </html>

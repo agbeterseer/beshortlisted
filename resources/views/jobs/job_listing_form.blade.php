@@ -39,9 +39,9 @@ border-color: white !important;
         <div class="careerfy-main-content">
             
             <!-- Main Section -->
-            <div class="space">&nbps;</div>
-              <div class="space">&nbps;</div>
-                <div class="space">&nbps;</div>
+            <div class="space">&nbsp;</div>
+              <div class="space">&nbsp;</div>
+                <div class="space">&nbsp;</div>
             <div class="careerfy-main-section careerfy-subheader-form-full">
                 <div class="container">
                     <div class="row">
