@@ -23,7 +23,7 @@
 border-color: white !important;
 
     }
-    body{background-color: #FAFAFA;}
+    
 </style>
   <!-- SubHeader -->
  
