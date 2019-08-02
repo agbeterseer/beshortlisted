@@ -160,10 +160,7 @@
  </ol>
 </div>
 <p></p>
-<button class="collapsible">How do I apply for a job?</button>
-<div class="content">
- <p>Check later</p>
-</div>
+
      
     </div>
   </div>
