@@ -41,3 +41,12 @@ Route::get('industries', 'JobController@getIndustries');
 
 
 
+Route::get('/api/v1/users', [
+    'as' => 'users',
+   	'uses' => 'HomeController@indexapi'
+        ]);
+        
+        Route::get('/testreere', function () {
+            return response('Test API', 200)
+                          ->header('Content-Type', 'application/json');
+        });

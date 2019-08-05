@@ -21,7 +21,7 @@
                                 <ul>
                                     <li><a href="{{route('list_industries')}}" class="footer_links">Browse Industries</a></li>
                                     <li><a href="{{route('employer_infor')}}" class="footer_links">Employer</a></li>
-                                    <li><a href="{{url('/usermanual')}}" class="footer_links">Guidelines</a></li>
+                                    <li><a href="{{url('/usermanual')}}" class="footer_links" target="_blank">Guidelines</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-3">
@@ -34,7 +34,7 @@
                             <div class="col-md-3">
                                 <ul>
                                     <li><a href="{{route('candidates')}}" class="footer_links">Candidate</a></li>
-                                    <li><a href="{{route('employer_infor')}}" class="footer_links">Job Packages</a></li>
+                                    <li><a href="{{route('employer_infor')}}" class="footer_links">Pricing</a></li>
                                     <li><a href="{{route('display.policy')}}" class="footer_links">Privacy &amp; Cookies</a></li>
                                 </ul>
                             </div>
@@ -86,7 +86,7 @@
 
                 </div>
              <div style="text-align: left">
-                    <p style="text-align: left; color: #ffffff;">Copyrights © 2019 All Rights Reserved beShorlisted.com</p></div>
+                    <p style="text-align: left; color: #ffffff;">Copyrights © 2019 All Rights Reserved beshortlisted.com</p></div>
                 <!-- CopyRight -->
             </div>
         </footer>

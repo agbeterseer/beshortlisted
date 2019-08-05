@@ -20,6 +20,7 @@ use App\Menu;
 Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 Route::get('/', 'HomeController@welcome');
+<<<<<<< HEAD
 
 
 Route::get('/vue-terser', function () {
@@ -27,6 +28,11 @@ Route::get('/vue-terser', function () {
   });
 
 
+=======
+Route::get('/vue', function () {
+	return view('testhome');
+  });
+>>>>>>> ed0b9562e5aed10f7427fc5febaa0ec39eeb851b
 Route::get('/home', 'HomeController@home')->name('home');
 Auth::routes();
 

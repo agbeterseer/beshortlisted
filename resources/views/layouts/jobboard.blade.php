@@ -424,7 +424,7 @@ function isEmpty(obj) {
   var resume_id = null;
   var job_id = data.job_id; 
    var apply_route = location.href ='/candidates/job-details';
-   var job_details = location.href ='/job/job-descriptions/';
+   var job_details = location.href ='/job/job-descriptions';
     if(isEmpty(code['data'])) {
         $('#job_section').append('<li class="careerfy-column-12"> No Record(s) Found</li>');  
  

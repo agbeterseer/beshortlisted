@@ -1,8 +1,8 @@
-<div class="careerfy-priceplan-style5-wrap">
+<div class="careerfy-priceplan-style5-wrap"  style="background-color: #ffffff; ">
       <div class="container"> 
    @foreach($plans as $plan) 
        @if($plan->make_active === 1) 
-                                <div class="col-md-4 active""> 
+                                <div class="col-md-4 active"> 
                                     <div class="careerfy-priceplan-style5" >
                                       @if($plan->make_active === 1) 
 
@@ -37,8 +37,7 @@
                                    <a href="{{route('employer.payment', $plan->id)}}" class="careerfy-priceplan-style5-btn">Buy now</a>
                                             <div class="space">&nbsp;</div>
         
-                                            </div>
-                                <div class="space">&nbsp;</div>
+                                            </div> 
                                       <div class="price_list" >  <ul >
                             <?php $properties = \App\Planpackage::find($plan->id)->properties; ?>
                                 @foreach($properties as $property_)

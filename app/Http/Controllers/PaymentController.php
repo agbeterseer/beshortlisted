@@ -59,11 +59,10 @@ public function displayUnit()
     {
       $user = Auth::user();
     $paymentDetails = Paystack::getPaymentData();
+  //dd($paymentDetails); 
+  if ($paymentDetails['data']['status'] === 'success') { 
+  $planpackage = DB::table('planpackages')->where('price_in_kobo', $paymentDetails['data']['amount'])->first();
 
-  if ($paymentDetails['data']['status'] === 'success') {
-
-  $planpackage = DB::table('planpackages')->where('price', $paymentDetails['data']['amount'])->first();
-  //dd($planpackages); 
         $employer_package = EmployerPackage::firstOrNew(['userfkp'=>$user->id, 'package_id' => $planpackage->id]);
         $employer_package->jobs_remaining = $planpackage->jobs_posting;
         $employer_package->features_remaining = $planpackage->featured_jobs;

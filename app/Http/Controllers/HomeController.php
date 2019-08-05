@@ -54,7 +54,10 @@ class HomeController extends Controller
       $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'users' => $users);
       return response()->json($response);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> ed0b9562e5aed10f7427fc5febaa0ec39eeb851b
 
     public function testhome($value='')
     {
@@ -226,7 +229,7 @@ public function employement_term_list()
     $cities = $this->GetCities();
     $regions = DB::table('regions')->get();
     $educational_levels = $this->GetQualificationLevels(); 
-    $industries = DB::table('industries')->orderBy('name')->get();
+    $industries = DB::table('industries')->where('status', 1)->orderBy('name')->get();
       $industry_professions = DB::table('industry_professions')->get();
           $city_count = DB::table('tags')
              ->select('city', DB::raw('count(*) as total'))

@@ -11,6 +11,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
+<<<<<<< HEAD
         <!-- Styles -->
         
     </head>
@@ -28,3 +29,19 @@
        <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
+=======
+    <!-- CSS Reset : BEGIN -->
+
+
+</head>
+
+<body>
+   <div id="app">
+    <div class="container">
+    <articles></articles>
+    </div>
+  </div>
+  <script src="{{ asset('js/app.js') }}"></script>
+</body>
+</html>  
+>>>>>>> ed0b9562e5aed10f7427fc5febaa0ec39eeb851b

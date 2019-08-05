@@ -404,6 +404,7 @@
                                 <p>Search all the open positions on the web.</p>
                         <a href="{{route('list.job', 'job-list')}}" class="careerfy-static-btn careerfy-bgcolor"  ><span>Search Jobs</span></a>
                             </div>
+                            <img src="{{assets('recruit/images/jobsearch.png')}}">
                         </div>
                       </div>
                   </div>
