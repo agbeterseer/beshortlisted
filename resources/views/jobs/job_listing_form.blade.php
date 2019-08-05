@@ -1,4 +1,4 @@
-@extends('layouts.jobboard', [
+@extends('layouts.jobslayout', [
   'page_header' => 'Employer',
   'dash' => '',
   'quiz' => '',
@@ -46,6 +46,10 @@ border-color: white !important;
                         <div class="col-md-12 careerfy-typo-wrap">
                             <!-- Sub Header Form -->
                             <div class="careerfy-subheader-form">
+                            <div id="app"> 
+                            <searchbar></searchbar>
+                             <listjobs></listjobs> 
+                            </div> 
                      <form class="careerfy-banner-search" action="{{route('job.listing')}}" method="GET">
                      
                         <ul>
@@ -184,6 +188,8 @@ border-color: white !important;
                                 <!-- JobGrid -->
                                 <div class="careerfy-job careerfy-joblisting-classic">
                                     <ul class="careerfy-row" id="job_section">
+                                   
+                                    
                                     @forelse($tags as $tag)
                                         <li class="careerfy-column-12">
                                             <div class="careerfy-joblisting-classic-wrap">
@@ -230,6 +236,7 @@ border-color: white !important;
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
             <!-- Main Section -->
 @endsection

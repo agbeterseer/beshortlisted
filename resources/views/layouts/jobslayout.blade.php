@@ -103,24 +103,11 @@ border-color: white !important;
 @endif
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="{{ asset('recruit/script/jquery-3.3.1.min.js')}}"></script>
-<script src="{{ asset('recruit/script/bootstrap.js')}}"></script>
-<script src="{{ asset('css/assets/global/plugins/bootstrap-summernote/summernote.min.js')}}" type="text/javascript"></script>
-<script src="{{ asset('recruit/script/slick-slider.js')}}"></script>
-<script src="{{ asset('recruit/plugin-script/counter.js')}}"></script>
-<script src="{{ asset('recruit/plugin-script/fancybox.pack.js')}}"></script>
-<script src="{{ asset('recruit/plugin-script/isotope.min.js')}}"></script>
-<script src="{{ asset('recruit/plugin-script/functions.js')}}"></script>
-<script src="{{ asset('recruit/script/functions.js')}}"></script>
-        <script src="{{ asset('css/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('js/selectform.js') }}"></script>
-    <script src="{{ asset('css/assets/pages/scripts/components-bootstrap-tagsinput.min.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('css/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('css/assets/pages/scripts/form-repeater.min.js')}}" type="text/javascript"></script>
-    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/masking-input.js" data-autoinit="true"></script> 
-    <script src="{{ asset('js/card/jquery.payform.min.js')}}" charset="utf-8"></script>
-    <script src="{{ asset('js/card/script.js')}}"></script> 
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> 
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+       <script src="{{ asset('js/app.js') }}"></script> 
+  
  <script type="text/javascript">
  
 
@@ -138,32 +125,7 @@ border-color: white !important;
     });
 });
 
-    $(document).ready(function() {
-        $('#summernote_1').summernote({
-            height:'300px'
-
-
-        });
-        // body...
-    });
-
-    $(document).ready(function() {
-        $('#summernote_2').summernote({
-            height:'300px',
-
-
-        });
-        // body...
-    });
-
-    $('#clear').on('click', function() {
-        $('#summernote_1').summernote('code', null);
-
-    });
-        $('#clear').on('click', function() {
-        $('#summernote_2').summernote('code', null);
-
-    });
+     
 </script>
  
     <script>
@@ -525,8 +487,7 @@ var profession_name = '';
     $(".delete").on("submit", function(){
         return confirm("Do you want to delete this item?");
     });
-  $(":input").inputmask(); 
-$("#phone").inputmask({"mask": "(999) 999-9999"});
+ 
 </script>
 <script type="text/javascript">
 

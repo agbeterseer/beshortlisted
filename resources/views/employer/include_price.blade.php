@@ -13,10 +13,7 @@
                                         <div class="space">&nbsp;</div>
                                         <span><strong>N</strong>{{number_format($plan->price,2)}}<small></small></span>
                                         <a href="{{route('employer.payment', $plan->id)}}" class="careerfy-priceplan-style5-btn">Buy now</a>
-                                         <div class="space">&nbsp;</div>
-                                       
-
-                                      </div>
+                                       </div>
                                       <div class="space">&nbsp;</div>
                                        <div class="price_list"> <ul>
                             <?php $properties = \App\Planpackage::find($plan->id)->properties; ?>

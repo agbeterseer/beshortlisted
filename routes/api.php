@@ -13,11 +13,31 @@ use Illuminate\Http\Request;
 |
 */
 
-//  Route::group(['prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], function () {
-// Route::resource('employer', 'EmployerController', ['except' => ['create', 'edit']]);
-//  Route::get('/v1/api/candidates', [
-//     	'uses' => 'EmployerController@ListCandidates2'
-//     	]);
-   
-//  });
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+// List articles
+//Route::get('jobs', 'JobController@index');
+Route::get('jobs', 'JobController@getJobs');
+// List single article
+Route::get('jobs/{id}', 'JobController@show');
+
+// Create new article
+Route::post('jobs', 'JobController@store');
+
+// Update article
+Route::put('jobs', 'JobController@store');
+
+// Delete article
+Route::delete('jobs/{id}', 'JobController@destroy');
+
+// get search bar collections
+Route::get('search', 'JobController@SearchBar');
+Route::get('cities', 'JobController@getCities');
+Route::get('industryprofessions', 'JobController@getIndustryProfessions');
+Route::get('industries', 'JobController@getIndustries');
+
+
+
 

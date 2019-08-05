@@ -16,13 +16,17 @@ use App\Menu;
 | contains the "web" middleware group. Now create something great!
 |
 */ 
- 
+
 Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 Route::get('/', 'HomeController@welcome');
-// Route::get('/vue', function () {
-// 	return view('testhome');
-//   });
+
+
+Route::get('/vue-terser', function () {
+	return view('testhome');
+  });
+
+
 Route::get('/home', 'HomeController@home')->name('home');
 Auth::routes();
 
@@ -1148,7 +1152,7 @@ Route::get('/index/resume/edit-referees/{id}', [
 	Route::resource('policies', 'PolicyController');
 	Route::resource('resume', 'ResumeController');
 	Route::resource('employer', 'EmployerController');
-	Route::resource('index', 'HomeController');
+	// Route::resource('index', 'HomeController');
 	Route::resource('plans', 'PackagesController');
 	Route::resource('menu', 'MenuController');
 	Route::resource('pages', 'PostController');

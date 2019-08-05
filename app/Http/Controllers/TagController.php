@@ -44,8 +44,7 @@ class TagController extends Controller
 {
       public function __construct()
     {
-        $this->middleware('auth');
-        //$this->middleware('role:admin');
+        $this->middleware('auth'); 
     }
 
     /**
@@ -60,6 +59,7 @@ class TagController extends Controller
         //
         return view('admin.tags.index', compact('tags', 'users'), array('user' => Auth::user()));
     }
+
 
     public function findJob(Request $request)
     {

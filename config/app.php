@@ -178,7 +178,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
+        // Maatwebsite\Excel\ExcelServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Backpack\BackupManager\BackupManagerServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
@@ -253,7 +253,7 @@ return [
         'Entrust'=> Zizaco\Entrust\EntrustFacade::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        // 'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Alertify' => odannyc\Alertify\Alertify::class,
         'Date' => Jenssegers\Date\Date::class,
         'LogActivity' => App\Helpers\LogActivity::class,
