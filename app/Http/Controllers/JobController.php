@@ -27,7 +27,6 @@ class JobController extends Controller
     {
         // Get tags
         $tags = Tag::orderBy('created_at', 'DESC')->paginate(5);
-
         // Return collection of tags as a resource
         return TagResource::collection($tags);
     }
@@ -35,7 +34,7 @@ class JobController extends Controller
         public function SearchBar()
         {
             // $users = User::orderBy('created_at', 'ASC')->paginate(5);
-            $industries = DB::table('industries')->where('status',1)->get(); 
+            $industries = DB::table('industries')->orderBy('name')->where('status',1)->get(); 
             $cities = DB::table('cities')->get();
             $industry_professions = DB::table('industry_professions')->get();
             $response = array(  'cities' => $cities,
