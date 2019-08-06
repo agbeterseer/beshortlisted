@@ -54,15 +54,7 @@ class HomeController extends Controller
       $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'users' => $users);
       return response()->json($response);
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> ed0b9562e5aed10f7427fc5febaa0ec39eeb851b
-
-    public function testhome($value='')
-    {
-     
-    }
+ 
     /**
      * Show the application dashboard.
      *
@@ -180,7 +172,7 @@ public function employement_term_list()
   public function employee(Request $request){ 
        $menus = $this->displayMenu();
        $posts = DB::table('posts')->where('status', 1)->paginate(3);
-       $featured_tags = DB::table('tags')->where('featured', 1)->paginate(6);
+       $featured_tags = DB::table('tags')->where('featured', 1)->where('active', 1)->paginate(6);
        $employement_terms = $this->employement_terms();
        $industry_professions = $this->industry_professions(); 
         //$industries = Industry::all();
@@ -230,7 +222,7 @@ public function employement_term_list()
     $regions = DB::table('regions')->get();
     $educational_levels = $this->GetQualificationLevels(); 
     $industries = DB::table('industries')->where('status', 1)->orderBy('name')->get();
-      $industry_professions = DB::table('industry_professions')->get();
+      $industry_professions = DB::table('industry_professions')->orderBy('name')->get();
           $city_count = DB::table('tags')
              ->select('city', DB::raw('count(*) as total'))
              ->groupBy('city')->get();
@@ -244,6 +236,28 @@ public function employement_term_list()
           // $page = Post::where('display_name', $code)->where('status',1)->first();
          
      return view('jobs.job_listing_form', compact('industry_professions', 'industries', 'cities', 'city_count', 'employement_term_list','job_type_count', 'tags', 's', 'menus', 'posts') );
+    }
+        public function ShowJobFilterForm2(Request $request, $code){
+    $s = $request->input('s');
+    $countries = DB::table('countries')->get();
+    $cities = $this->GetCities();
+    $regions = DB::table('regions')->get();
+    $educational_levels = $this->GetQualificationLevels(); 
+    $industries = DB::table('industries')->where('status', 1)->orderBy('name')->get();
+      $industry_professions = DB::table('industry_professions')->orderBy('name')->get();
+          $city_count = DB::table('tags')
+             ->select('city', DB::raw('count(*) as total'))
+             ->groupBy('city')->get();
+    $employement_term_list = DB::table('employement_terms')->orderBy('name')->where('status',1)->get();
+    $job_type_count = DB::table('tags')
+             ->select('job_type', DB::raw('count(*) as total'))
+             ->groupBy('job_type')->get();
+          $tags = Tag::where('status',1)->where('active',1)->paginate(20);  
+          $menus = $this->displayMenu();
+          $posts = $this->listPages();
+          // $page = Post::where('display_name', $code)->where('status',1)->first();
+         
+     return view('jobs.job_listing_form-2', compact('industry_professions', 'industries', 'cities', 'city_count', 'employement_term_list','job_type_count', 'tags', 's', 'menus', 'posts') );
     }
     public function JobListing(Request $request){
         $s = $request->input('s');
@@ -276,7 +290,7 @@ public function employement_term_list()
          $tags = Tag::where('status',1)->where('active',1)->paginate(20);     
         }
  $tags = Tag::where('status',1)->where('active',1)->paginate(20); 
-        $industry_professions = DB::table('industry_professions')->get();
+        $industry_professions = DB::table('industry_professions')->orderBy('name')->get();
         $employement_term_list = DB::table('employement_terms')->get();
         $cities = DB::table('cities')->get();
     $job_type_count = DB::table('tags')

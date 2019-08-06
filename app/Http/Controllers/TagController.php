@@ -1694,7 +1694,7 @@ return redirect()->back();
 
 public function SaveJob(Request $request)
 {
-    //dd($request->all());
+   
   // After Job is posted
       // 1. status is set to 0
       // active is set to 0
@@ -1711,15 +1711,13 @@ public function SaveJob(Request $request)
         $client = $request->client;
         $profession = $request->profession;
         $display_name = $request->display_name;
-        $description = $request->description;
-        $field_of_study = $request->fieldsos;
+        $description = $request->description; 
         
         $experience = $request->p_experience;
         $job_level = $request->p_job_level;
         $salary_range = $request->salary_range;
         $industry = $request->p_industry;
-        $qualification = $request->p_qualification;
-        $deadline_submission = $request->deadline_submission;
+        $qualification = $request->p_qualification; 
         $country = $request->p_country;
         $region = $request->region;
         $city = $request->location;
@@ -1783,12 +1781,11 @@ public function SaveJob(Request $request)
         }
       
        //job_requirements
-    //dd($profession->id);
         
-      if($end_date !=null && $job_title !=null && $job_level !=null && $industry !=null){
- 
-        try {
-            DB::transaction(function () use ($job_title, $display_name, $client, $profession, $client_name, $end_date, $job_code, $request, $user, $reqirements, $assessments, $skillist, $field_of_study)  {
+     // if($end_date !=null && $job_title !=null && $job_level !=null && $industry !=null){
+//dd($request->all());
+       
+            DB::transaction(function () use ($job_title, $display_name, $client, $profession, $client_name, $end_date, $job_code, $request, $user, $reqirements, $assessments, $skillist)  {
 // .'-'. str_limit(strtoupper($client_name),3)
 
           $tag = Tag::firstOrNew(['job_title' => $request->input('job_title')]);
@@ -1803,8 +1800,7 @@ public function SaveJob(Request $request)
           $tag->job_type = $request->input('job_type');
           $tag->salary_range = $request->input('p_salary_range');
           $tag->industry = $request->input('p_industry');
-          $tag->qualification = $request->input('p_qualification');
-          $tag->deadline_submission = $request->input('deadline_submission');
+          $tag->qualification = $request->input('p_qualification'); 
           $tag->country = $request->input('p_country');
           $tag->region = $request->input('region');
           $tag->city = $request->input('location');
@@ -1818,21 +1814,20 @@ public function SaveJob(Request $request)
           $tag->delete = 0;
           $tag->awaiting_aproval = 1;
           $tag->job_summary = $request->input('job_summary');
-          $tag->Job_roles  = $request->input('Job_roles'); 
-          $tag->save();
- 
+          $tag->job_role = $request->input('job_roles'); 
+          $tag->save(); 
+    
+   foreach ($assessments as $key => $value) {
+       DB::table('job_assessments')->insert(['question' => $value['assessment'], 'client_id' => $user->id, 'job_id' =>$tag->id, 'status' => 1, 'created_at' =>$this->returnCurrentTime()]);
+    }
+         
 
-       foreach ($assessments as $key => $value) {
-        //dd($value['assessment']);
-             DB::table('job_assessments')->insert(['question' => $value['assessment'], 'client_id' => $user->id, 'job_id' =>$tag->id, 'status' => 1, 'created_at' =>$this->returnCurrentTime()]);
-        }
-
-        foreach ($field_of_study as $key => $value) {
-          DB::table('job_field_of_studies')->insert(['fostudy' => $value, 'tag_id' =>$tag->id, 'status' => 1, 'created_at' =>$this->returnCurrentTime()]);
-        }
+        // foreach ($field_of_study as $key => $value) {
+        //   DB::table('job_field_of_studies')->insert(['fostudy' => $value, 'tag_id' =>$tag->id, 'status' => 1, 'created_at' =>$this->returnCurrentTime()]);
+        // }
 
            });
-       
+    
  
     $tagid = DB::table('tags')->orderby('created_at', 'DESC')->first();
    // redirect to payment Packages
@@ -1842,19 +1837,24 @@ public function SaveJob(Request $request)
    // get employers abailable units
   // subtract one from the abailable units
   // update employer with new unite
-$employer_package = EmployerPackage::where('userfkp', $user->id)->where('status',1)->first();
+// $employer_package = EmployerPackage::where('userfkp', $user->id)->where('status',1)->first();
 
-if ($employer_package->jobs_remaining !=0 ) {
- $new_unit = $employer_package->jobs_remaining - 1;
-$employer_packages = DB::table('employer_packages')->where(['userfkp' => $user->id, 'package_id' => $employer_package->package_id, 'status'=> 1])->update([ 'jobs_remaining' => $new_unit ]);
-}else{
-  Session::flash('you have no availabile unit');
-}
+// if ($employer_package->jobs_remaining !=0 ) {
+//  $new_unit = $employer_package->jobs_remaining - 1;
+// $employer_packages = DB::table('employer_packages')->where(['userfkp' => $user->id, 'package_id' => $employer_package->package_id, 'status'=> 1])->update([ 'jobs_remaining' => $new_unit ]);
+// }else{
+//   Session::flash('you have no availabile unit');
+// }
+    try {
+     
+  $this->SendJobAlert($tagid->id, $job_type, $city, $country, $email_address, $industry, $job_category);
 
-        
-    $this->SendJobAlert($tagid->id, $job_type, $city, $country, $email_address, $industry, $job_category);
-
-    $this->SendJobPostAlertToAdmin($tagid->id);
+  $this->SendJobPostAlertToAdmin($tagid->id);
+        } catch (\Exception $e) {
+      Session::flash('error', $e->getMessage());
+        // return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+ 
 
     $admin = $request->admin;
 
@@ -1871,10 +1871,8 @@ if ($admin) {
 // return response()->json($response);
  }
    // insert into ProfessionMeta of candidates to im     
-        } catch (\Exception $e) {
-        return redirect()->back()->withErrors(['error' => 'somthing went wrong']);
-        }
-  }
+  
+  
 //dd('here');
         return back()->with(['error' => 'somthing went wrong']);
 }

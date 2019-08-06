@@ -1899,7 +1899,7 @@ $pr_caption= RecruitResume::where('user_id', $user->id)->where('status',1)->firs
        
         $document = Document::Where('user_id', $user->id)->first();
         $industries =  DB::table('industries')->get();
-        $recruityear_list = RecruitYear::all();
+        $recruityear_list = RecruitYear::orderBy('name', 'DESC')->get();
         $qualifications = Qualification::all();
         // $countries = Country::all();
         $job_career_levelList = JobcareerLevel::all();

@@ -84,7 +84,7 @@ $check = 'second';
 <div class="space">&nbsp;</div> 
 <div class="space">&nbsp;</div>
 <div class="space">&nbsp;</div> --> 
-        <div class="careerfy-subheader careerfy-subheader-without-bg">
+<!--         <div class="careerfy-subheader careerfy-subheader-without-bg">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -97,17 +97,16 @@ $check = 'second';
                         </div>
                     </div>
                 </div>
-            </div>
-<!-- <div class="clearfix"></div> -->
-<!-- <div class="careerfy-breadcrumb">
+            </div> 
+ <div class="careerfy-breadcrumb">
 <ul>
   <li><a href="#">Home</a></li>
   <li><a href="#">Pages</a></li>
   <li>Candidates</li>
 </ul>
  </div> 
--->
-        </div>
+
+        </div> -->
 <!--             <div class="careerfy-main-section careerfy-parallex-full animation-test"  style="background-color: #ffffff;">
                 <div class="container">
                     <div class="row">
@@ -123,6 +122,7 @@ $check = 'second';
                     </div>
                 </div>
             </div>  -->
+            @include('partials.employee_breadcomb')
 <div class="space">&nbsp;</div> 
 <div class="space">&nbsp;</div> 
   @if ($errors->any())

@@ -43,6 +43,11 @@ border-color: white !important;
    </td> -->
                         <!-- <div class="careerfy-column-12 careerfy-typo-wrap"> -->
     <!-- Main Section -->
+        @if(Session()->has('error'))
+                        <div class="alert alert-danger"> 
+                        {!! Session::get('error') !!}
+                        </div>
+                        @endif
 
                               <div class="lds-ripplee" style="display: none;"><div></div><div></div></div>
                                <div id="info"></div>

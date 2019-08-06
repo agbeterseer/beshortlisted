@@ -49,57 +49,11 @@ border-color: white !important;
                         <div class="col-md-12 careerfy-typo-wrap">
                             <!-- Sub Header Form -->
                             <div class="careerfy-subheader-form">
-                       <div id="app"> 
+                            <div id="app"> 
                             <searchbar></searchbar>
                              <listjobs></listjobs> 
                             </div> 
-                     <form class="careerfy-banner-search" action="{{route('job.listing')}}" method="GET">
-                     
-                        <ul>
-                            <li>
-                                   <div class="careerfy-select-style"> 
-                                    <select name="location">
-                                    <option value="">Select City</option>
-                                    @foreach($cities as $city)
-                                 
-    <option value="{{$city->id}}">{{$city->name}}</option> 
-                                 
-                                        @endforeach 
-                                    </select>
-                                </div>
- 
-                            </li>
-                            <li>
-                                 <div class="careerfy-select-style" >
-                                    <select name="job_function" >
-                                    <option value="">Select Job Function</option>
-                                    @foreach($industry_professions as $industry_profession)
-                                        <option value="{{$industry_profession->id}}">{{$industry_profession->name}}</option>
-
-                                        @endforeach
-                               
-                                    </select>
-                                </div>
-                               
-                            </li>
-                            <li>
-                                                        <div class="careerfy-select-style">
-                                    <select name="s"  >
-                                    <option value="">Select Industry</option>
-                                    @foreach($industries as $industry)
-                       
-                                 
-                                             <option value="{{$industry->id}}"> <div style="width: 50px;">{{$industry->name}}</div></option> 
-                                
-                                        @endforeach  
-                                        
-                                    </select>
-                                </div>
-
-                            </li>
-                            <li class="careerfy-banner-submit"> <input type="submit" value=""> <i class="careerfy-icon careerfy-search"></i> </li>
-                        </ul>
-                    </form>
+             
                             </div>
                             <!-- Sub Header Form -->
                         </div>

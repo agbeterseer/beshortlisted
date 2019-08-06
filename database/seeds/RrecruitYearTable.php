@@ -131,7 +131,7 @@ class RrecruitYearTableSeeder extends Seeder
 '118', '1901', '1', 
 '119', '1900', '1',
 
-    $pageinformation = [
+    $years = [
 	    [ 
 	    'name' => '2019',
 	    'status' => '1' 
@@ -186,8 +186,8 @@ class RrecruitYearTableSeeder extends Seeder
 
     ];
 
-    foreach ($professions as $key => $value) {
-    	Profession::create($value);
+    foreach ($years as $key => $value) {
+    	RecruitYear::create($value);
     }
     }
 }
