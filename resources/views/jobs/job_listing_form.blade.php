@@ -95,7 +95,7 @@ border-color: white !important;
                                 </div>
 
                             </li>
-                            <li class="careerfy-banner-submit"> <input type="submit" value=""> <i class="careerfy-icon careerfy-search"></i> Find</li>
+                            <li class="careerfy-banner-submit"> <input type="submit" value="Find"> <i class="careerfy-icon careerfy-search"></i> </li>
                         </ul>
                     </form>
                             </div>

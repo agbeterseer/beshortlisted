@@ -207,12 +207,14 @@
                                                 <figure><a href="#"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-joblisting-text">
                                                     <div class="careerfy-list-option">
-                                                        <h2><a href="#"> {{$common_job->job_title}}</a>  
+                                                        <h2><a href="#"> {{$common_job->job_title}}</a> 
+
                                                     @foreach($employement_terms as $employement_term) 
                                                           @if($employement_term->id === $tag->job_type)
                                                     <span class="careerfy-option-btn careerfy-{{$employement_term->category}}"> {{$employement_term->name}} </span> @endif @endforeach </h2>
                                                         <ul> 
-                                                            <li><i class="careerfy-icon careerfy-maps-and-flags"></i>{{$common_job->country}}, {{$common_job->city}}</li>
+                          <li style="color: #F1630D";><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>  
+                            <strong>Apply Before:</strong> {{ date('M d, Y', strtotime($common_job->end_date)) }}</li>
                                                             <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> @foreach($industry_professions as $profession) @if($profession->id === $common_job->job_category){{$profession->name}} @endif @endforeach</li>
                                                         </ul>
                                                     </div>

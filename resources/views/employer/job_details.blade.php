@@ -168,8 +168,9 @@
                                                     <div class="careerfy-list-option">
                                                         <h2><a href="{{route('job.description', $common_job->id)}}"> {{$common_job->job_title}}</a> <!-- <span>Featured</span> --></h2>
                                                         <ul>
-                                                            <li><a href="#"> </a></li>
-                                                            <li><i class="careerfy-icon careerfy-maps-and-flags"></i>{{$common_job->country}}, {{$common_job->city}}</li>
+                                                      
+                                                           <li style="color: #F1630D";><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>  
+                            <strong>Apply Before:</strong> {{ date('M d, Y', strtotime($common_job->end_date)) }}</li>
                                                             <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> @foreach($industry_professions as $profession) @if($profession->id === $common_job->job_category){{$profession->name}} @endif @endforeach
 
                                                             </li>
@@ -242,18 +243,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
  
     <script src="{{ asset('recruit/script/jquery.js')}}"></script>
-    <script src="{{ asset('recruit/script/bootstrap.js')}}"></script>
-    <script src="{{ asset('recruit/script/slick-slider.js')}}"></script>
-    <script src="{{ asset('recruit/plugin-script/counter.js')}}"></script>
-    <script src="{{ asset('recruit/plugin-script/fancybox.pack.js')}}"></script>
-    <script src="{{ asset('recruit/plugin-script/isotope.min.js')}}"></script>
-    <script src="{{ asset('recruit/plugin-script/functions.js')}}"></script>
-    <script src="{{ asset('recruit/script/functions.js')}}"></script>
-    <script src="{{ asset('css/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('css/assets/global/plugins/bootstrap-summernote/summernote.min.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('css/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
-         <script src="{{ asset('css/assets/global/scripts/app.min.js') }}" type="text/javascript"></script>
- <script src="{{ asset('css/assets/pages/scripts/form-repeater.min.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('recruit/script/bootstrap.js')}}"></script> 
 
 
  </div>
