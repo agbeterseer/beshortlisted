@@ -1484,14 +1484,14 @@ $units = $this->displayUnit();
     if ($employer_packages !=null  && $employer_packages->units != 0) {
     //dd('NO');
     $resumes = RecruitResume::all(); 
-    $countries = DB::table('countries')->get();
-    $cities = DB::table('cities')->get();
+    $countries = DB::table('countries')->orderBy('name_en')->get();
+    $cities = DB::table('cities')->orderBy('name')->get();
     $regions = DB::table('regions')->get();
     $educational_levels = $this->GetQualificationLevels(); 
-    $industries = DB::table('industries')->where('status',1)->get();
-    $employement_terms = DB::table('employement_terms')->get();
+    $industries = DB::table('industries')->where('status',1)->orderBy('name')->get();
+    $employement_terms = DB::table('employement_terms')->orderBy('name')->get();
     $jobcareer_levels = DB::table('jobcareer_levels')->where('status',1)->get();
-    $industry_professions = DB::table('industry_professions')->where('status',1)->get();
+    $industry_professions = DB::table('industry_professions')->where('status',1)->orderBy('name')->get();
     $fields_of_study_list = DB::table('fields_of_studies')->get();
     $recruit_profile_pix_list = DB::table('recruit_profile_pixs')->where('user_id',$user->id)->orderBy('created_at', 'DESC')->get();
 

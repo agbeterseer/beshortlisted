@@ -187,7 +187,7 @@
                                         <span class="word-counter">{{$jobs_count}}</span>
                                         <small>Jobs Added</small>
                                     </li>
-                                    <li class="col-md-3">
+                                    <li class="col-md-3" style="color: #fff;">
                                         <i class="careerfy-icon careerfy-hospital"></i>
                                         <span class="word-counter">{{$company_count}}</span>
                                         <small>Companies Registered</small>

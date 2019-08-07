@@ -27,6 +27,7 @@ class JobController extends Controller
     {
         // Get tags
         $tags = Tag::orderBy('created_at', 'DESC')->paginate(5);
+
         // Return collection of tags as a resource
         return TagResource::collection($tags);
     }
@@ -37,7 +38,7 @@ class JobController extends Controller
             $industries = DB::table('industries')->orderBy('name')->where('status',1)->get(); 
             $cities = DB::table('cities')->get();
             $industry_professions = DB::table('industry_professions')->get();
-            $response = array(  'cities' => $cities,
+            $response = array('cities' => $cities,
                                 'industries' => $industries,
                                 'industry_professions' => $industry_professions
                                 );
@@ -48,25 +49,31 @@ class JobController extends Controller
         public function getCities()
         {
             $cities = DB::table('cities')->orderBy('name')->get();
-            $response = array(  'cities' => $cities);
+            $response = array('cities' => $cities);
              return response()->json($response);
         }
         public function getIndustryProfessions()
         {
-            $industry_professions = DB::table('industry_professions')->get();
+            $industry_professions = DB::table('industry_professions')->orderBy('name')->get();
             $response = array(  'industry_professions' => $industry_professions);
              return response()->json($response);
         }
         public function getIndustries()
         {
-            $industries = DB::table('industries')->get();
-            $response = array(  'industries' => $industries);
+            $industries = DB::table('industries')->where('status',1)->orderBy('name')->get();
+            $response = array('industries' => $industries);
+             return response()->json($response);
+        }
+        public function getVacancyTypes()
+        {
+            $employement_term_list = DB::table('employement_terms')->where('status',1)->orderBy('name')->get();
+            $response = array('employement_term_list' => $employement_term_list);
              return response()->json($response);
         }
 
         public function getJobs()
         {
-        $tags = Tag::where('status',1)->where('active',1)->orderBy('created_at', 'DESC')->paginate(20);
+        $tags = Tag::where('status',1)->where('active',1)->orderBy('created_at', 'DESC')->paginate(5);
            // $tags = Tag::where('status',1)->where('active',1)->paginate(20); 
          return TagResource::collection($tags); 
         }
@@ -105,6 +112,7 @@ class JobController extends Controller
  $tags = Tag::where('status',1)->where('active',1)->paginate(20); 
         $industry_professions = DB::table('industry_professions')->get();
         $employement_term_list = DB::table('employement_terms')->get();
+
         $cities = DB::table('cities')->get();
     $job_type_count = DB::table('tags')
              ->select('job_type', DB::raw('count(*) as total'))

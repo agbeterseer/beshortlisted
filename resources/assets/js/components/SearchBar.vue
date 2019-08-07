@@ -1,6 +1,6 @@
-<template>
+            <template>
     <div class="container">
-      <h2>Articles</h2>
+      <h2>Find a job</h2>
   
         <form class="careerfy-banner-search"  method="GET">
                      
@@ -15,10 +15,11 @@
                                 </div> 
                             </li>
                             <li>
-                           <div class="careerfy-select-style"  v-model="industries.name">
+                           <div class="careerfy-select-style"  v-model="industryprofessions.name">
                                     <select name="job_function" >
                                     <option value="">Select Job Function</option> 
-                                  <option v-for="industry in industries" v-bind:value="industry.id"> {{ industry.name }} </option> 
+               <option v-for="industry_profession in industryprofessions" v-bind:value="industry_profession.id"> 
+               {{ industry_profession.name }} </option> 
                                     
                                     </select>
                                 </div>
@@ -29,14 +30,16 @@
                                     <select name="s">
                                     <option value="">Select Industry</option>
                                                                 
-                                    <option value="ID"> <div style="width: 50px;"> Name </div>
+                                   <option v-for="industry in industries" v-bind:value="industry.id"> {{ industry.name }} </option> 
+                                    
+                                    </select>
                                     </option> 
                                        
                                     </select>
                                 </div>
 
                             </li>
-                            <li class="careerfy-banner-submit"> <input type="submit" value=""> <i class="careerfy-icon careerfy-search"></i> </li>
+                            <li class="careerfy-banner-submit"> <input type="submit" value="Find"> <i class="careerfy-icon careerfy-search"></i> </li>
                         </ul>
 
                     </form>
@@ -54,7 +57,15 @@ export default {
       name: ''
       },
       industries: [],
-      industry_professions: [],
+      industry: {
+      id: '',
+      name: ''
+      },
+      industryprofessions: [],
+      industry_profession: {
+      id: '',
+      name: ''
+      }
 
     }
   },
@@ -62,6 +73,7 @@ export default {
   // run automatically
     this.fetchCities(); 
     this.fetchIndustries();
+    this.fetchIndustryProfession();
   },
   methods:{
     fetchCities() {
@@ -80,8 +92,15 @@ export default {
         this.industries = res.industries;
       })
       .catch(err => console.log(err));
+    },
+      fetchIndustryProfession() {
+    fetch('/api/industryprofessions')
+    .then(res => res.json())
+    .then(res => {
+        this.industryprofessions = res.industry_professions;
+      })
+      .catch(err => console.log(err));
     }
-  
   }
  
 };

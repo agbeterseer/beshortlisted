@@ -289,8 +289,10 @@ border-color: white !important;
                                             <ul class="careerfy-row careerfy-employer-profile-form">
                                             <div class="note note-primary">
 <span style="line-height: 2.6;"> 
-1. Enter question(s), one at a time and then click 'Add' button <br> 
-2. Click on 'Delete' to remove a question 
+ Enter role specific question(s) related to this job.
+<p>
+ These question will be made available for all candidates applying for this position as they will be requried to answer all.
+</p>
 <br> 
 </span> 
 </div>

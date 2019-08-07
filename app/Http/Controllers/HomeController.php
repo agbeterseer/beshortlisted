@@ -568,8 +568,8 @@ public function EmployerSignUp()
   $menus = $this->displayMenu();
   $posts = $this->listPages();
   $all_pages = DB::table('personal_informations')->get();
-  $countries = DB::table('countries')->get();
-  $industries = DB::table('industries')->where('status',1)->get();
+  $countries = DB::table('countries')->orderBy('name_en')->get();
+  $industries = DB::table('industries')->orderBy('name')->where('status',1)->get();
 return view('auth.employer_registration', compact('menus', 'posts', 'all_pages', 'countries', 'industries'), array('user' => Auth::user()));
 }
 
@@ -578,15 +578,14 @@ public function EmployeeSignUp()
   $menus = $this->displayMenu();
   $posts = $this->listPages();
   $all_pages = DB::table('personal_informations')->get();
-  $countries = DB::table('countries')->get();
-  $industries = DB::table('industries')->where('status',1)->get();
-   $recruityear_list = RecruitYear::all();
+  $countries = DB::table('countries')->orderBy('name_en')->get();
+  $industries = DB::table('industries')->orderBy('name')->where('status',1)->get();
+   $recruityear_list = RecruitYear::orderBy('name', 'DESC')->get();
         $job_career_levelList = JobcareerLevel::all();
         $educationallevels = $this->GetQualificationLevels();
-        $employementterms = DB::table('employement_terms')->get(); 
-       $industry_profession = DB::table('industry_professions')->get();
+        $employementterms = DB::table('employement_terms')->orderBy('name')->get(); 
+       $industry_profession = DB::table('industry_professions')->orderBy('name')->get();
         //employement_terms employement_terms
-        $industry_profession = DB::table('industry_professions')->get();
 return view('auth.employee_registration', compact('menus', 'posts', 'all_pages', 'countries', 'industries', 'recruityear_list', 'job_career_levelList', 'educationallevels', 'employementterms', 'industry_profession'), array('user' => Auth::user()));
 }
 
@@ -594,14 +593,14 @@ return view('auth.employee_registration', compact('menus', 'posts', 'all_pages',
 
 public function RegisterEmployer(Request $request)
 {
- // dd($request->all());
+// dd($request->all());
 
 
   $account_type = $request->account_type;
   $email = $request->email;
   $password = $request->password;
   $password_confirmation = $request->password_confirmation;
-  $phone = $request->phone;
+  $phone = $request->code . $request->phone;
   $name = $request->name;
   $lastname = $request->lastname;
   $comany_name = $request->comany_name;
@@ -611,10 +610,10 @@ public function RegisterEmployer(Request $request)
   $website = $request->website;
 
   $contact_address = $request->contact_address;
-  $contact_phone_number = $request->contact_phone_number;
+  $contact_phone_number = $request->code . $request->contact_phone_number;
   $email_notificaiton = $request->email_notificaiton;
   $contact_person = $request->contact_person;
-  $country = $request->country;
+  $country = $request->country; 
 
   //check user
   $user = DB::table('users')->where('email', $email)->first();
@@ -673,7 +672,7 @@ public function RegisterEmployee(Request $request)
   $email = $request->email;
   $password = $request->password;
   $password_confirmation = $request->password_confirmation;
-  $phone = $request->phone;
+  $phone = $request->code . $request->phone;
   $firstname = $request->firstname;
   $lastname = $request->lastname;
   $work_from_year = $request->work_from_year;
@@ -689,6 +688,7 @@ public function RegisterEmployee(Request $request)
   $position_title = $request->position_title;
   $company_name = $request->company_name;
   $gender = $request->gender; 
+ // dd($phone);
    // check if user exist
 
   $user = DB::table('users')->where('email', $email)->first();

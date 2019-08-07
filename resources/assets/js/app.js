@@ -15,14 +15,18 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('navbar', require('./components/Navbar.vue'));
-Vue.component('articles', require('./components/Article.vue'));
+Vue.component('navbar', require('./components/Navbar.vue')); 
 Vue.component('jobs', require('./components/Job.vue'));
 Vue.component('searchbar', require('./components/SearchBar.vue'));
 Vue.component('listjobs', require('./components/ListJob.vue'));
+Vue.component('industries', require('./components/Industries.vue'));
+Vue.component('listcities', require('./components/ListCity.vue'));
+Vue.component('jobfunctions', require('./components/JobFunctions.vue'));
+Vue.component('vacancytypes', require('./components/VacancyType.vue'));
 
 const app = new Vue({
     el: '#app',
    
 });
+
  

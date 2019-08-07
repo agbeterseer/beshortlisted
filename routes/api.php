@@ -37,6 +37,8 @@ Route::get('search', 'JobController@SearchBar');
 Route::get('cities', 'JobController@getCities');
 Route::get('industryprofessions', 'JobController@getIndustryProfessions');
 Route::get('industries', 'JobController@getIndustries');
+Route::get('vacancytypes', 'JobController@getVacancyTypes');
+
 
 
 

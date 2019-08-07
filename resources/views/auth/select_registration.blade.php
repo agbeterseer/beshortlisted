@@ -484,41 +484,7 @@ employee
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{{ asset('recruit/script/jquery.js')}}"></script>
     <script src="{{ asset('recruit/script/bootstrap.js')}}"></script>
- <script src="{{ asset('css/assets/global/plugins/bootstrap-summernote/summernote.min.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('recruit/script/slick-slider.js')}}"></script>
-    <script src="{{ asset('recruit/plugin-script/counter.js')}}"></script>
-    <script src="{{ asset('recruit/plugin-script/fancybox.pack.js')}}"></script>
-    <script src="{{ asset('recruit/plugin-script/isotope.min.js')}}"></script>
-    <script src="{{ asset('recruit/plugin-script/functions.js')}}"></script>
-    <script src="{{ asset('recruit/script/functions.js')}}"></script>
-        <script src="{{ asset('css/assets/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}" type="text/javascript"></script>
-          <script src="{{ asset('js/selectform.js') }}"></script>
-<script src="{{ asset('css/assets/pages/scripts/components-bootstrap-tagsinput.min.js')}}" type="text/javascript"></script>
-      <script src="{{ asset('css/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
-      <script src="{{ asset('css/assets/pages/scripts/form-repeater.min.js')}}" type="text/javascript"></script>
  
- <script type="text/javascript">
-    
- 
-    $(document).ready(function() {
-        $('#summernote_1').summernote({
-            height:'300px'
-        });
-        // body...
-    });
-    $(document).ready(function() {
-        $('#summernote_2').summernote({
-            height:'300px',
-        });
-        // body...
-    });
-    $('#clear').on('click', function() {
-        $('#summernote_1').summernote('code', null);
-    });
-        $('#clear').on('click', function() {
-        $('#summernote_2').summernote('code', null);
-    });
-</script>
  
     <script>
 $(document).ready(function(){
@@ -541,46 +507,8 @@ $(document).ready(function(){
         $("#availability_date").hide();
     }
 });
-$("#present").click(function(){
-  //  alert($(this).val());
-    //$("#end_month").hide();
-    //document.getElementById('myInput').value = ''
-  document.getElementById('end_month_work').value = ''; 
-  
-  document.getElementById('end_year').value = ''; 
-  
-});
-  $("#end_month").change(function() { 
-//alert($(this).val());
-    if ( $(this).val() !=null) {
-        $("#present2").show();
-        $("#present").hide();
-  //document.getElementById('present').style.display = 'none';
-   //document.getElementById('work_to_present').style.display = 'block';
-        
-    }
-    else{
-document.getElementById('work_to_present').style.display = 'none';
-document.getElementById('present').style.display = 'block';
  
-    }
-}); 
- (function( $ ) {
-    'use strict';
-    if ( $.isFunction($.fn[ 'summernote_1' ]) ) {
-        $(function() {
-            $('#summernote_1').themePluginSummerNote({
-                height: 180,
-                codemirror: {
-                    "theme": "ambiance"
-                },
-                toolbar: [               
-                    ['style', ['bold', 'italic', 'underline', 'clear']]
-                ]
-            });
-        });
-    }
-}).apply(this, [ jQuery ]);
+ 
  </script>
 
  <script type="text/javascript">

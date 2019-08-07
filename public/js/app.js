@@ -1108,10 +1108,13 @@ window.Vue = __webpack_require__(4);
  */
 
 Vue.component('navbar', __webpack_require__(40));
-Vue.component('articles', __webpack_require__(42));
 Vue.component('jobs', __webpack_require__(45));
 Vue.component('searchbar', __webpack_require__(48));
 Vue.component('listjobs', __webpack_require__(51));
+Vue.component('industries', __webpack_require__(71));
+Vue.component('listcities', __webpack_require__(68));
+Vue.component('jobfunctions', __webpack_require__(74));
+Vue.component('vacancytypes', __webpack_require__(77));
 
 var app = new Vue({
   el: '#app'
@@ -44691,327 +44694,9 @@ if (false) {
 }
 
 /***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(43)
-/* template */
-var __vue_template__ = __webpack_require__(44)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/Article.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-720b7e0f", Component.options)
-  } else {
-    hotAPI.reload("data-v-720b7e0f", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 43 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            articles: [],
-            article: {
-                id: '',
-                title: '',
-                body: ''
-            },
-            article_id: '',
-            pagination: {},
-            edit: false
-        };
-    },
-    created: function created() {
-        this.fetchArticles();
-    },
-
-    methods: {
-        fetchArticles: function fetchArticles(page_url) {
-            var _this = this;
-
-            var vm = this;
-            page_url = page_url || '/api/articles';
-            fetch(page_url).then(function (res) {
-                return res.json();
-            }).then(function (res) {
-                console.log(res.json());
-                _this.articles = res.data;
-                vm.makePagination(res.meta, res.links);
-            }).catch(function (err) {
-                return console.log(err);
-            });
-        },
-        makePagination: function makePagination(meta, links) {
-            var pagination = {
-                current_page: meta.current_page,
-                last_page: meta.last_page,
-                next_page_url: links.next,
-                prev_page_url: links.prev
-            };
-            this.pagination = pagination;
-        },
-        deleteArticle: function deleteArticle(id) {
-            var _this2 = this;
-
-            if (confirm('Are You Sure?')) {
-                fetch('api/article/' + id, {
-                    method: 'delete'
-                }).then(function (res) {
-                    return res.json();
-                }).then(function (data) {
-                    alert('Article Removed');
-                    _this2.fetchArticles();
-                }).catch(function (err) {
-                    return console.log(err);
-                });
-            }
-        },
-        addArticle: function addArticle() {
-            var _this3 = this;
-
-            if (this.edit === false) {
-                // Add
-                fetch('api/article', {
-                    method: 'post',
-                    body: JSON.stringify(this.article),
-                    headers: {
-                        'content-type': 'application/json'
-                    }
-                }).then(function (res) {
-                    return res.json();
-                }).then(function (data) {
-                    _this3.article.title = '';
-                    _this3.article.body = '';
-                    alert('Article Added');
-                    _this3.fetchArticles();
-                }).catch(function (err) {
-                    return console.log(err);
-                });
-            } else {
-                // update
-                fetch('api/article', {
-                    method: 'put',
-                    body: JSON.stringify(this.article),
-                    headers: {
-                        'content-type': 'application/json'
-                    }
-                }).then(function (res) {
-                    return res.json();
-                }).then(function (data) {
-                    _this3.article.title = '';
-                    _this3.article.body = '';
-                    alert('Article Updated');
-                    _this3.fetchArticles();
-                }).catch(function (err) {
-                    return console.log(err);
-                });
-            }
-        },
-        editArticle: function editArticle(article) {
-            this.edit = true;
-            this.article.id = article.id;
-            this.article.article_id = article.id;
-            this.article.title = article.title;
-            this.article.body = article.body;
-        }
-    }
-});
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _c("h2", [_vm._v("Articles")]),
-      _vm._v(" "),
-      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
-        _c("ul", { staticClass: "pagination" }, [
-          _c(
-            "li",
-            {
-              staticClass: "page-item",
-              class: [{ disabled: !_vm.pagination.prev_page_url }]
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      return _vm.fetchArticles(_vm.pagination.prev_page_url)
-                    }
-                  }
-                },
-                [_vm._v("Previous")]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("li", { staticClass: "page-item disabled" }, [
-            _c(
-              "a",
-              { staticClass: "page-link text-dark", attrs: { href: "#" } },
-              [
-                _vm._v(
-                  "Page " +
-                    _vm._s(_vm.pagination.current_page) +
-                    " of " +
-                    _vm._s(_vm.pagination.last_page)
-                )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "li",
-            {
-              staticClass: "page-item",
-              class: [{ disabled: !_vm.pagination.next_page_url }]
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      return _vm.fetchArticles(_vm.pagination.next_page_url)
-                    }
-                  }
-                },
-                [_vm._v("Next")]
-              )
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _vm._l(_vm.articles, function(article) {
-        return _c(
-          "div",
-          { key: article.id, staticClass: "card card-body mb-2" },
-          [
-            _c("h3", [_vm._v(_vm._s(article.job_title))]),
-            _vm._v(" "),
-            _c("p", [_vm._v(" " + _vm._s(article.description))]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-warning mb-2",
-                on: {
-                  click: function($event) {
-                    return _vm.editArticle(article)
-                  }
-                }
-              },
-              [_vm._v("Edit ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-danger",
-                on: {
-                  click: function($event) {
-                    return _vm.deleteArticle(article.id)
-                  }
-                }
-              },
-              [_vm._v("Delete ")]
-            )
-          ]
-        )
-      })
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-720b7e0f", module.exports)
-  }
-}
-
-/***/ }),
+/* 42 */,
+/* 43 */,
+/* 44 */,
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -45510,6 +45195,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -45520,7 +45208,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         name: ''
       },
       industries: [],
-      industry_professions: []
+      industry: {
+        id: '',
+        name: ''
+      },
+      industryprofessions: [],
+      industry_profession: {
+        id: '',
+        name: ''
+      }
 
     };
   },
@@ -45528,6 +45224,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     // run automatically
     this.fetchCities();
     this.fetchIndustries();
+    this.fetchIndustryProfession();
   },
 
   methods: {
@@ -45552,6 +45249,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).catch(function (err) {
         return console.log(err);
       });
+    },
+    fetchIndustryProfession: function fetchIndustryProfession() {
+      var _this3 = this;
+
+      fetch('/api/industryprofessions').then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this3.industryprofessions = res.industry_professions;
+      }).catch(function (err) {
+        return console.log(err);
+      });
     }
   }
 
@@ -45566,7 +45274,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("h2", [_vm._v("Articles")]),
+    _c("h2", [_vm._v("Find a job")]),
     _vm._v(" "),
     _c(
       "form",
@@ -45613,11 +45321,11 @@ var render = function() {
               {
                 staticClass: "careerfy-select-style",
                 model: {
-                  value: _vm.industries.name,
+                  value: _vm.industryprofessions.name,
                   callback: function($$v) {
-                    _vm.$set(_vm.industries, "name", $$v)
+                    _vm.$set(_vm.industryprofessions, "name", $$v)
                   },
-                  expression: "industries.name"
+                  expression: "industryprofessions.name"
                 }
               },
               [
@@ -45629,11 +45337,19 @@ var render = function() {
                       _vm._v("Select Job Function")
                     ]),
                     _vm._v(" "),
-                    _vm._l(_vm.industries, function(industry) {
+                    _vm._l(_vm.industryprofessions, function(
+                      industry_profession
+                    ) {
                       return _c(
                         "option",
-                        { domProps: { value: industry.id } },
-                        [_vm._v(" " + _vm._s(industry.name) + " ")]
+                        { domProps: { value: industry_profession.id } },
+                        [
+                          _vm._v(
+                            " \n           " +
+                              _vm._s(industry_profession.name) +
+                              " "
+                          )
+                        ]
                       )
                     })
                   ],
@@ -45643,9 +45359,28 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(0),
+          _c("li", [
+            _c("div", { staticClass: "careerfy-select-style" }, [
+              _c(
+                "select",
+                { attrs: { name: "s" } },
+                [
+                  _c("option", { attrs: { value: "" } }, [
+                    _vm._v("Select Industry")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.industries, function(industry) {
+                    return _c("option", { domProps: { value: industry.id } }, [
+                      _vm._v(" " + _vm._s(industry.name) + " ")
+                    ])
+                  })
+                ],
+                2
+              )
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(1)
+          _vm._m(0)
         ])
       ]
     )
@@ -45656,24 +45391,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("div", { staticClass: "careerfy-select-style" }, [
-        _c("select", { attrs: { name: "s" } }, [
-          _c("option", { attrs: { value: "" } }, [_vm._v("Select Industry")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "ID" } }, [
-            _c("div", { staticStyle: { width: "50px" } }, [_vm._v(" Name ")])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("li", { staticClass: "careerfy-banner-submit" }, [
-      _c("input", { attrs: { type: "submit", value: "" } }),
+      _c("input", { attrs: { type: "submit", value: "Find" } }),
       _vm._v(" "),
       _c("i", { staticClass: "careerfy-icon careerfy-search" })
     ])
@@ -45755,6 +45474,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -45783,14 +45545,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     fetchJobs: function fetchJobs(page_url) {
       var _this = this;
 
+      var vm = this;
       page_url = page_url || '/api/jobs';
       fetch(page_url).then(function (res) {
         return res.json();
       }).then(function (res) {
         _this.jobs = res.data;
+        vm.makePagination(res.meta, res.links);
       }).catch(function (err) {
         return console.log(err);
       });
+    },
+    makePagination: function makePagination(meta, links) {
+      var pagination = {
+        current_page: meta.current_page,
+        last_page: meta.last_page,
+        next_page_url: links.next,
+        prev_page_url: links.prev,
+        from_page: meta.from,
+        to_page: meta.to,
+        total_page: meta.total,
+        path_page: meta.path + '?page=',
+        first_link: links.first,
+        last_link: links.last,
+        prev_link: links.prev,
+        next_link: links.next
+      };
+      console.log(pagination.last_page);
+      this.pagination = pagination;
     }
   }
 
@@ -45804,26 +45586,181 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _c("h2", [_vm._v("Articles")]),
-      _vm._v(" "),
-      _vm._l(_vm.jobs, function(job) {
-        return _c("div", { key: job.id, staticClass: "card card-body mb-2" }, [
-          _c("h3", [_vm._v(_vm._s(job.id))]),
-          _vm._v(" "),
-          _c("p", [_vm._v(" " + _vm._s(job.job_title))]),
-          _vm._v(" "),
-          _c("hr")
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "div",
+      { staticClass: "careerfy-column-8 careerfy-typo-wrap" },
+      [
+        _vm._l(_vm.jobs, function(job) {
+          return _c("div", { key: job.id, staticClass: "careerfy-typo-wrap" }, [
+            _c(
+              "div",
+              { staticClass: "careerfy-job careerfy-joblisting-classic" },
+              [
+                _c("ul", { staticClass: "careerfy-row" }, [
+                  _c("li", { staticClass: "careerfy-column-12" }, [
+                    _c(
+                      "div",
+                      { staticClass: "careerfy-joblisting-classic-wrap" },
+                      [
+                        _vm._m(0, true),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "careerfy-joblisting-text" }, [
+                          _c("div", { staticClass: "careerfy-list-option" }, [
+                            _c("h2", [
+                              _c("a", { attrs: { href: "" } }, [
+                                _vm._v(" " + _vm._s(job.job_title) + " ")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(1, true)
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(2, true),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "clearfix" })
+                        ])
+                      ]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ])
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "careerfy-pagination-blog" }, [
+          _c(
+            "ul",
+            { staticClass: "pagination" },
+            [
+              _c(
+                "li",
+                { class: [{ disabled: !_vm.pagination.prev_page_url }] },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "prev page-numbers",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.fetchJobs(_vm.pagination.prev_page_url)
+                        }
+                      }
+                    },
+                    [_vm._m(3)]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _vm._l(_vm.pagination.last_page, function(n) {
+                return _c(
+                  "li",
+                  {
+                    key: n,
+                    staticClass: "page-item",
+                    class: [{ active: !_vm.pagination.current_page == n }]
+                  },
+                  [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "page-link",
+                        on: {
+                          click: function($event) {
+                            return _vm.fetchJobs(_vm.pagination.path_page + n)
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(n) + " ")]
+                    )
+                  ]
+                )
+              }),
+              _vm._v(" "),
+              _c("li", { class: [{ disabled: !_vm.pagination.next_link }] }, [
+                _c(
+                  "span",
+                  {
+                    staticClass: "next page-numbers",
+                    on: {
+                      click: function($event) {
+                        return _vm.fetchJobs(_vm.pagination.next_link)
+                      }
+                    }
+                  },
+                  [_vm._m(4)]
+                )
+              ])
+            ],
+            2
+          )
         ])
-      })
-    ],
-    2
-  )
+      ],
+      2
+    )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("figure", [_c("a", { attrs: { href: "" } })])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", [
+      _c("li", [
+        _c("i", { staticClass: "careerfy-icon careerfy-maps-and-flags" }),
+        _vm._v(" countryname and cityname")
+      ]),
+      _vm._v(" "),
+      _c("li", [
+        _c("i", {
+          staticClass: "careerfy-icon careerfy-filter-tool-black-shape"
+        }),
+        _vm._v(" professionname")
+      ]),
+      _vm._v(" "),
+      _c("li", [_vm._v(" Industryname")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "careerfy-job-userlist" }, [
+      _c(
+        "a",
+        {
+          staticClass: "careerfy-option-btn  careerfy-blue",
+          attrs: { href: "" }
+        },
+        [_vm._v("APPLY ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("i", { staticClass: "careerfy-icon careerfy-arrows4" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("i", { staticClass: "careerfy-icon careerfy-arrows4" })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -45838,6 +45775,787 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(69)
+/* template */
+var __vue_template__ = __webpack_require__(70)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/ListCity.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-55380840", Component.options)
+  } else {
+    hotAPI.reload("data-v-55380840", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 69 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			citylist: [],
+			city: {
+				id: '',
+				name: ''
+			}
+		};
+	},
+	created: function created() {
+		// run automatically
+		this.fetchCities();
+	},
+
+	methods: {
+		fetchCities: function fetchCities() {
+			var _this = this;
+
+			fetch('/api/cities').then(function (res) {
+				return res.json();
+			}).then(function (res) {
+				_this.citylist = res.cities;
+			}).catch(function (err) {
+				return console.log(err);
+			});
+		}
+	}
+
+});
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "careerfy-search-filter-wrap careerfy-search-filter-toggle",
+      staticStyle: { "background-color": "#ffffff" }
+    },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "careerfy-checkbox-toggle scroll_div",
+          attrs: { id: "job_industry" }
+        },
+        [
+          _c(
+            "ul",
+            { staticClass: "careerfy-checkbox" },
+            _vm._l(_vm.citylist, function(city) {
+              return _c("li", { key: city.id }, [
+                _c("input", {
+                  attrs: {
+                    type: "checkbox",
+                    name: "industry[]",
+                    id: "c_" + city.id
+                  },
+                  domProps: { value: city.id }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "c_" + city.id } }, [
+                  _c("span"),
+                  _vm._v(_vm._s(city.name))
+                ]),
+                _vm._v(" "),
+                _c("small")
+              ])
+            }),
+            0
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", [
+      _c("a", { staticClass: "careerfy-click-btn", attrs: { href: "#" } }, [
+        _vm._v("Location")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-55380840", module.exports)
+  }
+}
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(72)
+/* template */
+var __vue_template__ = __webpack_require__(73)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Industries.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-c632fb1a", Component.options)
+  } else {
+    hotAPI.reload("data-v-c632fb1a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 72 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			industries: [],
+			industry: {
+				id: '',
+				name: ''
+			},
+			checkedNames: []
+		};
+	},
+	created: function created() {
+		// run automatically 
+		this.fetchIndustries();
+	},
+
+	methods: {
+		fetchIndustries: function fetchIndustries() {
+			var _this = this;
+
+			fetch('/api/industries').then(function (res) {
+				return res.json();
+			}).then(function (res) {
+				_this.industries = res.industries;
+			}).catch(function (err) {
+				return console.log(err);
+			});
+		},
+
+		check: function check(e) {
+			if (e.target.checked) {
+				console.log(e.target.value);
+			}
+		}
+	}
+
+});
+
+/***/ }),
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "careerfy-search-filter-wrap careerfy-search-filter-toggle",
+      staticStyle: { "background-color": "#ffffff" }
+    },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "careerfy-checkbox-toggle scroll_div",
+          attrs: { id: "job_industry" }
+        },
+        [
+          _c(
+            "ul",
+            { staticClass: "careerfy-checkbox" },
+            [
+              _vm._l(_vm.industries, function(industry) {
+                return _c("li", { key: industry.id }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.checkedNames,
+                        expression: "checkedNames"
+                      }
+                    ],
+                    attrs: { type: "checkbox", id: "r_" + industry.id },
+                    domProps: {
+                      value: industry.id,
+                      checked: Array.isArray(_vm.checkedNames)
+                        ? _vm._i(_vm.checkedNames, industry.id) > -1
+                        : _vm.checkedNames
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.checkedNames,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = industry.id,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 && (_vm.checkedNames = $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              (_vm.checkedNames = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
+                          }
+                        } else {
+                          _vm.checkedNames = $$c
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "r_" + industry.id } }, [
+                    _c("span"),
+                    _vm._v(_vm._s(industry.name))
+                  ]),
+                  _vm._v(" "),
+                  _c("small")
+                ])
+              }),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("span", [_vm._v("Checked names: " + _vm._s(_vm.checkedNames))])
+            ],
+            2
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", [
+      _c("a", { staticClass: "careerfy-click-btn", attrs: { href: "#" } }, [
+        _vm._v("Industries")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c632fb1a", module.exports)
+  }
+}
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(75)
+/* template */
+var __vue_template__ = __webpack_require__(76)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/JobFunctions.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-f715b9d6", Component.options)
+  } else {
+    hotAPI.reload("data-v-f715b9d6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 75 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+
+			industryprofessions: [],
+			industry_profession: {
+				id: '',
+				name: ''
+			}
+
+		};
+	},
+	created: function created() {
+		// run automatically 
+		this.fetchIndustryProfession();
+	},
+
+	methods: {
+		fetchIndustryProfession: function fetchIndustryProfession() {
+			var _this = this;
+
+			fetch('/api/industryprofessions').then(function (res) {
+				return res.json();
+			}).then(function (res) {
+				_this.industryprofessions = res.industry_professions;
+			}).catch(function (err) {
+				return console.log(err);
+			});
+		}
+	}
+
+});
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "careerfy-search-filter-wrap careerfy-search-filter-toggle",
+      staticStyle: { "background-color": "#ffffff" }
+    },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "careerfy-checkbox-toggle scroll_div",
+          attrs: { id: "job_profession" }
+        },
+        [
+          _c(
+            "ul",
+            { staticClass: "careerfy-checkbox" },
+            _vm._l(_vm.industryprofessions, function(industry_profession) {
+              return _c("li", { key: industry_profession.id }, [
+                _c("input", {
+                  attrs: {
+                    type: "checkbox",
+                    name: "industry[]",
+                    id: "c_" + industry_profession.id
+                  },
+                  domProps: { value: industry_profession.id }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "c_" + industry_profession.id } }, [
+                  _c("span"),
+                  _vm._v(_vm._s(industry_profession.name))
+                ]),
+                _vm._v(" "),
+                _c("small")
+              ])
+            }),
+            0
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", [
+      _c("a", { staticClass: "careerfy-click-btn", attrs: { href: "#" } }, [
+        _vm._v("Job Function")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-f715b9d6", module.exports)
+  }
+}
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(78)
+/* template */
+var __vue_template__ = __webpack_require__(79)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/VacancyType.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1639cb6e", Component.options)
+  } else {
+    hotAPI.reload("data-v-1639cb6e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 78 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			employement_term_list: [],
+			employement_term: {
+				id: '',
+				name: ''
+			},
+			pagination: {}
+		};
+	},
+	created: function created() {
+		// run automatically
+		this.fetchVacancyTypes();
+	},
+
+	methods: {
+		fetchVacancyTypes: function fetchVacancyTypes() {
+			var _this = this;
+
+			fetch('/api/vacancytypes').then(function (res) {
+				return res.json();
+			}).then(function (res) {
+				_this.employement_term_list = res.employement_term_list;
+			}).catch(function (err) {
+				return console.log(err);
+			});
+		}
+	}
+
+});
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "careerfy-search-filter-wrap careerfy-search-filter-toggle",
+      staticStyle: { "background-color": "#ffffff" }
+    },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "careerfy-checkbox-toggle scroll_div",
+          attrs: { id: "job_terms" }
+        },
+        [
+          _c(
+            "ul",
+            { staticClass: "careerfy-checkbox" },
+            _vm._l(_vm.employement_term_list, function(employement_term) {
+              return _c("li", { key: employement_term.id }, [
+                _c("input", {
+                  attrs: {
+                    type: "checkbox",
+                    name: "employement_term[]",
+                    id: "v_" + employement_term.id
+                  },
+                  domProps: { value: employement_term.id }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "v_" + employement_term.id } }, [
+                  _c("span"),
+                  _vm._v(_vm._s(employement_term.name))
+                ]),
+                _vm._v(" "),
+                _c("small")
+              ])
+            }),
+            0
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h2", [
+      _c("a", { staticClass: "careerfy-click-btn", attrs: { href: "#" } }, [
+        _vm._v("Vacancy Type")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1639cb6e", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
