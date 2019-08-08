@@ -48,6 +48,9 @@
       border: 1px solid #cccccc;
     }
 
+.employer_container{
+  margin: 0px 20px 0px 20px;
+}
 </style>
  
     <?php  
@@ -88,7 +91,7 @@
         <!-- <div class="space">&nbsp;</div> -->
         <div class="careerfy-main-content"> 
             <div class="careerfy-main-section"> 
-                <div class="container">  
+                <div class="employer_container">  
                     <div class="row"> 
       <div class="tabbable-line boxless tabbable-reversed">
                                     <ul class="nav nav-tabs">

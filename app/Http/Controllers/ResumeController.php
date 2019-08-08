@@ -2483,7 +2483,7 @@ public function ApplicationSuccess($id)
     $job_draft_count = Tag::where('client', $user->id)->where('draft', 1)->where('delete',0)->where('active', 0)->where('status',0)->count();
     $jobs_draft_list = Tag::where('client', $user->id)->where('draft', 1)->where('delete',0)->where('active', 0)->where('status',0)->latest()->paginate(10);
     $job_awaiting_approval_count = Tag::where('client', $user->id)->where('awaiting_aproval',1)->where('active', 0)->where('status', 0)->where('delete',0)->count();
-    $jobs_awaiting_approval_list = Tag::where('client', $user->id)->where('awaiting_aproval', 1)->where('active', 0)->where('status', 0)->where('delete',0)->latest()->paginate(10);
+    $jobs_awaiting_approval_list = Tag::where('client', $user->id)->where('awaiting_aproval', 1)->where('active', 0)->where('status', 0)->where('delete',0)->orderBy('created_at', 'DESC')->paginate(10);
     $job_blacklist_count = Tag::where('client', $user->id)->where('status',3)->where('delete', 1)->count();
     $job_black_list = Tag::where('client', $user->id)->where('status', 3)->where('delete', 1)->latest()->paginate(10);
     $job_active_list = Tag::where('client', $user->id)->where('status', 1)->where('active', 1)->where('awaiting_aproval', 0)->where('delete',0)->latest()->paginate(10);
@@ -2543,16 +2543,16 @@ $applications_employer = DB::table('applications')->where('clientfk', $user->id)
     // $unsorted_count = DB::table('applications')->where('sorted', 0)->where('clientfk', $user->id)->count();
     $in_review_count = DB::table('applications')->where('in_review', 0)->where('clientfk', $user->id)->count();
     $unsorted_count = DB::table('applications')->where('sorted', 0)->where('clientfk', $user->id)->count();
-    $employement_terms = DB::table('employement_terms')->get();
+    $employement_terms = DB::table('employement_terms')->orderBy('name')->get();
 
-    $industries = Industry::all();
-    $professions = IndustryProfession::all();
+    $industries = Industry::orderBy('name')->get();
+    $professions = IndustryProfession::orderBy('name')->get();
     $cities = $this->GetCities(); 
     $educational_levels = $this->GetQualificationLevels(); 
     // get all records
     $sort_categories_list = DB::table('sort_categories')->get();
     $educational_qualifications = $this->GetQualificationLevels();
-    $employement_terms = DB::table('employement_terms')->where('status', 1)->get();
+    $employement_terms = DB::table('employement_terms')->orderBy('name')->where('status', 1)->get();
     $jobcareer_levels = DB::table('jobcareer_levels')->get();
     $users = User::all();
     // get candidates Resume
