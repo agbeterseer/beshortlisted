@@ -1433,7 +1433,7 @@ public function SowUpdateWorkHistoryForm($code,$id)
 
         $user = Auth::user();
         $countries = Country::all();
-        $recruityear_list = RecruitYear::orderBy('created_at', 'DESC')->get(); 
+        $recruityear_list = RecruitYear::orderBy('name', 'DESC')->get();  
         $qualifications = Qualification::all(); 
         $user_single_resume_by_id = RecruitResume::where('id', $id)->first();
         $work_history = WorkExperience::findOrFail($code);
