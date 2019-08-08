@@ -1241,7 +1241,7 @@ public function ShowWorkExperienceForm()
     return \Redirect::back()->withInput()->withErrors( $validation->messages() );
     }
      try {
-  $candidate_work_experience = DB::table('work_experiences')->insertGetId(['start_year'=>$work_from_year, 'start_month'=>$work_from_month, 'end_year'=>$end_year, 'end_month'=>$end_month, 'position_title'=>$position_title, 'career_level'=>$career_level, 'company_name'=>$company_name, 'country'=>$country, 'responsibilities'=>$responsibilities, 'status'=>1, 'userfk'=>$user->id, 'resumefk'=>$resume, 'present'=> $present, 'create_at' => $this->returnCurrentTime()]); 
+  $candidate_work_experience = DB::table('work_experiences')->insertGetId(['start_year'=>$work_from_year, 'start_month'=>$work_from_month, 'end_year'=>$end_year, 'end_month'=>$end_month, 'position_title'=>$position_title, 'career_level'=>$career_level, 'company_name'=>$company_name, 'country'=>$country, 'responsibilities'=>$responsibilities, 'status'=>1, 'userfk'=>$user->id, 'resumefk'=>$resume, 'present'=> $present, 'created_at' => $this->returnCurrentTime()]); 
 
   // dd($candidate_work_experience);
 
@@ -1433,12 +1433,12 @@ public function SowUpdateWorkHistoryForm($code,$id)
 
         $user = Auth::user();
         $countries = Country::all();
-        $recruityear_list = RecruitYear::all(); 
+        $recruityear_list = RecruitYear::orderBy('created_at', 'DESC')->get(); 
         $qualifications = Qualification::all(); 
         $user_single_resume_by_id = RecruitResume::where('id', $id)->first();
         $work_history = WorkExperience::findOrFail($code);
         $job_career_levelList = JobcareerLevel::all();
-        $industries = Industry::all();
+        $industries = Industry::orderBy('created_at', 'DESC')->get();
         $industry_profession = DB::table('industry_professions')->get();
 
          $work_industry_single = DB::table('work_industry')->where('work_experience_id', $code)->distinct()->first();
