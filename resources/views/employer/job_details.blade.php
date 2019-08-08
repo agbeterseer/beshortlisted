@@ -138,8 +138,8 @@
                             
                                     <div class="careerfy-content-title"><h2>Job Funtions</h2></div>
                                     <div class="careerfy-description">
-                                    @if($tag->job_roles)  
-                                     {!! $tag->job_roles !!}
+                                    @if($tag->job_role)  
+                                     {!! $tag->job_role !!}
                                     @else
                                         N/A
                                     @endif

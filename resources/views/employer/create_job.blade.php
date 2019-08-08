@@ -319,7 +319,7 @@ border-color: white !important;
                                             </div>
                     <div style="align:center"> 
                     <div class="space">&nbsp;</div>     
-                          <button class="careerfy-employer-profile-submit" >Save Job </button>
+                          <button class="careerfy-employer-profile-submit" >Post Job </button>
                           </div>
                                          </div>
                                      </div> 

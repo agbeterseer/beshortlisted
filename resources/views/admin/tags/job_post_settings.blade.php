@@ -178,7 +178,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @php($i = 0)
+                        @php($i = 1)
  @foreach($industries as $industry)
              <tr class="odd gradeX">
                <td> {{$i}}
