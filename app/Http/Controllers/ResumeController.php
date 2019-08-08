@@ -2483,7 +2483,7 @@ public function ApplicationSuccess($id)
     $job_draft_count = Tag::where('client', $user->id)->where('draft', 1)->where('delete',0)->where('active', 0)->where('status',0)->count();
     $jobs_draft_list = Tag::where('client', $user->id)->where('draft', 1)->where('delete',0)->where('active', 0)->where('status',0)->latest()->paginate(10);
     $job_awaiting_approval_count = Tag::where('client', $user->id)->where('awaiting_aproval',1)->where('active', 0)->where('status', 0)->where('delete',0)->count();
-    $jobs_awaiting_approval_list = Tag::orderBy('created_at', 'DESC')->where('client', $user->id)->where('awaiting_aproval', '1')->get();
+    $jobs_awaiting_approval_list = Tag::orderBy('created_at', 'DESC')->where('client', $user->id)->where('awaiting_aproval', '1')->paginate(10);
     $job_blacklist_count = Tag::where('client', $user->id)->where('status',3)->where('delete', 1)->count();
     $job_black_list = Tag::where('client', $user->id)->where('status', 3)->where('delete', 1)->latest()->paginate(10);
     $job_active_list = Tag::where('client', $user->id)->where('status', 1)->where('active', 1)->where('awaiting_aproval', 0)->where('delete',0)->latest()->paginate(10);
