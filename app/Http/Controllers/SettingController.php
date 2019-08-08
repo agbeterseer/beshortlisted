@@ -224,7 +224,7 @@ public function RemoveFieldsOfStudy($value='')
 
     public function showIndustrySettings()
     {
-        $industries = Industry::all();
+        $industries = Industry::orderBy('created_at', 'DESC')->get();
         $industry_count = Industry::count();
         $professions = Profession::all();
         $professions_count = Profession::count();

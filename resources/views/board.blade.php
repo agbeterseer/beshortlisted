@@ -201,6 +201,50 @@
                                   </ul>
                                
                               </li>
+                                              <li class="nav-item">
+                                  <a href="javascript:;" class="nav-link nav-toggle">
+                                      <i class="icon-docs"></i>
+                                      <span class="title">TAGs</span>
+                                      <span class="arrow"></span>
+                                  </a>
+                                   <ul class="sub-menu">
+                                      <li class="nav-item ">
+                                      <a href="{{ route('tag.index') }}" class="nav-link "> 
+                                     <span class="title">All Tags</span>
+                                      </a>
+                                
+                                      </li>
+                  <li class="nav-item ">
+                                          <a href="{{route('tag.create')}}" class="nav-link ">
+                                              <span class="title">Add New Tag</span>
+                                          </a>
+                                      </li> 
+                                  </ul> 
+                      
+                              </li>     <li class="nav-item">
+                                  <a href="javascript:;" class="nav-link nav-toggle">
+                                      <i class="icon-docs"></i>
+                                      <span class="title">Clients</span>
+                                      <span class="arrow"></span>
+                                  </a>
+                                   <ul class="sub-menu">
+                                    <li class="nav-item ">
+                                      <a href="{{route('client.index')}}" class="nav-link "> 
+                                     <span class="title">All Clients</span>
+                                      </a>
+                                
+                                      </li>
+                                  <li class="nav-item ">
+                                          <a href="{{route('client.create')}}" class="nav-link ">
+                                              <span class="title">Add New</span>
+                                          </a>
+                                      </li> 
+                    
+                                  </ul>
+                                       <!--  <a href="{{ url('/register') }}">Register</a>  -->
+                      
+                              </li>
+             
                                 <li class="nav-item">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-puzzle"></i>
@@ -410,6 +454,11 @@
                                         <li class="nav-item ">
                                           <a href="{{route('admin.tickets')}}" class="nav-link ">
                                         <span class="title">Support Tickets </span>
+                                          </a>
+                                      </li>
+                                    <li class="nav-item ">
+                                          <a href="{{route('show.industry_settings')}}" class="nav-link ">
+                                        <span class="title">Industries </span>
                                           </a>
                                       </li>   
                                     </ul> 
