@@ -44,7 +44,13 @@ public function showLoginForm()
     return view('auth.login', compact('menus'));
 }
 
-
+// public function showLoginForm()
+// {
+//     $menus = $this->displayMenu();
+//     session(['link' => url()->previous()]);
+//     return view('auth.login');
+// }
+ 
 public function showRegisterForm()
 { 
     $menus = $this->displayMenu();

@@ -288,13 +288,11 @@ border-color: white !important;
                                             <div class="careerfy-profile-title"><h2>Assessment</h2></div>
                                             <ul class="careerfy-row careerfy-employer-profile-form">
                                             <div class="note note-primary">
-<span style="line-height: 2.6;"> 
- Enter role specific question(s) related to this job.
-<p>
-So it should be changed to "provide candidate assessment questions related to this role"</p>
-<p>
+<span style="line-height: 2.6;">  
+Provide candidate assessment questions related to this role.
+<br>
 These are technical-skill questions required to be answered (yes/no) by the candidate applying for this position
-</p>
+ 
 <br> 
 </span> 
 </div>
@@ -308,7 +306,7 @@ These are technical-skill questions required to be answered (yes/no) by the cand
                                                 
                                                     <div class="mt-repeater-input" >
                                             
-                                    <textarea name="assessment" class="form-control" required="required" placeholder="Do You have Experience in building API's?"></textarea>
+                                    <textarea name="assessment" class="form-control" required="required" ></textarea>
                              </div>
                                                                   <div class="mt-repeater-input">
                                                         <a href="javascript:;" data-repeater-delete class="careerfy-employer-profile-submit" style="border-color: red; background-color: red;">
@@ -316,7 +314,7 @@ These are technical-skill questions required to be answered (yes/no) by the cand
                                                     </div>
                                                 </div>
                                             </div>
-                            <a href="javascript:;" data-repeater-create class="careerfy-employer-profile-submit" >
+                            <a href="javascript:;" data-repeater-create style="color: red;" >
                                                 <i class="fa fa-plus"></i> Add Assessement</a>
                                             </div>
                     <div style="align:center"> 
