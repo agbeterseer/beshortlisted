@@ -20,7 +20,7 @@
                                         </ul> -->
          <div class="portlet-body">
          Edit
-                                        <div id="tree_1" class="tree-demo">
+<!--                                         <div id="tree_1" class="tree-demo">
                                             <ul>
                                                 <li> Root Industries <strong>( {{$industry_count}} ) </strong>
 
@@ -36,7 +36,7 @@
                                                 </li>
  
                                             </ul>
-                                        </div>
+                                        </div> -->
                                     </div>
            
         
@@ -56,7 +56,7 @@
 
 </script>
 <div class="note note-primary">
-<a class="edits" data-toggle="modal" data-style="slide-left" data-spinner-color="#333" href="#static_qualification">Add Qualifications</a>( {{$qualifications}} ) </p> 
+<a class="edits" data-toggle="modal" data-style="slide-left" data-spinner-color="#333" href="#static_qualification">Add Qualifications</a>({{$qualifications}})  
 
 </div>
 
@@ -64,9 +64,7 @@
 
 <h3> Adding Industry List</h3>
 <p> 1. Enter industry in the text field provided and then click on the 'Add' button  <br>
-2. Leave "Value" on "Ture" for every question you enter.<br>
-3. click on 'Delete' to remove a requirement 
-</p>
+ 
 </div>
                         <div class="note note-danger">
 <h3> Tips on adding Professions to Industry</h3>
@@ -75,12 +73,11 @@
 3. click on 'Delete' to remove a requirement 
 </p>
 </div>
-                        <div class="note note-primary">
-<h3> Tips on adding Professions to Industry</h3>
-<p> 1. Enter requirement(s), as intended for your job Ad and then click on the 'Add' button  <br>
-2. Leave "Value" on "Ture" for every question you enter.<br>
-3. click on 'Delete' to remove a requirement 
-</p>
+                        <div class="note note-primary" style="height: 150px;">
+<h3>  </h3>
+ <p><div class="space">&nbsp;</div>
+ <div class="space">&nbsp;</div>
+ <div class="space">&nbsp;</div></p>
 </div>
                          <div class="search-label uppercase" style="margin-top: 15px;">
                                     </div>
@@ -141,7 +138,7 @@
              <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Save Settings
+                                    Add
                                 </button>
                             </div>
                         </div>
@@ -253,15 +250,7 @@
             </div>
 
 
-
-
-
-            <!-- END EXAMPLE TABLE PORTLET-->
-        </div>
-
-
-
-  <div class="col-md-8">
+  <div>
 <!--   <div class="note note-danger">
 <h3> Job Requirement</h3>
 <p> 1. Enter requirement(s), as intended for your job Ad and then click on the 'Add' button  <br>
@@ -270,7 +259,7 @@
 </p>
 </div> -->
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
-            <div class="portlet light bordered" style="padding-left: 34px;">
+            <div class="portlet light bordered" >
                 <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
@@ -370,20 +359,15 @@
                 
             </div>
 
-            <div class="portlet-title">
-            <div class="caption font-dark">
 
-            <span class="caption-subject bold uppercase"></span>
-            </div>
-                
-<!-- <div class="note note-success">
-<h3> Job Assessment</h3>
-<p> 1. Enter question(s), one at a time and then click 'Add' button <br>
-2. Leave "Value" on "Ture" for every question you enter.<br>
-3. click on 'Delete' to remove a question 
-</p>
-</div> -->
-      </div>
+            <!-- END EXAMPLE TABLE PORTLET-->
+        </div>
+
+
+
+
+
+ 
             <!-- <div class="portlet light bordered" style="padding-left: 34px;">               -->
    <!--          <div class="portlet-title">
                     <div class="caption font-dark">

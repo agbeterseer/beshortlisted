@@ -2466,7 +2466,7 @@ public function ApplicationSuccess($id)
   {
 
       $documents = Document::all();
-      $industries = Industry::all(); 
+      $industries = Industry::where('status', 1)->get(); 
       $allapplicants = Application::all();
   $users = DB::table('applications')->distinct()->get(); 
   $distinct_job_applications = Application::distinct('tag_id')->pluck('tag_id');
@@ -2554,7 +2554,7 @@ $applications_employer = DB::table('applications')->where('clientfk', $user->id)
     $employement_terms = DB::table('employement_terms')->orderBy('name')->get();
 
     $industries = Industry::orderBy('name')->get();
-    $professions = IndustryProfession::orderBy('name')->get();
+    $professions = IndustryProfession::orderBy('name')->where('status', 1)->get();
     $cities = $this->GetCities(); 
     $educational_levels = $this->GetQualificationLevels(); 
     // get all records
