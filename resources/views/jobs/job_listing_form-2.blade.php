@@ -35,7 +35,6 @@ border-color: white !important;
         <div class="space">&nbsp;</div>        
         <!-- SubHeader -->
  
-  
         <!-- Main Content -->
         <div id="app">
         <div class="careerfy-main-content">

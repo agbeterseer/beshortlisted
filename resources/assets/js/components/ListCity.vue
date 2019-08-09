@@ -5,7 +5,7 @@
                                             <ul class="careerfy-checkbox">
                                   
                                                 <li v-for="city in citylist" v-bind:key="city.id">
-                                   <input type="checkbox"  name="industry[]" :value="city.id" :id="'c_'+city.id" />
+                                   <input type="checkbox"  name="industry[]" :value="city.id" :id="'c_'+city.id" v-model="citylist"/>
                                    <label :for="'c_'+city.id"><span></span>{{city.name}}</label>
                                                     <small></small>
                                                 </li>
@@ -40,7 +40,27 @@
 				this.citylist = res.cities;
 			})
 			.catch(err => console.log(err));
-		} 
+},
+
+	  job_terms: function (event) {
+	  	var location = [];
+		var profession = [];
+		var job_type = [];
+		var industry = [];
+
+      // `this` inside methods points to the Vue instance
+      alert('Hello ' + this.name + '!')
+      // `event` is the native DOM event
+      if (event) {
+
+        alert(event.target.tagName)
+      }
+
+
+    }
+
+
+
 	}
  
 };

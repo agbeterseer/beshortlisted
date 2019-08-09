@@ -22,7 +22,7 @@ Vue.component('listjobs', require('./components/ListJob.vue'));
 Vue.component('industries', require('./components/Industries.vue'));
 Vue.component('listcities', require('./components/ListCity.vue'));
 Vue.component('jobfunctions', require('./components/JobFunctions.vue'));
-Vue.component('vacancytypes', require('./components/VacancyType.vue'));
+Vue.component('vacancytypes', require('./components/VacancyType.vue')); 
 
 const app = new Vue({
     el: '#app',

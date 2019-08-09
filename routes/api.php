@@ -38,6 +38,7 @@ Route::get('cities', 'JobController@getCities');
 Route::get('industryprofessions', 'JobController@getIndustryProfessions');
 Route::get('industries', 'JobController@getIndustries');
 Route::get('vacancytypes', 'JobController@getVacancyTypes');
+Route::get('filter/{city}/{vacancytype}/{industry}', 'JobController@getFilterJobs');
 
 
 
@@ -47,8 +48,4 @@ Route::get('/api/v1/users', [
     'as' => 'users',
    	'uses' => 'HomeController@indexapi'
         ]);
-        
-        Route::get('/testreere', function () {
-            return response('Test API', 200)
-                          ->header('Content-Type', 'application/json');
-        });
+ 

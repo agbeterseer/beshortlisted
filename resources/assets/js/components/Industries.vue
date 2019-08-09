@@ -5,7 +5,7 @@
                                         <div class="careerfy-checkbox-toggle scroll_div" id="job_industry">
                                        <ul class="careerfy-checkbox">
                                   
-                      <li v-for="industry in industries" v-bind:key="industry.id">
+                      <li v-for="industry in industries">
 
   <input type="checkbox"  :value="industry.id"  :id="'r_'+industry.id" v-model="checkedNames"/> 
         <label :for="'r_'+industry.id"><span></span>{{industry.name}}</label>
@@ -13,15 +13,13 @@
 
                                  
                        </li>
-                     
-  <br>
-  <span>Checked names: {{ checkedNames }}</span>
-                                           
+                       {{ checkedNames }}
+                                            
                                             </ul> 
                                         </div>
                                     </div>
 
- 
+
 </template>
 
 
@@ -50,12 +48,12 @@
 				this.industries = res.industries;
 			})
 			.catch(err => console.log(err));
-		},
-		check: function(e) {
-      if (e.target.checked) {
-        console.log(e.target.value)
-      }
-    }
+		}
+		// check: function(e) {
+  //     if (e.target.checked) {
+  //       console.log(e.target.value)
+  //     }
+  //   }
 	}
  
 };

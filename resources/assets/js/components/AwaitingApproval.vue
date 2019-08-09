@@ -53,7 +53,6 @@
 
                                 </div>
                     </div>
-
                                                            <!-- Pagination --> 
                       
 
@@ -61,13 +60,7 @@
 </template>
 
 <script>
-import ListCity from './ListCity'
-
 export default {
-  name: 'App',
-  components: {
-    ListCity
-  },
   data() {
     return {
       jobs: [],
@@ -98,7 +91,6 @@ export default {
     this.fetchIndustries(); 
   },
   methods:{
-
     fetchJobs(page_url) { 
       let vm = this;
     page_url = page_url || '/api/jobs'
@@ -135,8 +127,15 @@ export default {
         this.industriesList = res.industries; 
       })
       .catch(err => console.log(err));
+    },
+    filterJobs(city,vacancytype,industry){
+    fetch('/api/filter/{city}/{vacancytype}/{industry}')
+    .then(res => res.json())
+    .then(res => {
+        this.industriesList = res.industries; 
+      })
+      .catch(err => console.log(err));
     }
-
 
   }
  

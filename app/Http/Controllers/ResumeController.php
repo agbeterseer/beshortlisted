@@ -2453,6 +2453,14 @@ public function ApplicationSuccess($id)
   return view('candidate.application_success_page', compact('get_Job_by_common_industries', 'employement_terms', 'industry_professions', 'menus') , array('user' => Auth::user()));
 }
 
+        public function getAwaitingJobs()
+        {
+        $user = Auth::user(); 
+        $waiting_approvals = Tag::orderBy('created_at', 'DESC')->where('client', $user->id)->where('awaiting_aproval', '1')->paginate(10);
+           // $tags = Tag::where('status',1)->where('active',1)->paginate(20); 
+         return TagResource::collection($tags); 
+        }
+
 
   public function employer(Request $request)
   {

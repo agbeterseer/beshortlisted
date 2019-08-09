@@ -291,7 +291,9 @@ border-color: white !important;
 <span style="line-height: 2.6;"> 
  Enter role specific question(s) related to this job.
 <p>
- These question will be made available for all candidates applying for this position as they will be requried to answer all.
+So it should be changed to "provide candidate assessment questions related to this role"</p>
+<p>
+These are technical-skill questions required to be answered (yes/no) by the candidate applying for this position
 </p>
 <br> 
 </span> 

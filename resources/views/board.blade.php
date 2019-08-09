@@ -221,30 +221,7 @@
                                       </li> 
                                   </ul> 
                       
-                              </li>     <li class="nav-item">
-                                  <a href="javascript:;" class="nav-link nav-toggle">
-                                      <i class="icon-docs"></i>
-                                      <span class="title">Clients</span>
-                                      <span class="arrow"></span>
-                                  </a>
-                                   <ul class="sub-menu">
-                                    <li class="nav-item ">
-                                      <a href="{{route('client.index')}}" class="nav-link "> 
-                                     <span class="title">All Clients</span>
-                                      </a>
-                                
-                                      </li>
-                                  <li class="nav-item ">
-                                          <a href="{{route('client.create')}}" class="nav-link ">
-                                              <span class="title">Add New</span>
-                                          </a>
-                                      </li> 
-                    
-                                  </ul>
-                                       <!--  <a href="{{ url('/register') }}">Register</a>  -->
-                      
-                              </li>
-             
+                              </li>                
                                 <li class="nav-item">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-puzzle"></i>
@@ -324,57 +301,8 @@
                                                    
                                   </ul> 
                               </li>
-      <li class="nav-item">
-        <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="icon-settings"></i>
-            <span class="title">Online Test</span>
-            <span class="arrow"></span>
-        </a>
-      <ul class="sub-menu">      
-      <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}">
-                <a href="{{ route('tests.index') }}">
-                    <i class="fa fa-gears"></i>
-                    <span class="title">@lang('cvmanagement.test.new')</span>
-                </a>
-            </li>
-
-            <li class="{{ $request->segment(1) == 'results' ? 'active' : '' }}">
-                <a href="{{ route('results.index') }}">
-                    <i class="fa fa-gears"></i>
-                    <span class="title">@lang('cvmanagement.results.title')</span>
-                </a>
-            </li> 
-            
-            <li class="{{ $request->segment(1) == 'topics' ? 'active' : '' }}">
-                <a href="{{ route('topics.index') }}">
-                    <i class="fa fa-gears"></i>
-                    <span class="title">@lang('cvmanagement.topics.title')</span>
-                </a>
-            </li>
-            <li class="{{ $request->segment(1) == 'questions' ? 'active' : '' }}">
-                <a href="{{ route('questions.index') }}">
-                    <i class="fa fa-gears"></i>
-                    <span class="title">@lang('cvmanagement.questions.title')</span>
-                </a>
-            </li>
-            <li class="{{ $request->segment(1) == 'questions_options' ? 'active' : '' }}">
-                <a href="{{ route('questions_options.index') }}">
-                    <i class="fa fa-gears"></i>
-                    <span class="title">@lang('cvmanagement.questions-options.title')</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-users"></i>
-                    <span class="title">@lang('cvmanagement.user-management.title')</span>
-                    <span class="fa arrow"></span>
-                </a>
-       
-            </li>
-         
-          </ul>
-
-                                  </li>
+ 
+ 
                           <li class="nav-item {{ $request->segment(1) == 'resume' ? 'active' : '' }} ">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-settings"></i>

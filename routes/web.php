@@ -32,9 +32,7 @@ Route::get('/pricing', [
 	'as' => 'pricing',
 	'uses' => 'HomeController@show_price'
 ]);
-Route::get('/terseer-agbe', function () {
-  return view('post');
-})->where('any', '.*');
+// Route::get('/{any}', 'HomeController@home')->where('any', '.*');
 
 Route::post('/test', [
 	'as' => 'send.email',
