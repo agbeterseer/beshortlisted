@@ -300,7 +300,7 @@
     <div class="clearfix"></div></div></div></li> <div class="space">&nbsp;</div> @endforeach  @endif  @else
 <li> 
 <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="400" width="400" alt="" align="center"></div>
+<div align="center">   <img src="{{asset('img/NoJobFound.png')}}" height="400" width="400" alt="" align="center"></div>
 <div class="clearfix"></div>
 </div> </li>  @endif 
 
@@ -397,7 +397,7 @@
     <div class="clearfix"></div></div></div></li>  <div class="space">&nbsp;</div> @endforeach @endif   @else
 <li> 
 <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="400" width="400" alt="" align="center"></div>
+<div align="center">   <img src="{{asset('img/NoJobFound.png')}}" height="400" width="400" alt="" align="center"></div>
 <div class="clearfix"></div>
 </div> </li>  @endif 
 
@@ -520,7 +520,7 @@
     <div class="clearfix"></div></div></div></li> <div class="space">&nbsp;</div> @endforeach  @endif  @else
 <li> 
 <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="400" width="400" alt="" align="center"></div>
+<div align="center">   <img src="{{asset('img/NoJobFound.png')}}" height="400" width="400" alt="" align="center"></div>
 <div class="clearfix"></div>
 </div> </li>  @endif 
 
