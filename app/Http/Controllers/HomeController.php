@@ -346,7 +346,7 @@ public function employement_term_list()
 
 
     public function JobListing(Request $request){
-
+//dd('here');
         $s = $request->input('s');
         $location = $request->input('location');
         $job_function = $request->input('job_function');

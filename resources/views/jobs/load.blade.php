@@ -2,7 +2,7 @@
                             <div class="careerfy-typo-wrap">
                                 <!-- FilterAble -->
                                 <div class="careerfy-filterable">
-                                    <h2>Showing available results of jobs</h2>
+                                    <h2>Available results of jobs</h2>
                                     <ul>
                                         <li>
                                            <a href="{{route('list.job', 'job-list')}}"> <i class="careerfy-icon careerfy-sort"></i>Show all</a></li>

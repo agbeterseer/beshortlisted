@@ -53,7 +53,8 @@
                         <a href="{{route('post.jobs')}}" class="careerfy-bgcolorhover"><i class="careerfy-icon careerfy-portfolio"></i> Hiring? Post a job for free</a>
                     </div>
                     <div class="space">&nbsp;</div> 
-                                        <form class="careerfy-banner-search" action="{{route('job.listing')}}" method="GET" id="find_jobs"> 
+                                        <form class="careerfy-banner-search" action="{{route('job.listing')}}" method="POST" id="find_jobs"> 
+                                        {{ csrf_field() }}
                         <ul>
                             <li>
 
@@ -148,7 +149,7 @@
                                        <figure><a href=""><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-featured-listing-text"> 
                                                     <div class="careerfy-featured-listing-options"> 
-                                                         No Record(s) Found
+                                                         No Job(s) Found
                                                     </div>
                                                 </div>
                                             </div>
