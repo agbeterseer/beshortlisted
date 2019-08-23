@@ -2525,7 +2525,7 @@ public function ApplicationSuccess($id)
     $job_draft_count = Tag::where('client', $user->id)->where('draft', 1)->where('delete',0)->where('active', 0)->where('status',0)->count();
     $jobs_draft_list = Tag::where('client', $user->id)->where('draft', 1)->where('delete',0)->where('active', 0)->where('status',0)->latest()->paginate(10);
     $job_awaiting_approval_count = Tag::where('client', $user->id)->where('awaiting_aproval',1)->where('active', 0)->where('status', 0)->where('delete',0)->count();
-    $jobs_awaiting_approval_list = Tag::orderBy('created_at', 'DESC')->where('client', $user->id)->where('awaiting_aproval', '1')->paginate(10);
+    $jobs_awaiting_approval_list = Tag::orderBy('created_at', 'DESC')->where('client', $user->id)->where('awaiting_aproval', '1')->paginate(3);
     $job_blacklist_count = Tag::where('client', $user->id)->where('status',3)->where('delete', 1)->count();
     $job_black_list = Tag::where('client', $user->id)->where('status', 3)->where('delete', 1)->latest()->paginate(10);
     $job_active_list = Tag::where('client', $user->id)->where('status', 1)->where('active', 1)->where('awaiting_aproval', 0)->where('delete',0)->latest()->paginate(10);
@@ -2634,13 +2634,21 @@ public function employementTermsActive()
       $job_draft_count = Tag::where('client', $user->id)->where('draft', 1)->where('delete',0)->where('active', 0)->where('status',0)->count();
 
         if ($type == 'draft') {
-          $jobs_draft_list = Tag::where('client', $user->id)->where('draft', 1)->where('delete',0)->where('active', 0)->where('status',0)->latest()->paginate(10); 
-return view('jobs.load_draft_jobs', [ 'jobs_draft_list' => $jobs_draft_list,  'job_draft_count' => $job_draft_count, 'applications_employer' => $applications_employer, 'applications' => $applications, 'professions' =>$professions, 'industries' => $industries, 'cities' => $cities, 'educational_levels' => $educational_levels, 'employement_terms' => $employement_terms ])->render(); 
 
-        }else{
+          $jobs_draft_list = Tag::where('client', $user->id)->where('draft', 1)->where('delete',0)->where('active', 0)->where('status',0)->latest()->paginate(10); 
+        return view('jobs.load_draft_jobs', [ 'jobs_draft_list' => $jobs_draft_list,  'job_draft_count' => $job_draft_count, 'applications_employer' => $applications_employer, 'applications' => $applications, 'professions' =>$professions, 'industries' => $industries, 'cities' => $cities, 'educational_levels' => $educational_levels, 'employement_terms' => $employement_terms ])->render(); 
+
+        }elseif($type == 'alljobs'){
+
         $tags = Tag::where('client', $user->id)->paginate(10);
 
         return view('jobs.load_all_jobs', [ 'tags' => $tags,  'job_draft_count' => $job_draft_count, 'applications_employer' => $applications_employer, 'applications' => $applications, 'professions' =>$professions, 'industries' => $industries, 'cities' => $cities, 'educational_levels' => $educational_levels, 'employement_terms' => $employement_terms ])->render(); 
+
+        }elseif ($type == 'awaitingjobs') {
+
+           $jobs_awaiting_approval_list = Tag::where('client', $user->id)->where('awaiting_aproval', 1)->where('delete',0)->where('active', 0)->where('status',0)->latest()->paginate(3); 
+
+        return view('jobs.load_awaiting_jobs', ['jobs_awaiting_approval_list' => $jobs_awaiting_approval_list, 'applications_employer' => $applications_employer, 'applications' => $applications, 'professions' =>$professions, 'industries' => $industries, 'cities' => $cities, 'educational_levels' => $educational_levels, 'employement_terms' => $employement_terms ])->render(); 
         } 
   }
  

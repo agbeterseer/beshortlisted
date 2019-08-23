@@ -24,7 +24,7 @@ Route::get('/', 'HomeController@welcome');
 Route::get('/employer/dashboard/{type}', array(
     'as' => 'items.type', 
     'uses' => 'ResumeController@getItemType'
-))->where('type', 'alljobs|draft');
+))->where('type', 'alljobs|draft|awaitingjobs');
 
 Route::get('/employer/job/applicants/{type}', array(
     'as' => 'applicants.type', 
