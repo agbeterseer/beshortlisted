@@ -29,6 +29,43 @@
   td{
     width: 100px;
   }
+ 
+.lds-ripple {
+  display: inline-block; 
+  position: absolute; 
+  left: 0; 
+  top: 0; 
+  z-index: 100000;
+  width: 64px;
+  height: 64px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #13B5EA;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+
+@keyframes lds-ripple {
+  0% {
+    top: 28px;
+    left: 28px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: -1px;
+    left: -1px;
+    width: 58px;
+    height: 58px;
+    opacity: 0;
+  }
+}
 </style>
  
 <style type="text/css">
@@ -72,20 +109,6 @@
         @include('partials.employer_breadcomb')
         <!-- Banner -->
         <!-- Main Content -->
-   <!--      <div class="careerfy-main-content" style="margin-top: -50px;">
-    <nav class="nav-tabs navbar-inverse">
-  <div class="container-fluid">
- 
-    <ul class="nav navbar-nav">
-    <li class="active"><a href="{{route('short.list')}}"  >Manage Jobs </a> </li>
-      <li ><a href="#draft"  >Draft&nbsp; </a> </li>
-      <li><a href="#awaiting"  >Awaiting Approval&nbsp; </a></li>
-      <li><a href="#blacklist" >Blacklist&nbsp; </a></li>
-      <li><a href="#not_active" >Not Active&nbsp; </a></li>
-        <li><a href="#active" >Active&nbsp; </a></li>
-    </ul>
-  </div>
-</nav>  -->
         <!-- Main Content -->
        
         <!-- <div class="space">&nbsp;</div> -->
@@ -114,6 +137,7 @@
                                             <a href="#tab_5" data-toggle="tab">ACTIVE &nbsp;<span class="badge">{{$job_activelist_count}}</span></a>
                                         </li> 
                                     </ul>
+       
                                       <div class="tab-content">
                                         <div class="tab-pane active" id="tab_0">
                         <aside class="careerfy-column-3 careerfy-typo-wrap" >
@@ -169,263 +193,20 @@
                          
                             </div>
                         </aside>
-                        <div class="careerfy-column-9 careerfy-typo-wrap">
-                            <div class="careerfy-typo-wrap">
-                              <div class="lds-ripplee" style="display: none;"><div></div><div></div></div>
-                              <div id="info"></div>
-                                <!-- FilterAble -->
-                         <!--        <div class="careerfy-filterable">
-                                    <h2>Showing 0-12 of 37 results</h2>
-                                    <ul>
-                                        <li>
-                                            <i class="careerfy-icon careerfy-sort"></i>
-                                            <div class="careerfy-filterable-select">
-                                                <select>
-                                                    <option>Sort</option>
-                                                    <option>Sort</option>
-                                                    <option>Sort</option>
-                                                </select>
-                                            </div>
-                                        </li>
-                                        <li><a href="#"><i class="careerfy-icon careerfy-squares"></i> Grid</a></li>
-                                        <li><a href="#"><i class="careerfy-icon careerfy-list"></i> List</a></li>
-                                    </ul>
-                                </div> -->
-                                <!-- FilterAble -->
-                                <!-- JobGrid -->
+                      
+
+                      <!--Load all jobs --> 
+                   <section class="alljobs" id="alljobs">
+                      @include('jobs.load_all_jobs')
+                    </section>
 
 
-
-                                <div class="careerfy-job careerfy-joblisting-classic">
-                                    <ul class="careerfy-row">
-                                       <div id="joblist">
-                                          @if(!$jobs_draft_list->isEmpty())
-                                          
-                                            @if($tags)
-                                     @foreach($tags as $job)  
- <li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><div class="careerfy-joblisting-text">
-    <div class="col-md-12 careerfy-list-option" >
-      <div class="col-md-6">  <a href="{{route('get.applicants_byid', $job->id)}}" style="font-weight: 400px; font-size: 17px"> <h2>   {{$job->job_title}}  </h2> </a>   </div>
-      <div class="col-md-6" align="right"> <div class="status-mark" align="right"><div class=""></div> 
-      STATUS: @if($job->status === 1 && $job->active === 1)<span class="badge" style="background-color: green;"> ONLINE</span> @else<span class="badge" style="background-color: red;">OFFLINE</span>  @endif  </div> </div>
-    </div>
-    <hr style="height: 2px;">
-    <div class="careerfy-list-option"> 
-     <ul>  
-     <li><i class="careerfy-icon careerfy-maps-and-flags"></i> {{$job->country}}, {{$job->city}}</li>
-     <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>@foreach($professions as $profession) @if($profession->id === $job->job_category) {{$profession->name}} @endif @endforeach</li>
-     </ul> </div>
-     <div class="space">&nbsp;</div>  
-     <div class="row"><div class="col-md-12"> 
- <div class="col-md-2" align="center">
-    <div class="badge" style="background-color: #ffffff;"><font style=" font-weight: bold; font-size: 35px; color: orange;">
-    <?php  
-            $unsorted_co = 0;
-            $total = 0;
-            $shortlisted = 0;
-            $in_review = 0;
-            $rejected = 0;
-            $offered = 0;
-            $hired = 0;
-    ?> 
-   
-     <?php  $total = \App\Application::where('sorted', 0)->where('tag_id',$job->id)->count(); ?>
-        
-{{$total}}
-    </font> <br><br><p></p>  <font  style="font-size: 20px; color: orange;"> Unsorted </font></div></div>
- 
-    <div class="col-md-2" align="center">
-    <div class="badge" style="background-color: #ffffff;"><font style=" font-weight: bold; font-size: 35px; color: orange;">
-<?php  $in_review = \App\Application::where('in_review', 1)->where('tag_id',$job->id)->count(); ?>
-{{$in_review}}
-    </font>   <br><br><p></p>  <font  style="font-size: 20px; color: orange;"> In Review </font></div></div>
- 
-    <div class="col-md-2" align="center"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: orange;"> 
-<?php  $shortlisted = \App\Application::where('shortlisted', 1)->where('tag_id',$job->id)->count(); ?>
-{{$shortlisted}}
-    </font> <br><br><p></p>
-    <font  style="font-size: 20px; color: red;">  Shortlisted</font></div></div>
-
-    <div class="col-md-2" align="center">  <div class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: red;">  
-<?php  $rejected = \App\Application::where('rejected', 1)->where('tag_id',$job->id)->count(); ?>
-{{$rejected}}
-    </font>  <br><br><p></p>
-    <font  style="font-size: 20px; color: red;">  Rejected</font>
-    </div></div>
-
-    <div class="col-md-2" align="center"> <div class="badge" style=" background-color: #ffffff;"><font style="font-weight: bold; font-size: 35px; color: green;">
-    <?php  $offered = \App\Application::where('offered', 1)->where('tag_id',$job->id)->count(); ?>
-{{$offered}}
-    </font><br><br><p></p>
-    <font  style="font-size: 20px; color: green;">  Offered</font>
-
-    </div><br></div>
-    <div class="col-md-1" align="center"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: green;"> 
-   
-  <?php  $hired = \App\Application::where('hired', 1)->where('tag_id',$job->id)->count(); ?>
-{{$hired}} 
-  </font><br><br><p></p>
-    <font  style="font-size: 20px; color: green;">  Hired</font>
-    </div></div> 
-    </div></div>
-
- 
-
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<hr>  
-    <div class="col-sm-12">
-    <div class="col-sm-6" align="left">
-  <div class="careerfy-job-userlist2 careerfy-list-option" > <ul><li>Published  {{ date('M, d, Y', strtotime($job->created_at)) }}</li> <li>  Expires in {{ date('M, d, Y', strtotime($job->end_date)) }}</li></ul>   </div></div>
-      
- <div class="col-sm-6" align="right">
-    <div class="careerfy-job-userlist">@foreach($employement_terms as $employement_term) @if($job->job_type === $employement_term->id)<span class="careerfy-option-btn careerfy-{{$employement_term->category}}"><a href="{{route('get.applicants_byid', $job->id)}}" style="color: #ffffff;"> view</a></span>@endif @endforeach 
-
-      </div>
-
-     </div>
-    </div>
-
-    <div class="clearfix"></div></div></div></li>  <div class="space">&nbsp;</div>
-
-                                     @endforeach 
-                                     @endif
- @else
-
-<li> 
-<div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="400" width="400" alt="" align="center"></div>
-<div class="clearfix"></div>
-</div> </li> @endif
- 
-    </div> </ul></div>
-                                <!-- Pagination -->
-                                <div class="careerfy-pagination-blog">
-                                    <ul class="page-numbers">
-                         
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                                        <div class="tab-pane" id="tab_1">
-                                          <div class="careerfy-column-12 careerfy-typo-wrap">
-                            <div class="careerfy-typo-wrap">
-                                <!-- FilterAble -->
-                         <!--        <div class="careerfy-filterable">
-                                    <h2>Showing 0-12 of 37 results</h2>
-                                    <ul>
-                                        <li>
-                                            <i class="careerfy-icon careerfy-sort"></i>
-                                            <div class="careerfy-filterable-select">
-                                                <select>
-                                                    <option>Sort</option>
-                                                    <option>Sort</option>
-                                                    <option>Sort</option>
-                                                </select>
-                                            </div>
-                                        </li>
-                                        <li><a href="#"><i class="careerfy-icon careerfy-squares"></i> Grid</a></li>
-                                        <li><a href="#"><i class="careerfy-icon careerfy-list"></i> List</a></li>
-                                    </ul>
-                                </div> -->
-                                <!-- FilterAble -->
-                                <!-- JobGrid -->
-                                <div class="careerfy-job careerfy-joblisting-classic">
-                                    <ul class="careerfy-row">
-                                       <div id="joblist">
-                                         @if(!$jobs_draft_list->isEmpty())
-                                         @if($jobs_draft_list)
-         @foreach($jobs_draft_list as $job)
-   <li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><div class="careerfy-joblisting-text">
-    <div class="col-md-12 careerfy-list-option" >
-      <div class="col-md-6">  <a href="{{route('get.applicants_byid', $job->id)}}" style="font-weight: 400px; font-size: 17px"> <h2>   {{$job->job_title}}  </h2> </a> <!-- <span>Featured</span> -->  </div>
-      <div class="col-md-6" align="right"> <div class="status-mark" align="right"><div class=""></div> 
-      STATUS: @if($job->status === 1 && $job->active === 1)<span class="badge" style="background-color: green;"> ONLINE</span> @else<span class="badge" style="background-color: red;">OFFLINE</span>  @endif </div> </div>
-    </div>
-    <hr style="height: 2px;">
-    <div class="careerfy-list-option"> 
-     <ul>  
-     <li><i class="careerfy-icon careerfy-maps-and-flags"></i> {{$job->country}}, {{$job->city}}</li>
-     <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>@foreach($professions as $profession) @if($profession->id === $job->job_category) {{$profession->name}} @endif @endforeach</li>
-     </ul> </div>
-     <div class="space">&nbsp;</div>  
-     <div class="row"><div class="col-md-12"> 
- 
- <div class="col-md-2" align="center">
-    <div class="badge" style="background-color: #ffffff;"><font style=" font-weight: bold; font-size: 35px; color: orange;">
+               <div class="tab-pane" id="tab_1" >
+                     <section class="draftjobs" id="draftjobs">
+                      @include('jobs.load_draft_jobs')
+                    </section> 
   
-     <?php  $total = \App\Application::where('sorted', 0)->where('tag_id',$job->id)->where('delete', 0)->count(); ?>
-      
-      {{$total}}
-    </font>   <br><br><p></p>  <font  style="font-size: 20px; color: orange;"> Unsorted </font></div></div>
- 
-    <div class="col-md-2" align="center">
-    <div class="badge" style="background-color: #ffffff;"><font style=" font-weight: bold; font-size: 35px; color: orange;">
-      <?php  $in_review = \App\Application::where('in_review', 1)->where('tag_id',$job->id)->count(); ?>
-{{$in_review}}</font>   <br><br><p></p>  <font  style="font-size: 20px; color: orange;"> In Review </font></div></div>
-
-    <div class="col-md-2" align="center"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: orange;"><?php  $shortlisted = \App\Application::where('shortlisted', 1)->where('tag_id',$job->id)->count(); ?>
-{{$shortlisted}}</font> <br><br><p></p>
-    <font  style="font-size: 20px; color: red;">  Shortlisted</font></div></div>
-
-    <div class="col-md-2" align="center">  <div class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: red;"><?php  $rejected = \App\Application::where('rejected', 1)->where('tag_id',$job->id)->count(); ?>
-{{$rejected}}</font>  <br><br><p></p>
-    <font  style="font-size: 20px; color: red;">  Rejected</font>
-    </div></div>
-
-    <div class="col-md-2" align="center"> <div class="badge" style=" background-color: #ffffff;"><font style="font-weight: bold; font-size: 35px; color: green;">    <?php  $offered = \App\Application::where('offered', 1)->where('tag_id',$job->id)->count(); ?>
-{{$offered}}</font><br><br><p></p>
-    <font  style="font-size: 20px; color: green;">  Offered</font>
-
-    </div><br></div>
-    <div class="col-md-1" align="center"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: green;">  <?php  $hired = \App\Application::where('hired', 1)->where('tag_id',$job->id)->count(); ?>
-{{$hired}} </font><br><br><p></p>
-    <font  style="font-size: 20px; color: green;">  Hired</font>
-    </div></div>
-
-    </div></div>
-
- 
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<hr>  
-    <div class="col-sm-12">
-    <div class="col-sm-6" align="left">
-  <div class="careerfy-job-userlist2 careerfy-list-option">  <strong> Published</strong> {{ date('M, d, Y', strtotime($job->created_at)) }} | Expires in {{ date('M, d, Y', strtotime($job->end_date)) }}  </div></div>
-      
- <div class="col-sm-6" align="right">
-    <div class="careerfy-job-userlist ">@foreach($employement_terms as $employement_term) @if($job->job_type === $employement_term->id)<span class="careerfy-option-btn careerfy-{{$employement_term->category}}"><a href="{{route('get.applicants_byid', $job->id)}}" style="color: #ffffff;"> view</a></span>@endif @endforeach 
-
-      </div>
-
-     </div>
-    </div>
-
-    <div class="clearfix"></div></div></div></li>  <div class="space">&nbsp;</div> 
-    
-    @endforeach    
-@endif
-    @else
-
-<li> 
-<div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="400" width="400" alt="" align="center"></div>
-<div class="clearfix"></div>
-</div> </li> @endif
-
-
-    </div> </ul></div>
-                                <!-- Pagination -->
-                                <div class="careerfy-pagination-blog">
-                                    <ul class="page-numbers">
-                                {{ $jobs_draft_list->appends(['s' => $s])->links() }}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                                         </div>
 
 
@@ -876,22 +657,90 @@
     <script src="{{ asset('recruit/script/jquery.js')}}"></script> -->
      <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
     <script src="{{ asset('recruit/script/bootstrap.js')}}"></script>
-    <script src="{{ asset('recruit/script/slick-slider.js')}}"></script>
-    <script src="{{ asset('recruit/plugin-script/counter.js')}}"></script>
-    <script src="{{ asset('recruit/plugin-script/fancybox.pack.js')}}"></script>
-    <script src="{{ asset('recruit/plugin-script/isotope.min.js')}}"></script>
-    <script src="{{ asset('recruit/plugin-script/functions.js')}}"></script> 
-    <script src="{{ asset('css/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('css/assets/global/plugins/bootstrap-summernote/summernote.min.js')}}" type="text/javascript"></script>
-    <script src="{{ asset('css/assets/global/plugins/jquery-repeater/jquery.repeater.js')}}" type="text/javascript"></script>
-     
- <script src="{{ asset('css/assets/pages/scripts/form-repeater.min.js')}}" type="text/javascript"></script>
+ 
    <script>
 $(document).ready(function(){
     $(".nav-tabs a").click(function(){
         $(this).tab('show');
     });
 });
+
+$(function() {
+
+          function getPaginationSelectedPage(url) {
+            var chunks = url.split('?');
+            var baseUrl = chunks[0];
+            var querystr = chunks[1].split('&');
+            var pg = 1;
+            for (i in querystr) {
+                var qs = querystr[i].split('=');
+                if (qs[0] == 'page') {
+                    pg = qs[1];
+                    break;
+                }
+            }
+            return pg;
+        } 
+
+
+    $('#alljobs').on('click', '.pagination a', function(e) { 
+        $('#load a').css('color', '#dfecf6');
+        $('#load').append('<img style="position: absolute; left: 0; top: 0; z-index: 100000;" src="{{asset(`img/ajax-loader.gif`)}}" />');
+
+        // var url = $(this).attr('href');  
+        // getTags(url);
+        // window.history.pushState("", "", url);
+         
+         e.preventDefault();
+            var pg = getPaginationSelectedPage($(this).attr('href'));
+
+            $.ajax({
+                url: '/employer/dashboard/alljobs',
+                data: { page: pg }, 
+                beforeSend: function(){
+                    $(".lds-ripple").show(); 
+              },
+                success: function(data) {
+                    $('#alljobs').html(data);
+                }
+            }).done(function(data){ 
+                    $(".lds-ripple").hide(); 
+            });
+
+
+    });
+
+
+    function getTags(url) {
+        $.ajax({
+            url : url  
+        }).done(function (data) {
+            $('.alljobs').html(data);  
+        }).fail(function () {
+            alert('Jobs could not be loaded.');
+        });
+    }
+
+
+
+        $('#draftjobs').on('click', '.pagination a', function(e) {
+            e.preventDefault();
+            var pg = getPaginationSelectedPage($(this).attr('href'));
+
+            $.ajax({
+                url: '/employer/dashboard/draft',
+                data: { page: pg },
+                success: function(data) {
+                    $('#draftjobs').html(data);
+                }
+            });
+        });
+
+
+}); 
+
+    $('#alljobs').load('/employer/dashboard/alljobs?page=1');
+    $('#draftjobs').load('/employer/dashboard/draft?page=1');
 </script>
 
 

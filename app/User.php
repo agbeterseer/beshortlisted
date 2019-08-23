@@ -27,6 +27,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+ 
      
     public function is_admin()
     {
@@ -46,7 +48,14 @@ class User extends Authenticatable
         }
         return false;
     }
-
+       public function is_confirmed()
+    {
+        if($this->confirmed) 
+        {
+            return true;
+        }
+        return false;
+    }
 
      /**
      * Send the password reset notification.

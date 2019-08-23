@@ -10,7 +10,8 @@
                                     <ul class="careerfy-row" >
                                      <li class="careerfy-column-12">
                                             <div class="careerfy-joblisting-classic-wrap">
-                                                <figure><a v-bind:href="'/job/job-descriptions/' + job.id " ><img v-bind:src="'/img/job.png'" /> </a></figure>
+                                                <figure><a v-bind:href="'/job/job-descriptions/' + job.id " >
+                                                <img v-bind:src="'/img/job.png'" /> </a></figure>
                                                 <div class="careerfy-joblisting-text">
                                                     <div class="careerfy-list-option">
                                                     <h2><a href=""> {{ job.job_title }} </a>  </h2>
@@ -43,10 +44,10 @@
                         </div>
                                   <div class="careerfy-pagination-blog">
                                     <ul class="pagination">
-                                        <li v-bind:class="[{disabled: !pagination.prev_page_url}]"><a class="prev page-numbers" href="#" @click="fetchJobs(pagination.prev_page_url)"><span><i class="careerfy-icon careerfy-arrows4"></i></span></a></li>
+                    <li v-bind:class="[{disabled: !pagination.prev_page_url}]"><a class="prev page-numbers" href="#" @click="fetchJobs(pagination.prev_page_url)"><span><i class="careerfy-icon careerfy-arrows4"></i></span></a></li>
                  <li v-for="n in pagination.last_page" v-bind:key="n" v-bind:class="[{active: !pagination.current_page == n}]" class="page-item"><span  class="page-link" @click="fetchJobs(pagination.path_page + n)">{{ n }} </span></li>
                                             
-                                        <li v-bind:class="[{disabled: !pagination.next_link}]" ><span class="next page-numbers" @click="fetchJobs(pagination.next_link)"><span><i class="careerfy-icon careerfy-arrows4"></i></span></span></li>
+                  <li v-bind:class="[{disabled: !pagination.next_link}]" ><span class="next page-numbers" @click="fetchJobs(pagination.next_link)"><span><i class="careerfy-icon careerfy-arrows4"></i></span></span></li>
 
  
                                     </ul>

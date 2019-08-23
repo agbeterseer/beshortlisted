@@ -82,7 +82,7 @@
                             <label for="content" class="col-md-4 control-label">Body
                             <span class="required">*</span>
                             </label> 
-                            <div class="col-md-8">
+                            <div >
                             <textarea id="summernote_1" name="content">{{$page->content}}</textarea> 
                                 @if ($errors->has('content'))
                                     <span class="help-block">

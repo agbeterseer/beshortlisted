@@ -61,30 +61,8 @@ border-color: white !important;
  <!-- Main Section -->
  
           
-       <div class="careerfy-main-section">
-                <div class="container">
-                    <div class="row"> 
-                     <aside class="careerfy-column-4 careerfy-typo-wrap"  >
-                        <div class="careerfy-typo-wrap" >
-                            <form class="careerfy-search-filter"> 
-                          
-                        <listcities></listcities>
-                        <vacancytypes></vacancytypes>
-                        <jobfunctions></jobfunctions>
-                        <industries></industries>
+ <jobfilter></jobfilter>
 
-                            </form> 
-                        </div> 
-                    </aside> 
- 
- <!-- Search result -->
-
-                        <listjobs></listjobs> 
-       
- <!-- Search result --> 
-                    </div>
-                </div>
-        </div>
          </div>   
   </div>
 

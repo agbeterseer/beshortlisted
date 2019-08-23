@@ -125,16 +125,19 @@
                                             </li>
                                         </ul>
                                     </div>
-                              <div class="careerfy-content-title"><h2>Job Responsibilities</h2></div>
-                                    <div class="careerfy-description">  
-                                     {!! $tag->job_roles !!}
-            
-                                    </div>
+                          
                                  <div class="careerfy-content-title"><h2>Technical Requirements</h2></div> 
                                     <div class="careerfy-description">
                                         {!! $tag->description !!}
                                     </div>
-                            
+                                    <div class="careerfy-content-title"><h2>Job Funtionssds df</h2></div>
+                                    <div class="careerfy-description">
+                                    @if($tag->job_role) 
+                                     {!! $tag->job_role !!}
+                                    @else
+                                        N/A
+                                    @endif
+                                    </div>
 
   <div class="space">&nbsp;</div>
     <span style="color: red;">Kindly answer the evaluation question(s) below to begin your screening process</span>

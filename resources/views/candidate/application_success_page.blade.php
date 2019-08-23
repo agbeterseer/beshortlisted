@@ -31,7 +31,7 @@
                         <div class="careerfy-column-12">
                             <div class="careerfy-typo-wrap">
                                 <div class="careerfy-employer-dasboard">
-                                    <div class="careerfy-employer-box-section">
+                                    <div class="careerfy-employer-box-section" style="background-color: #FFFFFF;">
                                         <!-- Profile Title -->
                                       <nav class="careerfy-employer-jobnav">
                                             <ul>

@@ -1,4 +1,6 @@
-<div class="page-sidebar-wrapper">
+@inject('request', 'Illuminate\Http\Request')
+  
+                             
                       <!-- BEGIN SIDEBAR -->
                       <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
                       <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
@@ -37,7 +39,7 @@
                                   <!-- END RESPONSIVE QUICK SEARCH FORM -->
                               </li>
                                @if ($user->is_admin())
-                              <li class="nav-item">
+                              <li class="nav-item start ">
                               <a href="{{route('board')}}" class="nav-link nav-toggle">
                                     <i class="icon-home"></i>
                                     <span class="title">Dashboard</span>
@@ -46,7 +48,7 @@
                               </li>
                               @else
 
-                      <li class="nav-item start active open">
+                      <li class="nav-item ">
                               <a href="{{route('home')}}" class="nav-link nav-toggle">
                                     <i class="icon-home"></i>
                                     <span class="title">Dashboard</span>
@@ -56,7 +58,7 @@
 
                               @endif
 
-                              @if ($user->is_admin())
+                              @if(Auth::user()->hasRole(['super-user', 'Managing Partner', 'admin']))
                       <li class="nav-item  " id="roleid">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-briefcase"></i>
@@ -98,46 +100,35 @@
                       
                               </li>
                               @endif
-
-                                  <li class="nav-item">
+              @role(['super-user', 'Managing Partner', 'general-user', 'Document Master', 'admin'])
+                 
+                                <li class="nav-item">
                                   <a href="javascript:;" class="nav-link nav-toggle">
-                                      <i class="icon-puzzle"></i>
-                                      <span class="title">Document Management</span>
+                                      <i class="icon-docs"></i>
+                                      <span class="title">TAGs</span>
                                       <span class="arrow"></span>
                                   </a>
-                                  <ul class="sub-menu">
-                                   <li class="nav-item">
-                                          <a href="{{route('profession.index')}}" class="nav-link ">
-                                              <span class="title"> List Professions</span>
-                                          </a>
-                                      </li>
-                                  
+                                   <ul class="sub-menu">
                                       <li class="nav-item ">
-                                          <a href="{{route('document.index')}}" class="nav-link ">
-                                              <span class="title">Candidates Records</span>
-                                          </a>
+                                      <a href="{{ route('tag.index') }}" class="nav-link "> 
+                                     <span class="title">All Tags</span>
+                                      </a>
+                                
                                       </li>
-                                          <li class="nav-item ">
-                                          <a href="{{route('document.uploadfromcsv')}}" class="nav-link ">
-                                              <span class="title">Upload CV From CSV</span>
+                  <li class="nav-item ">
+                                          <a href="{{route('tag.create')}}" class="nav-link ">
+                                              <span class="title">Add New Tag</span>
                                           </a>
-                                      </li>
-                                       <li class="nav-item">
-                                          <a href="{{route('document.search_category')}}" class="nav-link ">
-                                              <span class="title">Document Search</span>
-                                          </a>
-                                      </li>
-                                         <li class="nav-item">
-                                          <a href="{{route('search.index')}}" class="nav-link ">
-                                              <span class="title"> Advance Search</span>
-                                          </a>
-                                      </li>
-                                    
-                                  </ul>
-                               
-                              </li>
+                                      </li> 
+                                  </ul> 
+                      
+                              </li>     
 
-                              <li class="nav-item   start active open">
+ 
+             
+                @endrole
+              @role(['super-user', 'Managing Partner', 'admin'])
+                     <li class="nav-item">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-settings"></i>
                                       <span class="title">Settings</span>
@@ -150,21 +141,84 @@
                                         <span class="title">Back up cv </span>
                                           </a>
                                       </li>
-                            <!--         <li class="nav-item ">
+
+                                  <li class="nav-item ">
                                           <a href="{{route('backupsys.backups')}}" class="nav-link ">
                                         <span class="title">Back up cv </span>
                                           </a>
-                                      </li> -->
-                                         <li class="nav-item ">
+                                      </li>
+                                    <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
+                                          <a href="{{route('policies.index')}}" class="nav-link ">
+                                        <span class="title">@lang('cvmanagement.policies.title') </span>
+                                          </a>
+                                      </li> 
+                                  <li class="nav-item {{ $request->segment(1) == 'fields-of-study' ? 'active' : '' }}">
+                                          <a href="{{route('create.field')}}" class="nav-link ">
+                                        <span class="title">@lang('cvmanagement.fields-of-study.title') </span>
+                                          </a>
+                                      </li> 
+                                    <li class="nav-item {{ $request->segment(1) == 'contact' ? 'active' : '' }}">
+                                          <a href="{{route('show.contacts')}}" class="nav-link ">
+                                        <span class="title">@lang('cvmanagement.contact.title') </span>
+                                          </a>
+                                      </li> 
+                                       <li class="nav-item ">
+                                          <a href="{{route('banner.index')}}" class="nav-link ">
+                                        <span class="title">Banner </span>
+                                          </a>
+                                      </li> 
+                                     <li class="nav-item ">
+                                          <a href="{{route('aboutus.index')}}" class="nav-link ">
+                                        <span class="title">AboutUs </span>
+                                          </a>
+                                      </li> 
+                                  <li class="nav-item ">
+                                          <a href="{{route('frequently.index')}}" class="nav-link ">
+                                        <span class="title">Frequently Questions </span>
+                                          </a>
+                                      </li> 
+                                        <li class="nav-item ">
+                                          <a href="{{route('admin.tickets')}}" class="nav-link ">
+                                        <span class="title">Support Tickets </span>
+                                          </a>
+                                      </li>
+                                    <li class="nav-item ">
+                                          <a href="{{route('show.industry_settings')}}" class="nav-link ">
+                                        <span class="title">Industries </span>
+                                          </a>
+                                      </li>   
+                                    </ul> 
+                                  </li> 
+                                   <li class="nav-item  ">
+                                  <a href="javascript:;" class="nav-link nav-toggle">
+                                      <i class="icon-settings"></i>
+                                      <span class="title">Send Email</span>
+                                      <span class="arrow"></span>
+                                  </a>
+                                  <ul class="sub-menu"> 
+                                      <li class="nav-item ">
+                                          <a href="{{route('show.uploademail')}}" class="nav-link ">
+                                        <span class="title">Upload Emails </span>
+                                          </a>
+                                      </li>
+                                    <li class="nav-item ">
                                           <a href="{{route('log.activity')}}" class="nav-link ">
                                         <span class="title">Log </span>
                                           </a>
                                       </li>
+                                        <!--    <li class="nav-item ">
+                                          <a href="{{route('backupsys.backups')}}" class="nav-link ">
+                                        <span class="title">Back up cv </span>
+                                          </a>
+                                      </li> -->
+                              </ul>
 
                                   </li>
+                  @endrole
+                
                           
                          <!-- END SIDEBAR MENU -->
                           <!-- END SIDEBAR MENU -->
                      </div>
                       <!-- END SIDEBAR -->
-                  </div>
+                

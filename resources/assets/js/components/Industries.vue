@@ -9,11 +9,9 @@
 
   <input type="checkbox"  :value="industry.id"  :id="'r_'+industry.id" v-model="checkedNames"/> 
         <label :for="'r_'+industry.id"><span></span>{{industry.name}}</label>
-                                                    <small></small>
-
-                                 
+                                                    <small></small> 
                        </li>
-                       {{ checkedNames }}
+                       
                                             
                                             </ul> 
                                         </div>

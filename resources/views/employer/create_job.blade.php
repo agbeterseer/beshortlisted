@@ -98,10 +98,10 @@ border-color: white !important;
                                                     <input onblur="if(this.value == '') { this.value ='Graveholdings'; }" onfocus="if(this.value =='Graveholdings') { this.value = ''; }" type="text" name="username">
                                                 </li> -->
                                                 <li class="careerfy-column-6">
-                                                    <label>Job Category / Position *</label>
+                                                    <label>Job Family *</label>
                                                     <div class="careerfy-profile-select">
                                                         <select name="job_category" required="required"> 
-                                                        <option value="">Select a Category</option>
+                                                        <option value="">Select a Job Family</option>
                                                         @foreach($industry_professions as $industry_profession)
                                                         <option value="{{$industry_profession->id}}">{{$industry_profession->name}}</option>
 

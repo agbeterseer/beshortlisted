@@ -47,7 +47,7 @@
  <figure>
 
 
- <a href="{{route('display.pix', Auth::user()->id)}}" class="employer-dashboard-thumb"><img src="/uploads/avatars/{{$profile_pix->pix }}" alt=""></a>
+ <a href="{{route('display.pix', Auth::user()->id)}}" class="employer-dashboard-thumb"><img src="/uploads/avatars/{{$user->avatar }}" alt=""></a>
                  
               <figcaption>
               
@@ -145,7 +145,7 @@
 @endif
 @if($section_candidatelist_count === 3)
 
-<a href=" " class="careerfy-applyjob">view</a>
+ <a href="{{route('apply.job',  $tag->id)}}" class="careerfy-applyjob">Apply</a> 
 @endif
 
 @if($section_candidatelist_count === 4) 
@@ -153,7 +153,7 @@
 @endif
 
 @if($section_candidatelist_count === 5)
- <a href="" class="careerfy-green">view</a> 
+ <a href="{{route('apply.job',  $tag->id)}}" class="careerfy-applyjob">Apply</a> 
 @endif
 
 @if($section_candidatelist_count === 6)

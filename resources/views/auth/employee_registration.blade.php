@@ -110,7 +110,7 @@ tr:hover {background-color:#f5f5f5;}
             </div>
             @endif       
      <!-- <div class="portlet light bordered" > -->
-  <form class="careerfy-row careerfy-employer-profile-form" method="POST" action="{{ route('register.employee') }}"  >
+  <form class="careerfy-row careerfy-employer-profile-form" method="POST" action="{{ route('register.employee') }}"   enctype="multipart/form-data">
                         {{ csrf_field() }} 
            <div class="panel panel-default"> 
                 <div class="panel-body"> 
@@ -122,30 +122,22 @@ tr:hover {background-color:#f5f5f5;}
                     <div class="careerfy-user-form careerfy-user-form-coltwo">
                            <div>
                 <ul> 
-                        <li>
-
-                        <label >Password</label> 
-                        <div name="frmCheckPassword" id="frmCheckPassword"> 
-                        <input type="password" name="password" id="password" class="demoInputBox" onKeyUp="checkPasswordStrength();" />
-                        <div id="password-strength-status" style="position: absolute; margin: -15px 0px 0px 90px;"></div>
-                        </div>
-
-                        <i class="careerfy-icon careerfy-typo-wrap"></i>
-                        @if ($errors->has('password'))
-                        <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                        @endif
-                        </li>
-                    <li> 
-                    <label>Confirm Password</label>  
-                    <input id="password_confirmation" type="password"  name="password_confirmation" class="form-control" onblur="return Validate()">
-                    <i class="careerfy-icon careerfy-typo-wrap"></i> 
-                    </li> 
-                </ul>
-                </div>
-                        <ul>
-                          <li>
+                               <li>
+                                <label>First Name:<span class="required" style="color: red">*</span></label>
+       <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="firstname">
+                                <i class="careerfy-icon careerfy-user"></i>
+                              @if ($errors->has('firstname'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('firstname') }}</strong>
+                                    </span>
+                                @endif
+                            </li>
+                            <li>
+                                <label>Last Name:<span class="required" style="color: red">*</span></label>
+                                <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="lastname">
+                                <i class="careerfy-icon careerfy-user"></i>
+                            </li>
+                                                      <li>
                                 <label>Email Address:<span class="required" style="color: red">*</span></label>
                                 <input onblur="if(this.value == '') { this.value ='Enter Your Email Address'; }" onfocus="if(this.value =='Enter Your Email Address') { this.value = ''; }" type="text" name="email"  >
                                 <i class="careerfy-icon careerfy-mail"></i>
@@ -414,22 +406,32 @@ tr:hover {background-color:#f5f5f5;}
           </div>
 
                             </li>
-                        
                         <li>
-                                <label>First Name:<span class="required" style="color: red">*</span></label>
-       <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="firstname">
-                                <i class="careerfy-icon careerfy-user"></i>
-                              @if ($errors->has('firstname'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('firstname') }}</strong>
-                                    </span>
-                                @endif
-                            </li>
-                            <li>
-                                <label>Last Name:<span class="required" style="color: red">*</span></label>
-                                <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="lastname">
-                                <i class="careerfy-icon careerfy-user"></i>
-                            </li>
+
+                        <label >Password</label> 
+                        <div name="frmCheckPassword" id="frmCheckPassword"> 
+                        <input type="password" name="password" id="password" class="demoInputBox" onKeyUp="checkPasswordStrength();" />
+                        <div id="password-strength-status" style="position: absolute; margin: -15px 0px 0px 90px;"></div>
+                        </div>
+
+                        <i class="careerfy-icon careerfy-typo-wrap"></i>
+                        @if ($errors->has('password'))
+                        <span class="help-block">
+                        <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                        @endif
+                        </li>
+                    <li> 
+                    <label>Confirm Password</label>  
+                    <input id="password_confirmation" type="password"  name="password_confirmation" class="form-control" onblur="return Validate()">
+                    <i class="careerfy-icon careerfy-typo-wrap"></i> 
+                    </li> 
+                </ul>
+                </div>
+                        <ul>
+
+                        
+         
                         <li>
                                 <label>Gender:<span class="required" style="color: red">*</span></label>
                           <select name="gender" id="gender" required="required" style="background-color: #ffffff; font-size: 13px; font-weight: normal;">
@@ -446,6 +448,18 @@ tr:hover {background-color:#f5f5f5;}
                             <li>
                                 <label>Date Of Birth:<span class="required" style="color: red">*</span></label>
                                 <input onblur="if(this.value == '') { this.value ='Enter Date of Birth'; }" onfocus="if(this.value =='Enter Date of Birth') { this.value = ''; }" type="date" name="date_of_birth" class="form-control"  required="required">
+                            </li>
+
+                            <li> <label>Qualification:<span class="required" style="color: red">*</span></label>
+
+  <select name="educational_level" id="educational_level" required="required" style="background-color: #ffffff; font-size: 13px; font-weight: normal;">
+          <option value="" selected="selected">Select</option>dd($file);
+  @foreach($educationallevels as $educationallevel)
+                  
+                          <option value="{{$educationallevel->id}}">{{$educationallevel->name}}</option>
+                          @endforeach
+                          </select>
+
                             </li>
                           </ul>
 
@@ -639,7 +653,7 @@ tr:hover {background-color:#f5f5f5;}
                    </div>
                         <ul class="careerfy-user-form careerfy-user-form-coltwo"> 
                           <li> 
-                      Upload CV <input type="file" name="upload-cv">  </li>
+                      Upload CV <input type="file" name="upload_cv">  </li>
                             <div class="space">&nbsp;</div> 
  <input type="checkbox" name="newsletter" checked="checked" > I would like to receive top jobs and career tips
                         </ul>
@@ -946,7 +960,21 @@ document.getElementById('present').style.display = 'block';
             });
         }
  
+      $("#end_year").change(function() { 
+ //alert($(this).val());
+    if ( $(this).val() !=null) {
+    
+          var start_d = document.getElementById('from_year').value; 
+          var end_d = document.getElementById('end_year').value;
+        // alert(start_d);
+            
+            if (document.getElementById('from_year').value > document.getElementById('end_year').value) {
 
+             alert('The year you stopped working should be greater than the start year');  
+             document.getElementById('end_year').value = '';  
+            }
+    } 
+});
  </script>
 
  

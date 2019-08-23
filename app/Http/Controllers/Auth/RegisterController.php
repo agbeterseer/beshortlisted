@@ -86,10 +86,11 @@ class RegisterController extends Controller
     $user->name = $data['name'];
     $user->password = bcrypt($data['password']);
     $user->account_type = $data['account_type'];
+    $user->
     $user->save();
        
-      $recruit_profile_pix = DB::table('recruit_profile_pixs')->insert(['user_id' => $user->id, 'order' => 1, 'status' => 1, 'created_at' => $this->returnCurrentTime()]);
-     return $user;
+    // $recruit_profile_pix = DB::table('recruit_profile_pixs')->insert(['user_id' => $user->id, 'order' => 1, 'status' => 1, 'created_at' => $this->returnCurrentTime()]);
+    //  return $user;
     }
 
     // public function create(array $data) {

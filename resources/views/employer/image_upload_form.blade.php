@@ -26,7 +26,7 @@
                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="id" value="{{ Auth::user()->id }}">
                                         <div class="form-group">
-         <img src="/uploads/avatars/{{ $recruit_profile_pix->pix }}"  alt="Picture" class="employer-dashboard-thumb" >
+         <img src="/uploads/avatars/{{ $user->avatar }}"  alt="Picture" class="employer-dashboard-thumb" >
 
                                             <div class="fileinput fileinput-new" data-provides="fileinput"> 
                                                 <div>
@@ -51,34 +51,7 @@
    </figure>
  
 <hr>
-  <div class="careerfy-column-12 pageaction" align="center">
-<div class="col-md-12">
-@foreach($recruit_profile_pix_list as $recruit_profile)
- <form action="{{route('selete.image')}}" method="GET">
-      <div class="col-md-2" >   
-                               
-          <figure>
-            <div class="resume_pic_outer">
-            <div class="resume_pic">
-            <a href="#"></a>
-            <input type="hidden" name="id" value="{{$recruit_profile->id}}">
-       <button type="Submit">
-           <div class="careerfy-checkbox-toggle" id="image_section-{{$recruit_profile->id}}" >    
-            <img src="/uploads/avatars/{{ $recruit_profile->pix }}"  alt="Picture" class="employer-dashboard-thumb" >
-             </div>
-            </button>
-          
- 
-            </div>
-            </div>
-          </figure>
-          </form>
-         
-  </div>
- 
-  @endforeach
- 
-</div>
+
 </div>
                    
  

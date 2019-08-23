@@ -98,49 +98,7 @@
                       
                               </li>
                               @endif
-
-                                  <li class="nav-item">
-                                  <a href="javascript:;" class="nav-link nav-toggle">
-                                      <i class="icon-docs"></i>
-                                      <span class="title">Document Management</span>
-                                      <span class="arrow down"></span>
-                                  </a>
-                                  <ul class="sub-menu">
-                                      <li class="nav-item">
-                                          <a href="{{route('profession.index')}}" class="nav-link ">
-                                              <span class="title"> List Professions</span>
-                                          </a>
-                                      </li>
-                                  
-                                      <li class="nav-item">
-                                          <a href="{{route('document.index')}}" class="nav-link ">
-                                              <span class="title">All CV's</span>
-                                          </a>
-                                      </li>
-
-                                        <li class="nav-item ">
-                                          <a href="{{route('document.uploadfromcsv')}}" class="nav-link ">
-                                              <span class="title">Upload CV From CSV</span>
-                                          </a>
-                                      </li>
-                                       <li class="nav-item">
-                                          <a href="{{route('document.search_category')}}" class="nav-link ">
-                                              <span class="title">Document Search</span>
-                                          </a>
-                                      </li>
-                                         <li class="nav-item">
-                                          <a href="{{route('search.advance_search')}}" class="nav-link ">
-                                              <span class="title"> Advance Search</span>
-                                          </a>
-                                      </li>
-                                            <li class="nav-item">
-                                          <a href="{{route('shortlist.index')}}" class="nav-link ">
-                                              <span class="title"> Shortlist</span>
-                                          </a>
-                                      </li>
-                                  </ul>
-                               
-                              </li>
+ 
   <li class="nav-item  start active open">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-docs"></i>

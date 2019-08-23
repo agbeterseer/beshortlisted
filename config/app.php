@@ -4,7 +4,7 @@ return [
     'fileDestinationPath' => 'uploads',
     'allowedFileTypes' => 'txt,doc,docx,pdf,rtf,odt',
     'allowedFileTypess' => 'doc,docx,pdf,rtf,odt',
-    'maxFileSize' => 2000,
+    'maxFileSize' => 25960,
     'doc' => 'doc',
     'docx' => 'docx',
 

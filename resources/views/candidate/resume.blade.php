@@ -88,7 +88,7 @@ $check = 'second';
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                      <div class="col-md-4"><img src="/uploads/avatars/{{$profile_pix->pix }}" class="img-circle" alt="Picture" height="180px;" width="150px;"></div>
+                      <div class="col-md-4"><img src="/uploads/avatars/{{$user->avatar }}" class="img-circle" alt="Picture" height="180px;" width="150px;"></div>
                       <div class="col-md-4">dssdf</div>
                       <div class="col-md-4">sdfsdf</div>
                         <div class="careerfy-page-title">
@@ -154,6 +154,7 @@ $check = 'second';
                 <div class="container " id="page" >
                     <div> 
                     @include('partials.job_board_sidebar')
+  
 
 <!--  <div class="progress" style="height: 10px;">
  @foreach($section_candidatelist as $section_candidate)
@@ -270,7 +271,7 @@ $check = 'second';
  <div class="overviewtitle2">
 <span class="ovtitle"><strong>Willing to relocate:</strong></span>
 @if($document->relocate_nationaly)<span class="detail highlightable">{{$document->relocate_nationaly}}   </span>@else
-<span class="detail highlightable">N/A</span>
+<span class="detail highlightable required" >N/A  *</span>
 @endif
 </div>
 
@@ -280,7 +281,7 @@ $check = 'second';
 @if($document->educational_level)
 <span class="detail highlightable">
 @foreach($educationallevels as $educationallevel)  
-@if($educationallevel->id == $document->educational_level) {{$educationallevel->name}} @endif @endforeach</span> @else<span class="detail highlightable"> N/A</span>@endif
+@if($educationallevel->id == $document->educational_level) {{$educationallevel->name}} @endif @endforeach</span> @else<span class="detail highlightable"> N/A *</span>@endif
 </div>
  
  <div class="overviewtitle2">
@@ -292,7 +293,7 @@ $check = 'second';
  <div class="overviewtitle2">
 <span class="ovtitle"><strong> Minimum Salary:</strong></span>
 @if($document->minimum_salary)<span class="detail highlightable">{{$document->minimum_salary}} / Year </span>@else
-<span class="detail highlightable"> N/A</span>
+<span class="detail highlightable"> N/A *</span>
 @endif
 </div>
 
@@ -2372,7 +2373,7 @@ Training
 <div class="form-group">
 <label class="control-label col-md-3"> </label>
 <div class="col-md-12">
-Personal page <span class="required">*</span>
+Personal page 
 <input type="text" name="personal_page" class="form-control" placeholder="Eg. https://www.linkedin.com/in/terseer-agbe-61287677/">
  
   <span style="color:#827e7e;">Eg. Personal website, portfolio, ... etc.</span>

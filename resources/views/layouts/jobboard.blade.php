@@ -62,6 +62,13 @@ border-color: white !important;
     }
  
 </style> 
+<style>
+  .left-tag{
+   text-align: left !important; 
+   vertical-align: top !important;
+   font-weight: bolder;
+  }
+</style>
 </head>
 <body>
     <!-- Wrapper -->
@@ -581,14 +588,30 @@ $("#phone").inputmask({"mask": "(999) 999-9999"});
  //alert($(this).val());
     if ( $(this).val() !=null) {
     
-var start_d = document.getElementById('education_start_date').value; 
-var end_d = document.getElementById('educationend_year').value;
+            var start_d = document.getElementById('education_start_date').value; 
+            var end_d = document.getElementById('educationend_year').value;
         // alert(start_d);
             
             if (document.getElementById('education_start_date').value > document.getElementById('educationend_year').value) {
 
-             alert('The Year you started working must be greater than the later');  
+             alert('The Year you completed your education can not be less than the start date');  
              document.getElementById('educationend_year').value = '';  
+            }
+    } 
+});
+
+      $("#end_year").change(function() { 
+ //alert($(this).val());
+    if ( $(this).val() !=null) {
+    
+          var start_d = document.getElementById('from_year').value; 
+          var end_d = document.getElementById('end_year').value;
+        // alert(start_d);
+            
+            if (document.getElementById('from_year').value > document.getElementById('end_year').value) {
+
+             alert('The year you stopped working should me greater than the start year');  
+             document.getElementById('end_year').value = '';  
             }
     } 
 });

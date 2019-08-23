@@ -94,7 +94,7 @@ border-color: white !important;
                                     <figure>
                                     <div class="resume_pic_outer">
 <div class="resume_pic" id="imagesection">
- <img src="/uploads/avatars/{{ $recruit_profile_pix->pix }}"  alt="Picture" class="employer-dashboard-thumb" >
+ <img src="/uploads/avatars/{{ $user->avatar }}"  alt="Picture" class="employer-dashboard-thumb" >
                 <div class="careerfy-fileUpload">
                 <span><i class="careerfy-icon careerfy-add"></i><a href="{{route('upload.images', Auth::user()->id )}}">  Upload Logo</span>
               
@@ -930,31 +930,7 @@ function validate() {
  
 
  
-@foreach($recruit_profile_pix_list as $recruit_profile)
- $('#image_section-{{$recruit_profile->id}}').change(function() {
-
-    alert('hereeee');
-    var location = [];
-    var profession = [];
-    var job_type = [];
-
  
-  {
-   
-     var cboxValue = $(this).val(); 
-      alert(cboxValue);
- 
-      $(this).prop('checked', true);
- 
- 
-  
- console.log(profession);
- 
-selectImage(location,profession,job_type);
- 
-  }
-});
- @endforeach
 
 function isEmpty(obj) {
     for(var key in obj) {

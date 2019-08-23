@@ -92,12 +92,24 @@ protected function authenticated(Request $request, $user)
               ]);
       }
 
+
+      $user = User::whereEmail(Input::get('email'))->first();
+
+        if( ! $user->is_confirmed())
+        {
+            return Redirect::back()
+                ->withInput()
+                ->withErrors([
+                    'credentials' => 'Kindly refer to your inbox and confirm your email address.'
+                ]);
+        }
+
           if (Auth::attempt([
                'email' => $request->email,
                'password' => $request->password
           ])){ 
             //   
-         $user = User::where('email', $request->email)->first();
+         //$user = User::where('email', $request->email)->first();
         //$user_id=$user->id;
         //dd($user->is_admin());
          if ($user->is_admin()) {

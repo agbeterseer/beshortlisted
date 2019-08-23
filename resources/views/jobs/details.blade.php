@@ -131,7 +131,7 @@
                             
                                     <div class="careerfy-content-title"><h2>Job Funtions</h2></div>
                                     <div class="careerfy-description">  
-                                     {!! $tag->job_roles !!}
+                                     {!! $tag->job_role !!}
             
                                     </div>
   <div class="space">&nbsp;</div>

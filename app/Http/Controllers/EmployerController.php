@@ -296,7 +296,7 @@ function generatePIN($digits = 4){
      $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
 
     // $plans = DB::table('employer_packages')->orderBy('created_at', 'ASC')->get();
-     $employer_packages = EmployerPackage::where('userfkp', $user->id)->get();
+    $employer_packages = EmployerPackage::where('userfkp', $user->id)->get();
     $menus = $this->displayMenu();
     $units = $this->displayUnits();
   
@@ -306,20 +306,19 @@ function generatePIN($digits = 4){
 
     public function showImageForm($id){
             if ($id) {
-                        $user = User::findOrFail($id);
-       $recruit_profile_pix_list = DB::table('recruit_profile_pixs')->where('user_id',$user->id)->orderBy('created_at', 'DESC')->get();
-     $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
-            } 
 
-        //dd($recruit_profile_pix_list);
-    $menus = $this->displayMenu();
-    $units = $this->displayUnits();
+              $user = User::findOrFail($id); 
+              $menus = $this->displayMenu();
+              $units = $this->displayUnits();
+
         return view('employer.image_upload_form', compact('user', 'recruit_profile_pix_list', 'recruit_profile_pix', 'menus', 'units'), array('user' => Auth::user()));
     }
-
+}
     public function UpdateProfilePix(Request $request){
          $user_id = $request->id;
-         $user = Auth::user();
+
+        $user = Auth::user();
+  
         try {
 
         $avatar = $request->file('avatar');
@@ -332,7 +331,7 @@ function generatePIN($digits = 4){
         '_token',
         'avatar'
         );
-      
+     
         $validator = Validator::make($input, $rules);
 
          
@@ -345,26 +344,21 @@ function generatePIN($digits = 4){
       } catch (\Exception $e) {
         Session::flash('error-avatar', $e->getMessage());
       }
+    
     //dd($request->all());
     if ($request->hasFile('avatar')) {
 
       $filename = time() . '.' . $avatar->getClientOriginalExtension();
       Image::make($avatar)->resize(300, 300)->save(public_path('/uploads/avatars/' . $filename));
-  
-   $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('user_id', $user->id)->get();
-    foreach ($recruit_profile_pix as $key => $value) {
- 
-    $recruit_profile_pix = DB::table('recruit_profile_pixs')->where('user_id', $user->id)->update(['status'=> 0, 'order'=> 0]);
 
-           }
-       $recruit_profile_pix = DB::table('recruit_profile_pixs')->insert(['user_id' => $user_id, 'pix' => $filename, 'order' => 1, 'status' => 1, 'created_at'=>$this->returnCurrentTime()]);
+      $user = User::findOrFail($user->id);
+      $user->avatar = $filename;
+      $user->save();
 
          Session::flash('success-avatar','Image Change successfully');
      \LogActivity::addToLog(Auth::user()->firstname .' Has Changed Picture.');
            return redirect()->back();
-    }
-
- 
+    } 
         return redirect()->back();
     }
 

@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Application extends Model
 {
     
-    protected $fillable = ['document_id','user_id', 'resume_id', 'tag_id', 'status','sorted', 'sort_by_category'];
+    protected $fillable = ['id', 'document_id','user_id', 'resume_id', 'tag_id', 'status','sorted', 'sort_by_category'];
 
       public function user()
     {
-    	return $this->belongsTo('App\User');
+    	return $this->belongsTo('App\User', 'user_id');
     }
       public function document()
     {
@@ -37,5 +37,7 @@ class Application extends Model
         
        return $query->where('tag_id', $tag_id);
     }
+
+     
 
 }

@@ -38,11 +38,52 @@ Route::get('cities', 'JobController@getCities');
 Route::get('industryprofessions', 'JobController@getIndustryProfessions');
 Route::get('industries', 'JobController@getIndustries');
 Route::get('vacancytypes', 'JobController@getVacancyTypes');
-Route::get('filter/{city}/{vacancytype}/{industry}', 'JobController@getFilterJobs');
+Route::get('/filter/city/{city}/vacancytype/{vacancytype}/industry/{industry}', 'JobController@JobFilter');
+
+Route::get('/load/rejectedcv', 'TagController@GetCandidatesByJobApplication');
+Route::get('industry', 'JobController@FilterJobs');
+ 
+// get applicants for shortlist
+
+Route::get('/job/applicants/{code}', 'JobController@getApplicantsByJobID');
+Route::get('/job/getrejectedapplicants/{code}', 'JobController@getRejectedApplicants');
+Route::get('/job/inreview/{code}', 'JobController@getReviewApplicants');
+Route::get('/job/shortlist/{code}', 'JobController@getShortlistedApplicants');
+Route::get('/job/offer/{code}', 'JobController@getOfferedApplicants');
+Route::get('/job/hire/{code}', 'JobController@getHireApplicants');
+
+Route::get('/singlecv/{code}', 'JobController@GetCandidateCV');
+Route::get('/job/workexperience/{code}', 'JobController@getWorkExperienceByJobID');
+
+
+// get applicants count
+Route::get('/unsortedcount/{code}', 'JobController@UnsortedCount');
+Route::get('/rejectedcount/{code}', 'JobController@RejectedCount');
+Route::get('/reviewcount/{code}', 'JobController@ReviewCount');
+Route::get('/shortlistcount/{code}', 'JobController@ShortlistedCount');
+Route::get('/offeredcount/{code}', 'JobController@OfferedCount');
+Route::get('/hiredcount/{code}', 'JobController@HiredCount');
+
+
+// get CV properties
+Route::get('/objective/{code}', 'JobController@GetObjective');
+
+// Create shortist, rejected, inreview, etc...
+Route::get('/addrejectcv/{code}', 'JobController@CreateRejectApplicant');
+Route::get('/addreviewcv/{code}', 'JobController@CreateReviewApplicant');
+Route::get('/addshortlist/{code}', 'JobController@CreateShortlistApplicant');
+Route::get('/addhire/{code}', 'JobController@CreateHireApplicant'); 
+Route::get('/addoffer/{code}', 'JobController@CreateOfferedApplicant'); 
 
 
 
+Route::get('/educationalexperience/{code}', 'JobController@GetEducationalExperience');
 
+
+Route::get('/employer/job/applicants/{id}', [
+	'as' => 'get.applicantsid',
+	'uses' => 'TagController@GetCandidatesByJobApplication2'
+	]);
 
 Route::get('/api/v1/users', [
     'as' => 'users',

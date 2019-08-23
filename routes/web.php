@@ -16,17 +16,28 @@ use App\Menu;
 | contains the "web" middleware group. Now create something great!
 |
 */ 
-
+Route::get('api/customers', 'CustomerController@index');
 Route::post('/pay', 'PaymentController@redirectToGateway')->name('pay');
 Route::get('/payment/callback', 'PaymentController@handleGatewayCallback');
 Route::get('/', 'HomeController@welcome');
 
-Route::get('/vue-terser', function () {
-	return view('testhome');
-  });
+Route::get('/employer/dashboard/{type}', array(
+    'as' => 'items.type', 
+    'uses' => 'ResumeController@getItemType'
+))->where('type', 'alljobs|draft');
 
+Route::get('/employer/job/applicants/{type}', array(
+    'as' => 'applicants.type', 
+    'uses' => 'ResumeController@getItemType'
+))->where('type', 'alljobs|draft');
+ 
 Route::get('/home', 'HomeController@home')->name('home');
 Auth::routes();
+
+Route::get('/job-functions', [
+	'as' => 'j.functions',
+	'uses' => 'HomeController@JobFunctions'
+]);
 
 Route::get('/pricing', [
 	'as' => 'pricing',
@@ -135,7 +146,7 @@ Route::get('/jobs/job-listing-form-2/{code}', [
 	]);
 Route::get('/job/all-jobs', [
 	'as' => 'all.jobs',
-	'uses' => 'HomeController@AllJobs'
+	'uses' => 'JobController@AllJobs'
 	]);
 Route::get('/email-subscription', [
 	'as' => 'subscribe',
@@ -820,7 +831,7 @@ Route::post('employer-job', [
 	'as' => 'save.draft',
 	'uses' => 'TagController@SaveDraft'
 	]);
-Route::get('/job/job-listing', [
+Route::post('/job/job-listing', [
 	'as' => 'job.listing',
 	'uses' => 'HomeController@JobListing'
 	]);
@@ -1054,7 +1065,7 @@ Route::post('/filterRejected', 'TagController@RejectedFilter');
 Route::post('/filterInReview', 'TagController@InReviewFilter');
 Route::post('/filterShortlist', 'TagController@ShortListFilter');
 Route::post('/filterOffered', 'TagController@OfferedFilter');
-Route::post('/jobfilter', 'HomeController@JobFilter');
+Route::post('/jobfilter', 'JobController@JobFilter');
 Route::post('/filterbyJobTitle', 'DocumentController@filterbyJobTitle');
 Route::post('/send-candidates-email', 'TagController@EmailCandidates');
 Route::post('/reject_applicant', 'TagController@RejectApplicant');

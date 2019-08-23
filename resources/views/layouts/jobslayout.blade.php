@@ -103,9 +103,11 @@ border-color: white !important;
 @endif
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="{{ asset('recruit/script/jquery-3.3.1.min.js')}}"></script>
+<script src="{{ asset('recruit/script/bootstrap.js')}}"></script>
+<!--  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
        <script src="{{ asset('js/app.js') }}"></script> 
   
  <script type="text/javascript">
@@ -299,7 +301,7 @@ JobFilterIndex(location,profession,job_type);
 });
 
 
- $('#job_industry').change(function() {
+ $('#job_industry1').change(function() {
 
     var location = [];
     var profession = [];
@@ -321,7 +323,7 @@ JobFilterIndex(location,profession,job_type);
   } 
    
   {
-    $('#job_industry :checked').each(function() { 
+    $('#job_industry1 :checked').each(function() { 
      var cboxValue = $(this).val(); 
       $(this).prop('checked', true);
       itemExistsChecker(cboxValue); 
@@ -414,7 +416,7 @@ checked_featured = '<small class="careerfy-jobdetail-postinfo">Featured</small>'
     }else{
 checked_featured = ''; 
     }
-     var content2 = '<li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><figure><a href="'+apply_route+'/ '+value.id+'"><img src="'+image_url+'" alt=""></a></figure><div class="careerfy-joblisting-text"><div class="careerfy-list-option"><h2><a href="'+job_details+'/'+id +'">'+job_title+' </a>'+checked_featured +'</h2><ul><li><a href="#" class="careerfy-option-btn careerfy-'+category+'" style="color:#ffffff;">'+employement_term+'</a></li><li><i class="careerfy-icon careerfy-maps-and-flags"></i> '+value.country+', '+value.city+'</li><li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>'+profession_name+'</li>   <li style="color: #F1630D";>  '+industryname+'</li></ul></div><div class="careerfy-job-userlist"> <a href="'+apply_route+'/'+value.id+'" class="careerfy-option-btn careerfy-'+category+'">Apply</a> </div><div class="clearfix"></div></div></div></li>';
+     var content2 = '<li class="careerfy-column-12"><div class="careerfy-joblisting-classic-wrap"><figure><a href="'+apply_route+'/ '+value.id+'"><img src="'+image_url+'" alt=""></a></figure><div class="careerfy-joblisting-text"><div class="careerfy-list-option"><h2><a href="'+job_details+'/'+id +'">'+job_title+' </a>'+checked_featured +'</h2><ul><li><i class="careerfy-icon careerfy-maps-and-flags"></i> <strong>Apply Before:</strong> '+ value.end_date  +' </li> <li style="color: #F1630D";>  '+industryname+'</li></ul></div><div class="careerfy-job-userlist"> <a href="'+apply_route+'/'+value.id+'" class="careerfy-option-btn careerfy-'+category+'">Apply</a> </div><div class="clearfix"></div></div></div></li>';
 
         $('#job_section').append(content2);
 
@@ -424,6 +426,8 @@ console.log('am here');
 
 }
       });
+
+
    
   });
 }
@@ -490,6 +494,88 @@ var profession_name = '';
  
 </script>
 <script type="text/javascript">
+  $(window).on('hashchange', function() {
+
+          if (window.location.hash) {
+
+              var page = window.location.hash.replace('#', '');
+
+              if (page == Number.NaN || page <= 0) {
+
+                  return false;
+
+              }else{
+
+                  getData(page);
+
+              }
+
+          }
+
+      });
+
+
+
+  $(document).ready(function()
+
+  {
+
+       $(document).on('click', '.pagination a',function(event)
+
+      {
+
+          event.preventDefault();
+
+          $('li').removeClass('active');
+
+          $(this).parent('li').addClass('active');
+
+          var myurl = $(this).attr('href');
+
+          var page=$(this).attr('href').split('page=')[1];
+
+          getData(page);
+
+      });
+
+  });
+
+
+
+  function getData(page){
+
+          $.ajax(
+
+          {
+
+              url: '?page=' + page,
+
+              type: "get",
+
+              datatype: "html"
+
+          })
+
+          .done(function(data)
+
+          {
+
+              $("#tag_container").empty().html(data);
+
+              location.hash = page;
+
+          })
+
+          .fail(function(jqXHR, ajaxOptions, thrownError)
+
+          {
+
+                alert('No response from server');
+
+          });
+
+  }
+
 
     document.addEventListener('DOMContentLoaded', () => {
 

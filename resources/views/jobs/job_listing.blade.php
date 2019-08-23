@@ -1,4 +1,4 @@
-@extends('layouts.jobboard', [
+@extends('layouts.jobs', [
   'page_header' => 'Employer',
   'dash' => '',
   'quiz' => '',
@@ -38,12 +38,12 @@ border-color: white !important;
                         <div class="col-md-12 careerfy-typo-wrap">
                             <!-- Sub Header Form -->
                             <div class="careerfy-subheader-form">
-                       <form class="careerfy-banner-search" action="{{route('job.listing')}}" method="GET">
-                     
+                       <form class="careerfy-banner-search" action="{{route('job.listing')}}" method="">
+                     {{ csrf_field() }}
                         <ul>
                             <li>
                             <div class="careerfy-select-style"> 
-                                    <select name="location">
+                                    <select name="location" required="required">
                                     <option value="">Select City</option>
                                     @foreach($cities as $city)
                                  
@@ -56,7 +56,7 @@ border-color: white !important;
                             </li>
                             <li>
                             <div class="careerfy-select-style" >
-                                    <select name="job_function" >
+                                    <select name="job_function" required="required" >
                                     <option value="">Select Job Function</option>
                                     @foreach($industry_professions as $industry_profession)
                                         <option value="{{$industry_profession->id}}">{{$industry_profession->name}}</option>
@@ -68,7 +68,7 @@ border-color: white !important;
                             </li>
                             <li>
                         <div class="careerfy-select-style">
-                                    <select name="s"  >
+                                    <select name="s" required="required" >
                                     <option value="">Select Industry</option>
                                     @foreach($industries as $industry)
                        
@@ -172,67 +172,12 @@ border-color: white !important;
                                 </form>
                             </div>
                         </aside>
-                        <div class="careerfy-column-8 careerfy-typo-wrap">
-                            <div class="careerfy-typo-wrap">
+                  
                                 <!-- FilterAble -->
-           <!--                      <div class="careerfy-filterable">
-                                    <h2>Showing 0-12 of 37 results</h2>
-                                    <ul>
-                                        <li>
-                                           <a href=""> <i class="careerfy-icon careerfy-sort"></i>Filter</a></li>
-                                        <li><a href="#"><i class="careerfy-icon careerfy-squares"></i> Grid</a></li>
-                                        <li><a href="#"><i class="careerfy-icon careerfy-list"></i> List</a></li>
-                                    </ul>
-                                </div> -->
-                                <!-- FilterAble -->
-                                <!-- JobGrid -->
-                                <div class="careerfy-job careerfy-joblisting-classic">
-                                    <ul class="careerfy-row" id="job_section">
-                                    @forelse($tags as $tag)
-                                        <li class="careerfy-column-12">
-                                            <div class="careerfy-joblisting-classic-wrap">
-                                                <figure><a href="{{route('job.description', $tag->id)}}"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
-                                                <div class="careerfy-joblisting-text">
-                                                    <div class="careerfy-list-option">
-                                                        <h2><a href="{{route('apply.job', $tag->id)}}"> {{$tag->job_title}} </a> @foreach($employement_term_list as $employement_term) 
-                                                    @if($employement_term->id === $tag->job_type)
-                                                    <span class="careerfy-option-btn careerfy-{{$employement_term->category}}"> {{$employement_term->name}} </span> @endif @endforeach </h2>
-                                                        <ul>
-                                                      
-                                                            <li><i class="careerfy-icon careerfy-maps-and-flags"></i> {{$tag->country}}, {{$tag->city}}</li>
-                                                            <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> @foreach($industry_professions as $profession) @if($profession->id === $tag->job_category){{$profession->name}} @endif @endforeach</li>
-                                                            <li></li>
-                                                        </ul>
-                                                    </div>
-
-                                                    <div class="careerfy-job-userlist">
-                                                    @foreach($employement_term_list as $employement_term) 
-                                                    @if($employement_term->id === $tag->job_type)
-                                 <a href="{{route('apply.job', $tag->id)}}" class="careerfy-option-btn  careerfy-{{$employement_term->category}}">APPLY </a>
-                                 @endif @endforeach
-                                                        <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a>
-                                                    </div>
-                                                <div class="clearfix"></div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        @empty
-                                       <li> No Record(s) Found</li>
-                                        @endforelse
-                                       
-                                    </ul>
-                                </div>
-                                <!-- Pagination -->
-
-                                <div class="careerfy-pagination-blog" id="pages">
-                                    <ul class="page-numbers">
-                                    {{ $tags->appends(['s' => $s])->links() }}
-                                     
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
+                      
+                                              <section class="jobslist">
+                                                @include('jobs.load')
+                                               </section>
                     </div>
                 </div>
             </div>

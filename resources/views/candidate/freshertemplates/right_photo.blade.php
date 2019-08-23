@@ -104,7 +104,7 @@ hr{
     <td width="80%" valign="bottom" align="left"> <strong> <span style="font-size: 25px; padding-left: 10px;" class="uppercase">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</span></strong></td>
  <td width="20%" class="t_label" valign="top"><div  align="left" style="padding-bottom: -1290px; padding-right: 10px; position: absolute;">
 <div class="resume_pic" align="right">
-<img src="{{asset('/uploads/avatars/')}}/{{ $profile_pix->pix }}" alt="Picture" height="150px;" width="150px;">
+<img src="{{asset('/uploads/avatars/')}}/{{ $user->avatar }}" alt="Picture" height="150px;" width="150px;">
 <!-- <p class="editov2"><a class="edits" ><i class="icon-plus"></i>Edit</a></p> -->
 </div>
 

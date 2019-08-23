@@ -6,4 +6,7 @@
 @import "variables";
 
 // Bootstrap
+$bootstrap-sass-asset-helper: true;
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+ 

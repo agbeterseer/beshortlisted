@@ -183,7 +183,7 @@ th, td {
   <tr>
     <td valign="middle" width="40%" align="right" > 
      <div class="resume_pic" align="right">  
-    <img src="{{asset('/uploads/avatars/')}}/{{ $profile_pix->pix }}" class="img-circle" alt="Picture" height="150px;" width="150px;">
+    <img src="{{asset('/uploads/avatars/')}}/{{ $user->avatar }}" class="img-circle" alt="Picture" height="150px;" width="150px;">
 </div>
     </td><td valign="bottom" width="60%" align="left">   
     <div class="resume_title"> 

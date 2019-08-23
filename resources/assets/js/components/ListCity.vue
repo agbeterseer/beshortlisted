@@ -25,7 +25,8 @@
 			city: {
 			id: '',
 			name: ''
-			} 
+			},
+			checkedNames: []  
 		}
 	},
 	created() {
@@ -37,6 +38,7 @@
 		fetch('/api/cities')
 		.then(res => res.json())
 		.then(res => {
+			
 				this.citylist = res.cities;
 			})
 			.catch(err => console.log(err));
@@ -48,8 +50,8 @@
 		var job_type = [];
 		var industry = [];
 
-      // `this` inside methods points to the Vue instance
-      alert('Hello ' + this.name + '!')
+      // // `this` inside methods points to the Vue instance
+      // alert('Hello ' + this.name + '!')
       // `event` is the native DOM event
       if (event) {
 

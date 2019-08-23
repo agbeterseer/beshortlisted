@@ -11,13 +11,7 @@
   'candidate' => 'active'
 ])
 
-@section('content')
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div> 
+@section('content') 
 @include('partials.employee_breadcomb') 
     <div class="col-md-8" id="page">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->

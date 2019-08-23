@@ -93,7 +93,7 @@ color: {{$color_}};
                                 <tr>
                                 <td width="20%" class="t_label" valign="top"><div  align="right" style="padding-bottom: -1290px; padding-left: 10px; position: absolute;">
 <div class="resume_pic" align="left">
-<img src="{{asset('/uploads/avatars/')}}/{{ $profile_pix->pix }}" alt="Picture" height="150px;" width="150px;">
+<img src="{{asset('/uploads/avatars/')}}/{{ $user->avatar }}" alt="Picture" height="150px;" width="150px;">
 <!-- <p class="editov2"><a class="edits" ><i class="icon-plus"></i>Edit</a></p> -->
 </div>
 @if($document)

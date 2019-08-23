@@ -127,12 +127,11 @@ $check = 'second';
     <div class="careerfy-employer-dashboard-nav"  style="background-color: #FFFFFF;">
  <figure>
  
-@if($profile_pix != null )
- <a href="#" class="employer-dashboard-thumb"><img src="/uploads/avatars/{{$profile_pix->pix }}" alt=""></a>
 
-@else
+
  <a href="#" class="employer-dashboard-thumb"><img src="/uploads/avatars/{{$user->avatar }}" alt=""></a>
-@endif
+
+
               <figcaption>
               
              <!--  <div class="careerfy-fileUpload">
