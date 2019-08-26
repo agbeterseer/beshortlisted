@@ -2780,7 +2780,7 @@ public function BlackListJobPost($id){
 }
 
 public function approvejobpost($id){
-  //dd($id);
+// dd($id);
   if ($id) {
   $tag = Tag::find($id);
   $tag->delete = 0;
@@ -2792,15 +2792,21 @@ public function approvejobpost($id){
 
   // go to employee units and subtract from the available units
     $employer_package = DB::table('employer_packages')->where('status', 1)->where('userfkp', $tag->client)->first();
-   
-    if ($employer_package !=null) {
-        return back()->withErrors(['error' => 'something went wrong']);
 
-    }else{
-          $remaining_units = $employer_package->units - 1;
+    if ($employer_package) {
+
+ 
+    $remaining_units = $employer_package->units - 1;
+
     $remaining_jobs = $employer_package->jobs_remaining - 1;
+   
+   $employer_ = DB::table('employer_packages')->where(['userfkp' => $tag->client, 'package_id' => $employer_package->package_id])->update([ 'jobs_remaining' => $remaining_jobs, 'units' => $remaining_units ]); 
+      
+    // dd($employer_);
+    }else{
+      
+      return back()->withErrors(['error' => 'something went wrong']);
 
-    $employer_packages = DB::table('employer_packages')->where(['userfkp' => $tag->client, 'package_id' => $employer_package->package_id])->update([ 'jobs_remaining' => $remaining_jobs, 'units' => $remaining_units ]);  
     }
 
 

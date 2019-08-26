@@ -1,10 +1,10 @@
  
-<div class="page-header navbar navbar-fixed-top"> 
+<div class="page-header navbar navbar-fixed-top" style="background-color:#011627;">  
                 <!-- BEGIN HEADER INNER -->
                 <div class="page-header-inner">
                     <!-- BEGIN LOGO -->
                     <div class="page-logo">                      
-                <img src="{{asset('logo/logo2.jpg')}}" alt="Logo"  width="90px" height="30px"  class="logo-default" /> 
+                <img src="{{asset('logo/logo.jpg')}}" alt="Logo" width="150px" height="40px" class="logo-default" style="margin:-0px; " /> 
                         <div class="menu-toggler sidebar-toggler">
                             <span></span>
                         </div>
