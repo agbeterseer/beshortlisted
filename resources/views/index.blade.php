@@ -18,6 +18,11 @@
   margin-right: auto;
   width: 50%;
 }
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 </style>
     <!-- Wrapper --> 
         <!-- Header --> 
@@ -113,7 +118,7 @@
                                                     <ul>
                                                         <li><i class="careerfy-icon careerfy-maps-and-flags"></i> <a href="#">{{$job->country}},</a> <a href="#">{{$job->city}}</a></li>
                                                         <br>
-                                                        <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#">@foreach($industry_professions as $profession) @if($profession->id === $job->job_category){{$profession->name}} @endif @endforeach</a></li>
+                                                        <li ><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#"><div class="ellipsis"> @foreach($industry_professions as $profession) @if($profession->id === $job->job_category){{$profession->name}} @endif @endforeach</a></div></li>
                                                         <li>| <i>  @foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type){{$employement_term->name}} @endif @endforeach</i></li>
                                                     </ul>
                                                         <a href="{{route('apply.job', $job->id)}}" class="careerfy-option-btn">@foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type)Apply @endif @endforeach</a>

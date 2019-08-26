@@ -29,6 +29,12 @@
     position: relative;
     padding: 138px 0px 139px 0px; 
 }
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 </style>
     <!-- Wrapper --> 
         <!-- Header --> 
@@ -134,8 +140,16 @@
                                                     <ul>
                                                         <li><i class="careerfy-icon careerfy-maps-and-flags"></i> <a href="#">{{$job->country}},</a> <a href="#">{{$job->city}}</a></li>
                                                         <br>
-                                                        <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#">@foreach($industry_professions as $profession) @if($profession->id === $job->job_category){{$profession->name}} @endif @endforeach</a></li>
-                                                        <li>| <i>  @foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type){{$employement_term->name}} @endif @endforeach</i></li>
+                                                         @foreach($industry_professions as $profession)
+                                                         @if($profession->id === $job->job_category) 
+                                                        <li class="ellipsis" title="{{$profession->name}}"><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#">
+
+                                                        
+{{ mb_strimwidth($profession->name, 0, 22, "...") }}
+                                                         </a></li>@endif @endforeach
+                                                        <li>| <i>
+      @foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type)
+      {{ $employement_term->name }} @endif @endforeach</i></li>
                                                     </ul>
                                                         <a href="{{route('apply.job', $job->id)}}" class="careerfy-option-btn">@foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type)Apply @endif @endforeach</a>
                                                     </div>
