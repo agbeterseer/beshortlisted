@@ -19,7 +19,6 @@ use App\JobEducation;
 use Carbon\Carbon;
 use App\JobcareerLevel; 
 use App\ResumeBuilder;
-use App\Application;
 use App\Tag;
 use App\Email;
 use App\City;
@@ -114,9 +113,9 @@ return view('jobs.job_functions', compact('menus', 'posts', 'units'), array('use
     public function home()
     {
         $job_post = \App\Tag::job_post();
-      //  $documents = Application::where('status','1')->where('active',1)->get()->count();
-        $roles = Role::all()->count();
-        $users = User::all()->count();
+        // $documents = Document::all()->count();
+        // $roles = Role::all()->count();
+        // $users = User::all()->count();
         $company_count = User::where('account_type', 'employer')->count();
         $resumes = RecruitResume::all();
         $resume_count = RecruitResume::all()->count();
@@ -159,7 +158,7 @@ return view('jobs.job_functions', compact('menus', 'posts', 'units'), array('use
        // get banner file
        $banner = DB::table('banners')->orderBy('created_at', 'DESC')->first();
       
-      return view('home', compact('documents', 'roles', 'users', 'resumes','industries', 'resume_builder_list', 'industries', 'jobs', 'resume_count', 'jobs_count', 'industry_professions', 'employement_term_list', 'cities','industry_count', 'industries_paginage', 'job_function_count', 'jobs_8', 'job_post', 'tag_cities', 'employement_terms', 'menus', 'job_match_count', 'posts', 'page_information', 'all_jobs', 'featured_jobs', 'company_count', 'banner'), array('user' => Auth::user()));
+      return view('home', compact( 'resumes','industries', 'resume_builder_list', 'industries', 'jobs', 'resume_count', 'jobs_count', 'industry_professions', 'employement_term_list', 'cities','industry_count', 'industries_paginage', 'job_function_count', 'jobs_8', 'job_post', 'tag_cities', 'employement_terms', 'menus', 'job_match_count', 'posts', 'page_information', 'all_jobs', 'featured_jobs', 'company_count', 'banner'), array('user' => Auth::user()));
     }
     public function employement_terms()
     {
