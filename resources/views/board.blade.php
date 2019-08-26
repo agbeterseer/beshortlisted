@@ -431,7 +431,7 @@
                               <span data-counter="counterup" data-value="{{$documents}}">0</span>
                                         <!-- <small class="font-green-sharp">$</small> -->
                                             </h3>
-                                            <small>TOTAL CV's</small>
+                                            <small>TOTAL Applications's</small>
                                         </div>
                                         <div class="icon">
                                             <i class="icon-puzzle"></i>

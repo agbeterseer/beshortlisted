@@ -32,7 +32,9 @@
 
 <style type="text/css">
  
-        
+ .butt{
+  margin-top: 10px !important;
+} 
   
 .lds-ripple {
   display: inline-block;
@@ -102,6 +104,7 @@
     opacity: 0;
   }
 }
+
   <?php endforeach ?>    
 
 </style>
@@ -194,6 +197,9 @@ border-color: white !important;
                                         <a href="#tab_16" data-toggle="tab">AUTOMATCH &nbsp;<span class="badge"><div id="auto_count">0</div></span></a>
                                         </li>
                                     </ul>
+                                          <div id="loading" style="position: absolute; display: none;">
+                                    <img src="{{asset('img/giphy.gif')}}">
+                                      </div> 
                                       <div class="tab-content">
                                         <div class="tab-pane active" id="tab_01">
    <!-- <div class="careerfy-candidate-default-wrap">   -->
@@ -207,763 +213,20 @@ border-color: white !important;
 <div id="" data-toggle="collapse" data-target="#expand_inreview"> 
 <i class="careerfy-icon careerfy-sort"></i>  <h2>Filter</h2>
 </div>
-</div></div>
-<ul class="careerfy-row nav-tabs tabs-left" id="applicants_list">
- 
- <?php $countme = 0; ?>
- @if(!$List_applicants_by_job_id->isEmpty())
-@forelse($List_applicants_by_job_id as $List_applicant)
-   
-<li class="careerfy-column-12">
- 
- <a href="#tab_6_1{{$List_applicant->id}}" data-toggle="tab">
-                                          
-
-                                            <div class="careerfy-candidate-default-wrap"> 
-                                                <figure> 
-                                                    <?php $record = \App\RecruitProfilePix::where('status', 1)->where('user_id', $List_applicant->user_id)->orderBy('created_at', 'DESC')->first(); ?>
-                                              @if($record)<img src="/uploads/avatars/{{ $record->pix }}" alt="">@else  
-                                                @endif
-                                               </figure> 
-                                                <div class="careerfy-candidate-default-text">
-                                                    <div class="careerfy-candidate-default-left">
-                                                        <h2>
-                            @foreach($documentList as $document) @if($List_applicant->document_id === $document->id) {{$document->candidates_name}} {{$document->id}} {{$document->user_id}}@endif @endforeach  <i class="careerfy-icon careerfy-check-mark"></i></h2>
-                                                        <ul class="careerfy-column-12" >
-
-                                                        <!-- to get work experience; get job_id from application table and resume_id, then goto workexperience table and find by resume_id and jpob_id  -->
-                                                   @if(!$work_experiences->isEmpty())
-                                                        @foreach($work_experiences as $work_experience)
-                                                        @if($work_experience->userfk === $List_applicant->user_id && $work_experience->present === 1)
-                                                            <li>{{$work_experience->position_title}} at <span href="#" class="careerfy-candidate-default-studio">{{$work_experience->company_name}}</span></li>
-                                                        @endif
-                                                        @endforeach                                                
-                                                            @else
-                                                             N/A
-                                                             @endif
-                                                        </ul>
-                                                    </div>
-                                              <!--       <a href="#" class="careerfy-candidate-default-btn"><i class="careerfy-icon careerfy-add-list"></i> Shortlist</a> -->
-                                                </div>
-                                            </div>
-
-                                             </a>
-                                        </li>
-
-
- <?php $countme++; ?>
-@empty
-
-@endforelse
-@else
-<li class="careerfy-column-12"> No Record(s) Found</li>
- 
-@endif
-                             </ul>
-                                </div> 
-                                </div>
- 
-                            </div>
-                        </aside>  
-                                     
-                                            <div class="col-md-8 col-sm-8 col-xs-8">
-         <div id="expand_unsorted" class="collapse"> 
-  <div class="cscroll_div scroll_div" >
-            <div class="container "> 
-            
-                <div class="row"> 
-                    <div class="col-md-8">
-                    <div class="col-md-8">   
-
-                         <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Gender</a></h2>
-                                        <div class="careerfy-checkbox-toggle" id="gender_unsorted">
-                                            <ul class="careerfy-checkbox">
-                                                <li>
-                                                    <input type="checkbox" id="g1_unsorted" name="gender[]" value="Male" />
-                                                    <label for="g1_unsorted"><span></span>Male</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="g2_unsorted"  name="gender[]" value="Female" />
-                                                    <label for="g2_unsorted"><span></span> Female</label>
-                                                </li>
-                                     <!--            <li>
-                                                    <input type="checkbox" id="g2"  name="gender" value="All" />
-                                                    <label for="g2"><span></span> Both</label>
-                                                </li> -->
-                                              
-                                            </ul>
-                                        </div>
-                                    </div> </div>
-                                                           <div class="col-md-8">                                          
-                            <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Location</a></h2>
-                                        <div class="careerfy-checkbox-toggle scroll_div" id="location_unsorted" >
-                                            <ul class="careerfy-checkbox">
-                                            @foreach($cities as $city) 
-                                                <li>
-                                                    <input type="checkbox" id="r{{$city->id}}_unsorted" name="city[]" value="{{$city->id}}" />
-                                                    <label for="r{{$city->id}}_unsorted"><span></span>{{$city->name}}</label>
-                                                </li> 
-                                            @endforeach 
-                                            </ul> 
-                                        </div>
-                                    </div> </div>
-
-                        <div class="col-md-8">       <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Job Function</a></h2>
-                                        <div class="careerfy-checkbox-toggle scroll_div" id="profession_unsorted">
-                                            <ul class="careerfy-checkbox">
-                                               @foreach($professions as $profession)
-                                                <li>
-                                                    <input type="checkbox" id="r_{{$profession->id}}_unsorted" name="profession[]" value="{{$profession->id}}" />
-                                                    <label for="r_{{$profession->id}}_unsorted"><span></span>{{$profession->name}}</label>
-                                                    <small></small>
-                                                </li>
-                                                @endforeach 
-                                            </ul> 
-                                        </div>
-                                    </div>
-                            </div>
-
-                                    <div class="col-md-8">
-        <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Career Level</a></h2>
-                                        <div class="careerfy-checkbox-toggle croll_div" id="career_level_unsorted">
-                                            <ul class="careerfy-checkbox">
-                                  @foreach($jobcareer_levels as $jobcareer_level)
-                                                <li>
-                                 <input type="checkbox" id="jc{{$jobcareer_level->id}}_unsorted" name="career_level[]" value="{{$jobcareer_level->id}}" />
-                                                    <label for="jc{{$jobcareer_level->id}}_unsorted"><span></span>{{$jobcareer_level->name}}</label>
-                                                    <small>4</small>
-                                                </li>
-                                @endforeach
-                                          
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    </div>
-                    </div>
-                </div>
-
-                <div class="row"> 
-                <div class="col-md-8">
-                    <div class="col-md-8"> 
-                  <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Minimum Salary</a></h2>
-                                        <div class="careerfy-checkbox-toggle scroll_div" id="salary_unsorted">
-                                            <ul class="careerfy-checkbox">
-                                                <li>
-                                                    <input type="checkbox" id="salary1_unsorted" name="salary[]" value="N50,000-N100,000" />
-                                                    <label for="salary1_unsorted"><span></span>N50,000-N100,000</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="salary2_unsorted" name="salary[]" value="N150,000-N250,000" />
-                                                    <label for="salary2_unsorted"><span></span>N150,000-N250,000</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="salary3_unsorted"  name="salary[]" value="N350,000-N600,000" />
-                                                    <label for="salary3_unsorted"><span></span>N350,000-N600,000</label>
-                                                </li>
-                                               <li>
-                                                    <input type="checkbox" id="salary4_unsorted"  name="salary[]" value="N750,000-N1,000," />
-                                                    <label for="salary4_unsorted"><span></span>N750,000-N1,000,000</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="salary5_unsorted"  name="salary[]" value="N1,000,000-N5,000,000" />
-                                                    <label for="salary5_unsorted"><span></span>N1,000,000-N5,000,000</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="salary6_unsorted"  name="salary[]" value="N550,000-N10,000,000" />
-                                                    <label for="salary6_unsorted"><span></span>N5,050,000-N10,000,000</label>
-                                                </li>
-                                                  <li>
-                                                    <input type="checkbox" id="salary7_unsorted"  name="salary[]" value="N10,000,000-N15,000,000" />
-                                                    <label for="salary7_unsorted"><span></span>N10,000,000-N15,000,000</label>
-                                                </li>
-                                                  <li>
-                                                    <input type="checkbox" id="salary8_unsorted"  name="salary[]" value="N15,000,000-Above" />
-                                                    <label for="salary8_unsorted"><span></span>N15,000,000-Above</label>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                </div></div>
-                    <div class="col-md-8">                 <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Availability</a></h2>
-                                        <div class="careerfy-checkbox-toggle" id="availability_unsorted">
-                                            <ul class="careerfy-checkbox">
-                                                <li>
-                                                    <input type="checkbox" id="avail1_unsorted" name="avail[]" value="now" />
-                                                    <label for="avail1_unsorted"><span></span>Immediate</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="avail2_unsorted" name="avail[]" value="1 week" />
-                                                    <label for="avail2_unsorted"><span></span>1 week</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="avail3_unsorted"  name="avail[]" value="2 weeks" />
-                                                    <label for="avail3_unsorted"><span></span>2 weeks</label>
-                                                </li>
-                                               <li>
-                                                    <input type="checkbox" id="avail4_unsorted"  name="avail[]" value="1 month" />
-                                                    <label for="avail4_unsorted"><span></span>1 month</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="avail5_unsorted"  name="avail[]" value="2 months" />
-                                                    <label for="avail5_unsorted"><span></span>2 months</label>
-                                                </li>
-  <!--                                               <li>
-                                                    <input type="checkbox" id="avail6_hired"  name="avail[]" value="Specific date" />
-                                                    <label for="avail6_hired"><span></span>Specific date</label>
-                                                </li> -->
-                                            </ul>
-                                        </div>
-                                </div>  </div>
-                    <div class="col-md-8"> 
-                    <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Years Of Experience</a></h2>
-                                        <div class="careerfy-checkbox-toggle" id="yearofexperience_unsorted">
-                                            <ul class="careerfy-checkbox">
-                                                <li>
-                                                    <input type="checkbox" id="g1yoe_unsorted" name="yoe[]" value="0-5" />
-                                                    <label for="g1yoe_unsorted"><span></span>0-5</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="g2yoe_unsorted"  name="yoe[]" value="6-10" />
-                                                    <label for="g2yoe_unsorted"><span></span>6-10</label>
-                                                </li>
-                                               <li>
-                                                    <input type="checkbox" id="g3yoe_unsorted"  name="yoe[]" value="11-15" />
-                                                    <label for="g3yoe_unsorted"><span></span>11-15</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="g4yoe_unsorted"  name="yoe[]" value="16-20" />
-                                                    <label for="g4yoe_unsorted"><span></span>16-20</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="g5yoe_unsorted"  name="yoe[]" value="20 Above" />
-                                                    <label for="g5yoe_unsorted"><span></span>20 Above</label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                </div> </div> 
-                </div> 
-                </div>
-
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="col-md-8">                                <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Age</a></h2>
-                                        <div class="careerfy-checkbox-toggle" id="age_unsorted">
-                                            <ul class="careerfy-checkbox">
-                                                <li>
-                                                    <input type="checkbox" id="rag1_unsorted" name="ag" value="18-25" />
-                                                    <label for="rag1_unsorted"><span></span>18-25</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="rag2_unsorted" name="ag" value="26-30" />
-                                                    <label for="rag2_unsorted"><span></span>26-30</label>
-                                                </li>
-                                                    <li>
-                                                    <input type="checkbox" id="rag3_unsorted" name="ag" value="31-35" />
-                                                    <label for="rag3_unsorted"><span></span>31-35</label>
-                                                </li>
-                                                <li>
-                                                    <input type="checkbox" id="rag4_unsorted" name="ag" value="36-40" />
-                                                    <label for="rag4_unsorted"><span></span>36-40</label>
-                                                </li>
-                                                     <li>
-                                                    <input type="checkbox" id="rag5_unsorted" name="ag" value="41-45" />
-                                                    <label for="rag5_unsorted"><span></span>41-45</label>
-                                                </li> 
-                                                <li>
-                                                    <input type="checkbox" id="rag6_unsorted" name="ag" value="46-50" />
-                                                    <label for="rag6_unsorted"><span></span>46-50</label>
-                                                </li> 
-                                                <li>
-                                                    <input type="checkbox" id="rag7_unsorted" name="ag" value="51 Above" />
-                                                    <label for="rag7_unsorted"><span></span>51 Above</label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div> </div>
-                            <div class="col-md-8">                                
-                            <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Qualification</a></h2>
-                                        <div class="careerfy-checkbox-toggle scroll_div"  >
-                               <div id="qualify_unsorted">
-
-                                            <ul class="careerfy-checkbox">
-                                             @foreach($educationallevels as $educational_level)
-                                                    <li>
-                                         <input type="checkbox" id="qu_{{$educational_level->id}}" name="qu[]" value="{{$educational_level->id}}" />
-                                                    <label for="qu_{{$educational_level->id}}"><span></span>{{$educational_level->name}}</label>
-                                                </li>
-                                                @endforeach
-                                        
-                                                 </ul>
-                                                 </div>
-                                        </div>
-                                    </div> </div>
+</div>
+          </div>
+       
+          <ul class="careerfy-row nav-tabs tabs-left" id="applicants_list">
+          @include('sortapplicants.load_unsorted')
+          </ul>
      
-                        </div> 
-                    </div>
+              </div> 
+              </div>
 
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="col-md-8"> 
-                            <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle">
-                                        <h2><a href="#" class="careerfy-click-btn">Employement Terms</a></h2>
-                                        <div class="careerfy-checkbox-toggle" id="job_terms_unsorted">
-                                            <ul class="careerfy-checkbox">
-                                  @foreach($employement_terms as $employement_term)
-                                                <li>
-                                   <input type="checkbox" id="jr{{$employement_term->id}}_unsorted" name="job[]" value="{{$employement_term->id}}" />
-                                                    <label for="jr{{$employement_term->id}}_unsorted"><span></span>{{$employement_term->name}}</label>
-                                                    <small>4</small>
-                                                </li>
-                                @endforeach
-                                          
-                                            </ul>
-                                        </div>
-                                    </div></div>
-                            
-                        </div>
-
-
-                    </div>
-            
-            </div>
-        </div>
-          </div> 
-                                                <div class="tab-content" >
-
-
-                                                 @if(!$List_applicants_by_job_id->isEmpty())
-                                                         <?php $countme2 = 0; ?>
-                                                @forelse($List_applicants_by_job_id as $List_applicant)
-                                                       @if($countme2 === 0)
-                                                 <div class="tab-pane active" id="tab_6_1{{$List_applicant->id}}">
-                                                 @else
-                                                 <div class="tab-pane fade" id="tab_6_1{{$List_applicant->id}}">
-                                                 @endif 
-                                                  
-                                   
- 
-
-              <div class="col-md-12 cv_content"  >
-
-                    <div id="savedescription{{$List_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
-                    <input type="hidden" value="rejected" name="rejected{{$List_applicant->id}}">
-                    <input type="hidden" value="{{$List_applicant->id}}" name="application_id{{$List_applicant->id}}">
-                    <input type="hidden" value="{{$List_applicant->user_id}}" name="user_id{{$List_applicant->id}}">
-                     <input type="hidden" value="{{$List_applicant->tag_id}}" name="job_id{{$List_applicant->tag_id}}">
-                        <i class="icon-plus"></i> REJECT
-                    </div>
-                                   
-                     <div id="in_review{{$List_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
-                    <input type="hidden" value="in_review" name="in_review{{$List_applicant->id}}">
-                    <input type="hidden" value="{{$List_applicant->id}}" name="application_id{{$List_applicant->id}}">
-                    <input type="hidden" value="{{$List_applicant->user_id}}" name="user_id{{$List_applicant->id}}">
-                     <input type="hidden" value="{{$List_applicant->tag_id}}" name="job_id{{$List_applicant->tag_id}}">
-                        <i class="icon-plus"></i> KEEP IN VIEW
-                    </div>
- 
-                 <div id="shortlist{{$List_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
-                    <input type="hidden" value="shortlist" name="shortlist{{$List_applicant->id}}">
-                    <input type="hidden" value="{{$List_applicant->id}}" name="application_id{{$List_applicant->id}}">
-                    <input type="hidden" value="{{$List_applicant->user_id}}" name="user_id{{$List_applicant->id}}">
-                     <input type="hidden" value="{{$List_applicant->tag_id}}" name="job_id{{$List_applicant->tag_id}}">
-                        <i class="icon-plus"></i> SHORTLIST
-                    </div> 
-
-                  <div id="offered{{$List_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
-                    <input type="hidden" value="offer" name="offer{{$List_applicant->id}}">
-                    <input type="hidden" value="{{$List_applicant->id}}" name="application_id{{$List_applicant->id}}">
-                    <input type="hidden" value="{{$List_applicant->user_id}}" name="user_id{{$List_applicant->id}}">
-                     <input type="hidden" value="{{$List_applicant->tag_id}}" name="job_id{{$List_applicant->tag_id}}">
-                        <i class="icon-plus"></i> OFFER
-                    </div>
-            <div id="hire{{$List_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
-                    <input type="hidden" value="hire" name="hire{{$List_applicant->id}}">
-                    <input type="hidden" value="{{$List_applicant->id}}" name="application_id{{$List_applicant->id}}">
-                    <input type="hidden" value="{{$List_applicant->user_id}}" name="user_id{{$List_applicant->id}}">
-                     <input type="hidden" value="{{$List_applicant->tag_id}}" name="job_id{{$List_applicant->tag_id}}">
-                        <i class="icon-plus"></i> HIRE
-                    </div>
-              <div id="hire{{$List_applicant->id}}" class="btn  mt-ladda-btn mini_header" data-toggle="collapse" data-target="#expand_unsorted" >
-                   
-                       <i class="careerfy-icon careerfy-sort"></i> Sort
-                    </div>
-                     <div class="space">&nbsp;</div> 
-
-                                </div>
-                                  <div class="space">&nbsp;</div> 
-                                  <div id="emalForm">
-  <button type="button" class="btn green mt-ladda-btn ladda-button btn-outline" data-toggle="collapse" data-target="#{{$List_applicant->id}}"><i class="careerfy-icon careerfy-envelope" ></i>Send Email</button>
-            <div class="space">&nbsp;</div> 
-                                  <div class="lds-ripplee{{$List_applicant->user_id}}" style="display: none;"><div></div><div></div></div>
-                              <div id="info"></div>
-<div id="emailsent{{$List_applicant->user_id}}"></div>
-  <div id="{{$List_applicant->id}}" class="collapse">
-     <div class="col-md-7">
-        <div class="row" id="sendEmailStatus{{$List_applicant->user_id}}">
-        
- {!! Form::model($List_applicant, ['files' => true]) !!}
-  {{ csrf_field() }}
-<div class="space"></div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="box">
-        <div class="box-body settings-block">
- <div class="space">&nbsp;</div> 
-   <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-            {!! Form::label('title', 'Subject') !!} 
-            <input type="tex" name="title{{$List_applicant->user_id}}"> 
-            <input type="hidden" name="email_address" value="{{$List_applicant->email}}">
-            <input type="hidden" name="name" value="{{$List_applicant->candidates_name}}">
-            <small class="text-danger">{{ $errors->first('title') }}</small>
           </div>
- <div class="space">&nbsp;</div> 
-          <div class="form-group{{ $errors->has('body_of_email') ? ' has-error' : '' }}">
-            {!! Form::label('body_of_email', 'Email') !!}
-         <textarea name="body_of_email{{$List_applicant->user_id}}" class="form-control" required="required"></textarea> 
-            <small class="text-danger">{{ $errors->first('body_of_email') }}</small>
-          </div>
-    <div class="space">&nbsp;</div> 
-    <button type="submit" class="btn blue mt-ladda-btn ladda-button btn-outline btn-block" id="sendEmail{{$List_applicant->user_id}}">Send Email</button> 
-        </div>
-      </div>
-    </div>
-  </div>
-  {!! Form::close() !!}   
-        
-        </div>
-      </div>
-  </div>
-  </div>
- @foreach($documentList as $document)
-@if($List_applicant->document_id === $document->id)  
-   <div class="space">&nbsp;</div>
- 
-<div class="col-md-12 cv_content">  
-<div class="" id="user_profile"> 
- <div class="pageactionIn">
- <div class="title4">
-<div class="user_name"> <h4 class="highlightable">{{$document->candidates_name}}</h4> </div>  
-                                        
-</div>
-
- <div class="overviewtitle2">
-<span class="ovtitle">Age</span>
-
-<span class="detail highlightable"><strong>{{$document->age}}</strong></span>
-
-</div>
-
- <div class="overviewtitle2">
-<span class="ovtitle">Date of Birth</span>
-<span class="detail highlightable"><strong>{{ date('M d, Y', strtotime($document->date_of_birth)) }}  </strong></span>
-</div>
- <div class="overviewtitle2">
-<span class="ovtitle">Gender</span>
-<span class="detail highlightable"><strong> {{$document->gender}} </strong></span>
-</div>
-
- <div class="overviewtitle2">
-<span class="ovtitle">Nationality</span>
-<span class="detail highlightable"><strong> @foreach($countries as $country)  @if($country->code === $List_applicant->nationality) {{$country->name_en}} @endif @endforeach </strong></span>
-</div>
- <div class="overviewtitle2">
-<span class="ovtitle">Location</span>
-<span class="detail highlightable"><strong>  {{$List_applicant->city_id}}</strong></span>
-</div>
- <div class="overviewtitle2">
-<span class="ovtitle">Email</span>
-<span class="detail highlightable"><strong>{{$document->email}}</strong></span>
-</div>
-
- <div class="overviewtitle2">
-<span class="ovtitle">Willing to relocate:</span>
-<span class="detail highlightable"><strong>{{$List_applicant->relocate_nationaly}} </strong></span>
-</div>
-
- <div class="overviewtitle2">
-<span class="ovtitle">Educational Level:</span>
-<span class="detail highlightable"><strong>       
-@foreach($educationallevels as $educational_level)
-                                      @if($educational_level->id === $document->educational_level)
-                                                    {{$educational_level->name}} 
-                                             @endif
-                                                @endforeach </strong></span>
-</div>
-
- <div class="overviewtitle2">
-<span class="ovtitle">Employment Terms:</span>
-<span class="detail highlightable"><strong> @foreach($employement_terms as $employement_term) @if($employement_term->id == $List_applicant->d_employment_term) {{$employement_term->name}} @endif @endforeach</strong></span>
-</div>
- <div class="overviewtitle2">
-<span class="ovtitle">Career Level:</span>
-<span class="detail highlightable"><strong> @foreach($jobcareer_levels as $job_career_level) @if($job_career_level->id == $document->career_level) {{$job_career_level->name}}  @endif @endforeach{{$List_applicant->career_level}} </strong></span>
-</div>
-
- <div class="overviewtitle2">
-<span class="ovtitle"> Minimum Salary:</span>
-<span class="detail highlightable"><strong>{{$List_applicant->minimum_salary}} / Year</strong></span>
-</div>
-
- <div class="overviewtitle2">
-<span class="ovtitle">Availability:</span>
-<span class="detail highlightable"><strong> {{$List_applicant->availability}}</strong></span>
-</div> 
- </div> 
-</div>
-</div>
-@endif
-@endforeach
-
-
-
-<div class="space">&nbsp;</div>
- 
-<div class="col-md-12 cv_content">
-<div class="pageactionIn" id="education_topsection">
-<div class="title4">
-<p class="editov2"> </p>
- 
-<h4>Career Objective / Summary</h4>
-@foreach($careerlist as $career)
-@if($career->resume_id === $List_applicant->resume_id)
-{{ $career->summary }}
-@endif
-@endforeach
- 
- </div>
-</div>
-</div>
-<div class="space">&nbsp;</div>
-
-<div class="col-md-12 cv_content">
-<div class="pageactionIn" id="education_topsection"> 
-<div class="title4">
-<h4><i class="careerfy-icon careerfy-design-skills"></i>Specialties and Skills</h4>
-</div>
- 
-<div class="skills_inner">
-@foreach($jobskills as $jobskill)
-@if($jobskill->resumeid === $List_applicant->resume_id)
- 
- <span class="jellybean">{{$jobskill->job_skill}}</span> 
-@endif
-@endforeach
-
-</div>
-</div> </div>
-<div class="space">&nbsp;</div>
- 
-
-<div class="col-md-12 cv_content">
-<div class="pageactionIn" id="education_topsection">
-<div class="title4">
-<h4> <i class="careerfy-icon careerfy-mortarboard"></i>Educational History </h4>
-</div>
-@foreach($educationaList as $educational)
-@if($educational->resume_id === $List_applicant->resume_id)
-<?php
-    $dt->year   = $educational->start_year;
-    $dt->month  = $educational->start_month;
-
-    $ddt->year   = $educational->end_year;
-    $ddt->month  = $educational->end_month;
-
-    //$dtt->addYear($dt);  
-    $yer = $ddt->diffInYears($dt);     
-    $weeks = $ddt->diffInWeeks($dt);                  // 62
-    $months = $ddt->diffInMonths($dt);  
-?>
-<div class="education_inner several2">
-<div class="actions">
-
-</div>
-
-<div class="overviewtitle2">
-<span class="ovtitle">Degree</span>
-<span class="detail">{{$educational->qualificaiton}}<strong> {{$educational->feild_of_study}}</strong></span>
-</div>
-
-<div class="overviewtitle2">
-<span class="ovtitle">Graduation period</span>
-<span class="highlightable">{{ date('M, Y', strtotime($dt)) }} - {{ date('M, Y', strtotime($ddt)) }}  ( {{$yer}} years, )</span>
- 
-</div>
-
-<div class="overviewtitle2">
-<span class="ovtitle">School</span>
-<span class="highlightable">
-{{$educational->school_name}}
- </span>
-</div>
-
-<div class="overviewtitle2">
-<span class="ovtitle">Country</span>
-<span class="highlightable"> @foreach($countries as $country)  @if($country->code === $educational->country) {{$country->name_en}} @endif @endforeach </span>
-</div>
-
-</div>
- @endif
-@endforeach
-</div>
-</div>
- 
-<div class="space">&nbsp;</div>
-<div class="col-md-12 cv_content">
-<div class="pageactionIn" id="work_history_topsection">
-<div class="title4">
- 
-<h4> <i class="careerfy-icon careerfy-social-media"></i>Work History</h4>
-</div>
- 
-@foreach($work_histories as $work_history)
-@if($work_history->resumefk === $List_applicant->resume_id)
-<?php 
-    $dt->year = $work_history->start_year;
-    $dt->month = $work_history->start_month;
-
-    $ddt->year = $work_history->end_year;
-    $ddt->month = $work_history->end_month;
-  
-    $yer = $ddt->diffInYears($dt);     
-    // $weeks = $ddt->diffInWeeks($dt);                  // 62
-    $months = $ddt->diffInMonths($dt);    
-?>
-<div class="workhistory_inner several2">
-
-<div class="overviewtitle2">
-<span class="ovtitle">Position Title</span>
-<span class="highlightable"><strong> {{$work_history->position_title}}  </strong></span>
-</div>
-
-<div class="overviewtitle2">
-<span class="ovtitle">Employment period</span>
-<span class="highlightable"> {{ date('M, Y', strtotime($dt)) }} - 
-@if($work_history->end_year === null && $work_history->end_month === null && $work_history->present == '1') Present
-@elseif($work_history->end_year === null && $work_history->end_month === null && $work_history->present == '2')
-Previous
-@else
- {{ date('M, Y', strtotime($ddt)) }}  ({{$yer}} year(s) ) @endif</span>
-</div>
-
-<div class="overviewtitle2">
-<span class="ovtitle">Company</span>
-<span class="highlightable">{{$work_history->company_name}}</span>
-</div>
-
-<div class="overviewtitle2">
-<span class="ovtitle">Country</span>
-<span class="highlightable"> @foreach($countries as $country) @if($work_history->country === $country->code) {{$country->name_en}} @endif @endforeach</span>
-</div>
-
-
-<div class="overviewtitle2">
-<span class="ovtitle">Industry</span>
-<span class="highlightable"> @foreach($work_history->industries as $industry) {{$industry->name}}  @endforeach</span>
-</div>
-
-<div class="overviewtitle2">
-<span class="ovtitle">Position Type</span>
-<span class="highlightable">@foreach($work_history->industryprofessions as $profession) {{$profession->name}}  @endforeach </span>
-</div>
-
-<div class="overviewtitle2">
-<span class="ovtitle">Position Description</span>
-<span class="job_description detail highlightable">
- {!! $work_history->responsibilities !!} </span>
-</div>
-</div>
-@endif
-@endforeach
-</div>
-</div>
-<div class="space">&nbsp;</div>
-<div class="col-md-12 cv_content">
-<div class="pageactionIn" id="certifications_topsection several2">
-<div class="title4">
- 
-<h4>Certifications</h4>
-</div>
-@foreach($jobcertifications as $jobcertification)
-@if($jobcertification->user_id === $List_applicant->user_id)
-<div class="certification_inner several2">
- 
-<div class="overviewtitle2">
-<span class="ovtitle">Certification Name</span>
-<span class="highlightable"><strong> {{$jobcertification->name}} </strong></span>
-</div>
-<div class="overviewtitle2">
-<span class="ovtitle">Date Received</span>
-<span class="highlightable">{{ date('M, Y', strtotime($jobcertification->date_received)) }}</span>
-</div>
-
-</div>
-@endif
-@endforeach
-</div>
-</div>
-
-<div class="space">&nbsp;</div>
-<div class="col-md-12 cv_content" >
-<div class="pageactionIn" id="additional_information_topsection">
-<div class="title4">
- 
-<h4>Personal Information</h4>
-</div>
-@foreach($person_info_list as $person_info)
-@if($person_info->user_id === $List_applicant->user_id)
-<div class="overviewtitle2 overviewtype3 several2">
-<span class="ovtitle">Interests</span>
-<div class="highlightable">{{$person_info->interest}}</div>
-</div>
-
-<div class="overviewtitle2 overviewtype3 several2">
-<span class="ovtitle">Associations</span>
-<div class="highlightable">{{$person_info->association}} </div>
-</div>
-
-<div class="overviewtitle2 overviewtype3 several2">
-<span class="ovtitle">Awards</span>
-<div class="highlightable"> None {{$person_info->award}} </div>
-</div>
-
-<div class="overviewtitle2 overviewtype3 several2">
-<span class="ovtitle">Personal page</span>
-<span class="highlightable"><a class="breakword" href="#" rel="external">{{$person_info->personal_page}}</a></span>
-</div>
-@endif
-@endforeach
-</div>
- </div>
-  
-                                                    </div>
-                                                     <?php $countme2++; ?>
-                                                    @empty
-                                        <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="400" width="400" alt="" align="center"></div>
-<div class="clearfix"></div>
-</div>
-                                                    @endforelse
-                                                    @else
-                                                                                     <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="300" width="300" alt="" align="center"></div>
-<div class="clearfix"></div>
-</div>
-                                                    @endif
-                                                </div>
-                                            </div>
-
-                                        </div>
-
+                        </aside>  
+          
+                              @include('sortapplicants.load_unsortedCV')
 
 
                                 <div class="tab-pane" id="tab_11">
@@ -979,53 +242,9 @@ Previous
 <i class="careerfy-icon careerfy-sort"></i>  <h2>Filter Rejected</h2>
 </div>
 </div></div>
-
-<ul class="careerfy-row nav-tabs tabs-left" id="reject_section">
-<!-- <ul> -->
-  @if(!$rejected_list->isEmpty())
- <?php $reviewcr = 0; ?>
-@forelse($rejected_list as $rejected_applicant)
-   
-<li class="careerfy-column-12"> 
-      <a href="#tab_6_1{{$rejected_applicant->id}} " data-toggle="tab"> 
-                                            <div class="careerfy-candidate-default-wrap"> 
-                                                  <?php $record = \App\RecruitProfilePix::where('status', 1)->where('user_id', $rejected_applicant->user_id)->orderBy('created_at', 'DESC')->first(); ?>
-                                                <figure>
-                                                  @if($record)<img src="/uploads/avatars/{{ $record->pix }}" alt="">@else  
-                                                    @endif 
-                                                </figure> 
-                                                <div class="careerfy-candidate-default-text">
-                                                    <div class="careerfy-candidate-default-left">
-                                                        <h2>
-                            @foreach($documentList as $document) @if($rejected_applicant->document_id === $document->id) {{$document->candidates_name}} @endif @endforeach  <i class="careerfy-icon careerfy-check-mark"></i></h2>
-                                                        <ul class="careerfy-column-12" >
-
-                                                        <!-- to get work experience; get job_id from application table and resume_id, then goto workexperience table and find by resume_id and jpob_id  -->
-                                                   
-                                                        @foreach($work_experiences as $work_experience)
-                                              @if($work_experience->userfk === $rejected_applicant->user_id && $work_experience->present === 1)
-                                                            <li>{{$work_experience->position_title}} at <span href="#" class="careerfy-candidate-default-studio">{{$work_experience->company_name}}</span></li>
-                                                            @endif
-                                                        @endforeach
-                                                        </ul>
-                                                    </div>
-                                              <!--       <a href="#" class="careerfy-candidate-default-btn"><i class="careerfy-icon careerfy-add-list"></i> Shortlist</a> -->
-                                                </div>
-                                            </div> </a>
-                                        </li>
-
- <?php $reviewcr++; ?>
-@empty
-                                           <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="400" width="400" alt="" align="center"></div>
-<div class="clearfix"></div>
-</div>
-@endforelse
- 
- @else
-<li class="careerfy-column-12"> No Record(s) Found</li>
- @endif
-                                    </ul>
+                  <ul class="careerfy-row nav-tabs tabs-left" id="reject_section">
+                          @include('sortapplicants.load_rejected')
+                   </ul>
                                 </div> 
                                 </form>
  
@@ -1321,13 +540,13 @@ Previous
 @if($rejected_applicant->document_id === $document->id)  
               <div class="col-md-12 cv_content">
 
-                    <div id="savedescription{{$rejected_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
+       <!--              <div id="savedescription{{$rejected_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
                     <input type="hidden" value="rejected" name="rejected{{$rejected_applicant->id}}">
                     <input type="hidden" value="{{$rejected_applicant->id}}" name="application_id{{$rejected_applicant->id}}">
                     <input type="hidden" value="{{$rejected_applicant->user_id}}" name="user_id{{$rejected_applicant->id}}">
                      <input type="hidden" value="{{$rejected_applicant->tag_id}}" name="job_id{{$rejected_applicant->tag_id}}">
                         <i class="icon-plus"></i> REJECT
-                    </div>
+                    </div> -->
                                    
                      <div id="in_review{{$rejected_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
                     <input type="hidden" value="in_review" name="in_review{{$rejected_applicant->id}}">
@@ -1705,14 +924,14 @@ Previous
                                                      <?php $countme4++; ?>
                                                     @empty
                                            <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="300" width="300" alt="" align="center"></div>
+<div align="center">   <img src="{{asset('img/NoJobFound.png')}}" height="300" width="300" alt="" align="center"></div>
 <div class="clearfix"></div>
 </div>
                                                     @endforelse
 
                                                 @else
                                                                                          <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="300" width="300" alt="" align="center"></div>
+<div align="center">   <img src="{{asset('img/NoJobFound.png')}}" height="300" width="300" alt="" align="center"></div>
 <div class="clearfix"></div>
 </div>
                                                 @endif
@@ -1735,52 +954,9 @@ Previous
 <i class="careerfy-icon careerfy-sort"></i>  <h2>Filter In-Review</h2>
 </div>
 </div></div>
-
-<ul class="careerfy-row nav-tabs tabs-left" id="review_section">
-<!-- <ul> -->
- @if(!$review_list->isEmpty())
- <?php $reviewc = 0; ?>
-@forelse($review_list as $review_applicant) 
-<li class="careerfy-column-12">
- 
-      <a href="#tab_6_1{{$review_applicant->id}}" data-toggle="tab">
- 
-
-                                            <div class="careerfy-candidate-default-wrap"> 
-                                                <figure>
-                              <?php $record = \App\RecruitProfilePix::where('status', 1)->where('user_id', $review_applicant->user_id)->orderBy('created_at', 'DESC')->first(); ?>
-                                                  @if($record)<img src="/uploads/avatars/{{ $record->pix }}" alt="">@else  
-                                                    @endif
-                                                </figure> 
-                                                <div class="careerfy-candidate-default-text">
-                                                    <div class="careerfy-candidate-default-left">
-                                                        <h2>
-                            @foreach($documentList as $document) @if($review_applicant->document_id === $document->id) {{$document->candidates_name}} @endif @endforeach  <i class="careerfy-icon careerfy-check-mark"></i></h2>
-                                                        <ul class="careerfy-column-12" >
-
-                                                        <!-- to get work experience; get job_id from application table and resume_id, then goto workexperience table and find by resume_id and jpob_id  -->
-                                                   
-                                                        @foreach($work_experiences as $work_experience)
-                                                        @if($work_experience->userfk === $review_applicant->user_id && $work_experience->present === 1)
-                                                            <li>{{$work_experience->position_title}} at <span href="#" class="careerfy-candidate-default-studio">{{$work_experience->company_name}}</span></li>
-                                                            @endif
-                                                        @endforeach
-                                                        </ul>
-                                                    </div>
-                                              <!--       <a href="#" class="careerfy-candidate-default-btn"><i class="careerfy-icon careerfy-add-list"></i> Shortlist</a> -->
-                                                </div>
-                                            </div> </a>
-                                        </li>
-
- <?php $reviewc++; ?>
-@empty
-@endforelse
-
-@else
-<li class="careerfy-column-12"> No Record(s) Found</li>
-@endif
- 
-                                    </ul>
+                  <ul class="careerfy-row nav-tabs tabs-left" id="review_section">
+                @include('sortapplicants.load_reviewed')
+                </ul>
                                 </div> 
                                 </form>
  
@@ -2081,14 +1257,14 @@ Previous
                      <input type="hidden" value="{{$review_applicant->tag_id}}" name="job_id{{$review_applicant->tag_id}}">
                         <i class="icon-plus"></i> REJECT
                     </div>
-                                   
+                                   <!-- 
                      <div id="in_review{{$review_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
                     <input type="hidden" value="in_review" name="in_review{{$review_applicant->id}}">
                     <input type="hidden" value="{{$review_applicant->id}}" name="application_id{{$review_applicant->id}}">
                     <input type="hidden" value="{{$review_applicant->user_id}}" name="user_id{{$review_applicant->id}}">
                      <input type="hidden" value="{{$review_applicant->tag_id}}" name="job_id{{$review_applicant->tag_id}}">
                         <i class="icon-plus"></i> KEEP IN VIEW
-                    </div>
+                    </div> -->
  
                  <div id="shortlist{{$review_applicant->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
                     <input type="hidden" value="in_review" name="shortlist{{$review_applicant->id}}">
@@ -2467,14 +1643,14 @@ Previous
                                                      <?php $reviewb++; ?>
                                                     @empty
                                            <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="300" width="300" alt="" align="center"></div>
+<div align="center">   <img src="{{asset('img/NoJobFound.png')}}" height="300" width="300" alt="" align="center"></div>
 <div class="clearfix"></div>
 </div>
                                                     @endforelse
 
                                                     @else
                                            <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="300" width="300" alt="" align="center"></div>
+<div align="center">   <img src="{{asset('img/NoJobFound.png')}}" height="300" width="300" alt="" align="center"></div>
 <div class="clearfix"></div>
 </div>
           
@@ -2485,7 +1661,7 @@ Previous
                                 </div>
  
 
-
+<!-- Begin Shortlist Section -->
                                 <div class="tab-pane" id="tab_13"> 
  
    <aside class="careerfy-column-4"> 
@@ -2499,47 +1675,10 @@ Previous
 <i class="careerfy-icon careerfy-sort"></i>  <h2>Filter Shortlisted</h2>
 </div>
 </div></div>
+                    <ul class="careerfy-row nav-tabs tabs-left" id="shortlist_section">
+@include('sortapplicants.load_shortlist')
 
-<ul class="careerfy-row nav-tabs tabs-left" id="shortlist_section">
-<!-- <ul> -->
- @if(!$shortlisted_list->isEmpty())
- <?php $reviewc = 0; ?>
-@forelse($shortlisted_list as $shortlisted)
-                            <li class="careerfy-column-12">
-                                  <a href="#tab_6_1{{$shortlisted->id}}" data-toggle="tab">
-                                     <?php $record = \App\RecruitProfilePix::where('status', 1)->where('user_id', $shortlisted->user_id)->orderBy('created_at', 'DESC')->first(); ?>
-                                            <div class="careerfy-candidate-default-wrap"> 
-                                                <figure>
-                                                @if($record)<img src="/uploads/avatars/{{ $record->pix }}" alt="">@else  
-                                                @endif
-                                               </figure> 
-                                                <div class="careerfy-candidate-default-text">
-                                                    <div class="careerfy-candidate-default-left">
-                                                        <h2>
-                            @foreach($documentList as $document) @if($shortlisted->document_id === $document->id) {{$document->candidates_name}} @endif @endforeach  <i class="careerfy-icon careerfy-check-mark"></i></h2>
-                                                        <ul class="careerfy-column-12" > 
-                                                        <!-- to get work experience; get job_id from application table and resume_id, then goto workexperience table and find by resume_id and jpob_id  --> 
-                                                        @foreach($work_experiences as $work_experience)
-                                                        @if($work_experience->userfk === $shortlisted->user_id && $work_experience->present === 1)
-                                                            <li>{{$work_experience->position_title}} at <span href="#" class="careerfy-candidate-default-studio">{{$work_experience->company_name}}</span></li>
-                                                            @endif
-                                                        @endforeach
-                                                        </ul>
-                                                    </div>
-                                              <!--       <a href="#" class="careerfy-candidate-default-btn"><i class="careerfy-icon careerfy-add-list"></i> Shortlist</a> -->
-                                                </div>
-                                            </div> </a>
-                                        </li>
-
- <?php $reviewc++; ?>
-@empty
-@endforelse
-
-@else
-<li class="careerfy-column-12"> No Record(s) Found</li>
-@endif
- 
-                                    </ul>
+                    </ul>
                                 </div> 
                             </form> 
                             </div>
@@ -2844,14 +1983,14 @@ Previous
                         <i class="icon-plus"></i> IN VIEW
                     </div>
  
-                 <div id="shortlist{{$shortlisted->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
+                <!--  <div id="shortlist{{$shortlisted->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
                     <input type="hidden" value="in_review" name="shortlist{{$shortlisted->id}}">
                     <input type="hidden" value="{{$shortlisted->id}}" name="application_id{{$shortlisted->id}}">
                     <input type="hidden" value="{{$shortlisted->user_id}}" name="user_id{{$shortlisted->id}}">
                      <input type="hidden" value="{{$shortlisted->tag_id}}" name="job_id{{$shortlisted->tag_id}}">
                         <i class="icon-plus"></i> SHORTLIST
                     </div> 
-
+ -->
                   <div id="offered{{$shortlisted->id}}" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" >
                     <input type="hidden" value="offer" name="offer{{$shortlisted->id}}">
                     <input type="hidden" value="{{$shortlisted->id}}" name="application_id{{$shortlisted->id}}">
@@ -3222,14 +2361,14 @@ Previous
                                                      <?php $reviewb++; ?>
                                                     @empty
                                            <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="300" width="300" alt="" align="center"></div>
+<div align="center">   <img src="{{asset('img/NoJobFound.png')}}" height="300" width="300" alt="" align="center"></div>
 <div class="clearfix"></div>
 </div>
                                                     @endforelse
 
                                                     @else
                                            <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="300" width="300" alt="" align="center"></div>
+<div align="center">   <img src="{{asset('img/NoJobFound.png')}}" height="300" width="300" alt="" align="center"></div>
 <div class="clearfix"></div>
 </div>
                                                     @endif
@@ -3249,50 +2388,9 @@ Previous
 <i class="careerfy-icon careerfy-sort"></i>  <h2>Filter Offered</h2>
 </div>
 </div></div>
-
-<ul class="careerfy-row nav-tabs tabs-left" id="offered_section">
-<!-- <ul> -->
- @if(!$offered_list->isEmpty())
- 
-@forelse($offered_list as $offered_applicant)
-   
-<li class="careerfy-column-12"> 
-      <a href="#tab_6_1{{$offered_applicant->id}}" data-toggle="tab"> 
-        <?php $record = \App\RecruitProfilePix::where('status', 1)->where('user_id', $offered_applicant->user_id)->orderBy('created_at', 'DESC')->first(); ?>
-                                            <div class="careerfy-candidate-default-wrap"> 
-                                                <figure>@if($record) <img src="/uploads/avatars/{{ $record->pic }}" alt=""> @else
-                                                    <img src="/uploads/avatars/{{ $user->avatar }}" alt="">
-                                                    @endif
-                                                </figure> 
-                                                <div class="careerfy-candidate-default-text">
-                                                    <div class="careerfy-candidate-default-left">
-                                                        <h2>
-                            @foreach($documentList as $document) @if($offered_applicant->document_id === $document->id) {{$document->candidates_name}} @endif @endforeach  <i class="careerfy-icon careerfy-check-mark"></i></h2>
-                                                        <ul class="careerfy-column-12" >
-
-                                                        <!-- to get work experience; get job_id from application table and resume_id, then goto workexperience table and find by resume_id and jpob_id  -->
-                                                   
-                                                        @foreach($work_experiences as $work_experience)
-                                                        @if($work_experience->userfk === $offered_applicant->user_id && $work_experience->present === 1)
-                                                            <li>{{$work_experience->position_title}} at <span href="#" class="careerfy-candidate-default-studio">{{$work_experience->company_name}}</span></li>
-                                                            @endif
-                                                        @endforeach
-                                                        </ul>
-                                                    </div>
-                                              <!-- <a href="#" class="careerfy-candidate-default-btn"><i class="careerfy-icon careerfy-add-list"></i> Shortlist</a> -->
-                                                </div>
-                                            </div> </a>
-                                        </li>
-
- 
-@empty
-@endforelse
-
-@else
-<li class="careerfy-column-12"> No Record(s) Found</li>
-@endif
- 
-                                    </ul>
+                        <ul class="careerfy-row nav-tabs tabs-left" id="offered_section">
+      @include('sortapplicants.load_offerlist')
+                          </ul>
                                 </div> 
                                 </form>
  
@@ -3975,14 +3073,14 @@ Previous
                                                      <?php $reviewo++; ?>
                                                     @empty
                                            <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="300" width="300" alt="" align="center"></div>
+<div align="center">   <img src="{{asset('img/NoJobFound.png')}}" height="300" width="300" alt="" align="center"></div>
 <div class="clearfix"></div>
 </div>
                                                     @endforelse
 
                                                     @else
                                            <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="300" width="300" alt="" align="center"></div>
+<div align="center">   <img src="{{asset('img/NoJobFound.png')}}" height="300" width="300" alt="" align="center"></div>
 <div class="clearfix"></div>
 </div>
                                                     @endif
@@ -4005,54 +3103,9 @@ Previous
 </div>
 </div></div>
 <div class="careerfy-candidate careerfy-candidate-default">
-<ul class="careerfy-row nav-tabs tabs-left" id="hire_section">
-<!-- <ul> -->
- @if(!$hired_list->isEmpty())
- <?php $reviewcf = 0; ?>
-@forelse($hired_list as $hired_applicant)
-   
-<li class="careerfy-column-12">
- @if($reviewcf === 0)
-      <a href="#tab_6_1{{$hired_applicant->id}}" data-toggle="tab">
-                                                 @else
- <a href="#tab_6_1{{$hired_applicant->id}}" data-toggle="tab">
-                                                 @endif 
-                   <?php $record = \App\RecruitProfilePix::where('status', 1)->where('user_id', $hired_applicant->user_id)->orderBy('created_at', 'DESC')->first(); ?>
-                                            <div class="careerfy-candidate-default-wrap"> 
-                                                <figure>
-
-                                                 @if($record)<img src="/uploads/avatars/{{ $record->pix }}" alt="">@else  
-                                                    @endif
-                                                </figure> 
-                                                <div class="careerfy-candidate-default-text">
-                                                    <div class="careerfy-candidate-default-left">
-                                                        <h2>
-                            @foreach($documentList as $document) @if($hired_applicant->document_id === $document->id) {{$document->candidates_name}} @endif @endforeach  <i class="careerfy-icon careerfy-check-mark"></i></h2>
-                                                        <ul class="careerfy-column-12" >
-
-                                                        <!-- to get work experience; get job_id from application table and resume_id, then goto workexperience table and find by resume_id and jpob_id  -->
-                                                   
-                                                        @foreach($work_experiences as $work_experience)
-                                                        @if($work_experience->userfk === $hired_applicant->user_id && $work_experience->present === 1)
-                                                            <li>{{$work_experience->position_title}} at <span href="#" class="careerfy-candidate-default-studio">{{$work_experience->company_name}}</span></li>
-                                                            @endif
-                                                        @endforeach
-                                                        </ul>
-                                                    </div>
-                                              <!--       <a href="#" class="careerfy-candidate-default-btn"><i class="careerfy-icon careerfy-add-list"></i> Shortlist</a> -->
-                                                </div>
-                                            </div> </a>
-                                        </li>
-
- <?php $reviewcf++; ?>
-@empty
-@endforelse
-
-@else
-<li class="careerfy-column-12"> No Record(s) Found</li>
-@endif
- 
-                                    </ul>
+                          <ul class="careerfy-row nav-tabs tabs-left" id="hire_section">
+                            @include('sortapplicants.load_hiredlist')
+                            </ul>
                                 </div> 
                                 </form>
  
@@ -4754,14 +3807,14 @@ Previous
                                                      <?php $reviewo++; ?>
                                                     @empty
                                            <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="300" width="300" alt="" align="center"></div>
+<div align="center">   <img src="{{asset('img/NoJobFound.png')}}" height="300" width="300" alt="" align="center"></div>
 <div class="clearfix"></div>
 </div>
                                                     @endforelse
 
                                                     @else
                                            <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="300" width="300" alt="" align="center"></div>
+<div align="center">   <img src="{{asset('img/NoJobFound.png')}}" height="300" width="300" alt="" align="center"></div>
 <div class="clearfix"></div>
 </div>
                                                     @endif
@@ -5498,14 +4551,14 @@ Previous
                                                      <?php $reviewo++; ?>
                                                     @empty
                                            <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="300" width="300" alt="" align="center"></div>
+<div align="center">   <img src="{{asset('img/NoJobFound.png')}}" height="300" width="300" alt="" align="center"></div>
 <div class="clearfix"></div>
 </div>
                                                     @endforelse
 
                                                     @else
                                            <div class="careerfy-employer-confitmation">
-<div align="center">   <img src="{{asset('img/NoRecordFound.png')}}" height="300" width="300" alt="" align="center"></div>
+<div align="center">   <img src="{{asset('img/NoJobFound.png')}}" height="300" width="300" alt="" align="center"></div>
 <div class="clearfix"></div>
 </div>
                                                     @endif
@@ -5670,10 +4723,61 @@ document.getElementById('present').style.display = 'block';
     return true;
 }
 
+$(function() {
 
- 
+          function getPaginationSelectedPage(url) {
+            var chunks = url.split('?');
+            var baseUrl = chunks[0];
+            var querystr = chunks[1].split('&');
+            var pg = 1;
+            for (i in querystr) {
+                var qs = querystr[i].split('=');
+                if (qs[0] == 'page') {
+                    pg = qs[1];
+                    break;
+                }
+            }
+            return pg;
+        } 
+
+var jobid = {{$job_id}};
+
+        $('#applicants_list').on('click', '.pagination a', function(e) {
+            e.preventDefault();
+            var pg = getPaginationSelectedPage($(this).attr('href'));
+
+            $.ajax({
+                url: '/employer/job/applicants/applicants_list/' + jobid,
+                data: { page: pg },
+                success: function(data) {
+                    $('#applicants_list').html(data);
+                }
+            });
+        });
+
+        $('#reject_section').on('click', '.pagination a', function(e) {
+            e.preventDefault();
+            var pg = getPaginationSelectedPage($(this).attr('href'));
+
+            $.ajax({
+                url: '/employer/job/applicants/reject_section/' + jobid,
+                data: { page: pg },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
+        });
+
+       $('#applicants_list').load('/employer/job/applicants/applicants_list/'+jobid+'?page=1');
+      $('#reject_section').load('/employer/job/applicants/reject_section/'+jobid+'?page=1'); 
+
+  });
 
 
+
+
+
+///employer/job/applicants/{type}/{code}
 // $('#fpdId').click(function(){
 //     var files = new Array();
 
@@ -5750,26 +4854,23 @@ document.getElementById('present').style.display = 'block';
             },
               beforeSend: function(){
             //Show image container
-            $("#loader").show();
+            $("#loading").show();
             
              },
             success:function(data){
-            console.log(data);
-             $('#review_count').empty();
+            //console.log(data);
+             // $('#review_count').empty();
             $('#reject_count').empty(); 
             $('#sorted_count').empty();
-            $('#shortlist_count').empty(); 
-            $("#hired_count").empty();
+            // $('#shortlist_count').empty(); 
+            // $("#hired_count").empty();
             $("#applicants_list").empty(); 
             $("#move_to").empty(); 
-            $("#reject_section").empty(); 
-           // window.location.href+"#tab_11>*", "";
-            $("#tab_rejected").load(location.href+" #tab_rejected>*", "");
-        //window.location.reload(); review_section
+            $("#reject_section").empty();  
      },
      complete:function(data){
     // Hide image container 
-    $("#loader").hide();
+    $("#loading").hide();
     },
     }).done(function (data) {
         var rejected = data.reject_count;
@@ -5793,85 +4894,46 @@ document.getElementById('present').style.display = 'block';
 
             $("#reject_count").append(rejected);
             $('#sorted_count').append(sorted_count);
-            $("#review_count").append(in_review_count);
-            $("#shortlist_count").append(shortlisted_count); 
-            $("#hired_count").append(hired_count); 
+            // $("#review_count").append(in_review_count);
+            // $("#shortlist_count").append(shortlisted_count); 
+            // /$("#hired_count").append(hired_count); 
 
-        var count = 0;
-        var status = '';
-        var content_v = '';
-         $.each(hired_list, function(key, value){
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
 
-            //loop through experience to get candidates 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#hire_section").append(content); 
+    var jobid = $('input[name=job_id{{$List_applicant->tag_id}}]').val();
 
- });
-         count++;
 
- $.each(new_reject_list, function(key, value){
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
+           $.ajax({
+                url: '/api/job/newunsortedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#applicants_list').html(data);
+                }
+            });
 
-            //loop through experience to get candidates 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#reject_section").append(content); 
- 
- });
- count++;
-      $.each(newapplication_list, function(key, value) {
-         console.log(value.id);
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            } 
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $('#applicants_list').append(newapplication_content);  
+           // $.ajax({
+           //      url: '/api/job/cvcontent/' + jobid,
+           //      data: { 'code': jobid },
+           //      success: function(data) {
 
- 
-        });
-           count++;
- 
-  });
+           //          $('#unsortedcv').html(data);
+           //      }
+           //  });
+
+
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
+
+    
  
     });
+
+});
+
 
 
 
@@ -5909,8 +4971,8 @@ document.getElementById('present').style.display = 'block';
             $("#move_to").empty();
             $("#review_section").empty();
             $("#reject_section").empty();
-          location.reload();
-        $("#review").load(location.href+" #review>*", "");
+        
+       
      },
      complete:function(data){
     // Hide image container 
@@ -5941,80 +5003,30 @@ document.getElementById('present').style.display = 'block';
         $('#resume_body').append('No Record(s) Found'); 
 
         }
-         var count = 0;
-        var status = '';
-        var content_v = '';
-        var uprofile = null;
+      
 
-// // update rejected List
- $.each(new_reject_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
+
+ var jobid = $('input[name=job_id{{$List_applicant->tag_id}}]').val();
  
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#reject_section").append(content); 
- });
-  count++;
-// update In-review List
-  $.each(new_reivew_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
- 
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates
-            var review_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#review_section").append(review_content); 
- });
-   count++;
+           $.ajax({
+                url: '/api/job/newunsortedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#applicants_list').html(data);
+             
+                }
+            });
+        
 
-      $.each(newapplication_list, function(key, value) {
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            var pix = null;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
 
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $('#applicants_list').append(newapplication_content);  
+            $.ajax({
+                url: '/api/job/newreviewlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#review_section').html(data);
+                }
+            });
 
- 
-        });
-   count++;
 
   });
  
@@ -6074,17 +5086,16 @@ function compare_ID(user1) {
             
              },
             success:function(data){
-            console.log(data);
-            $('#review_count').empty();   
-            $('#reject_count').empty(); 
+           // console.log(data);
+            // $('#review_count').empty();   
+            // $('#reject_count').empty(); 
             $('#sorted_count').empty();
             $('#shortlist_count').empty();
-            $("#offered_count").empty(); 
-            $("#hire_count").empty();
+            // $("#offered_count").empty(); 
+            // $("#hire_count").empty();
             $('#shortlist_section').empty(); 
             $('#applicants_list').empty(); 
-$("#shortlist_me").load(location.href+" #shortlist_me>*", "");
-        //  window.location.reload(); 
+  
      },
      complete:function(data){
     // Hide image container 
@@ -6101,11 +5112,11 @@ $("#shortlist_me").load(location.href+" #shortlist_me>*", "");
         var shortlisted_list = data.shortlisted_list;
         var newapplication_list = data.newapplication_list;
 
-        $("#reject_count").append(rejected);
-        $("#review_count").append(in_review_count);
+        // /$("#reject_count").append(rejected);
+        // $("#review_count").append(in_review_count);
         $("#sorted_count").append(sorted_count);
         $("#shortlist_count").append(shortlisted_count); 
-        $("#offered_count").append(offered_count);
+        // $("#offered_count").append(offered_count);
         $("#hire_count").append(hire_count);
 
         console.log(newapplication_list);
@@ -6116,58 +5127,43 @@ $("#shortlist_me").load(location.href+" #shortlist_me>*", "");
 
         }
 
-        var count = 0;
-        var status = '';
-        var content_v = '';
-        var uprofile = null;
+        // var count = 0;
+        // var status = '';
+        // var content_v = '';
+        // var uprofile = null;
 
-         $.each(shortlisted_list, function(key, value) {
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id; 
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
+  var jobid = $('input[name=job_id{{$List_applicant->tag_id}}]').val();
+            // $.ajax({
+            //     url: '/api/job/cvcontent/' + jobid,
+            //     data: { 'code': jobid },
+            //     success: function(data) { 
+            //         $('#unsortedCV').html(data);
 
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates
+            //     }
+            // });
 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $('#shortlist_section').append(content);  
+
+           $.ajax({
+                url: '/api/job/newunsortedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#applicants_list').html(data);
+             
+                }
+            });
+        
+ 
+
+            $.ajax({
+                url: '/api/job/newshortlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#shortlist_section').html(data);
+                }
+            });
 
  
-        });
-          count++;
-         $.each(newapplication_list, function(key, value) {
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id; 
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
 
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $('#applicants_list').append(newapplication_content);  
-
- 
-        });
- count++;
   });
  
     });
@@ -6199,15 +5195,14 @@ $("#shortlist_me").load(location.href+" #shortlist_me>*", "");
             
              },
             success:function(data){
-            console.log(data);
-            $("#review_count").empty();   
-            $("#reject_count").empty(); 
+            //console.log(data);
+            // $("#review_count").empty();   
+            // $("#reject_count").empty(); 
            $("#sorted_count").empty();
-           $("#shortlist_count").empty(); 
+           // $("#shortlist_count").empty(); 
            $("#offered_count").empty();
-            $("#hire_count").empty();   
-
-        //  window.location.reload(); 
+            // $("#hire_count").empty();   
+ 
      },
      complete:function(data){
     // Hide image container 
@@ -6221,60 +5216,38 @@ $("#shortlist_me").load(location.href+" #shortlist_me>*", "");
         var offered_count = data.offered_count;
         var hire_count = data.hire_count;
 
-        console.log(in_review_count);
-        console.log(sorted_count);
-        console.log(rejected);
-    $("#reject_count").append(rejected);
-    $("#review_count").append(in_review_count);
+
+    // $("#reject_count").append(rejected);
+    // $("#review_count").append(in_review_count);
     $("#sorted_count").append(sorted_count);
-   $("#shortlist_count").append(shortlisted_count);
-   $("#offered_count").append(offered_count);
-    $("#hire_count").append(hire_count);
+   // $("#shortlist_count").append(shortlisted_count);
+    $("#offered_count").append(offered_count);
+    // $("#hire_count").append(hire_count);
 
-     $.each(hired_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
  
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
- 
-            //loop through experience to get
-        var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+ ' ' +'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#hire_section").append(content); 
- });
-           $.each(newapplication_list, function(key, value) {
-         console.log(value.id);
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            // var company = value.id;
-            // var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
+var jobid = $('input[name=job_id{{$List_applicant->tag_id}}]').val();
+       
 
-   
-    
-    console.log(company);
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+ ' ' +'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $('#applicants_list').append(newapplication_content);  
+           $.ajax({
+                url: '/api/job/newunsortedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#applicants_list').html(data);
+             
+                }
+            });
+        
  
-});
+
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+ 
+
 
   });
  
@@ -6305,12 +5278,12 @@ $('#hire{{$List_applicant->id}}').click(function() {
             
              },
             success:function(data){
-            console.log(data);
-            $("#review_count").empty();   
-            $("#reject_count").empty(); 
+            // console.log(data);
+            // $("#review_count").empty();   
+            // $("#reject_count").empty(); 
            $("#sorted_count").empty();
-           $("#shortlist_count").empty(); 
-           $("#offered_count").empty();
+           // $("#shortlist_count").empty(); 
+           // $("#offered_count").empty();
            $("#hired_count").empty();  
 
             $("#applicants_list").empty(); 
@@ -6318,7 +5291,6 @@ $('#hire{{$List_applicant->id}}').click(function() {
             $("#hire_section").empty();
             // $("#reject_section").empty();
 
-         //window.location.reload(); 
      },
      complete:function(data){
     // Hide image container 
@@ -6338,18 +5310,12 @@ $('#hire{{$List_applicant->id}}').click(function() {
         var work_experiences = data.work_experiences;
         var documents = data.documents;
 
-
-        console.log(in_review_count);
-        console.log(sorted_count);
-        console.log(hired_list);
-        console.log(review_list);
-        console.log(newapplication_list);
-        
-        $("#reject_count").append(rejected);
-        $("#review_count").append(in_review_count);
+ 
+        // $("#reject_count").append(rejected);
+        // $("#review_count").append(in_review_count);
         $("#sorted_count").append(sorted_count);
-        $("#shortlist_count").append(shortlisted_count);
-        $("#offered_count").append(offered_count);
+        // $("#shortlist_count").append(shortlisted_count);
+        // $("#offered_count").append(offered_count);
         $("#hired_count").append(hired_count);
 
   
@@ -6362,101 +5328,31 @@ $('#hire{{$List_applicant->id}}').click(function() {
 
         }
  
-
-        var count = 0;
-        var status = '';
-        var content_v = '';
-        var user = null;
-        var title = null;
-        var company = null;
-// // update rejected applicant List coming from in-review Tab
- $.each(hired_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
+  
  
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
-    // console.log(company);
-    // console.log(documents);
-       // $.each(work_experiences, function(key, value){
-       //  if (true) {}
-       // });      
 
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-        var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+ ' ' +'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#hire_section").append(content); 
- });
-
-// update rejected applicants Resume list
-
-// update In-review List
-  $.each(review_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
-
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content_r = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+ ' ' +'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#review_section").append(content_r); 
- });
-
-
-      $.each(newapplication_list, function(key, value) {
-         console.log(value.id);
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            // var company = value.id;
-            // var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
-
-   
+var jobid = $('input[name=job_id{{$List_applicant->tag_id}}]').val();
     
-    console.log(company);
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+ ' ' +'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $('#applicants_list').append(newapplication_content);  
-        // $("#review_section").append(content); 
 
-
-        count++;
-        content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
-        });
-    $("#move_to").append(content_v); 
-
-
-
-
-  });
+           $.ajax({
+                url: '/api/job/newunsortedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#applicants_list').html(data);
+             
+                }
+            });
+        
  
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });
+
+ });
     });
  @endforeach
 
@@ -6494,7 +5390,7 @@ $('#hire{{$List_applicant->id}}').click(function() {
             
              },
             success:function(data){
-            console.log(data);
+        //    console.log(data);
          $('#review_count').empty();
             $('#reject_count').empty(); 
             $('#sorted_count').empty();
@@ -6522,8 +5418,14 @@ $('#hire{{$List_applicant->id}}').click(function() {
             $("#shortlist_count").append(shortlisted_count);
  
   });
+
+
  
     });
+
+  
+
+
     $('#in_review{{$rejected_applicant->id}}').click(function() {
         alert('in_review on rejected section');
          $.ajaxSetup({
@@ -6552,12 +5454,15 @@ $('#hire{{$List_applicant->id}}').click(function() {
             console.log(data);
             $('#review_count').empty();
             $('#reject_count').empty(); 
-            $('#sorted_count').empty();
-            $("#hired_count").empty();
-            $('#shortlist_count').empty(); 
+            // $('#sorted_count').empty();
+            // $("#hired_count").empty();
+            // $('#shortlist_count').empty(); 
+
             $("#move_to").empty();
+
             $("#review_section").empty();
             $("#reject_section").empty();
+             // $("#offered_count").empty();
             // hide review Side display
       // window.location.reload(); 
      },
@@ -6575,20 +5480,21 @@ $('#hire{{$List_applicant->id}}').click(function() {
         var hired_count = data.hired_count;
         var work_experiences = data.work_experiences;
         var review_list = data.review_list;
-        console.log(new_reject_list);
+        var offered_count = data.offered_count;
+       // console.log(new_reject_list);
         // console.log(newapplication_list);
 
         $("#reject_count").append(rejected);
         $("#review_count").append(in_review_count);
-        $('#sorted_count').append(sorted_count);
-        $('#shortlist_count').append(shortlisted_count);
-        $("#offered_count").append(offered_count);
-        $("#hired_count").append(hired_count);
+        // $('#sorted_count').append(sorted_count);
+        // $('#shortlist_count').append(shortlisted_count);
+        // $("#offered_count").append(offered_count);
+        // $("#hired_count").append(hired_count);
 
         if(isEmpty(newapplication_list)) {
-        $('#review_section').append('<li class="careerfy-column-12"> No Record(s) Found</li>');  
+        $('#review_section').append('<li class="careerfy-column-12"> No Job(s) Found</li>');  
         $('#resume_body').empty();
-        $('#resume_body').append('No Record(s) Found'); 
+        $('#resume_body').append('No Job(s) Found'); 
 
         }
  
@@ -6599,57 +5505,37 @@ $('#hire{{$List_applicant->id}}').click(function() {
         var user = null;
         var title = null;
         var company = null;
-// // update rejected applicant List coming from in-review Tab
- $.each(new_reject_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-       console.log(candidates_name);
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to 
-        var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#reject_section").append(content); 
- });
 
-// update rejected applicants Resume list
+  // am here reject
 
-// update In-review List
-  $.each(review_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get  
-            var content_r = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#review_section").append(content_r); 
- });
+        var jobid = $('input[name=job_id{{$rejected_applicant->tag_id}}]').val();
 
-    $("#move_to").append(content_v); 
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newreviewlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#review_section').html(data);
+                }
+            });
+
+ 
 
 });
  
 
     });
+
+ 
+
+
     $('#shortlist{{$rejected_applicant->id}}').click(function() {
         alert('shortlist');
          $.ajaxSetup({
@@ -6681,9 +5567,10 @@ $('#hire{{$List_applicant->id}}').click(function() {
            $("#sorted_count").empty();
            $("#shortlist_count").empty(); 
            $("#offered_count").empty();
-            $("#hire_count").empty();   
-
-         window.location.reload(); 
+            $("#hire_count").empty();
+            $("#review_section").empty();
+            $("#shortlist_section").empty();   
+ 
      },
      complete:function(data){
     // Hide image container 
@@ -6694,12 +5581,13 @@ $('#hire{{$List_applicant->id}}').click(function() {
         var sorted_count = data.sorted_count;
         var in_review_count = data.review_count;
         var shortlisted_count = data.shortlisted_count;
+        var offered_count = data.offered_count;
         var newapplication_list = data.newapplication_list;
         var new_reject_list = data.new_reject_list;
         var hire_count = data.hire_count;
         var review_list = data.review_list;
-        console.log(review_list);
-        console.log(newapplication_list);
+
+       
         $("#reject_count").append(rejected);
         $("#review_count").append(in_review_count);
         $('#sorted_count').append(sorted_count);
@@ -6710,57 +5598,54 @@ $('#hire{{$List_applicant->id}}').click(function() {
         if(isEmpty(newapplication_list)) {
         $('#applicants_list').append('<li class="careerfy-column-12"> <p>No Record(s) Found</p></li>');  
         $('#resume_body').empty();
-        $('#resume_body').append('No Record(s) Found'); 
+        $('#resume_body').append('No Job(s) Found'); 
 
         }
  
 
-        var count = 0;
-        var status = '';
-        var content_v = '';
-// // update rejected applicant List coming from in-review Tab
- $.each(new_reject_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
+    
 
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-        var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#reject_section").append(content); 
- });
+    var jobid = $('input[name=job_id{{$rejected_applicant->tag_id}}]').val();
 
-// update rejected applicants Resume list
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
 
-// update In-review List
-  $.each(review_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
+            $.ajax({
+                url: '/api/job/newreviewlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#review_section').html(data);
+                }
+            });
 
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content_r = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#review_section").append(content_r); 
- });
+            $.ajax({
+                url: '/api/job/newshortlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#shortlist_section').html(data);
+                }
+            });
 
-
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+            
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });
 
   });
  
@@ -6801,14 +5686,14 @@ $('#hire{{$List_applicant->id}}').click(function() {
            $("#offered_count").empty();
             $("#hire_count").empty();   
 
-         window.location.reload(); 
+         // window.location.reload(); 
      },
      complete:function(data){
     // Hide image container 
     $("#loader").hide();
     },
     }).done(function (data) { 
-    var rejected = data.reject_count;
+        var rejected = data.reject_count;
         var sorted_count = data.sorted_count;
         var in_review_count = data.review_count;
         var shortlisted_count = data.shortlisted_count;
@@ -6817,10 +5702,7 @@ $('#hire{{$List_applicant->id}}').click(function() {
         var hire_count = data.hire_count;
         var review_list = data.review_list;
         var offered_count = data.offered_count;
-
-        console.log(review_list);//
-
-        console.log(newapplication_list);
+ 
         $("#reject_count").append(rejected);
         $("#review_count").append(in_review_count);
         $('#sorted_count').append(sorted_count);
@@ -6835,51 +5717,51 @@ $('#hire{{$List_applicant->id}}').click(function() {
 
         }
  
+ 
 
-        var count = 0;
-        var status = '';
-        var content_v = '';
-// // update rejected applicant List coming from in-review Tab
- $.each(new_reject_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
+    var jobid = $('input[name=job_id{{$rejected_applicant->tag_id}}]').val();
 
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-        var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#reject_section").append(content); 
- });
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
 
-// update rejected applicants Resume list
+            $.ajax({
+                url: '/api/job/newreviewlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#review_section').html(data);
+                }
+            });
 
-// update In-review List
-  $.each(review_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
+            $.ajax({
+                url: '/api/job/newshortlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#shortlist_section').html(data);
+                }
+            });
 
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content_r = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#review_section").append(content_r); 
- });
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+            
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });
+
+
 
 
   });
@@ -6887,7 +5769,7 @@ $('#hire{{$List_applicant->id}}').click(function() {
     });
    
 $('#hire{{$rejected_applicant->id}}').click(function() {
-        alert('shortlist');
+        alert('hire');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -6911,15 +5793,14 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
             
              },
             success:function(data){
-            console.log(data);
+            // console.log(data);
             $("#review_count").empty();   
             $("#reject_count").empty(); 
            $("#sorted_count").empty();
            $("#shortlist_count").empty(); 
            $("#offered_count").empty();
            $("#hire_count").empty();  
-
-          window.location.reload(); 
+ 
      },
      complete:function(data){
     // Hide image container 
@@ -6932,10 +5813,7 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
         var shortlisted_count = data.shortlisted_count;
          var offered_count = data.offered_count;
         var hired_count = data.hired_count;
-
-        console.log(in_review_count);
-        console.log(sorted_count);
-        console.log(rejected);
+ 
     $("#reject_count").append(rejected);
     $("#review_count").append(in_review_count);
     $("#sorted_count").append(sorted_count);
@@ -6944,6 +5822,48 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
    $("#hire_count").append(hire_count);
 
   });
+
+        var jobid = $('input[name=job_id{{$rejected_applicant->tag_id}}]').val();
+
+            // $.ajax({
+            //     url: '/api/job/newrejectedlist/' + jobid,
+            //     data: { 'code': jobid },
+            //     success: function(data) {
+            //         $('#reject_section').html(data);
+            //     }
+            // });
+
+            $.ajax({
+                url: '/api/job/newreviewlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#review_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newshortlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#shortlist_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+            
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });
  
     });
  @endforeach
@@ -6978,7 +5898,7 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
             
              },
             success:function(data){
-            console.log(data);
+            // console.log(data);
              $('#review_count').empty();
             $('#reject_count').empty(); 
             $('#sorted_count').empty();
@@ -6987,8 +5907,10 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
             $("#move_to").empty();
             $("#review_section").empty();
             $("#reject_section").empty();
+            $("#offered_count").empty();
+            $("#hire_count").empty();
 
-         window.location.reload(); 
+         // window.location.reload(); 
      },
      complete:function(data){
     // Hide image container 
@@ -7002,9 +5924,8 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
         var newapplication_list = data.newapplication_list;
         var review_list = data.review_list;
         var new_reject_list = data.new_reject_list;
-        console.log(rejected);
-        console.log(newapplication_list);
-
+        var offered_count = data.offered_count;
+           
             if(isEmpty(newapplication_list)) {
             $('#applicants_list_j').append('<li class="careerfy-column-12"> <p>No Record(s) Found</p></li>');  
             $('#resume_body').empty();
@@ -7016,75 +5937,50 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
             $('#sorted_count').append(sorted_count);
             $("#review_count").append(in_review_count);
             $("#shortlist_count").append(shortlisted_count); 
+            $("#offered_count").append(offered_count);
+ 
+     
+        var jobid = $('input[name=job_id{{$review->tag_id}}]').val();
 
-        var count = 0;
-        var status = '';
-        var content_v = '';
-         $.each(new_reject_list, function(key, value){
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
 
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
+            $.ajax({
+                url: '/api/job/newreviewlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#review_section').html(data);
+                }
+            });
 
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#reject_section").append(content); 
- });
-    $.each(review_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
+            $.ajax({
+                url: '/api/job/newshortlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#shortlist_section').html(data);
+                }
+            });
 
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#review_section").append(content); 
-      
- });
-
-      $.each(newapplication_list, function(key, value) {
-         console.log(value.id);
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $('#applicants_list').append(newapplication_content);  
-        // $("#review_section").append(content); 
-
-
-        count++;
-        content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
-
-           });
-          
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+            
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });      
  
   });
  
@@ -7115,7 +6011,7 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
             
              },
             success:function(data){
-            console.log(data);
+            // console.log(data);
             $('#review_count').empty();
             $('#reject_count').empty(); 
             $('#sorted_count').empty();
@@ -7156,74 +6052,49 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
 
         }
  
+ 
+      var jobid = $('input[name=job_id{{$review->tag_id}}]').val();
 
-        var count = 0;
-        var status = '';
-        var content_v = '';
-// // update rejected List
- $.each(review_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#review_section").append(content); 
- });
-// update In-review List
-  $.each(review_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
+            $.ajax({
+                url: '/api/job/newreviewlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#review_section').html(data);
+                }
+            });
 
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content_r = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#reject_section").append(content_r); 
- });
+            $.ajax({
+                url: '/api/job/newshortlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#shortlist_section').html(data);
+                }
+            });
 
-
-      $.each(newapplication_list, function(key, value) {
-         console.log(value.id);
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $('#applicants_list').append(newapplication_content);  
-        // $("#review_section").append(content); 
-
-
-        count++;
-        content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
-        });
-
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+            
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });      
+ 
 
   });
  
@@ -7254,7 +6125,7 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
             
              },
             success:function(data){
-            console.log(data);
+            console.log(data);//
             $('#review_count').empty();   
             $('#reject_count').empty(); 
             $('#sorted_count').empty();
@@ -7284,9 +6155,6 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
         var work_experiences  = data.work_experiences;
 
 
-        console.log(shortlisted_list);
-        console.log(newapplication_list);
-
         $("#reject_count").append(rejected);
         $("#review_count").append(in_review_count);
         $('#sorted_count').append(sorted_count);
@@ -7301,62 +6169,50 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
 
         }
  
-        var count = 0;
-        var status = '';
-        var content_v = '';
-        var company = '';
-        var title = '';
-        var candidates_name = '';
+    
 
-  $.each(shortlisted_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            candidates_name = value.candidates_name; 
-            company = value.id;
-            title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
+      var jobid = $('input[name=job_id{{$review->tag_id}}]').val();
 
-            company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
 
-            //loop through experience to get candidates experience  
-            var content_r = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#shortlist_section").append(content_r); 
- });
+            $.ajax({
+                url: '/api/job/newreviewlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#review_section').html(data);
+                }
+            });
 
+            $.ajax({
+                url: '/api/job/newshortlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#shortlist_section').html(data);
+                }
+            });
 
-      $.each(new_review_list, function(key, value) {
-         console.log(value.id);
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            candidates_name = value.candidates_name; 
-                company = value.id;
-                title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-            company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates experience 
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-                // $('#e').append(newapplication_content);  
-       $("#review_section").append(newapplication_content); 
-
-
-        count++;
-        // content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
-        });
-
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+            
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });      
+ 
 
   });
  
@@ -7411,22 +6267,20 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
         var rejected = data.reject_count;
         var shortlisted_count = data.shortlisted_count;
         var offered_count = data.offered_count;
-        var hired_count = data.hired_count;
+        // var hired_count = data.hired_count;
 
         var newapplication_list = data.newapplication_list;
         var new_review_list = data.new_review_list;
         var new_offered_list = data.new_offered_list;
         var work_experiences  = data.work_experiences; 
 
-        console.log(in_review_count);
-        console.log(sorted_count);
-        console.log(rejected);
+     
     $("#reject_count").append(rejected);
     $("#review_count").append(in_review_count);
     $("#sorted_count").append(sorted_count);
    $("#shortlist_count").append(shortlisted_count);
    $("#offered_count").append(offered_count); 
-     $("#hired_count").append(hired_count);
+     // $("#hired_count").append(hired_count);
 
             if(isEmpty(new_offered_list)) {
         $('#review_section').append('<li class="careerfy-column-12"> No Record(s) Found</li>');  
@@ -7434,69 +6288,56 @@ $('#hire{{$rejected_applicant->id}}').click(function() {
         $('#resume_body').append('No Record(s) Found'); 
 
         }
+  
+      var jobid = $('input[name=job_id{{$review->tag_id}}]').val();
+
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newreviewlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#review_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newshortlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#shortlist_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+            
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });      
  
-        var count = 0;
-        var status = '';
-        var content_v = '';
-        var company = '';
-        var title = '';
-        var candidates_name = '';
-
-  $.each(new_offered_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            candidates_name = value.candidates_name; 
-            company = value.id;
-            title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-
-            company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
-
-            //loop through experience to get candidates experience  
-            var content_r = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#offered_section").append(content_r); 
- });
-
-
-      $.each(new_review_list, function(key, value) {
-         console.log(value.id);
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            candidates_name = value.candidates_name; 
-                company = value.id;
-                title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-            company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates experience 
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-                // $('#e').append(newapplication_content);  
-       $("#review_section").append(newapplication_content); 
-
-
-        count++;
-        // content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
-        });
 
   });
  
     });
    
 $('#hire{{$review->id}}').click(function() {
-        alert('shortlist');
+        alert('hire');
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -7520,17 +6361,16 @@ $('#hire{{$review->id}}').click(function() {
             
              },
             success:function(data){
-            console.log(data);
+            // console.log(data);
             $("#review_count").empty();   
             $("#reject_count").empty(); 
-           $("#sorted_count").empty();
-           $("#shortlist_count").empty(); 
-           $("#offered_count").empty();
-           $("#hired_count").empty();  
+            $("#sorted_count").empty();
+            $("#shortlist_count").empty(); 
+            $("#offered_count").empty();
+            $("#hired_count").empty();  
             $("#review_section").empty();
             $("#hire_section").empty();   
-
-        //  window.location.reload(); 
+  
      },
      complete:function(data){
     // Hide image container 
@@ -7541,7 +6381,7 @@ $('#hire{{$review->id}}').click(function() {
         var sorted_count = data.sorted_count;
         var rejected = data.reject_count;
         var shortlisted_count = data.shortlisted_count;
-         var offered_count = data.offered_count;
+        var offered_count = data.offered_count;
         var hired_count = data.hired_count;
 
       
@@ -7549,14 +6389,12 @@ $('#hire{{$review->id}}').click(function() {
         var new_review_list = data.new_review_list;
         var hired_list = data.hired_list;
         var work_experiences  = data.work_experiences; 
-        console.log(hired_count);
-        console.log(hired_list);
-        console.log(new_review_list); 
+
     $("#reject_count").append(rejected);
     $("#review_count").append(in_review_count);
     $("#sorted_count").append(sorted_count);
-   $("#shortlist_count").append(shortlisted_count);
-   $("#offered_count").append(offered_count);
+    $("#shortlist_count").append(shortlisted_count);
+    $("#offered_count").append(offered_count);
     $("#hired_count").append(hired_count);
 
 
@@ -7566,63 +6404,50 @@ $('#hire{{$review->id}}').click(function() {
         $('#resume_body').append('No Record(s) Found'); 
 
         }
+  
+       
+            var jobid = $('input[name=job_id{{$review->tag_id}}]').val();
+
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newreviewlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#review_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newshortlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#shortlist_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+            
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });      
  
-        var count = 0;
-        var status = '';
-        var content_v = '';
-        var company = '';
-        var title = '';
-        var candidates_name = '';
-
-  $.each(hired_list, function(key, value){
-    console.log(value.id);
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            candidates_name = value.candidates_name; 
-            company = value.id;
-            title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-
-            company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
-
-            //loop through experience to get candidates experience  
-            var content_r = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#hire_section").append(content_r); 
- });
-
-
-      $.each(new_review_list, function(key, value) {
-         console.log(value.id);
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            candidates_name = value.candidates_name; 
-                company = value.id;
-                title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-            company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates experience 
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-                // $('#e').append(newapplication_content);  
-       $("#review_section").append(newapplication_content); 
-
-
-        count++;
-        // content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
-        });
   });
  
     });
@@ -7658,8 +6483,8 @@ $('#hire{{$review->id}}').click(function() {
             
              },
             success:function(data){
-            console.log(data);
-             $('#review_count').empty();
+            // console.log(data);
+            $('#review_count').empty();
             $('#reject_count').empty(); 
             $('#sorted_count').empty();
             $('#shortlist_count').empty();
@@ -7669,7 +6494,7 @@ $('#hire{{$review->id}}').click(function() {
             $("#reject_section").empty();
             $("#shortlist_section").empty();
 
-         //window.location.reload(); 
+
      },
      complete:function(data){
     // Hide image container 
@@ -7684,13 +6509,12 @@ $('#hire{{$review->id}}').click(function() {
         var review_list = data.review_list;
         var new_reject_list = data.new_reject_list;
         var new_shortlisted = data.new_shortlisted;
-        console.log(rejected);
-        console.log(newapplication_list);
+ 
 
             if(isEmpty(newapplication_list)) {
-            $('#applicants_list_j').append('<li class="careerfy-column-12"> <p>No Record(s) Found</p></li>');  
+            $('#applicants_list_j').append('<li class="careerfy-column-12"> <p>No Job(s) Found</p></li>');  
             $('#resume_body').empty();
-            $('#resume_body').append('No Record(s) Found'); 
+            $('#resume_body').append('No Job(s) Found'); 
  
             }
 
@@ -7699,96 +6523,49 @@ $('#hire{{$review->id}}').click(function() {
             $("#review_count").append(in_review_count);
             $("#shortlist_count").append(shortlisted_count); 
 
-        var count = 0;
-        var status = '';
-        var content_v = '';
-         $.each(new_reject_list, function(key, value){
+  
+           var jobid = $('input[name=job_id{{$shortlisted->tag_id}}]').val();
 
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-           company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#reject_section").append(content); 
- });
-    $.each(review_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-           company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#review_section").append(content); 
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newreviewlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#review_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newshortlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#shortlist_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+            
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });      
       
- });
-        $.each(new_shortlisted, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-           company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#shortlist_section").append(content); 
-      
- });
-
-      $.each(newapplication_list, function(key, value) {
-         console.log(value.id);
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-           company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $('#applicants_list').append(newapplication_content);  
-        // $("#review_section").append(content); 
-
-
-        count++;
-        content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
-        });
-          
  
   });
  
@@ -7819,7 +6596,7 @@ $('#hire{{$review->id}}').click(function() {
             
              },
             success:function(data){
-            console.log(data);
+            // console.log(data);
             $('#review_count').empty();
             $('#reject_count').empty(); 
             $('#sorted_count').empty();
@@ -7847,8 +6624,7 @@ $('#hire{{$review->id}}').click(function() {
         var hired_count = data.hired_count;
         var shortlisted_list = data.shortlisted_list;
         var work_experiences = data.work_experiences;
-        console.log(rejected);
-        console.log(newapplication_list);
+ 
         $("#reject_count").append(rejected);
         $("#review_count").append(in_review_count);
         $('#sorted_count').append(sorted_count);
@@ -7859,101 +6635,53 @@ $('#hire{{$review->id}}').click(function() {
         if(isEmpty(newapplication_list)) {
         $('#applicants_list').append('<li class="careerfy-column-12"> <p>No Record(s) Found</p></li>');  
         $('#resume_body').empty();
-        $('#resume_body').append('No Record(s) Found'); 
+        $('#resume_body').append('No Job(s) Found'); 
 
         }
  
-
-        var count = 0;
-        var status = '';
-        var content_v = '';
-// // update rejected List
- $.each(new_reject_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-           company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#reject_section").append(content); 
- });
-// update In-review List
-  $.each(review_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-           company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#review_section").append(content); 
- });
-   $.each(shortlisted_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-           company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#shortlist_section").append(content); 
- });
-
  
-      $.each(newapplication_list, function(key, value) {
-         console.log(value.id);
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-           company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $('#applicants_list').append(newapplication_content);  
-        // $("#review_section").append(content); 
+      var jobid = $('input[name=job_id{{$shortlisted->tag_id}}]').val();
 
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
 
-        count++;
-        content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
-        });
+            $.ajax({
+                url: '/api/job/newreviewlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#review_section').html(data);
+                }
+            });
 
+            $.ajax({
+                url: '/api/job/newshortlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#shortlist_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+            
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });      
+ 
 
   });
  
@@ -7984,7 +6712,7 @@ $('#hire{{$review->id}}').click(function() {
             
              },
             success:function(data){
-            console.log(data);
+            // console.log(data);
                 $('#review_count').empty();   
                 $('#reject_count').empty(); 
                 $('#sorted_count').empty();
@@ -8006,15 +6734,57 @@ $('#hire{{$review->id}}').click(function() {
         var offered_count = data.offered_count;
         var hire_count = data.hire_count;
 
-        console.log(in_review_count);
-        console.log(sorted_count);
-        console.log(rejected);
+
     $("#reject_count").append(rejected);
     $("#review_count").append(in_review_count);
     $("#sorted_count").append(sorted_count);
    $("#shortlist_count").append(shortlisted_count); 
   $("#offered_count").append(offered_count);
    $("#hire_count").append(hire_count);
+
+         var jobid = $('input[name=job_id{{$shortlisted->tag_id}}]').val();
+
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newreviewlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#review_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newshortlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#shortlist_section').html(data);
+                }
+            });
+
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+            
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });   
+   
+
 
   });
  
@@ -8071,10 +6841,7 @@ $('#hire{{$review->id}}').click(function() {
         var newshortlist = data.shortlisted_list; 
         var new_offered_list = data.new_offered_list;
         var work_experiences = data.work_experiences
-
-        console.log(in_review_count);
-        console.log(sorted_count);
-        console.log(rejected);
+ 
 
         $("#reject_count").append(rejected);
         $("#review_count").append(in_review_count);
@@ -8083,65 +6850,55 @@ $('#hire{{$review->id}}').click(function() {
         $("#offered_count").append(offered_count);
         $("#hired_count").append(hired_count);
 
-        console.log(rejected);
-        console.log(newshortlist); 
 
         if(isEmpty(newshortlist)) {
         $('#shortlist_section').append('<li class="careerfy-column-12"> No Record(s) Found</li>');  
         $('#resume_body').empty();
-        $('#resume_body').append('No Record(s) Found'); 
+        $('#resume_body').append('No Job(s) Found'); 
 
         }
- 
+  
+       var jobid = $('input[name=job_id{{$shortlisted->tag_id}}]').val();
 
-        var count = 0;
-        var status = '';
-        var content_v = '';
-// // update rejected List
- $.each(newshortlist, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
 
-            company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
+            $.ajax({
+                url: '/api/job/newreviewlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#review_section').html(data);
+                }
+            });
 
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#shortlist_section").append(content); 
- });
-// update In-review List
-  $.each(new_offered_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-            company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
+            $.ajax({
+                url: '/api/job/newshortlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#shortlist_section').html(data);
+                }
+            });
 
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content_r = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#offered_section").append(content_r); 
- });
-
- 
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+            
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });   
 
 
   });
@@ -8150,6 +6907,7 @@ $('#hire{{$review->id}}').click(function() {
    
 $('#hire{{$shortlisted->id}}').click(function() {
         alert('hire now');
+        // shortlist section
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -8173,7 +6931,7 @@ $('#hire{{$shortlisted->id}}').click(function() {
             
              },
             success:function(data){
-            console.log(data);
+            // console.log(data);
                 $("#review_count").empty();   
                 $("#reject_count").empty(); 
                 $("#sorted_count").empty();
@@ -8181,6 +6939,11 @@ $('#hire{{$shortlisted->id}}').click(function() {
                 $("#offered_count").empty();
                 $("#hire_count").empty();  
 
+                $("#offered_count").empty();
+                $("#hired_count").empty();  
+
+                $("#shortlist_section").empty(); 
+                $("#offered_section").empty();  
         //  window.location.reload(); 
      },
      complete:function(data){
@@ -8198,9 +6961,9 @@ $('#hire{{$shortlisted->id}}').click(function() {
         var hired_list = data.hired_list;
         var offer_list = data.offer_list;
 
-        console.log(in_review_count);
-        console.log(sorted_count);
-        console.log(hire_count);
+        // console.log(in_review_count);
+        // console.log(sorted_count);
+        // console.log(hire_count);
             $("#reject_count").append(rejected);
             $("#review_count").append(in_review_count);
             $("#sorted_count").append(sorted_count);
@@ -8208,93 +6971,54 @@ $('#hire{{$shortlisted->id}}').click(function() {
             $("#offered_count").append(offered_count);
             $("#hired_count").append(hired_count);
 
-  if(isEmpty(newapplication_list)) {
-            $('#applicants_list_j').append('<li class="careerfy-column-12"> <p>No Record(s) Found</p></li>');  
+            if(isEmpty(newapplication_list)) {
+            $('#applicants_list_j').append('<li class="careerfy-column-12"> <p>No Job(s) Found</p></li>');  
             $('#resume_body').empty();
-            $('#resume_body').append('No Record(s) Found'); 
+            $('#resume_body').append('No Job(s) Found'); 
             }
 
-            $("#reject_count").append(rejected);
-            $('#sorted_count').append(sorted_count);
-            $("#review_count").append(in_review_count);
-            $("#shortlist_count").append(shortlisted_count); 
+        
+       var jobid = $('input[name=job_id{{$shortlisted->tag_id}}]').val();
 
-        var count = 0;
-        var status = '';
-        var content_v = '';
-        var company = '';
-        var title = '';
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
 
-        // update Hired List
-         $.each(hired_list, function(key, value){
+            $.ajax({
+                url: '/api/job/newreviewlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#review_section').html(data);
+                }
+            });
 
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-              company = value.id;
-              title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-            company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#reject_section").append(content); 
- });
-         // update Offerlist
-    $.each(review_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-            company = getWorkExperienceCompanyName(work_experiences, user);
-            title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#review_section").append(content); 
-      
- });
+            $.ajax({
+                url: '/api/job/newshortlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#shortlist_section').html(data);
+                }
+            });
 
-      $.each(newapplication_list, function(key, value) {
-         console.log(value.id);
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-            company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
-
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $('#applicants_list').append(newapplication_content);  
-        // $("#review_section").append(content); 
-
-
-        count++;
-        content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
-        });
-          
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+            
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });             
 
   });
  
@@ -8339,7 +7063,7 @@ $('#hire{{$shortlisted->id}}').click(function() {
             $("#review_section").empty();
             $("#reject_section").empty();
 
-         window.location.reload(); 
+         // window.location.reload(); 
      },
      complete:function(data){
     // Hide image container 
@@ -8353,9 +7077,7 @@ $('#hire{{$shortlisted->id}}').click(function() {
         var newapplication_list = data.newapplication_list;
         var review_list = data.review_list;
         var new_reject_list = data.new_reject_list;
-        console.log(rejected);
-        console.log(newapplication_list);
-
+ 
             if(isEmpty(newapplication_list)) {
             $('#applicants_list_j').append('<li class="careerfy-column-12"> <p>No Record(s) Found</p></li>');  
             $('#resume_body').empty();
@@ -8367,74 +7089,33 @@ $('#hire{{$shortlisted->id}}').click(function() {
             $('#sorted_count').append(sorted_count);
             $("#review_count").append(in_review_count);
             $("#shortlist_count").append(shortlisted_count); 
+ 
+   var jobid = $('input[name=job_id{{$offered->tag_id}}]').val();
 
-        var count = 0;
-        var status = '';
-        var content_v = '';
-         $.each(new_reject_list, function(key, value){
-
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#reject_section").append(content); 
- });
-    $.each(review_list, function(key, value){
-        var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $("#review_section").append(content); 
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
       
- });
 
-      $.each(newapplication_list, function(key, value) {
-         console.log(value.id);
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-            var company = value.id;
-            var title = value.id;
-            var tag_id = value.tag_id;
-            if (count === 0 ) {
-                status = 'active';
-            }else{
-                status = '';
-            }
-
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $('#applicants_list').append(newapplication_content);  
-        // $("#review_section").append(content); 
-
-
-        count++;
-        content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
-        });
-          
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+            
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });                     
  
   });
  
@@ -8728,7 +7409,7 @@ $('#hire{{$offered->id}}').click(function() {
             
              },
             success:function(data){
-            console.log(data);
+            //console.log(data);
             $("#review_count").empty();   
             $("#reject_count").empty(); 
            $("#sorted_count").empty();
@@ -8737,9 +7418,7 @@ $('#hire{{$offered->id}}').click(function() {
            $("#hired_count").empty();
            $("#hire_section").empty();
            $("#offered_section").empty();    
-           
-
-        //  window.location.reload(); 
+    
      },
      complete:function(data){
     // Hide image container 
@@ -8763,60 +7442,43 @@ $('#hire{{$offered->id}}').click(function() {
         $('#resume_body').append('No Record(s) Found'); 
 
         }
- 
 
-    console.log(rejected); 
-    console.log(in_review_count);
-    console.log(sorted_count);
-    console.log(hired_count);
         $("#reject_count").append(rejected);
         $("#review_count").append(in_review_count);
         $("#sorted_count").append(sorted_count);
         $("#shortlist_count").append(shortlisted_count);
         $("#offered_count").append(offered_count);
         $("#hired_count").append(hired_count);
-        var company = '';
-        var title = '';
+        // var company = '';
+        // var title = '';
 
-      $.each(newoffered_list, function(key, value) {
-         console.log(value.id);
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-                company = value.id;
-                title = value.id;
-            var tag_id = value.tag_id;
- 
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
+     
+     var jobid = $('input[name=job_id{{$offered->tag_id}}]').val();
 
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $('#offered_section').append(newapplication_content);  
-        // $("#review_section").append(content); 
-  
-        });
+            $.ajax({
+                url: '/api/job/newrejectedlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#reject_section').html(data);
+                }
+            });
+      
 
-
-            $.each(hired_list, function(key, value) {
-         console.log(value.id);
-            var application_id = value.id;
-            var email = value.email;
-            var user = value.user_id;
-            var candidates_name = value.candidates_name; 
-                company = value.id;
-                title = value.id;
-            var tag_id = value.tag_id;
- 
-    company = getWorkExperienceCompanyName(work_experiences, user);
-    title = getWorkExperienceTitle(work_experiences, user);
-            //loop through experience to get candidates experience@foreach($documentList as $document) 
-            var newapplication_content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
-        $('#hire_section').append(newapplication_content);  
-        // $("#review_section").append(content); 
-  
-        });
+            $.ajax({
+                url: '/api/job/newofferlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#offered_section').html(data);
+                }
+            });
+            
+            $.ajax({
+                url: '/api/job/newhiredlist/' + jobid,
+                data: { 'code': jobid },
+                success: function(data) {
+                    $('#hire_section').html(data);
+                }
+              });   
 
   });
  
@@ -8912,7 +7574,7 @@ $('#hire{{$offered->id}}').click(function() {
             //loop through experience to get candidates experience@foreach($documentList as $document) 
             var content = '<li class="careerfy-column-12"><a href="#tab_6_1'+application_id+'" data-toggle="tab"><div class="careerfy-candidate-default-wrap"> <figure> <img src="/uploads/avatars/{{ $user->avatar }}" alt=""> </figure><div class="careerfy-candidate-default-text"><div class="careerfy-candidate-default-left"><h2>'+candidates_name+'<i class="careerfy-icon careerfy-check-mark"></i></h2><ul class="careerfy-column-12" ><li>'+title+'at <span href="#" class="careerfy-candidate-default-studio"> '+company+'</span></li> </ul> </div> </div> </div> </a></li>';
         $("#reject_section").append(content); 
-             content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
+             // content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
  });
 
  $("#move_to").append(content_v); 
@@ -8937,9 +7599,7 @@ $('#hire{{$offered->id}}').click(function() {
         $('#applicants_list').append(newapplication_content);  
         // $("#review_section").append(content); 
 
-
-        count++;
-        content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
+ 
         });
           
  
@@ -9212,6 +7872,8 @@ $('#hire{{$offered->id}}').click(function() {
    
 $('#hire{{$hired->id}}').click(function() {
         alert('Hire Now');
+
+        // here now noew
          $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -9243,7 +7905,7 @@ $('#hire{{$hired->id}}').click(function() {
            $("#offered_count").empty();
            $("#hire_count").empty();  
 
-         window.location.reload(); 
+         // window.location.reload(); 
      },
      complete:function(data){
     // Hide image container 
@@ -9353,7 +8015,7 @@ $('#hire{{$hired->id}}').click(function() {
 
 
         count++;
-        content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
+        // content_v = ' <div id="savedescription'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="rejected" name="rejected'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+application_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> REJECT</div><div id="in_review'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="in_review" name="in_review'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+application_id+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> IN VIEW</div><div id="shortlist'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="shortlist" name="shortlist'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> SHORTLIST</div> <div id="offered'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="offer" name="offer'+application_id+'"><input type="hidden" value="'+application_id+'" name="application_id'+application_id+'"><input type="hidden" value="'+user+'" name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> OFFER</div><div id="hire'+application_id+'" class="btn blue mt-ladda-btn careerfy-employer-profile-submit mini_header" ><input type="hidden" value="hire" name="hire'+application_id+'"><input type="hidden" value="'+application_id+'"name="user_id'+user+'"><input type="hidden" value="'+tag_id+'" name="job_id'+tag_id+'"><i class="icon-plus"></i> HIRE</div>';
         });
     $("#move_to").append(content_v); 
 

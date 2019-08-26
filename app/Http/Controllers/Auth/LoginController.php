@@ -93,6 +93,13 @@ class LoginController extends Controller
         return view('auth.register',['name' => $userSocial->getName(), 'email' => $userSocial->getEmail()]);
        }
    }
-
+        public function showLoginForm()
+        {
+            if(!session()->has('url.intended'))
+            {
+                session(['url.intended' => url()->previous()]);
+            }
+            return view('auth.login');
+        }
 
 }

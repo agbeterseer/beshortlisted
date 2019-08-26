@@ -19,6 +19,7 @@ use App\JobEducation;
 use Carbon\Carbon;
 use App\JobcareerLevel; 
 use App\ResumeBuilder;
+use App\Application;
 use App\Tag;
 use App\Email;
 use App\City;
@@ -113,7 +114,7 @@ return view('jobs.job_functions', compact('menus', 'posts', 'units'), array('use
     public function home()
     {
         $job_post = \App\Tag::job_post();
-        $documents = Document::all()->count();
+      //  $documents = Application::where('status','1')->where('active',1)->get()->count();
         $roles = Role::all()->count();
         $users = User::all()->count();
         $company_count = User::where('account_type', 'employer')->count();

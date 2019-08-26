@@ -36,14 +36,16 @@ public function __construct()
     }
  
 
+ 
 public function showLoginForm()
-{ 
+{
     $menus = $this->displayMenu();
-    session(['link' => url()->previous()]);
-    Session::put('url.intended',URL::previous()); 
+    if(!session()->has('url.intended'))
+    {
+        session(['url.intended' => url()->previous()]);
+    }
     return view('auth.login', compact('menus'));
 }
-
 // public function showLoginForm()
 // {
 //     $menus = $this->displayMenu();
@@ -57,6 +59,8 @@ public function showRegisterForm()
     session(['link' => url()->previous()]);
     return view('auth.register', compact('menus'));
 }
+
+
 protected function authenticated(Request $request, $user)
 {
     return redirect(session('link'));
@@ -117,10 +121,11 @@ protected function authenticated(Request $request, $user)
           }elseif(!$user->is_admin() && !$user->is_candidate()){ 
            if ($user->account_type === 'employee') { 
             // dd('here');
-              return redirect()->route('candidates'); // candidate
-             //   return Redirect::to(Session::get('url.intended'));
+             // return redirect()->route('candidates'); // candidate
+             return Redirect::to(Session::get('url.intended'));
             }else{
-              return redirect()->route('dashboard');
+              //return redirect()->route('dashboard');
+            return Redirect::to(Session::get('url.intended'));
             }
           }
         }

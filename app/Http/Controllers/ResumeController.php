@@ -2216,7 +2216,7 @@ public function GetCountries(){
 }
 public function Tags()
 {
-   return Tag::where('status', 1)->where('active',1)->get();
+   return Tag::latest()->where('status', 1)->where('active',1)->get();
 } 
 public function GetSections()
 {
@@ -2256,7 +2256,7 @@ return $get_Job_by_common_industries;
     public function JobApplicationForm($id){
     //$id = 28
 
-      $user = Auth::user();
+       $user = Auth::user();
        $user_single_resume_by_date = RecruitResume::where('user_id', $user->id)->where('status', 1)->first();
         
       if ($user_single_resume_by_date === null) {
@@ -2608,6 +2608,27 @@ public function employementTermsActive()
      return $employement_terms;
 }
 
+
+
+    public function getApplicantsType($type, $code)
+    {
+      if ($type === 'applicants_list') {
+                  $job_id = $code;
+           $List_applicants_by_job_id = Application::where('tag_id',$job_id)->where('sorted', 0)->where('delete', 0)->orderby('candidates_name')->paginate(10);
+
+      return view('sortapplicants.load_unsorted', [ 'List_applicants_by_job_id' => $List_applicants_by_job_id ])->render();
+      }elseif ($type === 'reject_section') {
+
+            $job_id = $code;
+           $rejected_list = Application::where('tag_id',$job_id)->where('rejected', 1)->where('sorted', 1)->where('delete', 0)->orderby('candidates_name')->paginate(10);
+            
+            return view('sortapplicants.load_rejected', [ 'rejected_list' => $rejected_list ])->render();
+
+        # code...
+      }
+
+    }
+
     public function getItemType($type)
   { 
    
@@ -2649,6 +2670,25 @@ public function employementTermsActive()
            $jobs_awaiting_approval_list = Tag::where('client', $user->id)->where('awaiting_aproval', 1)->where('delete',0)->where('active', 0)->where('status',0)->latest()->paginate(3); 
 
         return view('jobs.load_awaiting_jobs', ['jobs_awaiting_approval_list' => $jobs_awaiting_approval_list, 'applications_employer' => $applications_employer, 'applications' => $applications, 'professions' =>$professions, 'industries' => $industries, 'cities' => $cities, 'educational_levels' => $educational_levels, 'employement_terms' => $employement_terms ])->render(); 
+
+        }elseif ($type == 'blacklist') {
+   
+       $job_black_list = Tag::where('client', $user->id)->where('status', 3)->where('delete', 1)->latest()->paginate(10);
+
+        return view('jobs.load_blacklist_jobs', ['job_black_list' => $job_black_list, 'applications_employer' => $applications_employer, 'applications' => $applications, 'professions' =>$professions, 'industries' => $industries, 'cities' => $cities, 'educational_levels' => $educational_levels, 'employement_terms' => $employement_terms ])->render();
+
+        }elseif ($type == 'notactive') {
+         
+         $job_not_active_list = Tag::where('client', $user->id)->where('status', 2)->where('active', 2)->where('awaiting_aproval', 0)->where('delete', 0)->latest()->paginate(10);
+
+        return view('jobs.load_not_active_jobs', ['job_not_active_list' => $job_not_active_list, 'applications_employer' => $applications_employer, 'applications' => $applications, 'professions' =>$professions, 'industries' => $industries, 'cities' => $cities, 'educational_levels' => $educational_levels, 'employement_terms' => $employement_terms ])->render();
+
+        }elseif ($type == 'yesactive') {
+          
+           $job_active_list = Tag::where('client', $user->id)->where('status', 1)->where('active', 1)->where('awaiting_aproval', 0)->where('delete',0)->latest()->paginate(10);
+
+        return view('jobs.load_active_jobs', ['job_active_list' => $job_active_list, 'applications_employer' => $applications_employer, 'applications' => $applications, 'professions' =>$professions, 'industries' => $industries, 'cities' => $cities, 'educational_levels' => $educational_levels, 'employement_terms' => $employement_terms ])->render();
+
         } 
   }
  

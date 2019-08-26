@@ -4271,8 +4271,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4357,33 +4355,29 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    var _this = this;
-
     // run automatically
     // listening to the event through a live cicle hook
     // this firs when the conponent is first created
     _app__WEBPACK_IMPORTED_MODULE_0__["bus"].$on('displayRejectedCV', function (data) {
-      _this.getCareerObjectives(data);
+      console.log(data); //this.getCareerObjectives(data);
     });
   },
   methods: {
     getCareerObjectives: function getCareerObjectives(code) {
-      var _this2 = this;
+      var _this = this;
 
       var page_url = "/api/objective/" + code;
       fetch(page_url).then(function (res) {
         return res.json();
       }).then(function (res) {
-        console.log('inside Load CV');
-        console.log(res.objective);
-        _this2.objective = res.objective;
-        _this2.jobskills = res.jobskills;
-        _this2.educationaList = res.educationaList;
-        _this2.work_histories = res.work_histories;
-        _this2.jobcertifications = res.jobcertifications;
-        _this2.person_info_list = res.person_info_list;
-        _this2.applicant = res.applicant;
-        console.log(_this2.person_info_list);
+        _this.objective = res.objective;
+        _this.jobskills = res.jobskills;
+        _this.educationaList = res.educationaList;
+        _this.work_histories = res.work_histories;
+        _this.jobcertifications = res.jobcertifications;
+        _this.person_info_list = res.person_info_list;
+        _this.applicant = res.applicant;
+        console.log(_this.person_info_list);
       });
     }
   }
@@ -4776,149 +4770,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getRejectedCV: function getRejectedCV(data) {
-      console.log(data);
       _app__WEBPACK_IMPORTED_MODULE_0__["bus"].$emit('displayRejectedCV', data); // shows the new rejected applicants list 
     }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Review.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Review.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app */ "./resources/assets/js/app.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['jobid'],
-  mounted: function mounted() {// Do something useful with the data in the template
-  },
-  data: function data() {
-    return {
-      inreviewapplicants: [],
-      inreview: {
-        id: '',
-        document_id: '',
-        user_id: '',
-        resume_id: '',
-        email: '',
-        phone_number: ''
-      },
-      pagination: {}
-    };
-  },
-  created: function created() {
-    var _this = this;
-
-    // run automatically 
-    this.fetchReviewByJobID();
-    _app__WEBPACK_IMPORTED_MODULE_0__["bus"].$on('newReviewList', function (data) {
-      _this.fetchReviewByJobID();
-    });
-  },
-  methods: {
-    fetchReviewByJobID: function fetchReviewByJobID(page_url) {
-      var _this2 = this;
-
-      var vm = this;
-      page_url = page_url || "/api/job/inreview/" + this.jobid;
-      fetch(page_url).then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        console.log(res.data);
-        _this2.inreviewapplicants = res.data;
-        vm.makePagination(res.meta, res.links);
-      })["catch"](function (err) {
-        return console.log(err);
-      });
-    },
-    makePagination: function makePagination(meta, links) {
-      var pagination = {
-        current_page: meta.current_page,
-        last_page: meta.last_page,
-        next_page_url: links.next,
-        prev_page_url: links.prev,
-        from_page: meta.from,
-        to_page: meta.to,
-        total_page: meta.total,
-        path_page: meta.path + '?page=',
-        first_link: links.first,
-        last_link: links.last,
-        prev_link: links.prev,
-        next_link: links.next
-      };
-      this.pagination = pagination;
-    } // updateReviewData: function(jobid){ 
-    // this.fetchReviewByJobID(); 
-    // } 
-
   }
 });
 
@@ -40497,480 +40350,440 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.applicant.id
-    ? _c(
-        "div",
-        [
-          _c("div", { staticClass: "col-md-12 cv_content" }, [
-            _c("div", { attrs: { id: "user_profile" } }, [
-              _c("div", { staticClass: "pageactionIn" }, [
-                _c("div", { staticClass: "title4" }, [
-                  _c("div", { staticClass: "user_name" }, [
-                    _c("h4", { staticClass: "highlightable" }, [
-                      _vm._v(_vm._s(_vm.applicant.candidates_name))
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "overviewtitle2" }, [
-                  _c("span", { staticClass: "ovtitle" }, [_vm._v("Age")]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "detail highlightable" }, [
-                    _c("strong", [_vm._v(_vm._s(_vm.applicant.age))])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "overviewtitle2" }, [
-                  _c("span", { staticClass: "ovtitle" }, [
-                    _vm._v("Date of Birth")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "detail highlightable" }, [
-                    _c("strong", [
-                      _vm._v(" " + _vm._s(_vm.applicant.date_of_birth) + " ")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "overviewtitle2" }, [
-                  _c("span", { staticClass: "ovtitle" }, [_vm._v("Gender")]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "detail highlightable" }, [
-                    _c("strong", [
-                      _vm._v(" " + _vm._s(_vm.applicant.gender) + " ")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "overviewtitle2" }, [
-                  _c("span", { staticClass: "ovtitle" }, [
-                    _vm._v("Nationality")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "detail highlightable" }, [
-                    _c("strong", [
-                      _vm._v(" " + _vm._s(_vm.applicant.nationality))
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "overviewtitle2" }, [
-                  _c("span", { staticClass: "ovtitle" }, [_vm._v("Location")]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "detail highlightable" }, [
-                    _c("strong", [_vm._v("  " + _vm._s(_vm.applicant.city_id))])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "overviewtitle2" }, [
-                  _c("span", { staticClass: "ovtitle" }, [_vm._v("Email")]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "detail highlightable" }, [
-                    _c("strong", [_vm._v(_vm._s(_vm.applicant.email))])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "overviewtitle2" }, [
-                  _c("span", { staticClass: "ovtitle" }, [
-                    _vm._v("Willing to relocate:")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "detail highlightable" }, [
-                    _c("strong", [
-                      _vm._v(_vm._s(_vm.applicant.relocate_nationaly) + " ")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "overviewtitle2" }, [
-                  _c("span", { staticClass: "ovtitle" }, [
-                    _vm._v("Educational Level:")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "detail highlightable" }, [
-                    _c("strong", [
-                      _vm._v(
-                        " " + _vm._s(_vm.applicant.educational_level) + " "
-                      )
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "overviewtitle2" }, [
-                  _c("span", { staticClass: "ovtitle" }, [
-                    _vm._v("Employment Terms:")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "detail highlightable" }, [
-                    _c("strong", [
-                      _vm._v(" " + _vm._s(_vm.applicant.d_employment_term))
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "overviewtitle2" }, [
-                  _c("span", { staticClass: "ovtitle" }, [
-                    _vm._v("Career Level:")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "detail highlightable" }, [
-                    _c("strong", [
-                      _vm._v(" " + _vm._s(_vm.applicant.career_level) + "  ")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "overviewtitle2" }, [
-                  _c("span", { staticClass: "ovtitle" }, [
-                    _vm._v(" Minimum Salary:")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "detail highlightable" }, [
-                    _c("strong", [
-                      _vm._v(" " + _vm._s(_vm.applicant.minimum_salary) + " ")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "overviewtitle2" }, [
-                  _c("span", { staticClass: "ovtitle" }, [
-                    _vm._v("Availability:")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "detail highlightable" }, [
-                    _c("strong", [
-                      _vm._v(" " + _vm._s(_vm.applicant.availability) + " ")
-                    ])
-                  ])
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "col-md-12 cv_content" }, [
+        _c("div", { attrs: { id: "user_profile" } }, [
+          _c("div", { staticClass: "pageactionIn" }, [
+            _c("div", { staticClass: "title4" }, [
+              _c("div", { staticClass: "user_name" }, [
+                _c("h4", { staticClass: "highlightable" }, [
+                  _vm._v(_vm._s(_vm.applicant.candidates_name))
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "overviewtitle2" }, [
+              _c("span", { staticClass: "ovtitle" }, [_vm._v("Age")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "detail highlightable" }, [
+                _c("strong", [_vm._v(_vm._s(_vm.applicant.age))])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "overviewtitle2" }, [
+              _c("span", { staticClass: "ovtitle" }, [_vm._v("Date of Birth")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "detail highlightable" }, [
+                _c("strong", [
+                  _vm._v(" " + _vm._s(_vm.applicant.date_of_birth) + " ")
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "overviewtitle2" }, [
+              _c("span", { staticClass: "ovtitle" }, [_vm._v("Gender")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "detail highlightable" }, [
+                _c("strong", [_vm._v(" " + _vm._s(_vm.applicant.gender) + " ")])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "overviewtitle2" }, [
+              _c("span", { staticClass: "ovtitle" }, [_vm._v("Nationality")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "detail highlightable" }, [
+                _c("strong", [_vm._v(" " + _vm._s(_vm.applicant.nationality))])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "overviewtitle2" }, [
+              _c("span", { staticClass: "ovtitle" }, [_vm._v("Location")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "detail highlightable" }, [
+                _c("strong", [_vm._v("  " + _vm._s(_vm.applicant.city_id))])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "overviewtitle2" }, [
+              _c("span", { staticClass: "ovtitle" }, [_vm._v("Email")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "detail highlightable" }, [
+                _c("strong", [_vm._v(_vm._s(_vm.applicant.email))])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "overviewtitle2" }, [
+              _c("span", { staticClass: "ovtitle" }, [
+                _vm._v("Willing to relocate:")
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "detail highlightable" }, [
+                _c("strong", [
+                  _vm._v(_vm._s(_vm.applicant.relocate_nationaly) + " ")
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "overviewtitle2" }, [
+              _c("span", { staticClass: "ovtitle" }, [
+                _vm._v("Educational Level:")
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "detail highlightable" }, [
+                _c("strong", [
+                  _vm._v(" " + _vm._s(_vm.applicant.educational_level) + " ")
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "overviewtitle2" }, [
+              _c("span", { staticClass: "ovtitle" }, [
+                _vm._v("Employment Terms:")
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "detail highlightable" }, [
+                _c("strong", [
+                  _vm._v(" " + _vm._s(_vm.applicant.d_employment_term))
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "overviewtitle2" }, [
+              _c("span", { staticClass: "ovtitle" }, [_vm._v("Career Level:")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "detail highlightable" }, [
+                _c("strong", [
+                  _vm._v(" " + _vm._s(_vm.applicant.career_level) + "  ")
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "overviewtitle2" }, [
+              _c("span", { staticClass: "ovtitle" }, [
+                _vm._v(" Minimum Salary:")
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "detail highlightable" }, [
+                _c("strong", [
+                  _vm._v(" " + _vm._s(_vm.applicant.minimum_salary) + " ")
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "overviewtitle2" }, [
+              _c("span", { staticClass: "ovtitle" }, [_vm._v("Availability:")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "detail highlightable" }, [
+                _c("strong", [
+                  _vm._v(" " + _vm._s(_vm.applicant.availability) + " ")
                 ])
               ])
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "space" }, [_vm._v(" ")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-12 cv_content" }, [
-            _c(
-              "div",
-              {
-                staticClass: "pageactionIn",
-                attrs: { id: "education_topsection" }
-              },
-              [
-                _c("div", { staticClass: "title4" }, [
-                  _c("p", { staticClass: "editov2" }),
-                  _vm._v(" "),
-                  _c("h4", [_vm._v("Career Objective / Summary")]),
-                  _vm._v("\n\n " + _vm._s(_vm.objective.summary) + "\n ")
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "space" }, [_vm._v(" ")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-12 cv_content" }, [
-            _c(
-              "div",
-              {
-                staticClass: "pageactionIn",
-                attrs: { id: "education_topsection" }
-              },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._l(_vm.jobskills, function(jobskill) {
-                  return _c("div", { staticClass: "skills_inner" }, [
-                    _c("span", { staticClass: "jellybean" }, [
-                      _vm._v(_vm._s(jobskill.job_skill))
-                    ])
-                  ])
-                })
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "space" }, [_vm._v(" ")]),
-          _vm._v(" "),
-          _vm._l(_vm.educationaList, function(educational) {
-            return _c("div", { staticClass: "col-md-12 cv_content" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "pageactionIn",
-                  attrs: { id: "education_topsection" }
-                },
-                [
-                  _vm._m(1, true),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "education_inner several2" }, [
-                    _c("div", { staticClass: "actions" }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "overviewtitle2" }, [
-                      _c("span", { staticClass: "ovtitle" }, [
-                        _vm._v("Degree")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "detail" }, [
-                        _vm._v(_vm._s(educational.qualificaiton)),
-                        _c("strong", [
-                          _vm._v(" " + _vm._s(educational.feild_of_study))
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(2, true),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "overviewtitle2" }, [
-                      _c("span", { staticClass: "ovtitle" }, [
-                        _vm._v("School")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "highlightable" }, [
-                        _vm._v("\n" + _vm._s(educational.school_name) + "\n ")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "overviewtitle2" }, [
-                      _c("span", { staticClass: "ovtitle" }, [
-                        _vm._v("Country")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "highlightable" }, [
-                        _vm._v(" " + _vm._s(educational.country) + " ")
-                      ])
-                    ])
-                  ])
-                ]
-              )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "space" }, [_vm._v(" ")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-12 cv_content" }, [
+        _c(
+          "div",
+          {
+            staticClass: "pageactionIn",
+            attrs: { id: "education_topsection" }
+          },
+          [
+            _c("div", { staticClass: "title4" }, [
+              _c("p", { staticClass: "editov2" }),
+              _vm._v(" "),
+              _c("h4", [_vm._v("Career Objective / Summary")]),
+              _vm._v("\n\n " + _vm._s(_vm.objective.summary) + "\n ")
             ])
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "space" }, [_vm._v(" ")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-12 cv_content" }, [
-            _c(
-              "div",
-              {
-                staticClass: "pageactionIn",
-                attrs: { id: "work_history_topsection" }
-              },
-              [
-                _vm._m(3),
-                _vm._v(" "),
-                _vm._l(_vm.work_histories, function(work_history) {
-                  return _c(
-                    "div",
-                    { staticClass: "workhistory_inner several2" },
-                    [
-                      _c("div", { staticClass: "overviewtitle2" }, [
-                        _c("span", { staticClass: "ovtitle" }, [
-                          _vm._v("Position Title")
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "highlightable" }, [
-                          _c("strong", [
-                            _vm._v(
-                              " " + _vm._s(work_history.position_title) + "  "
-                            )
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(4, true),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "overviewtitle2" }, [
-                        _c("span", { staticClass: "ovtitle" }, [
-                          _vm._v("Company")
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "highlightable" }, [
-                          _vm._v(_vm._s(work_history.company_name))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "overviewtitle2" }, [
-                        _c("span", { staticClass: "ovtitle" }, [
-                          _vm._v("Country")
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "highlightable" }, [
-                          _vm._v("  " + _vm._s(work_history.country) + " ")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "overviewtitle2" }, [
-                        _c("span", { staticClass: "ovtitle" }, [
-                          _vm._v("Industry")
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "highlightable" }, [
-                          _vm._v(
-                            "  " + _vm._s(work_history.industries) + " Industry"
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "overviewtitle2" }, [
-                        _c("span", { staticClass: "ovtitle" }, [
-                          _vm._v("Position Type")
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "highlightable" }, [
-                          _vm._v(
-                            " " +
-                              _vm._s(work_history.industryprofessions) +
-                              " Position Type"
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(5, true)
-                    ]
-                  )
-                })
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "space" }, [_vm._v(" ")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-12 cv_content" }, [
-            _c(
-              "div",
-              {
-                staticClass: "pageactionIn",
-                attrs: { id: "certifications_topsection several2" }
-              },
-              [
-                _c("div", { staticClass: "title4" }, [
-                  _vm.jobcertifications
-                    ? _c("h4", [_vm._v("Certifications")])
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _vm._l(_vm.jobcertifications, function(jobcertification) {
-                  return _c(
-                    "div",
-                    { staticClass: "certification_inner several2" },
-                    [
-                      _c("div", { staticClass: "overviewtitle2" }, [
-                        _c("span", { staticClass: "ovtitle" }, [
-                          _vm._v("Certification Name")
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "highlightable" }, [
-                          _c("strong", [
-                            _vm._v(" " + _vm._s(jobcertification.name) + " ")
-                          ])
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "overviewtitle2" }, [
-                        _c("span", { staticClass: "ovtitle" }, [
-                          _vm._v("Date Received")
-                        ]),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "highlightable" }, [
-                          _vm._v(_vm._s(jobcertification.date_received))
-                        ])
-                      ])
-                    ]
-                  )
-                })
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "space" }, [_vm._v(" ")]),
-          _vm._v(" "),
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "space" }, [_vm._v(" ")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-12 cv_content" }, [
+        _c(
+          "div",
+          {
+            staticClass: "pageactionIn",
+            attrs: { id: "education_topsection" }
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._l(_vm.jobskills, function(jobskill) {
+              return _c("div", { staticClass: "skills_inner" }, [
+                _c("span", { staticClass: "jellybean" }, [
+                  _vm._v(_vm._s(jobskill.job_skill))
+                ])
+              ])
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "space" }, [_vm._v(" ")]),
+      _vm._v(" "),
+      _vm._l(_vm.educationaList, function(educational) {
+        return _c("div", { staticClass: "col-md-12 cv_content" }, [
           _c(
             "div",
-            { staticClass: "col-md-12 cv_content" },
-            _vm._l(_vm.person_info_list, function(person_info) {
+            {
+              staticClass: "pageactionIn",
+              attrs: { id: "education_topsection" }
+            },
+            [
+              _vm._m(1, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "education_inner several2" }, [
+                _c("div", { staticClass: "actions" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "overviewtitle2" }, [
+                  _c("span", { staticClass: "ovtitle" }, [_vm._v("Degree")]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "detail" }, [
+                    _vm._v(_vm._s(educational.qualificaiton)),
+                    _c("strong", [
+                      _vm._v(" " + _vm._s(educational.feild_of_study))
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(2, true),
+                _vm._v(" "),
+                _c("div", { staticClass: "overviewtitle2" }, [
+                  _c("span", { staticClass: "ovtitle" }, [_vm._v("School")]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "highlightable" }, [
+                    _vm._v("\n" + _vm._s(educational.school_name) + "\n ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "overviewtitle2" }, [
+                  _c("span", { staticClass: "ovtitle" }, [_vm._v("Country")]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "highlightable" }, [
+                    _vm._v(" " + _vm._s(educational.country) + " ")
+                  ])
+                ])
+              ])
+            ]
+          )
+        ])
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "space" }, [_vm._v(" ")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-12 cv_content" }, [
+        _c(
+          "div",
+          {
+            staticClass: "pageactionIn",
+            attrs: { id: "work_history_topsection" }
+          },
+          [
+            _vm._m(3),
+            _vm._v(" "),
+            _vm._l(_vm.work_histories, function(work_history) {
+              return _c("div", { staticClass: "workhistory_inner several2" }, [
+                _c("div", { staticClass: "overviewtitle2" }, [
+                  _c("span", { staticClass: "ovtitle" }, [
+                    _vm._v("Position Title")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "highlightable" }, [
+                    _c("strong", [
+                      _vm._v(" " + _vm._s(work_history.position_title) + "  ")
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(4, true),
+                _vm._v(" "),
+                _c("div", { staticClass: "overviewtitle2" }, [
+                  _c("span", { staticClass: "ovtitle" }, [_vm._v("Company")]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "highlightable" }, [
+                    _vm._v(_vm._s(work_history.company_name))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "overviewtitle2" }, [
+                  _c("span", { staticClass: "ovtitle" }, [_vm._v("Country")]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "highlightable" }, [
+                    _vm._v("  " + _vm._s(work_history.country) + " ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "overviewtitle2" }, [
+                  _c("span", { staticClass: "ovtitle" }, [_vm._v("Industry")]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "highlightable" }, [
+                    _vm._v("  " + _vm._s(work_history.industries) + " Industry")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "overviewtitle2" }, [
+                  _c("span", { staticClass: "ovtitle" }, [
+                    _vm._v("Position Type")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "highlightable" }, [
+                    _vm._v(
+                      " " +
+                        _vm._s(work_history.industryprofessions) +
+                        " Position Type"
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(5, true)
+              ])
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "space" }, [_vm._v(" ")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-12 cv_content" }, [
+        _c(
+          "div",
+          {
+            staticClass: "pageactionIn",
+            attrs: { id: "certifications_topsection several2" }
+          },
+          [
+            _c("div", { staticClass: "title4" }, [
+              _vm.jobcertifications
+                ? _c("h4", [_vm._v("Certifications")])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.jobcertifications, function(jobcertification) {
               return _c(
                 "div",
-                {
-                  staticClass: "pageactionIn",
-                  attrs: { id: "additional_information_topsection" }
-                },
+                { staticClass: "certification_inner several2" },
                 [
-                  _vm._m(6, true),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "overviewtitle2 overviewtype3 several2" },
-                    [
-                      _c("span", { staticClass: "ovtitle" }, [
-                        _vm._v("Interests")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "highlightable" }, [
-                        _vm._v(_vm._s(person_info.interest))
+                  _c("div", { staticClass: "overviewtitle2" }, [
+                    _c("span", { staticClass: "ovtitle" }, [
+                      _vm._v("Certification Name")
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "highlightable" }, [
+                      _c("strong", [
+                        _vm._v(" " + _vm._s(jobcertification.name) + " ")
                       ])
-                    ]
-                  ),
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "overviewtitle2 overviewtype3 several2" },
-                    [
-                      _c("span", { staticClass: "ovtitle" }, [
-                        _vm._v("Associations")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "highlightable" }, [
-                        _vm._v(_vm._s(person_info.association) + " ")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "overviewtitle2 overviewtype3 several2" },
-                    [
-                      _c("span", { staticClass: "ovtitle" }, [
-                        _vm._v("Awards")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "highlightable" }, [
-                        _vm._v(" None " + _vm._s(person_info.award) + " ")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "overviewtitle2 overviewtype3 several2" },
-                    [
-                      _c("span", { staticClass: "ovtitle" }, [
-                        _vm._v("Personal page")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "highlightable" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "breakword",
-                            attrs: { href: "#", rel: "external" }
-                          },
-                          [_vm._v(_vm._s(person_info.personal_page))]
-                        )
-                      ])
-                    ]
-                  )
+                  _c("div", { staticClass: "overviewtitle2" }, [
+                    _c("span", { staticClass: "ovtitle" }, [
+                      _vm._v("Date Received")
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "highlightable" }, [
+                      _vm._v(_vm._s(jobcertification.date_received))
+                    ])
+                  ])
                 ]
               )
-            }),
-            0
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "space" }, [_vm._v(" ")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-md-12 cv_content" },
+        _vm._l(_vm.person_info_list, function(person_info) {
+          return _c(
+            "div",
+            {
+              staticClass: "pageactionIn",
+              attrs: { id: "additional_information_topsection" }
+            },
+            [
+              _vm._m(6, true),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "overviewtitle2 overviewtype3 several2" },
+                [
+                  _c("span", { staticClass: "ovtitle" }, [_vm._v("Interests")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "highlightable" }, [
+                    _vm._v(_vm._s(person_info.interest))
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "overviewtitle2 overviewtype3 several2" },
+                [
+                  _c("span", { staticClass: "ovtitle" }, [
+                    _vm._v("Associations")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "highlightable" }, [
+                    _vm._v(_vm._s(person_info.association) + " ")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "overviewtitle2 overviewtype3 several2" },
+                [
+                  _c("span", { staticClass: "ovtitle" }, [_vm._v("Awards")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "highlightable" }, [
+                    _vm._v(" None " + _vm._s(person_info.award) + " ")
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "overviewtitle2 overviewtype3 several2" },
+                [
+                  _c("span", { staticClass: "ovtitle" }, [
+                    _vm._v("Personal page")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "highlightable" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "breakword",
+                        attrs: { href: "#", rel: "external" }
+                      },
+                      [_vm._v(_vm._s(person_info.personal_page))]
+                    )
+                  ])
+                ]
+              )
+            ]
           )
-        ],
-        2
+        }),
+        0
       )
-    : _c("div", [_c("nocontent")], 1)
+    ],
+    2
+  )
 }
 var staticRenderFns = [
   function() {
@@ -41574,208 +41387,6 @@ var render = function() {
                 on: {
                   click: function($event) {
                     return _vm.fetchRejectedByJobID(_vm.pagination.next_link)
-                  }
-                }
-              },
-              [_vm._m(2)]
-            )
-          ])
-        ],
-        2
-      )
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [_c("br")])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", [
-      _c("i", { staticClass: "careerfy-icon careerfy-arrows4" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", [
-      _c("i", { staticClass: "careerfy-icon careerfy-arrows4" })
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Review.vue?vue&type=template&id=362f204f&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/components/Review.vue?vue&type=template&id=362f204f& ***!
-  \****************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "ul",
-      {
-        staticClass: "careerfy-row nav-tabs tabs-left",
-        attrs: { id: "reject_section" }
-      },
-      [
-        _vm._l(_vm.inreviewapplicants, function(inreview) {
-          return _c(
-            "li",
-            { key: inreview.id, staticClass: "careerfy-column-12 " },
-            [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "#tab_6_1" + inreview.id,
-                    "data-toggle": "tab"
-                  }
-                },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "careerfy-candidate-default-wrap butt" },
-                    [
-                      _c("figure", [
-                        _c("img", {
-                          attrs: { src: "/uploads/avatars/" + inreview.avatar }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "careerfy-candidate-default-text" },
-                        [
-                          _c(
-                            "div",
-                            { staticClass: "careerfy-candidate-default-left" },
-                            [
-                              _c("h2", [
-                                _vm._v(
-                                  "\r\n                                                        " +
-                                    _vm._s(inreview.candidates_name) +
-                                    "\r\n                                                        "
-                                ),
-                                _c("i", {
-                                  staticClass:
-                                    "careerfy-icon careerfy-check-mark"
-                                })
-                              ]),
-                              _vm._v(" "),
-                              _c("ul", { staticClass: "careerfy-column-12" }, [
-                                _c("li", [
-                                  _vm._v(" " + _vm._s(inreview.city_id) + " "),
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "careerfy-candidate-default-studio",
-                                      attrs: { href: "#" }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\r\n                                                                " +
-                                          _vm._s(inreview.email) +
-                                          "\r\n                                                            "
-                                      )
-                                    ]
-                                  )
-                                ])
-                              ])
-                            ]
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                ]
-              )
-            ]
-          )
-        }),
-        _vm._v(" "),
-        _vm._m(0)
-      ],
-      2
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "careerfy-pagination-blog" }, [
-      _c(
-        "ul",
-        { staticClass: "pagination" },
-        [
-          _c("li", { class: [{ disabled: !_vm.pagination.prev_page_url }] }, [
-            _c(
-              "a",
-              {
-                staticClass: "prev page-numbers",
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    return _vm.fetchReviewByJobID(_vm.pagination.prev_page_url)
-                  }
-                }
-              },
-              [_vm._m(1)]
-            )
-          ]),
-          _vm._v(" "),
-          _vm._l(_vm.pagination.last_page, function(n) {
-            return _c(
-              "li",
-              {
-                key: n,
-                staticClass: "page-item",
-                class: [{ active: _vm.pagination.current_page == n }]
-              },
-              [
-                _c(
-                  "span",
-                  {
-                    staticClass: "page-link",
-                    on: {
-                      click: function($event) {
-                        return _vm.fetchReviewByJobID(
-                          _vm.pagination.path_page + n
-                        )
-                      }
-                    }
-                  },
-                  [_vm._v(_vm._s(n) + " ")]
-                )
-              ]
-            )
-          }),
-          _vm._v(" "),
-          _c("li", { class: [{ disabled: !_vm.pagination.next_link }] }, [
-            _c(
-              "span",
-              {
-                staticClass: "next page-numbers",
-                on: {
-                  click: function($event) {
-                    return _vm.fetchReviewByJobID(_vm.pagination.next_link)
                   }
                 }
               },
@@ -55807,31 +55418,31 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('navbar', __webpack_require__(/*! ./components/Navbar.vue */ "./resources/assets/js/components/Navbar.vue")["default"]);
-Vue.component('jobs', __webpack_require__(/*! ./components/Job.vue */ "./resources/assets/js/components/Job.vue")["default"]);
-Vue.component('searchbar', __webpack_require__(/*! ./components/SearchBar.vue */ "./resources/assets/js/components/SearchBar.vue")["default"]);
-Vue.component('listjobs', __webpack_require__(/*! ./components/ListJob.vue */ "./resources/assets/js/components/ListJob.vue")["default"]);
-Vue.component('industries', __webpack_require__(/*! ./components/Industries.vue */ "./resources/assets/js/components/Industries.vue")["default"]);
-Vue.component('listcities', __webpack_require__(/*! ./components/ListCity.vue */ "./resources/assets/js/components/ListCity.vue")["default"]);
-Vue.component('jobfunctions', __webpack_require__(/*! ./components/JobFunctions.vue */ "./resources/assets/js/components/JobFunctions.vue")["default"]);
-Vue.component('vacancytypes', __webpack_require__(/*! ./components/VacancyType.vue */ "./resources/assets/js/components/VacancyType.vue")["default"]);
-Vue.component('jobfilter', __webpack_require__(/*! ./components/JobFilter.vue */ "./resources/assets/js/components/JobFilter.vue")["default"]);
-Vue.component('applicants', __webpack_require__(/*! ./components/App.vue */ "./resources/assets/js/components/App.vue")["default"]);
-Vue.component('applicantscv', __webpack_require__(/*! ./components/UnsortedCV.vue */ "./resources/assets/js/components/UnsortedCV.vue")["default"]);
-Vue.component('nocontent', __webpack_require__(/*! ./components/NoContent.vue */ "./resources/assets/js/components/NoContent.vue")["default"]);
-Vue.component('unsortedfilter', __webpack_require__(/*! ./components/Unsortedfilter */ "./resources/assets/js/components/Unsortedfilter.vue")["default"]);
-Vue.component('shortlistcount', __webpack_require__(/*! ./components/ShortlistCount */ "./resources/assets/js/components/ShortlistCount.vue")["default"]);
-Vue.component('rejected', __webpack_require__(/*! ./components/Rejected */ "./resources/assets/js/components/Rejected.vue")["default"]);
-Vue.component('reviewapplicants', __webpack_require__(/*! ./components/Review */ "./resources/assets/js/components/Review.vue")["default"]);
-Vue.component('shortlisted', __webpack_require__(/*! ./components/Shortlisted */ "./resources/assets/js/components/Shortlisted.vue")["default"]);
-Vue.component('offered', __webpack_require__(/*! ./components/Offered */ "./resources/assets/js/components/Offered.vue")["default"]);
-Vue.component('hired', __webpack_require__(/*! ./components/Hire */ "./resources/assets/js/components/Hire.vue")["default"]);
-Vue.component('rejectbutton', __webpack_require__(/*! ./components/RejectButton */ "./resources/assets/js/components/RejectButton.vue")["default"]);
-Vue.component('reviewbutton', __webpack_require__(/*! ./components/ReviewButton */ "./resources/assets/js/components/ReviewButton.vue")["default"]);
-Vue.component('offerbutton', __webpack_require__(/*! ./components/OfferedButton */ "./resources/assets/js/components/OfferedButton.vue")["default"]);
-Vue.component('shortlistbutton', __webpack_require__(/*! ./components/ShortlistButton */ "./resources/assets/js/components/ShortlistButton.vue")["default"]);
-Vue.component('hirebutton', __webpack_require__(/*! ./components/HireButton */ "./resources/assets/js/components/HireButton.vue")["default"]);
-Vue.component('loadcv', __webpack_require__(/*! ./components/LoadCV */ "./resources/assets/js/components/LoadCV.vue")["default"]);
+Vue.component('navbar', __webpack_require__(/*! ./components/Navbar.vue */ "./resources/assets/js/components/Navbar.vue"));
+Vue.component('jobs', __webpack_require__(/*! ./components/Job.vue */ "./resources/assets/js/components/Job.vue"));
+Vue.component('searchbar', __webpack_require__(/*! ./components/SearchBar.vue */ "./resources/assets/js/components/SearchBar.vue"));
+Vue.component('listjobs', __webpack_require__(/*! ./components/ListJob.vue */ "./resources/assets/js/components/ListJob.vue"));
+Vue.component('industries', __webpack_require__(/*! ./components/Industries.vue */ "./resources/assets/js/components/Industries.vue"));
+Vue.component('listcities', __webpack_require__(/*! ./components/ListCity.vue */ "./resources/assets/js/components/ListCity.vue"));
+Vue.component('jobfunctions', __webpack_require__(/*! ./components/JobFunctions.vue */ "./resources/assets/js/components/JobFunctions.vue"));
+Vue.component('vacancytypes', __webpack_require__(/*! ./components/VacancyType.vue */ "./resources/assets/js/components/VacancyType.vue"));
+Vue.component('jobfilter', __webpack_require__(/*! ./components/JobFilter.vue */ "./resources/assets/js/components/JobFilter.vue"));
+Vue.component('applicants', __webpack_require__(/*! ./components/App.vue */ "./resources/assets/js/components/App.vue"));
+Vue.component('applicantscv', __webpack_require__(/*! ./components/UnsortedCV.vue */ "./resources/assets/js/components/UnsortedCV.vue"));
+Vue.component('nocontent', __webpack_require__(/*! ./components/NoContent.vue */ "./resources/assets/js/components/NoContent.vue"));
+Vue.component('unsortedfilter', __webpack_require__(/*! ./components/Unsortedfilter */ "./resources/assets/js/components/Unsortedfilter.vue"));
+Vue.component('shortlistcount', __webpack_require__(/*! ./components/ShortlistCount */ "./resources/assets/js/components/ShortlistCount.vue"));
+Vue.component('rejected', __webpack_require__(/*! ./components/Rejected */ "./resources/assets/js/components/Rejected.vue"));
+Vue.component('reviewapplicants', __webpack_require__(/*! ./components/Review */ "./resources/assets/js/components/Review.vue"));
+Vue.component('shortlisted', __webpack_require__(/*! ./components/Shortlisted */ "./resources/assets/js/components/Shortlisted.vue"));
+Vue.component('offered', __webpack_require__(/*! ./components/Offered */ "./resources/assets/js/components/Offered.vue"));
+Vue.component('hired', __webpack_require__(/*! ./components/Hire */ "./resources/assets/js/components/Hire.vue"));
+Vue.component('rejectbutton', __webpack_require__(/*! ./components/RejectButton */ "./resources/assets/js/components/RejectButton.vue"));
+Vue.component('reviewbutton', __webpack_require__(/*! ./components/ReviewButton */ "./resources/assets/js/components/ReviewButton.vue"));
+Vue.component('offerbutton', __webpack_require__(/*! ./components/OfferedButton */ "./resources/assets/js/components/OfferedButton.vue"));
+Vue.component('shortlistbutton', __webpack_require__(/*! ./components/ShortlistButton */ "./resources/assets/js/components/ShortlistButton.vue"));
+Vue.component('hirebutton', __webpack_require__(/*! ./components/HireButton */ "./resources/assets/js/components/HireButton.vue"));
+Vue.component('loadcv', __webpack_require__(/*! ./components/LoadCV */ "./resources/assets/js/components/LoadCV.vue"));
 var bus = new Vue();
 var app = new Vue({
   el: '#app'
@@ -56968,20 +56579,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Review_vue_vue_type_template_id_362f204f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Review.vue?vue&type=template&id=362f204f& */ "./resources/assets/js/components/Review.vue?vue&type=template&id=362f204f&");
-/* harmony import */ var _Review_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Review.vue?vue&type=script&lang=js& */ "./resources/assets/js/components/Review.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+var script = {}
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Review_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Review_vue_vue_type_template_id_362f204f___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Review_vue_vue_type_template_id_362f204f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
+  script,
+  render,
+  staticRenderFns,
   false,
   null,
   null,
@@ -56989,42 +56597,8 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
-/* hot reload */
-if (false) { var api; }
 component.options.__file = "resources/assets/js/components/Review.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/assets/js/components/Review.vue?vue&type=script&lang=js&":
-/*!****************************************************************************!*\
-  !*** ./resources/assets/js/components/Review.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Review_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Review.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Review.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Review_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/assets/js/components/Review.vue?vue&type=template&id=362f204f&":
-/*!**********************************************************************************!*\
-  !*** ./resources/assets/js/components/Review.vue?vue&type=template&id=362f204f& ***!
-  \**********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Review_vue_vue_type_template_id_362f204f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Review.vue?vue&type=template&id=362f204f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/components/Review.vue?vue&type=template&id=362f204f&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Review_vue_vue_type_template_id_362f204f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Review_vue_vue_type_template_id_362f204f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
 
 /***/ }),
 

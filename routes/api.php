@@ -90,3 +90,16 @@ Route::get('/api/v1/users', [
    	'uses' => 'HomeController@indexapi'
         ]);
  
+
+
+ // 
+Route::get('/job/newunsortedlist/{code}' ,'JobController@getNewUnsortedApplicant');
+Route::get('/job/newrejectedlist/{code}' ,'JobController@getNewRejectedApplicant');
+Route::get('/job/newreviewlist/{code}' ,'JobController@getNewReviewApplicant');
+Route::get('/job/newshortlist/{code}' ,'JobController@getNewShortlistApplicants');
+Route::get('/job/newofferlist/{code}' ,'JobController@getNewOfferApplicants');
+Route::get('/job/newhiredlist/{code}' ,'JobController@getNewHiredApplicants');
+Route::get('/job/cvcontent/{code}','JobController@GetContent');
+
+Route::get('/employer/job/applicants/{code}', 'JobController@getNewUnsortedApplicant');
+

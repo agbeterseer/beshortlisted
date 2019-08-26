@@ -1,6 +1,6 @@
 <template>
-{{ applicantid }}
- <div v-if="applicantid">
+
+ <div >
  <div class="col-md-12 cv_content">  
 <div class="" id="user_profile"> 
  <div class="pageactionIn">
@@ -252,10 +252,7 @@
 </div>
  </div>
 </div>
-
- <div v-else>
- <nocontent></nocontent>
- </div>
+ 
 
  
 </template>
@@ -356,13 +353,9 @@ export default {
   // listening to the event through a live cicle hook
   // this firs when the conponent is first created
     bus.$on('displayRejectedCV', (data) => { 
-          
-          console.log(data);
-
+              console.log(data);
     //this.getCareerObjectives(data);
-
-
-    })
+   })
   },
   methods:{
  	getCareerObjectives(code){

@@ -24,12 +24,15 @@ Route::get('/', 'HomeController@welcome');
 Route::get('/employer/dashboard/{type}', array(
     'as' => 'items.type', 
     'uses' => 'ResumeController@getItemType'
-))->where('type', 'alljobs|draft|awaitingjobs');
+))->where('type', 'alljobs|draft|awaitingjobs|blacklist|notactive|yesactive');
 
-Route::get('/employer/job/applicants/{type}', array(
+
+
+
+Route::get('/employer/job/applicants/{type}/{code}', array(
     'as' => 'applicants.type', 
-    'uses' => 'ResumeController@getItemType'
-))->where('type', 'alljobs|draft');
+    'uses' => 'ResumeController@getApplicantsType'
+))->where('type', 'applicants_list|reject_section');
  
 Route::get('/home', 'HomeController@home')->name('home');
 Auth::routes();

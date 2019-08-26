@@ -92,7 +92,7 @@ tr:hover {background-color:#f5f5f5;}
                         <div class="careerfy-right">
                             <ul class="careerfy-user-section hide_inner">
                                 <li><a class="careerfy-color" href="{{route('sign.up')}}">Register</a></li>
-                                <li><a class="careerfy-color" href="{{route('auth.login')}}">Sign in</a></li>
+                                <li><a class="careerfy-color" href="{{url('/login')}}">Sign in</a></li>
                             </ul>
                               @if(Auth::user())
                                  

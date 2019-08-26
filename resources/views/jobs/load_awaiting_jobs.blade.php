@@ -39,31 +39,11 @@
      <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>@foreach($professions as $profession) @if($profession->id === $job->job_category) {{$profession->name}} @endif @endforeach</li>
      </ul> </div>
      <div class="space">&nbsp;</div>  
-     <div class="row"><div class="col-md-12">  <div class="col-md-2" align="center">
-    <div class="badge" style="background-color: #ffffff;"><font style=" font-weight: bold; font-size: 35px; color: orange;">0</font>   <br><br><p></p>  <font  style="font-size: 20px; color: orange;"> Unsorted </font></div></div>
- 
-    <div class="col-md-2" align="center">
-    <div class="badge" style="background-color: #ffffff;"><font style=" font-weight: bold; font-size: 35px; color: orange;">0</font>   <br><br><p></p>  <font  style="font-size: 20px; color: orange;"> In Review </font></div></div>
-
-    <div class="col-md-2" align="center"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: orange;">0</font> <br><br><p></p>
-    <font  style="font-size: 20px; color: red;">  Shortlisted</font></div></div>
-
-    <div class="col-md-2" align="center">  <div class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: red;"> 0</font>  <br><br><p></p>
-    <font  style="font-size: 20px; color: red;">  Rejected</font>
-    </div></div>
-
-    <div class="col-md-2" align="center"> <div class="badge" style=" background-color: #ffffff;"><font style="font-weight: bold; font-size: 35px; color: green;">0</font><br><br><p></p>
-    <font  style="font-size: 20px; color: green;">  Offered</font>
-
-    </div><br></div>
-    <div class="col-md-1" align="center"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: green;">0</font><br><br><p></p>
-    <font  style="font-size: 20px; color: green;">  Hired</font>
-    </div></div>
+     <div class="row"><div class="col-md-12">  
+     @include('jobs.load_count')
 
     </div></div>
- 
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
+
 <div class="space">&nbsp;</div>
 <hr>  
     <div class="col-sm-12">

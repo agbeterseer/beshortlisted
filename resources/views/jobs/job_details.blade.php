@@ -210,7 +210,7 @@
                                                 <figure><a href="#"><img src="{{asset('/img/job.png')}}" alt=""></a></figure>
                                                 <div class="careerfy-joblisting-text">
                                                     <div class="careerfy-list-option">
-                                                        <h2><a href="#"> {{$common_job->job_title}}</a> 
+                                                        <h2><a href="#"> {{$common_job->job_title}}</a> &nbsp;
 
                                                     @foreach($employement_terms as $employement_term) 
                                                           @if($employement_term->id === $tag->job_type)
