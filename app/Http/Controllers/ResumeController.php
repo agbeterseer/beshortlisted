@@ -2368,19 +2368,15 @@ public function ApplyForAJob(Request $request)
   $resume = $request->resume;
 
   $tag_record = Tag::findOrFail($tag_id);
-  
-  // dd($tag_record->end_date);
 
      $current_date = $this->returnCurrentTime();
-      // dd($tag_record->end_date);
-    // dd($current_date->format("Y-m-d"));
-      if ($current_date->format("Y-m-d") >= $tag_record->end_date) {
-          //dd('Here');
  
+      if ($current_date->format("Y-m-d") >= $tag_record->end_date) {
+    
           Session::flash('job-expire','Sorry this job is no longer open for application');
           return redirect()->back();
       } 
- dd($tag_record->end_date);
+ 
   if ($resume_selected_id === null) {
   $resume_name = RecruitResume::where('id', $resume)->where('user_id',$user->id)->where('status', 1)->first();
   }else{
