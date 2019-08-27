@@ -186,15 +186,16 @@
                                      <div class="space">&nbsp;</div> 
                                     <div class="space">&nbsp;</div> 
                                     <input type="submit" name="" value="Apply" class="careerfy-applyjob-btn">
-                                    <span style="color: red;">Application ends in 4d 5h 3m</span>
+                                    <!-- <span style="color: red;">Application ends in 4d 5h 3m</span> -->
                                     <div class="careerfy-applywith-title"><small><!-- OR apply with --></small></div>
-                                    <p>Know someone who would be perfect for  this role this role? Be a pal, let them know.</p>
+                               <!--      <p>Know someone who would be perfect for  this role this role? Be a pal, let them know.</p> -->
                                      
                                     </div>
                                
-                                    <a href="#" class="careerfy-sendmessage-btn"><i class="careerfy-icon careerfy-envelope"></i> Send a message</a>
+                             
                                 </div>
                                </form> 
+                                      <a href="#" class="careerfy-sendmessage-btn"><i class="careerfy-icon careerfy-envelope"></i> Send a message</a>
                                 </div> 
 
                                 <!-- display jobs in the same industry -->

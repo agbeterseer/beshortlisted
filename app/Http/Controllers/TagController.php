@@ -2749,7 +2749,7 @@ public function BlackListJobPost($id){
   $tag->delete = 1;
   $tag->status = 3;
   $tag->active = 0;
-  $tag->awaiting_aproval = 0;
+  $tag->awaiting_aproval = 0;EmailCandidates
   $tag->draft = 0;
   $tag->save();
   ///$tag->active === 0 && $tag->status === 3 && $tag->awaiting_aproval === 0 && $tag->draft === 0
