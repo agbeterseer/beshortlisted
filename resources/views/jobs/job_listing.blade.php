@@ -92,7 +92,7 @@ border-color: white !important;
             </div>
             <!-- Main Section -->
  <!-- Main Section -->
-            <div class="careerfy-main-section">
+            <div class="careerfy-main-section" style="overflow-x:auto;">
                 <div class="container">
                     <div class="row"> 
                      <aside class="careerfy-column-4 careerfy-typo-wrap">

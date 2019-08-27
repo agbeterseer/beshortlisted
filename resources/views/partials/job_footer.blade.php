@@ -8,7 +8,7 @@
                 <!-- Footer Widget -->
                 <div class="careerfy-footer-widget">
                     <div class="row" >
-                        <span style="color:#ffffff;">
+                        <span style="color:#ffffff;" class="footer_text">
                         <aside class="col-md-12" >
                             <div class="col-md-3">
                                 <ul>

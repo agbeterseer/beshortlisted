@@ -60,7 +60,12 @@ tr:hover {background-color:#f5f5f5;}
 border-color: white !important;
 
     }
- 
+ .container2 {  
+display: grid;  
+white-space:nowrap;
+float: left;  
+overflow-x:auto;
+}
 </style> 
 <style>
   .left-tag{

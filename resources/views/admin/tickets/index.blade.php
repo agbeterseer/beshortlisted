@@ -22,7 +22,7 @@
                 <div class="portlet-title">
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
-                        <span class="caption-subject bold uppercase"> FAQ</span>
+                        <span class="caption-subject bold uppercase"> Tickets</span>
                     </div> 
                 </div>
                 <div class="portlet-body">
@@ -30,7 +30,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group"> 
-<a class="btn btn-success" href="{{route('frequently.create')}}"><i class="fa fa-plus"></i>Create FAQ</a>
+ 
                                 </div>
                             </div> 
                         </div> 

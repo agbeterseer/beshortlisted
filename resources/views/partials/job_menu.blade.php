@@ -80,13 +80,18 @@ window.onclick = function(event) {
                           @foreach($menus as $menu) 
                        <li  id="menu{{$menu->id}}"> <a href="{{asset($menu->routes)}}"> {{$menu->name}}</a> </li>
                           @endforeach 
-                      
+                          <li class="mobileShow" media="only screen and (max-device-width: 480px)">logout</li>
+                   
                                 </ul>
                             </div>
                       </nav>
                     </aside>
-                    <aside class="col-md-4 showHide">
+               <aside class="col-md-4 mobileShow">
+               Logout
+               </aside>
+                    <aside class="col-md-4 ">
                         <div class="careerfy-right">
+                           
                             <ul class="careerfy-user-section hide_inner">
                                 @if(!Auth::user()) 
                                 <li><a class="careerfy-color" href="{{route('sign.up')}}">Register</a></li>
@@ -113,6 +118,7 @@ window.onclick = function(event) {
                             @endif
                         </div>
                     </aside>
+             
                 </div>
             </div>
         </header>

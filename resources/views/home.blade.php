@@ -50,7 +50,7 @@
             <div class="careerfy-banner-caption">
                 <div class="">  
         <div class="col-md-12"> 
-                <div class="text-content"> 
+                <div class="text-content showHide"> 
                      <h1>We Meet You at Your Desk</h1>
                     <p>Build a profile which places you in the ideal position to be recruited</p> 
                 </div>
@@ -142,9 +142,7 @@
                                                         <br>
                                                          @foreach($industry_professions as $profession)
                                                          @if($profession->id === $job->job_category) 
-                                                        <li class="ellipsis" title="{{$profession->name}}"><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#">
-
-                                                        
+                                                        <li class="ellipsis" title="{{$profession->name}}"><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#"> 
 {{ mb_strimwidth($profession->name, 0, 22, "...") }}
                                                          </a></li>@endif @endforeach
                                                         <li>| <i>
@@ -324,7 +322,11 @@
                                                     <ul>
                                                         <li><i class="careerfy-icon careerfy-maps-and-flags"></i> <a href="#">{{$job->country}},</a> <a href="#">{{$job->city}}</a></li>
                                                         <br>
-                                                        <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#">@foreach($industry_professions as $profession) @if($profession->id === $job->job_category){{$profession->name}} @endif @endforeach</a></li>
+                                                                     @foreach($industry_professions as $profession)
+                                                         @if($profession->id === $job->job_category) 
+                                                        <li class="ellipsis" title="{{$profession->name}}"><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#"> 
+{{ mb_strimwidth($profession->name, 0, 22, "...") }}
+                                                         </a></li>@endif @endforeach
                                                         <li>| <i>  @foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type){{$employement_term->name}} @endif @endforeach</i></li>
                                                     </ul>
                                                         <a href="{{route('apply.job', $job->id)}}" class="careerfy-option-btn">@foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type)Apply @endif @endforeach</a>
@@ -422,7 +424,7 @@
                  <div class="space">&nbsp;</div>
                   <div class="space">&nbsp;</div>
                           </div>
-                        <div class="col-md-15 careerfy-typo-wrap ">
+                        <div class="col-md-15 careerfy-typo-wrap industry_text">
                             @foreach($industries as $industry)
                             <div class="col-md-4">
                                 <li>@foreach($job_function_count as $function_count) @if($function_count->industry === $industry->id) <span style="font-weight: bold;"> ({{ $function_count->total}}) </span> 

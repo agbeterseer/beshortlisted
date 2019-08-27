@@ -912,17 +912,18 @@ try {
 }
     public function AddSkills(Request $request)
     {
+      //dd($request->all());
         // get current user ID
        $user =  Auth::user();
         // collect values from the client
         $skills = $request->multi;
         $resume = $request->resume;
-        $group_b = $request->group_b;
+        $group_a = $request->group_a;
         $section = $request->section;
        $resume = RecruitResume::findOrFail($resume);
 
         if ($resume) {      
-            foreach ($group_b as $key => $value) {
+            foreach ($group_a as $key => $value) {
                 $skill = DB::table('job_skills')->insert(['userid' => $user->id, 'resumeid' => $resume->id, 'job_skill' => $value['skill'], 'status' => 1, 'created_at' => $this->returnCurrentTime()]);
         }
 
@@ -1929,7 +1930,12 @@ $pr_caption= RecruitResume::where('user_id', $user->id)->where('status',1)->firs
         $countries = $this->GetCountries();
         $cities = $this->GetCities();
         $regions = DB::table('regions')->get();
-        $tags = $this->Tags();
+        $tags = Tag::latest()->where('status', 1)->where('active',1)->paginate(3);
+
+          // $tag_record->end_date;
+          // if ($tag_record->end_date == date('d') && $tag_record->end_date == date('m')) {
+          // # code...
+          // }
         $section_candidatelist = $this->GetCandidateSection($user_single_resume_by_date->id);
         $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
         //dd($section_candidatelist);
@@ -2362,6 +2368,8 @@ public function ApplyForAJob(Request $request)
   $resume = $request->resume;
 
   $tag_record = Tag::findOrFail($tag_id);
+
+
   if ($resume_selected_id === null) {
   $resume_name = RecruitResume::where('id', $resume)->where('user_id',$user->id)->where('status', 1)->first();
   }else{

@@ -118,7 +118,11 @@
                                                     <ul>
                                                         <li><i class="careerfy-icon careerfy-maps-and-flags"></i> <a href="#">{{$job->country}},</a> <a href="#">{{$job->city}}</a></li>
                                                         <br>
-                                                        <li ><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#"><div class="ellipsis"> @foreach($industry_professions as $profession) @if($profession->id === $job->job_category){{$profession->name}} @endif @endforeach</a></div></li>
+                         @foreach($industry_professions as $profession)
+                                                         @if($profession->id === $job->job_category) 
+                                                        <li class="ellipsis" title="{{$profession->name}}"><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#"> 
+{{ mb_strimwidth($profession->name, 0, 22, "...") }}
+                                                         </a></li>@endif @endforeach
                                                         <li>| <i>  @foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type){{$employement_term->name}} @endif @endforeach</i></li>
                                                     </ul>
                                                         <a href="{{route('apply.job', $job->id)}}" class="careerfy-option-btn">@foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type)Apply @endif @endforeach</a>
@@ -294,7 +298,11 @@
                                                     <ul>
                                                         <li><i class="careerfy-icon careerfy-maps-and-flags"></i> <a href="#">{{$job->country}},</a> <a href="#">{{$job->city}}</a></li>
                                                         <br>
-                                                        <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#">@foreach($industry_professions as $profession) @if($profession->id === $job->job_category){{$profession->name}} @endif @endforeach</a></li>
+                               @foreach($industry_professions as $profession)
+                                                         @if($profession->id === $job->job_category) 
+                                                        <li class="ellipsis" title="{{$profession->name}}"><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#"> 
+{{ mb_strimwidth($profession->name, 0, 22, "...") }}
+                                                         </a></li>@endif @endforeachs
                                                         <li>| <i>  @foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type){{$employement_term->name}} @endif @endforeach</i></li>
                                                     </ul>
                                                         <a href="{{route('apply.job', $job->id)}}" class="careerfy-option-btn">@foreach($employement_term_list as $employement_term) @if($employement_term->id === $job->job_type)Apply @endif @endforeach</a>
@@ -366,7 +374,8 @@
                  <div class="space">&nbsp;</div>
                   <div class="space">&nbsp;</div>
                           </div>
-                        <div class="col-md-15 careerfy-typo-wrap ">
+                          
+                        <div class="col-md-15 careerfy-typo-wrap industry_text">
                             @foreach($industries as $industry)
                             <div class="col-md-4">
                                 <li>@foreach($job_function_count as $function_count) @if($function_count->industry === $industry->id) <span style="font-weight: bold;"> ({{ $function_count->total}}) </span> 
@@ -374,8 +383,8 @@
                                 </li>
                             </div>
                             @endforeach
- 
-                        </div>
+                                        </div>
+                 
                     <div class="space">&nbsp;</div>
                     <div class="space">&nbsp;</div>
                     <div class="space">&nbsp;</div>

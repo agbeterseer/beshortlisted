@@ -89,13 +89,12 @@
                                     </ul>
                                 </div>
                             </div>
-               <div class="careerfy-typo-wrap">
+              <!--  <div class="careerfy-typo-wrap">
                      
                                 <div class="widget widget_add">
                                     <img src="img/extra-images/jobdetail-add.jpg" alt="">
                                 </div>
-                                <div class="widget widget_view_jobs">
-                                <!-- get employee that posted this job -->
+                                <div class="widget widget_view_jobs"> 
                                     <div class="careerfy-widget-title"><h2> </h2></div>
                                     <ul>
                                     @forelse($job_by_candidate_list as $similar_job)
@@ -110,7 +109,7 @@
                                     </ul>
                                     <a href="{{route('list.job', 'job-list')}}" class="widget_view_jobs_btn">View all jobs <i class="careerfy-icon careerfy-arrows32"></i></a>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="careerfy-typo-wrap">
                             <!-- Select jobs that have not yet expire -->
                           <ul>
@@ -133,7 +132,7 @@
                                      @foreach($job_category_list as $job_category) @if($job_category->id === $tag->job_type) 
                                         <div class="careerfy-job-userlist">
                                   <a href="#" class="careerfy-option-btn careerfy-blue">{{$job_category->name}}</a>
-                                                        <!-- <a href="#" class="careerfy-job-like"><i class="fa fa-heart"></i></a> -->
+                                                    
                                                     </div>
                                        @endif  @endforeach
  

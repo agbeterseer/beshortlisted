@@ -82,13 +82,9 @@ border-color: white !important;
                            <div class="careerfy-select-style">
                                     <select name="s" required="required" >
                                     <option value=""><strong>Select Industry</strong></option>
-                                    @foreach($industries as $industry)
-                       
-                                 
+                                    @foreach($industries as $industry) 
                                              <option value="{{$industry->id}}"> <div style="width: 50px;"><strong>{{$industry->name}}</strong></div></option> 
-                                
-                                        @endforeach  
-                                        
+                                    @endforeach    
                                     </select>
                                 </div>
 
@@ -102,14 +98,13 @@ border-color: white !important;
 
                     </div>
                 </div>
-            </div>
-            <!-- Main Section -->
- <!-- Main Section -->
-            <div class="careerfy-main-section">
+            </div> 
+                <!-- Main Section -->
+            <div class="careerfy-main-section container2">
                 <div class="container">
                     <div class="row"> 
-                     <aside class="careerfy-column-4 careerfy-typo-wrap" >
-                            <div class="careerfy-typo-wrap" >
+                     <aside class="careerfy-column-4 careerfy-typo-wrap" style="display:inline-block" >
+                            <div class="careerfy-typo-wrap"> 
                                 <form class="careerfy-search-filter"> 
     <div class="careerfy-search-filter-wrap careerfy-search-filter-toggle" style="background-color: #ffffff;">
                                         <h2><a href="#" class="careerfy-click-btn"><strong>Location</strong></a></h2>
@@ -185,7 +180,7 @@ border-color: white !important;
                                 </form>
                             </div>
                         </aside>
-                                                      <section class="jobslist">
+                                                      <section class="jobslist" style="display:inline-block">
                                                 @include('jobs.load')
                                                       </section>
                     </div>

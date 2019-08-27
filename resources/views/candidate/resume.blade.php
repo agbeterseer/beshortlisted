@@ -71,7 +71,10 @@ height: 92px;
     border-radius: 40px;
     line-height: 1;
     margin-top: 1px;
-
+}
+.mb-5{
+  margin-bottom: 10px;
+}
    </style>
        
 
@@ -123,6 +126,7 @@ $check = 'second';
                 </div>
             </div>  -->
             @include('partials.employee_breadcomb')
+
 <div class="space">&nbsp;</div> 
 <div class="space">&nbsp;</div> 
   @if ($errors->any())
@@ -150,9 +154,9 @@ $check = 'second';
         </div>
         @endif
             <!-- Main Section -->
-            <div class="careerfy-main-section careerfy-dashboard-fulltwo">
+            <div class="careerfy-main-section careerfy-dashboard-fulltwo ">
                 <div class="container " id="page" >
-                    <div> 
+  
                     @include('partials.job_board_sidebar')
   
 
@@ -185,7 +189,7 @@ $check = 'second';
 @endforeach
 </div> -->
 
-    <div class="careerfy-column-9 pageaction">
+    <div class="careerfy-column-9 pageaction ">
     <div class="careerfy-typo-wrap"  style="background-color: #FFFFFF;">
     <div id="resume_title" class="title3" >
 <div class="actions">
@@ -230,95 +234,95 @@ $check = 'second';
 <div class="careerfy-employer-box-section" style="background-color: #FFFFFF;"> 
 
 @if($document)
-<div class="col-md-12 cv_content">  
-<div class="" id="user_profile"> 
- <div class="pageactionIn">
- <div class="title4">
-<span class="progressbar">
-<span style="width: 40%;"><span></span></span>
-</span>
+<div class="col-md-12 cv_content"  style="margin: 0px 0px 0px 20px;">  
 
-<div class="actions">
-<p class="editov2"><a class="edits" data-toggle="modal" data-style="slide-left" data-spinner-color="#333" href="{{route('edit.profile', [$document->id, $user_single_resume_by_date->id])}}">Edit</a></p>
+
+ 
+
+
+<div class="row mb-5">
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <strong>Age</strong>
     </div>
-<div class="user_name"> <h4 class="highlightable">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</h4> </div>
-</div>
+        <div class="col-md-6">
+      @if($document->age)<span class="detail highlightable">{{$document->age}}</span>@else<span class="detail highlightable">N/A</span>  @endif
+    </div>
+  </div>
+ </div>
+ 
+ <div class="row mb-5">
+  <div class="col-md-12">
+      <div class="col-md-6"><strong>Date of Birth</strong></div>
+        <div class="col-md-6">{{ date('M d, Y', strtotime($document->date_of_birth)) }}  </div>
+  </div> 
+  </div>
+ 
 
- <div class="overviewtitle2">
-<span class="ovtitle"><strong>Age</strong></span>
-@if($document->age)<span class="detail highlightable">{{$document->age}}</span>@else<span class="detail highlightable">N/A</span>  @endif
-</div>
+ <div class="row mb-5">
+  <div class="col-md-12">
+      <div class="col-md-6"><strong>Gender</strong></div>
+        <div class="col-md-6">{{$document->gender}}  </div>
+  </div> 
+  </div>
+ 
+ <div class="row mb-5">
+  <div class="col-md-12 mt-3">
+      <div class="col-md-6"><strong>Nationality</strong></div>
+        <div class="col-md-6">@foreach($countries as $country)  @if($country->code === $document->nationality) {{$country->name_en}} @endif @endforeach  </div>
+  </div> 
+ </div>
 
- <div class="overviewtitle2">
-<span class="ovtitle"><strong>Date of Birth</strong></span>
-<span class="detail highlightable">{{ date('M d, Y', strtotime($document->date_of_birth)) }}  </span>
-</div>
- <div class="overviewtitle2">
-<span class="ovtitle"><strong>Gender</strong></span>
-<span class="detail highlightable"> {{$document->gender}} </span>
-</div>
+ <div class="row mb-5">
+  <div class="col-md-12">
+      <div class="col-md-6"><strong>Email</strong></div>
+        <div class="col-md-6"> {{$document->email}} </div>
+  </div> 
+ </div>
 
- <div class="overviewtitle2">
-<span class="ovtitle"><strong> Nationality</strong></span>
-<span class="detail highlightable">  @foreach($countries as $country)  @if($country->code === $document->nationality) {{$country->name_en}} @endif @endforeach</span>
+ <div class="row mb-5">
+  <div class="col-md-12">
+      <div class="col-md-6"><strong>Willing to relocate:</strong></div>
+        <div class="col-md-6"> @if($document->relocate_nationaly){{$document->relocate_nationaly}} @else N/A  *
+@endif </div>
+  </div> 
+ </div>
+ 
+ <div class="row mb-5">
+  <div class="col-md-12">
+      <div class="col-md-6"><strong>Educational Level:</strong></div>
+        <div class="col-md-6">@if($document->educational_level) @foreach($educationallevels as $educationallevel)  
+@if($educationallevel->id == $document->educational_level) {{$educationallevel->name}} @endif @endforeach @else N/A *@endif
+ 
+  </div> 
 </div>
-
- <div class="overviewtitle2">
-<span class="ovtitle"><strong>Email</strong></span>
-<span class="detail highlightable"> {{$document->email}}</span>
-</div>
-
- <div class="overviewtitle2">
-<span class="ovtitle"><strong>Willing to relocate:</strong></span>
-@if($document->relocate_nationaly)<span class="detail highlightable">{{$document->relocate_nationaly}}   </span>@else
-<span class="detail highlightable required" >N/A  *</span>
-@endif
-</div>
-
-
- <div class="overviewtitle2">
-<span class="ovtitle"><strong>Educational Level:</strong></span>
-@if($document->educational_level)
-<span class="detail highlightable">
-@foreach($educationallevels as $educationallevel)  
-@if($educationallevel->id == $document->educational_level) {{$educationallevel->name}} @endif @endforeach</span> @else<span class="detail highlightable"> N/A *</span>@endif
 </div>
  
- <div class="overviewtitle2">
-<span class="ovtitle"><strong>Career Level:</strong></span>
-@if($document->career_level)<span class="detail highlightable"> @foreach($job_career_levelList as $job_career_level)   @if($job_career_level->id == $document->career_level) {{$job_career_level->name}}  @endif @endforeach </span>@else <span class="detail highlightable"> N/A</span> @endif
-</div>
+ <div class="row mb-5">
+  <div class="col-md-12">
+      <div class="col-md-6"><strong>Career Level:</strong></div>
+        <div class="col-md-6"> @if($document->career_level) @foreach($job_career_levelList as $job_career_level)   @if($job_career_level->id == $document->career_level) {{$job_career_level->name}}  @endif @endforeach >@else  N/A @endif </div>
+  </div> 
+ </div>
 
+ <div class="row mb-5">
+  <div class="col-md-12">
+      <div class="col-md-6"><strong>Minimum Salary:</strong></div>
+        <div class="col-md-6"> @if($document->minimum_salary){{$document->minimum_salary}} / Year @else
+ N/A *
+@endif </div>
+  </div> 
+ </div>
 
- <div class="overviewtitle2">
-<span class="ovtitle"><strong> Minimum Salary:</strong></span>
-@if($document->minimum_salary)<span class="detail highlightable">{{$document->minimum_salary}} / Year </span>@else
-<span class="detail highlightable"> N/A *</span>
-@endif
-</div>
-
-
- <div class="overviewtitle2">
-<span class="ovtitle"><strong>Availability:</strong></span>
-<span class="detail highlightable"> {{$document->availability}}</span>
-</div> 
- </div> 
+ <div class="row mb-5">
+  <div class="col-md-12">
+      <div class="col-md-6"><strong>Availability:</strong></div>
+        <div class="col-md-6"> {{$document->availability}} </div>
+  </div> 
 </div>
 </div>
 @else
-<!--  <div class="col-md-12 cv_content" >
-
-<div class="pageactionIn" id="education_topsection">
-
-<div class="apply_select_l select_add" id="summary_topsection">
-<a class="action"  data-toggle="modal" data-style="slide-left" data-spinner-color="#333" href="#static_summary">
-<span class="outer"><span class="line"><span class="inner"> 
- Add Profile
-</span></span></span></a>
-</div> 
- </div>
-</div>
- -->
+ 
 <div class="careerfy-candidate-resume-wrap">    
             <div class="careerfy-candidate-title"> <h4>
             <i class="careerfy-icon careerfy-mortarboard"></i> Profile 
@@ -605,7 +609,7 @@ $check = 'second';
                                           {{ csrf_field() }} 
                                           <input type="hidden" name="resume" value="{{$user_single_resume_by_date->id}}">
                                             <!-- <input type="hidden" name="section" value="skill"> -->
-                                            <div data-repeater-list="group-a">
+                                            <div data-repeater-list="group_a">
                                                 <div data-repeater-item class="mt-repeater-item">
                                                     <!-- jQuery Repeater Container -->
                                                     <div class="mt-repeater-input"> 
@@ -676,28 +680,36 @@ $check = 'second';
 <p class="editov2"><a  data-toggle="modal" data-style="slide-left"  href="{{ route('show.update', array('code'=>$educational->id, 'resume'=>$user_single_resume_by_date->id)) }}" class="edits">Edit</a></p>
  
 </div>
-
-<div class="overviewtitle2">
-<span class="ovtitle">Degree</span>
-<span class="detail">{{$educational->qualificaiton}}<strong> {{$educational->feild_of_study}}</strong></span>
-</div>
-
-<div class="overviewtitle2">
-<span class="ovtitle">Graduation period</span>
-<span class="highlightable">{{ date('M, Y', strtotime($dt)) }} - {{ date('M, Y', strtotime($ddt)) }}  ( {{$yer}} years, )</span>
  
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Degree</strong></span></div>
+        <div class="col-md-6">{{$educational->qualificaiton}} {{$educational->feild_of_study}}</div>  
+
+    </div>
 </div>
 
-<div class="overviewtitle2">
-<span class="ovtitle">School</span>
-<span class="highlightable">
-{{$educational->school_name}}
- </span>
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Graduation period</strong></span></div>
+        <div class="col-md-6">{{ date('M, Y', strtotime($dt)) }} - {{ date('M, Y', strtotime($ddt)) }}  ( {{$yer}} years, )</div>  
+
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>School</strong></span></div>
+        <div class="col-md-6">{{$educational->school_name}}</div>  
+
+    </div>
 </div>
 
-<div class="overviewtitle2">
-<span class="ovtitle">Country</span>
-<span class="highlightable"> @foreach($countries as $country)  @if($country->code === $educational->country) {{$country->name_en}} @endif @endforeach </span>
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Country</strong></span></div>
+        <div class="col-md-6"> @foreach($countries as $country)  @if($country->code === $educational->country) {{$country->name_en}} @endif @endforeach</div>  
+
+    </div>
 </div>
 
 </div>
@@ -854,48 +866,65 @@ Feild of Study:<span class="required">*</span>
 <p class="editov2"><a class="edits" href="{{ route('show.work_history', array('code'=>$work_history->id, 'resume'=>$user_single_resume_by_date->id)) }}">Edit</a></p>
 </div>
 
-<div class="overviewtitle2">
-<span class="ovtitle">Position Title</span>
-<span class="highlightable"><strong> {{$work_history->position_title}}  </strong></span>
+
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Position Title</strong></span></div>
+        <div class="col-md-6"> {{$work_history->position_title}}</div>  
+    </div>
 </div>
 
-<div class="overviewtitle2">
-<span class="ovtitle">Employment period</span>
-<span class="highlightable"> {{ date('M, Y', strtotime($dt)) }} - 
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Employment period</strong></span></div>
+        <div class="col-md-6">{{ date('M, Y', strtotime($dt)) }} - 
 @if($work_history->end_year === null && $work_history->end_month === null && $work_history->present == '1') Present
 @elseif($work_history->end_year === null && $work_history->end_month === null && $work_history->present == '2')
 Previous
 @else
- {{ date('M, Y', strtotime($ddt)) }}  ({{$yer}} year(s) ) @endif</span>
+ {{ date('M, Y', strtotime($ddt)) }}  ({{$yer}} year(s) ) @endif</div>  
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Country</strong></span></div>
+        <div class="col-md-6"> @foreach($countries as $country) @if($work_history->country === $country->code) {{$country->name_en}} @endif @endforeach</div>  
+    </div>
 </div>
 
-<div class="overviewtitle2">
-<span class="ovtitle">Company</span>
-<span class="highlightable">{{$work_history->company_name}}</span>
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Country</strong></span></div>
+        <div class="col-md-6"> @foreach($countries as $country) @if($work_history->country === $country->code) {{$country->name_en}} @endif @endforeach</div>  
+    </div>
 </div>
 
-<div class="overviewtitle2">
-<span class="ovtitle">Country</span>
-<span class="highlightable"> @foreach($countries as $country) @if($work_history->country === $country->code) {{$country->name_en}} @endif @endforeach</span>
-</div> 
- 
-<div class="overviewtitle2">
-<span class="ovtitle">Industry</span>
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Industry</strong></span></div>
+        <div class="col-md-6"><span class="ovtitle">Industry</span>
 @if(!$work_history->industries->isEmpty())
-@foreach($work_history->industries as $industry) <span class="highlightable"> {{$industry->name}}  </span>@endforeach @else<span class="highlightable">N/A </span>  @endif 
-</div> 
+@foreach($work_history->industries as $industry) <span class="highlightable"> {{$industry->name}}  </span>@endforeach @else<span class="highlightable">N/A </span>  @endif</div>  
+    </div>
+</div>
 
-<div class="overviewtitle2">
-<span class="ovtitle">Position Type</span>
-@if(!$work_history->industryprofessions->isEmpty())
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Position Type</strong></span></div>
+        <div class="col-md-6">@if(!$work_history->industryprofessions->isEmpty())
 @foreach($work_history->industryprofessions as $profession) <span class="highlightable">{{$profession->name}}  </span>
  @endforeach @else <span class="highlightable">N/A </span> @endif</div>  
-<div class="overviewtitle2">
-<span class="ovtitle">Position Description</span>
-@if($work_history->responsibilities )
-<span class="job_description detail highlightable">
- {!! $work_history->responsibilities !!} </span> @else<span class="highlightable">N/A</span>  @endif
+    </div>
 </div>
+
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Position Description</strong></span></div>
+        <div class="col-md-6"> @if($work_history->responsibilities ) {!! $work_history->responsibilities !!} @else<span class="highlightable">N/A</span>  @endif</div>  
+    </div>
+</div>
+
+
 </div>
 @endforeach
 </div>
@@ -973,15 +1002,21 @@ Previous
 <div class="actions">
 <p class="editov2"><a class="edits" href="{{route('edit.certificate', $jobcertification->id)}}">Edit</a></p>
 </div>
+ 
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Certification Name</strong></span></div>
+        <div class="col-md-6">{{$jobcertification->name}} </div>  
+    </div>
+</div>
 
-<div class="overviewtitle2">
-<span class="ovtitle">Certification Name</span>
-<span class="highlightable"><strong> {{$jobcertification->name}} </strong></span>
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Date Received</strong></span></div>
+        <div class="col-md-6">{{ date('M, Y', strtotime($jobcertification->date_received)) }}</div>  
+    </div>
 </div>
-<div class="overviewtitle2">
-<span class="ovtitle">Date Received</span>
-<span class="highlightable">{{ date('M, Y', strtotime($jobcertification->date_received)) }}</span>
-</div>
+
 
 </div>
 @endforeach
@@ -999,32 +1034,35 @@ Previous
 <h4>Personal Information</h4>
 </div>
 
-<div class="overviewtitle2 overviewtype3 several2">
-<span class="ovtitle">Interests</span>
-<div class="highlightable">
-    <textarea class="form-control textarea" placeholder="" name="association" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; background-color: #ffffff; " maxlength="120" disabled="disabled"> {{$person_info->interest}} </textarea> 
-</div>
-</div>
-
-<div class="overviewtitle2 overviewtype3 several2">
-<span class="ovtitle">Associations</span>
-<div class="highlightable">
-  <textarea class="form-control textarea" placeholder="" name="association" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; background-color: #ffffff; " maxlength="120" disabled="disabled"> {{$person_info->association}} </textarea>
-
-</div>
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Interests</strong></span></div>
+        <div class="col-md-6">    {{$person_info->interest}}  </div>  
+    </div>
 </div>
 
-<div class="overviewtitle2 overviewtype3 several2">
-<span class="ovtitle">Awards</span>
-<div class="highlightable">
-    <textarea class="form-control textarea" placeholder="" name="award" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; background-color: #ffffff; " maxlength="120" disabled="disabled">{{$person_info->award}}</textarea>
+<div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Associations</strong></span></div>
+        <div class="col-md-6"> {{$person_info->association}}   </div>  
+    </div>
 </div>
+ 
+ <div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Awards</strong></span></div>
+        <div class="col-md-6"> {{$person_info->award}}   </div>  
+    </div>
 </div>
-
-<div class="overviewtitle2 overviewtype3 several2">
-<span class="ovtitle">Training</span>
-<div class="highlightable">   <textarea class="form-control textarea" placeholder="" name="training" required="required" style="margin-top: 0px; margin-bottom: 0px; height: 100px; background-color: #ffffff; " maxlength="120" disabled="disabled"> {{$person_info->training}} </textarea> </div>
+ 
+ <div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Training</strong></span></div>
+        <div class="col-md-6"> {{$person_info->training}}   </div>  
+    </div>
 </div>
+ 
+ 
 <div class="overviewtitle2 overviewtype3 several2">
 <span class="ovtitle">Personal page</span>
 <span class="highlightable"><a class="breakword" href="{{$person_info->personal_page}}" rel="external">{{$person_info->personal_page}}</a></span>
@@ -1142,26 +1180,41 @@ Previous
 <p class="editov2"><a class="edits" href="{{route('edit.referee', $referee->id)}}">Edit</a></p>
 </div>
 
-<div class="overviewtitle2">
-<span class="ovtitle">Name</span>
-<span class="highlightable"> {{$referee->name}} </span>
+ <div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Name</strong></span></div>
+        <div class="col-md-6"> {{$referee->name}}   </div>  
+    </div>
 </div>
-<div class="overviewtitle2">
-<span class="ovtitle">Position</span>
-<span class="highlightable">{{$referee->position }}</span>
+
+ <div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Position</strong></span></div>
+        <div class="col-md-6"> {{$referee->position }} </div>  
+    </div>
 </div>
-<div class="overviewtitle2">
-<span class="ovtitle">Office Address</span>
-<span class="highlightable">{{$referee->office_address}}</span>
+ 
+  <div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Office Address</strong></span></div>
+        <div class="col-md-6">{{$referee->office_address}}</div>  
+    </div>
 </div>
-<div class="overviewtitle2">
-<span class="ovtitle">Phone Number</span>
-<span class="highlightable">{{  $referee->phone_number }}</span>
+ 
+  <div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Phone Number</strong></span></div>
+        <div class="col-md-6">{{  $referee->phone_number }}</div>  
+    </div>
 </div>
-<div class="overviewtitle2">
-<span class="ovtitle">Email</span>
-<span class="highlightable">{{  $referee->email }}</span>
+ 
+   <div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Email</strong></span></div>
+        <div class="col-md-6">{{  $referee->email }}</div>  
+    </div>
 </div>
+
 </div>
 @endforeach
 </div>

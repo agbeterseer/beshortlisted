@@ -2795,7 +2795,6 @@ public function approvejobpost($id){
 
     if ($employer_package) {
 
- 
     $remaining_units = $employer_package->units - 1;
 
     $remaining_jobs = $employer_package->jobs_remaining - 1;

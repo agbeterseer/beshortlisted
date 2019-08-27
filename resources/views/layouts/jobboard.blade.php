@@ -27,7 +27,12 @@
 .singup a:hover {
  color: #ffffff;
 }
-
+ .container2 {  
+    display: grid;  
+white-space:nowrap;
+     float: left;  
+overflow-x:auto;
+}
 </style>
    <style type="text/css">
 table {

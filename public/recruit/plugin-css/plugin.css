@@ -177,9 +177,23 @@
 }
 @media screen and (min-width: 768px) {
   .showHide  { display: block; }
+        .mobileShow  { display: inline-block;}
   #leftside > button { display: none; }
+   .industry_text{
+    justify-content: center;
+    margin: 0px 0px 0px 80px !important;
+ }
+
 }
 
+@media screen and (max-width: 568px) {
+ .mobileShow  { display: inline-block;}
+ .industry_text{
+    justify-content: center;
+    margin: 0px 0px 0px 50px !important;
+ }
+
+}
 @media screen and (max-width: 200px) {
 .hide_right{
     display: none;
@@ -266,6 +280,22 @@ margin-top: 0px;
   .hide_inner  { display: inline-block; font-size: small;}
   #leftside > button { display: none; } 
 }
+@media only screen and (max-width : 13309px) {
+  .mobileShow  { display: none;}
+  #leftside > button { display: none; } 
+}
+
+
+@media  screen and (min-width : 109px) {
+  .hide_inner_in  { display:inline-block;}
+  #leftside > button { display: none; } 
+}
+/*.mobileShow {display: none;} /*/
+@media only screen 
+    and (min-device-width : 320px) 
+    and (max-device-width : 420px){ 
+      .mobileShow {display: inline-block;}
+  }
 
 /* Medium Devices, Desktops */
 @media only screen and (max-width : 992px) {
