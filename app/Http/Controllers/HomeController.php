@@ -417,8 +417,8 @@ public function DisplayTemplates()
       // view assessement Questions
       $job_assessments = DB::table('job_assessments')->where('job_id', $id)->get();
       $job_requirements = DB::table('job_requirements')->where('job_id', $id)->get();
-      $get_Job_by_common_industries = DB::table('tags')->where('industry',$tag->industry)->orWhere('job_category',$tag->job_category)->orWhere('salary_range', $tag->salary_range)->get();
-      $get_Job_by_common_industries_similler = DB::table('tags')->where('industry',$tag->industry)->where('job_category',$tag->job_category)->where('salary_range', $tag->salary_range)->get();
+      $get_Job_by_common_industries = Tag::latest()->where('industry',$tag->industry)->orWhere('job_category',$tag->job_category)->orWhere('salary_range', $tag->salary_range)->paginate(3);
+      $get_Job_by_common_industries_similler = Tag::latest()->where('industry',$tag->industry)->where('job_category',$tag->job_category)->where('salary_range', $tag->salary_range)->paginate(3);
       $get_all_user_list = User::all();
       $menus = $this->displayMenu();
       $posts = $this->listPages();

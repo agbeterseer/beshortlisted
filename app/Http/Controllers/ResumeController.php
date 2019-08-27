@@ -912,12 +912,12 @@ try {
 }
     public function AddSkills(Request $request)
     {
-      //dd($request->all());
+     //dd($request->all());
         // get current user ID
        $user =  Auth::user();
         // collect values from the client
         $skills = $request->multi;
-        $resume = $request->resume;
+        $resume = $request->resume; 
         $group_a = $request->group_a;
         $section = $request->section;
        $resume = RecruitResume::findOrFail($resume);

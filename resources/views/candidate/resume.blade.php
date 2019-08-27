@@ -301,7 +301,7 @@ $check = 'second';
  <div class="row mb-5">
   <div class="col-md-12">
       <div class="col-md-6"><strong>Career Level:</strong></div>
-        <div class="col-md-6"> @if($document->career_level) @foreach($job_career_levelList as $job_career_level)   @if($job_career_level->id == $document->career_level) {{$job_career_level->name}}  @endif @endforeach >@else  N/A @endif </div>
+        <div class="col-md-6"> @if($document->career_level) @foreach($job_career_levelList as $job_career_level)   @if($job_career_level->id == $document->career_level) {{$job_career_level->name}}  @endif @endforeach @else  N/A @endif </div>
   </div> 
  </div>
 
@@ -614,7 +614,7 @@ $check = 'second';
                                                     <!-- jQuery Repeater Container -->
                                                     <div class="mt-repeater-input"> 
                                                     <div class="mt-repeater">
-                                                        <div data-repeater-list="group_b">
+                                                     
   <div data-repeater-item class="careerfy-row careerfy-employer-profile-form">
     <div class="careerfy-column-3"> </div>
    <div class="careerfy-column-6">
@@ -626,7 +626,7 @@ $check = 'second';
 </a> </div>
  </div>
  
-                                                        </div> 
+                                                     
                                                   
                                                         </div> 
                                                         </div>
@@ -1061,12 +1061,14 @@ Previous
         <div class="col-md-6"> {{$person_info->training}}   </div>  
     </div>
 </div>
- 
- 
-<div class="overviewtitle2 overviewtype3 several2">
-<span class="ovtitle">Personal page</span>
-<span class="highlightable"><a class="breakword" href="{{$person_info->personal_page}}" rel="external">{{$person_info->personal_page}}</a></span>
+ <div class="row mb-5">
+    <div class="col-md-12">
+        <div class="col-md-6"><span class="ovtitle"><strong>Personal page</strong></span></div>
+        <div class="col-md-6"> <a class="breakword" href="{{$person_info->personal_page}}" rel="external">{{$person_info->personal_page}}</a>  </div>  
+    </div>
 </div>
+  
+ 
 
 </div>
  </div>
