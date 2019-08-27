@@ -64,7 +64,11 @@
                                                     <ul>
                                                         <li><i class="careerfy-icon careerfy-maps-and-flags"></i> <a href="#">{{$job->country}},</a> <a href="#">{{$job->city}}</a></li>
                                                         <br>
-                                                        <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#">@foreach($industry_professions as $profession) @if($profession->id === $job->job_category){{$profession->name}} @endif @endforeach</a></li>
+                       @foreach($industry_professions as $profession)
+                                                         @if($profession->id === $job->job_category) 
+                                                        <li class="ellipsis" title="{{$profession->name}}"><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> <a href="#"> 
+{{ mb_strimwidth($profession->name, 0, 22, "...") }}
+                                                         </a></li>@endif @endforeach
                                              <a href="{{route('apply.job', $job->id)}}" class="careerfy-option-btn"> Apply </a>    </ul>
                                                 
                                                     </div>
