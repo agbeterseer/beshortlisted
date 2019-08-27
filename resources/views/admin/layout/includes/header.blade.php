@@ -5,7 +5,7 @@
                 <div class="page-header-inner">
                     <!-- BEGIN LOGO -->
                     <div class="page-logo">                      
-                <img src="/logo/rhizome.jpg" alt="Logo"  width="90px" height="30px"  class="logo-default" /> 
+                <img src="logo/logo2.jpg" alt="Logo"  width="90px" height="30px"  class="logo-default" /> 
                         <div class="menu-toggler sidebar-toggler">
                             <span></span>
                         </div>

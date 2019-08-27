@@ -2324,7 +2324,7 @@ function cutText($str, $limit, $brChar = ' ', $pad = '...')
       $job_by_candidate_list = $this->GetAvailableJobs();
       $job_category_list = $this->GetJobcategory();
       $cities = DB::table('cities')->get();
-      $tags = DB::table('tags')->where('status',1)->where('active', 1)->get();
+      $tags = Tag::latest()->where('status',1)->where('active', 1)->paginate(3);
       $countries = DB::table('countries')->get();
    $job_applied_by_candidate = DB::table('applications')->where('user_id', $user->id)
             ->join('tags', 'tags.id', '=', 'applications.tag_id')
