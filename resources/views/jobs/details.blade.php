@@ -247,7 +247,8 @@
                                 </div>
                                 <div class="widget widget_view_jobs white_background">
                                 <!-- get employee that posted this job -->
-                                    <div class="careerfy-widget-title"><h2>More Jobs from  @foreach($get_all_user_list as $user) @if($user->id === $tag->client) {{$user->name}}@endif @endforeach</h2></div>
+                                    <div class="careerfy-widget-title"><h2 style="margin: 10px 10px 0px 15px;">
+                                    More Jobs from  @foreach($get_all_user_list as $user) @if($user->id === $tag->client) {{$user->name}}@endif @endforeach</h2></div>
                                     <ul>
                                     @foreach($get_Job_by_common_industries_similler as $similar_job)
                                         <li>
