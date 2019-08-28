@@ -164,7 +164,7 @@
                     </tr>
 
                     <tr>
-                        <td align="center">
+            <!--             <td align="center">
 
                             <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
 
@@ -191,7 +191,7 @@
                                     </td>
                                 </tr>
                             </table>
-                        </td>
+                        </td> -->
                     </tr>
 
                     <tr>
@@ -247,7 +247,7 @@
                         <td align="left">
                             <table border="0" width="590" align="center" cellpadding="0" cellspacing="0" class="container590">
                                 <tr>
-                                    <td align="left" style="color: #000000; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
+                                    <td align="left" style="color: #000000 !important; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
                                         <!-- section text ======-->
 
                                         <p style="line-height: 24px; margin-bottom:15px;">
@@ -256,10 +256,10 @@
 
                                         </p>
                                         <p style="line-height: 24px;margin-bottom:15px;">
-                                    <strong> {{ $content['from'] }}</strong>  have sent your a job link that might interest you 
-                                          
-                                            
-                                                Kindly follow the link to apply for the position.
+                                   You have a job link send to you that might interest you from  
+                                   <strong> {{ $content['from'] }}</strong>
+                                                                            
+                                    Kindly follow the link to apply for the position.
                                             
                                         </p>
                                         <p style="line-height: 24px; margin-bottom:20px;">

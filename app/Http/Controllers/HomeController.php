@@ -425,6 +425,10 @@ public function DisplayTemplates()
       $menus = $this->displayMenu();
       $posts = $this->listPages();
 
+      if ($success) {
+        Session::flash('Job link sent successfully');
+      }
+
      return view('employer.job_details', compact('tag','employement_terms', 'jobcareer_levels', 'industries', 'educational_levels', 'skillsets', 'job_assessments', 'job_requirements', 'get_Job_by_common_industries', 'get_Job_by_common_industries_similler', 'cities', 'get_all_user_list', 'industry_professions', 'menus', 'posts'), array('user' => Auth::user()));
     }
 
@@ -451,10 +455,14 @@ public function DisplayTemplates()
  
   if ($job_title) {
     $when = Carbon::now()->addSeconds(15); 
-   
+   try{
         
         Mail::to($to)->later($when, new EmailAFriend($content));
- 
+        
+        return redirect()->back()->withMessage('success', 'Job link sent successfully');
+     } catch (Exception $e) {
+            return redirect()->back()->withErrors(['error'=> 'something went wrong']); 
+    } 
   } 
 
  return redirect()->back();

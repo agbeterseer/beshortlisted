@@ -238,7 +238,9 @@ $check = 'second';
 
 
  
-
+<div class="actions">
+<p class="editov2"><a class="edits" data-toggle="modal" data-style="slide-left" data-spinner-color="#333" href="{{route('edit.profile', [$document->id, $user_single_resume_by_date->id])}}">Edit</a></p>
+    </div>
 
 <div class="row mb-5">
   <div class="col-md-12">
