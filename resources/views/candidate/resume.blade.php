@@ -2339,14 +2339,15 @@ Responsibilities and Achievements
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 <h4 class="modal-title">Personal Information</h4>
 </div>
+<form class="form-horizontal" action="{{ route('personal.information') }}" method="post" role="form">
+{{ csrf_field() }}
 <div class="modal-body">
 
 <!-- BEGIN EXAMPLE TABLE PORTLET-->
 <!-- <div class="portlet light bordered">
 <div class="portlet-body"> -->
  <!-- <pre> Specifications</pre> -->
-<form class="form-horizontal" action="{{ route('personal.information') }}" method="post" role="form">
-{{ csrf_field() }}
+
 <input type="hidden" name="resume" value="{{$user_single_resume_by_date->id}}">
 <input type="hidden" value="personalinfor" name="pinfor">
 <!-- <form role="form"> -->

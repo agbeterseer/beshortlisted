@@ -6,10 +6,10 @@
   'questions' => '',
   'top_re' => '',
   'all_re' => '',
-  'sett' => '',
+  'sett' => 'active open',
   'candidate' => '',
   'policy' => '',
-  'package' => 'active',
+  'package' => '',
       'page' => '',
   'role' => '',
   'user' => ''

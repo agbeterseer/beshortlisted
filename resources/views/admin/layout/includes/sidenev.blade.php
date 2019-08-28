@@ -57,8 +57,218 @@
                               </li>
 
                               @endif
+                                    <li class="nav-item">
+                                  <a href="javascript:;" class="nav-link nav-toggle">
+                                      <i class="icon-puzzle"></i>
+                                      <span class="title">Menu</span>
+                                      <span class="arrow"></span>
+                                  </a>
+                                   <ul class="sub-menu">
+                                   <li class="nav-item">
+                                      <a href="{{ route('menu.index') }}" class="nav-link "> 
+                                     <span class="title">All Menu</span>
+                                      </a>
+                                      </li>
+                                          <li class="nav-item ">
+                                          <a href="{{ route('menu.create') }}" class="nav-link ">
+                                              <span class="title">Add Menu</span>
+                                          </a>
+                                      </li> 
+                                                   
+                                  </ul> 
+                      </li>
+                     
 
-                              @if ($user->is_admin())
+                                    <li class="nav-item">
+                                  <a href="javascript:;" class="nav-link nav-toggle">
+                                      <i class="icon-puzzle"></i>
+                                      <span class="title">Pages</span>
+                                      <span class="arrow"></span>
+                                  </a>
+                                   <ul class="sub-menu">
+                                   <li class="nav-item ">
+                                      <a href="{{ route('pages.index') }}" class="nav-link "> 
+                                     <span class="title">All Pages</span>
+                                      </a>
+                                
+                                      </li>
+                                  <li class="nav-item ">
+                                          <a href="{{ route('pages.create') }}" class="nav-link ">
+                                              <span class="title">Add Page</span>
+                                          </a>
+                                      </li>  
+                                <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
+                                          <a href="{{route('policies.index')}}" class="nav-link ">
+                                        <span class="title">@lang('cvmanagement.policies.title') </span>
+                                          </a>
+                                      </li> 
+                             <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
+                                     <a href="{{route('page_infor')}}" class="nav-link ">
+                                        <span class="title">Page Information </span>
+                                          </a>
+                                </li>
+                                  <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
+                                     <a href="{{route('policies.index')}}" class="nav-link ">
+                                        <span class="title">Employer </span>
+                                          </a>
+                                </li>         
+                                  </ul>
+                                </li>
+                                <li class="nav-item">
+                                  <a href="javascript:;" class="nav-link nav-toggle">
+                                      <i class="icon-puzzle"></i>
+                                      <span class="title">Job Post</span>
+                                      <span class="arrow"></span>
+                                  </a>
+                                   <ul class="sub-menu">
+                                   <li class="nav-item ">
+                                      <a href="{{ route('tag.index') }}" class="nav-link "> 
+                                     <span class="title">All Job Post</span>
+                                      </a>
+                                
+                                      </li>
+                        <li class="nav-item ">
+                                          <a href="{{ route('tag.create') }}" class="nav-link ">
+                                              <span class="title">Add New</span>
+                                          </a>
+                                      </li> 
+                                  </ul>
+                                       <!--  <a href="{{ url('/register') }}">Register</a>  -->
+                      
+                               </li>
+                          <li class="nav-item{{ $request->segment(1) == 'package' ? 'active' : '' }} " >
+                                  <a href="javascript:;" class="nav-link nav-toggle">
+                                      <i class="icon-puzzle"></i>
+                                      <span class="title">Packages</span>
+                                      <span class="arrow"></span>
+                                  </a>
+                                   <ul class="sub-menu">
+                                   <li class="nav-item">
+                                      <a href="{{ route('plans.index') }}" class="nav-link "> 
+                                     <span class="title">All Packages</span>
+                                      </a>
+                                
+                                      </li>
+                                          <li class="nav-item ">
+                                          <a href="{{ route('plans.create') }}" class="nav-link ">
+                                              <span class="title">Add Package</span>
+                                          </a>
+                                      </li> 
+                                                   
+                                  </ul> 
+                              </li>
+ 
+                          <li class="nav-item {{ $request->segment(1) == 'resume' ? 'active' : '' }} ">
+                                  <a href="javascript:;" class="nav-link nav-toggle">
+                                      <i class="icon-settings"></i>
+                                      <span class="title">Resume Builder</span>
+                                      <span class="arrow"></span>
+                                  </a>
+                                  <ul class="sub-menu">
+                                  
+                                      <li class="nav-item ">
+                                          <a href="{{route('resume.index')}}" class="nav-link ">
+                                        <span class="title">Templates </span>
+                                          </a>
+                                      </li>
+
+                                  <li class="nav-item ">
+                                          <a href="{{route('resume.create')}}" class="nav-link ">
+                                        <span class="title">Add Template </span>
+                                          </a>
+                                      </li>
+                                    <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
+                                          <a href="{{route('policies.index')}}" class="nav-link ">
+                                        <span class="title">@lang('cvmanagement.policies.title') </span>
+                                          </a>
+                                      </li>
+
+                                    </ul> 
+                                  </li>  
+                           
+                                   
+                              <li class="nav-item">
+                                  <a href="javascript:;" class="nav-link nav-toggle">
+                                      <i class="icon-settings"></i>
+                                      <span class="title">Extra</span>
+                                      <span class="arrow"></span>
+                                  </a>
+                                  <ul class="sub-menu">
+                                  
+                                      <li class="nav-item ">
+                                          <a href="{{route('backupsys.importExport')}}" class="nav-link ">
+                                        <span class="title">Export CSV </span>
+                                          </a>
+                                      </li>
+
+                                  <li class="nav-item ">
+                                          <a href="{{route('backupsys.backups')}}" class="nav-link ">
+                                        <span class="title">Back up cv </span>
+                                          </a>
+                                      </li>
+                                    <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
+                                          <a href="{{route('policies.index')}}" class="nav-link ">
+                                        <span class="title">@lang('cvmanagement.policies.title') </span>
+                                          </a>
+                                      </li> 
+                                  <li class="nav-item {{ $request->segment(1) == 'fields-of-study' ? 'active' : '' }}">
+                                          <a href="{{route('create.field')}}" class="nav-link ">
+                                        <span class="title">@lang('cvmanagement.fields-of-study.title') </span>
+                                          </a>
+                                      </li> 
+                                    <li class="nav-item {{ $request->segment(1) == 'contact' ? 'active' : '' }}">
+                                          <a href="{{route('show.contacts')}}" class="nav-link ">
+                                        <span class="title">@lang('cvmanagement.contact.title') </span>
+                                          </a>
+                                      </li> 
+                                       <li class="nav-item ">
+                                          <a href="{{route('banner.index')}}" class="nav-link ">
+                                        <span class="title">Banner </span>
+                                          </a>
+                                      </li> 
+                                     <li class="nav-item ">
+                                          <a href="{{route('aboutus.index')}}" class="nav-link ">
+                                        <span class="title">AboutUs </span>
+                                          </a>
+                                      </li> 
+                                  <li class="nav-item ">
+                                          <a href="{{route('frequently.index')}}" class="nav-link ">
+                                        <span class="title">Frequently Questions </span>
+                                          </a>
+                                      </li> 
+                                        <li class="nav-item ">
+                                          <a href="{{route('admin.tickets')}}" class="nav-link ">
+                                        <span class="title">Support Tickets </span>
+                                          </a>
+                                      </li>
+                                    <li class="nav-item ">
+                                          <a href="{{route('show.industry_settings')}}" class="nav-link ">
+                                        <span class="title">Industries </span>
+                                          </a>
+                                      </li>   
+                                    </ul> 
+                                  </li> 
+                                   <li class="nav-item  ">
+                                  <a href="javascript:;" class="nav-link nav-toggle">
+                                      <i class="icon-settings"></i>
+                                      <span class="title">Send Email</span>
+                                      <span class="arrow"></span>
+                                  </a>
+                                  <ul class="sub-menu"> 
+                                      <li class="nav-item ">
+                                          <a href="{{route('show.uploademail')}}" class="nav-link ">
+                                        <span class="title">Upload Emails </span>
+                                          </a>
+                                      </li>
+                           <!--        <li class="nav-item ">
+                                          <a href="{{route('backupsys.backups')}}" class="nav-link ">
+                                        <span class="title">Back up cv </span>
+                                          </a>
+                                      </li> -->
+                              </ul>
+
+                                  </li>
+                                           @if ($user->is_admin())
                       <li class="nav-item  " id="roleid">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-briefcase"></i>
@@ -95,171 +305,6 @@
                       
                               </li>
                               @endif
-
-                                  <li class="nav-item">
-                                  <a href="javascript:;" class="nav-link nav-toggle">
-                                      <i class="icon-docs"></i>
-                                      <span class="title">Document Management</span>
-                                      <span class="arrow"></span>
-                                  </a>
-                                  <ul class="sub-menu">
-                                   <li class="nav-item">
-                                          <a href="{{route('profession.index')}}" class="nav-link ">
-                                              <span class="title"> List Professions</span>
-                                          </a>
-                                      </li>
-                                  
-                                      <li class="nav-item ">
-                                          <a href="{{route('document.index')}}" class="nav-link ">
-                                              <span class="title">All CV's</span>
-                                          </a>
-                                      </li>
-                                          <li class="nav-item ">
-                                          <a href="{{route('document.uploadfromcsv')}}" class="nav-link ">
-                                              <span class="title">Upload CV From CSV</span>
-                                          </a>
-                                      </li>
-                                       <li class="nav-item">
-                                          <a href="{{route('document.search_category')}}" class="nav-link ">
-                                              <span class="title">Document Search</span>
-                                          </a>
-                                      </li>
-                                     <li class="nav-item">
-                                          <a href="{{route('shortlist.index')}}" class="nav-link ">
-                                              <span class="title"> Shortlist</span>
-                                          </a>
-                                      </li>
-<!--                                          <li class="nav-item">
-                                          <a href="{{route('search.index')}}" class="nav-link ">
-                                              <span class="title"> Advance Search</span>
-                                          </a>
-                                      </li> -->
-                                    
-                                  </ul>
-                               
-                              </li>
-                                <li class="nav-item">
-                                  <a href="javascript:;" class="nav-link nav-toggle">
-                                      <i class="icon-puzzle"></i>
-                                      <span class="title">Job Post</span>
-                                      <span class="arrow"></span>
-                                  </a>
-                                   <ul class="sub-menu">
-                                   <li class="nav-item ">
-                                      <a href="{{ route('tag.index') }}" class="nav-link "> 
-                                     <span class="title">All Job Post</span>
-                                      </a>
-                                
-                                      </li>
-                        <li class="nav-item ">
-                                          <a href="{{ route('tag.create') }}" class="nav-link ">
-                                              <span class="title">Add New</span>
-                                          </a>
-                                      </li> 
-                                  </ul>
-                                       <!--  <a href="{{ url('/register') }}">Register</a>  -->
-                      
-                              </li>
-      <li class="nav-item">
-        <a href="javascript:;" class="nav-link nav-toggle">
-            <i class="icon-settings"></i>
-            <span class="title">Online Test</span>
-            <span class="arrow"></span>
-        </a>
-      <ul class="sub-menu">
-                                  
-      <li class="{{ $request->segment(1) == 'tests' ? 'active' : '' }}">
-                <a href="{{ route('tests.index') }}">
-                    <i class="fa fa-gears"></i>
-                    <span class="title">@lang('cvmanagement.test.new')</span>
-                </a>
-            </li>
-
-            <li class="{{ $request->segment(1) == 'results' ? 'active' : '' }}">
-                <a href="{{ route('results.index') }}">
-                    <i class="fa fa-gears"></i>
-                    <span class="title">@lang('cvmanagement.results.title')</span>
-                </a>
-            </li>
-
-            
-            <li class="{{ $request->segment(1) == 'topics' ? 'active' : '' }}">
-                <a href="{{ route('topics.index') }}">
-                    <i class="fa fa-gears"></i>
-                    <span class="title">@lang('cvmanagement.topics.title')</span>
-                </a>
-            </li>
-            <li class="{{ $request->segment(1) == 'questions' ? 'active' : '' }}">
-                <a href="{{ route('questions.index') }}">
-                    <i class="fa fa-gears"></i>
-                    <span class="title">@lang('cvmanagement.questions.title')</span>
-                </a>
-            </li>
-            <li class="{{ $request->segment(1) == 'questions_options' ? 'active' : '' }}">
-                <a href="{{ route('questions_options.index') }}">
-                    <i class="fa fa-gears"></i>
-                    <span class="title">@lang('cvmanagement.questions-options.title')</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-users"></i>
-                    <span class="title">@lang('cvmanagement.user-management.title')</span>
-                    <span class="fa arrow"></span>
-                </a>
-       
-            </li>
-          
-                                    </ul>
-
-                                  </li>
-                           
-                                   
-                              <li class="nav-item  ">
-                                  <a href="javascript:;" class="nav-link nav-toggle">
-                                      <i class="icon-settings"></i>
-                                      <span class="title">Settings</span>
-                                      <span class="arrow"></span>
-                                  </a>
-                                  <ul class="sub-menu">
-                                  
-                                      <li class="nav-item ">
-                                          <a href="{{route('backupsys.importExport')}}" class="nav-link ">
-                                        <span class="title">Back up cv </span>
-                                          </a>
-                                      </li> 
-                                  <li class="nav-item ">
-                                          <a href="{{route('backupsys.backups')}}" class="nav-link ">
-                                        <span class="title">Back up cv </span>
-                                          </a>
-                                      </li>
-                                    <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
-                                          <a href="{{route('policies.index')}}" class="nav-link ">
-                                        <span class="title">@lang('cvmanagement.policies.title') </span>
-                                          </a>
-                                      </li> 
-                                    </ul> 
-                                  </li> 
-                                   <li class="nav-item  ">
-                                  <a href="javascript:;" class="nav-link nav-toggle">
-                                      <i class="icon-settings"></i>
-                                      <span class="title">Send Email</span>
-                                      <span class="arrow"></span>
-                                  </a>
-                                  <ul class="sub-menu"> 
-                                      <li class="nav-item ">
-                                          <a href="{{route('show.uploademail')}}" class="nav-link ">
-                                        <span class="title">Upload Emails </span>
-                                          </a>
-                                      </li>
-                           <!--        <li class="nav-item ">
-                                          <a href="{{route('backupsys.backups')}}" class="nav-link ">
-                                        <span class="title">Back up cv </span>
-                                          </a>
-                                      </li> -->
-                              </ul>
-
-                                  </li>
                          <!-- END SIDEBAR MENU -->
                           <!-- END SIDEBAR MENU -->
                      </div>

@@ -189,14 +189,43 @@
                                     <input type="submit" name="" value="Apply" class="careerfy-applyjob-btn">
                                     <!-- <span style="color: red;">Application ends in 4d 5h 3m</span> -->
                                     <div class="careerfy-applywith-title"><small><!-- OR apply with --></small></div>
-                                   <!--  <p>Know someone who would be perfect for  this role this role? Be a pal, let them know.</p> -->
+                                    <p>Know someone who would be perfect for  this role this role? Be a pal, let them know.</p>
                                      
                                     </div>
                                
                         
                                 </div>
                                </form> 
-                                         <!--   <a href="#" class="careerfy-sendmessage-btn"><i class="careerfy-icon careerfy-envelope"></i> Send a message</a> -->
+                                  <a href="#" class="careerfy-sendmessage-btn"><i class="careerfy-icon careerfy-envelope"></i> Send a message</a>
+                                            <div class="btn-group">
+           <button class="btn btn-xs btn-primary" type="button" data-toggle="modal" data-target="#myModal-{{$tag->id}}"> Assign.. <i class="fa fa-angle-down"></i> </button>                                   
+        <div class="modal fade" id="myModal-{{$tag->id}}" tabindex="1" role="dialog" aria-labelledby="myModalLabel" >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+                 <span aria-hidden="true"></span>   </button>
+            <h4 class="modal-title" id="myModalLabel" style="margin-left: 165px;">{{$tag->job_title}}</h4>
+                        </div>
+                        <div class="modal-body">
+                    <form action="" method="post" role="form" id="role-form-{{$tag->id}}">
+                            {{csrf_field()}}
+                            {{method_field('PATCH')}}
+
+                        <div class="form-group" style="margin-left: 185px;">
+                          note:
+                      
+                        </form>
+                      </div>
+                        <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+             <button type="button" class="btn btn-primary" onclick="$('#role-form-{{$tag->id}}').submit()">Save changes</button>
+
+                        </div>
+                    </div>
+                 </div>
+              </div>
+            </div>
                                 </div> 
 
                                 <!-- display jobs in the same industry -->
@@ -271,7 +300,97 @@
 
         </div>
         <!-- Main Content -->
-         
+<div class="modal fade bs-modal-lg" id="static_personal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+<h4 class="modal-title">Personal Information</h4>
+</div>
+<form class="form-horizontal" action="" method="post" role="form">
+{{ csrf_field() }}
+<div class="modal-body">
+
+<!-- BEGIN EXAMPLE TABLE PORTLET-->
+<!-- <div class="portlet light bordered">
+<div class="portlet-body"> -->
+ <!-- <pre> Specifications</pre> -->
+ 
+<input type="hidden" value="personalinfor" name="pinfor">
+<!-- <form role="form"> -->
+<div class="row">
+<div class="col-md-12">
+<div class="form-group">
+<label class="control-label col-md-3"> </label>
+<div class="col-md-12">
+Interests 
+<textarea class="form-control textarea" placeholder="" name="interest" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="125"></textarea> 
+ 
+<span style="color:#827e7e;">Eg. Photography, Marathon, Yoga, Rock Climbing, Football, Fishing, Snowboard, Investment etc.</span>
+</div>
+</div>
+<!-- /input-group -->
+</div>
+<!-- /.col-md-6 -->
+<!-- /.col-md-6 -->
+</div>
+<!-- /.row -->
+<!-- </form> -->
+
+<!-- <form role="form"> -->
+<div class="row">
+<div class="col-md-12">
+<div class="form-group">
+<label class="control-label col-md-3"> </label>
+<div class="col-md-12">
+Associations 
+<textarea class="form-control textarea"  name="associations" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="125"></textarea> 
+<span style="color:#827e7e;">Eg. (ITAN) Information Technology Association of Nigeria </span>
+</div>
+</div>
+<!-- /input-group -->
+</div>
+<!-- /.col-md-6 -->
+<!-- /.col-md-6 -->
+</div>
+<!-- /.row -->
+<!-- </form> -->
+
+<!-- <form role="form"> -->
+ 
+<div class="row">
+<div class="col-md-12">
+<div class="form-group">
+<label class="control-label col-md-3"> </label>
+<div class="col-md-12">
+Training 
+<textarea class="form-control textarea" name="training" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="125"></textarea> 
+
+</div>
+</div>
+<!-- /input-group -->
+</div>
+<!-- /.col-md-6 -->
+<!-- /.col-md-6 -->
+</div>
+<!-- /.row -->
+<!-- </form> -->
+<!-- <form role="form"> -->
+
+<!-- /.row -->
+<!-- </form> -->
+<!-- END EXAMPLE TABLE PORTLET-->
+</div>
+<div class="modal-footer">
+<button type="submit" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+<button type="submit" class="btn green">Save changes</button>
+</div>
+</form>
+</div>
+<!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+</div>
         <!-- Footer -->
                @include('partials.job_footer')
         <!-- Footer -->

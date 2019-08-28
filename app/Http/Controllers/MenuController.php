@@ -174,7 +174,7 @@ public function AssignSubmenusToParentMenu(Request $request)
      */
     public function show($id)
     {
-        //
+   return view('admin.menu.edit', compact('menu'),  array('user' => Auth::user()));
     }
 
     /**
@@ -185,7 +185,9 @@ public function AssignSubmenusToParentMenu(Request $request)
      */
     public function edit($id)
     {
-        return view('menu.edit',  array('user' => Auth::user()));
+         
+        $menu = Menu::find($id);
+        return view('admin.menu.edit', compact('menu'),  array('user' => Auth::user()));
     }
 
     /**

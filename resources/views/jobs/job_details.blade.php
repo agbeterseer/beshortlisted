@@ -188,14 +188,43 @@
                                     <input type="submit" name="" value="Apply" class="careerfy-applyjob-btn">
                                     <!-- <span style="color: red;">Application ends in 4d 5h 3m</span> -->
                                     <div class="careerfy-applywith-title"><small><!-- OR apply with --></small></div>
-                               <!--      <p>Know someone who would be perfect for  this role this role? Be a pal, let them know.</p> -->
+                                    <p>Know someone who would be perfect for  this role this role? Be a pal, let them know.</p>
                                      
                                     </div>
                                
                              
                                 </div>
                                </form> 
-                                      <a href="#" class="careerfy-sendmessage-btn"><i class="careerfy-icon careerfy-envelope"></i> Send a message</a>
+                                      <a href="#" class="careerfy-sendmessage-btn" data-toggle="modal" data-style="slide-left" data-spinner-color="#333" ><i class="careerfy-icon careerfy-envelope"></i> Send a message</a>
+                                                         <div class="careerfy-sendmessage-btn">
+           <button class="btn btn-xs btn-primary" type="button" data-toggle="modal" data-target="#myModal-{{$tag->id}}"> Assign.. <i class="fa fa-angle-down"></i> </button>                                   
+        <div class="modal fade" id="myModal-{{$tag->id}}" tabindex="1" role="dialog" aria-labelledby="myModalLabel" >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+                 <span aria-hidden="true"></span>   </button>
+            <h4 class="modal-title" id="myModalLabel" style="margin-left: 165px;">{{$tag->job_title}}</h4>
+                        </div>
+                        <div class="modal-body">
+                    <form action="" method="post" role="form" id="role-form-{{$tag->id}}">
+                            {{csrf_field()}}
+                            {{method_field('PATCH')}}
+
+                        <div class="form-group" style="margin-left: 185px;">
+                          note:
+                      
+                        </form>
+                      </div>
+                        <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+             <button type="button" class="btn btn-primary" onclick="$('#role-form-{{$tag->id}}').submit()">Save changes</button>
+
+                        </div>
+                    </div>
+                 </div>
+              </div>
+            </div>
                                 </div> 
 
                                 <!-- display jobs in the same industry -->

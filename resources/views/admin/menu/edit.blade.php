@@ -1,24 +1,23 @@
-@extends('layouts.admin', [
-  'page_header' => 'Menu',
-  'dash' => '',
-  'staffmgt' => '',
-  'users' => '',
-  'menu' => 'active',
-  'department' => '',
-  'probation' => '',
-  'sett' => '',
-  'candidate' =>'',
-  'taxcalculator' => '',
-  'finance' => '',
-  'email' => '',
+@extends('layouts.admin_layout', [
+    'page_header' => 'Menu',
+    'dash' => '',
+    'staffmgt' => '',
+    'users' => '',
+    'menu' => 'active',
+    'department' => '',
+    'probation' => '',
+    'sett' => '',
+    'candidate' =>'',
+    'taxcalculator' => '',
+    'finance' => '',
+    'email' => '',
     'policy' => '',
-  'package' => 'active',
+    'package' => 'active',
     'page' => '', 
-  'role' => '',
-  'user' => '',
+    'role' => '',
+    'user' => '',
 ])
-@section('content')
-    
+@section('content') 
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Edit Menu</div>

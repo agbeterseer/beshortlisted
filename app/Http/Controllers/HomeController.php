@@ -35,7 +35,7 @@ use App\EmployerPackage;
 use App\Http\Requests\UpdateContactRequest;
 use App\WorkExperience;
 use App\AboutUs;
-
+use App\Mail\EmailAFriend;
 class HomeController extends Controller
 {
     /**
@@ -404,6 +404,8 @@ public function DisplayTemplates()
         $posts = $this->listPages();
         return view('candidate.template_home', compact('resumelist', 'menus', 'posts'), array('user' => Auth::user()));
     }
+
+
     public function JobDetails($id){ 
       $tag = Tag::findOrFail($id);
       //$tag = Tag::findOrFail($id);
@@ -422,8 +424,43 @@ public function DisplayTemplates()
       $get_all_user_list = User::all();
       $menus = $this->displayMenu();
       $posts = $this->listPages();
+
      return view('employer.job_details', compact('tag','employement_terms', 'jobcareer_levels', 'industries', 'educational_levels', 'skillsets', 'job_assessments', 'job_requirements', 'get_Job_by_common_industries', 'get_Job_by_common_industries_similler', 'cities', 'get_all_user_list', 'industry_professions', 'menus', 'posts'), array('user' => Auth::user()));
     }
+
+
+  public function EmailJobToAFriend(Request $request){
+//$job_id, $from, $to, $body
+      // dd($request->all());
+      $job_title = $request->job_title;
+      $to = $request->to;
+      $from = $request->from;
+      $link = $request->link;
+      $job_description = $request->job_description;
+
+      $JOBALERT = 'JOB ALERT';
+        $content = [
+        'title'=> $job_title, 
+        'body'=> $job_description,
+        'from' => $from, 
+        'link' => $link,
+        'to' => $to
+        // 'apply' => url('/') . '/candidates/job-details/'.$job_id->id,
+        ];    
+      
+ 
+  if ($job_title) {
+    $when = Carbon::now()->addSeconds(15); 
+   
+        
+        Mail::to($to)->later($when, new EmailAFriend($content));
+ 
+  } 
+
+ return redirect()->back();
+}
+
+
     public function AllIndustries(Request $request)
     {
     $s = $request->input('s'); 

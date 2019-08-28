@@ -10,7 +10,7 @@
   'candidate' => '',
     'policy' => 'active', 
   'package' => '',
-  'page' => ' ',
+  'page' => ' active open',
      'role' => '',
   'user' => '',
 ])

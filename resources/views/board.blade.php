@@ -123,64 +123,7 @@
                                                    
                                   </ul> 
                       </li>
-                      <li class="nav-item" id="roleid">
-                                  <a href="javascript:;" class="nav-link nav-toggle">
-                                      <i class="icon-briefcase"></i>
-                                      <span class="title">Role Management</span>
-                                  <span class="arrow"></span>
-                                      <span class="selected"></span>
-                                  </a>
-                                  <ul class="sub-menu">
-                                      <li class="nav-item">
-                                          <a href="{{route('role.index')}}" class="nav-link">
-                                              <span class="title">View Roles</span>
-                                             <span class="selected"></span>
-                                          </a>
-                                      </li>
-                            
-                                    </ul>
-                                  </li>
-                                  
-                                   <li class="nav-item  ">
-                                  <a href="javascript:;" class="nav-link nav-toggle">
-                                      <i class="icon-users"></i>
-                                      <span class="title">User Mangement</span>
-                                      <span class="arrow"></span>
-                                  </a>
-                                   <ul class="sub-menu">
-                                      <li class="nav-item ">
-                                      <a href="{{ route('user.index') }}" class="nav-link "> 
-                                     <span class="title">User</span>
-                                      </a>
-                                
-                                      </li>
-                               </ul>
-                                      
-                      
-                              </li> 
-
-         
-                             <li class="nav-item">
-                                  <a href="javascript:;" class="nav-link nav-toggle">
-                                      <i class="icon-docs"></i>
-                                      <span class="title">TAGs</span>
-                                      <span class="arrow"></span>
-                                  </a>
-                                   <ul class="sub-menu">
-                                      <li class="nav-item ">
-                                      <a href="{{ route('tag.index') }}" class="nav-link "> 
-                                     <span class="title">All Tags</span>
-                                      </a>
-                                
-                                      </li>
-                  <li class="nav-item ">
-                                          <a href="{{route('tag.create')}}" class="nav-link ">
-                                              <span class="title">Add New Tag</span>
-                                          </a>
-                                      </li> 
-                                  </ul> 
-                      
-                              </li>                
+               
                                 <li class="nav-item">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-puzzle"></i>
@@ -204,12 +147,12 @@
                                         <span class="title">@lang('cvmanagement.policies.title') </span>
                                           </a>
                                       </li> 
-                             <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
+                             <li class="nav-item {{ $request->segment(1) == 'pageinfor' ? 'active' : '' }}">
                                      <a href="{{route('page_infor')}}" class="nav-link ">
                                         <span class="title">Page Information </span>
                                           </a>
                                 </li>
-                                  <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
+                                  <li class="nav-item ">
                                      <a href="{{route('policies.index')}}" class="nav-link ">
                                         <span class="title">Employer </span>
                                           </a>
@@ -292,14 +235,14 @@
                               <li class="nav-item">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-settings"></i>
-                                      <span class="title">Settings</span>
+                                      <span class="title">Extra</span>
                                       <span class="arrow"></span>
                                   </a>
                                   <ul class="sub-menu">
                                   
                                       <li class="nav-item ">
                                           <a href="{{route('backupsys.importExport')}}" class="nav-link ">
-                                        <span class="title">Back up cv </span>
+                                        <span class="title">Export CSV </span>
                                           </a>
                                       </li>
 
@@ -308,11 +251,7 @@
                                         <span class="title">Back up cv </span>
                                           </a>
                                       </li>
-                                    <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
-                                          <a href="{{route('policies.index')}}" class="nav-link ">
-                                        <span class="title">@lang('cvmanagement.policies.title') </span>
-                                          </a>
-                                      </li> 
+       
                                   <li class="nav-item {{ $request->segment(1) == 'fields-of-study' ? 'active' : '' }}">
                                           <a href="{{route('create.field')}}" class="nav-link ">
                                         <span class="title">@lang('cvmanagement.fields-of-study.title') </span>
@@ -370,6 +309,41 @@
                               </ul>
 
                                   </li>
+                                                        <li class="nav-item" id="roleid">
+                                  <a href="javascript:;" class="nav-link nav-toggle">
+                                      <i class="icon-briefcase"></i>
+                                      <span class="title">Role Management</span>
+                                  <span class="arrow"></span>
+                                      <span class="selected"></span>
+                                  </a>
+                                  <ul class="sub-menu">
+                                      <li class="nav-item">
+                                          <a href="{{route('role.index')}}" class="nav-link">
+                                              <span class="title">View Roles</span>
+                                             <span class="selected"></span>
+                                          </a>
+                                      </li>
+                            
+                                    </ul>
+                                  </li>
+                                  
+                                   <li class="nav-item  ">
+                                  <a href="javascript:;" class="nav-link nav-toggle">
+                                      <i class="icon-users"></i>
+                                      <span class="title">User Mangement</span>
+                                      <span class="arrow"></span>
+                                  </a>
+                                   <ul class="sub-menu">
+                                      <li class="nav-item ">
+                                      <a href="{{ route('user.index') }}" class="nav-link "> 
+                                     <span class="title">User</span>
+                                      </a>
+                                
+                                      </li>
+                               </ul>
+                                      
+                      
+                              </li> 
                          <!-- END SIDEBAR MENU -->
                           <!-- END SIDEBAR MENU -->
                      </div>
@@ -553,40 +527,7 @@
             <!-- END FOOTER -->
         </div>
         <!-- BEGIN QUICK NAV -->
-        <nav class="quick-nav">
-            <a class="quick-nav-trigger" href="#0">
-                <span aria-hidden="true"></span>
-            </a>
-            <ul>
-                <li>
-                    <a href="{{ route('test.dashborad') }}"  class="active">
-                        <span>Online Test</span>
-                        <i class="icon-users"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('user.index') }}" class="active">
-                        <span>Applicant</span>
-                        <i class="icon-users"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('document.index') }}" >
-                        <span>Shortlisted</span>
-                        <i class="icon-users"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('board') }}">
-                        <span>Scheduled for Interview</span>
-                        <i class="icon-graph"></i>
-                    </a>
-                </li>
-
-            </ul>
-            <span aria-hidden="true" class="quick-nav-bg"></span>
-        </nav>
-        <div class="quick-nav-overlay"></div>
+       
         <!-- END QUICK NAV -->
         <!--[if lt IE 9]>
 <script src="assets/global/plugins/respond.min.js"></script>

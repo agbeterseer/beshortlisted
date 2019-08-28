@@ -17,7 +17,7 @@
 ]) 
 
 @section('content')
-<div >
+ 
     
                         @if(Session()->has('success'))
                         <div class="alert alert-success"> 
@@ -65,5 +65,5 @@
             </div>
         </div>
     </div>
-</div>
+ 
 @endsection

@@ -74,6 +74,9 @@ return [
 	],
 
 ],
+   'pageinfor' =>[
+   'title' => 'Page Information'
+   ],
 	'fields-of-study' =>[
 	'title' => 'Feilds Of Study',
 	'fields' => [

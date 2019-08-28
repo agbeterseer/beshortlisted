@@ -17,15 +17,15 @@
 ]) 
 
 @section('content')
-<div >
+ 
     
                         @if(Session()->has('success'))
                         <div class="alert alert-success"> 
                         {!! Session::get('success') !!}
                         </div>
                         @endif
-    <div class="row">
-        <div class="col-md-8">
+    <div class="col-md-12">
+        <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">Create FAQ</div>
                 <div class="panel-body">
@@ -33,7 +33,7 @@
                         {{ method_field('PATCH')}}
                         {{ csrf_field() }}
                                <div class="form-group{{ $errors->has('question') ? ' has-error' : '' }}">
-                            <label for="question" class="col-md-4 control-label">Question <span class="required">*</span></label>
+                            <label for="question" class="col-md-2 control-label">Question <span class="required">*</span></label>
                             <div class="col-md-8">
                                 <textarea name="question" class="form-control" placeholder="Enter question">{{$frequent->question}}</textarea>
                                 @if ($errors->has('question'))
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('answer') ? ' has-error' : '' }}">
-                            <label for="answer" class="col-md-4 control-label">Answer</label> 
+                            <label for="answer" class="col-md-2 control-label">Answer</label> 
                             <div class="col-md-8">
                               <textarea name="answer" class="form-control" placeholder="Enter answer" id="summernote_1">{{$frequent->answer}}</textarea>
                                 @if ($errors->has('answer'))
@@ -66,5 +66,5 @@
             </div>
         </div>
     </div>
-</div>
+ 
 @endsection

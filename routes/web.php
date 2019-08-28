@@ -27,7 +27,12 @@ Route::get('/employer/dashboard/{type}', array(
 ))->where('type', 'alljobs|draft|awaitingjobs|blacklist|notactive|yesactive');
 
 
+Route::post('/send_job_link',[
+    'as' => 'send_job_link', 
+    'uses' =>  "HomeController@EmailJobToAFriend"
 
+	]
+);
 
 Route::get('/employer/job/applicants/{type}/{code}', array(
     'as' => 'applicants.type', 

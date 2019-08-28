@@ -17,17 +17,16 @@
 ]) 
 
 @section('content')
-<div >
-    
+  
                         @if(Session()->has('success'))
                         <div class="alert alert-success"> 
                         {!! Session::get('success') !!}
                         </div>
                         @endif
-    <div class="row">
-        <div class="col-md-8">
+    <div class="col-md-12">
+        <div class="row">
             <div class="panel panel-default">
-                <div class="panel-heading">Create About Us</div>
+                <div class="panel-heading">Update About Us</div>
                 <div class="panel-body">
  <form class="form-horizontal" method="POST" action="{{ route('aboutus.update', $about->id) }}" enctype="multipart/form-data">
                     {{ method_field('PATCH')}}
@@ -36,7 +35,7 @@
                             <label for="history" class="col-md-4 control-label">History <span class="required">*</span></label>
 
                             <div class="col-md-6">
-                                <textarea name="history" class="form-control" placeholder="Enter company history">{{$about->history}}</textarea>
+                                <textarea name="history" class="form-control" placeholder="Enter company history" style="height: 120px;">{{$about->history}}</textarea>
                    
                                 @if ($errors->has('history'))
                                     <span class="help-block">
@@ -49,7 +48,7 @@
                             <label for="mission" class="col-md-4 control-label">Mission</label>
 
                             <div class="col-md-6">
-                              <textarea name="mission" class="form-control" placeholder="Enter mission">{{$about->mission}}</textarea>
+                              <textarea name="mission" class="form-control" placeholder="Enter mission" style="height: 120px;">{{$about->mission}}</textarea>
 
                                 @if ($errors->has('mission'))
                                     <span class="help-block">
@@ -63,7 +62,7 @@
                             <label for="vision" class="col-md-4 control-label">Vision</label>
 
                             <div class="col-md-6">
-                        <textarea name="vision" class="form-control" placeholder="Enter vision">{{$about->vision}}</textarea>
+                        <textarea name="vision" class="form-control" placeholder="Enter vision" style="height: 120px;">{{$about->vision}}</textarea>
 
                                 @if ($errors->has('vision'))
                                     <span class="help-block">
@@ -76,7 +75,7 @@
                             <label for="philosophy" class="col-md-4 control-label">Philosophy</label>
 
                             <div class="col-md-6">
-                        <textarea name="philosophy" class="form-control" placeholder="Enter philosopy">{{$about->philosophy}}</textarea>
+                        <textarea name="philosophy" class="form-control" placeholder="Enter philosopy" style="height: 120px;">{{$about->philosophy}}</textarea>
 
                                 @if ($errors->has('philosophy'))
                                     <span class="help-block">
@@ -89,7 +88,7 @@
                             <label for="core_values" class="col-md-4 control-label">Core Values/ Our Principle</label>
 
                             <div class="col-md-6">
-                        <textarea name="core_values" class="form-control" placeholder="Enter values">{{$about->values}}</textarea>
+                        <textarea name="core_values" class="form-control" placeholder="Enter values" style="height: 120px;">{{$about->values}}</textarea>
 
                                 @if ($errors->has('core_values'))
                                     <span class="help-block">
@@ -111,5 +110,5 @@
             </div>
         </div>
     </div>
-</div>
+ 
 @endsection
