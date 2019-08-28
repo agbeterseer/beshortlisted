@@ -402,7 +402,7 @@ ul.social li{
     <div style="display: none; font-size: 1px;max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
       &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
     </div>
-    <div style="max-width: 600px; margin: 0 auto;" class="email-container">
+    <div class="email-container">
       <!-- BEGIN BODY -->
       <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
         <tr>
@@ -435,7 +435,7 @@ ul.social li{
                   <div class="heading-section" style="padding: 0 0px; color: #000000;">
                     <h2>Dear {{$content['to']}},</h2>
                     <p></p> 
-                    Your and a job link <a href="{{ $content['link']}}">{{ $content['title']}}  </a> suggestered by {{ $content['from']}}
+                    Your have a job link <a href="{{ $content['link']}}">{{ $content['title']}}  </a> suggestered by {{ $content['from']}}
                      <p></p> 
                      Kindly follow the link to apply for the position.
                      <p></p>
