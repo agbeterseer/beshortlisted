@@ -245,7 +245,7 @@
                         <td align="left">
                             <table border="0" width="590" align="center" cellpadding="0" cellspacing="0" class="container590">
                                 <tr>
-                                    <td align="left" style="color: #888888; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
+                                    <td align="left" style="color: #343434; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
                                         <!-- section text ======-->
 
                                         <p style="line-height: 24px; margin-bottom:15px;">
@@ -254,10 +254,11 @@
 
                                         </p>
                                         <p style="line-height: 24px;margin-bottom:15px;">
-                                              {{ $content['from'] }}  have sent your a job link that might interest you <a href="{{ $content['link']}}">{{ $content['title']}}  </a>  
-                                                <p></p> 
+                                    <strong> {{ $content['from'] }}</strong>  have sent your a job link that might interest you 
+                                          
+                                            
                                                 Kindly follow the link to apply for the position.
-                                                <p></p>
+                                            
                                         </p>
                                         <p style="line-height: 24px; margin-bottom:20px;">
                                             You can access you the  at any point using the link below.
