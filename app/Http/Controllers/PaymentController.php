@@ -31,6 +31,7 @@ public function displayUnit()
   $user = Auth::user();
   return $units = EmployerPackage::where('status', 1)->where('userfkp', $user->id)->first();
 }
+    
     public function redirectToGateway()
     {
       try {
@@ -50,7 +51,7 @@ public function displayUnit()
         $currentTime->toDateTimeString();
         return $currentTime;
     }
-
+ 
     /**
      * Obtain Paystack payment information
      * @return void
@@ -61,6 +62,7 @@ public function displayUnit()
     $paymentDetails = Paystack::getPaymentData();
   //dd($paymentDetails); 
   if ($paymentDetails['data']['status'] === 'success') { 
+
   $planpackage = DB::table('planpackages')->where('price_in_kobo', $paymentDetails['data']['amount'])->first();
 
         $employer_package = EmployerPackage::firstOrNew(['userfkp'=>$user->id, 'package_id' => $planpackage->id]);

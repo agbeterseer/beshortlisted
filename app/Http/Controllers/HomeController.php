@@ -1051,5 +1051,13 @@ public function account_creation_success()
 }
 
 
+public function ViewMailTemplate()
+{
+ 
+ return view('employer_email_information');
+}
+
+
+
 
 }

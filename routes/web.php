@@ -53,9 +53,9 @@ Route::get('/pricing', [
 ]);
 // Route::get('/{any}', 'HomeController@home')->where('any', '.*');
 
-Route::post('/test', [
-	'as' => 'send.email',
-	'uses' => 'HomeController@sendEmail'
+Route::get('/test', [
+	'as' => 'email_check',
+	'uses' => 'HomeController@ViewMailTemplate'
 ]);
 
 Route::get('/sign-up', [

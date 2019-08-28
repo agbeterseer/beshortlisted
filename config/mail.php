@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+    'host' => env('MAIL_HOST', 'smtp.zoho.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => env('MAIL_PORT', 465),
 
     /*
     |--------------------------------------------------------------------------
@@ -57,7 +57,7 @@ return [
  
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hr@rhizomeng.com'),
-        'name' => env('MAIL_FROM_NAME', 'Rhizome Consulting'),
+        'name' => env('MAIL_FROM_NAME', 'Beshortlisted Team'),
     ],
 
     /*
