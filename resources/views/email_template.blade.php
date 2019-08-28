@@ -144,7 +144,7 @@
         <tr>
             <td>
                 <div style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
-                    Welcome to Beshortlisted!
+                    Welcome to MDB!
                 </div>
             </td>
         </tr>
@@ -168,7 +168,7 @@
 
                                 <tr>
                                     <td align="center" height="70" style="height:70px;">
-                                        <a href="" style="display: block; border-style: none !important; border: 0 !important;"><img width="100" border="0" style="display: block; width: 100px;" src="{{asset('logo/logo2.jpg')}}" alt="" /></a>
+                                        <a href="" style="display: block; border-style: none !important; border: 0 !important;"><img width="100" border="0" style="display: block; width: 100px;" src="https://mdbootstrap.com/img/logo/mdb-email.png" alt="" /></a>
                                     </td>
                                 </tr>
 
@@ -178,12 +178,14 @@
                                             class="container590 hide">
                                             <tr>
                                                 <td width="120" align="center" style="font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
-                                                    <a href="" style="color: #312c32; text-decoration: none;">Home</a>
+                                                    <a href="" style="color: #312c32; text-decoration: none;">MEN</a>
                                                 </td>
                                                 <td width="120" align="center" style="font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
-                                                    <a href="" style="color: #312c32; text-decoration: none;">Jobs</a>
+                                                    <a href="" style="color: #312c32; text-decoration: none;">WOMEN</a>
                                                 </td>
-                                            
+                                                <td width="120" align="center" style="font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
+                                                    <a href="" style="color: #312c32; text-decoration: none;">BLOG</a>
+                                                </td>
                                             </tr>
                                         </table>
                                     </td>
@@ -217,7 +219,7 @@
 
                             <div style="line-height: 35px">
 
-                                Welcome to the <span style="color: #5caad2;">future</span>
+                                Welcome to the future of <span style="color: #5caad2;">fashion</span>
 
                             </div>
                         </td>
@@ -250,17 +252,15 @@
 
                                         <p style="line-height: 24px; margin-bottom:15px;">
 
-                                            Dear {{$content['to']}},,
+                                            Firstname,
 
                                         </p>
                                         <p style="line-height: 24px;margin-bottom:15px;">
-                                              {{ $content['from'] }}  have sent your a job link that might interest you <a href="{{ $content['link']}}">{{ $content['title']}}  </a>  
-                                                <p></p> 
-                                                Kindly follow the link to apply for the position.
-                                                <p></p>
+                                            Great news, you will now be the first to see exclusive previews of our latest collections, hear about news from the Abacus!
+                                            community and get the most up to date news in the world of fashion.
                                         </p>
                                         <p style="line-height: 24px; margin-bottom:20px;">
-                                            You can access you the  at any point using the link below.
+                                            You can access your account at any point using the link below.
                                         </p>
                                         <table border="0" align="center" width="180" cellpadding="0" cellspacing="0" bgcolor="5caad2" style="margin-bottom:20px;">
 
@@ -273,7 +273,7 @@
                                                     <!-- main section button -->
 
                                                     <div style="line-height: 22px;">
-                                                        <a href="{{ $content['link']}}" style="color: #ffffff; text-decoration: none;">{{ $content['title']}}</a>
+                                                        <a href="" style="color: #ffffff; text-decoration: none;">MY ACCOUNT</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -284,8 +284,8 @@
 
                                         </table>
                                         <p style="line-height: 24px">
-                                            Best Regards,</br>
-                                            The Beshortlisted team
+                                            Love,</br>
+                                            The MDB team
                                         </p>
 
                                     </td>

@@ -1053,8 +1053,9 @@ public function account_creation_success()
 
 public function ViewMailTemplate()
 {
- 
- return view('employer_email_information');
+   $menus = $this->displayMenu();
+  $posts = $this->listPages();
+ return view('email_template', compact('menus','posts'), array('user' => Auth::user()));
 }
 
 
