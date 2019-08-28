@@ -10,7 +10,7 @@
     <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel="stylesheet">
     <!--<![endif]-->
 
-    <title>Material Design for Bootstrap</title>
+    <title>Job Board</title>
 
     <style type="text/css">
         body {
@@ -339,7 +339,7 @@
                                             <tr>
                                                 <!-- logo -->
                                                 <td align="left">
-                                                    <a href="" style="display: block; border-style: none !important; border: 0 !important;"><img width="80" border="0" style="display: block; width: 80px;" src="https://mdbootstrap.com/img/logo/mdb-email.png" alt="" /></a>
+                                                    <a href="" style="display: block; border-style: none !important; border: 0 !important;"><img width="80" border="0" style="display: block; width: 80px;" src="{{asset('logo/logo2.jpg')}}" alt="" /></a>
                                                 </td>
                                             </tr>
 
@@ -352,7 +352,7 @@
                                                     class="text_color">
                                                     <div style="color: #333333; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; font-weight: 600; mso-line-height-rule: exactly; line-height: 23px;">
 
-                                                        Email us: <br/> <a href="mailto:" style="color: #888888; font-size: 14px; font-family: 'Hind Siliguri', Calibri, Sans-serif; font-weight: 400;">contact@mdbootstrap.com</a>
+                                                        Email us: <br/> <a href="mailto:" style="color: #888888; font-size: 14px; font-family: 'Hind Siliguri', Calibri, Sans-serif; font-weight: 400;">inf@beshortlisted.com</a>
 
                                                     </div>
                                                 </td>
@@ -437,7 +437,7 @@
                                     <td align="left" style="color: #aaaaaa; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
                                         <div style="line-height: 24px;">
 
-                                            <span style="color: #333333;">Material Design for Bootstrap</span>
+                                            <span style="color: #333333;">Beshortlisted </span>
 
                                         </div>
                                     </td>
