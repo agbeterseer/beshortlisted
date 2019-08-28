@@ -22,6 +22,7 @@
             mso-margin-top-alt: 0px;
             mso-margin-bottom-alt: 0px;
             mso-padding-alt: 0px 0px 0px 0px;
+            color: #000000;
         }
 
         p,
@@ -82,6 +83,7 @@
             /*-------- container --------*/
             .container590 {
                 width: 440px !important;
+                color: #000000;
             }
             .container580 {
                 width: 400px !important;
@@ -274,7 +276,7 @@
                                                     <!-- main section button -->
 
                                                     <div style="line-height: 22px;">
-                                                        <a href="{{ $content['link']}}" style="color: #ffffff; text-decoration: none;">{{ $content['title']}}</a>
+                                                        <a href="{{ $content['link']}}" style="color: #ffffff; text-decoration: none;">{{ $content['title']}}</a> Position
                                                     </div>
                                                 </td>
                                             </tr>
@@ -285,7 +287,7 @@
 
                                         </table>
                                         <p style="line-height: 24px">
-                                            Best Regards,</br>
+                                            Best Regards,<br>
                                             The Beshortlisted team
                                         </p>
 
@@ -371,17 +373,7 @@
                                         <table border="0" width="200" align="right" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"
                                             class="container590">
 
-                                            <tr>
-                                                <td class="hide" height="45" style="font-size: 45px; line-height: 45px;">&nbsp;</td>
-                                            </tr>
-
-
-
-                                            <tr>
-                                                <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
-                                            </tr>
-
-                                            <tr>
+                                              <tr>
                                                 <td>
                                                     <table border="0" align="right" cellpadding="0" cellspacing="0">
                                                         <tr>
