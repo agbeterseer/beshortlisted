@@ -14,13 +14,18 @@
 
 @section('content')
 <div class="space">&nbsp;</div>
-          <div class="careerfy-main-section">
-                <div class="container">
-               
-                {!! $policy->description !!}
-               </div>
+   
 
-               </div>
+                  <div class="careerfy-main-section" >
+                <div class="container">
+                    <div class="row"> 
+                           <div class="careerfy-employer-box-section" style="background-color: #ffffff; text-align: justify;">
+            {!! $policy->description !!}
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
 
 

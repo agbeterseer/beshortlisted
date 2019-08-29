@@ -51,7 +51,7 @@
                     <div class="row">
 
                         <div class="col-md-12 careerfy-typo-wrap">
-                            <div class="careerfy-about-text" style="text-align: justify; line-height: 36px; font-size: 20px">
+                            <div class="careerfy-about-text" style="text-align: justify; line-height: 36px; ">
                                 <h2>About Us</h2>
                                 {{ $about->history }}  
                             </div>
