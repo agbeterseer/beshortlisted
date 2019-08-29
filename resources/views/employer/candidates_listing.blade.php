@@ -196,6 +196,7 @@ border-color: white !important;
                                         <li>
                                         <a href="#tab_16" data-toggle="tab">AUTOMATCH &nbsp;<span class="badge"><div id="auto_count">0</div></span></a>
                                         </li>
+                                     
                                     </ul>
                                           <div id="loading" style="position: absolute; display: none;">
                                     <img src="{{asset('img/giphy.gif')}}">
@@ -4855,7 +4856,7 @@ var jobid = {{$job_id}};
               beforeSend: function(){
             //Show image container
             $("#loading").show();
-            
+            window.location.reload(); 
              },
             success:function(data){
             //console.log(data);
@@ -4866,7 +4867,8 @@ var jobid = {{$job_id}};
             // $("#hired_count").empty();
             $("#applicants_list").empty(); 
             $("#move_to").empty(); 
-            $("#reject_section").empty();  
+            $("#reject_section").empty(); 
+            
      },
      complete:function(data){
     // Hide image container 
@@ -4959,7 +4961,7 @@ var jobid = {{$job_id}};
               beforeSend: function(){
             //Show image container
             $("#loader").show();
-            
+            window.location.reload(); 
              },
             success:function(data){
            //console.log(data);
@@ -5192,7 +5194,7 @@ function compare_ID(user1) {
               beforeSend: function(){
             //Show image container
             $("#loader").show();
-            
+            window.location.reload(); 
              },
             success:function(data){
             //console.log(data);
@@ -5275,7 +5277,7 @@ $('#hire{{$List_applicant->id}}').click(function() {
               beforeSend: function(){
             //Show image container
             $("#loader").show();
-            
+            window.location.reload(); 
              },
             success:function(data){
             // console.log(data);

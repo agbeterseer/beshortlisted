@@ -2682,7 +2682,7 @@ public function employementTermsActive()
 
         }elseif ($type == 'awaitingjobs') {
 
-           $jobs_awaiting_approval_list = Tag::where('client', $user->id)->where('awaiting_aproval', 1)->where('delete',0)->where('active', 0)->where('status',0)->latest()->paginate(3); 
+           $jobs_awaiting_approval_list = Tag::where('client', $user->id)->where('awaiting_aproval', 1)->where('delete',0)->where('active', 0)->where('status',0)->latest()->paginate(10); 
 
         return view('jobs.load_awaiting_jobs', ['jobs_awaiting_approval_list' => $jobs_awaiting_approval_list, 'applications_employer' => $applications_employer, 'applications' => $applications, 'professions' =>$professions, 'industries' => $industries, 'cities' => $cities, 'educational_levels' => $educational_levels, 'employement_terms' => $employement_terms ])->render(); 
 

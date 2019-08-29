@@ -47,47 +47,11 @@
      <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i>@foreach($professions as $profession) @if($profession->id === $job->job_category) {{$profession->name}} @endif @endforeach</li>
      </ul> </div>
      <div class="space">&nbsp;</div>  
-     <div class="row"><div class="col-md-12">  <div class="col-md-2" align="center">
-    <div class="badge" style="background-color: #ffffff;"><font style=" font-weight: bold; font-size: 35px; color: orange;"> 
-       <?php  $h_shortlisted = \App\Application::where('sorted', 1)->where('tag_id',$job->id)->count(); ?>
-    {{$h_shortlisted}} 
-    </font>   <br><br><p></p>  <font  style="font-size: 20px; color: orange;"> Unsorted </font></div></div>
- 
-    <div class="col-md-2" align="center">
-    <div class="badge" style="background-color: #ffffff;"><font style=" font-weight: bold; font-size: 35px; color: orange;">
-       <?php  $h_shortlisted = \App\Application::where('in_review', 1)->where('tag_id',$job->id)->count(); ?>
-    {{$h_shortlisted}} 
-    </font>   <br><br><p></p>  <font  style="font-size: 20px; color: orange;"> In Review </font></div></div>
-
-    <div class="col-md-2" align="center"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: orange;">
-     <?php  $h_shortlisted = \App\Application::where('shortlisted', 1)->where('tag_id',$job->id)->count(); ?>
-    {{$h_shortlisted}} 
-    </font> <br><br><p></p>
-    <font  style="font-size: 20px; color: red;">  Shortlisted</font></div></div>
-
-    <div class="col-md-2" align="center">  <div class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: red;">
-     <?php  $h_rejected = \App\Application::where('rejected', 1)->where('tag_id',$job->id)->count(); ?>
-    {{$h_rejected}} 
-    </font>  <br><br><p></p>
-    <font  style="font-size: 20px; color: red;">  Rejected</font>
-    </div></div>
-
-    <div class="col-md-2" align="center"> <div class="badge" style=" background-color: #ffffff;"><font style="font-weight: bold; font-size: 35px; color: green;">
-  <?php  $h_offered = \App\Application::where('offered', 1)->where('tag_id',$job->id)->count(); ?>
-{{$h_offered}} 
-  </font><br><br><p></p>
-    <font  style="font-size: 20px; color: green;">  Offered</font>
-
-    </div><br></div>
-    <div class="col-md-1" align="center"><div align="center" class="badge" style=" background-color: #ffffff;"><font  style="font-weight: bold; font-size: 35px; color: green;">
-
-  <?php  $h_hired = \App\Application::where('hired', 1)->where('tag_id',$job->id)->count(); ?>
-{{$h_hired}} 
-    </font><br><br><p></p>
-    <font  style="font-size: 20px; color: green;">  Hired</font>
-    </div></div>
-
-    </div></div>
+     <div class="row">
+          <div class="col-md-12">  
+        @include('jobs.load_count')
+          </div>
+    </div>
  
 <div class="space">&nbsp;</div>
 <div class="space">&nbsp;</div>
@@ -112,7 +76,8 @@
 <div class="clearfix"></div>
 </div> </li>  @endif 
 
-        </ul></div>
+    </ul>
+  </div>
      
                                 <!-- Pagination -->
                         <div class="careerfy-pagination-blog">

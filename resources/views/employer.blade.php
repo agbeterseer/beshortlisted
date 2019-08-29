@@ -90,11 +90,32 @@
 }
 
       .box {
+
+          display: -webkit-flex;
+          display: -moz-flex;
+          display: -ms-flexbox;
+          display: -o-flex;
           display: flex;
+          display: -ms-flexbox;
+
+ 
           flex-direction: row;
           flex-wrap: wrap;
           justify-content: space-evenly;
+
+             /* Direction defaults to 'row', so not really necessary to specify */
+          -webkit-flex-direction: row;
+          -moz-flex-direction: row;
+          -ms-flex-direction: row;
+          -o-flex-direction: row;
+          flex-direction: row;
+          
         }
+    
+
+    .box_two{
+      position: 
+    }
 
 
 </style>
