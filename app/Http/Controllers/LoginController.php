@@ -121,11 +121,11 @@ protected function authenticated(Request $request, $user)
           }elseif(!$user->is_admin() && !$user->is_candidate()){ 
            if ($user->account_type === 'employee') { 
             // dd('here');
-             // return redirect()->route('candidates'); // candidate
-             return Redirect::to(Session::get('url.intended'));
+             return redirect()->route('show.resume'); // candidate
+             // return Redirect::to(Session::get('url.intended'));
             }else{
-              //return redirect()->route('dashboard');
-            return Redirect::to(Session::get('url.intended'));
+            return redirect()->route('dashboard');
+            // return Redirect::to(Session::get('url.intended'));
             }
           }
         }

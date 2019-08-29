@@ -65,9 +65,9 @@ tr:hover {background-color:#f5f5f5;}
 .center2 {
   display: block;
   margin-left: auto;
-  margin-right: auto;
-  width: 50%; 
+  margin-right: auto; 
   text-align:center;
+    align-content: center;
 }
 </style>
 </head>
@@ -87,11 +87,14 @@ tr:hover {background-color:#f5f5f5;}
         <!-- Main Content --> 
           <div class="space">&nbsp;</div>
           <div class="space">&nbsp;</div>
-          <div class=" col-md-offset-2">
-          <div class="center">
-          <h2>Create an Employer Account</h2> 
-        </div>
-      </div>
+ 
+                  <div class="col-md-12">
+                  <div class="row">
+                  <div class="col-md-2">&nbsp; &nbsp;</div>
+                  <div class="col-md-8 col-md-offset-2">  <h2>Create an Employer Account</h2>   </div>
+                      <div class="col-md-2"></div>
+                  </div>      
+                </div>
 <div class="col-md-8 col-md-offset-2">
     <div class="center">  
           <div class="space">&nbsp;</div>
@@ -115,19 +118,18 @@ tr:hover {background-color:#f5f5f5;}
 
  
                      <!-- class="tab-pane fade" -->
-                      <div  >
+                      <div>
              <div class="tab-content">
 
                     <div id="personal" class="tab-pane fade in active">
    <div style="text-align: center;"><h2>Personal Information</h2>  </div>
-                    <div class="careerfy-user-form careerfy-user-form-coltwo">
-                <div>
-                <ul> 
-                        <li>
-
-                        <label >Password</label> 
+      <div class="careerfy-user-form careerfy-user-form-coltwo">
+   <div class="row">
+   <div class="col-md-6">
+            <div class="form-group">
+                    <label >Password</label> 
                         <div name="frmCheckPassword" id="frmCheckPassword"> 
-                        <input type="password" name="password" id="password" class="demoInputBox" onKeyUp="checkPasswordStrength();" />
+                        <input type="password" name="password" id="password" class="demoInputBox form-control" onKeyUp="checkPasswordStrength();"  />
                         <div id="password-strength-status" style="position: absolute; margin: -15px 0px 0px 90px;"></div>
                         </div>
 
@@ -137,28 +139,35 @@ tr:hover {background-color:#f5f5f5;}
                         <strong>{{ $errors->first('password') }}</strong>
                         </span>
                         @endif
-                        </li>
-                    <li> 
-                    <label>Confirm Password</label>  
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                         <label>Confirm Password</label>  
                     <input id="password_confirmation" type="password"  name="password_confirmation" class="form-control" onblur="return Validate()">
-                    <i class="careerfy-icon careerfy-typo-wrap"></i> 
-                    </li> 
-                </ul>
-                </div>
-                        <ul>
-                          <li>
-                                <label>Email Address:</label>
+                   
+            </div>
+        </div>
+   </div>
+
+   <div class="row">
+   <div class="col-md-6">
+            <div class="form-group">
+                                     <label>Email Address:</label>
                                 <input onblur="if(this.value == '') { this.value ='Enter Your Email Address'; }" onfocus="if(this.value =='Enter Your Email Address') { this.value = ''; }" type="text" name="email"  >
-                                <i class="careerfy-icon careerfy-mail"></i>
+                                
                                      @if ($errors->has('email2'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email2') }}</strong>
                                     </span>
                                 @endif
-                            </li>
-                          <li>
+            </div>
+        </div>
 
-                                                     <div >
+           <div class="col-md-6">
+            <div class="form-group">
+                                <div >
                                   <div class="col-md-3">   
 <div class="form-group{{ $errors->has('phonenumber') ? ' has-error' : '' }}">
     <label for="phonenumber" class="cols-sm-3 control-label">Code
@@ -413,11 +422,15 @@ tr:hover {background-color:#f5f5f5;}
 
           </div>
           </div>
- 
-                            </li>
-         
-                        <li>
-                                <label>First Name:</label>
+            </div>
+        </div>
+   </div>
+
+
+      <div class="row">
+           <div class="col-md-6">
+                    <div class="form-group">
+                                                <label>First Name:</label>
        <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="firstname">
                                 <i class="careerfy-icon careerfy-user"></i>
                               @if ($errors->has('firstname'))
@@ -425,44 +438,61 @@ tr:hover {background-color:#f5f5f5;}
                                         <strong>{{ $errors->first('firstname') }}</strong>
                                     </span>
                                 @endif
-                            </li>
-                            <li>
-                                <label>Last Name:</label>
+                    </div>
+                </div>
+                   <div class="col-md-6">
+                    <div class="form-group">
+                                        <label>Last Name:</label>
                                 <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="lastname">
-                                <i class="careerfy-icon careerfy-user"></i>
-                            </li></ul>
-                            <div style="text-align: center;"><h2>Company Information</h2>  </div>
+                          
+                    </div>
+                </div>
+   </div>
+          <div style="text-align: center;"><h2>Company Information</h2>  </div>
 
-                            <ul>
-                 <li>
-                                <label>Comany Name:</label>
+      <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                                    <label>Comany Name:</label>
                                 <input onblur="if(this.value == '') { this.value ='Enter Comany Name'; }" onfocus="if(this.value =='Enter Comany Name') { this.value = ''; }" type="text" name="comany_name" required="required">
                                @if ($errors->has('comany_name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('comany_name') }}</strong>
                                     </span>
-                                @endif                               
-                            </li>
-                          <li>
-                                <label>Number of Employees:</label>
-       <input placeholder="Number of Employees" type="number" name="number_of_employees"> 
+                                @endif        
+                </div>
+            </div>
+
+               <div class="col-md-6">
+                    <div class="form-group">
+                                                            <label>Number of Employees:</label>
+       <input placeholder="Number of Employees" type="text" name="number_of_employees" class="form-control"> 
                               @if ($errors->has('number_of_employees'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('number_of_employees') }}</strong>
                                     </span>
                                 @endif
-                            </li>
-                            <li>
-                                <label>Industry:<span class="required">*</span></label>     
+                    </div>
+                </div>
+   </div>
+
+<div>&nbsp;</div>
+      <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+               <label>Industry:<span class="required">*</span></label>     
                                 <select name="industry" required="required" style="background-color: #ffffff; font-size: 13px; font-weight: normal;">                             
                                  <option value="">Select Industry</option>
                                     @foreach($industries as $industry)
                                         <option value="{{$industry->id}}">{{$industry->name}}</option> 
                                         @endforeach 
-                                    </select> 
-                            </li>
-                            <li>
-                                <label>Type of Employer:</label>
+                                    </select>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Type of Employer:</label>
                                 <select name="type_of_employer"  required="required" style="background-color: #ffffff; font-size: 13px; font-weight: normal;">
                                     <option value="">Select One</option> 
                                         <option value="Direct Employer">Direct Employer</option>
@@ -473,22 +503,39 @@ tr:hover {background-color:#f5f5f5;}
                                         <strong>{{ $errors->first('type_of_employer') }}</strong>
                                     </span>
                                 @endif
-                            </li>
-                        </ul>
-                           </div>
-                                 <ul class="careerfy-column-12"> 
-                                                       <li>
-                                <label>Website (start with http://)</label>
+            </div>
+        </div>
+    </div>
+
+      <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                         <label>Website (start with http://)</label>
                                 <input onblur="if(this.value == '') { this.value ='https://www.yourwebsite.com'; }" onfocus="if(this.value =='https://www.yourwebsite.com') { this.value = ''; }" type="text" name="website">
                                 <i class="careerfy-icon careerfy-world"></i>
                                @if ($errors->has('website'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('website') }}</strong>
                                     </span>
-                                @endif                               
-                            </li>
-                        </ul>
-                            <div style="text-align: center;"><h2>Company Contact Person</h2>  </div>
+                                @endif       
+            </div>
+        </div>
+         <div class="col-md-6">
+            <div class="form-group">
+        
+            </div>
+        </div>
+    </div>
+       <div style="text-align: center;"><h2>Company Contact Person</h2>  </div>
+ 
+              
+                <div>
+ 
+                </div>
+                 
+ 
+                           </div>
+                    
                            <div class="careerfy-column-8 careerfy-user-form" >
                          
                            <ul class="careerfy-column-12"> 
