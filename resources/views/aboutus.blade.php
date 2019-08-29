@@ -51,8 +51,8 @@
                     <div class="row">
 
                         <div class="col-md-12 careerfy-typo-wrap">
-                            <div class="careerfy-about-text" style="text-align: justify; line-height: 26px;">
-                                <h2>About Our Company</h2>
+                            <div class="careerfy-about-text" style="text-align: justify; line-height: 36px; font-size: 20px">
+                                <h2>About Beshortlisted</h2>
                                 {{ $about->history }}  
                             </div>
                         </div>
@@ -97,8 +97,7 @@
                         
                         <div class="careerfy-typo-wrap">
                             <section class="careerfy-fancy-title">
-                                <h2>Our Featured Services</h2>
-                                <p>A better career is out there. We'll help you find it to use.</p>
+                                <h2>Our Featured Services</h2> 
                             </section>
                             <div class="careerfy-classic-services">
                                   <ul class="row">
