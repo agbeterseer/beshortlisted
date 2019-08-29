@@ -53,8 +53,7 @@
           </div>
     </div>
  
-<div class="space">&nbsp;</div>
-<div class="space">&nbsp;</div>
+
 <div class="space">&nbsp;</div>
 <hr>  
     <div class="col-sm-12">

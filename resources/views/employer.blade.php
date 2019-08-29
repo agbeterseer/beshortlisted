@@ -109,12 +109,12 @@
           -ms-flex-direction: row;
           -o-flex-direction: row;
           flex-direction: row;
-          
+
         }
     
 
     .box_two{
-      position: 
+      padding: auto; 
     }
 
 

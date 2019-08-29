@@ -50,13 +50,13 @@
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-md-6 careerfy-typo-wrap">
-                            <div class="careerfy-about-text" style="text-align: center;">
+                        <div class="col-md-12 careerfy-typo-wrap">
+                            <div class="careerfy-about-text" style="text-align: justify; line-height: 26px;">
                                 <h2>About Our Company</h2>
                                 {{ $about->history }}  
                             </div>
                         </div>
-                        <div class="col-md-6 careerfy-typo-wrap"><div class="careerfy-about-thumb"><img src="{{asset('extra-images/about-us-thumb.png')}}" alt=""></div></div>
+
                         <div class="col-md-12 careerfy-typo-wrap">
                             <div class="careerfy-modren-counter">
                                 <ul class="row">
