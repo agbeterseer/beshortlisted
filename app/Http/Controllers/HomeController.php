@@ -425,9 +425,9 @@ public function DisplayTemplates()
       $menus = $this->displayMenu();
       $posts = $this->listPages();
 
-      if ($success) {
-        Session::flash('Job link sent successfully');
-      }
+      // if ($success) {
+      //   Session::flash('Job link sent successfully');
+      // }
 
      return view('employer.job_details', compact('tag','employement_terms', 'jobcareer_levels', 'industries', 'educational_levels', 'skillsets', 'job_assessments', 'job_requirements', 'get_Job_by_common_industries', 'get_Job_by_common_industries_similler', 'cities', 'get_all_user_list', 'industry_professions', 'menus', 'posts'), array('user' => Auth::user()));
     }

@@ -196,36 +196,9 @@
                         
                                 </div>
                                </form> 
-                                  <a href="#" class="careerfy-sendmessage-btn"><i class="careerfy-icon careerfy-envelope"></i> Send a message</a>
-                                            <div class="btn-group">
-           <button class="btn btn-xs btn-primary" type="button" data-toggle="modal" data-target="#myModal-{{$tag->id}}"> Assign.. <i class="fa fa-angle-down"></i> </button>                                   
-        <div class="modal fade" id="myModal-{{$tag->id}}" tabindex="1" role="dialog" aria-labelledby="myModalLabel" >
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
-                 <span aria-hidden="true"></span>   </button>
-            <h4 class="modal-title" id="myModalLabel" style="margin-left: 165px;">{{$tag->job_title}}</h4>
-                        </div>
-                        <div class="modal-body">
-                    <form action="" method="post" role="form" id="role-form-{{$tag->id}}">
-                            {{csrf_field()}}
-                            {{method_field('PATCH')}}
-
-                        <div class="form-group" style="margin-left: 185px;">
-                          note:
-                      
-                        </form>
-                      </div>
-                        <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-             <button type="button" class="btn btn-primary" onclick="$('#role-form-{{$tag->id}}').submit()">Save changes</button>
-
-                        </div>
-                    </div>
-                 </div>
-              </div>
-            </div>
+                                  
+             <a href="#static_personal" class="careerfy-sendmessage-btn" data-toggle="modal" data-style="slide-left" data-spinner-color="#333" ><i class="careerfy-icon careerfy-envelope"></i> Send a message</a>
+                                        
                                 </div> 
 
                                 <!-- display jobs in the same industry -->
@@ -300,14 +273,14 @@
 
         </div>
         <!-- Main Content -->
-<div class="modal fade bs-modal-lg" id="static_personal" tabindex="-1" role="dialog" aria-hidden="true">
+ <div class="modal fade bs-modal-lg" id="static_personal" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog modal-lg">
 <div class="modal-content">
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-<h4 class="modal-title">Personal Information</h4>
+<h4 class="modal-title">Email a friend about this job</h4>
 </div>
-<form class="form-horizontal" action="" method="post" role="form">
+<form class="form-horizontal" action="{{route('send_job_link')}}" method="post" role="form">
 {{ csrf_field() }}
 <div class="modal-body">
 
@@ -315,6 +288,7 @@
 <!-- <div class="portlet light bordered">
 <div class="portlet-body"> -->
  <!-- <pre> Specifications</pre> -->
+
  
 <input type="hidden" value="personalinfor" name="pinfor">
 <!-- <form role="form"> -->
@@ -323,10 +297,60 @@
 <div class="form-group">
 <label class="control-label col-md-3"> </label>
 <div class="col-md-12">
-Interests 
-<textarea class="form-control textarea" placeholder="" name="interest" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="125"></textarea> 
+Subject
+<input type="text" name="subject" class="form-control"  value="{{ $tag->job_title }}" disabled="disabled"> 
+ <input type="hidden" name="job_title" class="form-control" value="{{ $tag->job_title }}">
+</div>
+</div>
+<!-- /input-group -->
+</div>
+<!-- /.col-md-6 -->
+<!-- /.col-md-6 -->
+</div>
+<!-- /.row -->
+<!-- </form> -->
+<div class="row">
+<div class="col-md-12">
+<div class="form-group">
+<label class="control-label col-md-3"> </label>
+<div class="col-md-12">
+From 
+<input type="email" name="from" class="form-control" required="required" > 
  
-<span style="color:#827e7e;">Eg. Photography, Marathon, Yoga, Rock Climbing, Football, Fishing, Snowboard, Investment etc.</span>
+</div>
+</div>
+<!-- /input-group -->
+</div>
+<!-- /.col-md-6 -->
+<!-- /.col-md-6 -->
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<div class="form-group">
+<label class="control-label col-md-3"> </label>
+<div class="col-md-12">
+To 
+<input type="email" name="to" class="form-control" required="required" > 
+ 
+</div>
+</div>
+<!-- /input-group -->
+</div>
+<!-- /.col-md-6 -->
+<!-- /.col-md-6 -->
+</div>
+
+<!-- <form role="form"> -->
+<div class="row">
+<div class="col-md-12">
+<div class="form-group">
+<label class="control-label col-md-3"> </label>
+<div class="col-md-12">
+Job link 
+<input type="text" name="link" class="form-control" required="required" value="{{asset('/')}}job/job-descriptions/{{$tag->id}}" disabled="disabled" >
+<a href="{{asset('/')}}job/job-descriptions/{{$tag->id}}"> </a>
+ <input type="hidden" name="link" class="form-control" required="required" value="{{asset('/')}}job/job-descriptions/{{$tag->id}}"   >
 </div>
 </div>
 <!-- /input-group -->
@@ -338,34 +362,17 @@ Interests
 <!-- </form> -->
 
 <!-- <form role="form"> -->
-<div class="row">
+ <div class="row">
 <div class="col-md-12">
 <div class="form-group">
 <label class="control-label col-md-3"> </label>
 <div class="col-md-12">
-Associations 
-<textarea class="form-control textarea"  name="associations" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="125"></textarea> 
-<span style="color:#827e7e;">Eg. (ITAN) Information Technology Association of Nigeria </span>
-</div>
-</div>
-<!-- /input-group -->
-</div>
-<!-- /.col-md-6 -->
-<!-- /.col-md-6 -->
-</div>
-<!-- /.row -->
-<!-- </form> -->
-
-<!-- <form role="form"> -->
+Job Description 
+<br>
+ <input type="hidden" name="job_description" value="{{$tag->description}}">
+<div class="space">&nbsp;</div>
+{!! $tag->description !!} 
  
-<div class="row">
-<div class="col-md-12">
-<div class="form-group">
-<label class="control-label col-md-3"> </label>
-<div class="col-md-12">
-Training 
-<textarea class="form-control textarea" name="training" style="margin-top: 0px; margin-bottom: 0px; height: 100px; " maxlength="125"></textarea> 
-
 </div>
 </div>
 <!-- /input-group -->
@@ -383,15 +390,14 @@ Training
 </div>
 <div class="modal-footer">
 <button type="submit" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-<button type="submit" class="btn green">Save changes</button>
+<button type="submit" class="btn green">Send Email</button>
 </div>
 </form>
 </div>
 <!-- /.modal-content -->
 </div>
 <!-- /.modal-dialog -->
-</div>
-        <!-- Footer -->
+</div>        <!-- Footer -->
                @include('partials.job_footer')
         <!-- Footer -->
     </div>

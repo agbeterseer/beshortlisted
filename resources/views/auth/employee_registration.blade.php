@@ -67,8 +67,9 @@ tr:hover {background-color:#f5f5f5;}
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%; 
+ 
   text-align:center;
+  align-content: center;
 }
 </style>
 </head>
@@ -88,11 +89,14 @@ tr:hover {background-color:#f5f5f5;}
         <!-- Main Content --> 
           <div class="space">&nbsp;</div>
           <div class="space">&nbsp;</div>
-                    <div class=" col-md-offset-2">
-          <div class="center">
-          <h2>Create Candidate Account</h2> 
-        </div>
-      </div>
+                
+            <div class="col-md-12">
+                  <div class="row">
+                  <div class="col-md-2">&nbsp; &nbsp;</div>
+                  <div class="col-md-8 col-md-offset-2">  <h2>Create Candidate Account</h2>   </div>
+                      <div class="col-md-2"></div>
+                  </div>      
+                </div>
 <div class="col-md-8 col-md-offset-2">
     <div class="center">  
           <div class="space">&nbsp;</div>
@@ -110,46 +114,64 @@ tr:hover {background-color:#f5f5f5;}
             </div>
             @endif       
      <!-- <div class="portlet light bordered" > -->
-  <form class="careerfy-row careerfy-employer-profile-form" method="POST" action="{{ route('register.employee') }}"   enctype="multipart/form-data">
+  <form class="careerfy-row careerfy-employer-profile-form " method="POST" action="{{ route('register.employee') }}"   enctype="multipart/form-data">
                         {{ csrf_field() }} 
            <div class="panel panel-default"> 
                 <div class="panel-body"> 
-                  <div  > 
-                     <div><h2>Personal Information</h2>  </div>
+                  <div> 
+                          <div class="col-md-12">
+                  <div class="row">
+                  <div class="col-md-2">&nbsp; &nbsp;</div>
+                  <div class="col-md-8 col-md-offset-1">  <h2>Personal Information</h2>  </div>
+                      <div class="col-md-2"></div>
+                  </div>      
+                </div>
+                    
                  <div class="tab-content">
                     <div id="personal" class="tab-pane fade in active">
                    <input type="hidden" name="account_type" value="employee" >
                     <div class="careerfy-user-form careerfy-user-form-coltwo">
-                           <div>
-                <ul> 
-                               <li>
-                                <label>First Name:<span class="required" style="color: red">*</span></label>
+                         
+                <div class="col-md-12">
+                  <div class="row">
+                      <div class="col-md-6">
+                       <div class="form-group">
+                                      <label>First Name:<span class="required" style="color: red">*</span></label>
        <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="firstname">
-                                <i class="careerfy-icon careerfy-user"></i>
+                              
                               @if ($errors->has('firstname'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('firstname') }}</strong>
                                     </span>
                                 @endif
-                            </li>
-                            <li>
-                                <label>Last Name:<span class="required" style="color: red">*</span></label>
+
+                                </div>
+                      </div>
+                      <div class="col-md-6">
+
+                             <label>Last Name:<span class="required" style="color: red">*</span></label>
                                 <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="lastname">
-                                <i class="careerfy-icon careerfy-user"></i>
-                            </li>
-                                                      <li>
-                                <label>Email Address:<span class="required" style="color: red">*</span></label>
+                            
+
+                      </div>
+                  </div>
+
+                  <div class="row ">
+                      <div class="col-md-6">
+                      <div class="form-group"> 
+                                 <label>Email Address:<span class="required" style="color: red">*</span></label>
                                 <input onblur="if(this.value == '') { this.value ='Enter Your Email Address'; }" onfocus="if(this.value =='Enter Your Email Address') { this.value = ''; }" type="text" name="email"  >
-                                <i class="careerfy-icon careerfy-mail"></i>
+                       
                                      @if ($errors->has('email2'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email2') }}</strong>
                                     </span>
                                 @endif
-                            </li>
- 
-                             <li> 
-                             <div >
+                                </div>
+
+                      </div>
+                      <div class="col-md-6">
+                                  <div class="form-group">
                                   <div class="col-md-3"> 
 <div class="form-group{{ $errors->has('phonenumber') ? ' has-error' : '' }}">
     <label for="phonenumber" class="cols-sm-3 control-label">Code
@@ -384,8 +406,9 @@ tr:hover {background-color:#f5f5f5;}
                                                                                                     <option value="+1876">+1876</option>
                                                                                                     <option value="+7370">+7370</option>
                                                                                             </select>
-</div></div>
-          <div class="col-md-9">
+</div>
+</div>
+         <div class="col-md-9">
        <div class="form-group{{ $errors->has('phonenumber') ? ' has-error' : '' }}">
              
               <label for="phonenumber" class="cols-sm-2 control-label" style="margin-left:15px;">Phone Number
@@ -393,7 +416,7 @@ tr:hover {background-color:#f5f5f5;}
               </label>
               
    <input type="text" name="phone" maxlength="11" id="phonenumber" required="required" onkeypress="onlyNumbers()">
-    <i class="careerfy-icon careerfy-technology"></i>
+ 
            @if ($errors->has('phonenumber'))
                         <span class="help-block">
                             <strong>{{ $errors->first('phonenumber') }}</strong>
@@ -405,35 +428,40 @@ tr:hover {background-color:#f5f5f5;}
           </div>
           </div>
 
-                            </li>
-                        <li>
 
-                        <label >Password</label> 
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-md-6">
+                       <div class="form-group">
+                       <label >Password</label> 
                         <div name="frmCheckPassword" id="frmCheckPassword"> 
-                        <input type="password" name="password" id="password" class="demoInputBox" onKeyUp="checkPasswordStrength();" />
+                        <input type="password" name="password" id="password" class="demoInputBox form-control" onKeyUp="checkPasswordStrength();"  />
                         <div id="password-strength-status" style="position: absolute; margin: -15px 0px 0px 90px;"></div>
                         </div>
 
-                        <i class="careerfy-icon careerfy-typo-wrap"></i>
+                    
                         @if ($errors->has('password'))
                         <span class="help-block">
                         <strong>{{ $errors->first('password') }}</strong>
                         </span>
                         @endif
-                        </li>
-                    <li> 
-                    <label>Confirm Password</label>  
-                    <input id="password_confirmation" type="password"  name="password_confirmation" class="form-control" onblur="return Validate()">
-                    <i class="careerfy-icon careerfy-typo-wrap"></i> 
-                    </li> 
-                </ul>
-                </div>
-                        <ul>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                       <div class="form-group">
+                           <label>Confirm Password</label>  
+                          <input id="password_confirmation" type="password"  name="password_confirmation" class="form-control" onblur="return Validate()">
+                          <i class="careerfy-icon careerfy-typo-wrap"></i>   
+                          </div>
+                      </div>
+                  </div>
 
-                        
-         
-                        <li>
-                                <label>Gender:<span class="required" style="color: red">*</span></label>
+                  <div class="row">
+                      <div class="col-md-6">
+                       <div class="form-group">
+                                           <label>Gender:<span class="required" style="color: red">*</span></label>
                           <select name="gender" id="gender" required="required" style="background-color: #ffffff; font-size: 13px; font-weight: normal;">
                           <option value="" selected="selected">Select</option>
                           <option value="Male">Male</option>
@@ -444,24 +472,40 @@ tr:hover {background-color:#f5f5f5;}
                                         <strong>{{ $errors->first('gender') }}</strong>
                                     </span>
                                 @endif
-                            </li>
-                            <li>
-                                <label>Date Of Birth:<span class="required" style="color: red">*</span></label>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group"> 
+                                      <label>Date Of Birth:<span class="required" style="color: red">*</span></label>
                                 <input onblur="if(this.value == '') { this.value ='Enter Date of Birth'; }" onfocus="if(this.value =='Enter Date of Birth') { this.value = ''; }" type="date" name="date_of_birth" class="form-control"  required="required">
-                            </li>
+                                </div>
+                      </div>
+                  </div>
 
-                            <li> <label>Qualification:<span class="required" style="color: red">*</span></label>
 
-  <select name="educational_level" id="educational_level" required="required" style="background-color: #ffffff; font-size: 13px; font-weight: normal;">
-          <option value="" selected="selected">Select</option>dd($file);
-  @foreach($educationallevels as $educationallevel)
+                  <div class="row">
+                      <div class="col-md-6">
+                      <div class="form-group"> 
+                                  <label>Qualification:<span class="required" style="color: red">*</span></label>
+
+                                  <select name="educational_level" id="educational_level" required="required" style="background-color: #ffffff; font-size: 13px; font-weight: normal;">
+                                          <option value="" selected="selected">Select</option>dd($file);
+                                  @foreach($educationallevels as $educationallevel)
                   
                           <option value="{{$educationallevel->id}}">{{$educationallevel->name}}</option>
                           @endforeach
                           </select>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                        
 
-                            </li>
-                          </ul>
+                      </div>
+                  </div>
+<!--End of form 1 -->
+
+                </div>
+       
 
                            </div>
                     </div>
@@ -481,35 +525,35 @@ tr:hover {background-color:#f5f5f5;}
 <div class="col-md-6"> 
 <div class="form-group"> 
 <div class="col-md-12" style="overflow-x:auto;">
-<label>From: <span class="required">*</span>  </label> 
-<div class="careerfy-three-column-row"> 
-<div class="careerfy-profile-select careerfy-three-column">
-    <select name="work_from_year" id="from_year" required="required" style="font-size: 14px; color: #000000;">
-    <option value="" selected="selected">Year</option>
-        @foreach($recruityear_list as $recruityear)
-      <option value="{{$recruityear->name}}">{{$recruityear->name}}</option>
-      @endforeach
-                </select>
-            </div> 
-  <div class="careerfy-profile-select careerfy-three-column">    
-<select name="work_from_month" id="work_from_month" required="required" style="font-size: 14px; color: #000000;">
- <option value="" selected="selected">Month</option>
-<option value="1">January</option>
-<option value="2">February</option>
-<option value="3">March</option>
-<option value="4">April</option>
-<option value="5">May</option>
-<option value="6">June</option>
-<option value="7">July</option>
-<option value="8">August</option>
-<option value="9">September</option>
-<option value="10">October</option>
-<option value="11">Novermber</option>
-<option value="12">December</option>
-</select>
-                                       
-                </div>
-            </div>
+        <label>From: <span class="required">*</span>  </label> 
+        <div class="careerfy-three-column-row"> 
+        <div class="careerfy-profile-select careerfy-three-column">
+            <select name="work_from_year" id="from_year" required="required" style="font-size: 14px; color: #000000;">
+            <option value="" selected="selected">Year</option>
+                @foreach($recruityear_list as $recruityear)
+              <option value="{{$recruityear->name}}">{{$recruityear->name}}</option>
+              @endforeach
+                        </select>
+                    </div> 
+          <div class="careerfy-profile-select careerfy-three-column">    
+        <select name="work_from_month" id="work_from_month" required="required" style="font-size: 14px; color: #000000;">
+         <option value="" selected="selected">Month</option>
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">Novermber</option>
+        <option value="12">December</option>
+        </select>
+                                               
+                        </div>
+                    </div>
 </div>
 </div>
 <!-- /input-group -->
@@ -530,13 +574,7 @@ tr:hover {background-color:#f5f5f5;}
       <option value="{{$recruityear->name}}">{{$recruityear->name}}</option>
       @endforeach
  </select>
-<!--    <select name="end_year" id="end_year2" style="font-size: 16px; color: #000000; display: none;"  >
  
-    <option value="" >Year</option>
-    @foreach($recruityear_list as $recruityear)
-      <option value="{{$recruityear->name}}">{{$recruityear->name}}</option>
-      @endforeach
- </select> -->
      </div>
 <div class="careerfy-profile-select careerfy-three-column">                                            
 <select name="end_month" id="end_month_work" style="font-size: 14px; color: #000000; display: block;">
@@ -567,36 +605,37 @@ tr:hover {background-color:#f5f5f5;}
 
  </div>
  <div class="space">&nbsp;</div>
-   
-                      <div class="careerfy-user-form careerfy-user-form-coltwo">  
-                      <ul> 
-                        <li>
-                                <label>Company Name: <span class="required" style="color: red">*</span></label>
-       <input placeholder="Enter Company Name" type="text" name="company_name"> 
+
+   <div class="row">
+      <div class="col-md-6">
+       <div class="form-group">
+
+                    <label>Company Name: <span class="required" style="color: red">*</span></label>
+       <input placeholder="Enter Company Name" type="text" name="company_name" class="form-control"> 
                               @if ($errors->has('number_of_employees'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('number_of_employees') }}</strong>
                                     </span>
                                 @endif
-                            </li>
-                          <li>
-                                <label>Position Title: <span class="required" style="color: red">*</span></label>
-                                <input placeholder="Eg. Software Developer" type="text" name="position_title" required="required">
+                                  </div>
+      </div>
+      <div class="col-md-6">
+                  <label>Position Title: <span class="required" style="color: red">*</span></label>
+                                <input placeholder="Eg. Software Developer" type="text" name="position_title" required="required" class="form-control">
                                @if ($errors->has('position_title'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('position_title') }}</strong>
                                     </span>
-                                @endif                               
-                            </li>
+                                @endif 
 
-                            <li>
-   <label>Availability:<span class="required" style="color: red">*</span></label> 
-<!--  <select name="career_level" id="career_level" required="required" style="background-color: #ffffff; font-size: 13px; font-weight: normal;">
-  <option value="" selected="selected">Please Select</option>
- @foreach($job_career_levelList as $job_career_level)
-    <option value="{{$job_career_level->id}}">{{$job_career_level->name}}</option>
-    @endforeach 
-</select> -->
+      </div>
+   </div>
+
+    <div class="row">
+      <div class="col-md-6">
+       <div class="form-group">
+           <label>Availability:<span class="required" style="color: red">*</span></label> 
+ 
  <select name="availability" required="required" style="background-color: #ffffff; font-size: 13px; font-weight: normal;"> 
  <option value="">Select one</option>
    <option value="now">Immediate</option>
@@ -606,9 +645,12 @@ tr:hover {background-color:#f5f5f5;}
     <option value="2 months">2 months</option>
     <option value="date">Specific date</option>
 </select>
-                            </li>
-                            <li>
-                                <label>Work Location:<span class="required" style="color: red">*</span></label>
+</div>
+
+      </div>
+      <div class="col-md-6">
+       <div class="form-group">
+                                        <label>Work Location:<span class="required" style="color: red">*</span></label>
                         <select name="country"  required="required" style="background-color: #ffffff; font-size: 13px; font-weight: normal;">
                         <option value="" selected="selected">Select</option> 
                         @foreach($countries as $country)
@@ -620,8 +662,15 @@ tr:hover {background-color:#f5f5f5;}
                                         <strong>{{ $errors->first('country') }}</strong>
                                     </span>
                                 @endif
-                            </li>
-<li>                         <label>Industry: <span class="required" style="color: red">*</span></label>
+                                </div>
+
+      </div>
+   </div>
+
+    <div class="row">
+      <div class="col-md-6">
+         <div class="form-group">
+                                 <label>Industry: <span class="required" style="color: red">*</span></label>
                <select name="industry"  required="required" style="background-color: #ffffff; font-size: 13px; font-weight: normal;">
                         <option value="" selected="selected">Select</option> 
                         @foreach($industries as $industry)
@@ -633,10 +682,13 @@ tr:hover {background-color:#f5f5f5;}
                                     <span class="help-block">
                                         <strong>{{ $errors->first('website') }}</strong>
                                     </span>
-                                @endif   
-                              </li> 
-                            <li>
-                                <label>Function:<span class="required" style="color: red">*</span></label>
+                                @endif 
+</div>
+      </div>
+      <div class="col-md-6">
+      <div class="form-group">
+        
+                                        <label>Function:<span class="required" style="color: red">*</span></label>
                         <select name="profession" required="required" style="background-color: #ffffff; font-size: 13px; font-weight: normal;">
                         <option value="" selected="selected">Select</option>  
                         @foreach($industry_profession as $industry_pr)
@@ -648,9 +700,18 @@ tr:hover {background-color:#f5f5f5;}
                                         <strong>{{ $errors->first('profession') }}</strong>
                                     </span>
                                 @endif
-                     </li> 
-                  </ul>  
-                   </div>
+                                </div>
+      </div>
+   </div>
+
+ 
+
+    <div class="row">
+      <div class="col-md-6"></div>
+      <div class="col-md-6"></div>
+   </div>
+   
+ 
                         <ul class="careerfy-user-form careerfy-user-form-coltwo"> 
                           <li> 
                       Upload CV <input type="file" name="upload_cv">  </li>

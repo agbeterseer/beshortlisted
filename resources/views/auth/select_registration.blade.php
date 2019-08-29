@@ -68,7 +68,7 @@ tr:hover {background-color:#f5f5f5;}
 }
 .select_label{
 font-size: 20px;
-padding-left: 75px; 
+/*padding-left: 75px; */
 
 }
 
@@ -97,52 +97,67 @@ padding-left: 75px;
         <div class="panel panel-default">
             
                 <div class="panel-body">
-                      <div class="center"><h2>Choose your Account Type</h2> </div> 
-<div class="col-md-12" > 
-           <div class="careerfy-user-options nav-tabs">
-               <div class="space">&nbsp;</div>
-                        <div class="clearfix"></div>
-                        <ul>
-                            <li class="active candidate" >
+                <div class="col-md-12">
+                  <div class="row">
+                  <div class="col-md-2">&nbsp; &nbsp;</div>
+                  <div class="col-md-8 col-md-offset-1">  <h2>Choose your Account Type</h2> </div>
+                      <div class="col-md-2"></div>
+                  </div>      
+                </div>
+                      
+<div class="col-md-12 mb-5" > 
+       
+    <div class="col-md-6" >
+    <div class="careerfy-user-options nav-tabs col-md-12 careerfy-user-form">
+               <ul>
+                            <li class="active candidate" style="padding: 30px 0px 0px 0px">
                                 <a href="#candidate">
-                                     <i class="careerfy-icon careerfy-user"></i>
+                                     <i class="careerfy-icon careerfy-user" style=""></i>
                                      <span>Candidate</span>
                                      <div class="space">&nbsp;</div> 
                                 </a>
                             </li>
-                            <li class="active employer">
+                            </ul>
+    </div>
+                           
+        <!-- <ion-icon name="briefcase" size="large" class="center"></ion-icon>  -->
+        <img src="{{asset('recruit/images/job-search.svg')}}" width="190px" height="90px" class="center" >
+                        <div class="space">&nbsp;</div>
+                        <div class="clearfix"></div> 
+                        <div class="space">&nbsp;</div>
+       <div class="select_label " style="text-align: center;">Discover awesome jobs</div> 
+ 
+                        <div class="space">&nbsp;</div>
+                        <div class="clearfix"></div>
+                        <div class="space">&nbsp;</div>
+                        <div class="space">&nbsp;</div>
+                        <div class="clearfix"></div>
+      <div class="careerfy-user-form-coltwo-full careerfy-user-form">
+                            <a href="{{ route('employee.sigup') }}">    
+                        <input type="submit" value="Candidate Sign Up"></a>
+                            </div>
+                             <div class="clearfix"></div>
+</div> 
+
+    <div class="col-md-6" > 
+    <div class="careerfy-user-options nav-tabs careerfy-user-form">
+               <ul>
+               <li class="active employer" style="padding: 30px 0px 0px 0px">
                                 <a href="#employer" >
                                      <i class="careerfy-icon careerfy-building"></i>
                                      <span>Employer</span> 
                                      <div class="space">&nbsp;</div> 
                                     
                                 </a>
-                            </li>
-                        </ul>
-                    </div>
-    <div class="col-md-6">
-        <!-- <ion-icon name="briefcase" size="large" class="center"></ion-icon>  -->
-        <img src="{{asset('recruit/images/job-search.svg')}}" width="190px" height="90px" class="center" >
-                        <div class="space">&nbsp;</div>
-                        <div class="clearfix"></div> 
-                        <div class="space">&nbsp;</div>
-       <div class="center2 select_label">Discover awesome jobs<br></div> 
- 
-                        <div class="space">&nbsp;</div>
-                        <div class="clearfix"></div>
-                        <div class="space">&nbsp;</div>
-                        <div class="space">&nbsp;</div>
-      <div class="careerfy-user-form-coltwo-full careerfy-user-form">
-                            <a href="{{ route('employee.sigup') }}">    <input type="submit" value="Candidate Sign Up"></a>
-                            </div>
-</div>
-    <div class="col-md-6"> 
+                    </li>
+                </ul>
+                </div>
          <img src="{{asset('recruit/images/job-search-cv.svg')}}" width="190px" height="90px" class="center" >
 
                         <div class="space">&nbsp;</div>
                         <div class="clearfix"></div> 
                         <div class="space">&nbsp;</div>
-        <div class="container center2 select_label">Attract the best talent. <br></div>
+        <div class="select_label" style="text-align: center;">Attract the best talent. <br></div>
                         <div class="space">&nbsp;</div>
                         <div class="space">&nbsp;</div>
                         <div class="space">&nbsp;</div>
