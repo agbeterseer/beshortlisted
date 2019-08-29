@@ -129,7 +129,7 @@ tr:hover {background-color:#f5f5f5;}
             <div class="form-group">
                     <label >Password</label> 
                         <div name="frmCheckPassword" id="frmCheckPassword"> 
-                        <input type="password" name="password" id="password" class="demoInputBox form-control" onKeyUp="checkPasswordStrength();"  />
+                        <input type="password" name="password" id="password" class="demoInputBox form-control" onKeyUp="checkPasswordStrength();" placeholder="Enter password"  />
                         <div id="password-strength-status" style="position: absolute; margin: -15px 0px 0px 90px;"></div>
                         </div>
 
@@ -145,7 +145,7 @@ tr:hover {background-color:#f5f5f5;}
         <div class="col-md-6">
             <div class="form-group">
                          <label>Confirm Password</label>  
-                    <input id="password_confirmation" type="password"  name="password_confirmation" class="form-control" onblur="return Validate()">
+                    <input id="password_confirmation" type="password"  name="password_confirmation" class="form-control" onblur="return Validate()" placeholder="Enter confirm password">
                    
             </div>
         </div>
@@ -155,7 +155,7 @@ tr:hover {background-color:#f5f5f5;}
    <div class="col-md-6">
             <div class="form-group">
                                      <label>Email Address:</label>
-                                <input onblur="if(this.value == '') { this.value ='Enter Your Email Address'; }" onfocus="if(this.value =='Enter Your Email Address') { this.value = ''; }" type="text" name="email"  >
+                                <input   type="text" name="email" placeholder="Enter Your Email Address"  >
                                 
                                      @if ($errors->has('email2'))
                                     <span class="help-block">
