@@ -12,6 +12,7 @@ use App\Region;
 use App\City;
 use App\Profession;
 use App\ProfessionMeta;
+use App\Application;
 class DashboardController extends Controller
 {
     /**
@@ -31,7 +32,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $documents = Document::all()->count();
+        $documents = Application::all()->count();
         $roles = Role::all()->count();
         $users = User::all()->count();
         return view('board', compact('documents', 'roles', 'users'), array('user' => Auth::user()));
