@@ -117,7 +117,7 @@
                                         <span>4</span>
                                         <i class="careerfy-icon careerfy-24-hours"></i>
                                         <h2>Philosophy</h2>
-                                       {{ $about->philosophy }}
+                                       {!! $about->philosophy !!}
                                     </li>
                                     @endif
 <!--                                     <li class="col-md-4">
