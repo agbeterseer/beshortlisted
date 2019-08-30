@@ -390,7 +390,7 @@
                                              
                         <!-- END DASHBOARD STATS 1-->
                 <h1 class="page-title"> Admin Dashboard
-                <small>Current Users, recent events and reports</small>
+                <!-- <small>Current Users, recent events and reports</small> -->
                         </h1>
                           <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -402,7 +402,7 @@
                               <span data-counter="counterup" data-value="{{$documents}}">0</span>
                                         <!-- <small class="font-green-sharp">$</small> -->
                                             </h3>
-                                            <small>TOTAL Applications's</small>
+                                            <small>TOTAL Applications</small>
                                         </div>
                                         <div class="icon">
                                             <i class="icon-puzzle"></i>
