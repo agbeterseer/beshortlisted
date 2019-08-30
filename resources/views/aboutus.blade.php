@@ -40,7 +40,7 @@
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-md-6 careerfy-typo-wrap">
+                        <div class="col-md-12 careerfy-typo-wrap">
                             <div class="careerfy-about-text" style="text-align: justify; line-height: 46px; ">
                                 <h2>About Us</h2>
                              
@@ -48,8 +48,8 @@
                                                            
                             </div>
                         </div>
-                              <div class="col-md-6 careerfy-typo-wrap"><div class="careerfy-about-thumb"><img src="{{asset('/uploads/banners')}}/{{$about->banner}} " alt=""></div></div>
-
+                        <!--       <div class="col-md-6 careerfy-typo-wrap"><div class="careerfy-about-thumb"><img src="{{asset('/uploads/banners')}}/{{$about->banner}} " alt=""></div></div>
+ -->
                         <div class="col-md-12 careerfy-typo-wrap">
                             <div class="careerfy-modren-counter">
                                 <ul class="row">
