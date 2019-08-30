@@ -100,10 +100,10 @@
 
                                <div class="form-group{{ $errors->has('banner') ? ' has-error' : '' }}">
                             <label for="top_banner" class="col-md-4 control-label">Upload Top Banner
-                            <span class="required">*</span>
+                      
                             </label> 
                             <div class="col-md-6">
-                              <input type="file" name="top_banner"  required="required"> 
+                              <input type="file" name="top_banner"> 
                                 @if ($errors->has('top_banner'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('top_banner') }}</strong>

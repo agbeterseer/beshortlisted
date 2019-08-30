@@ -41,7 +41,7 @@
                     <div class="row">
 
                         <div class="col-md-6 careerfy-typo-wrap">
-                            <div class="careerfy-about-text" style="text-align: justify; line-height: 36px; ">
+                            <div class="careerfy-about-text" style="text-align: justify; line-height: 46px; ">
                                 <h2>About Us</h2>
                              
                                 {!!  $about->history !!}  
@@ -98,26 +98,26 @@
                                         <span>1</span>
                                         <i class="careerfy-icon careerfy-coding"></i>
                                         <h2>Our Vision</h2>
-                                        <p>{{$about->vision}}</p>
+                                       {!! $about->vision !!}
                                     </li>
                                     <li class="col-md-4">
                                         <span>2</span>
                                         <i class="careerfy-icon careerfy-support"></i>
                                         <h2>Our Mission</h2>
-                                        <p>{{$about->mission}}</p>
+                                        {!! $about->mission !!} 
                                     </li>
                                     <li class="col-md-4">
                                         <span>3</span>
                                         <i class="careerfy-icon careerfy-pen"></i>
                                         <h2>Our Core Values</h2>
-                                        <p>{{$about->values}}</p>
+                                        {!!  $about->values !!} 
                                     </li>
                                     @if($about->philosophy)
                                     <li class="col-md-4">
                                         <span>4</span>
                                         <i class="careerfy-icon careerfy-24-hours"></i>
                                         <h2>Philosophy</h2>
-                                        <p>{{$about->philosophy}}</p>
+                                       {{ $about->philosophy }}
                                     </li>
                                     @endif
 <!--                                     <li class="col-md-4">

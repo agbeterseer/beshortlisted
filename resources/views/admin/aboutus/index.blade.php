@@ -52,7 +52,7 @@
                         <tbody>
                         @forelse($about_us as $about) 
                     <tr class="odd gradeX"> 
-                        <td>{{$about->history}}</td> 
+                        <td>{{$about->mission}}</td> 
                         <td>{{$about->created_at}}
                         </td>#<td>
      <div class="btn-group">

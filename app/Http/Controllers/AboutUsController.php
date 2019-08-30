@@ -122,6 +122,15 @@ class AboutUsController extends Controller
         $core_values = $request->core_values;
 
 
+            $about = AboutUs::findOrFail($id);
+          $about->history = $history;
+          $about->values = $core_values;
+          $about->philosophy = $philosophy;
+          $about->vision = $vision;
+          $about->mission = $mission;
+          $about->updated_at = $this->returnCurrentTime();
+
+
         if ($request->hasFile('top_banner')) {
        $banner = $request->file('top_banner');
        $rules = [
@@ -140,20 +149,19 @@ class AboutUsController extends Controller
         }
         $filename = time() . '.' . $banner->getClientOriginalExtension();
         $banner->move(public_path('/uploads/banners/'), $filename);
+
+          $about->banner = $filename;
+        }else{
+
+            $about->save();
+          Session::flash('success', 'Done successfully!');
+
         }
 
-        if ($history !=null && $history !="") {
-          $about = AboutUs::findOrFail($id);
-          $about->history = $history;
-          $about->values = $core_values;
-          $about->philosophy = $philosophy;
-          $about->vision = $vision;
-          $about->mission = $mission;
-          $about->updated_at = $this->returnCurrentTime();
-          $about->banner = $filename;
-          $about->save();
-          Session::flash('success', 'Done successfully!');
-        }
+         
+     
+
+      
 
         return redirect()->back();
 
