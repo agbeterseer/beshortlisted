@@ -48,7 +48,7 @@
                                                            
                             </div>
                         </div>
-                              <div class="col-md-6 careerfy-typo-wrap"><div class="careerfy-about-thumb"><img src="{{asset('recruit/extra-images/about-us-thumb.png')}}" alt=""></div></div>
+                              <div class="col-md-6 careerfy-typo-wrap"><div class="careerfy-about-thumb"><img src="{{asset('/uploads/banners')}}/{{$about->banner}} " alt=""></div></div>
 
                         <div class="col-md-12 careerfy-typo-wrap">
                             <div class="careerfy-modren-counter">
