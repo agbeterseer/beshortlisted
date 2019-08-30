@@ -112,14 +112,14 @@
                                         <h2>Our Core Values</h2>
                                         {!!  $about->values !!} 
                                     </li>
-                                    @if($about->philosophy)
+                             <!--        @if($about->philosophy)
                                     <li class="col-md-4">
                                         <span>4</span>
                                         <i class="careerfy-icon careerfy-24-hours"></i>
                                         <h2>Philosophy</h2>
                                        {!! $about->philosophy !!}
                                     </li>
-                                    @endif
+                                    @endif -->
 <!--                                     <li class="col-md-4">
                                         <span>5</span>
                                         <i class="careerfy-icon careerfy-company-workers"></i>
