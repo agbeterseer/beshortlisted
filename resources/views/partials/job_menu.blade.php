@@ -120,7 +120,7 @@ window.onclick = function(event) {
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             <i class="fas fa-sign-out-alt"></i> Logout
-                                        </a>
+                                    </a>
                                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>

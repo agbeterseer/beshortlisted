@@ -81,7 +81,8 @@
                         <li><a href="https://web.facebook.com/Behortlisted-2279996612030726/" class="careerfy-icon careerfy-facebook-logo"></a></li>
                         <li><a href="https://twitter.com/beshortlisted" class="careerfy-icon careerfy-twitter-logo"></a></li>
                         <li><a href="https://www.linkedin.com/in/be-shortlisted-6792a1180/" class="careerfy-icon careerfy-linkedin-button"></a></li>
-                        <li><a href="#" class="careerfy-icon careerfy-dribbble-logo"></a></li>
+                       <!--  <li><a href="#" class="careerfy-icon careerfy-dribbble-logo"></a></li> -->
+                        <li><a href="https://www.instagram.com/beshortlisted/" class="careerfy-icon careerfy-instagram-logo"></a></li>
                     </ul>
 
                 </div>
