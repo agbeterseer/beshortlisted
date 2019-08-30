@@ -32,9 +32,10 @@
                     {{ method_field('PATCH')}}
                         {{ csrf_field() }}
                                <div class="form-group{{ $errors->has('history') ? ' has-error' : '' }}">
-                            <label for="history" class="col-md-4 control-label">History <span class="required">*</span></label>
+                   
 
                             <div class="col-md-12">
+                            <label for="core_values" ><strong>History</strong></label>
                              <textarea id="summernote_1" name="history" placeholder="Enter company history">{{$about->history}} </textarea> 
                         
                                 @if ($errors->has('history'))
@@ -44,10 +45,9 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('mission') ? ' has-error' : '' }}">
-                            <label for="mission" class="col-md-4 control-label">Mission</label>
-
+                        <div class="form-group{{ $errors->has('mission') ? ' has-error' : '' }}"> 
                             <div class="col-md-12">
+                            <label for="core_values" ><strong>Mission</strong></label>
                             <textarea id="summernote_2" name="mission" placeholder="Enter company mission">{{$about->mission}} </textarea> 
 
                                 @if ($errors->has('mission'))
@@ -58,11 +58,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('vision') ? ' has-error' : '' }}">
-                            <label for="vision" class="col-md-4 control-label">Vision</label>
+                        <div class="form-group{{ $errors->has('vision') ? ' has-error' : '' }}"> 
 
                             <div class="col-md-12">
-                  
+                   <label for="core_values" ><strong>Vision</strong></label>
   <textarea id="summernote_3" name="vision" placeholder="Enter company vission">{{$about->vision}} </textarea> 
                                 @if ($errors->has('vision'))
                                     <span class="help-block">
@@ -72,9 +71,10 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('philosophy') ? ' has-error' : '' }}">
-                            <label for="philosophy" class="col-md-4 control-label">Philosophy</label>
+                        
 
                             <div class="col-md-12">
+                            <label for="core_values" ><strong>Philosophy</strong></label>
                         <textarea id="summernote_4" name="philosophy" class="form-control" placeholder="Enter philosopy">{{$about->philosophy}}</textarea>
 
                                 @if ($errors->has('philosophy'))
@@ -85,9 +85,10 @@
                             </div>
                         </div> 
                         <div class="form-group{{ $errors->has('core_values') ? ' has-error' : '' }}">
-                            <label for="core_values" class="col-md-4 control-label">Core Values/ Our Principle</label>
+                            
 
                             <div class="col-md-12">
+                            <label for="core_values" ><strong>Core Values/ Our Principle</strong></label>
                         <textarea id="summernote_5" name="core_values" class="form-control" placeholder="Enter core values">{{$about->values}}</textarea>
 
                                 @if ($errors->has('core_values'))

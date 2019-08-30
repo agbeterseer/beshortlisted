@@ -95,16 +95,58 @@ window.onclick = function(event) {
                                 <li><a class="careerfy-color" href="{{route('sign.up')}}">Register</a></li>
                                 <li><a class="careerfy-color" href="{{route('auth.login')}}">Sign in</a></li>
                                 @else
-                       <li>  
-<div class="dropdown">  
+                       <!-- <li>   -->
+                              <li class="dropdown dropdown-user">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+<!--  <figure>
+    <img  class="img-circle" src="/uploads/avatars/{{ Auth::user()->avatar }}" width="40" height="50" />
+    </figure -->
+                    @if(Auth::user())
+              
+                     <span class="username username-hide-on-mobile" >
+                     Hi {{ str_limit(Auth::user()->name, $limit = 7, $end = '...') }} </span>
+                                @else
+<span class="username username-hide-on-mobile" > Admin </span>
+                                @endif
+                                   <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-default">
+                            <li>
+                <a href="{{url('/index/resume')}}"> <i class="fas fa-user-alt"></i> My Profile
+                    </a> </li>
+ 
+                                    <li>
+                                    <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            <i class="fas fa-sign-out-alt"></i> Logout
+                                        </a>
+                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+ 
+                                    </li>
+
+                                </ul>
+                            </li>
+
+<!-- <div class="dropdown">  
     <button onclick="myFunction()" class="dropbtn" style="background-color: #ffffff;"><i class="careerfy-icon careerfy-user"></i> &nbsp; Hi, {{ str_limit(Auth::user()->name, $limit = 7, $end = '...') }}</button>
   <div id="myDropdown" class="dropdown-content"> 
-                                      <a href="{{ route('logout') }}"
+  <ul>
+    <li><a href="{{url('/index/resume')}}">Profile </a> </li>
+    <li>                                      <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout 
-                                        </a> </div> </div> 
-                                     </li>
+                                        </a> </li>
+  </ul>
+
+
+                                        </div> 
+
+                                        </div>  -->
+                                     <!-- </li> -->
                                 @endif
                             </ul>
                               @if(Auth::user())

@@ -91,18 +91,53 @@ window.onclick = function(event) {
                                 <li><a class="careerfy-color" href="{{route('register')}}">Register</a></li>
                                 <li><a class="careerfy-color" href="{{route('auth.login')}}">Sign in</a></li>
                                 @else
-                                 <li>  
-<div class="dropdown">  
-    <button onclick="myFunction()" class="dropbtn" style="background-color: #ffffff;"><i class="careerfy-icon careerfy-user"></i> &nbsp; Hi, {{ str_limit(Auth::user()->name, $limit = 7, $end = '...') }}</button>
-  <div id="myDropdown" class="dropdown-content"> 
-                                      <a href="{{ route('logout') }}"
+                                           <li class="dropdown dropdown-user">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+  
+                    @if(Auth::user())
+              
+                     <span class="username username-hide-on-mobile" >
+                     Hi {{ str_limit(Auth::user()->name, $limit = 7, $end = '...') }} </span>
+                                @else
+<span class="username username-hide-on-mobile" > Admin </span>
+                                @endif
+                                   <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-default">
+                            <li>
+                <a href=""><i class="fas fa-user-alt"></i> My Profile
+                    </a> </li>
+ 
+                                    <li>
+                                    <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout 
-                                        </a> </div> </div> 
-                                     </li>
-                                @endif
+                                            <i class="fas fa-sign-out-alt"></i>  Logout
+                                        </a>
+                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+ 
+                                    </li>
 
+                                </ul>
+                            </li>
+
+                                @endif
+         
+                  
+     
+                              
+                            <!-- END USER LOGIN DROPDOWN -->
+                            <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+                            <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                            <li class="dropdown dropdown-quick-sidebar-toggler">
+                                <a href="javascript:;" class="dropdown-toggle">
+                                    <i class="icon-logout"></i>
+                                </a>
+                            </li>
+                            <!-- END QUICK SIDEBAR TOGGLER -->
+                        
                             </ul>
                               @if(Auth::user())
                                  

@@ -10,7 +10,10 @@
   <meta property="og:description"   content="Your description" />
   <meta property="og:image"         content="" />
 
-    <link href="{{ asset('recruit/css/bootstrap.css')}}" rel="stylesheet">
+
+  
+        <link href="{{ asset('recruit/css/bootstrap.css')}}" rel="stylesheet">
+       <link href="{{ asset('fontawesome-5.10.2/css/all.min.css')}}" rel="stylesheet">
     <link href="{{ asset('recruit/css/font-awesome.css')}}" rel="stylesheet">
     <link href="{{ asset('recruit/css/flaticon.css')}}" rel="stylesheet">
     <link href="{{ asset('recruit/css/slick-slider.css')}}" rel="stylesheet">
