@@ -56,7 +56,7 @@
                                     <li class="col-md-4">
                                         <i class="careerfy-icon careerfy-paper careerfy-color"></i>
                                         <span class="word-counter">{{$jobs_count}}</span>
-                                        <small>Jobs Addes</small>
+                                        <small>Jobs Added</small>
                                     </li>
                                     <li class="col-md-4">
                                         <i class="careerfy-icon careerfy-resume-document careerfy-color"></i>
