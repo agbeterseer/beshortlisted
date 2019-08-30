@@ -96,20 +96,23 @@
                                   <ul class="row">
                                     <li class="col-md-4">
                                         <span>1</span>
-                                        <i class="careerfy-icon careerfy-antenna"></i>
+                                        <i class="careerfy-icon careerfy-business"></i>
                                         <h2>Our Vision</h2>
                                        {!! $about->vision !!}
                                     </li>
                                     <li class="col-md-4">
                                         <span>2</span>
-                                    
-                                        <i class="careerfy-icon careerfy-map3"></i>
+                                        <div class="careerfy-icon">
+                                            dsdf
+                                        </div>
+                                        
+                                        <i class="careerfy-icon careerfy-trophy"></i>
                                         <h2>Our Mission</h2>
                                         {!! $about->mission !!} 
                                     </li>
                                     <li class="col-md-4">
                                         <span>3</span>
-                                        <i class="careerfy-icon careerfy-office"></i>
+                                        <i class="careerfy-icon careerfy-heart"></i>
                                         <h2>Our Core Values</h2>
                                         {!!  $about->values !!} 
                                     </li>
