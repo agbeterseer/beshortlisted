@@ -101,11 +101,7 @@
                                        {!! $about->vision !!}
                                     </li>
                                     <li class="col-md-4">
-                                        <span>2</span>
-                                        <div class="careerfy-icon">
-                                            dsdf
-                                        </div>
-                                        
+                                        <span>2</span>                                      
                                         <i class="careerfy-icon careerfy-trophy"></i>
                                         <h2>Our Mission</h2>
                                         {!! $about->mission !!} 
