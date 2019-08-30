@@ -251,6 +251,66 @@ $('#example').DataTable();
         $('#summernote_1').summernote('code', null);
 
     });
+
+        $(document).ready(function() {
+        $('#summernote_2').summernote({
+            height:'300px',
+            placeholder:'Content here...',
+
+
+        });
+        // body...
+    });
+
+    $('#clear').on('click', function() {
+        $('#summernote_2').summernote('code', null);
+
+    });
+
+        $(document).ready(function() {
+        $('#summernote_3').summernote({
+            height:'300px',
+            placeholder:'Content here...',
+
+
+        });
+        // body...
+    });
+
+    $('#clear').on('click', function() {
+        $('#summernote_3').summernote('code', null);
+
+    });
+
+    $(document).ready(function() {
+        $('#summernote_4').summernote({
+            height:'300px',
+            placeholder:'Content here...',
+
+
+        });
+        // body...
+    });
+
+    $('#clear').on('click', function() {
+        $('#summernote_4').summernote('code', null);
+
+    });
+
+            $(document).ready(function() {
+        $('#summernote_5').summernote({
+            height:'300px',
+            placeholder:'Content here...',
+
+
+        });
+        // body...
+    });
+
+    $('#clear').on('click', function() {
+        $('#summernote_5').summernote('code', null);
+
+    });
 </script>
 
 @if (session('success'))

@@ -114,7 +114,7 @@ class AboutUsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
+        //dd($request->all());
         $history = $request->history;
         $mission = $request->mission;
         $vision = $request->vision;
@@ -122,8 +122,8 @@ class AboutUsController extends Controller
         $core_values = $request->core_values;
 
 
-        if ($request->hasFile('banner')) {
-       $banner = $request->file('banner');
+        if ($request->hasFile('top_banner')) {
+       $banner = $request->file('top_banner');
        $rules = [
         '_token'=>'required',
         'banner' =>'required|jpg,jpeg,png,gif|max:381872',

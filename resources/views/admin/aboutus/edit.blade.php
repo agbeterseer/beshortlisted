@@ -34,7 +34,7 @@
                                <div class="form-group{{ $errors->has('history') ? ' has-error' : '' }}">
                             <label for="history" class="col-md-4 control-label">History <span class="required">*</span></label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                              <textarea id="summernote_1" name="history" placeholder="Enter company history">{{$about->history}} </textarea> 
                         
                                 @if ($errors->has('history'))
@@ -47,8 +47,8 @@
                         <div class="form-group{{ $errors->has('mission') ? ' has-error' : '' }}">
                             <label for="mission" class="col-md-4 control-label">Mission</label>
 
-                            <div class="col-md-6">
-                              <textarea name="mission" class="form-control" placeholder="Enter mission" style="height: 120px;">{{$about->mission}}</textarea>
+                            <div class="col-md-12">
+                            <textarea id="summernote_2" name="mission" placeholder="Enter company mission">{{$about->mission}} </textarea> 
 
                                 @if ($errors->has('mission'))
                                     <span class="help-block">
@@ -61,9 +61,9 @@
                         <div class="form-group{{ $errors->has('vision') ? ' has-error' : '' }}">
                             <label for="vision" class="col-md-4 control-label">Vision</label>
 
-                            <div class="col-md-6">
-                        <textarea name="vision" class="form-control" placeholder="Enter vision" style="height: 120px;">{{$about->vision}}</textarea>
-
+                            <div class="col-md-12">
+                  
+  <textarea id="summernote_3" name="vision" placeholder="Enter company vission">{{$about->vision}} </textarea> 
                                 @if ($errors->has('vision'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('vision') }}</strong>
@@ -74,8 +74,8 @@
                         <div class="form-group{{ $errors->has('philosophy') ? ' has-error' : '' }}">
                             <label for="philosophy" class="col-md-4 control-label">Philosophy</label>
 
-                            <div class="col-md-6">
-                        <textarea name="philosophy" class="form-control" placeholder="Enter philosopy" style="height: 120px;">{{$about->philosophy}}</textarea>
+                            <div class="col-md-12">
+                        <textarea id="summernote_4" name="philosophy" class="form-control" placeholder="Enter philosopy">{{$about->philosophy}}</textarea>
 
                                 @if ($errors->has('philosophy'))
                                     <span class="help-block">
@@ -87,8 +87,8 @@
                         <div class="form-group{{ $errors->has('core_values') ? ' has-error' : '' }}">
                             <label for="core_values" class="col-md-4 control-label">Core Values/ Our Principle</label>
 
-                            <div class="col-md-6">
-                        <textarea name="core_values" class="form-control" placeholder="Enter values" style="height: 120px;">{{$about->values}}</textarea>
+                            <div class="col-md-12">
+                        <textarea id="summernote_5" name="core_values" class="form-control" placeholder="Enter core values">{{$about->values}}</textarea>
 
                                 @if ($errors->has('core_values'))
                                     <span class="help-block">
@@ -103,7 +103,7 @@
                             <span class="required">*</span>
                             </label> 
                             <div class="col-md-6">
-                              <input type="file" name="top_banner" > 
+                              <input type="file" name="top_banner"  required="required"> 
                                 @if ($errors->has('top_banner'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('top_banner') }}</strong>
