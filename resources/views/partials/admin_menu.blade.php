@@ -83,7 +83,7 @@
                                       </li>
                                   <li class="nav-item ">
                                           <a href="{{ route('pages.create') }}" class="nav-link ">
-                                              <span class="title">Add Page</span>
+                                              <span class="title">Add Blog Post</span>
                                           </a>
                                       </li>  
                                 <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
@@ -92,15 +92,16 @@
                                           </a>
                                       </li> 
                              <li class="nav-item {{ $request->segment(1) == 'pageinfor' ? 'active' : '' }}">
-                                     <a href="{{route('page_infor')}}" class="nav-link ">
-                                        <span class="title">Page Information </span>
+                                     <a href="{{route('allpages')}}" class="nav-link ">
+                                        <span class="title">Core Pages </span>
                                           </a>
                                 </li>
+                            <!-- 
                                   <li class="nav-item">
                                      <a href="{{route('policies.index')}}" class="nav-link ">
                                         <span class="title">Employer </span>
                                           </a>
-                                </li>         
+                                </li> -->         
                                   </ul>
                                 </li>
                                 <li class="nav-item">
@@ -168,12 +169,7 @@
                                         <span class="title">Add Template </span>
                                           </a>
                                       </li>
-                                    <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
-                                          <a href="{{route('policies.index')}}" class="nav-link ">
-                                        <span class="title">@lang('cvmanagement.policies.title') </span>
-                                          </a>
-                                      </li>
-
+          
                                     </ul> 
                                   </li>  
                               <li class="nav-item {{ $sett }}">
@@ -184,11 +180,11 @@
                                   </a>
                                   <ul class="sub-menu">
                                   
-                                      <li class="nav-item ">
+                                      <!-- <li class="nav-item ">
                                           <a href="{{route('backupsys.importExport')}}" class="nav-link ">
                                         <span class="title">Export CSV </span>
                                           </a>
-                                      </li>
+                                      </li> -->
 
                                   <li class="nav-item ">
                                           <a href="{{route('backupsys.backups')}}" class="nav-link ">
@@ -211,11 +207,7 @@
                                         <span class="title">Banner </span>
                                           </a>
                                       </li> 
-                                     <li class="nav-item ">
-                                          <a href="{{route('aboutus.index')}}" class="nav-link ">
-                                        <span class="title">AboutUs </span>
-                                          </a>
-                                      </li> 
+                             
                                   <li class="nav-item ">
                                           <a href="{{route('frequently.index')}}" class="nav-link ">
                                         <span class="title">Frequently Questions </span>
@@ -233,7 +225,8 @@
                                       </li>   
                                     </ul> 
                                   </li> 
-                                   <li class="nav-item ">
+                               <!-- 
+                               <li class="nav-item ">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-settings"></i>
                                       <span class="title">Send Email</span>
@@ -244,16 +237,11 @@
                                           <a href="{{route('show.uploademail')}}" class="nav-link ">
                                         <span class="title">Upload Emails </span>
                                           </a>
-                                      </li>
-                                        <!--    <li class="nav-item ">
-                                          <a href="{{route('backupsys.backups')}}" class="nav-link ">
-                                        <span class="title">Back up cv </span>
-                                          </a>
-                                      </li> -->
-                              </ul>
-
-                                  </li>
-                                                        <li class="nav-item" id="roleid">
+                                      </li> 
+                                   </ul> 
+                                  </li> -->
+                                
+                                <li class="nav-item" id="roleid">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-briefcase"></i>
                                       <span class="title">Role Management</span>

@@ -17,14 +17,14 @@
 ]) 
 
 @section('content')
-<div class="container">
+ 
     
                         @if(Session()->has('success'))
                         <div class="alert alert-success"> 
                         {!! Session::get('success') !!}
                         </div>
                         @endif
-    <div class="">
+  
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Update Banner</div>
@@ -93,7 +93,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Create Banner
+                                    Update Banner
                                 </button>
                             </div>
                         </div>
@@ -101,6 +101,5 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+ 
 @endsection

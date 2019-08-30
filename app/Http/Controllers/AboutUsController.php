@@ -114,11 +114,33 @@ class AboutUsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $history = $request->history;
         $mission = $request->mission;
         $vision = $request->vision;
         $philosophy = $request->philosophy;
         $core_values = $request->core_values;
+
+
+        if ($request->hasFile('banner')) {
+       $banner = $request->file('banner');
+       $rules = [
+        '_token'=>'required',
+        'banner' =>'required|jpg,jpeg,png,gif|max:381872',
+        ];
+        $input = Input::only(
+        '_token',
+        'banner'
+        );
+          $validator = Validator::make($input, $rules);
+         if(!$validator)
+        {
+          Session::flash('error-avatar', 'error');
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
+        $filename = time() . '.' . $banner->getClientOriginalExtension();
+        $banner->move(public_path('/uploads/banners/'), $filename);
+        }
 
         if ($history !=null && $history !="") {
           $about = AboutUs::findOrFail($id);
@@ -128,6 +150,7 @@ class AboutUsController extends Controller
           $about->vision = $vision;
           $about->mission = $mission;
           $about->updated_at = $this->returnCurrentTime();
+          $about->banner = $filename;
           $about->save();
           Session::flash('success', 'Done successfully!');
         }

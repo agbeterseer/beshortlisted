@@ -577,7 +577,9 @@ public function DisplayTemplates()
 //             ->subject('Artisans Web Testing Mail');
 //     $message->from('hr@rhizomeng.com','Testing');
 // });
-    return view('aboutus', compact('posts', 'menus', 'contact', 'countries', 'about', 'job_match_count', 'resume_count', 'jobs_count'), array('user' => Auth::user()));
+
+     $page = Post::where('display_name', 'terms-of-use')->where('status',1)->first();
+    return view('aboutus', compact('posts', 'menus', 'contact', 'countries', 'about', 'job_match_count', 'resume_count', 'jobs_count', 'page'), array('user' => Auth::user()));
     }
 public function addContactUs (Request $request)
 { 

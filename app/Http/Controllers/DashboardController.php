@@ -34,7 +34,7 @@ class DashboardController extends Controller
     {
         $documents = Application::all()->count();
         $roles = Role::all()->count();
-        $users = User::all()->count();
+        $users = User::where('active', 1)->count();
         return view('board', compact('documents', 'roles', 'users'), array('user' => Auth::user()));
     }
 

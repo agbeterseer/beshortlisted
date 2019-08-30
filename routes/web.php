@@ -229,6 +229,11 @@ Route::post('/closed-ticket', [
 	'uses' => 'TicketController@closedTicket'
 ]);
 
+Route::get('/get-all-pages', [
+	'as' => 'allpages',
+	'uses' => 'PostController@getAllPageInformations'
+	]);
+
 	Route::post('/add-page-information', [
 		'as' => 'add.page_infor',
 		'uses' => 'PostController@AddPageInfor'

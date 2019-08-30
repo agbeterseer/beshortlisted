@@ -70,8 +70,7 @@
                         <div class="col-md-6">
                             <select class="form-control" name="category" required>
                                 <option value="">...Select one...</option> 
-                                <option value="employer">Employer</option>
-                                <option value="others">Others</option>
+                                <option value="employer">Employer</option> 
                                <option value="employee">Employee</option>
                                 <option value="index">Index</option>
                             </select>

@@ -35,8 +35,8 @@
                             <label for="history" class="col-md-4 control-label">History <span class="required">*</span></label>
 
                             <div class="col-md-6">
-                                <textarea name="history" class="form-control" placeholder="Enter company history" style="height: 120px;">{{$about->history}}</textarea>
-                   
+                             <textarea id="summernote_1" name="history" placeholder="Enter company history">{{$about->history}} </textarea> 
+                        
                                 @if ($errors->has('history'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('history') }}</strong>
@@ -97,6 +97,20 @@
                                 @endif
                             </div>
                         </div> 
+
+                               <div class="form-group{{ $errors->has('banner') ? ' has-error' : '' }}">
+                            <label for="top_banner" class="col-md-4 control-label">Upload Top Banner
+                            <span class="required">*</span>
+                            </label> 
+                            <div class="col-md-6">
+                              <input type="file" name="top_banner" > 
+                                @if ($errors->has('top_banner'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('top_banner') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

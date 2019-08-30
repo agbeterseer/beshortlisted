@@ -28,7 +28,7 @@
                     <div class="table-toolbar">
                         <div class="row">
                             <div class="col-md-6">
-                                    <a  class="btn blue mt-ladda-btn ladda-button btn-outline" data-toggle="modal"  data-style="slide-left" data-spinner-color="#333" href="{{route('pages.create')}}">
+                                    <a  class="btn blue mt-ladda-btn ladda-button btn-outline" data-toggle="modal"  data-style="slide-left" data-spinner-color="#333" href="{{route('page_infor')}}">
                                     <span class="ladda-label">
                                     <i class="icon-plus"></i> Add Page</span>
                                     </a>
@@ -57,22 +57,17 @@
                                              <table id="example" class="display" >
                                                 <thead>
                                                     <tr>
-                                                        <th>Select</th>
+                                                  
                                                          <th>Action</th>
                                                         <th>Title</th> 
-                                                        <th>Link</th>                                                 
-                                                        <th>Post Type</th>
+                                                        <th>Image</th>                                                 
+                                                        <th>Category</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                 @forelse($all_pages as $page)
                                                     <tr>
-                                                        <td>
-                                                            <div class="careerfy-payments-checkbox">
-                                                                <input id="p3" name="rr" type="checkbox">
-                                                                <label for="p3"><span></span></label>
-                                                            </div>
-                                                        </td>
+                                            
                                                 <td>
                                                 <div class="btn-group">
                            <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
@@ -91,8 +86,8 @@
                          </ul>
                                                 </div></td>
                                                         <td><span>{{$page->name}}</span></td> 
-                                                        <td>{{$page->head_line}}</td>
-                                                        <td>{{$page->description}}</td> 
+                                                        <td>{{ $page->description }}</td>
+                                                     <td>{{$page->category}}</td> 
                                                 </tr>
                                                     @empty 
                                                     @endforelse

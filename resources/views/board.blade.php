@@ -137,26 +137,31 @@
                                       </a>
                                 
                                       </li>
-                                  <li class="nav-item ">
+                                     <li class="nav-item ">
                                           <a href="{{ route('pages.create') }}" class="nav-link ">
-                                              <span class="title">Add Page</span>
+                                              <span class="title">Add Blog Post</span>
                                           </a>
-                                      </li>  
+                                      </li> 
                                 <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
                                           <a href="{{route('policies.index')}}" class="nav-link ">
                                         <span class="title">@lang('cvmanagement.policies.title') </span>
                                           </a>
                                       </li> 
-                             <li class="nav-item {{ $request->segment(1) == 'pageinfor' ? 'active' : '' }}">
+                                        <li class="nav-item {{ $request->segment(1) == 'pageinfor' ? 'active' : '' }}">
                                      <a href="{{route('page_infor')}}" class="nav-link ">
-                                        <span class="title">Page Information </span>
+                                        <span class="title">Core Pages </span>
                                           </a>
-                                </li>
-                                  <li class="nav-item ">
+                                            </li>
+                                      <li class="nav-item ">
+                                        <a href="{{route('aboutus.index')}}" class="nav-link ">
+                                      <span class="title">AboutUs </span>
+                                        </a>
+                                    </li> 
+                               <!--    <li class="nav-item ">
                                      <a href="{{route('policies.index')}}" class="nav-link ">
                                         <span class="title">Employer </span>
                                           </a>
-                                </li>         
+                                </li>  -->        
                                   </ul>
                                 </li>
                                 <li class="nav-item">
@@ -224,11 +229,7 @@
                                         <span class="title">Add Template </span>
                                           </a>
                                       </li>
-                                    <li class="nav-item {{ $request->segment(1) == 'policies' ? 'active' : '' }}">
-                                          <a href="{{route('policies.index')}}" class="nav-link ">
-                                        <span class="title">@lang('cvmanagement.policies.title') </span>
-                                          </a>
-                                      </li>
+            
 
                                     </ul> 
                                   </li>  
@@ -246,12 +247,12 @@
                                           </a>
                                       </li>
 
-                                  <li class="nav-item ">
+                                  <!-- <li class="nav-item ">
                                           <a href="{{route('backupsys.backups')}}" class="nav-link ">
                                         <span class="title">Back up cv </span>
                                           </a>
                                       </li>
-       
+        -->
                                   <li class="nav-item {{ $request->segment(1) == 'fields-of-study' ? 'active' : '' }}">
                                           <a href="{{route('create.field')}}" class="nav-link ">
                                         <span class="title">@lang('cvmanagement.fields-of-study.title') </span>
@@ -267,11 +268,7 @@
                                         <span class="title">Banner </span>
                                           </a>
                                       </li> 
-                                     <li class="nav-item ">
-                                          <a href="{{route('aboutus.index')}}" class="nav-link ">
-                                        <span class="title">AboutUs </span>
-                                          </a>
-                                      </li> 
+                             
                                   <li class="nav-item ">
                                           <a href="{{route('frequently.index')}}" class="nav-link ">
                                         <span class="title">Frequently Questions </span>
@@ -289,7 +286,7 @@
                                       </li>   
                                     </ul> 
                                   </li> 
-                                   <li class="nav-item  ">
+                          <!--          <li class="nav-item  ">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-settings"></i>
                                       <span class="title">Send Email</span>
@@ -301,14 +298,14 @@
                                         <span class="title">Upload Emails </span>
                                           </a>
                                       </li>
-                                        <!--    <li class="nav-item ">
+                                           <li class="nav-item ">
                                           <a href="{{route('backupsys.backups')}}" class="nav-link ">
                                         <span class="title">Back up cv </span>
                                           </a>
-                                      </li> -->
+                                      </li>
                               </ul>
 
-                                  </li>
+                                  </li> -->
                                                         <li class="nav-item" id="roleid">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-briefcase"></i>
@@ -518,7 +515,7 @@
             <!-- END CONTAINER -->
             <!-- BEGIN FOOTER -->
             <div class="page-footer">
-                <div class="page-footer-inner"> 2017 &copy; cv management
+                <div class="page-footer-inner"> 2019 &copy; Beshortlisted Admin Dashboard
                 </div>
                 <div class="scroll-to-top">
                     <i class="icon-arrow-up"></i>

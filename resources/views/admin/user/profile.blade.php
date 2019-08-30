@@ -28,10 +28,10 @@
                         </div>
                                         <!-- END SIDEBAR USERPIC -->
                                         <!-- SIDEBAR USER TITLE -->
-                                        <div class="profile-usertitle">
+                                      <!--   <div class="profile-usertitle">
                                             <div class="profile-usertitle-name"> {{ $user->name }}'s Profile </div>
                                             <div class="profile-usertitle-job"> Developer </div>
-                                        </div>
+                                        </div> -->
                                         <!-- END SIDEBAR USER TITLE -->
                                         <!-- SIDEBAR BUTTONS -->
                               <!--           <div class="profile-userbuttons">
@@ -77,7 +77,7 @@
                                             </div>
                                         </div> -->
                                         <!-- END STAT -->
-                                        <div>
+                    <!--                     <div>
                                             <h4 class="profile-desc-title">About {{ $user->name }}</h4>
                                             <span class="profile-desc-text"> Consultant at Rhizome Nigeria</span>
                                             <div class="margin-top-20 profile-desc-link">
@@ -92,7 +92,7 @@
                                                 <i class="fa fa-facebook"></i>
                                                 <a href="http://www.rhizomeng.com/">@jibrilrhizomeng</a>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <!-- END PORTLET MAIN -->
                                 </div>
@@ -127,31 +127,31 @@
                 <div class="form-group">
                     <label class="control-label">Full Name</label>
                     <input type="text" name="firstname" required="required" readonly="readonly"  class="form-control" value="{{ $user->name }}" /> </div>
- <!--                <div class="form-group">
+                <div class="form-group">
                     <label class="control-label">Last Name</label>
-                    <input type="text" name="lastname" required="required" class="form-control" value="{{ str_limit($user->name, 7) }}" readonly="readonly" /> </div> -->
+                    <input type="text" name="lastname" required="required" class="form-control" value="{{ str_limit($user->name, 7) }}" readonly="readonly" /> </div>
                  
-         <!--        <div class="form-group">
+                <div class="form-group">
                     <label class="control-label">Mobile Number</label>
-                    <input type="text" required="required" placeholder="+1 646 580  (6284)" class="form-control" /> </div> -->
-                <!-- <div class="form-group">
+                    <input type="text" required="required" placeholder="+1 646 580  (6284)" class="form-control" /> </div>
+                <div class="form-group">
                     <label class="control-label">Interests</label>
-                    <input type="text" placeholder="Design, Web etc." class="form-control" /> </div> -->
-                <!-- <div class="form-group">
+                    <input type="text" placeholder="Design, Web etc." class="form-control" /> </div>
+                <div class="form-group">
                     <label class="control-label">Occupation</label>
-                    <input type="text" placeholder="Web Developer" class="form-control" /> </div> -->
-          <!--       <div class="form-group">
+                    <input type="text" placeholder="Web Developer" class="form-control" /> </div>
+                <div class="form-group">
                     <label class="control-label">About</label>
                     <textarea class="form-control" rows="3" placeholder=" We are Resource persons"></textarea>
-                </div> -->
-                <!-- <div class="form-group">
+                </div>
+                <div class="form-group">
                     <label class="control-label">Website Url</label>
-                    <input type="text" placeholder="we" class="form-control" /> </div> -->
-<!--                 <div class="margiv-top-10">
+                    <input type="text" placeholder="we" class="form-control" /> </div>
+                <div class="margiv-top-10">
                     <button  class="btn green" type="Submit"> Save Changes 
                     </button> 
                     <button class="btn default" type="reset"> Cancel </button>
-                </div> -->
+                </div>
             </form>
         </div>
         <!-- END PERSONAL INFO TAB -->

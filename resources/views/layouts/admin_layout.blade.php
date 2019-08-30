@@ -142,33 +142,8 @@
                 <!-- END QUICK SIDEBAR -->
             </div>
         <!-- BEGIN QUICK NAV -->
-        <nav class="quick-nav">
-            <a class="quick-nav-trigger" href="#0">
-                <span aria-hidden="true"></span>
-            </a>
-            <ul>
-<!--                 <li>
-                    <a href=""  class="active">
-                        <span>Applicant</span>
-                        <i class="icon-users"></i>
-                    </a>
-                </li> -->
-       <!--          <li>
-                    <a href="">
-                        <span>Shortlisted</span>
-                        <i class="icon-users"></i>
-                    </a>
-                </li> -->
-         <!--        <li>
-                    <a href="" >
-                        <span>Scheduled for Interview</span>
-                        <i class="icon-graph"></i>
-                    </a>
-                </li> -->
-            </ul>
-            <span aria-hidden="true" class="quick-nav-bg"></span>
-        </nav>
-        <div class="quick-nav-overlay"></div>
+    
+       
         <!-- END QUICK NAV -->
         <!--[if lt IE 9]>
 <script src="assets/global/plugins/respond.min.js"></script>

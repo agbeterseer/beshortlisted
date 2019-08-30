@@ -327,6 +327,14 @@ class PostController extends Controller
         return view('admin.pages.page_information');
     }
 
+
+    public function getAllPageInformations()
+    {
+      $all_pages = DB::table('page_informations')->get();
+
+        return view('admin.pages.page_infor_list', compact('all_pages'));
+    }
+
     public function AddPageInfor(Request $request)
     { 
        // dd($request->all());

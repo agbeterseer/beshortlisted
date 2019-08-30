@@ -8,16 +8,6 @@
     <title>About Us</title>
     @include('partials.job_board_header') 
     <!-- Css -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <link href="css/flaticon.css" rel="stylesheet">
-    <link href="css/slick-slider.css" rel="stylesheet">
-    <link href="plugin-css/fancybox.css" rel="stylesheet">
-    <link href="plugin-css/plugin.css" rel="stylesheet">
-    <link href="css/color.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=cyrillic-ext,vietnamese" rel="stylesheet">
     
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,12 +40,15 @@
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-md-12 careerfy-typo-wrap">
+                        <div class="col-md-6 careerfy-typo-wrap">
                             <div class="careerfy-about-text" style="text-align: justify; line-height: 36px; ">
                                 <h2>About Us</h2>
-                                {{ $about->history }}  
+                             
+                                {!!  $about->history !!}  
+                                                           
                             </div>
                         </div>
+                              <div class="col-md-6 careerfy-typo-wrap"><div class="careerfy-about-thumb"><img src="{{asset('recruit/extra-images/about-us-thumb.png')}}" alt=""></div></div>
 
                         <div class="col-md-12 careerfy-typo-wrap">
                             <div class="careerfy-modren-counter">
