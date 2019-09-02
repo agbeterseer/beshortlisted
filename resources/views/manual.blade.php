@@ -82,7 +82,7 @@
       <li class="separator"></li>
       <li><strong>Customization</strong></li>
       <li><a href="#candidate" class="cc-active">Candidate</a></li>
-      <li><a href="#employee" class="cc-active">Employee</a></li>
+      <li><a href="#employee" class="cc-active">Employer</a></li>
       <!-- <li><a href="#document_management" class="cc-active">6.0 Document Management</a></li> -->
     
     </ul>
@@ -114,17 +114,24 @@
 <p></p>
 <button class="collapsible">How do I create my profile?</button>
 <div class="content">
-  <p>Check later</p>
+
+ <li>Click on <strong>"Önline Resume"</strong></li>
+  <li>Click on <strong>"Create Resume"</strong> on the left side menu</li>
+   <li>In the next window enter your profile title"</li>
+   <li>Next, you can begin building your profile wth the following buttons <strong>'Add Summary'</strong>, <strong>'Add Skills'</strong>, etc.</li>
+ 
 </div>
 <p></p>
 <button class="collapsible">How do I search for a job?</button>
 <div class="content">
- <p>Check later</p>
+ <li>Click on <strong>"Jobs"</strong> from the top menu</li>
+  <li>In the next window select <strong>"Location"</strong>, <strong>"Industry"</strong> and <strong>"Professon"</strong> to search for a job</li>
 </div>
 <p></p>
 <button class="collapsible">How do I apply for a job?</button>
 <div class="content">
- <p>check later</p>
+  <li>Click on <strong>"Apply Job"</strong> button </li>
+   <li>This will lead you to the job details page</li>
 </div>
 
 <h3 id="employee"> For Employer</h3>
