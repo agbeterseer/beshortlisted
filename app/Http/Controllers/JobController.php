@@ -101,6 +101,14 @@ public function JobFilter(Request $request)
            $location_id = City::findOrFail($loca);
             $query->orWhere('city', $location_id->name); 
            }
+        }elseif (isset($location) && isset($job_type)) {
+            foreach ($job_type as $key => $value) {
+            $query->orWhere('job_type', $value);
+           }
+           foreach ($location as $loca) {
+           $location_id = City::findOrFail($loca);
+            $query->orWhere('city', $location_id->name); 
+           }
         }elseif (isset($location) && isset($industry)) {
             foreach ($location as $loca) {
            $location_id = City::findOrFail($loca);
@@ -152,7 +160,8 @@ public function JobFilter(Request $request)
            }
         }
     })->where('status',1)->where('active',1)->paginate(10);
-}else{
+}
+else{
 
   $jobs = Tag::where('status',1)->where('active',1)->paginate(10);
 }

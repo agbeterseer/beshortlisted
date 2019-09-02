@@ -2336,11 +2336,10 @@ function cutText($str, $limit, $brChar = ' ', $pad = '...')
         // fresh user test pass
     $section_candidatelist = $this->GetCandidateSection($user_single_resume_by_date->id);
     $section_candidatelist_count = $this->GetCandidateSection($user_single_resume_by_date->id)->count();
-    $recruit_profile_pix_list = DB::table('recruit_profile_pixs')->where('user_id',$user->id)->orderBy('created_at', 'DESC')->get();
-     $profile_pix = DB::table('recruit_profile_pixs')->where('status', 1)->where('user_id', $user->id)->orderBy('created_at', 'DESC')->first();
+
       $pr_caption= RecruitResume::where('user_id', $user->id)->where('status',1)->first();
     $menus = $this->displayMenu();
-     return view('candidate.applied_jobs', compact('job_applied_by_candidate', 'resumes', 'job_by_candidate_list', 'cities', 'tags','s', 'job_category_list', 'section_candidatelist', 'section_candidatelist', 'section_candidatelist_count','countries', 'menus', 'profile_pix', 'pr_caption'), array('user' => Auth::user()));
+     return view('candidate.applied_jobs', compact('job_applied_by_candidate', 'resumes', 'job_by_candidate_list', 'cities', 'tags','s', 'job_category_list', 'section_candidatelist', 'section_candidatelist', 'section_candidatelist_count','countries', 'menus', 'pr_caption'), array('user' => Auth::user()));
     }
 
 public function GetCandidateSection($code){

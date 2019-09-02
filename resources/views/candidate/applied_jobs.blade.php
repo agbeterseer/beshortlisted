@@ -59,8 +59,8 @@
                                                         <td><span> {{$job_applied->email_address}} </span></td>
                                                         <td>{{ date('M d, Y', strtotime($job_applied->created_at)) }}</td>
                                                         <td>
-                                                            <a href="{{route('job.description', $job_applied->id)}}" class="careerfy-savedjobs-links"><i class="careerfy-icon careerfy-rubbish"></i></a>
-                                                            <!-- <a href="{{route('job.description', $job_applied->id)}}" class="careerfy-savedjobs-links"><i class="careerfy-icon careerfy-view"></i></a> -->
+                                                            <a href="{{route('job.description', $job_applied->id)}}" class="careerfy-savedjobs-links"><i class="careerfy-icon careerfy-view""></i></a>
+                                                            <!-- <a href="{{route('job.description', $job_applied->id)}}" class="careerfy-savedjobs-links"><i class="careerfy-icon careerfy-trash"></i></a> -->
                                                         </td>
                                                     </tr>
                                                     @endforeach
