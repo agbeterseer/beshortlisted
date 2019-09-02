@@ -51,7 +51,7 @@
                                         <li>
                                             <i class="careerfy-icon careerfy-mail"></i>
       <!-- <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required> -->
-                                            <input name="email" placeholder="Sign up for newsletter" type="text">
+                                            <input name="email" placeholder="Sign up for newsletter" type="text" id="email_subscription">
                                         </li>
                                         <li>
                                     <i class="careerfy-icon careerfy-arrows22"></i>
