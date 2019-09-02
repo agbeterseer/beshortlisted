@@ -96,6 +96,11 @@
                                         <span class="title">Core Pages </span>
                                           </a>
                                 </li>
+                                   <li class="nav-item ">
+                                        <a href="{{route('aboutus.index')}}" class="nav-link ">
+                                      <span class="title">AboutUs </span>
+                                        </a>
+                                    </li> 
                             <!-- 
                                   <li class="nav-item">
                                      <a href="{{route('policies.index')}}" class="nav-link ">
