@@ -115,7 +115,7 @@
 <button class="collapsible">How do I create my profile?</button>
 <div class="content">
 
- <li>Click on <strong>"Önline Resume"</strong></li>
+ <li>Click on <strong>"Online Resume"</strong></li>
   <li>Click on <strong>"Create Resume"</strong> on the left side menu</li>
    <li>In the next window enter your profile title"</li>
    <li>Next, you can begin building your profile wth the following buttons <strong>'Add Summary'</strong>, <strong>'Add Skills'</strong>, etc.</li>

@@ -37,34 +37,29 @@ public function __construct()
  
 
  
-public function showLoginForm()
-{
-    $menus = $this->displayMenu();
-    if(!session()->has('url.intended'))
+    public function showLoginForm()
     {
-        session(['url.intended' => url()->previous()]);
+        $menus = $this->displayMenu();
+        if(!session()->has('url.intended'))
+        {
+            session(['url.intended' => url()->previous()]);
+        }
+        return view('auth.login', compact('menus'));
     }
-    return view('auth.login', compact('menus'));
-}
-// public function showLoginForm()
-// {
-//     $menus = $this->displayMenu();
-//     session(['link' => url()->previous()]);
-//     return view('auth.login');
-// }
  
-public function showRegisterForm()
-{ 
-    $menus = $this->displayMenu();
-    session(['link' => url()->previous()]);
-    return view('auth.register', compact('menus'));
-}
+ 
+    public function showRegisterForm()
+    { 
+        $menus = $this->displayMenu();
+        session(['link' => url()->previous()]);
+        return view('auth.register', compact('menus'));
+    }
 
 
-protected function authenticated(Request $request, $user)
-{
-    return redirect(session('link'));
-}
+    protected function authenticated(Request $request, $user)
+    {
+        return redirect(session('link'));
+    }
  
 
 

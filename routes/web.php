@@ -196,6 +196,7 @@ Route::get('/test/start_test-{id}-candidate-{user}',[
 	'uses'=> 'LoginController@login',
 	'as'=> 'login'
 	]);
+	
 	Route::get('/logout',[
 	'uses'=> 'LoginController@logout',
 	'as'=> 'logout'

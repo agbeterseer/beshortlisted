@@ -125,7 +125,7 @@ tr:hover {background-color:#f5f5f5;}
         <div class="modal-inner-area">&nbsp;</div>
  <div align="center"> <h2>Login</h2></div>
            
-           @if ($errors->has('credentials'))
+                                 @if ($errors->has('credentials'))
                                     <span class="help-block">
                                     <strong>{{ $errors->first('credentials') }}</strong>
                                     </span>
