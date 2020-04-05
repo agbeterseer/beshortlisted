@@ -32,10 +32,10 @@
                   
                 <li class="dropdown dropdown-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
- 
+  @if(Auth::user())
     <img alt="" class="img-circle" src="/uploads/avatars/{{ Auth::user()->avatar }}" />
     
-                    @if(Auth::user())
+                   
               
                      <span class="username username-hide-on-mobile" > {{ Auth::user()->name }} </span>
                                 @else

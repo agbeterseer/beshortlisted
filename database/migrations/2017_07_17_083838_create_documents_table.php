@@ -13,21 +13,7 @@ class CreateDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('documents', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('candidates_name');
-            $table->string('profession');
-            $table->string('years_of_experience');
-            $table->integer('city_id');
-            $table->integer('city_id')->unsigned();
-            $table->foreign('city_id')->references('id')->on('cities');
-            $table->string('cv_file')->default('default.png');
-            $table->timestamps();
-
-            //
-        });
-
-        Schema::create('city', function (Blueprint $table) {
+        Schema::create('cities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('display_name');
@@ -36,7 +22,20 @@ class CreateDocumentsTable extends Migration
  
         });
 
-        Schema::create('region', function (Blueprint $table) {
+        Schema::create('documents', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('candidates_name');
+            $table->string('profession');
+            $table->string('years_of_experience'); 
+            $table->integer('city_id')->unsigned();
+            $table->foreign('city_id')->references('id')->on('cities');
+            $table->string('cv_file')->default('default.png');
+            $table->timestamps();
+
+            //
+        });
+
+        Schema::create('regions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('display_name');
@@ -90,8 +89,7 @@ class CreateDocumentsTable extends Migration
     public function down()
     {
         Schema::drop('documents');
-        Schema::drop('region');
-        Schema::drop('city');
-        Schema::drop('discription');
+        Schema::drop('regions');
+        Schema::drop('cities'); 
     }
 }

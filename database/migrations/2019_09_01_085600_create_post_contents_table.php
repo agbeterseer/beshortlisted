@@ -14,12 +14,10 @@ class CreatePostContentsTable extends Migration
     public function up()
     {
         Schema::create('post_contents', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('post_id');
+            $table->increments('id'); 
             $table->string('title');
             $table->string('content'); 
-            $table->integer('post_id')->unsigned();
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->integer('post_id')->unsigned(); 
             $table->timestamps();
         });
     }

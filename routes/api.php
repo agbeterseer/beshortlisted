@@ -103,3 +103,5 @@ Route::get('/job/cvcontent/{code}','JobController@GetContent');
 
 Route::get('/employer/job/applicants/{code}', 'JobController@getNewUnsortedApplicant');
 
+Route::get('/v1/logos', 'LogoController@indexapi');
+

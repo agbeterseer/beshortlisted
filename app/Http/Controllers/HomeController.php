@@ -112,7 +112,8 @@ return view('jobs.job_functions', compact('menus', 'posts', 'units'), array('use
 
     public function home()
     {
-        $job_post = \App\Tag::job_post();
+        $job_post = Tag::get();
+        //\App\Tag::job_post();
         // $documents = Document::all()->count();
         // $roles = Role::all()->count();
         // $users = User::all()->count();

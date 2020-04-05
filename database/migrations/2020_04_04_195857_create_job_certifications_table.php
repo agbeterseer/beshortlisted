@@ -1,28 +1,23 @@
 <?php
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-
-class CreateRouteTable extends Migration
+class CreateJobCertificationsTable extends Migration
 {
     /**
-     * Run the migrations. post_contents
+     * Run the migrations.
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('dynamic_routes', function (Blueprint $table) {
+        Schema::create('job_certifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('as');
-            $table->string('uses');
-            $table->string('link');
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
@@ -31,6 +26,6 @@ class CreateRouteTable extends Migration
      */
     public function down()
     {
-        Schema::drop('dynamic_routes');
+        Schema::dropIfExists('job_certifications');
     }
 }

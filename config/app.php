@@ -4,7 +4,9 @@ return [
     'fileDestinationPath' => 'uploads',
     'allowedFileTypes' => 'txt,doc,docx,pdf,rtf,odt',
     'allowedFileTypess' => 'doc,docx,pdf,rtf,odt',
+    'allowedFileTypesForLogo' => 'jpg,jpeg,png,gif',
     'maxFileSize' => 25960,
+    'maxLogoSize' => 25960,
     'doc' => 'doc',
     'docx' => 'docx',
 

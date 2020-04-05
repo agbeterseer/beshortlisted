@@ -12,8 +12,8 @@
 
 @section('content')
 
-                   <section class="jobslist">
+                  <section class="jobslist">
                         @include('jobs.load')
-                    </section>
+                  </section>
 
 @endsection

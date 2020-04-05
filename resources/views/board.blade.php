@@ -286,27 +286,26 @@
                                       </li>   
                                     </ul> 
                                   </li> 
-                          <!--          <li class="nav-item  ">
+                                    <li class="nav-item ">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-settings"></i>
-                                      <span class="title">Send Email</span>
+                                      <span class="title">Logo</span>
                                       <span class="arrow"></span>
                                   </a>
                                   <ul class="sub-menu"> 
                                       <li class="nav-item ">
-                                          <a href="{{route('show.uploademail')}}" class="nav-link ">
-                                        <span class="title">Upload Emails </span>
+                                          <a href="{{route('logos.index')}}" class="nav-link ">
+                                        <span class="title">Logos</span>
                                           </a>
-                                      </li>
-                                           <li class="nav-item ">
-                                          <a href="{{route('backupsys.backups')}}" class="nav-link ">
-                                        <span class="title">Back up cv </span>
+                                      </li> 
+                                      <li class="nav-item ">
+                                          <a href=" " class="nav-link ">
+                                        <span class="title">Change Logo</span>
                                           </a>
-                                      </li>
-                              </ul>
-
-                                  </li> -->
-                                                        <li class="nav-item" id="roleid">
+                                      </li> 
+                                   </ul> 
+                                  </li>
+                                    <li class="nav-item" id="roleid">
                                   <a href="javascript:;" class="nav-link nav-toggle">
                                       <i class="icon-briefcase"></i>
                                       <span class="title">Role Management</span>
@@ -515,7 +514,7 @@
             <!-- END CONTAINER -->
             <!-- BEGIN FOOTER -->
             <div class="page-footer">
-                <div class="page-footer-inner"> 2019 &copy; Beshortlisted Admin Dashboard
+                <div class="page-footer-inner"> 2020 &copy; Beshortlisted Admin Dashboard
                 </div>
                 <div class="scroll-to-top">
                     <i class="icon-arrow-up"></i>

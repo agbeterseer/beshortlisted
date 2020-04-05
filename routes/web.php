@@ -541,6 +541,7 @@ Route::post('custom_search', [
  
 	Route::get('/register-users', 'Auth\RegisterController@create');
  	Route::resource('/emails', 'EmailTemaplateController');
+ 	Route::resource('/logos', 'LogoController');
   	Route::resource('/admin/all_reports', 'AllReportController');
   	Route::resource('/admin/top_report', 'TopReportController');
   	Route::resource('/admin/candidate/verified', 'CandidateController');
@@ -1250,66 +1251,7 @@ Route::get('candidates', [
  Route::get('/testpage2', function () {
  	return view();
  });
- Route::get('/testpage2', function () {
- //$pathToFile = public_path().'/uploads/'.'R-24 user Manual.docx';
-//$pathToFile = 'C:/xampp/htdocs/laravel/storage/R-24 user Manual.docx'; // or txt etc.
- $pathToFile = storage_path('/app/R-24 user Manual.docx');
-  // dd($pathToFile);
- $file = file($pathToFile);
-// dd($file);
-// when the file name (display name) is decided by the name in storage,
-// remember to make sure your server can store your file name characters in the first place (!)
-// then encode to respect RFC 6266 on output through content-disposition
-$fileNameFromStorage = rawurlencode(basename($pathToFile));
- // dd($fileNameFromStorage);
-// otherwise, if the file in storage has a hashed file name (recommended)
-// and the display name comes from your DB and will tend to be UTF-8
-// encode to respect RFC 6266 on output through content-disposition
-// $fileNameFromDatabase = rawurlencode('пожалуйста.pdf');
-// Storage facade path is relative to the root directory
-// Defined as "storage/app" in your configuration by default
-// Remember to import Illuminate\Support\Facades\Storage
-// return response()->file(storage_path($pathToFile), [
-//     'Content-Disposition' => str_replace('%name', $fileNameFromStorage, "inline; filename=\"%name\"; filename*=utf-8''%name"),
-//     'Content-Type'        => Storage::getMimeType($pathToFile), // e.g. 'application/pdf', 'text/plain' etc.
-// ]);
-// return response()->file($pathToFile, [
-//   'Content-Disposition' => 'inline; filename="'. $fileNameFromStorage .'"'
-// ]);
-    // ->header('ContentType', 'text/plain')
-    // ->header('Content-Disposition', "inline; filename='$pathToFile'");
-	return response()->file($pathToFile, $headers);
-// return response()->file($pathToFile) ->header('Content-Disposition', "inline; filename='$filename'");
-    // return Response::make($pathToFile, 200)
-    // ->header('ContentType', 'text/plain')
-    // ->header('Content-Disposition', "inline; filename='$pathToFile'");
-// return response()->file($pathToFile);
-	});
- 
-Route::get('inbrowser', function(){
-  // $extension = $request->file('file')->getClientOriginalExtension();
-  // $filename = $request->book_name.'.'. $extension;
-  // $request->file('file')->move(storage_path().'/books/', $filename);
-$fullPath = storage_path().'/app/'. 'Emeka iwuchukwu.pdf';
-//$fullPath = storage_path().'/app/'. 'R-24 user Manual.docx';
-  //
-  $content_types = [
-    'application/octet-stream', // txt etc
-    'application/msword', // doc
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document', //docx
-    'application/vnd.ms-excel', // xls
-    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // xlsx
-    'application/pdf', // pdf
-];
-// dd($fullPath); 
- if(file_exists($fullPath)) {
-        //$contentType = mime_content_type($fullPath);
-         //dd($contentType); 
-        return Response::make(file_get_contents($fullPath), 200, [
-        'Content-Type' => $content_types,
-        'Content-Disposition' => 'inline; filename="'.$fullPath.'"']);
-  } else {
-      return 'NOT HERE';
-  }
-                            
-});
+  
+// logo routes
+
+ Route::get('/logos/activete/{id}', 'LogoController@setLogo')->name('logo.setlog');

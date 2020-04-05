@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Profession;
-class ProfessionTableSeeder extends Seeder
+class PageInformationTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
