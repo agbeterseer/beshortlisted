@@ -3,19 +3,18 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Session;
-use App\Logo;
+use App\Application;
 use App\Repositories\Repository;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
-use DB;
-
-class LogoService
+ 
+class ApplicationService
 {
 	protected $model;
 
-	public function __construct(Logo $logoModel)
+	public function __construct(Application $applcationModel)
 	{
-		$this->model = new Repository($logoModel);
+		$this->model = new Repository($applcationModel);
 	}
  
 	public function all()

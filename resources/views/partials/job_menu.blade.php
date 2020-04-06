@@ -63,7 +63,7 @@ window.onclick = function(event) {
             <div class="container">
                 <div class="row">
                     <aside class="col-md-2">
-  <a href="{{asset('/')}}" class="careerfy-logo" style="margin-top:10px;" ><img src="{{asset('logo/logo2.jpg')}}" alt="TREEPHR" width="200" height="00">  </a> 
+  <a href="{{asset('/')}}" class="careerfy-logo"  ><img src="{{asset('logo/logo3.png')}}" alt="TREEPHR" width="200" height="00">  </a> 
                 
                    <!--   <a href="#" class="careerfy-logo" style="margin-top: 10px;"><img src="{{asset('logo/logo2.jpg')}}"" alt=""></a> --></aside> 
                     <aside class="col-md-6">

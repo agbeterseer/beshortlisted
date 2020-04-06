@@ -33,25 +33,107 @@ use Alert;
 use App\Notifications\AccountVerification;
 use App\EmployerPackage;
 use App\Http\Requests\UpdateContactRequest;
+use App\Http\Requests\EmailJObToAFriendRequest;
 use App\WorkExperience;
 use App\AboutUs;
 use App\Mail\EmailAFriend;
+use App\Services\ApplicationService;
+use App\Services\UserService;
+use App\Services\MenuService;
+use App\Services\EmployerPackageService;
+use App\Services\PostService;
+use App\Services\PlanPackageService;
+use App\Services\RecruitResumeService;
+use App\Services\ResumeBuilderService;
+use App\Services\TagService;
+use App\Services\EmployementTermService;
+use App\Services\IndustryProfessionService;
+use App\Services\IndustryService;
+use App\Services\JobMatchService;
+use App\Services\PageInformationService;
+use App\Services\BannerService;
+use App\Services\CityService;
+use App\Services\CountryService;
+use App\Services\RegionService;
+use App\Services\JobAssessmentService;
+use App\Services\JobRequirementService;
+use App\Services\SendEmailService;
+use App\Services\AboutUSService;
+use App\Services\ContactUsService;
+use App\Services\PersonalInformationService;
+
 class HomeController extends Controller
 {
+  protected $applicationService;
+  protected $userService;
+  protected $menuService;
+  protected $employerPackageService;
+  protected $postService;
+  protected $planPackageService;
+  protected $recruitResumeService;
+  protected $resumeBuilderService;
+  protected $tagService;
+  protected $employementTermService;
+  protected $industryProfessionService;
+  protected $industryService;
+  protected $jobMatchService;
+  protected $pageInformationService;
+  protected $bannerService;
+  protected $cityService;
+  protected $countryService;
+  protected $regionService;
+  protected $jobAssessmentService;
+  protected $requirementService;
+  protected $sendEmailService;
+  protected $aboutUSService;
+  protected $contactusService;
+  protected $personalInformationService;
+
+
+  public function __construct(ApplicationService $applicationService, UserService $userService, MenuService $menuService, EmployerPackageService $employerPackageService, PostService $postService, PlanPackageService $planPackageService, RecruitResumeService $recruitResumeService, ResumeBuilderService $resumeBuilderService, TagService $tagService, EmployementTermService $employementTermService, IndustryProfessionService $industryProfessionService, IndustryService $industryService, JobMatchService $jobMatchService, PageInformationService $pageInformationService, BannerService $bannerService, CityService $cityService, CountryService $countryService, RegionService $regionService, JobAssessmentService $jobAssessmentService, JobRequirementService $jobRequirementService, SendEmailService $sendEmailService, AboutUSService $aboutUSService, ContactUsService $contactusService, PersonalInformationService $personalInformationService)
+  {
+    $this->applicationService = $applicationService;
+    $this->userService = $userService;
+    $this->menuService = $menuService;
+    $this->employerPackageService = $employerPackageService;
+    $this->postService = $postService;
+    $this->planPackageService = $planPackageService;
+    $this->recruitResumeService = $recruitResumeService;
+    $this->resumeBuilderService = $resumeBuilderService;
+    $this->tagService = $tagService;
+    $this->employementTermService = $employementTermService;
+    $this->industryProfessionService = $industryProfessionService;
+    $this->industryService = $industryService;
+    $this->jobMatchService = $jobMatchService;
+    $this->pageInformationService = $pageInformationService;
+    $this->bannerService = $bannerService;
+    $this->cityService = $cityService;
+    $this->countryService = $countryService;
+    $this->regionService = $regionService;
+    $this->jobAssessmentService = $jobAssessmentService;
+    $this->jobRequirementService = $jobRequirementService;
+    $this->sendEmailService = $sendEmailService;
+    $this->aboutUSService = $aboutUSService;
+    $this->contactusService = $contactusService;
+    $this->personalInformationService = $personalInformationService;
+
+  }
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-        public function returnCurrentTime()
+    public function returnCurrentTime()
     {
         $currentTime = Carbon::now();
         $currentTime->toDateTimeString();
         return $currentTime;
     }
+
     public function indexapi()
     {
-      $users = User::orderBy('created_at', 'ASC')->paginate(5);
+      // $users = User::orderBy('created_at', 'ASC')->paginate(5);
+      $users = $this->userService->getUserByCreatedAt();
       $response = array( 'status' => 'success', 'msg' => 'Setting created successfully', 'users' => $users);
       return response()->json($response);
     }
@@ -62,8 +144,10 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function displayMenu(){
-     return $menus = Menu::where('status', 1)->orderBy('menu_order', 'ASC')->get();
+     return $menus = $this->menuService->getActiveMenu();
+
    }
+
      public function displayUnits()
     {
       $user = Auth::user();
@@ -71,15 +155,20 @@ class HomeController extends Controller
       if ($user === null) {
          return $units = 0;
       }else{
-       return $units = EmployerPackage::where('status', 1)->where('userfkp', $user->id)->first();   
+       return $units = $this->employerPackageService->getUserActivePackage($user);
+       // EmployerPackage::where('status', 1)->where('userfkp', $user->id)->first();   
       }
       return back();
     }
+
+
    public function listPages()
    {
     $posts = DB::table('posts')->where('status',1)->get();
-    return $posts;
+    return $posts = $this->postService->getActivePost();
    }
+
+
    public function vieSinglePage($id)
    {
     $posts = $this->listPages();
@@ -87,18 +176,25 @@ class HomeController extends Controller
    }
  
    public function welcome()
-   {
-    //dd('home');
+   { 
     return redirect()->route('home');
    }
+
+   public function getAllPlanPackage()
+   {
+     return $plans = $this->planPackageService->getPlanPackage();
+   }
+
    public function show_price()
-{
-    $plans = DB::table('planpackages')->orderBy('created_at', 'ASC')->where('status', 1)->get();
+  {
+    // $plans = DB::table('planpackages')->orderBy('created_at', 'ASC')->where('status', 1)->get();
+    $plans = $this->getAllPlanPackage();
     $menus = $this->displayMenu();
     $posts = $this->listPages();
     $units = $this->displayUnits();
-return view('employer.pricing', compact('plans', 'menus', 'posts', 'units'), array('user' => Auth::user()));
-}
+
+return view('employerpricing', compact('plans', 'menus', 'posts', 'units'), array('user' => Auth::user()));
+  }
 
    public function JobFunctions()
 {
@@ -117,82 +213,132 @@ return view('jobs.job_functions', compact('menus', 'posts', 'units'), array('use
         // $documents = Document::all()->count();
         // $roles = Role::all()->count();
         // $users = User::all()->count();
-        $company_count = User::where('account_type', 'employer')->count();
-        $resumes = RecruitResume::all();
-        $resume_count = RecruitResume::all()->count();
-        $jobs_count = Tag::where('status',1)->where('active', 1)->count();
-        $resume_builder_list = ResumeBuilder::all();
-        $employement_terms = DB::table('employement_terms')->orderBy('name')->get();
-        $industry_professions = DB::table('industry_professions')->orderBy('name')->where('status',1)->get();
+
+        $company_count = $this->userService->company_count(); // count with account type employer
+         // User::where('account_type', 'employer')->count(); 
+        $resumes = $this->recruitResumeService->all();  //RecruitResume::all();
+        $resume_count = $this->recruitResumeService->all()->count(); 
+
+        $jobs_count =  $this->tagService->getActiveTag()->count();  //Tag::where('status',1)->where('active', 1)->count();
+        $resume_builder_list = $this->recruitResumeService->all();
+
+        $employement_terms = $this->employementTermService->getemployementTermsOrderByName();   //DB::table('employement_terms')->orderBy('name')->get();
+
+        $industry_professions = $this->industryProfessionService->getActiveIndustryProfessionByName();
+        //DB::table('industry_professions')->orderBy('name')->where('status',1)->get();
         //$industries = Industry::all();
-        $industries = DB::table('industries')->where('status',1)->orderBy('name')->orderBy('created_at', 'DESC')->get();
+        $industries = $this->industryService->getActiveIndustryByName();
+        // DB::table('industries')->where('status',1)->orderBy('name')->orderBy('created_at', 'DESC')->get();
+     
        // $query = IndustryProfession::all();
-        $industries_paginage = DB::table('industry_professions')->where('status',1)->orderBy('created_at', 'DESC')->paginate(8);
-        $jobs_8 = DB::table('tags')->where('status',1)->where('active', 1)->orderBy('created_at', 'DESC')->paginate(8);
-        $featured_jobs = DB::table('tags')->where('status',1)->where('active', 1)->where('featured',1)->orderBy('created_at', 'DESC')->paginate(8);
+        $industries_paginage = $this->industryProfessionService->getActiveIndustryProfessionPagination();
+        //DB::table('industry_professions')->where('status',1)->orderBy('created_at', 'DESC')->paginate(8);
+
+        $jobs_8 = $this->tagService->getActiveTagsPaginate();
+        // DB::table('tags')->where('status',1)->where('active', 1)->orderBy('created_at', 'DESC')->paginate(8);
+
+
+        $featured_jobs = $this->tagService->getFeaturedJobs()->paginate(8);
+        // DB::table('tags')->where('status',1)->where('active', 1)->where('featured',1)->orderBy('created_at', 'DESC')->paginate(8);
         //dd($featured_jobs);
-        $jobs = DB::table('tags')->where('status',1)->where('active', 1)->orderBy('created_at', 'DESC')->paginate(4);
-        $all_jobs = DB::table('tags')->where('active', 1)->orderBy('created_at', 'DESC')->get(); 
-        $employement_term_list = DB::table('employement_terms')->get();
+
+        $jobs = $this->tagService->getJobByPagination();
+        // DB::table('tags')->where('status',1)->where('active', 1)->orderBy('created_at', 'DESC')->paginate(4);
+        
+        $all_jobs = $this->tagService->getAllJobs();
+        //DB::table('tags')->where('active', 1)->orderBy('created_at', 'DESC')->get(); 
+
+        $employement_term_list = $this->employementTermService->all();
+        // DB::table('employement_terms')->get();
+
         $cities = $this->GetCities();
         // 
-        $query_count = DB::table('tags')
-             ->select('industry', DB::raw('count(*) as total'))
-             ->groupBy('industry');
+        $query_count = $this->tagService->getGroupTagsByIndustry();
         $industry_count = $query_count->paginate(8);
+
       // dd($industry_count);function_count
-        $tag_cities = DB::table('tags')
-             ->select('city', DB::raw('count(*) as total'))
-             ->groupBy('city')->get();
-      // dd($tag_city);
-        // $job_function_count = DB::table('tags')
-        //      ->select('job_category', DB::raw('count(*) as total'))
-        //      ->groupBy('job_category')->get(); 
-      $job_function_count = DB::table('tags')->where('status', 1)->where('active',1)->where('awaiting_aproval', 0)
-             ->select('industry', DB::raw('count(*) as total'))
-             ->groupBy('industry')->get();  
-             //dd($job_function_count);   
+        $tag_cities = $this->tagService->getGroupTagsByCity();
+       
+        $job_function_count = $this->tagService->getJobFunctionCount();
+        
         $menus = $this->displayMenu();
         $posts = $this->listPages();
-        $job_match_count = DB::table('job_matches')->where('rate', '>', 2)->count(); 
-       $page_information = DB::table('page_informations')->where('category', 'index')->first();
+
+        $job_match_count = $this->jobMatchService->getJobMatchGreaterThanTwo();
+        // DB::table('job_matches')->where('rate', '>', 2)->count(); 
+        //getJobMatchGreaterThanTwo
+
+        $page_information = $this->pageInformationService->getPageInformation();
+        // DB::table('page_informations')->where('category', 'index')->first();
+
        // get banner file
-       $banner = DB::table('banners')->orderBy('created_at', 'DESC')->first();
+        $banner = $this->bannerService->getFirstBanner();
+       // DB::table('banners')->orderBy('created_at', 'DESC')->first();
       
       return view('home', compact( 'resumes','industries', 'resume_builder_list', 'industries', 'jobs', 'resume_count', 'jobs_count', 'industry_professions', 'employement_term_list', 'cities','industry_count', 'industries_paginage', 'job_function_count', 'jobs_8', 'job_post', 'tag_cities', 'employement_terms', 'menus', 'job_match_count', 'posts', 'page_information', 'all_jobs', 'featured_jobs', 'company_count', 'banner'), array('user' => Auth::user()));
     }
+
+
     public function employement_terms()
     {
-      $employement_terms = DB::table('employement_terms')->get();
-      return $employement_terms;
+      // $employement_terms = DB::table('employement_terms')->get();
+      return $this->employementTermService->all();
     }
+
     public function industry_professions()
     {
-     $industry_professions = DB::table('industry_professions')->where('status',1)->get();
+     $industry_professions = $this->industryProfessionService->getActiveIndustryProfessionByName();
+     //DB::table('industry_professions')->where('status',1)->get();
       return $industry_professions;
     }
-public function industries()
-{
-  $industries = DB::table('industries')->where('status',1)->orderBy('created_at', 'DESC')->get();
-  $industries;
-}
-public function employement_term_list()
-{
-  $employement_term_list = DB::table('employement_terms')->get();
-  $employement_term_list;
-}
+
+  public function industries()
+  {
+    $industries = $this->industryService->getActiveIndustryByName();
+    // DB::table('industries')->where('status',1)->orderBy('created_at', 'DESC')->get();
+    return $industries;
+  }
+
+  public function allCountries()
+  {
+    return $countries = $this->countryService->getCountries();
+  }
+     public function GetQualificationLevels()
+    {
+    $qualifications = DB::table('qualification_levels')->orderBy('name')->get();
+     return $qualifications;
+    }
+    public function GetCities()
+    {
+    $cities = $this->cityService->getCitiesOrderByName();
+    // DB::table('cities')->orderBy('name')->get();
+    return $cities;
+    }
+
+  public function employement_term_list()
+  {
+    $employement_term_list = $this->employementTermService->all();
+   
+    return $employement_term_list;
+  }
+
   public function employee(Request $request){ 
        $menus = $this->displayMenu();
-       $posts = DB::table('posts')->where('status', 1)->paginate(3);
-       $featured_tags = DB::table('tags')->where('featured', 1)->where('active', 1)->paginate(6);
+
+       $posts = $this->postService->getActivePostPagination()->paginate(6);
+       // DB::table('posts')->where('status', 1)->paginate(3);
+       $featured_tags = $this->tagService->getFeaturedJobs()->paginate(6);   //DB::table('tags')->where('featured', 1)->where('active', 1)->paginate(6)
        $employement_terms = $this->employement_terms();
        $industry_professions = $this->industry_professions(); 
         //$industries = Industry::all();
        $industries = $this->industries();
        $employement_term_list = $this->employement_term_list();
-       $page_information = DB::table('page_informations')->where('category', 'employee')->first();
+       $page_information = $this->pageInformationService->getPageInformationInput('employee');
+       //DB::table('page_informations')->where('category', 'employee')->first();
+    
     return view('employee', compact('menus', 'posts', 'featured_tags', 'industries', 'industry_professions', 'employement_terms', 'employement_term_list', 'page_information'));
   }
+
   public function employer(Request $request)
   {
     $user = Auth::user();
@@ -200,7 +346,8 @@ public function employement_term_list()
     $is_empty = DB::table('employer_packages')->where('userfkp', $user->id)->get();
     }
     //dd($is_empty);
-    $plans = DB::table('planpackages')->orderBy('created_at', 'ASC')->where('status', 1)->get(); 
+    $plans = $this->getAllPlanPackage();
+    // DB::table('planpackages')->orderBy('created_at', 'ASC')->where('status', 1)->get(); 
     $menus = $this->displayMenu();
     $posts = $this->listPages();
     $units = $this->displayUnits();
@@ -217,16 +364,7 @@ public function employement_term_list()
       return view('admin.log.logActivity',compact('logs'), array('user' => Auth::user()));
  
     }
-    public function GetQualificationLevels()
-    {
-    $qualifications = DB::table('qualification_levels')->orderBy('name')->get();
-     return $qualifications;
-    }
-    public function GetCities()
-    {
-    $cities = DB::table('cities')->orderBy('name')->get();
-    return $cities;
-    }
+ 
 
         public function Jobs(Request $request)
         {
@@ -245,101 +383,123 @@ public function employement_term_list()
         public function ShowJobFilterForm(Request $request){ 
 
         $s = $request->input('s');
-        $countries = DB::table('countries')->get();
+
+        $countries = $this->allCountries();
+        
         $cities = $this->GetCities();
-        $regions = DB::table('regions')->get();
+        
+        $regions = $this->regionService->all();
+        // DB::table('regions')->get();
+        
         $educational_levels = $this->GetQualificationLevels(); 
-        $industries = DB::table('industries')->where('status', 1)->orderBy('name')->get();
-        $industry_professions = DB::table('industry_professions')->orderBy('name')->get();
-        $employement_term_list = DB::table('employement_terms')->orderBy('name')->where('status',1)->get();
+        
+        $industries = $this->industries();
+        // DB::table('industries')->where('status', 1)->orderBy('name')->get();
+        
+        $industry_professions = $this->industry_professions();
+        //DB::table('industry_professions')->orderBy('name')->get();
+
+        $employement_term_list = $this->employementTermService->getemployementTermsOrderByName();
+        // DB::table('employement_terms')->orderBy('name')->where('status',1)->get();
+        //DB::table('employement_terms')->orderBy('name')->where('status',1)->get();
+
         $employement_term_Unorderedlist = DB::table('employement_terms')->where('status',1)->get();
-        $city_count = $this->cityCount();
+        
+        $city_count = $this->countTagByCity();
+        
         $job_type_count = $this->jobTypeCount();
+        
         $industry_count = $this->industryCount();
+        
         $industry_professions_count = $this->industryProfessionsCount();
+        
         $tags = $this->getActiveTags();
+        
         $tags_count = $this->getActiveTagsCount(); 
+        
         $menus = $this->displayMenu();
+        
         $posts = $this->listPages();
               // $page = Post::where('display_name', $code)->where('status',1)->first();
-              if ($request->ajax()) {
+        if ($request->ajax()) {
 
-                  return view('jobs.load', ['tags' => $tags, 'industry_professions' => $industry_professions, 'employement_term_list' => $employement_term_list, 'industries' => $industries, ])->render();  
-              }   
+            return view('jobs.load', ['tags' => $tags, 'industry_professions' => $industry_professions, 'employement_term_list' => $employement_term_list, 'industries' => $industries, ])->render();  
+        }   
      return view('jobs.job_listing_form', compact('industry_professions', 'industries', 'cities', 'city_count', 'employement_term_list','job_type_count', 'tags', 's', 'menus', 'posts', 'employement_term_Unorderedlist', 'industry_count', 'industry_professions_count', 'tags_count'));
     }
 
-
-    public function cityCount()
+    public function countTagByCity()
     {
-            $city_count = DB::table('tags')
-                 ->select('city', DB::raw('count(*) as total'))
-                 ->groupBy('city')->where('status',1)->where('active',1)->get();
+      $city_count = $this->tagService->cityCount();
     return $city_count;
     }
+// cityCount//
+    // public function cityCount()
+    // {
+    //         $city_count = DB::table('tags')
+    //              ->select('city', DB::raw('count(*) as total'))
+    //              ->groupBy('city')->where('status',1)->where('active',1)->get();
+    // return $city_count;
+    // }
 
     public function getActiveTags()
     {
-
-     $tags = Tag::where('status',1)->where('active',1)->paginate(20); 
-
+     $tags = $this->tagService->getActiveTag()->paginate(20); 
+     // Tag::where('status',1)->where('active',1)
      return $tags;
     }
 
-        public function getActiveTagsCount()
+    public function getActiveTagsCount()
     {
-
-     $tags = Tag::where('status',1)->where('active',1)->count(); 
-
+     $tags = $this->tagService->getActiveTag()->count(); 
      return $tags;
     }
 
     public function jobTypeCount()
     {
-       $job_type_count = DB::table('tags')
-                 ->select('job_type', DB::raw('count(*) as total'))
-                 ->groupBy('job_type')->where('status',1)->where('active',1)->get();
-
+       $job_type_count =  $this->tagService->jobTypeCount();
       return $job_type_count;
     }
 
     public function industryCount()
     {
-           $industry_count = DB::table('tags')
-                 ->select('industry', DB::raw('count(*) as total'))
-                 ->groupBy('industry')->where('status',1)->where('active',1)->get();
-
+      $industry_count = $this->tagService->industryCount();
       return $industry_count;
     }
 
     public function industryProfessionsCount()
     {
-           $industry_professions_count = DB::table('tags')
-                 ->select('job_category', DB::raw('count(*) as total'))
-                 ->groupBy('job_category')->where('status',1)->where('active',1)->get();
-
+      $industry_professions_count = $this->tagService->industryProfessionsCount();
       return $industry_professions_count;
     }
 
-        public function ShowJobFilterForm2(Request $request, $code){
+    public function ShowJobFilterForm2(Request $request, $code){
 
         $s = $request->input('s');
         $countries = DB::table('countries')->get();
+
         $cities = $this->GetCities();
-        $regions = DB::table('regions')->get();
-        $educational_levels = $this->GetQualificationLevels(); 
-        $industries = DB::table('industries')->where('status', 1)->orderBy('name')->get();
-          $industry_professions = DB::table('industry_professions')->orderBy('name')->get();
-              $city_count = DB::table('tags')
-                 ->select('city', DB::raw('count(*) as total'))
-                 ->groupBy('city')->get();
-        $employement_term_list = DB::table('employement_terms')->orderBy('name')->where('status',1)->get();
-        $job_type_count = DB::table('tags')
-                 ->select('job_type', DB::raw('count(*) as total'))
-                 ->groupBy('job_type')->get();
-              $tags =  $tags = $this->getActiveTags();   
-              $menus = $this->displayMenu();
-              $posts = $this->listPages();
+
+        $regions = $this->regionService->all();
+
+        $educational_levels = $this->GetQualificationLevels();
+
+        $industries = $this->industries();
+        // DB::table('industries')->where('status', 1)->orderBy('name')->get();
+        
+        $industry_professions = $this->industry_professions();
+
+        $city_count = $this->tagService->getGroupTagsByCity();
+
+        $employement_term_list = $this->employementTermService->getemployementTermsOrderByName();
+        
+        $job_type_count = $this->tagService->jobTypeCount();
+ 
+        $tags = $this->getActiveTags();   
+              
+        $menus = $this->displayMenu();
+              
+        $posts = $this->listPages();
               // $page = Post::where('display_name', $code)->where('status',1)->first();
          
      return view('jobs.job_listing_form-2', compact('industry_professions', 'industries', 'cities', 'city_count', 'employement_term_list','job_type_count', 'tags', 's', 'menus', 'posts') );
@@ -347,16 +507,17 @@ public function employement_term_list()
 
 
     public function JobListing(Request $request){
-//dd('here');
+    //dd('here');
         $s = $request->input('s');
         $location = $request->input('location');
         $job_function = $request->input('job_function');
 
-        $industry_professions = DB::table('industry_professions')->orderBy('name')->get();
-        $employement_term_list = DB::table('employement_terms')->orderBy('name')->get();
-         $employement_term_Unorderedlist = DB::table('employement_terms')->where('status',1)->get();
-        $cities = DB::table('cities')->orderBy('name')->get();
-        $city_count = $this->cityCount();
+        $industry_professions = $this->industry_professions();
+        $employement_term_list = $this->employementTermService->getemployementTermsOrderByName(); 
+        $employement_term_Unorderedlist = $this->employementTermService->employement_term_Unorderedlist();
+
+        $cities = $this->GetCities();
+        $city_count = $this->countTagByCity();
         $job_type_count = $this->jobTypeCount(); 
         $industry_count = $this->industryCount();
         $industry_professions_count = $this->industryProfessionsCount();
@@ -366,12 +527,7 @@ public function employement_term_list()
         $posts = $this->listPages();
 
         $location = City::findOrFail($location);
-
-        // if ($s && isset($location) ) {
-        //     $tags = Tag::where(function($query) use ($location, $s){
-        //     $query->orWhere('city', $location->name)->search(strtolower($s))->where('status',1)->where('active',1);
-        //     })->paginate(20);
-        // }
+ 
         if ($s && $location && $job_function) {
 
 
@@ -408,22 +564,31 @@ public function DisplayTemplates()
 
 
     public function JobDetails($id){ 
-      $tag = Tag::findOrFail($id);
+      $tag = $this->tagService->readOrFail($id);
       //$tag = Tag::findOrFail($id);
-      $employement_terms = DB::table('employement_terms')->get();
+      $employement_terms = $this->employementTermService->getemployementTermsOrderByName();
       $jobcareer_levels = DB::table('jobcareer_levels')->get();
-      $industries = DB::table('industries')->get();
+      $industries = $this->industries();
       $educational_levels = $this->GetQualificationLevels(); 
       $skillsets = DB::table('skillsets')->where('tagid', $id)->get();
-      $cities = DB::table('cities')->get();
-      $industry_professions = DB::table('industry_professions')->get();
+      $cities = $this->GetCities();
+      $industry_professions = $this->industry_professions();
       // view assessement Questions
-      $job_assessments = DB::table('job_assessments')->where('job_id', $id)->get();
-      $job_requirements = DB::table('job_requirements')->where('job_id', $id)->get();
-      $get_Job_by_common_industries = Tag::latest()->where('industry',$tag->industry)->orWhere('job_category',$tag->job_category)->orWhere('salary_range', $tag->salary_range)->paginate(3);
-      $get_Job_by_common_industries_similler = Tag::latest()->where('industry',$tag->industry)->where('job_category',$tag->job_category)->where('salary_range', $tag->salary_range)->paginate(3);
+      $job_assessments = $this->jobAssessmentService->getJobAssessmentsByJobID($id);
+      //DB::table('job_assessments')->where('job_id', $id)->get();
+      
+      $job_requirements = $this->jobRequirementService->getJobRequirementsByJobID($id);
+      // DB::table('job_requirements')->where('job_id', $id)->get();
+
+      $get_Job_by_common_industries = $this->tagService->findByIndustryIDAndJobCategoryAndSalaryRang($tag)->paginate(3);
+      // Tag::latest()->where('industry',$tag->industry)->orWhere('job_category',$tag->job_category)->orWhere('salary_range', $tag->salary_range)->paginate(3);
+
+      $get_Job_by_common_industries_similler = $this->tagService->findByIndustryIDAndJobCategoryAndSalaryRang($tag)->paginate(3);
+      
       $get_all_user_list = User::all();
+      
       $menus = $this->displayMenu();
+      
       $posts = $this->listPages();
 
       // if ($success) {
@@ -434,72 +599,33 @@ public function DisplayTemplates()
     }
 
 
-  public function EmailJobToAFriend(Request $request){
-//$job_id, $from, $to, $body
-      // dd($request->all());
-      $job_title = $request->job_title;
-      $to = $request->to;
-      $from = $request->from;
-      $link = $request->link;
-      $job_description = $request->job_description;
+    public function EmailJobToAFriend(EmailJObToAFriendRequest $request){
 
-      $JOBALERT = 'JOB ALERT';
-        $content = [
-        'title'=> $job_title, 
-        'body'=> $job_description,
-        'from' => $from, 
-        'link' => $link,
-        'to' => $to
-        // 'apply' => url('/') . '/candidates/job-details/'.$job_id->id,
-        ];    
-      
+      $semail = $this->sendEmailService->EmailJobToAFriendService($request);
  
-  if ($job_title) {
-    $when = Carbon::now()->addSeconds(15); 
-   try{
-        
-        Mail::to($to)->later($when, new EmailAFriend($content));
-        
-        return redirect()->back()->withMessage('success', 'Job link sent successfully');
-     } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error'=> 'something went wrong']); 
-    } 
-  } 
-
- return redirect()->back();
-}
+     return redirect()->back();
+    }
 
 
     public function AllIndustries(Request $request)
     {
     $s = $request->input('s'); 
-    $industries = DB::table('industries')->where('status',1)->orderBy('created_at', 'DESC')->get();
-      $menus = $this->displayMenu();
-         // $job_function_count = DB::table('tags')
-         //     ->select('job_category', DB::raw('count(*) as total'))
-         //     ->groupBy('job_category')->get(); 
-
-              $job_function_count = DB::table('tags')->where('status', 1)->where('active',1)->where('awaiting_aproval', 0)
-             ->select('industry', DB::raw('count(*) as total'))
-             ->groupBy('industry')->get();  
-     return view('jobs.industry_list',  compact('industries', 's', 'menus', 'job_function_count'));
+    $industries = $this->industries();
+    $menus = $this->displayMenu();
+    $job_function_count = $this->tagService->getTagsGroupByIndustry();
+    return view('jobs.industry_list',  compact('industries', 's', 'menus', 'job_function_count'));
     }
+
     public function SubscribeToNewsletter(Request $request)
     {
      //dd($request->all());
-      $email = $request->email;
-      $email_user = $request->email_user;
-      $all = '110';
-      $em = Email::firstOrNew(['email' => $email, 'industry' => $all]);
-      $em->email = $request->email;
-      $em->industry = $all;
-      $em->created_at = $this->returnCurrentTime();
-      $em->account_type = $email_user;
-      $em->save(); 
-      Alert::success('Success Message', 'you have been added to the mailing list');
-      Session::flash('sub-success', 'you have been added to the mailing list');
+
+      $this->sendEmailService->SubscribeToNewsletterService($request); 
+
      return redirect()->back()->withMessage('success', 'Done successfully');
     }
+
+
     public function guidelines()
     {
       $menus = $this->displayMenu();
@@ -554,7 +680,7 @@ public function DisplayTemplates()
     $menus = $this->displayMenu();
     $posts = $this->listPages();
     $contact = DB::table('contacts')->where('status',1)->get();
-    $countries = DB::table('countries')->get();
+    $countries = $this->allCountries(); //DB::table('countries')->get();
     return view('contactus', compact('posts', 'menus', 'contact', 'countries'), array('user' => Auth::user()));
     }
 
@@ -563,43 +689,24 @@ public function DisplayTemplates()
     $menus = $this->displayMenu();
     $posts = $this->listPages();
     $contact = DB::table('contacts')->where('status',1)->get();
-    $countries = DB::table('countries')->get();
+    $countries = $this->allCountries();
     // $page = Post::where('display_name', 'about-us')->where('status',1)->first();  
-    $about = DB::table('aboutuses')->orderBy('created_at', 'DESC')->first();
+    $about = $this->aboutUSService->getAboutUSOrderByCreatedAt(); //DB::table('aboutuses')->orderBy('created_at', 'DESC')->first();
+    //getAboutUSOrderByCreatedAt
     $resume_count = RecruitResume::all()->count();
-    $jobs_count = Tag::where('status',1)->where('active', 1)->count();
-     $job_match_count = DB::table('job_matches')->where('rate', '>', 2)->count();
-// $to_name = 'Terseer Agbe';
-// $to_email = 'agbe.terseer@gmail.com';
-// $data = array('name'=>"Sam Jose", "body" => "Test mail");
-    
-// Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
-//     $message->to($to_email, $to_name)
-//             ->subject('Artisans Web Testing Mail');
-//     $message->from('hr@rhizomeng.com','Testing');
-// });
+    $jobs_count = $this->tagService->getActiveTag()->count();
+    $job_match_count = $this->jobMatchService->getJobMatchGreaterThanTwo();
+    // DB::table('job_matches')->where('rate', '>', 2)->count();
 
-     $page = Post::where('display_name', 'terms-of-use')->where('status',1)->first();
+    $page = Post::where('display_name', 'terms-of-use')->where('status',1)->first();
     return view('aboutus', compact('posts', 'menus', 'contact', 'countries', 'about', 'job_match_count', 'resume_count', 'jobs_count', 'page'), array('user' => Auth::user()));
     }
 public function addContactUs (Request $request)
-{ 
-    try {
-      if ($request->name !=null && $request->name !='' && $request->email !=null && $request->email !='') {
-           $contact = new ReachUs; 
-            $contact->name = $request->name;
-            $contact->email = $request->email;
-            $contact->message = $request->message; 
-            $contact->created_at = $this->returnCurrentTime();
-            $contact->save();
-            Session::flash('success','Thank you for contacting us. your email has been sent successfully');
-            return redirect()->back();#
-          }
-    } catch (Exception $e) {
-            return redirect()->back()->withErrors(['error'=> 'something went wrong']); 
-    } 
+{
+
+  $this->contactusService->SaveContact($request);
  
-       return  redirect()->back();
+  return  redirect()->back();
 }
 
 public function getJobsByIndustries($code)
@@ -607,9 +714,11 @@ public function getJobsByIndustries($code)
 
   $menus = $this->displayMenu();
   $posts = $this->listPages();
-  $jobs_by_industries = DB::table('tags')->where('industry',$code)->where('status', 1)->get(); 
-  $industry_professions = DB::table('industry_professions')->where('status',1)->get();
-  $employement_term_list = DB::table('employement_terms')->get();
+
+  $jobs_by_industries = $this->tagService->getJobByIndustry($code);
+   // DB::table('tags')->where('industry',$code)->where('status', 1)->get(); 
+  $industry_professions = $this->industry_professions();       //DB::table('industry_professions')->where('status',1)->get();
+  $employement_term_list = $this->employementTermService->getemployementTermsOrderByName();
  //dd($jobs_by_industries);
  return view('jobs.view_jobs_by_industries', compact('jobs_by_industries', 'menus', 'posts', 'industry_professions', 'employement_term_list', 'code'), array('user' => Auth::user()));
 }
@@ -618,7 +727,8 @@ public function listPageInfo(Request $request)
 {
   $menus = $this->displayMenu();
   $posts = $this->listPages();
-  $all_pages = DB::table('personal_informations')->get();
+  $all_pages = $this->personalInformationService->all();
+  // DB::table('personal_informations')->get();
 return view('pages.page_infor_list', compact('menus', 'posts', 'all_pages'), array('user' => Auth::user()));
 }
 
@@ -626,7 +736,7 @@ public function SingUp()
 {
   $menus = $this->displayMenu();
   $posts = $this->listPages();
-  $all_pages = DB::table('personal_informations')->get();
+  $all_pages =  DB::table('personal_informations')->get();
 return view('auth.select_registration', compact('menus', 'posts', 'all_pages'), array('user' => Auth::user()));
 }
 
@@ -634,9 +744,9 @@ public function EmployerSignUp()
 {
   $menus = $this->displayMenu();
   $posts = $this->listPages();
-  $all_pages = DB::table('personal_informations')->get();
-  $countries = DB::table('countries')->orderBy('name_en')->get();
-  $industries = DB::table('industries')->orderBy('name')->where('status',1)->get();
+  $all_pages = $this->personalInformationService->all(); //DB::table('personal_informations')->get();
+  $countries = $this->allCountries(); //DB::table('countries')->orderBy('name_en')->get();
+  $industries = $this->industries(); //DB::table('industries')->orderBy('name')->where('status',1)->get();
 return view('auth.employer_registration', compact('menus', 'posts', 'all_pages', 'countries', 'industries'), array('user' => Auth::user()));
 }
 
@@ -662,7 +772,6 @@ return view('auth.employee_registration', compact('menus', 'posts', 'all_pages',
 public function RegisterEmployer(Request $request)
 {
 // dd($request->all());
-
 
   $account_type = $request->account_type;
   $email = $request->email;
@@ -773,8 +882,6 @@ public function RegisterEmployee(Request $request)
  // dd($phone);
    // check if user exist
 
-
-
   $user = DB::table('users')->where('email', $email)->first();
   if ($user) {
     Session::flash('error-email', 'email address already taken');
@@ -805,10 +912,8 @@ if ($email !=null && $email !="" && $firstname !=null && $firstname !="") {
 
  //Save user
  $user = $this->SaveUser($email, $firstname, $lastname, $password, $account_type, $confirmation_code);
-
   // initialise candidates resume
  $resume_record = $this->SaveCaption($position_title, $user); 
-
 
  $profession = DB::table('professions')->where('id',$profession)->first();
  // save docment
@@ -990,7 +1095,6 @@ public function SendEmployerVerificaionEmail2($contact_person, $email, $confirma
      'confirmation_code' => $confirmation_code,
      'contact_person' => $contact_person,
      'account_type' => $account_type,
- 
   ];
  
   try {
@@ -1016,7 +1120,6 @@ public function SendEmployerVerificaionEmail($email, $confirmation_code, $user, 
   ];
  
   try {
-
     // Mail::to($email)->queue(new EmailAccountCreation($content));
      $user->notify(new AccountVerification($content));
 
@@ -1047,27 +1150,27 @@ public function SendEmployerVerificaionEmail($email, $confirmation_code, $user, 
     }
 
 
-public function activeted($account_type)
-{
-  $menus = $this->displayMenu();
-  $posts = $this->listPages();
-return view('activate_account', compact('menus','posts', 'account_type'),array('user' => Auth::user()));
-}
+  public function activeted($account_type)
+  {
+    $menus = $this->displayMenu();
+    $posts = $this->listPages();
+  return view('activate_account', compact('menus','posts', 'account_type'),array('user' => Auth::user()));
+  }
 
-public function account_creation_success()
-{
-  $menus = $this->displayMenu();
-  $posts = $this->listPages();
- return view('employer_email_information', compact('menus','posts'), array('user' => Auth::user()));
-}
+  public function account_creation_success()
+  {
+    $menus = $this->displayMenu();
+    $posts = $this->listPages();
+   return view('employer_email_information', compact('menus','posts'), array('user' => Auth::user()));
+  }
 
 
-public function ViewMailTemplate()
-{
-   $menus = $this->displayMenu();
-  $posts = $this->listPages();
- return view('email_template', compact('menus','posts'), array('user' => Auth::user()));
-}
+  public function ViewMailTemplate()
+  {
+     $menus = $this->displayMenu();
+    $posts = $this->listPages();
+   return view('email_template', compact('menus','posts'), array('user' => Auth::user()));
+  }
 
 
 

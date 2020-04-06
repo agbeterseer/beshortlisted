@@ -4,7 +4,7 @@
                 <div class="page-header-inner">
                     <!-- BEGIN LOGO -->
                     <div class="page-logo">                      
-                <img src="{{asset('logo/logo2.jpg')}}" alt="Logo" width="150px" height="40px" class="logo-default" style="margin:4px; " /> 
+                <img src="{{asset('logo/logo-white.png')}}" alt="Logo" width="150px" height="30px" class="logo-default"/> 
                         <div class="menu-toggler sidebar-toggler">
                             <span></span>
                         </div>

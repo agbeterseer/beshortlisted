@@ -14,9 +14,11 @@ class CreateControlApplicationTable extends Migration
     public function up()
     {
         Schema::create('control_applications', function (Blueprint $table) {
-            $table->increments('id'); 
-            //$table->foreign('application_id')->references('id')->on('applications');
-            //$table->foreign('job_id')->references('id')->on('tags');
+            $table->increments('id');
+            $table->integer('application_id')->unsigned();
+            $table->foreign('application_id')->references('id')->on('applications');
+            $table->integer('job_id')->unsigned();
+            $table->foreign('job_id')->references('id')->on('tags');
             $table->string('status');   
             $table->timestamps();
         });
