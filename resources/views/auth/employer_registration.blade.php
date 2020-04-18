@@ -431,7 +431,7 @@ tr:hover {background-color:#f5f5f5;}
            <div class="col-md-6">
                     <div class="form-group">
                                                 <label>First Name:</label>
-       <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="firstname">
+       <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="firstname" maxlength="50">
                                 <i class="careerfy-icon careerfy-user"></i>
                               @if ($errors->has('firstname'))
                                     <span class="help-block">
@@ -443,7 +443,7 @@ tr:hover {background-color:#f5f5f5;}
                    <div class="col-md-6">
                     <div class="form-group">
                                         <label>Last Name:</label>
-                                <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="lastname">
+                                <input onblur="if(this.value == '') { this.value ='Enter Your Name'; }" onfocus="if(this.value =='Enter Your Name') { this.value = ''; }" type="text" name="lastname" maxlength="50">
                           
                     </div>
                 </div>
@@ -453,7 +453,7 @@ tr:hover {background-color:#f5f5f5;}
       <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                                    <label>Comany Name:</label>
+                                    <label>Comany Name:<span class="required"><font color="red">*</font></span></label>
                                 <input onblur="if(this.value == '') { this.value ='Enter Comany Name'; }" onfocus="if(this.value =='Enter Comany Name') { this.value = ''; }" type="text" name="comany_name" required="required">
                                @if ($errors->has('comany_name'))
                                     <span class="help-block">

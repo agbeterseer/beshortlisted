@@ -137,6 +137,8 @@ public function __construct()
     public function redirectToProvider($provider)
     {
         //dd($provider);
+        //Socialite::driver('google')->scopes(['profile','email'])->redirect()
+
         return Socialite::driver($provider)->redirect();
     }
 
@@ -161,10 +163,10 @@ public function __construct()
     public function Callback($provider){
         $userSocial =   Socialite::driver($provider)->stateless()->user();
         $users       =   User::where(['email' => $userSocial->getEmail()])->first();
-if($users){
-            Auth::login($users);
+        if($users){
+                Auth::login($users);
             return redirect('/');
-        }else{
+                }else{
 // $user = User::create([
 //                 'name'          => $userSocial->getName(),
 //                 'email'         => $userSocial->getEmail(),
@@ -205,7 +207,7 @@ if($users){
 
      public function logout(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $this->guard()->logout();
         $request->session()->flush();
         $request->session()->regenerate();
@@ -226,7 +228,7 @@ if($users){
 
     public function callback2()
     { 
-        dd('here');
+        // dd('here');
         $user = Socialite::driver('google')->user(); 
 
         $authUser = $this->findOrCreateUser($user, 'google');

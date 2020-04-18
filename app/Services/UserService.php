@@ -8,7 +8,9 @@ use App\Repositories\Repository;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use Auth;
- 
+use DB;
+use App\Utility\DateUtil;
+
 class UserService
 {
 	protected $model;
@@ -76,6 +78,27 @@ class UserService
 	 public function company_count()
 	 {
 	 	return $company_count = User::where('account_type', 'employer')->count();
+	 }
+
+
+	 public function check_email($email)
+	 {
+	 	return $user = DB::table('users')->where('email', $email)->first(); //$email ? $email : null;
+	 }
+
+	 public function saveUser(Request $request)
+	 {
+	 	//dd($request->all());
+		$user = User::firstOrNew(['email'=>$request->email]); 
+		$user->name = $request->comany_name;
+		$user->password = bcrypt($request->password);
+		$user->account_type = $request->account_type;
+		$user->active = 0;
+		$user->confirmation_code = $request->confirmation_code;
+		$user->confirmed = 0;
+		$user->save();
+
+		return $user;
 	 }
 
 

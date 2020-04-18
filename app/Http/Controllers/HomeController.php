@@ -34,12 +34,15 @@ use App\Notifications\AccountVerification;
 use App\EmployerPackage;
 use App\Http\Requests\UpdateContactRequest;
 use App\Http\Requests\EmailJObToAFriendRequest;
+use App\Http\Requests\RegisterEmployerRequest;
+use App\Http\Requests\RegisterEmployeeRequest;
 use App\WorkExperience;
+use App\Utility\DateUtil;
 use App\AboutUs;
 use App\Mail\EmailAFriend;
 use App\Services\ApplicationService;
 use App\Services\UserService;
-use App\Services\MenuService;
+use App\Services\Mevice;
 use App\Services\EmployerPackageService;
 use App\Services\PostService;
 use App\Services\PlanPackageService;
@@ -61,6 +64,9 @@ use App\Services\SendEmailService;
 use App\Services\AboutUSService;
 use App\Services\ContactUsService;
 use App\Services\PersonalInformationService;
+use App\Services\ClientService;
+use App\Services\RecruitProfilePixService;
+use App\Services\MenuService;
 
 class HomeController extends Controller
 {
@@ -88,9 +94,11 @@ class HomeController extends Controller
   protected $aboutUSService;
   protected $contactusService;
   protected $personalInformationService;
+  protected $clientService;
+  protected $recruitProfilePixService; 
 
 
-  public function __construct(ApplicationService $applicationService, UserService $userService, MenuService $menuService, EmployerPackageService $employerPackageService, PostService $postService, PlanPackageService $planPackageService, RecruitResumeService $recruitResumeService, ResumeBuilderService $resumeBuilderService, TagService $tagService, EmployementTermService $employementTermService, IndustryProfessionService $industryProfessionService, IndustryService $industryService, JobMatchService $jobMatchService, PageInformationService $pageInformationService, BannerService $bannerService, CityService $cityService, CountryService $countryService, RegionService $regionService, JobAssessmentService $jobAssessmentService, JobRequirementService $jobRequirementService, SendEmailService $sendEmailService, AboutUSService $aboutUSService, ContactUsService $contactusService, PersonalInformationService $personalInformationService)
+  public function __construct(ApplicationService $applicationService, UserService $userService, MenuService $menuService, EmployerPackageService $employerPackageService, PostService $postService, PlanPackageService $planPackageService, RecruitResumeService $recruitResumeService, ResumeBuilderService $resumeBuilderService, TagService $tagService, EmployementTermService $employementTermService, IndustryProfessionService $industryProfessionService, IndustryService $industryService, JobMatchService $jobMatchService, PageInformationService $pageInformationService, BannerService $bannerService, CityService $cityService, CountryService $countryService, RegionService $regionService, JobAssessmentService $jobAssessmentService, JobRequirementService $jobRequirementService, SendEmailService $sendEmailService, AboutUSService $aboutUSService, ContactUsService $contactusService, PersonalInformationService $personalInformationService, ClientService $clientService, RecruitProfilePixService $recruitProfilePixService)
   {
     $this->applicationService = $applicationService;
     $this->userService = $userService;
@@ -116,6 +124,8 @@ class HomeController extends Controller
     $this->aboutUSService = $aboutUSService;
     $this->contactusService = $contactusService;
     $this->personalInformationService = $personalInformationService;
+    $this->clientService = $clientService;
+    $this->recruitProfilePixService = $recruitProfilePixService; 
 
   }
     /**
@@ -433,15 +443,7 @@ return view('jobs.job_functions', compact('menus', 'posts', 'units'), array('use
       $city_count = $this->tagService->cityCount();
     return $city_count;
     }
-// cityCount//
-    // public function cityCount()
-    // {
-    //         $city_count = DB::table('tags')
-    //              ->select('city', DB::raw('count(*) as total'))
-    //              ->groupBy('city')->where('status',1)->where('active',1)->get();
-    // return $city_count;
-    // }
-
+ 
     public function getActiveTags()
     {
      $tags = $this->tagService->getActiveTag()->paginate(20); 
@@ -752,92 +754,54 @@ return view('auth.employer_registration', compact('menus', 'posts', 'all_pages',
 
 public function EmployeeSignUp()
 {
-  $menus = $this->displayMenu();
-  $posts = $this->listPages();
-  $all_pages = DB::table('personal_informations')->get();
-  $countries = DB::table('countries')->orderBy('name_en')->get();
-  $industries = DB::table('industries')->orderBy('name')->where('status',1)->get();
-   $recruityear_list = RecruitYear::orderBy('name', 'DESC')->get();
-        $job_career_levelList = JobcareerLevel::all();
-        $educationallevels = $this->GetQualificationLevels();
-        $employementterms = DB::table('employement_terms')->orderBy('name')->get(); 
-       $industry_profession = DB::table('industry_professions')->orderBy('name')->get();
+    $menus = $this->displayMenu();
+    $posts = $this->listPages();
+    $all_pages = $this->personalInformationService->all();
+    $countries = $this->allCountries();
+    $industries = $this->industries(); 
+    $recruityear_list = RecruitYear::orderBy('name', 'DESC')->get();
+    $job_career_levelList = JobcareerLevel::all();
+    $educationallevels = $this->GetQualificationLevels();
+    $employementterms = $this->employementTermService->getemployementTermsOrderByName(); 
+    $industry_profession = $this->industry_professions();
         //employement_terms employement_terms
 return view('auth.employee_registration', compact('menus', 'posts', 'all_pages', 'countries', 'industries', 'recruityear_list', 'job_career_levelList', 'educationallevels', 'employementterms', 'industry_profession'), array('user' => Auth::user()));
 }
+ 
 
-
-
-
-public function RegisterEmployer(Request $request)
-{
-// dd($request->all());
-
-  $account_type = $request->account_type;
+public function RegisterEmployer(RegisterEmployerRequest $request)
+{      
+                       
+ 
   $email = $request->email;
-  $password = $request->password;
-  $password_confirmation = $request->password_confirmation;
-  $phone = $request->code . $request->phone;
-  $name = $request->name;
-  $lastname = $request->lastname;
-  $comany_name = $request->comany_name;
-  $number_of_employees = $request->number_of_employees;
-  $industry = $request->industry;
-  $type_of_employer = $request->type_of_employer;
-  $website = $request->website;
+  //check user RegisterEmployerRequest
+  $user = $this->userService->check_email($email); 
 
-  $contact_address = $request->contact_address;
-  $contact_phone_number = $request->code . $request->contact_phone_number;
-  $email_notificaiton = $request->email_notificaiton;
-  $contact_person = $request->contact_person;
-  $country = $request->country; 
-
-  //check user
-  $user = DB::table('users')->where('email', $email)->first();
   if ($user) {
    Session::flash('error-email', 'email address already taken');
   return redirect()->back();
   }
-
-  $confirmation_code = str_random(30);
+ // dd($request->all());
+  $request->confirmation_code = str_random(30);
 //dd($request->all());
-if ($contact_person !=null && $contact_person !="" && $lastname !=null && $lastname !="") {
+if ($request->contact_person !=null && $request->contact_person !="" && $request->firstname !=null && $request->firstname !="") {
 
-  $user = User::firstOrNew(['email'=>$email]); 
-  $user->name = $comany_name;
-  $user->password = bcrypt($password);
-  $user->account_type = $account_type;
-  $user->active = 0;
-  $user->confirmation_code = $confirmation_code;
-  $user->confirmed = 0;
-  $user->save();
+  $user = $this->userService->saveUser($request);
 
- $recruit_profile_pix = DB::table('recruit_profile_pixs')->insert(['user_id' => $user->id, 'order' => 1, 'status' => 1, 'created_at' => $this->returnCurrentTime()]);
+  $this->recruitProfilePixService->recruit_profile_pix($user);
+ 
+  $client = $this->clientService->CustomSave($request);
 
-  $client = Client::firstOrNew(['name' => $comany_name]);
-  $client->name = $comany_name; 
-  $client->phone_number = $phone;
-  $client->website = $website;
-  $client->country = $country; 
-  $client->full_address = $contact_address;
-  $client->number_of_employees = $number_of_employees;
-  $client->type_of_employment = $type_of_employer;
-  $client->industry = $industry;
-  $client->contact_person_name = $contact_person;
-  $client->contact_person_email = $email_notificaiton; 
-  $client->contact_person_number = $contact_phone_number; 
-  $client->user_id = $user->id;
-  $client->created_at = $this->returnCurrentTime();
-  $client->save(); 
+  $this->SendEmployerVerificaionEmail2($request->contact_person, $request->email, $request->confirmation_code, $user, $request->account_type);
 
-  $this->SendEmployerVerificaionEmail2($contact_person, $email, $confirmation_code, $user, $account_type);
+  dd($client);
 // redirect to employer_email_info_page
-
 }else{
   return redirect()->back()->withErrors(['error', 'cannot create account']);
 }
 return redirect()->route('create_account.success');
 }
+
 
 
   public function uploadIsValid($request)
@@ -897,6 +861,7 @@ public function RegisterEmployee(Request $request)
       }
 
   $date_of_birth = new Carbon($request->date_of_birth);
+
 if ($end_year !=null && $end_month !=null) {
     if ($work_from_year > $end_year ) { 
 
@@ -950,8 +915,6 @@ $this->SaveWorkExperience($work_from_year, $work_from_month, $end_year, $end_mon
    $subemail->account_type = $account_type;
    $subemail->save();
   }
-
-
 
   $this->SendEmployerVerificaionEmail($email, $confirmation_code, $user, $account_type);
 // redirect to employer_email_info_page  show.resume

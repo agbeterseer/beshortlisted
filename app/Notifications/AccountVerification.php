@@ -49,7 +49,7 @@ class AccountVerification extends Notification implements ShouldQueue {
             $messg = 'posting jobs';
         }
         return (new MailMessage) 
-        ->subject( 'beShortlisted Account Activation Notificaiton '.   date('M d, Y', strtotime(Carbon::now())))
+        ->subject( 'beShortlisted Account Activation Notification '.   date('M d, Y', strtotime(Carbon::now())))
         ->markdown('emails.employer_verify_email', ['url' => $url, 'content' => $this->content]); 
     }
 
