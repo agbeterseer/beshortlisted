@@ -182,7 +182,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         // Maatwebsite\Excel\ExcelServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
-        Backpack\BackupManager\BackupManagerServiceProvider::class,
+        // Backpack\BackupManager\BackupManagerServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         /*
          * Application Service Providers...
